@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.routers import auth, lesson, quiz
+from app.routers import auth, lesson, progress, quiz
 
 app = FastAPI(
     title="Adaptive Learning System API",
@@ -14,11 +14,14 @@ def root():
     return {
         "success": True,
         "message": "Adaptive Learning System API is running",
-        "data": {}
+        "data": {},
     }
 
 
 app.include_router(auth.router)
 app.include_router(lesson.router)
 app.include_router(quiz.router)
+app.include_router(progress.router)
+
+
 

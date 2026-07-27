@@ -1,17 +1,7 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel
 
 
-class ProgressUpdateRequest(BaseModel):
-    lesson_id: int
-    quiz_score: float
-    response_time: float
-    attention_score: float
-    difficulty: str
-    completed: bool
-
-
-class ProgressResponse(BaseModel):
-    id: int
+class ProgressBase(BaseModel):
     student_id: int
     lesson_id: int
     quiz_score: float
@@ -20,4 +10,21 @@ class ProgressResponse(BaseModel):
     difficulty: str
     completed: bool
 
-    model_config = ConfigDict(from_attributes=True)
+
+class ProgressCreate(ProgressBase):
+    pass
+
+
+class ProgressUpdate(BaseModel):
+    quiz_score: float
+    response_time: float
+    attention_score: float
+    difficulty: str
+    completed: bool
+
+
+class ProgressResponse(ProgressBase):
+    id: int
+
+    class Config:
+        from_attributes = True
