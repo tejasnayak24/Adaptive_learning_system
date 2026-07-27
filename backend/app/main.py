@@ -1,7 +1,7 @@
 import os
 
 from fastapi import FastAPI
-from app.routers import auth, lesson, progress, quiz
+from app.routers import auth, lesson, progress, quiz, integration
 
 # Validate required environment variables
 SECRET_KEY = os.getenv("SECRET_KEY")
@@ -31,6 +31,9 @@ app.include_router(auth.router)
 app.include_router(lesson.router)
 app.include_router(quiz.router)
 app.include_router(progress.router)
+app.include_router(integration.router)
+
+
 
 
 
