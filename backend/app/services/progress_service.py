@@ -1,19 +1,16 @@
 from sqlalchemy.orm import Session
 
-from app.models.progress import StudentProgress
+from app.models.progress import Progress
 from app.schemas.progress import ProgressUpdate
 
 
 class ProgressService:
 
     @staticmethod
-    def get_student_progress(
-        db: Session,
-        student_id: int,
-    ):
+    def get_student_progress(db: Session, student_id: int):
         return (
-            db.query(StudentProgress)
-            .filter(StudentProgress.student_id == student_id)
+            db.query(Progress)
+            .filter(Progress.student_id == student_id)
             .all()
         )
 
@@ -24,10 +21,10 @@ class ProgressService:
         lesson_id: int,
     ):
         return (
-            db.query(StudentProgress)
+            db.query(Progress)
             .filter(
-                StudentProgress.student_id == student_id,
-                StudentProgress.lesson_id == lesson_id,
+                Progress.student_id == student_id,
+                Progress.lesson_id == lesson_id,
             )
             .first()
         )
@@ -38,22 +35,22 @@ class ProgressService:
         progress_id: int,
         progress: ProgressUpdate,
     ):
-        existing = (
-            db.query(StudentProgress)
-            .filter(StudentProgress.id == progress_id)
+        db_progress = (
+            db.query(Progress)
+            .filter(Progress.id == progress_id)
             .first()
         )
 
-        if not existing:
+        if db_progress is None:
             return None
 
-        existing.quiz_score = progress.quiz_score
-        existing.response_time = progress.response_time
-        existing.attention_score = progress.attention_score
-        existing.difficulty = progress.difficulty
-        existing.completed = progress.completed
+        db_progress.quiz_score = progress.quiz_score
+        db_progress.response_time = progress.response_time
+        db_progress.attention_score = progress.attention_score
+        db_progress.difficulty = progress.difficulty
+        db_progress.completed = progress.completed
 
         db.commit()
-        db.refresh(existing)
+        db.refresh(db_progress)
 
-        return existing
+        return db_progress

@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 
 from app.models.quiz import Quiz
 from app.models.question import Question
-from app.models.progress import StudentProgress
+from app.models.progress import Progress
 
 
 class QuizService:
@@ -62,7 +62,7 @@ class QuizService:
         attention_score: float,
         difficulty: str,
     ):
-        progress = StudentProgress(
+        progress = Progress(
             student_id=student_id,
             lesson_id=lesson_id,
             quiz_score=quiz_score,
