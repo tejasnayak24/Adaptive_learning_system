@@ -1,28 +1,59 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel
+from typing import List
+
+
+class QuizBase(BaseModel):
+    lesson_id: int
+    title: str
+    total_questions: int
+    difficulty: str
+
+
+class QuizCreate(QuizBase):
+    pass
+
+
+class QuizUpdate(QuizBase):
+    pass
+
+
+class QuizResponse(QuizBase):
+    id: int
+
+    class Config:
+        from_attributes = True
 
 
 class QuizStartRequest(BaseModel):
-    lesson_id: int
+    quiz_id: int
 
 
 class QuizSubmitRequest(BaseModel):
-    quiz_id: int
-    answers: dict[int, str]
-    response_time: float
-
-
-class QuizResponse(BaseModel):
-    id: int
+    student_id: int
     lesson_id: int
-    title: str
+    quiz_score: float
+    response_time: float
+    attention_score: float
     difficulty: str
 
-    model_config = ConfigDict(from_attributes=True)
+
+class QuestionResponse(BaseModel):
+    id: int
+    question_text: str
+    option_a: str
+    option_b: str
+    option_c: str
+    option_d: str
+
+    class Config:
+        from_attributes = True
 
 
-class QuizResultResponse(BaseModel):
+class QuizStartResponse(BaseModel):
+    quiz: QuizResponse
+    questions: List[QuestionResponse]
+
+
+class QuizSubmitResponse(BaseModel):
     success: bool
     message: str
-    score: float
-
-    model_config = ConfigDict(from_attributes=True)
