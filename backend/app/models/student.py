@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import DateTime, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.database.base import Base
+from app.database.connection import Base
 
 
 class Student(Base):
@@ -12,53 +12,53 @@ class Student(Base):
     id: Mapped[int] = mapped_column(
         Integer,
         primary_key=True,
-        index=True
+        index=True,
     )
 
     name: Mapped[str] = mapped_column(
         String(100),
-        nullable=False
+        nullable=False,
     )
 
     email: Mapped[str] = mapped_column(
         String(255),
         unique=True,
         nullable=False,
-        index=True
+        index=True,
     )
 
     password_hash: Mapped[str] = mapped_column(
         String(255),
-        nullable=False
+        nullable=False,
     )
 
     age: Mapped[int] = mapped_column(
         Integer,
-        nullable=False
+        nullable=False,
     )
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime,
-        default=datetime.utcnow
+        default=datetime.utcnow,
     )
 
     # One Student -> Many Progress Records
-    progress_records = relationship(
-        "StudentProgress",
+    progress = relationship(
+        "Progress",
         back_populates="student",
-        cascade="all, delete-orphan"
+        cascade="all, delete-orphan",
     )
 
     # One Student -> Many Learning Sessions
     learning_sessions = relationship(
         "LearningSession",
         back_populates="student",
-        cascade="all, delete-orphan"
+        cascade="all, delete-orphan",
     )
 
     # One Student -> Many Reward History Records
     reward_history = relationship(
         "RewardHistory",
         back_populates="student",
-        cascade="all, delete-orphan"
+        cascade="all, delete-orphan",
     )
