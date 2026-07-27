@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -14,7 +16,7 @@ router = APIRouter(tags=["Authentication"])
 def register(
     student: RegisterRequest,
     db: Session = Depends(get_db),
-):
+) -> dict[str, Any]:
     new_student = StudentService.register_student(db, student)
 
     if new_student is None:
@@ -38,7 +40,7 @@ def register(
 def login(
     login_data: LoginRequest,
     db: Session = Depends(get_db),
-):
+) -> TokenResponse:
     student = StudentService.authenticate_student(
         db,
         login_data,
@@ -67,7 +69,7 @@ def login(
 @router.get("/profile")
 def profile(
     current_user=Depends(get_current_user),
-):
+) -> dict[str, Any]:
     return {
         "success": True,
         "message": "Profile fetched successfully",

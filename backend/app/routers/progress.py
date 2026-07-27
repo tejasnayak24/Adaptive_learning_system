@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -14,7 +16,7 @@ def get_student_progress(
     student_id: int,
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
-):
+) -> dict[str, Any]:
     progress = ProgressService.get_student_progress(db, student_id)
 
     return {
@@ -30,7 +32,7 @@ def get_lesson_progress(
     lesson_id: int,
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
-):
+) -> dict[str, Any]:
     progress = ProgressService.get_lesson_progress(
         db,
         student_id,
@@ -56,7 +58,7 @@ def update_progress(
     progress: ProgressUpdate,
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
-):
+) -> dict[str, Any]:
     updated = ProgressService.update_progress(
         db,
         progress_id,

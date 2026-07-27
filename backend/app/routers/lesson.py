@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -10,7 +12,9 @@ router = APIRouter(tags=["Lessons"])
 
 
 @router.get("/lessons")
-def get_lessons(db: Session = Depends(get_db)):
+def get_lessons(
+    db: Session = Depends(get_db),
+) -> dict[str, Any]:
     lessons = LessonService.get_all_lessons(db)
 
     return {
@@ -24,7 +28,7 @@ def get_lessons(db: Session = Depends(get_db)):
 def get_lesson(
     lesson_id: int,
     db: Session = Depends(get_db),
-):
+) -> dict[str, Any]:
     lesson = LessonService.get_lesson_by_id(db, lesson_id)
 
     if lesson is None:
@@ -45,7 +49,7 @@ def create_lesson(
     lesson: LessonCreate,
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
-):
+) -> dict[str, Any]:
     new_lesson = LessonService.create_lesson(db, lesson)
 
     return {
@@ -61,7 +65,7 @@ def update_lesson(
     lesson: LessonUpdate,
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
-):
+) -> dict[str, Any]:
     updated = LessonService.update_lesson(
         db,
         lesson_id,
@@ -86,7 +90,7 @@ def delete_lesson(
     lesson_id: int,
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
-):
+) -> dict[str, Any]:
     deleted = LessonService.delete_lesson(db, lesson_id)
 
     if not deleted:

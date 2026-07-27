@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -14,7 +16,7 @@ def start_quiz(
     request: QuizStartRequest,
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
-):
+) -> dict[str, Any]:
     quiz_data = QuizService.start_quiz(
         db,
         request.quiz_id,
@@ -37,7 +39,7 @@ def start_quiz(
 def get_quiz(
     quiz_id: int,
     db: Session = Depends(get_db),
-):
+) -> dict[str, Any]:
     quiz = QuizService.get_quiz_by_id(
         db,
         quiz_id,
@@ -61,7 +63,7 @@ def submit_quiz(
     request: QuizSubmitRequest,
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
-):
+) -> dict[str, Any]:
     progress = QuizService.submit_quiz(
         db=db,
         student_id=request.student_id,

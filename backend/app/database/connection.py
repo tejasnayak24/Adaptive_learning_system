@@ -2,33 +2,40 @@ import os
 
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 
+# Load environment variables
 load_dotenv()
 
+# Database URL
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-if DATABASE_URL is None:
-    raise ValueError("DATABASE_URL is not set in the .env file.")
+# Enable SQL query logging only in development
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
+# Create SQLAlchemy engine
 engine = create_engine(
     DATABASE_URL,
-    echo=True
+    echo=DEBUG,
 )
 
+# Session factory
 SessionLocal = sessionmaker(
     autocommit=False,
     autoflush=False,
-    bind=engine
+    bind=engine,
 )
 
+# Base class for models
+Base = declarative_base()
 
+
+# Dependency
 def get_db():
-    """
-    Provides a database session for each request.
-    """
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
+
+        
