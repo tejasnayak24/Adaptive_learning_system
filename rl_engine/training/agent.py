@@ -12,9 +12,11 @@ code. It operates entirely on ``StudentState``, ``Action``, and
 actions, and observed rewards.
 """
 
+import json
 import math
 import random
 from collections.abc import Callable
+from typing import Final
 
 from ..core.actions import Action
 from ..core.config import RLConfig
@@ -25,6 +27,15 @@ from ..models.student_state import StudentState
 # (quiz score bucket, attention bucket, difficulty level,
 #  many hints used, many attempts made, yawning, looking away).
 StateKey = tuple[int, int, int, bool, bool, bool, bool]
+
+# All actions, cached once as a tuple rather than rebuilding a list from
+# the ``Action`` enum on every exploration step.
+_ALL_ACTIONS: Final[tuple[Action, ...]] = tuple(Action)
+
+# Bumped whenever _state_to_key's shape or field order changes, so a
+# saved Q-table produced by an incompatible encoding is rejected on load
+# instead of silently producing wrong lookups.
+STATE_KEY_VERSION: Final[int] = 1
 
 
 class QLearningAgent:
@@ -79,7 +90,10 @@ class QLearningAgent:
 
         With probability ``epsilon``, a random action is chosen to
         encourage exploration. Otherwise, the action with the highest
-        learned Q-value for this state is chosen.
+        learned Q-value for this state is chosen, with ties among
+        equally-valued actions broken uniformly at random so exploitation
+        doesn't systematically favor whichever action happens to be
+        declared first in the ``Action`` enum.
 
         Args:
             state: The student's current state.
@@ -90,16 +104,12 @@ class QLearningAgent:
         Raises:
             TypeError: If ``state`` is not an instance of ``StudentState``.
         """
-        if not isinstance(state, StudentState):
-            raise TypeError("state must be an instance of StudentState.")
-
-        state_key = self._state_to_key(state)
-        self._initialize_state(state_key)
+        state_key = self._prepare_state_key(state)
 
         if random.random() < self.epsilon:
-            return random.choice(list(Action))
+            return random.choice(_ALL_ACTIONS)
 
-        return self._best_action(state_key)
+        return self._best_action(state_key, break_ties_randomly=True)
 
     def update(
         self,
@@ -126,29 +136,29 @@ class QLearningAgent:
         Raises:
             TypeError: If ``state`` or ``next_state`` is not a
                 ``StudentState``, if ``action`` is not an ``Action``, if
-                ``reward`` is not a real number, or if ``done`` is not a
-                ``bool``.
+                ``reward`` is not a real number (``bool`` is rejected even
+                though it is technically an ``int`` subtype), or if
+                ``done`` is not a ``bool``.
         """
-        if not isinstance(state, StudentState):
-            raise TypeError("state must be an instance of StudentState.")
-        if not isinstance(next_state, StudentState):
-            raise TypeError("next_state must be an instance of StudentState.")
         if not isinstance(action, Action):
             raise TypeError("action must be an instance of Action.")
-        if not isinstance(reward, (int, float)):
+        if isinstance(reward, bool) or not isinstance(reward, (int, float)):
             raise TypeError("reward must be a real number.")
         if not isinstance(done, bool):
             raise TypeError("done must be a bool.")
 
-        state_key = self._state_to_key(state)
-        next_state_key = self._state_to_key(next_state)
-        self._initialize_state(state_key)
-        self._initialize_state(next_state_key)
-
+        state_key = self._prepare_state_key(state)
         current_q = self.q_table[state_key][action]
+
         if done:
+            # No future to bootstrap from, so the next state's Q-values
+            # are never read here -- skip preparing/initializing
+            # next_state_key entirely rather than populating Q-table
+            # entries for a terminal state that will never be queried
+            # again.
             target = float(reward)
         else:
+            next_state_key = self._prepare_state_key(next_state, param_name="next_state")
             best_next_q = max(self.q_table[next_state_key].values())
             target = reward + self.config.discount_factor * best_next_q
 
@@ -172,7 +182,10 @@ class QLearningAgent:
 
         Unlike ``choose_action``, this always selects the best-known
         action for the state (no random exploration), since it is meant
-        to be called at inference time rather than during training.
+        to be called at inference time rather than during training. Ties
+        among equally-valued actions are broken deterministically (by
+        enum declaration order) rather than randomly, so the same state
+        always yields the same recommendation.
 
         Args:
             state: The student's current state.
@@ -184,17 +197,109 @@ class QLearningAgent:
         Raises:
             TypeError: If ``state`` is not an instance of ``StudentState``.
         """
-        if not isinstance(state, StudentState):
-            raise TypeError("state must be an instance of StudentState.")
-
-        state_key = self._state_to_key(state)
-        self._initialize_state(state_key)
+        state_key = self._prepare_state_key(state)
 
         best_action = self._best_action(state_key)
         confidence = self._compute_confidence(state_key, best_action)
         explanation = self._build_explanation(state, best_action)
 
         return Recommendation(action=best_action, confidence=confidence, explanation=explanation)
+
+    def save_q_table(self, path: str) -> None:
+        """Persist this agent's learned Q-table and epsilon to a JSON file.
+
+        The state-key version is saved alongside the data so that
+        ``load_q_table`` can detect and reject a file produced by an
+        incompatible ``_state_to_key`` encoding, rather than silently
+        loading Q-values under the wrong keys.
+
+        Args:
+            path: The filesystem path to write the JSON file to.
+        """
+        payload = {
+            "state_key_version": STATE_KEY_VERSION,
+            "epsilon": self.epsilon,
+            "entries": [
+                {
+                    "state_key": list(state_key),
+                    "values": {action.name: value for action, value in action_values.items()},
+                }
+                for state_key, action_values in self.q_table.items()
+            ],
+        }
+
+        with open(path, "w", encoding="utf-8") as file:
+            json.dump(payload, file)
+
+    @classmethod
+    def load_q_table(cls, path: str, config: RLConfig) -> "QLearningAgent":
+        """Reconstruct a previously saved agent from a JSON file.
+
+        Uses plain JSON (no ``pickle``) so loading a Q-table never
+        executes arbitrary code, even if the file's origin isn't fully
+        trusted.
+
+        Args:
+            path: The filesystem path to read the JSON file from.
+            config: The configuration to construct the new agent with.
+                Hyperparameters and thresholds come from this argument,
+                not from the saved file, so a saved Q-table can be
+                reloaded against a deliberately adjusted configuration.
+
+        Returns:
+            A new ``QLearningAgent`` with its Q-table and epsilon
+            restored from ``path``.
+
+        Raises:
+            ValueError: If the file's ``state_key_version`` does not
+                match the current ``STATE_KEY_VERSION``.
+        """
+        with open(path, encoding="utf-8") as file:
+            payload = json.load(file)
+
+        if payload["state_key_version"] != STATE_KEY_VERSION:
+            raise ValueError(
+                f"Saved state_key_version {payload['state_key_version']} does not "
+                f"match current STATE_KEY_VERSION {STATE_KEY_VERSION}."
+            )
+
+        agent = cls(config)
+        agent.epsilon = payload["epsilon"]
+
+        for entry in payload["entries"]:
+            state_key: StateKey = tuple(entry["state_key"])
+            agent.q_table[state_key] = {
+                Action[name]: value for name, value in entry["values"].items()
+            }
+
+        return agent
+
+    def _prepare_state_key(self, state: StudentState, *, param_name: str = "state") -> StateKey:
+        """Validate a state and return its initialized Q-table key.
+
+        Consolidates the validate -> encode -> ensure-initialized
+        sequence that every public method needs before touching the
+        Q-table, so that sequence is defined in exactly one place.
+
+        Args:
+            state: The student state to validate and encode.
+            param_name: The parameter name to use in the error message,
+                so callers with more than one state argument (``update``'s
+                ``state`` and ``next_state``) get an accurate message.
+
+        Returns:
+            The state's key, guaranteed to have a corresponding entry in
+            ``q_table``.
+
+        Raises:
+            TypeError: If ``state`` is not an instance of ``StudentState``.
+        """
+        if not isinstance(state, StudentState):
+            raise TypeError(f"{param_name} must be an instance of StudentState.")
+
+        state_key = self._state_to_key(state)
+        self._initialize_state(state_key)
+        return state_key
 
     def _state_to_key(self, state: StudentState) -> StateKey:
         """Convert a ``StudentState`` into a hashable Q-table key.
@@ -299,23 +404,34 @@ class QLearningAgent:
         if state_key not in self.q_table:
             self.q_table[state_key] = {action: 0.0 for action in Action}
 
-    def _best_action(self, state_key: StateKey) -> Action:
+    def _best_action(self, state_key: StateKey, *, break_ties_randomly: bool = False) -> Action:
         """Return the highest-value action for a given state key.
-
-        Ties are broken deterministically by favoring whichever tied
-        action is declared first in the ``Action`` enum: ``max`` scans
-        actions in iteration order and only replaces its current pick
-        when it finds a strictly greater Q-value, so the first
-        highest-valued action always wins.
 
         Args:
             state_key: The Q-table key to look up.
+            break_ties_randomly: If True, ties among equally-valued
+                actions are broken uniformly at random, avoiding a
+                systematic bias toward whichever action happens to be
+                declared first in the ``Action`` enum -- important
+                during training, where many states start with all
+                Q-values equal at ``0.0``. If False (the default), ties
+                are broken deterministically by enum declaration order
+                (``max`` scans actions in iteration order and only
+                replaces its current pick on a strictly greater
+                Q-value), so the same state always yields the same
+                recommendation.
 
         Returns:
             The action with the highest learned Q-value for this state.
         """
         q_values = self.q_table[state_key]
-        return max(Action, key=lambda action: q_values[action])
+
+        if not break_ties_randomly:
+            return max(Action, key=lambda action: q_values[action])
+
+        best_value = max(q_values.values())
+        tied_actions = [action for action in Action if q_values[action] == best_value]
+        return random.choice(tied_actions)
 
     def _compute_confidence(self, state_key: StateKey, best_action: Action) -> float:
         """Compute a confidence score for the best action at a state.
@@ -426,3 +542,10 @@ _EXPLANATION_BUILDERS: dict[Action, Callable[[StudentState], str]] = {
         "recommending a skip to advanced material."
     ),
 }
+
+# Fail fast at import time if a new Action is ever added without a
+# matching explanation, rather than discovering the gap only at runtime
+# when recommend() happens to select that specific action.
+_missing_explanations = set(Action) - _EXPLANATION_BUILDERS.keys()
+if _missing_explanations:
+    raise ValueError(f"_EXPLANATION_BUILDERS is missing entries for: {_missing_explanations}")

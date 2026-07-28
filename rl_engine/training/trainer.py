@@ -58,9 +58,23 @@ class Trainer:
 
         Raises:
             TypeError: If ``config`` is not an instance of ``RLConfig``.
+            ValueError: If ``config.training_episodes`` is not positive,
+                or if ``config.max_steps_per_episode`` is not positive.
         """
         if not isinstance(config, RLConfig):
             raise TypeError("config must be an instance of RLConfig.")
+
+        if config.training_episodes <= 0:
+            raise ValueError(
+                "config.training_episodes must be greater than 0, got "
+                f"{config.training_episodes!r}."
+            )
+
+        if config.max_steps_per_episode <= 0:
+            raise ValueError(
+                "config.max_steps_per_episode must be greater than 0, got "
+                f"{config.max_steps_per_episode!r}."
+            )
 
         self.config = config
         self._agent = QLearningAgent(config)
