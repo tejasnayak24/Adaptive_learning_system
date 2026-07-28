@@ -99,7 +99,7 @@ class RLConfig:
     epsilon: float = 1.0
     epsilon_decay: float = 0.995
     min_epsilon: float = 0.01
-    training_episodes: int = 1000
+    training_episodes: int = 10000
     max_steps_per_episode: int = 100
     score_low_threshold: int = 50
     score_high_threshold: int = 80
