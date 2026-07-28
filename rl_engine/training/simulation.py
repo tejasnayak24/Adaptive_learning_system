@@ -13,8 +13,7 @@ from __future__ import annotations
 import random
 from typing import Final
 
-from ..core.actions import Difficulty
-from ..models.student_state import StudentState
+from ..models.student_state import Difficulty, StudentState
 
 
 # ---------------------------------------------------------------------
