@@ -21,12 +21,18 @@ Base.metadata.create_all(bind=engine)
 
 
 # Validate required environment variables
-SECRET_KEY = os.getenv("SECRET_KEY")
+required_env_vars = [
+    "DATABASE_URL",
+    "SECRET_KEY",
+    "ALGORITHM",
+    "ACCESS_TOKEN_EXPIRE_MINUTES",
+]
 
-if not SECRET_KEY:
-    raise RuntimeError(
-        "SECRET_KEY environment variable is not set."
-    )
+for var in required_env_vars:
+    if not os.getenv(var):
+        raise RuntimeError(
+            f"Required environment variable '{var}' is not set."
+        )
 
 
 app = FastAPI(
