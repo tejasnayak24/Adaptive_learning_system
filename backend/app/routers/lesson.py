@@ -1,6 +1,7 @@
 from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
 from app.auth.dependencies import get_current_user
@@ -20,7 +21,7 @@ def get_lessons(
     return {
         "success": True,
         "message": "Lessons fetched successfully",
-        "data": lessons,
+        "data": jsonable_encoder(lessons),
     }
 
 
@@ -40,7 +41,7 @@ def get_lesson(
     return {
         "success": True,
         "message": "Lesson fetched successfully",
-        "data": lesson,
+        "data": jsonable_encoder(lesson),
     }
 
 
@@ -55,7 +56,7 @@ def create_lesson(
     return {
         "success": True,
         "message": "Lesson created successfully",
-        "data": new_lesson,
+        "data": jsonable_encoder(new_lesson),
     }
 
 
@@ -81,7 +82,7 @@ def update_lesson(
     return {
         "success": True,
         "message": "Lesson updated successfully",
-        "data": updated,
+        "data": jsonable_encoder(updated),
     }
 
 

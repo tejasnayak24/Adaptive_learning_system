@@ -1,61 +1,57 @@
-from sqlalchemy import Boolean, Float, ForeignKey, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
 
-from app.database.base import Base
+from app.database.connection import Base
 
 
-class StudentProgress(Base):
-    __tablename__ = "student_progress"
+class Progress(Base):
+    __tablename__ = "progress"
 
-    id: Mapped[int] = mapped_column(
+    id = Column(Integer, primary_key=True, index=True)
+
+    student_id = Column(
         Integer,
-        primary_key=True,
-        index=True
-    )
-
-    student_id: Mapped[int] = mapped_column(
-        ForeignKey("students.id", ondelete="CASCADE"),
+        ForeignKey("students.id"),
         nullable=False,
-        index=True
     )
 
-    lesson_id: Mapped[int] = mapped_column(
-        ForeignKey("lessons.id", ondelete="CASCADE"),
+    lesson_id = Column(
+        Integer,
+        ForeignKey("lessons.id"),
         nullable=False,
-        index=True
     )
 
-    quiz_score: Mapped[float] = mapped_column(
+    quiz_score = Column(
         Float,
-        nullable=False
+        nullable=False,
     )
 
-    response_time: Mapped[float] = mapped_column(
+    response_time = Column(
         Float,
-        nullable=False
+        nullable=False,
     )
 
-    attention_score: Mapped[float] = mapped_column(
+    attention_score = Column(
         Float,
-        nullable=False
+        nullable=False,
     )
 
-    difficulty: Mapped[str] = mapped_column(
-        String(20),
-        nullable=False
+    difficulty = Column(
+        String,
+        nullable=False,
     )
 
-    completed: Mapped[bool] = mapped_column(
+    completed = Column(
         Boolean,
-        default=False
+        default=False,
     )
 
     student = relationship(
         "Student",
-        back_populates="progress_records"
+        back_populates="progress",
     )
 
     lesson = relationship(
         "Lesson",
-        back_populates="progress_records"
+        back_populates="progress",
     )
