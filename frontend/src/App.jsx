@@ -1,3 +1,4 @@
+import Lessons from "./pages/Lessons";
 import { Routes, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
@@ -10,6 +11,7 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<StudentDashboard />} />
+      <Route path="/lessons" element={<Lessons />} />
     </Routes>
   );
 }
