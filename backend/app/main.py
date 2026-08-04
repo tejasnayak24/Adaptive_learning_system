@@ -13,7 +13,14 @@ from app.models.progress import Progress
 from app.models.session import LearningSession
 from app.models.reward import RewardHistory
 
-from app.routers import auth, lesson, progress, quiz, integration
+from app.routers import (
+    auth,
+    lesson,
+    progress,
+    quiz,
+    integration,
+    rl,
+)
 
 
 # Create database tables
@@ -57,6 +64,7 @@ app.include_router(lesson.router)
 app.include_router(quiz.router)
 app.include_router(progress.router)
 app.include_router(integration.router)
+app.include_router(rl.router)
 
 
 
