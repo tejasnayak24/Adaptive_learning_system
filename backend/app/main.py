@@ -3,7 +3,9 @@ import os
 from fastapi import FastAPI
 from dotenv import load_dotenv
 
-load_dotenv()
+from pathlib import Path
+
+load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
 from app.database.connection import Base, engine
 
