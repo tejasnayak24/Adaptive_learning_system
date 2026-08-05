@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 function LessonCard({
+  id,
   title,
   difficulty,
   duration,
@@ -32,7 +33,7 @@ function LessonCard({
         </span>
 
         <Link
-          to="/lesson/python-basics"
+          to={`/lesson/${id}`}
           className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
         >
           Start Lesson

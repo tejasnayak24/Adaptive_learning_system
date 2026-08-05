@@ -1,45 +1,44 @@
 function LearningStreak() {
-  const streak = 12;
-  const goal = 15;
-  const progress = (streak / goal) * 100;
-
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 mt-8">
+    <div className="bg-white rounded-xl shadow-md p-6">
 
-      <div className="flex justify-between items-center">
+      <h2 className="text-2xl font-bold mb-6">
+        Learning Streak 🔥
+      </h2>
+
+      <div className="flex justify-around text-center">
 
         <div>
-          <h2 className="text-2xl font-semibold">
-            🔥 Learning Streak
-          </h2>
+          <h1 className="text-4xl font-bold text-orange-500">
+            7
+          </h1>
 
           <p className="text-gray-500">
-            Consecutive learning days
+            Current
           </p>
         </div>
 
-        <div className="text-4xl font-bold text-orange-500">
-          {streak}
+        <div>
+          <h1 className="text-4xl font-bold text-blue-600">
+            21
+          </h1>
+
+          <p className="text-gray-500">
+            Best
+          </p>
+        </div>
+
+        <div>
+          <h1 className="text-4xl font-bold text-green-600">
+            52
+          </h1>
+
+          <p className="text-gray-500">
+            Lessons
+          </p>
         </div>
 
       </div>
-
-      <div className="mt-6">
-
-        <div className="w-full bg-gray-200 rounded-full h-4">
-
-          <div
-            className="bg-orange-500 h-4 rounded-full"
-            style={{ width: `${progress}%` }}
-          ></div>
-
-        </div>
-
-      </div>
-
-      <p className="mt-4 text-gray-600">
-        Great job! You're only {goal - streak} days away from your goal.
-      </p>
 
     </div>
   );

@@ -1,51 +1,46 @@
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-
-const data = [
-  { day: "Mon", score: 70 },
-  { day: "Tue", score: 75 },
-  { day: "Wed", score: 80 },
-  { day: "Thu", score: 78 },
-  { day: "Fri", score: 85 },
-  { day: "Sat", score: 90 },
-  { day: "Sun", score: 88 },
-];
-
 function ProgressChart() {
+  const progress = [
+    { lesson: "Python", value: 100 },
+    { lesson: "Loops", value: 80 },
+    { lesson: "Functions", value: 60 },
+    { lesson: "Lists", value: 40 },
+  ];
+
   return (
     <div className="bg-white rounded-xl shadow-md p-6 mt-8">
 
-      <h2 className="text-2xl font-semibold mb-6">
-        Weekly Progress
+      <h2 className="text-2xl font-bold mb-6">
+        Course Progress
       </h2>
 
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={data}>
+      <div className="space-y-6">
 
-          <CartesianGrid strokeDasharray="3 3" />
+        {progress.map((item, index) => (
 
-          <XAxis dataKey="day" />
+          <div key={index}>
 
-          <YAxis />
+            <div className="flex justify-between mb-2">
 
-          <Tooltip />
+              <span>{item.lesson}</span>
 
-          <Line
-            type="monotone"
-            dataKey="score"
-            stroke="#2563eb"
-            strokeWidth={3}
-          />
+              <span>{item.value}%</span>
 
-        </LineChart>
-      </ResponsiveContainer>
+            </div>
+
+            <div className="w-full bg-gray-200 rounded-full h-4">
+
+              <div
+                className="bg-blue-600 h-4 rounded-full"
+                style={{ width: `${item.value}%` }}
+              ></div>
+
+            </div>
+
+          </div>
+
+        ))}
+
+      </div>
 
     </div>
   );
