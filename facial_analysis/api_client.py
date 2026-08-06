@@ -1,5 +1,6 @@
 import threading
 import requests
+from datetime import datetime
 
 from config import API_URL
 
@@ -26,13 +27,16 @@ class APIClient:
         head_direction
     ):
 
+       
         payload = {
             "student_id": student_id,
             "attention_score": attention_score,
             "status": status,
             "eyes_open": eyes_open,
-            "head_direction": head_direction
+            "head_direction": head_direction,
+            "timestamp": datetime.now().isoformat()
         }
+        
 
         threading.Thread(
             target=self._send,

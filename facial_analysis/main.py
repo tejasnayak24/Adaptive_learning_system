@@ -25,6 +25,9 @@ from head_pose import HeadPoseEstimator
 from gaze_tracker import GazeTracker
 from attention_engine import AttentionEngine
 from logger import SessionLogger
+from face_presence import FacePresence
+
+
 
 
 # ---------------------------------------------------
@@ -43,8 +46,12 @@ gaze_tracker = GazeTracker()
 
 attention = AttentionEngine()
 
+
+
 logger = SessionLogger()
+presence = FacePresence()
 api = APIClient()
+backend_status = "Disconnected"
 
 # ---------------------------------------------------
 # Timers
@@ -68,6 +75,7 @@ while True:
 
     # Detect face
     face_found, landmarks, frame = detector.detect(frame)
+    presence_result = presence.update(face_found)
 
     if face_found:
 
@@ -82,12 +90,19 @@ while True:
         # -----------------------------
 
         gaze_result = gaze_tracker.process(landmarks)
+        
+        
 
         # -----------------------------
         # Head Pose
         # -----------------------------
 
         head_result = head_pose.process(landmarks)
+        
+        looking_at_screen = (
+    gaze_result["gaze"] == "Center"
+    and head_result["direction"] == "Forward"
+)
 
         # -----------------------------
         # Attention Engine
@@ -134,7 +149,23 @@ while True:
             head_direction=head_result["direction"]
             )
 
-            last_api_time = current_time    
+            last_api_time = current_time  
+        if current_time - last_api_time >= SEND_INTERVAL:
+            try:
+                api.send_attention_data(
+                student_id=STUDENT_ID,
+                attention_score=attention_result["score"],
+                status=attention_result["status"],
+                eyes_open=eye_result["eyes_open"],
+                head_direction=head_result["direction"]
+                )
+
+                backend_status = "Connected"
+
+            except Exception:
+                backend_status = "Disconnected"
+
+            last_api_time = current_time      
 
         cv2.putText(
             frame,
@@ -168,27 +199,29 @@ while True:
 
         cv2.putText(
             frame,
-            f"Gaze : {gaze_result['gaze']}",
+            f"Looking : {'YES' if looking_at_screen else 'NO'}",
             (20,145),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (0,255,0) if looking_at_screen else (0,0,255),
+            2
+        )
+
+        cv2.putText(
+            frame,
+            f"Gaze : {gaze_result['gaze']}",
+            (20,180),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.7,
             (255,255,0),
             2
         )
+        
+        
 
         cv2.putText(
             frame,
             f"EAR : {eye_result['ear']:.3f}",
-            (20,180),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (255,255,255),
-            2
-        )
-
-        cv2.putText(
-            frame,
-            f"Blinks : {eye_result['blink_count']}",
             (20,215),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.7,
@@ -198,8 +231,18 @@ while True:
 
         cv2.putText(
             frame,
-            f"Blink Rate : {eye_result['blink_rate']:.1f}/min",
+            f"Blinks : {eye_result['blink_count']}",
             (20,250),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (255,255,255),
+            2
+        )
+
+        cv2.putText(
+            frame,
+            f"Blink Rate : {eye_result['blink_rate']:.1f}/min",
+            (20,285),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.7,
             (255,255,255),
@@ -231,12 +274,39 @@ while True:
     cv2.putText(
         frame,
         f"FPS : {int(fps)}",
-        (20,285),
+        (20,320),
         cv2.FONT_HERSHEY_SIMPLEX,
         0.7,
         (0,255,255),
         2
     )
+    cv2.putText(
+    frame,
+    f"Face : {presence_result['status']}",
+    (20, 320),
+    cv2.FONT_HERSHEY_SIMPLEX,
+    0.7,
+    (0, 255, 0) if presence_result["status"] == "Present" else (0, 0, 255),
+    2
+    )
+    cv2.putText(
+    frame,
+    f"Absent : {presence_result['absent_time']} sec",
+    (20, 355),
+    cv2.FONT_HERSHEY_SIMPLEX,
+    0.7,
+    (0, 255, 255),
+    2
+    )
+    cv2.putText(
+    frame,
+    f"Backend : {backend_status}",
+    (20, 320),
+    cv2.FONT_HERSHEY_SIMPLEX,
+    0.7,
+    (0, 255, 0) if backend_status == "Connected" else (0, 0, 255),
+    2
+)
 
     # ---------------------------------------------------
     # Show Window
