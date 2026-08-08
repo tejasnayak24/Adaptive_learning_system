@@ -1,5 +1,6 @@
 import threading
 import requests
+from datetime import datetime
 
 from config import API_URL
 
@@ -29,15 +30,15 @@ class APIClient:
         yawning
     ):
 
+       
         payload = {
             "student_id": student_id,
             "attention_score": attention_score,
             "status": status,
             "eyes_open": eyes_open,
-            "head_direction": head_direction,
-            "looking_away": looking_away,
-            "yawning": yawning
+            "head_direction": head_direction
         }
+        
 
         threading.Thread(
             target=self._send,
