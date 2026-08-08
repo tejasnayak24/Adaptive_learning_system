@@ -74,6 +74,19 @@ function QuizResult() {
 
         </div>
 
+        {location.state?.recommendation && (
+          <div className="mt-8 p-4 border rounded-md text-left">
+            <h3 className="font-semibold text-lg mb-2">Recommendation</h3>
+            <p className="text-sm text-gray-700">Action: {location.state.recommendation.action ?? location.state.recommendation?.data?.action}</p>
+            {location.state.recommendation.confidence && (
+              <p className="text-sm text-gray-700">Confidence: {location.state.recommendation.confidence}</p>
+            )}
+            {location.state.recommendation.explanation && (
+              <p className="text-sm text-gray-700 mt-2">{location.state.recommendation.explanation}</p>
+            )}
+          </div>
+        )}
+
       </div>
     </StudentLayout>
   );
