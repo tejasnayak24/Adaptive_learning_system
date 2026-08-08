@@ -1,6 +1,5 @@
 import threading
 import requests
-from datetime import datetime
 
 from config import API_URL
 
@@ -8,14 +7,12 @@ from config import API_URL
 class APIClient:
 
     def _send(self, payload):
-
         try:
             requests.post(
                 API_URL,
                 json=payload,
                 timeout=2
             )
-
         except Exception as e:
             print("Backend Error:", e)
 
@@ -29,16 +26,20 @@ class APIClient:
         looking_away,
         yawning
     ):
+        score = float(attention_score)
 
-       
+        if score > 1:
+            score = score / 100.0
+
         payload = {
             "student_id": student_id,
-            "attention_score": attention_score,
+            "attention_score": score,
             "status": status,
             "eyes_open": eyes_open,
-            "head_direction": head_direction
+            "head_direction": head_direction,
+            "looking_away": looking_away,
+            "yawning": yawning
         }
-        
 
         threading.Thread(
             target=self._send,
