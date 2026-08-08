@@ -14,20 +14,24 @@ development, ahead of real student interaction data becoming available.
 """
 
 from dataclasses import replace
+from typing import Final
 
 from ..core.actions import Action
 from ..models.student_state import Difficulty, StudentState
 from .rewards import RewardCalculator
+from .simulation import CURRICULUM
 
-SUBJECTS_PER_CURRICULUM = 3
-TOPICS_PER_SUBJECT = 3
-LESSONS_PER_TOPIC = 2
-LESSONS_PER_SUBJECT = TOPICS_PER_SUBJECT * LESSONS_PER_TOPIC
-
-TOTAL_LESSONS = SUBJECTS_PER_CURRICULUM * LESSONS_PER_SUBJECT  # 18
-QUIZ_SCORE_IMPROVEMENT = 5
-ATTENTION_IMPROVEMENT = 0.1
-LESSONS_PER_SKIP = 2
+# The single source of truth for the curriculum's shape (subjects, their
+# topics, and each topic's lessons, in deterministic iteration order) is
+# ``training.simulation.CURRICULUM``. The total lesson count is derived
+# from it rather than hardcoded, so this module never has its own
+# opinion about how large the curriculum is.
+TOTAL_LESSONS: Final[int] = sum(
+    len(lessons) for topics in CURRICULUM.values() for lessons in topics.values()
+)
+QUIZ_SCORE_IMPROVEMENT: Final[int] = 5
+ATTENTION_IMPROVEMENT: Final[float] = 0.1
+LESSONS_PER_SKIP: Final[int] = 2
 
 
 class LearningEnvironment:
@@ -109,9 +113,9 @@ class LearningEnvironment:
             return replace(
                 state,
                 completed_lessons=completed_lessons,
-                current_subject=subject,
-                current_topic=topic,
-                current_lesson=lesson,
+                subject=subject,
+                topic=topic,
+                lesson=lesson,
                 lesson_attempts=0,
                 hints_used=0,
             )
@@ -171,9 +175,9 @@ class LearningEnvironment:
             return replace(
                 state,
                 completed_lessons=completed_lessons,
-                current_subject=subject,
-                current_topic=topic,
-                current_lesson=lesson,
+                subject=subject,
+                topic=topic,
+                lesson=lesson,
                 lesson_attempts=0,
                 hints_used=0,
             )
@@ -181,33 +185,39 @@ class LearningEnvironment:
         else:
             raise ValueError(f"Unrecognized action: {action}")
 
-    def _curriculum_position(self, completed_lessons: int) -> tuple[int, int, int]:
+    def _curriculum_position(self, completed_lessons: int) -> tuple[str, str, str]:
         """Translate a completed-lesson count into a curriculum position.
 
-        The curriculum is a fixed, deterministic grid of
-        ``SUBJECTS_PER_CURRICULUM`` subjects, each with ``TOPICS_PER_SUBJECT``
-        topics, each with ``LESSONS_PER_TOPIC`` lessons. Given how many
-        lessons the student has completed so far, this returns the
-        (subject, topic, lesson) the student is now on, all 1-indexed.
+        The curriculum's shape and ordering come entirely from the
+        shared ``training.simulation.CURRICULUM`` mapping (subject ->
+        topic -> ordered list of lesson names), so this environment
+        holds no independent opinion about how many subjects, topics, or
+        lessons exist -- it only walks ``CURRICULUM`` in order and picks
+        out the entry at ``completed_lessons``.
 
-        Once ``completed_lessons`` reaches or exceeds ``TOTAL_LESSONS`` the
-        position is clamped to the final lesson of the final topic of the
-        final subject, since there is nothing further to advance to.
+        Once ``completed_lessons`` reaches or exceeds ``TOTAL_LESSONS``
+        the position is clamped to the final lesson of the final topic
+        of the final subject, since there is nothing further to advance
+        to.
 
         Args:
             completed_lessons: How many lessons the student has finished.
 
         Returns:
-            A ``(subject, topic, lesson)`` tuple, each 1-indexed.
+            A ``(subject, topic, lesson)`` tuple of the actual names from
+            ``CURRICULUM`` at that position in the curriculum.
         """
         position = min(completed_lessons, TOTAL_LESSONS - 1)
 
-        subject = position // LESSONS_PER_SUBJECT
-        remainder = position % LESSONS_PER_SUBJECT
-        topic = remainder // LESSONS_PER_TOPIC
-        lesson = remainder % LESSONS_PER_TOPIC
+        index = 0
+        for subject, topics in CURRICULUM.items():
+            for topic, lessons in topics.items():
+                for lesson in lessons:
+                    if index == position:
+                        return subject, topic, lesson
+                    index += 1
 
-        return subject + 1, topic + 1, lesson + 1
+        raise RuntimeError("Curriculum traversal failed. Check CURRICULUM consistency.")
 
     def _improve_attention(self, current: float) -> float:
         """Apply the standard attention bump, capped at the max score.

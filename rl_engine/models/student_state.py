@@ -31,7 +31,7 @@ class Difficulty(Enum):
     HARD = 2
 
 
-@dataclass
+@dataclass(frozen=True)
 class StudentState:
     """A complete snapshot of a student's learning state.
 
@@ -97,11 +97,11 @@ class StudentState:
         bug in the caller. It intentionally does not enforce
         domain-specific business rules, which belong outside this module.
         """
-        if not self.subject:
+        if not self.subject.strip():
             raise ValueError("subject must not be empty.")
-        if not self.topic:
+        if not self.topic.strip():
             raise ValueError("topic must not be empty.")
-        if not self.lesson:
+        if not self.lesson.strip():
             raise ValueError("lesson must not be empty.")
 
         if not 0 <= self.previous_quiz_score <= 100:
@@ -111,6 +111,9 @@ class StudentState:
 
         if not 0.0 <= self.attention_score <= 1.0:
             raise ValueError("attention_score must be between 0.0 and 1.0.")
+
+        if not isinstance(self.difficulty, Difficulty):
+            raise TypeError("difficulty must be an instance of Difficulty.")
 
         if self.response_time < 0.0:
             raise ValueError("response_time must not be negative.")
