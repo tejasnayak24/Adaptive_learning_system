@@ -8,8 +8,43 @@ from app.auth.jwt_handler import create_access_token
 from app.database.connection import get_db
 from app.schemas.auth import LoginRequest, RegisterRequest, TokenResponse
 from app.services.student_service import StudentService
+from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(tags=["Authentication"])
+@router.post("/token")
+def token(
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: Session = Depends(get_db),
+) -> dict[str, str]:
+
+    login_data = LoginRequest(
+        email=form_data.username,
+        password=form_data.password,
+    )
+
+    student = StudentService.authenticate_student(
+        db,
+        login_data,
+    )
+
+    if student is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid email or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    access_token = create_access_token(
+        {
+            "sub": str(student.id),
+            "email": student.email,
+        }
+    )
+
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+    }
 
 
 @router.post("/register")

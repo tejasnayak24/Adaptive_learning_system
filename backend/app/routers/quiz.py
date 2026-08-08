@@ -17,6 +17,7 @@ def start_quiz(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ) -> dict[str, Any]:
+
     quiz_data = QuizService.start_quiz(
         db,
         request.quiz_id,
@@ -31,7 +32,10 @@ def start_quiz(
     return {
         "success": True,
         "message": "Quiz started successfully",
-        "data": quiz_data,
+        "data": {
+            "quiz": quiz_data["quiz"],
+            "questions": quiz_data["questions"],
+        },
     }
 
 
@@ -40,21 +44,44 @@ def get_quiz(
     quiz_id: int,
     db: Session = Depends(get_db),
 ) -> dict[str, Any]:
-    quiz = QuizService.get_quiz_by_id(
+
+    quiz_data = QuizService.start_quiz(
         db,
         quiz_id,
     )
 
-    if quiz is None:
+    if quiz_data is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Quiz not found",
         )
 
+    quiz = quiz_data["quiz"]
+    questions = quiz_data["questions"]
+
     return {
         "success": True,
         "message": "Quiz fetched successfully",
-        "data": quiz,
+        "data": {
+            "quiz": {
+                "id": quiz.id,
+                "lesson_id": quiz.lesson_id,
+                "title": quiz.title,
+                "difficulty": quiz.difficulty,
+            },
+            "questions": [
+                {
+                    "id": question.id,
+                    "quiz_id": question.quiz_id,
+                    "question": question.question,
+                    "option_a": question.option_a,
+                    "option_b": question.option_b,
+                    "option_c": question.option_c,
+                    "option_d": question.option_d,
+                }
+                for question in questions
+            ],
+        },
     }
 
 
@@ -64,6 +91,7 @@ def submit_quiz(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ) -> dict[str, Any]:
+
     progress = QuizService.submit_quiz(
         db=db,
         student_id=request.student_id,
@@ -77,5 +105,14 @@ def submit_quiz(
     return {
         "success": True,
         "message": "Quiz submitted successfully",
-        "data": progress,
+        "data": {
+            "id": progress.id,
+            "student_id": progress.student_id,
+            "lesson_id": progress.lesson_id,
+            "quiz_score": progress.quiz_score,
+            "response_time": progress.response_time,
+            "attention_score": progress.attention_score,
+            "difficulty": progress.difficulty,
+            "completed": progress.completed,
+        },
     }

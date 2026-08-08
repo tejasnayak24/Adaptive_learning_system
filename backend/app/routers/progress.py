@@ -11,18 +11,35 @@ from app.services.progress_service import ProgressService
 router = APIRouter(tags=["Student Progress"])
 
 
+def progress_to_dict(progress):
+    return {
+        "id": progress.id,
+        "student_id": progress.student_id,
+        "lesson_id": progress.lesson_id,
+        "quiz_score": progress.quiz_score,
+        "response_time": progress.response_time,
+        "attention_score": progress.attention_score,
+        "difficulty": progress.difficulty,
+        "completed": progress.completed,
+    }
+
+
 @router.get("/progress/{student_id}")
 def get_student_progress(
     student_id: int,
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ) -> dict[str, Any]:
-    progress = ProgressService.get_student_progress(db, student_id)
+
+    progress = ProgressService.get_student_progress(
+        db,
+        student_id,
+    )
 
     return {
         "success": True,
         "message": "Student progress fetched successfully",
-        "data": progress,
+        "data": [progress_to_dict(item) for item in progress],
     }
 
 
@@ -33,6 +50,7 @@ def get_lesson_progress(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ) -> dict[str, Any]:
+
     progress = ProgressService.get_lesson_progress(
         db,
         student_id,
@@ -48,7 +66,7 @@ def get_lesson_progress(
     return {
         "success": True,
         "message": "Lesson progress fetched successfully",
-        "data": progress,
+        "data": progress_to_dict(progress),
     }
 
 
@@ -59,6 +77,7 @@ def update_progress(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ) -> dict[str, Any]:
+
     updated = ProgressService.update_progress(
         db,
         progress_id,
@@ -74,5 +93,5 @@ def update_progress(
     return {
         "success": True,
         "message": "Progress updated successfully",
-        "data": updated,
+        "data": progress_to_dict(updated),
     }

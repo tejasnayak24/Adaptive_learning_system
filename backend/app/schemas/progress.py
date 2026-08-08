@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class ProgressBase(BaseModel):
@@ -26,5 +26,6 @@ class ProgressUpdate(BaseModel):
 class ProgressResponse(ProgressBase):
     id: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(
+        from_attributes=True
+    )
