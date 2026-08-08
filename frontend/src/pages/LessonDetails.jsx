@@ -1,165 +1,79 @@
 import { Link, useParams } from "react-router-dom";
 import StudentLayout from "../layouts/StudentLayout";
+import { useEffect, useState } from "react";
+import lessonService from "../services/lessonService";
 
 function LessonDetails() {
   const { id } = useParams();
+  const [lesson, setLesson] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const lessonData = {
-    "python-basics": {
-      title: "Python Basics",
-      difficulty: "Beginner",
-      duration: "30 mins",
-      objectives: [
-        "Understand Python syntax",
-        "Learn variables and data types",
-        "Use input() and print()",
-        "Write simple Python programs",
-      ],
-      content:
-        "Python is a beginner-friendly programming language used in web development, artificial intelligence, data science, automation, and many other fields. In this lesson, you'll learn the basic syntax, variables, data types, input and output, and write your first Python programs.",
-    },
+  useEffect(() => {
+    let mounted = true;
+    const load = async () => {
+      setLoading(true);
+      try {
+        const res = await lessonService.getLessonById(id);
+        const data = res?.data ?? res;
+        if (mounted) setLesson(data);
+      } catch (e) {
+        if (mounted) setError(e.message || "Failed to load lesson");
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
+    load();
+    return () => (mounted = false);
+  }, [id]);
 
-    loops: {
-      title: "Loops",
-      difficulty: "Intermediate",
-      duration: "25 mins",
-      objectives: [
-        "Understand for loops",
-        "Understand while loops",
-        "Practice nested loops",
-      ],
-      content:
-        "Loops help execute a block of code repeatedly. Python provides 'for' loops and 'while' loops that make programs efficient by reducing repetition.",
-    },
+  if (loading) {
+    return (
+      <StudentLayout>
+        <div className="bg-white rounded-xl shadow-md p-8 text-center">Loading lesson...</div>
+      </StudentLayout>
+    );
+  }
 
-    functions: {
-      title: "Functions",
-      difficulty: "Intermediate",
-      duration: "35 mins",
-      objectives: [
-        "Create functions",
-        "Pass parameters",
-        "Return values",
-      ],
-      content:
-        "Functions allow you to organize code into reusable blocks. They improve readability and reduce duplicate code by grouping related logic together.",
-    },
-
-    lists: {
-      title: "Lists",
-      difficulty: "Intermediate",
-      duration: "30 mins",
-      objectives: [
-        "Create lists",
-        "Access list elements",
-        "Perform list operations",
-      ],
-      content:
-        "Lists are ordered collections used to store multiple values. You'll learn indexing, slicing, adding, removing, and updating list elements.",
-    },
-
-    dictionaries: {
-      title: "Dictionaries",
-      difficulty: "Advanced",
-      duration: "40 mins",
-      objectives: [
-        "Understand key-value pairs",
-        "Access dictionary values",
-        "Update dictionary data",
-      ],
-      content:
-        "Dictionaries store information using key-value pairs. They provide fast data retrieval and are widely used in real-world Python applications.",
-    },
-
-    "file-handling": {
-      title: "File Handling",
-      difficulty: "Advanced",
-      duration: "45 mins",
-      objectives: [
-        "Read text files",
-        "Write files",
-        "Use file modes",
-      ],
-      content:
-        "File handling allows Python programs to store and retrieve data from files. You'll learn reading, writing, appending, and closing files safely.",
-    },
-  };
-
-  const lesson = lessonData[id];
-
-  if (!lesson) {
+  if (error || !lesson) {
     return (
       <StudentLayout>
         <div className="bg-white rounded-xl shadow-md p-8 text-center">
-          <h1 className="text-3xl font-bold text-red-600">
-            Lesson Not Found
-          </h1>
-
-          <Link
-            to="/lessons"
-            className="text-blue-600 hover:underline mt-4 inline-block"
-          >
-            ← Back to Lessons
-          </Link>
+          <h1 className="text-3xl font-bold text-red-600">Lesson Not Found</h1>
+          <Link to="/lessons" className="text-blue-600 hover:underline mt-4 inline-block">← Back to Lessons</Link>
         </div>
       </StudentLayout>
     );
   }
 
+  const objectives = lesson.objectives ?? lesson?.meta?.objectives ?? [];
+  const duration = lesson.duration ?? lesson?.meta?.duration ?? "-";
+  const difficulty = lesson.difficulty ?? lesson?.meta?.difficulty ?? "-";
+
   return (
     <StudentLayout>
-
-      <Link
-        to="/lessons"
-        className="text-blue-600 hover:underline"
-      >
-        ← Back to Lessons
-      </Link>
+      <Link to="/lessons" className="text-blue-600 hover:underline">← Back to Lessons</Link>
 
       <div className="bg-white rounded-xl shadow-md p-8 mt-6">
-
-        <h1 className="text-4xl font-bold">
-          {lesson.title}
-        </h1>
+        <h1 className="text-4xl font-bold">{lesson.title ?? lesson.name}</h1>
 
         <div className="flex gap-4 mt-4">
-
-          <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
-            {lesson.difficulty}
-          </span>
-
-          <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full">
-            {lesson.duration}
-          </span>
-
+          <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">{difficulty}</span>
+          <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full">{duration}</span>
         </div>
 
-        <h2 className="text-2xl font-semibold mt-8">
-          Learning Objectives
-        </h2>
-
+        <h2 className="text-2xl font-semibold mt-8">Learning Objectives</h2>
         <ul className="list-disc ml-6 mt-4 space-y-2">
-          {lesson.objectives.map((objective, index) => (
-            <li key={index}>{objective}</li>
-          ))}
+          {objectives.map((objective, index) => (<li key={index}>{objective}</li>))}
         </ul>
 
-        <h2 className="text-2xl font-semibold mt-8">
-          Lesson Content
-        </h2>
-
+        <h2 className="text-2xl font-semibold mt-8">Lesson Content</h2>
         <div className="bg-gray-50 rounded-lg p-6 mt-4 leading-8">
-          <p>{lesson.content}</p>
+          <div dangerouslySetInnerHTML={{ __html: lesson.content ?? lesson.body ?? lesson.description ?? "" }} />
         </div>
 
-       <Link
-  to={`/quiz/${id}`}
-  className="inline-block mt-8 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg"
->
-  Start Quiz
-</Link>
+        <Link to={`/quiz/${lesson.quiz_id ?? lesson.id ?? id}`} className="inline-block mt-8 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">Start Quiz</Link>
       </div>
-
     </StudentLayout>
   );
 }
