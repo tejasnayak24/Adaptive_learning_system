@@ -14,6 +14,7 @@ class APIClient:
                 json=payload,
                 timeout=2
             )
+
         except Exception as e:
             print("Backend Error:", e)
 
@@ -23,7 +24,9 @@ class APIClient:
         attention_score,
         status,
         eyes_open,
-        head_direction
+        head_direction,
+        looking_away,
+        yawning
     ):
 
         payload = {
@@ -31,7 +34,9 @@ class APIClient:
             "attention_score": attention_score,
             "status": status,
             "eyes_open": eyes_open,
-            "head_direction": head_direction
+            "head_direction": head_direction,
+            "looking_away": looking_away,
+            "yawning": yawning
         }
 
         threading.Thread(
