@@ -1,12 +1,4 @@
-"""Simulation utilities for Reinforcement Learning training.
-
-This module provides simulated student states for offline Reinforcement
-Learning training. It is responsible only for creating realistic initial
-student states for each training episode.
-
-During production, ``StudentState`` instances should be constructed from
-real learner data received from the backend rather than from this module.
-"""
+"""Simulation utilities for Reinforcement Learning training."""
 
 from __future__ import annotations
 
@@ -15,10 +7,6 @@ from typing import Final
 
 from ..models.student_state import Difficulty, StudentState
 
-
-# ---------------------------------------------------------------------
-# Simulated curriculum
-# ---------------------------------------------------------------------
 
 CURRICULUM: Final[dict[str, dict[str, list[str]]]] = {
     "Mathematics": {
@@ -54,45 +42,69 @@ CURRICULUM: Final[dict[str, dict[str, list[str]]]] = {
 }
 
 
-# ---------------------------------------------------------------------
-# Default values for a newly simulated learner
-# ---------------------------------------------------------------------
+ATTENTION_VALUES: Final[tuple[float, ...]] = (
+    0.2,
+    0.35,
+    0.5,
+    0.7,
+    0.9,
+)
 
-INITIAL_QUIZ_SCORE: Final[int] = 0
-INITIAL_ATTENTION_SCORE: Final[float] = 1.0
-INITIAL_RESPONSE_TIME: Final[float] = 0.0
-INITIAL_HINTS_USED: Final[int] = 0
-INITIAL_LESSON_ATTEMPTS: Final[int] = 0
-INITIAL_COMPLETED_LESSONS: Final[int] = 0
+
+DIFFICULTIES: Final[tuple[Difficulty, ...]] = (
+    Difficulty.EASY,
+    Difficulty.MEDIUM,
+    Difficulty.HARD,
+)
 
 
 def create_initial_state() -> StudentState:
-    """Create the initial simulated student state for a training episode.
+    """Create a varied simulated student state for a training episode."""
 
-    A subject, topic, and lesson are selected randomly from the simulated
-    curriculum. All learner-related metrics begin with sensible default
-    values representing a student starting a new lesson.
-
-    Returns:
-        A ``StudentState`` representing the initial state of a simulated
-        learner.
-    """
     subject = random.choice(list(CURRICULUM.keys()))
     topic = random.choice(list(CURRICULUM[subject].keys()))
     lesson = random.choice(CURRICULUM[subject][topic])
+
+    current_score = random.choice(
+        (30, 45, 55, 65, 75, 85, 90, 95)
+    )
+
+    previous_score = random.choice(
+        (30, 45, 55, 65, 75, 85, 90, 95)
+    )
+
+    attention = random.choice(ATTENTION_VALUES)
+
+    yawning = (
+        attention <= 0.35
+        and random.random() < 0.65
+    )
+
+    looking_away = (
+        attention <= 0.35
+        and random.random() < 0.65
+    )
+
+    if not yawning and random.random() < 0.08:
+        yawning = True
+
+    if not looking_away and random.random() < 0.08:
+        looking_away = True
 
     return StudentState(
         subject=subject,
         topic=topic,
         lesson=lesson,
-        previous_quiz_score=INITIAL_QUIZ_SCORE,
-        current_quiz_score=INITIAL_QUIZ_SCORE,
-        attention_score=INITIAL_ATTENTION_SCORE,
-        yawning=False,
-        looking_away=False,
-        difficulty=Difficulty.EASY,
-        response_time=INITIAL_RESPONSE_TIME,
-        hints_used=INITIAL_HINTS_USED,
-        lesson_attempts=INITIAL_LESSON_ATTEMPTS,
-        completed_lessons=INITIAL_COMPLETED_LESSONS,
+        previous_quiz_score=previous_score,
+        current_quiz_score=current_score,
+        attention_score=attention,
+        yawning=yawning,
+        looking_away=looking_away,
+        difficulty=random.choice(DIFFICULTIES),
+        response_time=random.choice(
+            (5.0, 10.0, 15.0, 25.0)
+        ),
+        hints_used=random.randint(0, 3),
+        lesson_attempts=random.randint(0, 4),
+        completed_lessons=random.randint(0, 5),
     )
