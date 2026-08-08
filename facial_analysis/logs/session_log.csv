@@ -452,3 +452,751 @@ Timestamp,Attention,Status,Head Direction,Eyes Open,Blink Count,Blink Rate
 2026-08-08 23:58:06,100,Highly Attentive,Forward,True,85,26.2
 2026-08-08 23:58:07,100,Highly Attentive,Forward,True,85,26.0
 2026-08-08 23:58:08,100,Highly Attentive,Forward,True,85,25.9
+2026-08-09 01:31:38,72,Attentive,Left,True,0,0.0
+2026-08-09 01:31:39,65,Slightly Distracted,Left,True,0,0.0
+2026-08-09 01:31:40,65,Slightly Distracted,Left,True,0,0.0
+2026-08-09 01:31:41,64,Slightly Distracted,Left,True,0,0.0
+2026-08-09 01:31:43,65,Slightly Distracted,Left,True,0,0.0
+2026-08-09 01:31:44,63,Slightly Distracted,Left,True,1,9.8
+2026-08-09 01:31:45,60,Slightly Distracted,Left,False,2,16.8
+2026-08-09 01:31:46,64,Slightly Distracted,Left,True,3,22.1
+2026-08-09 01:31:47,52,Slightly Distracted,Left,True,3,19.7
+2026-08-09 01:31:48,74,Attentive,Forward,True,4,23.6
+2026-08-09 01:31:49,85,Highly Attentive,Forward,True,4,21.4
+2026-08-09 01:31:50,85,Highly Attentive,Forward,True,4,19.6
+2026-08-09 01:31:51,85,Highly Attentive,Forward,True,4,18.1
+2026-08-09 01:31:52,87,Highly Attentive,Forward,True,4,16.8
+2026-08-09 01:31:53,89,Highly Attentive,Forward,False,5,19.6
+2026-08-09 01:31:54,93,Highly Attentive,Forward,True,7,25.8
+2026-08-09 01:31:55,76,Attentive,Left,True,10,34.7
+2026-08-09 01:31:56,55,Slightly Distracted,Left,True,10,32.7
+2026-08-09 01:31:57,57,Slightly Distracted,Forward,True,10,31.0
+2026-08-09 01:31:58,65,Slightly Distracted,Right,True,11,32.4
+2026-08-09 01:31:59,62,Slightly Distracted,Left,True,11,30.9
+2026-08-09 01:32:00,59,Slightly Distracted,Left,True,11,29.5
+2026-08-09 01:32:01,65,Slightly Distracted,Left,True,11,28.2
+2026-08-09 01:32:02,65,Slightly Distracted,Left,True,11,27.0
+2026-08-09 01:32:03,65,Slightly Distracted,Left,True,11,26.0
+2026-08-09 01:32:04,88,Highly Attentive,Left,True,11,25.0
+2026-08-09 01:32:05,52,Slightly Distracted,Up,False,11,24.0
+2026-08-09 01:32:06,61,Slightly Distracted,Left,True,12,25.3
+2026-08-09 01:32:07,65,Slightly Distracted,Left,True,12,24.4
+2026-08-09 01:32:08,65,Slightly Distracted,Left,True,12,23.6
+2026-08-09 01:32:09,65,Slightly Distracted,Left,True,12,22.8
+2026-08-09 01:32:10,71,Attentive,Forward,True,13,24.0
+2026-08-09 01:32:11,100,Highly Attentive,Forward,True,13,23.2
+2026-08-09 01:32:12,100,Highly Attentive,Forward,True,13,22.6
+2026-08-09 01:32:13,100,Highly Attentive,Forward,True,13,21.9
+2026-08-09 01:32:14,97,Highly Attentive,Forward,True,13,21.3
+2026-08-09 01:32:15,91,Highly Attentive,Forward,False,13,20.7
+2026-08-09 01:32:16,99,Highly Attentive,Forward,True,14,21.7
+2026-08-09 01:32:17,100,Highly Attentive,Forward,True,14,21.2
+2026-08-09 01:32:18,100,Highly Attentive,Forward,True,14,20.6
+2026-08-09 01:32:19,99,Highly Attentive,Forward,True,14,20.1
+2026-08-09 01:32:20,100,Highly Attentive,Forward,True,14,19.7
+2026-08-09 01:32:21,100,Highly Attentive,Forward,True,14,19.2
+2026-08-09 01:32:22,100,Highly Attentive,Forward,True,14,18.8
+2026-08-09 01:32:23,98,Highly Attentive,Forward,True,15,19.6
+2026-08-09 01:32:24,100,Highly Attentive,Forward,True,15,19.2
+2026-08-09 01:32:25,100,Highly Attentive,Forward,True,15,18.8
+2026-08-09 01:32:26,100,Highly Attentive,Forward,True,15,18.4
+2026-08-09 01:32:27,100,Highly Attentive,Forward,True,15,18.0
+2026-08-09 01:32:28,100,Highly Attentive,Forward,True,15,17.7
+2026-08-09 01:32:29,100,Highly Attentive,Forward,True,15,17.3
+2026-08-09 01:32:30,100,Highly Attentive,Forward,True,15,17.0
+2026-08-09 01:32:31,100,Highly Attentive,Forward,True,15,16.7
+2026-08-09 01:32:32,99,Highly Attentive,Forward,True,15,16.4
+2026-08-09 01:32:33,100,Highly Attentive,Forward,True,15,16.1
+2026-08-09 01:32:34,100,Highly Attentive,Forward,True,15,15.8
+2026-08-09 01:32:36,95,Highly Attentive,Forward,True,17,17.6
+2026-08-09 01:32:37,100,Highly Attentive,Forward,True,17,17.3
+2026-08-09 01:32:38,99,Highly Attentive,Forward,False,17,17.0
+2026-08-09 01:32:39,98,Highly Attentive,Forward,True,18,17.7
+2026-08-09 01:32:40,100,Highly Attentive,Forward,True,18,17.4
+2026-08-09 01:32:41,94,Highly Attentive,Forward,True,20,19.0
+2026-08-09 01:32:42,100,Highly Attentive,Forward,True,20,18.7
+2026-08-09 01:32:43,100,Highly Attentive,Forward,True,20,18.4
+2026-08-09 01:32:44,100,Highly Attentive,Forward,True,20,18.1
+2026-08-09 01:32:45,100,Highly Attentive,Forward,True,20,17.8
+2026-08-09 01:32:46,100,Highly Attentive,Forward,True,20,17.6
+2026-08-09 01:32:47,100,Highly Attentive,Forward,True,20,17.3
+2026-08-09 01:32:48,100,Highly Attentive,Forward,True,20,17.1
+2026-08-09 01:32:49,100,Highly Attentive,Forward,True,20,16.8
+2026-08-09 01:32:50,100,Highly Attentive,Forward,True,20,16.6
+2026-08-09 01:32:51,95,Highly Attentive,Forward,True,21,17.2
+2026-08-09 01:32:52,100,Highly Attentive,Forward,True,21,16.9
+2026-08-09 01:32:53,100,Highly Attentive,Forward,True,21,16.7
+2026-08-09 01:32:54,100,Highly Attentive,Forward,True,21,16.5
+2026-08-09 01:32:55,100,Highly Attentive,Forward,True,21,16.3
+2026-08-09 01:32:56,80,Attentive,Down,True,21,16.1
+2026-08-09 01:32:57,65,Slightly Distracted,Down,True,21,15.9
+2026-08-09 01:32:58,70,Slightly Distracted,Forward,True,21,15.7
+2026-08-09 01:32:59,100,Highly Attentive,Forward,True,21,15.5
+2026-08-09 01:33:00,100,Highly Attentive,Forward,True,21,15.3
+2026-08-09 01:33:01,100,Highly Attentive,Forward,True,21,15.1
+2026-08-09 01:33:02,100,Highly Attentive,Forward,True,21,14.9
+2026-08-09 01:33:03,98,Highly Attentive,Forward,True,21,14.7
+2026-08-09 01:33:04,99,Highly Attentive,Forward,True,21,14.6
+2026-08-09 01:33:05,100,Highly Attentive,Forward,True,21,14.4
+2026-08-09 01:33:06,99,Highly Attentive,Forward,True,21,14.2
+2026-08-09 01:33:07,100,Highly Attentive,Forward,True,21,14.1
+2026-08-09 01:33:08,98,Highly Attentive,Forward,True,22,14.6
+2026-08-09 01:33:09,100,Highly Attentive,Forward,True,22,14.4
+2026-08-09 01:33:10,100,Highly Attentive,Forward,True,22,14.2
+2026-08-09 01:33:11,100,Highly Attentive,Forward,True,22,14.1
+2026-08-09 01:33:12,100,Highly Attentive,Forward,True,22,13.9
+2026-08-09 01:33:13,100,Highly Attentive,Forward,True,22,13.8
+2026-08-09 01:33:14,100,Highly Attentive,Forward,True,22,13.6
+2026-08-09 01:33:15,100,Highly Attentive,Forward,True,22,13.5
+2026-08-09 01:33:16,100,Highly Attentive,Forward,True,22,13.4
+2026-08-09 01:33:17,96,Highly Attentive,Right,True,22,13.2
+2026-08-09 01:33:18,65,Slightly Distracted,Right,True,22,13.1
+2026-08-09 01:33:19,65,Slightly Distracted,Right,True,22,13.0
+2026-08-09 01:33:20,65,Slightly Distracted,Right,True,22,12.8
+2026-08-09 01:33:21,66,Slightly Distracted,Forward,True,22,12.7
+2026-08-09 01:33:22,72,Attentive,Right,True,22,12.6
+2026-08-09 01:33:23,71,Attentive,Forward,True,22,12.5
+2026-08-09 01:33:24,100,Highly Attentive,Forward,True,22,12.3
+2026-08-09 01:33:25,65,Slightly Distracted,Right,True,22,12.2
+2026-08-09 01:33:26,70,Slightly Distracted,Forward,True,22,12.1
+2026-08-09 01:33:27,100,Highly Attentive,Forward,True,22,12.0
+2026-08-09 01:33:28,100,Highly Attentive,Forward,True,22,11.9
+2026-08-09 01:33:29,100,Highly Attentive,Forward,True,22,11.8
+2026-08-09 01:33:30,100,Highly Attentive,Forward,True,22,11.7
+2026-08-09 01:33:31,100,Highly Attentive,Forward,True,22,11.6
+2026-08-09 01:33:33,100,Highly Attentive,Forward,True,22,11.5
+2026-08-09 01:33:34,100,Highly Attentive,Forward,True,22,11.4
+2026-08-09 01:33:35,100,Highly Attentive,Forward,True,22,11.3
+2026-08-09 01:33:36,100,Highly Attentive,Forward,True,22,11.2
+2026-08-09 01:33:37,96,Highly Attentive,Forward,True,23,11.6
+2026-08-09 01:33:38,93,Highly Attentive,Forward,False,25,12.5
+2026-08-09 01:33:39,83,Attentive,Forward,True,27,13.4
+2026-08-09 01:33:40,100,Highly Attentive,Forward,True,27,13.3
+2026-08-09 01:33:41,100,Highly Attentive,Forward,True,27,13.1
+2026-08-09 01:33:42,100,Highly Attentive,Forward,True,27,13.0
+2026-08-09 01:33:43,100,Highly Attentive,Forward,True,27,12.9
+2026-08-09 01:33:44,100,Highly Attentive,Forward,True,27,12.8
+2026-08-09 01:33:45,100,Highly Attentive,Forward,True,27,12.7
+2026-08-09 01:33:46,100,Highly Attentive,Forward,True,27,12.6
+2026-08-09 01:33:47,100,Highly Attentive,Forward,True,27,12.5
+2026-08-09 01:33:48,100,Highly Attentive,Forward,True,27,12.4
+2026-08-09 01:33:49,100,Highly Attentive,Forward,True,27,12.3
+2026-08-09 01:33:50,100,Highly Attentive,Forward,True,27,12.2
+2026-08-09 01:33:51,100,Highly Attentive,Forward,True,27,12.1
+2026-08-09 01:33:52,100,Highly Attentive,Forward,True,27,12.0
+2026-08-09 01:33:53,100,Highly Attentive,Forward,True,27,12.0
+2026-08-09 01:33:54,100,Highly Attentive,Forward,True,27,11.9
+2026-08-09 01:33:55,100,Highly Attentive,Forward,True,27,11.8
+2026-08-09 01:33:56,70,Slightly Distracted,Right,True,27,11.7
+2026-08-09 01:33:57,65,Slightly Distracted,Right,True,27,11.6
+2026-08-09 01:33:58,77,Attentive,Forward,True,27,11.5
+2026-08-09 01:33:59,99,Highly Attentive,Forward,True,27,11.4
+2026-08-09 01:34:00,65,Slightly Distracted,Right,True,27,11.4
+2026-08-09 01:34:01,78,Attentive,Forward,True,27,11.3
+2026-08-09 01:34:02,87,Highly Attentive,Forward,True,27,11.2
+2026-08-09 01:34:03,93,Highly Attentive,Forward,True,28,11.5
+2026-08-09 01:34:04,84,Attentive,Forward,False,28,11.5
+2026-08-09 01:34:05,82,Attentive,Forward,False,28,11.4
+2026-08-09 01:34:06,87,Highly Attentive,Forward,True,29,11.7
+2026-08-09 01:34:07,100,Highly Attentive,Forward,True,29,11.6
+2026-08-09 01:34:08,100,Highly Attentive,Forward,True,29,11.5
+2026-08-09 01:34:09,100,Highly Attentive,Forward,True,29,11.5
+2026-08-09 01:34:10,100,Highly Attentive,Forward,True,29,11.4
+2026-08-09 01:34:11,100,Highly Attentive,Forward,True,29,11.3
+2026-08-09 01:34:12,100,Highly Attentive,Forward,True,29,11.2
+2026-08-09 01:34:13,100,Highly Attentive,Forward,True,29,11.2
+2026-08-09 01:34:14,100,Highly Attentive,Forward,True,29,11.1
+2026-08-09 01:34:15,100,Highly Attentive,Forward,True,29,11.0
+2026-08-09 01:34:16,100,Highly Attentive,Forward,True,29,10.9
+2026-08-09 01:34:17,100,Highly Attentive,Forward,True,29,10.9
+2026-08-09 01:34:18,100,Highly Attentive,Forward,True,29,10.8
+2026-08-09 01:34:19,100,Highly Attentive,Forward,True,29,10.7
+2026-08-09 01:34:20,100,Highly Attentive,Forward,True,29,10.7
+2026-08-09 01:34:21,100,Highly Attentive,Forward,True,29,10.6
+2026-08-09 01:34:22,100,Highly Attentive,Forward,True,29,10.5
+2026-08-09 01:34:23,100,Highly Attentive,Forward,True,29,10.5
+2026-08-09 01:34:25,100,Highly Attentive,Forward,True,29,10.4
+2026-08-09 01:34:26,100,Highly Attentive,Forward,True,29,10.3
+2026-08-09 01:34:27,99,Highly Attentive,Forward,True,29,10.3
+2026-08-09 01:34:28,100,Highly Attentive,Forward,True,29,10.2
+2026-08-09 01:34:29,100,Highly Attentive,Forward,True,29,10.2
+2026-08-09 01:34:30,100,Highly Attentive,Forward,True,29,10.1
+2026-08-09 01:34:31,100,Highly Attentive,Forward,True,29,10.0
+2026-08-09 01:34:32,100,Highly Attentive,Forward,True,29,10.0
+2026-08-09 01:34:33,100,Highly Attentive,Forward,True,29,9.9
+2026-08-09 01:34:34,100,Highly Attentive,Forward,True,29,9.9
+2026-08-09 01:34:35,100,Highly Attentive,Forward,True,29,9.8
+2026-08-09 01:34:36,100,Highly Attentive,Forward,True,29,9.8
+2026-08-09 01:34:37,100,Highly Attentive,Forward,True,29,9.7
+2026-08-09 01:34:38,100,Highly Attentive,Forward,True,29,9.6
+2026-08-09 01:34:39,100,Highly Attentive,Forward,True,29,9.6
+2026-08-09 01:34:40,100,Highly Attentive,Forward,True,29,9.5
+2026-08-09 01:34:41,100,Highly Attentive,Forward,True,29,9.5
+2026-08-09 01:34:42,100,Highly Attentive,Forward,True,29,9.4
+2026-08-09 01:34:43,100,Highly Attentive,Forward,True,29,9.4
+2026-08-09 01:34:44,100,Highly Attentive,Forward,True,29,9.3
+2026-08-09 01:34:45,100,Highly Attentive,Forward,True,29,9.3
+2026-08-09 01:34:46,97,Highly Attentive,Forward,True,30,9.5
+2026-08-09 01:34:47,93,Highly Attentive,Down,True,30,9.5
+2026-08-09 01:34:48,65,Slightly Distracted,Left,True,30,9.4
+2026-08-09 01:34:49,65,Slightly Distracted,Left,True,30,9.4
+2026-08-09 01:34:50,65,Slightly Distracted,Left,True,30,9.3
+2026-08-09 01:34:51,65,Slightly Distracted,Left,True,30,9.3
+2026-08-09 01:34:52,71,Attentive,Forward,True,30,9.2
+2026-08-09 01:34:53,100,Highly Attentive,Forward,True,30,9.2
+2026-08-09 01:34:54,100,Highly Attentive,Forward,True,30,9.2
+2026-08-09 01:34:55,100,Highly Attentive,Forward,True,30,9.1
+2026-08-09 01:34:56,73,Attentive,Left,True,32,9.7
+2026-08-09 01:34:57,65,Slightly Distracted,Left,True,32,9.6
+2026-08-09 01:34:58,65,Slightly Distracted,Left,True,32,9.6
+2026-08-09 01:34:59,65,Slightly Distracted,Left,True,32,9.5
+2026-08-09 01:35:00,65,Slightly Distracted,Left,True,32,9.5
+2026-08-09 01:35:01,65,Slightly Distracted,Left,True,32,9.4
+2026-08-09 01:35:02,72,Attentive,Forward,True,32,9.4
+2026-08-09 01:35:03,70,Slightly Distracted,Down,True,32,9.3
+2026-08-09 01:35:04,91,Highly Attentive,Forward,True,32,9.3
+2026-08-09 01:35:05,100,Highly Attentive,Forward,True,32,9.2
+2026-08-09 01:35:06,100,Highly Attentive,Forward,True,32,9.2
+2026-08-09 01:35:07,100,Highly Attentive,Forward,True,32,9.1
+2026-08-09 01:35:08,86,Highly Attentive,Forward,True,32,9.1
+2026-08-09 01:35:09,98,Highly Attentive,Left,True,32,9.1
+2026-08-09 01:35:11,100,Highly Attentive,Forward,True,32,9.0
+2026-08-09 01:35:12,99,Highly Attentive,Forward,True,32,9.0
+2026-08-09 01:35:13,100,Highly Attentive,Forward,True,32,8.9
+2026-08-09 01:35:14,78,Attentive,Left,True,32,8.9
+2026-08-09 01:35:15,66,Slightly Distracted,Forward,True,32,8.8
+2026-08-09 01:35:16,100,Highly Attentive,Forward,True,32,8.8
+2026-08-09 01:35:17,100,Highly Attentive,Forward,True,32,8.8
+2026-08-09 01:35:18,100,Highly Attentive,Forward,True,32,8.7
+2026-08-09 01:35:19,98,Highly Attentive,Left,True,32,8.7
+2026-08-09 01:35:20,96,Highly Attentive,Forward,True,32,8.6
+2026-08-09 01:35:21,100,Highly Attentive,Forward,True,32,8.6
+2026-08-09 01:35:22,100,Highly Attentive,Forward,True,32,8.6
+2026-08-09 01:35:23,100,Highly Attentive,Forward,True,32,8.5
+2026-08-09 01:35:24,100,Highly Attentive,Forward,True,32,8.5
+2026-08-09 01:35:25,100,Highly Attentive,Forward,True,32,8.4
+2026-08-09 01:35:26,100,Highly Attentive,Forward,True,32,8.4
+2026-08-09 01:35:27,73,Attentive,Left,True,32,8.4
+2026-08-09 01:35:28,86,Highly Attentive,Forward,True,32,8.3
+2026-08-09 01:35:29,100,Highly Attentive,Forward,True,32,8.3
+2026-08-09 01:35:30,97,Highly Attentive,Forward,True,33,8.5
+2026-08-09 01:35:31,96,Highly Attentive,Forward,True,34,8.7
+2026-08-09 01:35:32,99,Highly Attentive,Forward,True,34,8.7
+2026-08-09 01:35:33,100,Highly Attentive,Forward,True,34,8.7
+2026-08-09 01:35:34,100,Highly Attentive,Forward,True,34,8.6
+2026-08-09 01:35:35,99,Highly Attentive,Forward,True,34,8.6
+2026-08-09 01:35:36,100,Highly Attentive,Forward,True,34,8.5
+2026-08-09 01:35:37,100,Highly Attentive,Forward,True,34,8.5
+2026-08-09 01:35:38,100,Highly Attentive,Forward,True,34,8.5
+2026-08-09 01:35:39,100,Highly Attentive,Forward,True,34,8.4
+2026-08-09 01:35:40,100,Highly Attentive,Forward,True,34,8.4
+2026-08-09 01:35:41,100,Highly Attentive,Forward,True,34,8.4
+2026-08-09 01:35:42,100,Highly Attentive,Forward,True,34,8.3
+2026-08-09 01:35:43,100,Highly Attentive,Forward,True,34,8.3
+2026-08-09 01:35:44,100,Highly Attentive,Forward,True,34,8.3
+2026-08-09 01:35:45,100,Highly Attentive,Forward,True,34,8.2
+2026-08-09 01:35:46,100,Highly Attentive,Forward,True,34,8.2
+2026-08-09 01:35:47,100,Highly Attentive,Forward,True,34,8.2
+2026-08-09 01:35:48,100,Highly Attentive,Forward,True,34,8.1
+2026-08-09 01:35:49,100,Highly Attentive,Forward,True,34,8.1
+2026-08-09 01:35:50,100,Highly Attentive,Forward,True,34,8.1
+2026-08-09 01:35:51,100,Highly Attentive,Forward,True,34,8.0
+2026-08-09 01:35:52,100,Highly Attentive,Forward,True,34,8.0
+2026-08-09 01:35:53,100,Highly Attentive,Forward,True,34,8.0
+2026-08-09 01:35:54,100,Highly Attentive,Forward,True,34,7.9
+2026-08-09 01:35:56,100,Highly Attentive,Forward,True,34,7.9
+2026-08-09 01:35:57,100,Highly Attentive,Forward,True,34,7.9
+2026-08-09 01:35:58,100,Highly Attentive,Forward,True,34,7.8
+2026-08-09 01:35:59,100,Highly Attentive,Forward,True,34,7.8
+2026-08-09 01:36:00,100,Highly Attentive,Forward,True,34,7.8
+2026-08-09 01:36:01,100,Highly Attentive,Forward,True,34,7.8
+2026-08-09 01:36:02,100,Highly Attentive,Forward,True,34,7.7
+2026-08-09 01:36:03,100,Highly Attentive,Forward,True,34,7.7
+2026-08-09 01:36:04,87,Highly Attentive,Forward,True,34,7.7
+2026-08-09 01:36:05,100,Highly Attentive,Forward,True,34,7.6
+2026-08-09 01:36:06,100,Highly Attentive,Forward,True,34,7.6
+2026-08-09 01:36:07,100,Highly Attentive,Forward,True,34,7.6
+2026-08-09 01:36:08,100,Highly Attentive,Forward,True,34,7.5
+2026-08-09 01:36:09,100,Highly Attentive,Forward,True,34,7.5
+2026-08-09 01:36:10,88,Highly Attentive,Forward,True,36,7.9
+2026-08-09 01:36:11,100,Highly Attentive,Forward,True,36,7.9
+2026-08-09 01:36:12,100,Highly Attentive,Forward,True,36,7.9
+2026-08-09 01:36:13,100,Highly Attentive,Forward,True,36,7.8
+2026-08-09 01:36:14,100,Highly Attentive,Forward,True,36,7.8
+2026-08-09 01:36:15,100,Highly Attentive,Forward,True,36,7.8
+2026-08-09 01:36:16,100,Highly Attentive,Forward,True,36,7.8
+2026-08-09 01:36:17,100,Highly Attentive,Forward,True,36,7.7
+2026-08-09 01:36:18,73,Attentive,Right,True,36,7.7
+2026-08-09 01:36:19,66,Slightly Distracted,Right,True,36,7.7
+2026-08-09 01:36:20,91,Highly Attentive,Forward,True,36,7.6
+2026-08-09 01:36:21,99,Highly Attentive,Forward,True,36,7.6
+2026-08-09 01:36:22,100,Highly Attentive,Forward,True,36,7.6
+2026-08-09 01:36:23,100,Highly Attentive,Forward,True,36,7.6
+2026-08-09 01:36:24,100,Highly Attentive,Forward,True,36,7.5
+2026-08-09 01:36:25,100,Highly Attentive,Forward,True,36,7.5
+2026-08-09 01:36:26,100,Highly Attentive,Forward,True,36,7.5
+2026-08-09 01:36:27,100,Highly Attentive,Forward,True,36,7.5
+2026-08-09 01:36:28,100,Highly Attentive,Forward,True,36,7.4
+2026-08-09 01:36:29,99,Highly Attentive,Forward,True,36,7.4
+2026-08-09 01:36:30,91,Highly Attentive,Down,True,36,7.4
+2026-08-09 01:36:31,95,Highly Attentive,Forward,True,36,7.4
+2026-08-09 01:36:32,100,Highly Attentive,Forward,True,36,7.3
+2026-08-09 01:36:33,100,Highly Attentive,Forward,True,36,7.3
+2026-08-09 01:36:34,100,Highly Attentive,Forward,True,36,7.3
+2026-08-09 01:36:35,100,Highly Attentive,Forward,True,36,7.3
+2026-08-09 01:36:36,84,Attentive,Right,True,36,7.2
+2026-08-09 01:36:37,68,Slightly Distracted,Forward,True,36,7.2
+2026-08-09 01:36:38,100,Highly Attentive,Forward,True,36,7.2
+2026-08-09 01:36:39,98,Highly Attentive,Right,True,36,7.2
+2026-08-09 01:36:40,100,Highly Attentive,Forward,True,36,7.1
+2026-08-09 01:36:41,100,Highly Attentive,Forward,True,36,7.1
+2026-08-09 01:36:42,100,Highly Attentive,Forward,True,36,7.1
+2026-08-09 01:36:43,100,Highly Attentive,Forward,True,36,7.1
+2026-08-09 01:36:44,100,Highly Attentive,Forward,True,36,7.0
+2026-08-09 01:36:45,91,Highly Attentive,Forward,True,37,7.2
+2026-08-09 01:36:47,99,Highly Attentive,Forward,True,37,7.2
+2026-08-09 01:36:48,97,Highly Attentive,Forward,True,38,7.4
+2026-08-09 01:36:49,100,Highly Attentive,Forward,True,38,7.3
+2026-08-09 01:36:50,99,Highly Attentive,Forward,True,38,7.3
+2026-08-09 01:36:51,100,Highly Attentive,Forward,True,38,7.3
+2026-08-09 01:36:52,100,Highly Attentive,Forward,True,38,7.3
+2026-08-09 01:36:53,100,Highly Attentive,Forward,True,38,7.2
+2026-08-09 01:36:54,92,Highly Attentive,Forward,True,40,7.6
+2026-08-09 01:36:55,92,Highly Attentive,Forward,False,41,7.8
+2026-08-09 01:36:56,80,Attentive,Forward,False,43,8.1
+2026-08-09 01:36:57,77,Attentive,Forward,False,43,8.1
+2026-08-09 01:36:58,81,Attentive,Forward,False,45,8.4
+2026-08-09 01:36:59,92,Highly Attentive,Forward,True,46,8.6
+2026-08-09 01:37:00,100,Highly Attentive,Forward,True,46,8.6
+2026-08-09 01:37:01,100,Highly Attentive,Forward,True,46,8.5
+2026-08-09 01:37:02,100,Highly Attentive,Forward,True,46,8.5
+2026-08-09 01:37:03,100,Highly Attentive,Forward,True,46,8.5
+2026-08-09 01:37:04,100,Highly Attentive,Forward,True,46,8.5
+2026-08-09 01:37:05,100,Highly Attentive,Forward,True,46,8.4
+2026-08-09 01:37:06,97,Highly Attentive,Forward,True,47,8.6
+2026-08-09 01:37:07,100,Highly Attentive,Forward,True,47,8.6
+2026-08-09 01:37:08,97,Highly Attentive,Forward,True,48,8.7
+2026-08-09 01:37:09,100,Highly Attentive,Forward,True,48,8.7
+2026-08-09 01:37:10,100,Highly Attentive,Forward,True,48,8.7
+2026-08-09 01:37:11,99,Highly Attentive,Forward,True,49,8.8
+2026-08-09 01:37:12,100,Highly Attentive,Forward,True,49,8.8
+2026-08-09 01:37:13,100,Highly Attentive,Forward,True,49,8.8
+2026-08-09 01:37:14,100,Highly Attentive,Forward,True,49,8.7
+2026-08-09 01:37:15,96,Highly Attentive,Forward,True,50,8.9
+2026-08-09 01:37:16,100,Highly Attentive,Forward,True,50,8.9
+2026-08-09 01:37:17,100,Highly Attentive,Forward,True,50,8.8
+2026-08-09 01:37:18,100,Highly Attentive,Forward,True,50,8.8
+2026-08-09 01:37:19,100,Highly Attentive,Forward,True,50,8.8
+2026-08-09 01:37:20,100,Highly Attentive,Forward,True,50,8.7
+2026-08-09 01:37:21,100,Highly Attentive,Forward,True,50,8.7
+2026-08-09 01:37:22,100,Highly Attentive,Forward,True,50,8.7
+2026-08-09 01:37:23,100,Highly Attentive,Forward,True,50,8.7
+2026-08-09 01:37:24,100,Highly Attentive,Forward,True,50,8.6
+2026-08-09 01:37:25,100,Highly Attentive,Forward,True,50,8.6
+2026-08-09 01:37:26,99,Highly Attentive,Forward,True,50,8.6
+2026-08-09 01:37:27,100,Highly Attentive,Forward,True,50,8.6
+2026-08-09 01:37:28,100,Highly Attentive,Forward,True,50,8.5
+2026-08-09 01:37:29,100,Highly Attentive,Forward,True,50,8.5
+2026-08-09 01:37:30,100,Highly Attentive,Forward,True,50,8.5
+2026-08-09 01:37:31,100,Highly Attentive,Forward,True,50,8.5
+2026-08-09 01:37:32,100,Highly Attentive,Forward,True,50,8.4
+2026-08-09 01:37:33,100,Highly Attentive,Forward,True,50,8.4
+2026-08-09 01:37:35,100,Highly Attentive,Forward,True,50,8.4
+2026-08-09 01:37:36,100,Highly Attentive,Forward,True,50,8.4
+2026-08-09 01:37:37,100,Highly Attentive,Forward,True,50,8.4
+2026-08-09 01:37:38,100,Highly Attentive,Forward,True,50,8.3
+2026-08-09 01:37:39,100,Highly Attentive,Forward,True,50,8.3
+2026-08-09 01:37:40,98,Highly Attentive,Forward,True,50,8.3
+2026-08-09 01:37:41,98,Highly Attentive,Forward,False,50,8.3
+2026-08-09 01:37:42,96,Highly Attentive,Forward,False,50,8.2
+2026-08-09 01:37:43,98,Highly Attentive,Forward,True,52,8.5
+2026-08-09 01:37:44,97,Highly Attentive,Forward,True,52,8.5
+2026-08-09 01:37:45,100,Highly Attentive,Forward,True,52,8.5
+2026-08-09 01:37:46,99,Highly Attentive,Forward,True,52,8.5
+2026-08-09 01:37:47,100,Highly Attentive,Forward,True,52,8.4
+2026-08-09 01:37:48,100,Highly Attentive,Forward,True,52,8.4
+2026-08-09 01:37:49,100,Highly Attentive,Forward,True,52,8.4
+2026-08-09 01:37:50,97,Highly Attentive,Forward,True,53,8.5
+2026-08-09 01:37:51,99,Highly Attentive,Forward,True,53,8.5
+2026-08-09 01:37:52,100,Highly Attentive,Forward,True,53,8.5
+2026-08-09 01:37:53,100,Highly Attentive,Forward,True,53,8.5
+2026-08-09 01:37:54,100,Highly Attentive,Forward,True,53,8.4
+2026-08-09 01:37:55,100,Highly Attentive,Forward,True,53,8.4
+2026-08-09 01:37:56,72,Attentive,Left,True,53,8.4
+2026-08-09 01:37:57,99,Highly Attentive,Forward,True,53,8.4
+2026-08-09 01:37:58,100,Highly Attentive,Forward,True,53,8.4
+2026-08-09 01:37:59,100,Highly Attentive,Forward,True,53,8.3
+2026-08-09 01:38:00,100,Highly Attentive,Forward,True,53,8.3
+2026-08-09 01:38:01,100,Highly Attentive,Forward,True,53,8.3
+2026-08-09 01:38:02,100,Highly Attentive,Forward,True,53,8.3
+2026-08-09 01:38:03,100,Highly Attentive,Forward,True,53,8.2
+2026-08-09 01:38:04,100,Highly Attentive,Forward,True,53,8.2
+2026-08-09 01:38:05,100,Highly Attentive,Forward,True,53,8.2
+2026-08-09 01:38:06,100,Highly Attentive,Forward,True,53,8.2
+2026-08-09 01:38:07,100,Highly Attentive,Forward,True,53,8.2
+2026-08-09 01:38:08,100,Highly Attentive,Forward,True,53,8.1
+2026-08-09 01:38:09,100,Highly Attentive,Forward,True,53,8.1
+2026-08-09 01:38:10,100,Highly Attentive,Forward,True,53,8.1
+2026-08-09 01:38:11,96,Highly Attentive,Forward,True,54,8.2
+2026-08-09 01:38:12,100,Highly Attentive,Forward,True,54,8.2
+2026-08-09 01:38:13,100,Highly Attentive,Forward,True,54,8.2
+2026-08-09 01:38:14,90,Highly Attentive,Right,True,54,8.2
+2026-08-09 01:38:15,77,Attentive,Forward,False,54,8.1
+2026-08-09 01:44:57,77,Attentive,Forward,False,55,4.1
+2026-08-09 01:44:58,91,Highly Attentive,Forward,False,56,4.2
+2026-08-09 01:44:59,100,Highly Attentive,Forward,True,56,4.2
+2026-08-09 01:45:00,100,Highly Attentive,Forward,True,56,4.2
+2026-08-09 01:45:01,100,Highly Attentive,Forward,True,56,4.2
+2026-08-09 01:45:02,100,Highly Attentive,Forward,True,56,4.2
+2026-08-09 01:45:03,100,Highly Attentive,Forward,True,56,4.2
+2026-08-09 01:45:04,100,Highly Attentive,Forward,True,56,4.2
+2026-08-09 01:45:05,100,Highly Attentive,Forward,True,56,4.2
+2026-08-09 01:45:06,100,Highly Attentive,Forward,True,56,4.2
+2026-08-09 01:45:07,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:08,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:09,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:10,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:11,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:12,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:13,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:14,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:15,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:16,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:18,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:19,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:20,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:21,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:22,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:23,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:24,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:25,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:26,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:45:27,100,Highly Attentive,Forward,True,56,4.1
+2026-08-09 01:46:20,94,Highly Attentive,Right,False,57,3.9
+2026-08-09 01:46:24,69,Slightly Distracted,Right,True,57,3.9
+2026-08-09 01:46:25,91,Highly Attentive,Forward,True,57,3.9
+2026-08-09 01:46:28,91,Highly Attentive,Right,True,57,3.8
+2026-08-09 01:46:29,65,Slightly Distracted,Right,True,57,3.8
+2026-08-09 01:46:30,52,Slightly Distracted,Right,True,60,4.0
+2026-08-09 01:46:31,46,Distracted,Right,False,61,4.1
+2026-08-09 01:46:32,46,Distracted,Right,False,62,4.2
+2026-08-09 01:46:33,46,Distracted,Right,False,63,4.2
+2026-08-09 01:46:34,45,Distracted,Right,False,63,4.2
+2026-08-09 01:46:35,49,Distracted,Right,True,64,4.3
+2026-08-09 01:46:36,59,Slightly Distracted,Right,True,66,4.4
+2026-08-09 01:46:37,56,Slightly Distracted,Right,False,67,4.5
+2026-08-09 01:46:38,47,Distracted,Right,False,68,4.5
+2026-08-09 01:46:39,46,Distracted,Right,False,69,4.6
+2026-08-09 01:46:40,45,Distracted,Right,False,69,4.6
+2026-08-09 01:46:41,52,Slightly Distracted,Right,True,70,4.6
+2026-08-09 01:46:42,60,Slightly Distracted,Right,True,70,4.6
+2026-08-09 01:46:43,54,Slightly Distracted,Right,False,71,4.7
+2026-08-09 01:46:44,54,Slightly Distracted,Right,False,74,4.9
+2026-08-09 01:46:45,61,Slightly Distracted,Forward,True,76,5.0
+2026-08-09 01:46:46,100,Highly Attentive,Forward,True,76,5.0
+2026-08-09 01:46:47,67,Slightly Distracted,Right,True,76,5.0
+2026-08-09 01:46:48,65,Slightly Distracted,Right,True,76,5.0
+2026-08-09 01:46:49,65,Slightly Distracted,Right,True,76,5.0
+2026-08-09 01:46:50,65,Slightly Distracted,Right,True,76,5.0
+2026-08-09 01:46:51,65,Slightly Distracted,Right,True,76,5.0
+2026-08-09 01:46:52,65,Slightly Distracted,Right,True,76,5.0
+2026-08-09 01:46:53,65,Slightly Distracted,Right,True,76,5.0
+2026-08-09 01:46:54,64,Slightly Distracted,Right,True,76,5.0
+2026-08-09 01:46:55,65,Slightly Distracted,Right,True,76,5.0
+2026-08-09 01:46:56,65,Slightly Distracted,Right,True,76,5.0
+2026-08-09 01:46:57,65,Slightly Distracted,Right,True,76,5.0
+2026-08-09 01:46:58,65,Slightly Distracted,Right,True,76,5.0
+2026-08-09 01:46:59,65,Slightly Distracted,Right,True,76,4.9
+2026-08-09 01:47:00,65,Slightly Distracted,Right,True,76,4.9
+2026-08-09 01:47:01,65,Slightly Distracted,Right,True,76,4.9
+2026-08-09 01:47:02,65,Slightly Distracted,Right,True,76,4.9
+2026-08-09 01:47:03,65,Slightly Distracted,Right,True,76,4.9
+2026-08-09 01:47:04,72,Attentive,Right,True,76,4.9
+2026-08-09 01:47:05,68,Slightly Distracted,Forward,True,76,4.9
+2026-08-09 01:47:06,95,Highly Attentive,Right,True,76,4.9
+2026-08-09 01:47:07,92,Highly Attentive,Forward,True,76,4.9
+2026-08-09 01:47:08,82,Attentive,Forward,True,76,4.9
+2026-08-09 01:47:09,99,Highly Attentive,Forward,True,76,4.9
+2026-08-09 01:47:10,100,Highly Attentive,Forward,True,76,4.9
+2026-08-09 01:47:11,100,Highly Attentive,Forward,True,76,4.9
+2026-08-09 01:47:12,100,Highly Attentive,Forward,True,76,4.9
+2026-08-09 01:47:13,98,Highly Attentive,Forward,True,76,4.9
+2026-08-09 01:47:14,100,Highly Attentive,Forward,True,76,4.9
+2026-08-09 01:47:15,99,Highly Attentive,Forward,True,76,4.9
+2026-08-09 01:47:16,94,Highly Attentive,Right,True,76,4.9
+2026-08-09 01:47:17,65,Slightly Distracted,Right,True,76,4.9
+2026-08-09 01:47:18,65,Slightly Distracted,Right,True,76,4.8
+2026-08-09 01:47:19,65,Slightly Distracted,Right,True,76,4.8
+2026-08-09 01:47:20,74,Attentive,Forward,False,77,4.9
+2026-08-09 01:47:21,95,Highly Attentive,Forward,True,78,5.0
+2026-08-09 01:47:22,100,Highly Attentive,Forward,True,78,5.0
+2026-08-09 01:47:23,100,Highly Attentive,Forward,True,78,4.9
+2026-08-09 01:47:25,100,Highly Attentive,Forward,True,78,4.9
+2026-08-09 01:47:26,98,Highly Attentive,Forward,True,79,5.0
+2026-08-09 01:47:27,100,Highly Attentive,Forward,True,79,5.0
+2026-08-09 01:47:28,62,Slightly Distracted,Right,False,79,5.0
+2026-08-09 01:47:29,45,Distracted,Right,False,79,5.0
+2026-08-09 01:47:30,47,Distracted,Right,False,80,5.0
+2026-08-09 01:47:31,45,Distracted,Right,False,80,5.0
+2026-08-09 01:47:32,52,Slightly Distracted,Right,True,82,5.2
+2026-08-09 01:47:33,55,Slightly Distracted,Right,True,84,5.3
+2026-08-09 01:47:34,49,Distracted,Right,False,86,5.4
+2026-08-09 01:47:35,64,Slightly Distracted,Right,False,87,5.5
+2026-08-09 01:47:36,46,Distracted,Right,False,89,5.6
+2026-08-09 01:47:37,45,Distracted,Right,False,89,5.6
+2026-08-09 01:47:38,52,Slightly Distracted,Right,True,90,5.6
+2026-08-09 01:47:39,64,Slightly Distracted,Right,True,90,5.6
+2026-08-09 01:47:40,46,Distracted,Right,False,90,5.6
+2026-08-09 01:47:41,45,Distracted,Right,False,90,5.6
+2026-08-09 01:47:42,45,Distracted,Right,False,90,5.6
+2026-08-09 01:47:43,45,Distracted,Right,False,90,5.6
+2026-08-09 01:47:44,45,Distracted,Right,False,90,5.6
+2026-08-09 01:47:45,45,Distracted,Right,False,90,5.6
+2026-08-09 01:47:46,45,Distracted,Right,False,90,5.6
+2026-08-09 01:47:47,45,Distracted,Right,False,90,5.6
+2026-08-09 01:47:48,45,Distracted,Right,False,90,5.6
+2026-08-09 01:47:49,46,Distracted,Right,True,92,5.7
+2026-08-09 01:47:50,56,Slightly Distracted,Right,True,95,5.9
+2026-08-09 01:47:51,54,Slightly Distracted,Right,False,95,5.9
+2026-08-09 01:47:52,50,Distracted,Right,False,98,6.0
+2026-08-09 01:47:53,55,Slightly Distracted,Right,False,98,6.0
+2026-08-09 01:47:54,68,Slightly Distracted,Right,True,99,6.1
+2026-08-09 01:47:55,62,Slightly Distracted,Right,True,100,6.1
+2026-08-09 01:47:56,51,Slightly Distracted,Right,False,101,6.2
+2026-08-09 01:47:58,64,Slightly Distracted,Right,True,102,6.2
+2026-08-09 01:47:59,64,Slightly Distracted,Right,True,102,6.2
+2026-08-09 01:48:00,59,Slightly Distracted,Right,True,103,6.3
+2026-08-09 01:48:01,49,Distracted,Right,False,103,6.3
+2026-08-09 01:48:02,62,Slightly Distracted,Right,True,104,6.3
+2026-08-09 01:48:03,62,Slightly Distracted,Right,True,104,6.3
+2026-08-09 01:48:04,87,Highly Attentive,Forward,True,105,6.4
+2026-08-09 01:48:05,100,Highly Attentive,Forward,True,105,6.4
+2026-08-09 01:48:06,100,Highly Attentive,Forward,True,105,6.4
+2026-08-09 01:48:07,100,Highly Attentive,Forward,True,105,6.4
+2026-08-09 01:48:08,100,Highly Attentive,Forward,True,105,6.4
+2026-08-09 01:48:09,100,Highly Attentive,Forward,True,105,6.4
+2026-08-09 01:48:10,100,Highly Attentive,Forward,True,105,6.3
+2026-08-09 01:48:11,100,Highly Attentive,Forward,True,105,6.3
+2026-08-09 01:48:12,100,Highly Attentive,Forward,True,105,6.3
+2026-08-09 01:48:13,100,Highly Attentive,Forward,True,105,6.3
+2026-08-09 01:48:14,100,Highly Attentive,Forward,True,105,6.3
+2026-08-09 01:48:15,100,Highly Attentive,Forward,True,105,6.3
+2026-08-09 01:48:16,100,Highly Attentive,Forward,True,105,6.3
+2026-08-09 01:48:17,96,Highly Attentive,Forward,True,105,6.3
+2026-08-09 01:48:18,85,Attentive,Left,True,105,6.3
+2026-08-09 01:48:19,65,Slightly Distracted,Left,True,105,6.3
+2026-08-09 01:48:20,65,Slightly Distracted,Left,True,105,6.3
+2026-08-09 01:48:21,65,Slightly Distracted,Left,True,105,6.3
+2026-08-09 01:48:22,65,Slightly Distracted,Left,True,105,6.3
+2026-08-09 01:48:23,65,Slightly Distracted,Left,True,105,6.3
+2026-08-09 01:48:24,65,Slightly Distracted,Left,True,105,6.3
+2026-08-09 01:48:25,65,Slightly Distracted,Left,True,105,6.3
+2026-08-09 01:48:26,65,Slightly Distracted,Left,True,105,6.2
+2026-08-09 01:48:27,65,Slightly Distracted,Left,True,105,6.2
+2026-08-09 01:48:28,65,Slightly Distracted,Left,True,105,6.2
+2026-08-09 01:48:29,65,Slightly Distracted,Left,True,105,6.2
+2026-08-09 01:48:30,65,Slightly Distracted,Left,True,105,6.2
+2026-08-09 01:48:31,65,Slightly Distracted,Left,True,105,6.2
+2026-08-09 01:48:32,64,Slightly Distracted,Left,True,105,6.2
+2026-08-09 01:48:33,65,Slightly Distracted,Left,True,105,6.2
+2026-08-09 01:48:34,65,Slightly Distracted,Left,True,105,6.2
+2026-08-09 01:48:35,65,Slightly Distracted,Left,True,105,6.2
+2026-08-09 01:48:36,65,Slightly Distracted,Left,True,105,6.2
+2026-08-09 01:48:37,65,Slightly Distracted,Left,True,105,6.2
+2026-08-09 01:48:38,58,Slightly Distracted,Down,False,105,6.2
+2026-08-09 01:48:39,63,Slightly Distracted,Left,True,106,6.2
+2026-08-09 01:48:40,66,Slightly Distracted,Forward,True,106,6.2
+2026-08-09 01:48:41,81,Attentive,Forward,True,106,6.2
+2026-08-09 01:48:42,100,Highly Attentive,Forward,True,106,6.2
+2026-08-09 01:48:43,97,Highly Attentive,Forward,True,107,6.3
+2026-08-09 01:48:44,100,Highly Attentive,Forward,True,107,6.3
+2026-08-09 01:48:45,100,Highly Attentive,Forward,True,107,6.2
+2026-08-09 01:48:46,100,Highly Attentive,Forward,True,107,6.2
+2026-08-09 01:48:47,100,Highly Attentive,Forward,True,107,6.2
+2026-08-09 01:48:48,100,Highly Attentive,Forward,True,107,6.2
+2026-08-09 01:48:49,100,Highly Attentive,Forward,True,107,6.2
+2026-08-09 01:48:50,98,Highly Attentive,Forward,True,108,6.3
+2026-08-09 01:48:51,100,Highly Attentive,Forward,True,108,6.3
+2026-08-09 01:48:52,100,Highly Attentive,Forward,True,108,6.3
+2026-08-09 01:48:53,100,Highly Attentive,Forward,True,108,6.3
+2026-08-09 01:48:54,91,Highly Attentive,Down,True,108,6.2
+2026-08-09 01:48:55,65,Slightly Distracted,Forward,True,109,6.3
+2026-08-09 01:48:56,93,Highly Attentive,Forward,True,109,6.3
+2026-08-09 01:48:57,100,Highly Attentive,Forward,True,109,6.3
+2026-08-09 01:48:58,100,Highly Attentive,Forward,True,109,6.3
+2026-08-09 01:49:00,100,Highly Attentive,Forward,True,109,6.3
+2026-08-09 01:49:01,79,Attentive,Forward,True,109,6.3
+2026-08-09 01:49:02,100,Highly Attentive,Forward,True,109,6.3
+2026-08-09 01:49:03,100,Highly Attentive,Forward,True,109,6.3
+2026-08-09 01:49:04,98,Highly Attentive,Forward,True,110,6.3
+2026-08-09 01:49:05,85,Attentive,Right,True,110,6.3
+2026-08-09 01:49:06,94,Highly Attentive,Forward,True,110,6.3
+2026-08-09 01:49:07,100,Highly Attentive,Forward,True,110,6.3
+2026-08-09 01:49:08,100,Highly Attentive,Forward,True,110,6.3
+2026-08-09 01:49:09,100,Highly Attentive,Forward,True,110,6.3
+2026-08-09 01:49:10,87,Highly Attentive,Forward,True,110,6.3
+2026-08-09 01:49:11,99,Highly Attentive,Left,True,110,6.3
+2026-08-09 01:49:12,65,Slightly Distracted,Left,True,110,6.3
+2026-08-09 01:49:13,65,Slightly Distracted,Left,True,110,6.3
+2026-08-09 01:49:14,82,Attentive,Right,True,110,6.2
+2026-08-09 01:49:15,87,Highly Attentive,Forward,True,110,6.2
+2026-08-09 01:49:16,86,Highly Attentive,Right,True,110,6.2
+2026-08-09 01:49:17,71,Attentive,Forward,True,110,6.2
+2026-08-09 01:49:18,82,Attentive,Forward,True,110,6.2
+2026-08-09 01:49:19,100,Highly Attentive,Forward,True,110,6.2
+2026-08-09 01:49:20,100,Highly Attentive,Forward,True,110,6.2
+2026-08-09 01:49:21,100,Highly Attentive,Forward,True,110,6.2
+2026-08-09 01:49:22,100,Highly Attentive,Forward,True,110,6.2
+2026-08-09 01:49:23,100,Highly Attentive,Forward,True,110,6.2
+2026-08-09 01:49:24,100,Highly Attentive,Forward,True,110,6.2
+2026-08-09 01:49:25,100,Highly Attentive,Forward,True,110,6.2
+2026-08-09 01:49:26,100,Highly Attentive,Forward,True,110,6.2
+2026-08-09 01:49:27,95,Highly Attentive,Forward,True,111,6.2
+2026-08-09 01:49:28,100,Highly Attentive,Forward,True,111,6.2
+2026-08-09 01:49:29,100,Highly Attentive,Forward,True,111,6.2
+2026-08-09 01:49:30,100,Highly Attentive,Forward,True,111,6.2
+2026-08-09 01:49:31,91,Highly Attentive,Forward,False,111,6.2
+2026-08-09 01:49:32,80,Attentive,Forward,False,111,6.2
+2026-08-09 01:49:33,57,Slightly Distracted,Left,False,111,6.2
+2026-08-09 01:49:34,45,Distracted,Left,False,111,6.2
+2026-08-09 01:49:35,82,Attentive,Forward,True,112,6.2
+2026-08-09 01:49:36,100,Highly Attentive,Forward,True,112,6.2
+2026-08-09 01:49:37,100,Highly Attentive,Forward,True,112,6.2
+2026-08-09 01:49:38,100,Highly Attentive,Forward,True,112,6.2
+2026-08-09 01:49:39,100,Highly Attentive,Forward,True,112,6.2
+2026-08-09 01:49:40,100,Highly Attentive,Forward,True,112,6.2
+2026-08-09 01:49:41,100,Highly Attentive,Forward,True,112,6.2
+2026-08-09 01:49:42,100,Highly Attentive,Forward,True,112,6.2
+2026-08-09 01:49:43,91,Highly Attentive,Left,True,112,6.2
+2026-08-09 01:49:44,65,Slightly Distracted,Left,True,112,6.2
+2026-08-09 01:49:45,98,Highly Attentive,Forward,True,112,6.2
+2026-08-09 01:49:46,100,Highly Attentive,Forward,True,112,6.2
+2026-08-09 01:49:47,100,Highly Attentive,Forward,True,112,6.2
+2026-08-09 01:49:48,100,Highly Attentive,Forward,True,112,6.2
+2026-08-09 01:49:49,85,Attentive,Right,True,112,6.2
+2026-08-09 01:49:50,75,Attentive,Forward,False,112,6.1
+2026-08-09 01:49:51,92,Highly Attentive,Right,True,114,6.3
+2026-08-09 01:49:52,86,Highly Attentive,Forward,True,115,6.3
+2026-08-09 01:49:53,100,Highly Attentive,Forward,True,115,6.3
+2026-08-09 01:49:54,100,Highly Attentive,Forward,True,115,6.3
+2026-08-09 01:49:55,93,Highly Attentive,Forward,True,115,6.3
+2026-08-09 01:49:56,97,Highly Attentive,Forward,True,115,6.3
+2026-08-09 01:49:57,64,Slightly Distracted,Left,False,116,6.3
+2026-08-09 01:49:59,60,Slightly Distracted,Left,True,117,6.4
+2026-08-09 01:50:06,65,Slightly Distracted,Left,False,118,6.4
+2026-08-09 01:50:07,83,Attentive,Forward,False,120,6.5
+2026-08-09 01:50:08,91,Highly Attentive,Forward,False,121,6.5
+2026-08-09 01:50:09,91,Highly Attentive,Forward,True,123,6.6
+2026-08-09 01:50:10,94,Highly Attentive,Down,True,123,6.6
+2026-08-09 01:50:11,63,Slightly Distracted,Down,True,124,6.7
+2026-08-09 01:50:12,64,Slightly Distracted,Down,True,124,6.7
+2026-08-09 01:50:14,60,Slightly Distracted,Down,False,125,6.7
+2026-08-09 01:50:15,62,Slightly Distracted,Down,True,125,6.7
+2026-08-09 01:50:16,64,Slightly Distracted,Down,True,125,6.7
+2026-08-09 01:50:17,64,Slightly Distracted,Down,True,125,6.7
+2026-08-09 01:50:18,68,Slightly Distracted,Forward,True,126,6.7
+2026-08-09 01:50:19,95,Highly Attentive,Forward,True,127,6.8
+2026-08-09 01:50:20,94,Highly Attentive,Forward,True,127,6.8
+2026-08-09 01:50:21,91,Highly Attentive,Forward,True,127,6.8
+2026-08-09 01:50:22,88,Highly Attentive,Right,True,127,6.8
+2026-08-09 01:50:23,96,Highly Attentive,Forward,True,127,6.8
+2026-08-09 01:50:24,100,Highly Attentive,Forward,True,127,6.8
+2026-08-09 01:50:25,99,Highly Attentive,Forward,True,127,6.8
+2026-08-09 01:50:26,94,Highly Attentive,Forward,True,127,6.8
+2026-08-09 01:50:27,90,Highly Attentive,Forward,True,127,6.7
+2026-08-09 01:50:28,88,Highly Attentive,Forward,True,127,6.7
+2026-08-09 01:50:29,97,Highly Attentive,Forward,True,127,6.7
+2026-08-09 01:50:30,87,Highly Attentive,Forward,True,128,6.8
+2026-08-09 01:50:31,98,Highly Attentive,Forward,True,128,6.8
+2026-08-09 01:50:32,84,Attentive,Forward,False,129,6.8
+2026-08-09 01:50:33,88,Highly Attentive,Forward,False,131,6.9
+2026-08-09 01:50:34,80,Attentive,Forward,False,131,6.9
+2026-08-09 01:50:35,86,Highly Attentive,Forward,True,133,7.0
+2026-08-09 01:50:36,99,Highly Attentive,Forward,False,133,7.0
+2026-08-09 01:50:37,79,Attentive,Forward,True,134,7.1
+2026-08-09 01:50:38,83,Attentive,Forward,False,134,7.0
+2026-08-09 01:50:39,78,Attentive,Forward,False,134,7.0
+2026-08-09 01:50:40,74,Attentive,Forward,False,134,7.0
+2026-08-09 01:50:41,82,Attentive,Forward,False,138,7.2
+2026-08-09 01:50:42,80,Attentive,Forward,False,139,7.3
+2026-08-09 01:50:43,78,Attentive,Forward,False,139,7.3
+2026-08-09 01:50:44,82,Attentive,Forward,True,141,7.4
+2026-08-09 01:50:45,89,Highly Attentive,Forward,True,143,7.5
+2026-08-09 01:51:30,91,Highly Attentive,Forward,True,144,7.2
+2026-08-09 01:51:31,100,Highly Attentive,Forward,True,144,7.2
+2026-08-09 01:51:32,70,Attentive,Down,True,146,7.3
+2026-08-09 01:51:33,64,Slightly Distracted,Down,True,146,7.3
+2026-08-09 01:51:34,60,Slightly Distracted,Down,False,146,7.3
+2026-08-09 01:51:35,56,Slightly Distracted,Down,False,148,7.4
+2026-08-09 01:51:36,57,Slightly Distracted,Down,False,150,7.5
+2026-08-09 01:51:37,54,Slightly Distracted,Down,False,153,7.7
+2026-08-09 01:51:38,46,Distracted,Down,False,154,7.7
+2026-08-09 01:51:39,52,Slightly Distracted,Down,True,155,7.7
+2026-08-09 01:51:40,58,Slightly Distracted,Down,False,155,7.7
+2026-08-09 01:51:41,45,Distracted,Down,False,155,7.7
+2026-08-09 01:51:42,45,Distracted,Down,False,155,7.7
+2026-08-09 01:51:43,48,Distracted,Down,False,156,7.8
+2026-08-09 01:51:44,45,Distracted,Down,False,156,7.8
+2026-08-09 01:51:45,45,Distracted,Down,False,156,7.7
+2026-08-09 01:51:46,45,Distracted,Down,False,156,7.7
+2026-08-09 01:51:47,45,Distracted,Down,False,156,7.7
+2026-08-09 01:51:48,52,Slightly Distracted,Forward,True,157,7.8
+2026-08-09 01:51:49,100,Highly Attentive,Forward,True,157,7.8
+2026-08-09 01:51:50,72,Attentive,Down,False,159,7.9
+2026-08-09 01:51:51,46,Distracted,Down,False,159,7.9
+2026-08-09 01:51:52,53,Slightly Distracted,Down,False,159,7.9
+2026-08-09 01:51:53,46,Distracted,Down,False,159,7.8
+2026-08-09 01:51:54,50,Distracted,Forward,False,159,7.8
+2026-08-09 01:51:55,47,Distracted,Down,False,159,7.8
+2026-08-09 01:51:56,45,Distracted,Down,False,159,7.8
+2026-08-09 01:51:57,51,Slightly Distracted,Down,False,160,7.9
+2026-08-09 01:51:58,45,Distracted,Down,False,160,7.9
+2026-08-09 01:51:59,45,Distracted,Down,False,160,7.9
+2026-08-09 01:52:01,64,Slightly Distracted,Forward,False,162,7.9
+2026-08-09 01:52:02,90,Highly Attentive,Forward,True,166,8.1
+2026-08-09 01:52:03,89,Highly Attentive,Forward,True,167,8.2
+2026-08-09 01:52:04,63,Slightly Distracted,Down,False,169,8.3
+2026-08-09 01:52:05,78,Attentive,Down,True,169,8.3
+2026-08-09 01:52:06,60,Slightly Distracted,Down,False,169,8.3
+2026-08-09 01:52:07,52,Slightly Distracted,Down,False,171,8.3
+2026-08-09 01:52:08,68,Slightly Distracted,Forward,False,172,8.4
+2026-08-09 01:52:09,89,Highly Attentive,Forward,False,174,8.5
+2026-08-09 01:52:10,85,Attentive,Down,True,176,8.6
+2026-08-09 01:52:26,64,Slightly Distracted,Down,True,176,8.5
+2026-08-09 01:52:27,59,Slightly Distracted,Down,False,177,8.5
+2026-08-09 01:52:28,55,Slightly Distracted,Down,True,181,8.7
+2026-08-09 01:52:29,50,Distracted,Down,True,183,8.8
+2026-08-09 01:52:30,58,Slightly Distracted,Down,False,184,8.8
+2026-08-09 01:52:31,50,Distracted,Down,False,186,8.9
+2026-08-09 01:52:37,53,Slightly Distracted,Down,False,188,9.0
+2026-08-09 01:52:38,48,Distracted,Down,False,190,9.0
+2026-08-09 01:52:39,50,Distracted,Down,False,192,9.1
+2026-08-09 01:52:40,95,Highly Attentive,Forward,True,193,9.2
+2026-08-09 01:52:41,88,Highly Attentive,Forward,False,193,9.2
+2026-08-09 01:52:42,91,Highly Attentive,Forward,True,194,9.2
+2026-08-09 01:52:43,97,Highly Attentive,Forward,True,195,9.2
+2026-08-09 01:52:56,95,Highly Attentive,Forward,True,195,9.2
+2026-08-09 01:52:57,91,Highly Attentive,Forward,True,196,9.2
+2026-08-09 01:52:58,78,Attentive,Left,True,197,9.2
+2026-08-09 01:52:59,65,Slightly Distracted,Left,True,197,9.2
+2026-08-09 01:53:00,66,Slightly Distracted,Left,True,197,9.2
+2026-08-09 01:53:15,67,Slightly Distracted,Forward,True,198,9.2
+2026-08-09 01:53:16,98,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:17,92,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:18,90,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:19,89,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:20,96,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:21,100,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:22,97,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:23,100,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:24,100,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:25,100,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:26,100,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:27,100,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:28,100,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:29,100,Highly Attentive,Forward,True,198,9.1
+2026-08-09 01:53:30,100,Highly Attentive,Forward,True,198,9.0
+2026-08-09 01:53:31,100,Highly Attentive,Forward,True,198,9.0
+2026-08-09 01:53:32,100,Highly Attentive,Forward,True,198,9.0
+2026-08-09 01:53:33,94,Highly Attentive,Forward,True,199,9.1
+2026-08-09 01:54:01,89,Highly Attentive,Forward,True,200,8.9
