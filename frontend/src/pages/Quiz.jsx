@@ -118,7 +118,7 @@ function Quiz() {
       }
 
       const payload = {
-        student_id: user.id,
+        student_id: user.id ?? Number(user.sub ?? user.sub),
         lesson_id: quiz.lesson_id,
         quiz_score,
         response_time,

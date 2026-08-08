@@ -20,7 +20,8 @@ export function AuthProvider({ children }) {
 		authService
 			.getProfile()
 			.then((res) => {
-				if (mounted) setUser(res?.data ?? null);
+				const profile = res?.data ?? null;
+				if (mounted) setUser(profile ? { ...profile, id: profile.id ?? Number(profile.sub || profile.sub) } : null);
 			})
 			.catch(() => {
 				authService.logout();
@@ -34,7 +35,8 @@ export function AuthProvider({ children }) {
 		const token = await authService.login(email, password);
 		// refresh profile
 		const profile = await authService.getProfile();
-		setUser(profile?.data ?? null);
+		const data = profile?.data ?? null;
+		setUser(data ? { ...data, id: data.id ?? Number(data.sub || data.sub) } : null);
 		return token;
 	};
 

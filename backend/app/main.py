@@ -1,9 +1,15 @@
 import os
+import sys
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parents[2]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
@@ -51,6 +57,14 @@ app = FastAPI(
     title="Adaptive Learning System API",
     version="1.0.0",
     description="Backend API for the Intelligent Adaptive Learning System",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5174", "http://127.0.0.1:5174"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
