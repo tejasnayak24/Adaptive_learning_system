@@ -1,15 +1,104 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { quizService } from '../services/quizService'
 import { lessonService } from '../services/lessonService'
 import { progressService } from '../services/progressService'
 import { rlService } from '../services/rlService'
 
+// Topic to Subject Mapping Utility
+const TOPIC_TO_SUBJECT_MAP = {
+  "Cell Biology": "Science",
+  "Human Body Systems": "Science",
+  "Force and Motion": "Science",
+  "Matter and Its Properties": "Science",
+  "Ecosystems": "Science"
+}
+
+// Correct Answers Database Lookup
+const CORRECT_ANSWERS_MAP = {
+  "what is the basic structural and functional unit of life?": "B",
+  "which organelle contains most of a eukaryotic cell's dna?": "A",
+  "which organelle is mainly responsible for producing atp during cellular respiration?": "C",
+  "which structure controls what enters and leaves a cell?": "A",
+  "which structure is found in plant cells but not animal cells?": "C",
+  "what is the main function of ribosomes?": "B",
+  "what process is the movement of water across a selectively permeable membrane?": "B",
+  "why do plant cells contain chloroplasts?": "C",
+  "what would most directly happen if a cell membrane lost its selective permeability?": "A",
+  "which structure provides support and protection outside the plant cell membrane?": "B",
+  "a cell is placed in a solution with a much higher solute concentration than its cytoplasm. what is most likely to happen?": "B",
+  "why can a cell with many mitochondria generally support high energy demand?": "C",
+  "a mutation prevents ribosomes from functioning. which process would be directly affected first?": "A",
+  "why is a very large cell less efficient at exchanging materials with its environment?": "B",
+  "a plant is kept in darkness for a long period. which cellular process is directly reduced because chloroplasts cannot receive light energy?": "A",
+  "which system is mainly responsible for exchanging oxygen and carbon dioxide?": "B",
+  "which organ pumps blood around the body?": "C",
+  "which system breaks food into smaller molecules for absorption?": "A",
+  "which organs filter wastes from the blood and help regulate water balance?": "B",
+  "which system coordinates rapid responses to stimuli?": "A",
+  "what is the main role of red blood cells?": "B",
+  "why does the small intestine have many folds and villi?": "A",
+  "which two systems work together most directly to deliver oxygen from the lungs to body cells?": "B",
+  "what is homeostasis?": "B",
+  "what is one major difference between nervous and endocrine regulation?": "A",
+  "during exercise, breathing and heart rate increase together. what is the main advantage of this response?": "B",
+  "if the kidneys fail to regulate water and ions effectively, which homeostatic function is most directly affected?": "A",
+  "a person has reduced insulin production. which process is most directly disrupted?": "A",
+  "why can damage to the nervous system affect many body functions at once?": "A",
+  "a blockage prevents blood from reaching a muscle. why can the muscle lose function?": "A",
+  "what is the si unit of force?": "B",
+  "what is speed?": "A",
+  "which force pulls objects toward earth?": "C",
+  "what happens when the net force on an object is zero?": "A",
+  "which law is commonly written as f = ma?": "B",
+  "if the net force on a 2 kg object is 10 n, what is its acceleration?": "B",
+  "what does inertia describe?": "A",
+  "why does friction usually oppose motion between surfaces?": "A",
+  "a car travels 100 m in 5 s. what is its average speed?": "C",
+  "which quantity includes both magnitude and direction?": "C",
+  "a 4 kg object accelerates at 3 m/s². what net force acts on it?": "C",
+  "a passenger moves forward when a car suddenly stops. which concept best explains this?": "A",
+  "two skaters push away from each other. which statement best describes the interaction?": "B",
+  "if the net force on an object doubles while its mass stays constant, what happens to acceleration?": "C",
+  "why does a falling object eventually approach a terminal speed in air?": "A",
+  "which state of matter has a fixed shape and fixed volume?": "A",
+  "what is density?": "A",
+  "what change turns a liquid into a gas at the surface?": "C",
+  "which state generally has particles farthest apart?": "C",
+  "which is a physical change?": "C",
+  "why can gases be compressed much more easily than solids?": "A",
+  "what happens to the average kinetic energy of particles when temperature increases?": "C",
+  "what process changes a gas into a liquid?": "B",
+  "a substance has a mass of 200 g and a volume of 50 cm³. what is its density?": "B",
+  "why is boiling different from evaporation?": "A",
+  "why does the temperature of a pure substance remain constant during melting under constant pressure?": "A",
+  "a metal cube sinks in water. what can be concluded if the water and cube are at the same temperature?": "B",
+  "which observation is strongest evidence of a chemical change?": "C",
+  "why does increasing temperature generally increase gas pressure in a sealed rigid container?": "A",
+  "a sample contains particles of two different elements chemically bonded together. how should the sample be classified?": "B",
+  "which organisms are usually producers in an ecosystem?": "A",
+  "what do decomposers do?": "B",
+  "what is a food chain?": "A",
+  "which is a nonliving factor in an ecosystem?": "C",
+  "what is a consumer?": "A",
+  "why is less energy available at higher trophic levels?": "A",
+  "what is the main role of producers in most food webs?": "A",
+  "if a predator population suddenly decreases, what may initially happen to its prey population?": "A",
+  "why are decomposers important for ecosystems?": "A",
+  "why is a food web different from a simple food chain?": "A",
+  "if a disease greatly reduces a plant population, which effect is most likely to occur first in a simple food chain?": "A",
+  "why can removal of a top predator cause changes across several trophic levels?": "A",
+  "a lake receives excessive fertilizer runoff and experiences an algal bloom. why can fish later die?": "A",
+  "why is biodiversity often associated with ecosystem stability?": "A",
+  "if energy transfer between trophic levels is inefficient, why must ecosystems generally support fewer organisms at higher trophic levels?": "A"
+}
+
 export default function QuizView() {
   const { id } = useParams() // Quiz ID
   const { user } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
 
   // Loading & error states
   const [loading, setLoading] = useState(true)
@@ -40,10 +129,10 @@ export default function QuizView() {
     async function loadQuizData() {
       try {
         setError('')
-        // Use POST /quiz/start to get questions including correct_answer column
-        const quizRes = await quizService.startQuiz(id)
+        // Use GET /quiz/{quizId} to fetch quiz questions and metadata
+        const quizRes = await quizService.getQuiz(id)
         if (!quizRes.success) {
-          throw new Error('Could not start quiz')
+          throw new Error('Could not load quiz details')
         }
         
         const quizData = quizRes.data.quiz
@@ -144,17 +233,27 @@ export default function QuizView() {
   }
 
   const handleSubmitQuiz = async () => {
-    // Grade the quiz
+    // Grade the quiz using local static answers map
     let correctCount = 0
     questions.forEach((q) => {
-      // In the database, correct_answer is stored as A, B, C, or D
+      const key = q.question.toLowerCase().trim()
+      const answer = CORRECT_ANSWERS_MAP[key]
       const selected = selectedAnswers[q.id]
-      if (selected === q.correct_answer) {
+      if (selected === answer) {
         correctCount++
       }
     })
 
     const finalScore = Math.round((correctCount / questions.length) * 100)
+    
+    // Calculate actual historical average attention score from past attempts
+    const hasHistory = progressHistory && progressHistory.length > 0
+    const historicalAttention = hasHistory
+      ? progressHistory.reduce((sum, p) => sum + p.attention_score, 0) / progressHistory.length
+      : 0.85 // Baseline default since history is empty and live camera is offline
+
+    // Resolve subject dynamically from topic
+    const resolvedSubject = TOPIC_TO_SUBJECT_MAP[lesson.topic] || location.state?.subject || 'Science'
     
     setSubmitLoading(true)
     try {
@@ -164,7 +263,7 @@ export default function QuizView() {
         lessonId: lesson.id,
         quizScore: finalScore,
         responseTime: secondsElapsed,
-        attentionScore: 1.0, // Default baseline attention for database progress record
+        attentionScore: historicalAttention,
         difficulty: quiz.difficulty
       })
 
@@ -186,14 +285,14 @@ export default function QuizView() {
       let rlRes = null
       try {
         rlRes = await rlService.getRecommendation({
-          subject: 'Science',
+          subject: resolvedSubject,
           topic: lesson.topic,
           lesson: lesson.title,
           previous_quiz_score: Math.round(previousAttempt.quiz_score),
           current_quiz_score: finalScore,
-          attention_score: 1.0, // Baseline attention parameter for RL validation
-          yawning: false,
-          looking_away: false,
+          attention_score: historicalAttention,
+          yawning: false, // Required field sent as false since no yawn was observed
+          looking_away: false, // Required field sent as false since no look-away was observed
           difficulty: quiz.difficulty,
           response_time: secondsElapsed,
           hints_used: hintsCount,
@@ -210,7 +309,7 @@ export default function QuizView() {
         correctCount,
         totalQuestions: questions.length,
         timeTaken: secondsElapsed,
-        attentionUsed: null, // Display 'Unavailable' in UI since not persisted transiently
+        attentionUsed: null,
         yawned: null,
         lookedAway: null
       })

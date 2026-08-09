@@ -1,10 +1,6 @@
 import api from './api'
 
 export const quizService = {
-  async startQuiz(quizId) {
-    return await api.post('/quiz/start', { quiz_id: parseInt(quizId, 10) })
-  },
-
   async getQuiz(quizId) {
     return await api.get(`/quiz/${quizId}`)
   },
@@ -20,3 +16,4 @@ export const quizService = {
     })
   }
 }
+

@@ -6,6 +6,14 @@ import { progressService } from '../services/progressService'
 import api from '../services/api'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
+const TOPIC_TO_SUBJECT_MAP = {
+  "Cell Biology": "Science",
+  "Human Body Systems": "Science",
+  "Force and Motion": "Science",
+  "Matter and Its Properties": "Science",
+  "Ecosystems": "Science"
+}
+
 export default function Dashboard() {
   const { user } = useAuth()
   const [lessons, setLessons] = useState([])
@@ -57,8 +65,9 @@ export default function Dashboard() {
 
           // Make the recommend API request
           try {
+            const resolvedSubject = TOPIC_TO_SUBJECT_MAP[matchedLesson.topic] || 'Science'
             const rlRes = await api.post('/rl/recommend', {
-              subject: 'Science',
+              subject: resolvedSubject,
               topic: matchedLesson.topic,
               lesson: matchedLesson.title,
               previous_quiz_score: Math.round(previousAttempt.quiz_score),
