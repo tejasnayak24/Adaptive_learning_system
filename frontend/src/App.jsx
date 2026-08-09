@@ -1,18 +1,49 @@
 import React from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
+import ProtectedRoute from './components/ProtectedRoute'
+import AppLayout from './layouts/AppLayout'
 
-function App() {
+// Pages
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
+import Subjects from './pages/Subjects'
+import LessonDetail from './pages/LessonDetail'
+import QuizView from './pages/QuizView'
+import Progress from './pages/Progress'
+import Recommendations from './pages/Recommendations'
+
+export default function App() {
   return (
-    <div className="flex h-screen items-center justify-center bg-slate-950 font-display">
-      <div className="text-center">
-        <h1 className="bg-gradient-to-r from-indigo-500 to-teal-400 bg-clip-text text-5xl font-extrabold text-transparent tracking-tight">
-          Aegis Platform
-        </h1>
-        <p className="mt-4 text-slate-400 font-sans">
-          Adaptive Learning System Frontend Foundation Loaded
-        </p>
-      </div>
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          {/* Protected Application Routes */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Dashboard />} />
+            <Route path="subjects" element={<Subjects />} />
+            <Route path="lesson/:id" element={<LessonDetail />} />
+            <Route path="quiz/:id" element={<QuizView />} />
+            <Route path="progress" element={<Progress />} />
+            <Route path="recommendations" element={<Recommendations />} />
+          </Route>
+
+          {/* Fallback Route */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
-
-export default App
