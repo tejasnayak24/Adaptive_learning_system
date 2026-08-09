@@ -23,6 +23,7 @@ export default function QuizView() {
   const [progressHistory, setProgressHistory] = useState([])
 
   // Quiz execution states
+  const [allLessons, setAllLessons] = useState([])
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0)
   const [selectedAnswers, setSelectedAnswers] = useState({})
   const [hintsRevealed, setHintsRevealed] = useState({})
@@ -64,6 +65,12 @@ export default function QuizView() {
         const lessonRes = await lessonService.getLesson(quizData.lesson_id)
         if (lessonRes.success) {
           setLesson(lessonRes.data)
+        }
+
+        // Load all lessons to determine next sequential lesson
+        const allLessonsRes = await lessonService.getLessons()
+        if (allLessonsRes.success) {
+          setAllLessons(allLessonsRes.data)
         }
 
         // Load overall progress history to compute historical inputs for RL
@@ -301,13 +308,28 @@ export default function QuizView() {
     }
 
     if (action === 'NEXT_LESSON') {
-      // Find the next lesson in sequence (find lesson index, load next)
+      // Find the next sequential lesson
+      const sortedLessons = [...allLessons].sort((a, b) => a.id - b.id)
+      const currentIdx = sortedLessons.findIndex(l => l.id === lesson.id)
+      const nextLesson = currentIdx !== -1 && currentIdx < sortedLessons.length - 1 ? sortedLessons[currentIdx + 1] : null
+
+      if (nextLesson) {
+        return (
+          <button
+            onClick={() => navigate(`/lesson/${nextLesson.id}`)}
+            className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-md shadow-emerald-500/20 active:scale-[0.98] transform transition-all"
+          >
+            Advance to Next Lesson: {nextLesson.title} &rarr;
+          </button>
+        )
+      }
+
       return (
         <button
           onClick={() => navigate('/subjects')}
           className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-md shadow-emerald-500/20 active:scale-[0.98] transform transition-all"
         >
-          Advance Curriculum Topics &rarr;
+          Curriculum Complete! Back to Subjects &rarr;
         </button>
       )
     }
