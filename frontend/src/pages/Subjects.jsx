@@ -154,7 +154,7 @@ export default function Subjects() {
                         {/* Topic Category */}
                         <div className="flex items-center justify-between">
                           <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
-                            SCIENCE CURRICULUM
+                            {selectedSubject.toUpperCase()} CURRICULUM
                           </span>
 
                           {stats?.completed ? (
@@ -212,6 +212,7 @@ export default function Subjects() {
 
                         <Link
                           to={`/lesson/${lesson.id}`}
+                          state={{ subject: selectedSubject }}
                           className="inline-flex px-4 py-2 rounded-xl bg-slate-900 hover:bg-indigo-600 border border-slate-800 hover:border-indigo-600 text-xs font-semibold text-slate-200 hover:text-white transition-all active:scale-[0.97]"
                         >
                           {stats?.completed ? 'Review Material' : 'Start Reading'}

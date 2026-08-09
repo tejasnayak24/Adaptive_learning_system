@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { lessonService } from '../services/lessonService'
 import { progressService } from '../services/progressService'
@@ -8,6 +8,7 @@ export default function LessonDetail() {
   const { id } = useParams()
   const { user } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
   const [lesson, setLesson] = useState(null)
   const [lessonProgress, setLessonProgress] = useState([])
   const [loading, setLoading] = useState(true)
@@ -73,6 +74,8 @@ export default function LessonDetail() {
     return quizzes.find(q => q.difficulty.toLowerCase() === diff.toLowerCase())
   }
 
+  const subject = location.state?.subject || lesson.subject || ''
+
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Navigation Breadcrumb */}
@@ -91,10 +94,14 @@ export default function LessonDetail() {
       {/* Header Info */}
       <div className="space-y-3 border-b border-slate-900 pb-6">
         <div className="flex items-center gap-2">
-          <span className="px-2.5 py-0.5 text-[10px] font-semibold bg-slate-900 text-slate-400 border border-slate-800 rounded">
-            Science
-          </span>
-          <span className="text-slate-600">&bull;</span>
+          {subject && (
+            <>
+              <span className="px-2.5 py-0.5 text-[10px] font-semibold bg-slate-900 text-slate-400 border border-slate-800 rounded">
+                {subject}
+              </span>
+              <span className="text-slate-600">&bull;</span>
+            </>
+          )}
           <span className="text-xs font-medium text-slate-400">
             Topic: {lesson.topic}
           </span>
@@ -165,6 +172,7 @@ export default function LessonDetail() {
                 {quiz ? (
                   <Link
                     to={`/quiz/${quiz.id}`}
+                    state={{ subject }}
                     className="mt-4 w-full inline-flex items-center justify-center py-2 rounded-xl text-xs font-semibold border bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-350 hover:text-white transition-all"
                   >
                     Take quiz

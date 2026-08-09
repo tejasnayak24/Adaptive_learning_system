@@ -3,16 +3,11 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { lessonService } from '../services/lessonService'
 import { progressService } from '../services/progressService'
+import { rlService } from '../services/rlService'
 import api from '../services/api'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
-const TOPIC_TO_SUBJECT_MAP = {
-  "Cell Biology": "Science",
-  "Human Body Systems": "Science",
-  "Force and Motion": "Science",
-  "Matter and Its Properties": "Science",
-  "Ecosystems": "Science"
-}
+
 
 export default function Dashboard() {
   const { user } = useAuth()
@@ -65,22 +60,22 @@ export default function Dashboard() {
 
           // Make the recommend API request
           try {
-            const resolvedSubject = TOPIC_TO_SUBJECT_MAP[matchedLesson.topic] || 'Science'
-            const rlRes = await api.post('/rl/recommend', {
-              subject: resolvedSubject,
+            const payload = {
+              subject: latest.subject || matchedLesson.subject,
               topic: matchedLesson.topic,
               lesson: matchedLesson.title,
               previous_quiz_score: Math.round(previousAttempt.quiz_score),
               current_quiz_score: Math.round(latest.quiz_score),
-              attention_score: latest.attention_score,
-              yawning: false,
-              looking_away: false,
-              difficulty: latest.difficulty.toUpperCase(),
+              difficulty: latest.difficulty,
               response_time: latest.response_time,
               hints_used: 0,
               lesson_attempts: attemptsCount,
               completed_lessons: completedLessonsCount
-            })
+            }
+            if (latest.attention_score !== null && latest.attention_score !== undefined) {
+              payload.attention_score = latest.attention_score
+            }
+            const rlRes = await rlService.getRecommendation(payload)
             setRecommendation(rlRes)
           } catch (rlErr) {
             console.error('Failed to load recommendation:', rlErr)

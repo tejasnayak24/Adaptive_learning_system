@@ -5,14 +5,6 @@ import { progressService } from '../services/progressService'
 import { lessonService } from '../services/lessonService'
 import { rlService } from '../services/rlService'
 
-const TOPIC_TO_SUBJECT_MAP = {
-  "Cell Biology": "Science",
-  "Human Body Systems": "Science",
-  "Force and Motion": "Science",
-  "Matter and Its Properties": "Science",
-  "Ecosystems": "Science"
-}
-
 export default function Recommendations() {
   const { user } = useAuth()
   const [loading, setLoading] = useState(true)
@@ -47,22 +39,22 @@ export default function Recommendations() {
           const attemptsCount = progressRes.data.filter(p => p.lesson_id === latest.lesson_id).length
 
           // Fetch the RL recommendation
-          const resolvedSubject = TOPIC_TO_SUBJECT_MAP[matchedLesson.topic] || 'Science'
-          const rlRes = await rlService.getRecommendation({
-            subject: resolvedSubject,
+          const payload = {
+            subject: latest.subject || matchedLesson.subject,
             topic: matchedLesson.topic,
             lesson: matchedLesson.title,
             previous_quiz_score: Math.round(previousAttempt.quiz_score),
             current_quiz_score: Math.round(latest.quiz_score),
-            attention_score: latest.attention_score,
-            yawning: false,
-            looking_away: false,
-            difficulty: latest.difficulty.toUpperCase(),
+            difficulty: latest.difficulty,
             response_time: latest.response_time,
             hints_used: 0,
             lesson_attempts: attemptsCount,
             completed_lessons: completedLessonsCount
-          })
+          }
+          if (latest.attention_score !== null && latest.attention_score !== undefined) {
+            payload.attention_score = latest.attention_score
+          }
+          const rlRes = await rlService.getRecommendation(payload)
 
           setRecommendation({
             ...rlRes,
