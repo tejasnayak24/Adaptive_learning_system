@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import { progressService } from '../services/progressService'
 import { lessonService } from '../services/lessonService'
 import { rlService } from '../services/rlService'
+import { getSubjectFromLesson } from '../utils/subjectHelper'
 
 export default function Recommendations() {
   const { user } = useAuth()
@@ -40,7 +41,7 @@ export default function Recommendations() {
 
           // Fetch the RL recommendation
           const payload = {
-            subject: latest.subject || matchedLesson.subject,
+            subject: getSubjectFromLesson(matchedLesson),
             topic: matchedLesson.topic,
             lesson: matchedLesson.title,
             previous_quiz_score: Math.round(previousAttempt.quiz_score),
