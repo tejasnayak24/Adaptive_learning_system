@@ -66,45 +66,11 @@ export default function LessonDetail() {
     )
   }
 
-  // Determine recommended difficulty based on progress
-  let recommendedDifficulty = 'Easy'
-  if (lessonProgress.length > 0) {
-    // Sort attempts by ID descending
-    const sorted = [...lessonProgress].sort((a, b) => b.id - a.id)
-    const latest = sorted[0]
-    
-    // If they did the latest quiz and scored high, they should advance
-    if (latest.quiz_score >= 80) {
-      if (latest.difficulty.toUpperCase() === 'EASY') recommendedDifficulty = 'Medium'
-      else if (latest.difficulty.toUpperCase() === 'MEDIUM') recommendedDifficulty = 'Hard'
-      else recommendedDifficulty = 'Hard' // Max difficulty reached
-    } else if (latest.quiz_score <= 40) {
-      if (latest.difficulty.toUpperCase() === 'HARD') recommendedDifficulty = 'Medium'
-      else if (latest.difficulty.toUpperCase() === 'MEDIUM') recommendedDifficulty = 'Easy'
-      else recommendedDifficulty = 'Easy' // Min difficulty reached
-    } else {
-      // Repeat the current difficulty
-      recommendedDifficulty = latest.difficulty.charAt(0).toUpperCase() + latest.difficulty.slice(1).toLowerCase()
-    }
-  }
-
   // Extract quizzes associated with this lesson
   const quizzes = lesson.quizzes || []
   
   const getQuizByDifficulty = (diff) => {
     return quizzes.find(q => q.difficulty.toLowerCase() === diff.toLowerCase())
-  }
-
-  const handleStartRecommendedQuiz = () => {
-    const recommendedQuiz = getQuizByDifficulty(recommendedDifficulty)
-    if (recommendedQuiz) {
-      navigate(`/quiz/${recommendedQuiz.id}`)
-    } else if (quizzes.length > 0) {
-      // Fallback to first available quiz if exact recommended difficulty is missing
-      navigate(`/quiz/${quizzes[0].id}`)
-    } else {
-      alert('No quizzes found for this lesson on the backend.')
-    }
   }
 
   return (
@@ -153,17 +119,16 @@ export default function LessonDetail() {
         
         <div>
           <h3 className="text-lg font-bold text-white flex items-center gap-2">
-            <span>📝</span> Adaptive Assessment Calibration
+            <span>📝</span> Assessments
           </h3>
           <p className="text-xs text-slate-500 mt-1">
-            Test your knowledge. Aegis uses your quiz performance and attention indicators to dynamically pace your study.
+            Choose a quiz difficulty below. Aegis will dynamically adapt the curriculum based on your performance.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {['Easy', 'Medium', 'Hard'].map((diff) => {
             const quiz = getQuizByDifficulty(diff)
-            const isRecommended = recommendedDifficulty.toLowerCase() === diff.toLowerCase()
             const attemptsCount = lessonProgress.filter(p => p.difficulty.toLowerCase() === diff.toLowerCase()).length
             const bestAttempt = lessonProgress
               .filter(p => p.difficulty.toLowerCase() === diff.toLowerCase())
@@ -172,11 +137,7 @@ export default function LessonDetail() {
             return (
               <div 
                 key={diff}
-                className={`rounded-2xl p-5 border flex flex-col justify-between h-44 transition-all duration-300 ${
-                  isRecommended 
-                    ? 'bg-indigo-500/10 border-indigo-500/40 shadow-inner' 
-                    : 'bg-slate-900/30 border-slate-800/80 hover:border-slate-700/60'
-                }`}
+                className="rounded-2xl p-5 border bg-slate-900/30 border-slate-800/80 hover:border-slate-700/60 flex flex-col justify-between h-44 transition-all duration-300"
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -189,12 +150,6 @@ export default function LessonDetail() {
                     }`}>
                       {diff} Quiz
                     </span>
-
-                    {isRecommended && (
-                      <span className="text-[9px] font-extrabold uppercase tracking-wide text-indigo-400 animate-pulse">
-                        Recommended
-                      </span>
-                    )}
                   </div>
 
                   <p className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider mt-4">
@@ -210,13 +165,9 @@ export default function LessonDetail() {
                 {quiz ? (
                   <Link
                     to={`/quiz/${quiz.id}`}
-                    className={`mt-4 w-full inline-flex items-center justify-center py-2 rounded-xl text-xs font-semibold border transition-all ${
-                      isRecommended 
-                        ? 'bg-indigo-500 border-indigo-500 hover:bg-indigo-600 text-white shadow-md shadow-indigo-500/25' 
-                        : 'bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-300 hover:text-white'
-                    }`}
+                    className="mt-4 w-full inline-flex items-center justify-center py-2 rounded-xl text-xs font-semibold border bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-350 hover:text-white transition-all"
                   >
-                    Take assessment
+                    Take quiz
                   </Link>
                 ) : (
                   <button 
@@ -230,22 +181,9 @@ export default function LessonDetail() {
             )
           })}
         </div>
-
-        {/* Global CTA */}
-        {quizzes.length > 0 && (
-          <div className="border-t border-slate-800/80 pt-5 flex items-center justify-end">
-            <button
-              onClick={handleStartRecommendedQuiz}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 transition-all active:scale-[0.98] transform"
-            >
-              Start Recommended Next Steps ({recommendedDifficulty})
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-        )}
       </div>
     </div>
   )
 }
+
+

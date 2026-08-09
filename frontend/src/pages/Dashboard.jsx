@@ -109,9 +109,6 @@ export default function Dashboard() {
   const completionPercentage = lessons.length > 0 ? Math.round((distinctCompleted.size / lessons.length) * 100) : 0
   const avgScore = progress.length > 0 ? Math.round(progress.reduce((acc, p) => acc + p.quiz_score, 0) / progress.length) : 0
 
-  // Calculate streak based on progress date (simplifying to total active quiz attempts count or streak simulation)
-  const learningStreak = progress.length > 0 ? Math.min(progress.length, 5) : 0
-
   // Find a lesson to recommend continuing (first uncompleted or next lesson)
   const continueLesson = lessons.find(l => !distinctCompleted.has(l.id)) || lessons[0]
 
@@ -177,8 +174,8 @@ export default function Dashboard() {
         <div className="glass-panel rounded-3xl p-6 relative border border-slate-900 shadow-md">
           <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Learning Streak</p>
           <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-white">{learningStreak}</span>
-            <span className="text-xs text-orange-400 font-medium">days streak</span>
+            <span className="text-3xl font-extrabold text-white">Unavailable</span>
+            <span className="text-xs text-slate-550 font-medium">not tracked</span>
           </div>
           <div className="absolute right-6 bottom-6 text-2xl">🔥</div>
         </div>
