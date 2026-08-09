@@ -34,7 +34,24 @@ api.interceptors.response.use(
       window.dispatchEvent(new Event('auth-unauthorized'))
     }
     
-    const message = error.response?.data?.detail || error.message || 'An error occurred'
+    let message = 'An error occurred'
+    if (error.response?.data) {
+      const data = error.response.data
+      if (typeof data.detail === 'string') {
+        message = data.detail
+      } else if (Array.isArray(data.detail)) {
+        message = data.detail.map(err => `${err.loc?.join('.') || 'field'}: ${err.msg}`).join(', ')
+      } else if (typeof data.message === 'string') {
+        message = data.message
+      } else if (typeof data.detail === 'object' && data.detail !== null) {
+        message = data.detail.message || JSON.stringify(data.detail)
+      } else if (typeof data === 'string') {
+        message = data
+      }
+    } else {
+      message = error.message || 'An error occurred'
+    }
+    
     return Promise.reject(new Error(message))
   }
 )

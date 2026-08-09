@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { lessonService } from '../services/lessonService'
 import { progressService } from '../services/progressService'
+import { getSubjectFromLesson } from '../utils/subjectHelper'
 
 export default function Subjects() {
   const { user } = useAuth()
@@ -14,6 +15,8 @@ export default function Subjects() {
 
   useEffect(() => {
     async function loadData() {
+      if (!user?.id) return
+      setError('')
       try {
         const lessonsRes = await lessonService.getLessons()
         const progressRes = await progressService.getStudentProgress(user.id)
@@ -31,7 +34,7 @@ export default function Subjects() {
       }
     }
     loadData()
-  }, [user.id])
+  }, [user?.id])
 
   if (loading) {
     return (
@@ -67,9 +70,14 @@ export default function Subjects() {
     }
   }
 
+  // Filter lessons dynamically based on selected subject
+  const filteredLessons = lessons.filter(
+    (lesson) => getSubjectFromLesson(lesson) === selectedSubject
+  )
+
   // Group lessons by topic
-  const groupedLessons = lessons.reduce((acc, lesson) => {
-    const topic = lesson.topic || 'General Science'
+  const groupedLessons = filteredLessons.reduce((acc, lesson) => {
+    const topic = lesson.topic || 'General'
     if (!acc[topic]) {
       acc[topic] = []
     }
@@ -112,20 +120,12 @@ export default function Subjects() {
         ))}
       </div>
 
-      {selectedSubject !== 'Science' ? (
-        <div className="glass-panel rounded-3xl p-12 border border-slate-900 shadow-md text-center py-16 space-y-4">
-          <div className="text-5xl">📚</div>
-          <h3 className="text-lg font-bold text-white">No Lessons Available</h3>
-          <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
-            Curriculum content for <span className="font-semibold text-white">{selectedSubject}</span> is currently under calibration. Please check back soon or switch to <span className="text-indigo-400 font-semibold">Science</span>.
-          </p>
-        </div>
-      ) : Object.keys(groupedLessons).length === 0 ? (
+      {Object.keys(groupedLessons).length === 0 ? (
         <div className="glass-panel rounded-3xl p-12 border border-slate-900 shadow-md text-center py-16 space-y-4">
           <div className="text-5xl">🍃</div>
           <h3 className="text-lg font-bold text-white">Curriculum Empty</h3>
           <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
-            No Science lessons were found in the database. Please verify your seed configuration.
+            No {selectedSubject} lessons were found in the database. Please verify your configuration.
           </p>
         </div>
       ) : (
