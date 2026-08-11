@@ -2,15 +2,16 @@ from typing import Any
 
 from fastapi import APIRouter
 
+from app.services.telemetry_service import (
+    get_telemetry,
+    update_telemetry,
+)
+
 router = APIRouter(tags=["Integration"])
 
 
 @router.post("/recommend")
 def recommend(data: dict[str, Any]) -> dict[str, Any]:
-    """
-    Placeholder endpoint for the Reinforcement Learning module.
-    """
-
     return {
         "success": True,
         "message": "Recommendation request received",
@@ -25,15 +26,35 @@ def recommend(data: dict[str, Any]) -> dict[str, Any]:
 
 @router.post("/attention")
 def attention(data: dict[str, Any]) -> dict[str, Any]:
-    """
-    Receives attention score from the facial analysis module.
-    """
+    student_id = data.get("student_id")
+    attention_score = data.get("attention_score")
+
+    if student_id is not None and attention_score is not None:
+        update_telemetry(
+            student_id=int(student_id),
+            attention_score=float(attention_score),
+            yawning=bool(data.get("yawning", False)),
+            looking_away=bool(data.get("looking_away", False)),
+        )
 
     return {
         "success": True,
         "message": "Attention score received",
         "data": {
-            "student_id": data.get("student_id"),
-            "attention_score": data.get("attention_score"),
+            "student_id": student_id,
+            "attention_score": attention_score,
+            "yawning": data.get("yawning", False),
+            "looking_away": data.get("looking_away", False),
         },
+    }
+
+
+@router.get("/attention/{student_id}")
+def get_attention(student_id: int) -> dict[str, Any]:
+    telemetry = get_telemetry(student_id)
+
+    return {
+        "success": True,
+        "message": "Latest attention telemetry fetched",
+        "data": telemetry,
     }

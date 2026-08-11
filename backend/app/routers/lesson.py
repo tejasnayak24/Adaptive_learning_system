@@ -38,10 +38,28 @@ def get_lesson(
             detail="Lesson not found",
         )
 
+    quizzes = [
+        {
+            "id": quiz.id,
+            "lesson_id": quiz.lesson_id,
+            "title": quiz.title,
+            "difficulty": quiz.difficulty,
+        }
+        for quiz in lesson.quizzes
+    ]
+
     return {
         "success": True,
         "message": "Lesson fetched successfully",
-        "data": jsonable_encoder(lesson),
+        "data": {
+            "id": lesson.id,
+            "title": lesson.title,
+            "topic": lesson.topic,
+            "content": lesson.content,
+            "difficulty": lesson.difficulty,
+            "created_at": lesson.created_at,
+            "quizzes": quizzes,
+        },
     }
 
 

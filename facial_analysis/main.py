@@ -17,11 +17,12 @@ Features:
 - FPS Counter
 """
 
+import argparse
 import cv2
 import time
 
 from api_client import APIClient
-from config import STUDENT_ID, SEND_INTERVAL
+from config import STUDENT_ID as DEFAULT_STUDENT_ID, SEND_INTERVAL
 from camera import Camera
 from face_detector import FaceDetector
 from eye_tracker import EyeTracker
@@ -32,6 +33,25 @@ from logger import SessionLogger
 from looking_away import LookingAwayDetector
 from yawn_detector import YawnDetector
 from face_presence import FacePresence
+
+
+# ---------------------------------------------------
+# Student Configuration
+# ---------------------------------------------------
+
+parser = argparse.ArgumentParser(
+    description="Adaptive Learning System - Facial Analysis"
+)
+
+parser.add_argument(
+    "--student-id",
+    type=int,
+    default=DEFAULT_STUDENT_ID,
+    help="Student ID to associate with facial telemetry",
+)
+
+args = parser.parse_args()
+student_id = args.student_id
 
 
 # ---------------------------------------------------
@@ -164,7 +184,7 @@ while True:
             try:
 
                 api.send_attention_data(
-                    student_id=STUDENT_ID,
+                    student_id=student_id,
                     attention_score=attention_result["score"],
                     status=attention_result["status"],
                     eyes_open=eye_result["eyes_open"],

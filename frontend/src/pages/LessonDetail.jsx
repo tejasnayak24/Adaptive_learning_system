@@ -15,27 +15,41 @@ export default function LessonDetail() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    async function loadLessonData() {
-      try {
-        const lessonRes = await lessonService.getLesson(id)
-        if (lessonRes.success) {
-          setLesson(lessonRes.data)
-        }
+  async function loadLessonData() {
+    try {
+      const lessonRes = await lessonService.getLesson(id)
 
-        const progressRes = await progressService.getStudentProgress(user.id)
+      if (lessonRes.success) {
+        setLesson(lessonRes.data)
+      }
+    } catch (err) {
+      setError(err.message || 'Failed to load lesson content')
+      setLoading(false)
+      return
+    }
+
+    try {
+      const studentId = user?.id ?? user?.sub
+
+      if (studentId) {
+        const progressRes = await progressService.getStudentProgress(studentId)
+
         if (progressRes.success) {
-          // Filter progress logs for this specific lesson
-          const filtered = progressRes.data.filter(p => p.lesson_id === parseInt(id, 10))
+          const filtered = progressRes.data.filter(
+            p => p.lesson_id === parseInt(id, 10)
+          )
           setLessonProgress(filtered)
         }
-      } catch (err) {
-        setError(err.message || 'Failed to load lesson content')
-      } finally {
-        setLoading(false)
       }
+    } catch (err) {
+      console.warn('Progress could not be loaded:', err)
+    } finally {
+      setLoading(false)
     }
-    loadLessonData()
-  }, [id, user.id])
+  }
+
+  loadLessonData()
+}, [id, user?.id, user?.sub])
 
   if (loading) {
     return (

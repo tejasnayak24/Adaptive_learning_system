@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -9,13 +9,14 @@ const api = axios.create({
   },
 })
 
-// Request Interceptor: Inject Auth Token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token')
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
+
     return config
   },
   (error) => {
@@ -23,18 +24,30 @@ api.interceptors.request.use(
   }
 )
 
-// Response Interceptor: Handle errors globally
 api.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    // Check for expired/invalid tokens
     if (error.response && error.response.status === 401) {
       localStorage.removeItem('token')
-      // Custom event to trigger logout or redirect
       window.dispatchEvent(new Event('auth-unauthorized'))
     }
-    
-    const message = error.response?.data?.detail || error.message || 'An error occurred'
+
+    const detail = error.response?.data?.detail
+
+    let message = 'An error occurred'
+
+    if (typeof detail === 'string') {
+      message = detail
+    } else if (Array.isArray(detail)) {
+      message = detail
+        .map(item => item.msg || JSON.stringify(item))
+        .join(', ')
+    } else if (detail && typeof detail === 'object') {
+      message = detail.message || JSON.stringify(detail)
+    } else if (error.message) {
+      message = error.message
+    }
+
     return Promise.reject(new Error(message))
   }
 )

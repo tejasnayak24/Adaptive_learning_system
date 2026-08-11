@@ -64,10 +64,22 @@ export default function QuizView() {
           setAllLessons(allLessonsRes.data)
         }
 
-        // Load overall progress history to compute historical inputs for RL
-        const progressRes = await progressService.getStudentProgress(user.id)
-        if (progressRes.success) {
-          setProgressHistory(progressRes.data)
+        // Load overall progress history to compute historical inputs for RL.
+        // Progress is optional for opening the quiz, so a progress API failure
+        // must not prevent the quiz itself from loading.
+        try {
+          const studentId = user?.id ?? user?.sub
+
+          if (studentId) {
+            const progressRes = await progressService.getStudentProgress(studentId)
+
+            if (progressRes.success) {
+              setProgressHistory(progressRes.data)
+            }
+          }
+        } catch (progressErr) {
+          console.warn('Progress could not be loaded:', progressErr)
+          setProgressHistory([])
         }
       } catch (err) {
         setError(err.message || 'Failed to initialize quiz')
@@ -76,7 +88,7 @@ export default function QuizView() {
       }
     }
     loadQuizData()
-  }, [id, user.id])
+  }, [id, user?.id, user?.sub])
 
   // Timer effect
   useEffect(() => {
@@ -144,6 +156,34 @@ export default function QuizView() {
     }
   }
 
+  const getLatestTelemetry = async () => {
+  try {
+    const studentId = user?.id ?? user?.sub
+
+    if (!studentId) {
+      return null
+    }
+
+    const response = await fetch(`/api/attention/${studentId}`)
+
+    if (!response.ok) {
+      return null
+    }
+
+    const data = await response.json()
+
+    if (!data.success) {
+      return null
+    }
+
+    return data.data
+  } catch (err) {
+    console.error('Failed to fetch latest facial telemetry:', err)
+    return null
+  }
+}
+
+
   const handleSubmitQuiz = async () => {
     // Grade the quiz using backend correctness contract
     let correctCount = 0
@@ -155,12 +195,12 @@ export default function QuizView() {
     })
 
     const finalScore = Math.round((correctCount / questions.length) * 100)
+    const telemetry = await getLatestTelemetry()
+
+    const currentAttention = telemetry?.attention_score ?? null
+    const currentYawning = telemetry?.yawning ?? false
+    const currentLookingAway = telemetry?.looking_away ?? false
     
-    // Calculate actual historical average attention score from past attempts
-    const hasHistory = progressHistory && progressHistory.length > 0
-    const historicalAttention = hasHistory
-      ? progressHistory.reduce((sum, p) => sum + p.attention_score, 0) / progressHistory.length
-      : null
 
     // Resolve subject dynamically from backend data
     const resolvedSubject = location.state?.subject || quiz.subject || lesson.subject || undefined
@@ -169,11 +209,11 @@ export default function QuizView() {
     try {
       // 1. Submit quiz results to backend to save student progress
       const submitRes = await quizService.submitQuiz({
-        studentId: user.id,
+        studentId: user?.id ?? user?.sub,
         lessonId: lesson.id,
         quizScore: finalScore,
         responseTime: secondsElapsed,
-        attentionScore: historicalAttention !== null ? historicalAttention : undefined,
+        attentionScore: currentAttention !== null ? currentAttention : undefined,
         difficulty: quiz.difficulty
       })
 
@@ -207,9 +247,12 @@ export default function QuizView() {
           completed_lessons: completedLessonsCount
         }
 
-        if (historicalAttention !== null) {
-          payload.attention_score = historicalAttention
+        if (currentAttention !== null) {
+          payload.attention_score = currentAttention
         }
+
+        payload.yawning = currentYawning
+        payload.looking_away = currentLookingAway
 
         rlRes = await rlService.getRecommendation(payload)
       } catch (rlErr) {
@@ -222,9 +265,9 @@ export default function QuizView() {
         correctCount,
         totalQuestions: questions.length,
         timeTaken: secondsElapsed,
-        attentionUsed: null,
-        yawned: null,
-        lookedAway: null
+        attentionUsed: currentAttention,
+        yawned: currentYawning,
+        lookedAway: currentLookingAway
       })
       setRlRecommendation(rlRes)
       setIsFinished(true)
@@ -392,15 +435,15 @@ export default function QuizView() {
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-slate-400">Average attention</span>
-                <span className="font-semibold text-slate-400">Unavailable</span>
+                <span className="font-semibold text-white">{results.attentionUsed !== null ? `${Math.round(results.attentionUsed * 100)}%` : 'Unavailable'}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-slate-400">Yawning observed</span>
-                <span className="font-semibold text-slate-400">Unavailable</span>
+                <span className="font-semibold text-slate-400">{results.yawned === null ? 'Unavailable' : results.yawned ? 'Yes' : 'No'}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-slate-400">Gaze stability</span>
-                <span className="font-semibold text-slate-400">Unavailable</span>
+                <span className="font-semibold text-slate-400">{results.lookedAway === null ? 'Unavailable' : results.lookedAway ? 'Looking away' : 'Stable'}</span>
               </div>
             </div>
           </div>

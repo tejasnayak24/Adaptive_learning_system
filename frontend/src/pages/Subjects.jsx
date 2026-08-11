@@ -12,26 +12,37 @@ export default function Subjects() {
   const [error, setError] = useState('')
   const [selectedSubject, setSelectedSubject] = useState('Science')
 
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const lessonsRes = await lessonService.getLessons()
-        const progressRes = await progressService.getStudentProgress(user.id)
+ useEffect(() => {
+  async function loadData() {
+    try {
+      const lessonsRes = await lessonService.getLessons()
 
-        if (lessonsRes.success) {
-          setLessons(lessonsRes.data)
-        }
+      if (lessonsRes.success) {
+        setLessons(lessonsRes.data)
+      }
+    } catch (err) {
+      setError(err.message || 'Failed to load lessons')
+    }
+
+    try {
+      const studentId = user?.id ?? user?.sub
+
+      if (studentId) {
+        const progressRes = await progressService.getStudentProgress(studentId)
+
         if (progressRes.success) {
           setProgress(progressRes.data)
         }
-      } catch (err) {
-        setError(err.message || 'Failed to load curriculum data')
-      } finally {
-        setLoading(false)
       }
+    } catch (err) {
+      console.warn('Progress could not be loaded:', err)
+    } finally {
+      setLoading(false)
     }
-    loadData()
-  }, [user.id])
+  }
+
+  loadData()
+}, [user?.id, user?.sub])
 
   if (loading) {
     return (
