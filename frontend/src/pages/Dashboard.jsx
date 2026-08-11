@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import { lessonService } from '../services/lessonService'
 import { progressService } from '../services/progressService'
 import { rlService } from '../services/rlService'
+import { getSubjectFromLesson } from '../utils/subjectHelper'
 import api from '../services/api'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
@@ -61,7 +62,7 @@ export default function Dashboard() {
           // Make the recommend API request
           try {
             const payload = {
-              subject: latest.subject || matchedLesson.subject,
+              subject: getSubjectFromLesson(matchedLesson),
               topic: matchedLesson.topic,
               lesson: matchedLesson.title,
               previous_quiz_score: Math.round(previousAttempt.quiz_score),

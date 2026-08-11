@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
+const API_BASE_URL = '/api'
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -32,20 +32,26 @@ api.interceptors.response.use(
       window.dispatchEvent(new Event('auth-unauthorized'))
     }
 
-    const detail = error.response?.data?.detail
-
     let message = 'An error occurred'
 
-    if (typeof detail === 'string') {
-      message = detail
-    } else if (Array.isArray(detail)) {
-      message = detail
-        .map(item => item.msg || JSON.stringify(item))
-        .join(', ')
-    } else if (detail && typeof detail === 'object') {
-      message = detail.message || JSON.stringify(detail)
-    } else if (error.message) {
-      message = error.message
+    if (error.response?.data) {
+      const data = error.response.data
+
+      if (typeof data.detail === 'string') {
+        message = data.detail
+      } else if (Array.isArray(data.detail)) {
+        message = data.detail
+          .map(err => `${err.loc?.join('.') || 'field'}: ${err.msg}`)
+          .join(', ')
+      } else if (typeof data.message === 'string') {
+        message = data.message
+      } else if (typeof data.detail === 'object' && data.detail !== null) {
+        message = data.detail.message || JSON.stringify(data.detail)
+      } else if (typeof data === 'string') {
+        message = data
+      }
+    } else {
+      message = error.message || 'An error occurred'
     }
 
     return Promise.reject(new Error(message))
