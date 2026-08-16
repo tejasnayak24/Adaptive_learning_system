@@ -1,417 +1,92 @@
-# 🎓 Adaptive Learning System using Reinforcement Learning
+Aegis — Adaptive Learning System
 
-> An Intelligent Adaptive Learning Platform that personalizes learning content using Reinforcement Learning and Facial Attention Analysis.
+An adaptive learning platform that uses quiz performance, facial attention telemetry, and reinforcement learning to personalize the learning experience.
 
----
+🚀 Quick Setup
 
-# 📖 Overview
+1. Clone the Repository
 
-Traditional e-learning platforms provide the same learning path to every student regardless of their understanding, learning speed, or attention level.
+git clone <YOUR_GITHUB_REPO_URL>
+cd Adaptive_learning_system
 
-Our project builds an intelligent adaptive learning platform that continuously analyzes student performance and engagement to recommend the most suitable learning content.
+2. Backend Setup
 
-The system combines:
+cd backend
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 
-- Reinforcement Learning
-- Facial Attention Analysis
-- Quiz Performance
-- Student Progress Tracking
-- AI-driven Content Recommendation
+Create a backend/.env file with your own PostgreSQL credentials.
 
-The objective is to create a personalized learning experience for every student.
+Then from the project root:
 
----
+cd ..
+alembic upgrade head
+python backend/seed_science.py
 
-# 🎯 Objectives
+The seed populates the database with 5 lessons, 15 quizzes, and 75 questions.
 
-- Personalize learning for every student
-- Adapt content difficulty automatically
-- Detect student attention using computer vision
-- Improve learning outcomes using Reinforcement Learning
-- Provide teachers with learning analytics
+Start the backend:
 
----
+uvicorn backend.app.main:app --reload --port 8000
 
-# 👨‍💻 Team Members
+Backend API:
 
-| Name | Responsibility |
-|------|----------------|
-| Tejas Nayak | Team Lead • Reinforcement Learning • Integration |
-| Rohan | Facial Analysis Module |
-| Roshwin | Frontend Development |
-| Rishika | Backend Development |
+http://127.0.0.1:8000
 
----
+3. Facial Analysis Setup
 
-# 🛠 Tech Stack
+Open a new terminal:
 
-## Frontend
+cd facial_analysis
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python main.py
 
-- React
-- Tailwind CSS
-- Axios
-- React Router
+Allow camera/webcam access when prompted.
 
----
+4. Frontend Setup
 
-## Backend
+Open another terminal:
 
-- FastAPI
-- Python
+cd frontend
+npm install
+npm run dev
 
----
+Open:
 
-## Database
+http://localhost:5173
 
-- PostgreSQL
+🧩 Running the Project
 
----
+Keep these three services running:
 
-## AI / Machine Learning
+Service
 
-- OpenCV
-- MediaPipe
-- Reinforcement Learning (Q-Learning initially)
-
----
-
-## Tools
-
-- Git
-- GitHub
-- VS Code
-- Postman
-
----
-
-# 📂 Project Structure
-
-```
-adaptive-learning-system/
-
-README.md
-
-TEAM/
-PROMPTS/
-
-frontend/
-backend/
-rl_engine/
-facial_analysis/
-```
-
----
-
-# 🏗 System Architecture
-
-```
-                Student
-
-                    │
-
-                    ▼
-
-             React Frontend
-
-                    │
-
-                    ▼
-
-              FastAPI Backend
-
-        ┌───────────┼───────────┐
-
-        ▼           ▼           ▼
-
-Database      RL Engine     Facial Analysis
-
-        │           │
-
-        └──────► Recommendation
-```
-
----
-
-# 🧠 Project Modules
-
-## 1. Frontend
-
-Responsible for
-
-- Login
-- Dashboard
-- Lessons
-- Quiz
-- Progress
-- Reports
-
----
-
-## 2. Backend
-
-Responsible for
-
-- Authentication
-- Database
-- APIs
-- Student Management
-- Quiz Management
-
----
-
-## 3. Reinforcement Learning
-
-Responsible for
-
-- Student State
-- Reward Calculation
-- Action Selection
-- Difficulty Recommendation
-
----
-
-## 4. Facial Analysis
-
-Responsible for
-
-- Face Detection
-- Attention Detection
-- Head Pose
-- Eye Tracking
-
----
-
-# 🔄 Data Flow
-
-Student
-
-↓
-
-Frontend
-
-↓
+Address
 
 Backend
 
-↓
+http://127.0.0.1:8000
 
-RL Engine
+Facial Analysis
 
-↓
-
-Recommendation
-
-↓
+Webcam + telemetry
 
 Frontend
 
-↓
+http://localhost:5173
 
-Student
+🗄️ Database
 
-Facial Analysis continuously updates attention score.
+Each teammate should use their own local PostgreSQL database and .env.
 
----
+Run:
 
-# 🔗 API Contracts
+alembic upgrade head
+python backend/seed_science.py
 
-These APIs are fixed.
+This provides the common Science lessons, quizzes, and questions, so teammates do not need access to anyone else's database.
 
-## Authentication
-
-POST /login
-
-POST /register
-
----
-
-## Lessons
-
-GET /lessons
-
-GET /lesson/{id}
-
----
-
-## Quiz
-
-POST /quiz/start
-
-POST /quiz/submit
-
----
-
-## Reinforcement Learning
-
-POST /recommend
-
-Input
-
-- Student ID
-- Current Topic
-- Accuracy
-- Attention Score
-- Difficulty
-- Response Time
-
-Output
-
-- Recommended Content
-- Difficulty Level
-- Suggested Action
-
----
-
-## Facial Analysis
-
-POST /attention
-
-Output
-
-- Attention Score
-- Looking At Screen
-- Head Direction
-
----
-
-## Progress
-
-GET /progress
-
----
-
-# 🗄 Database Tables
-
-Student
-
-Lesson
-
-Quiz
-
-Question
-
-Progress
-
-Learning Session
-
-Reward History
-
----
-
-# 🌿 Git Workflow
-
-Every member works only on their own branch.
-
-Example
-
-Tejas
-
-tejas/rl-engine
-
-Rohan
-
-rohan/facial-analysis
-
-Roshwin
-
-roshwin/frontend
-
-Rishika
-
-rishika/backend
-
-Nobody commits directly to **main**.
-
-Workflow
-
-1. Pull latest changes
-
-2. Work on your branch
-
-3. Commit
-
-4. Push
-
-5. Inform Team Lead
-
-6. Team Lead reviews
-
-7. Merge into main
-
----
-
-# 📋 Coding Rules
-
-- Write clean and readable code
-- Comment important logic
-- Never modify another member's folder
-- Keep commits meaningful
-- Test before pushing
-- Ask before changing shared APIs
-
----
-
-# 📅 Development Roadmap
-
-Phase 1
-
-- Repository Setup
-- Project Structure
-- Documentation
-
-Phase 2
-
-- Backend
-- Frontend
-- Facial Analysis
-- RL Module
-
-Phase 3
-
-- Integration
-
-Phase 4
-
-- Testing
-
-Phase 5
-
-- Final Demo
-
----
-
-# 🚀 Setup
-
-Clone Repository
-
-git clone <repository-url>
-
-Create your branch
-
-git checkout -b your-name/module
-
-Start Development
-
-Commit regularly
-
-Push your branch
-
-Inform Team Lead
-
----
-
-# 📌 Important Rules
-
-✅ Work only in your assigned module.
-
-✅ Never push directly to main.
-
-✅ Do not modify another teammate's code without discussion.
-
-✅ Follow API contracts.
-
-✅ Commit regularly.
-
----
-
-Developed as a Major Project by the Department of Information Science & Engineering.
+Each teammate should create their own .env using their local PostgreSQL credentials.
