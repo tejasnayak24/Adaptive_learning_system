@@ -44,10 +44,13 @@ CURRICULUM: Final[dict[str, dict[str, list[str]]]] = {
 
 ATTENTION_VALUES: Final[tuple[float, ...]] = (
     0.2,
-    0.35,
+    0.3,
+    0.4,
     0.5,
-    0.7,
+    0.6,
+    0.75,
     0.9,
+    1.0,
 )
 
 
@@ -58,38 +61,50 @@ DIFFICULTIES: Final[tuple[Difficulty, ...]] = (
 )
 
 
-def create_initial_state() -> StudentState:
-    """Create a varied simulated student state for a training episode."""
+SCORE_VALUES: Final[tuple[int, ...]] = (
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    95,
+)
 
+
+def create_initial_state() -> StudentState:
     subject = random.choice(list(CURRICULUM.keys()))
     topic = random.choice(list(CURRICULUM[subject].keys()))
     lesson = random.choice(CURRICULUM[subject][topic])
 
-    current_score = random.choice(
-        (30, 45, 55, 65, 75, 85, 90, 95)
+    current_score = random.choice(SCORE_VALUES)
+
+    score_change = random.choice(
+        (-15, -10, -5, 0, 5, 10, 15)
     )
 
-    previous_score = random.choice(
-        (30, 45, 55, 65, 75, 85, 90, 95)
+    previous_score = max(
+        0,
+        min(100, current_score - score_change)
     )
 
     attention = random.choice(ATTENTION_VALUES)
 
-    yawning = (
-        attention <= 0.35
-        and random.random() < 0.65
-    )
+    yawning = False
+    looking_away = False
 
-    looking_away = (
-        attention <= 0.35
-        and random.random() < 0.65
-    )
+    if attention < 0.4:
+        yawning = random.random() < 0.7
+        looking_away = random.random() < 0.7
+    elif attention < 0.6:
+        yawning = random.random() < 0.2
+        looking_away = random.random() < 0.2
+    else:
+        yawning = random.random() < 0.03
+        looking_away = random.random() < 0.03
 
-    if not yawning and random.random() < 0.08:
-        yawning = True
-
-    if not looking_away and random.random() < 0.08:
-        looking_away = True
+    difficulty = random.choice(DIFFICULTIES)
 
     return StudentState(
         subject=subject,
@@ -100,9 +115,9 @@ def create_initial_state() -> StudentState:
         attention_score=attention,
         yawning=yawning,
         looking_away=looking_away,
-        difficulty=random.choice(DIFFICULTIES),
+        difficulty=difficulty,
         response_time=random.choice(
-            (5.0, 10.0, 15.0, 25.0)
+            (5.0, 10.0, 15.0, 25.0, 40.0, 60.0)
         ),
         hints_used=random.randint(0, 3),
         lesson_attempts=random.randint(0, 4),

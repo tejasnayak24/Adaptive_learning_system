@@ -4,6 +4,7 @@ from fastapi import APIRouter
 
 from app.services.telemetry_service import (
     get_telemetry,
+    reset_telemetry,
     update_telemetry,
 )
 
@@ -57,4 +58,15 @@ def get_attention(student_id: int) -> dict[str, Any]:
         "success": True,
         "message": "Latest attention telemetry fetched",
         "data": telemetry,
+    }
+
+
+@router.post("/attention/{student_id}/reset")
+def reset_attention(student_id: int) -> dict[str, Any]:
+    reset_telemetry(student_id)
+
+    return {
+        "success": True,
+        "message": "Quiz telemetry reset",
+        "data": get_telemetry(student_id),
     }

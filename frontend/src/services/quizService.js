@@ -1,37 +1,22 @@
 import api from './api'
 
 export const quizService = {
-  async getQuiz(quizId) {
-    return await api.get(`/quiz/${quizId}`)
+  async getQuiz(id) {
+    return await api.get(`/quiz/${id}`)
   },
 
-  async submitQuiz({
-    studentId,
-    lessonId,
-    quizScore,
-    responseTime,
-    attentionScore,
-    difficulty
-  }) {
-    const parsedStudentId = parseInt(studentId, 10)
-    const parsedLessonId = parseInt(lessonId, 10)
-    const parsedQuizScore = parseFloat(quizScore)
-    const parsedResponseTime = parseFloat(responseTime)
+  async getQuizzesByLesson(lessonId) {
+    return await api.get(`/quiz/lesson/${lessonId}`)
+  },
 
-    const parsedAttentionScore =
-      attentionScore !== undefined &&
-      attentionScore !== null &&
-      Number.isFinite(Number(attentionScore))
-        ? parseFloat(attentionScore)
-        : 0.5
-
+  async submitQuiz(data) {
     return await api.post('/quiz/submit', {
-      student_id: parsedStudentId,
-      lesson_id: parsedLessonId,
-      quiz_score: parsedQuizScore,
-      response_time: parsedResponseTime,
-      attention_score: parsedAttentionScore,
-      difficulty: String(difficulty || '').toUpperCase()
+      student_id: data.studentId,
+      lesson_id: data.lessonId,
+      quiz_score: data.quizScore,
+      response_time: data.responseTime,
+      attention_score: data.attentionScore,
+      difficulty: data.difficulty
     })
   }
 }

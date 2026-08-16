@@ -17,7 +17,6 @@ def start_quiz(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ) -> dict[str, Any]:
-
     quiz_data = QuizService.start_quiz(
         db,
         request.quiz_id,
@@ -39,12 +38,37 @@ def start_quiz(
     }
 
 
+@router.get("/quiz/lesson/{lesson_id}")
+def get_quizzes_by_lesson(
+    lesson_id: int,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+) -> dict[str, Any]:
+    quizzes = QuizService.get_quizzes_by_lesson(
+        db,
+        lesson_id,
+    )
+
+    return {
+        "success": True,
+        "message": "Quizzes fetched successfully",
+        "data": [
+            {
+                "id": quiz.id,
+                "lesson_id": quiz.lesson_id,
+                "title": quiz.title,
+                "difficulty": quiz.difficulty,
+            }
+            for quiz in quizzes
+        ],
+    }
+
+
 @router.get("/quiz/{quiz_id}")
 def get_quiz(
     quiz_id: int,
     db: Session = Depends(get_db),
 ) -> dict[str, Any]:
-
     quiz_data = QuizService.start_quiz(
         db,
         quiz_id,
@@ -78,6 +102,7 @@ def get_quiz(
                     "option_b": question.option_b,
                     "option_c": question.option_c,
                     "option_d": question.option_d,
+                    "correct_answer": question.correct_answer,
                 }
                 for question in questions
             ],
@@ -91,7 +116,6 @@ def submit_quiz(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ) -> dict[str, Any]:
-
     progress = QuizService.submit_quiz(
         db=db,
         student_id=request.student_id,

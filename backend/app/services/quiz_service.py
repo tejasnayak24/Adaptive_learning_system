@@ -19,6 +19,18 @@ class QuizService:
         )
 
     @staticmethod
+    def get_quizzes_by_lesson(
+        db: Session,
+        lesson_id: int,
+    ):
+        return (
+            db.query(Quiz)
+            .filter(Quiz.lesson_id == lesson_id)
+            .order_by(Quiz.id)
+            .all()
+        )
+
+    @staticmethod
     def get_questions_by_quiz(
         db: Session,
         quiz_id: int,
