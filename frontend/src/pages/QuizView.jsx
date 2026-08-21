@@ -32,10 +32,37 @@ export default function QuizView() {
   const [results, setResults] = useState(null)
   const [rlRecommendation, setRlRecommendation] = useState(null)
 
+  const resetQuizTelemetry = async () => {
+    try {
+      const studentId = user?.id ?? user?.sub
+
+      if (!studentId) {
+        console.warn(
+          'No student ID available for telemetry reset.'
+        )
+        return
+      }
+
+      await fetch(
+        `/api/attention/${studentId}/reset`,
+        {
+          method: 'POST',
+        }
+      )
+    } catch (err) {
+      console.error(
+        'Failed to reset quiz telemetry:',
+        err
+      )
+    }
+  }
+
   useEffect(() => {
     async function loadQuizData() {
       try {
         setError('')
+
+        await resetQuizTelemetry()
 
         const quizRes = await quizService.getQuiz(id)
 
@@ -370,9 +397,7 @@ export default function QuizView() {
         telemetry
       )
 
-      const currentAttention =
-        telemetry?.attention_score ??
-        null
+      const currentAttention = telemetry?.attention_score
 
       const currentYawning =
         telemetry?.yawning_observed ??
@@ -403,10 +428,7 @@ export default function QuizView() {
           lessonId: lesson.id,
           quizScore: finalScore,
           responseTime: secondsElapsed,
-          attentionScore:
-            currentAttention !== null
-              ? currentAttention
-              : undefined,
+          attentionScore: currentAttention,
           difficulty: quiz.difficulty
         })
 
