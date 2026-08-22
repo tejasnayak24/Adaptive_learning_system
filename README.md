@@ -1,92 +1,50 @@
-Aegis — Adaptive Learning System
+# Run Instructions
 
-An adaptive learning platform that uses quiz performance, facial attention telemetry, and reinforcement learning to personalize the learning experience.
+## Backend
 
-🚀 Quick Setup
-
-1. Clone the Repository
-
-git clone <YOUR_GITHUB_REPO_URL>
-cd Adaptive_learning_system
-
-2. Backend Setup
-
-cd backend
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-
-Create a backend/.env file with your own PostgreSQL credentials.
-
-Then from the project root:
-
-cd ..
-alembic upgrade head
-python backend/seed_science.py
-
-The seed populates the database with 5 lessons, 15 quizzes, and 75 questions.
-
-Start the backend:
-
+```powershell
+cd C:\Users\tejas\Adaptive_learning_system
+$env:PYTHONPATH = "$PWD\backend"
 uvicorn backend.app.main:app --reload --port 8000
-
-Backend API:
-
-http://127.0.0.1:8000
-
-3. Facial Analysis Setup
+Frontend
 
 Open a new terminal:
 
-cd facial_analysis
+cd C:\Users\tejas\Adaptive_learning_system\frontend
+npm install
+npm run dev
+Facial Analysis
+
+Open another terminal:
+
+cd C:\Users\tejas\Adaptive_learning_system\facial_analysis
+.\venv\Scripts\Activate.ps1
+python main.py
+
+If venv does not exist:
+
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 python main.py
 
-Allow camera/webcam access when prompted.
+Make sure STUDENT_ID in facial_analysis/config.py matches the student account being tested.
 
-4. Frontend Setup
+Database
 
-Open another terminal:
+Make sure PostgreSQL is running and the .env file is configured in backend/.
 
-cd frontend
-npm install
-npm run dev
+If the database needs to be seeded:
 
-Open:
+python backend\seed_science.py
+Application
 
-http://localhost:5173
+Keep all three services running:
 
-🧩 Running the Project
+Backend: http://localhost:8000
+Frontend: http://localhost:5173
+Facial Analysis: python main.py
 
-Keep these three services running:
-
-Service
-
-Address
-
-Backend
-
-http://127.0.0.1:8000
-
-Facial Analysis
-
-Webcam + telemetry
-
-Frontend
+Then open:
 
 http://localhost:5173
-
-🗄️ Database
-
-Each teammate should use their own local PostgreSQL database and .env.
-
-Run:
-
-alembic upgrade head
-python backend/seed_science.py
-
-This provides the common Science lessons, quizzes, and questions, so teammates do not need access to anyone else's database.
-
-Each teammate should create their own .env using their local PostgreSQL credentials.
