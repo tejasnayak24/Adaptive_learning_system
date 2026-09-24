@@ -13,6 +13,7 @@ Features:
 - Looking Away Detection
 - Yawning Detection
 - Face Presence Detection
+- Drowsiness Detection (Voice Alerts)
 - Session Logging
 - FPS Counter
 """
@@ -33,6 +34,8 @@ from logger import SessionLogger
 from looking_away import LookingAwayDetector
 from yawn_detector import YawnDetector
 from face_presence import FacePresence
+from drowsiness_detector import DrowsinessDetector, ALERT_MESSAGES
+from voice_alert import VoiceAlert
 
 
 # ---------------------------------------------------
@@ -68,6 +71,8 @@ yawn_detector = YawnDetector()
 attention = AttentionEngine()
 logger = SessionLogger()
 presence = FacePresence()
+drowsiness = DrowsinessDetector()
+voice = VoiceAlert()
 api = APIClient()
 
 backend_status = "Disconnected"
@@ -140,6 +145,16 @@ while True:
         # -----------------------------
 
         yawn_result = yawn_detector.process(landmarks)
+
+        # -----------------------------
+        # Drowsiness Detection
+        # -----------------------------
+
+        drowsy_result = drowsiness.update(
+            face_found=True,
+            eyes_open=eye_result["eyes_open"],
+            yawning=yawn_result["yawning"]
+        )
 
         # -----------------------------
         # Attention Engine
@@ -315,7 +330,21 @@ while True:
             2
         )
 
+        if drowsy_result["drowsy"]:
+
+            cv2.putText(
+                frame,
+                f"DROWSY! Eyes closed {drowsy_result['eyes_closed_time']}s",
+                (300, 40),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.7,
+                (0, 0, 255),
+                2
+            )
+
     else:
+
+        drowsy_result = drowsiness.update(face_found=False)
 
         cv2.putText(
             frame,
@@ -326,6 +355,15 @@ while True:
             (0, 0, 255),
             2
         )
+
+    # ---------------------------------------------------
+    # Voice Alerts (played on a background thread)
+    # ---------------------------------------------------
+
+    for alert in drowsy_result["alerts"]:
+
+        message, beep = ALERT_MESSAGES[alert]
+        voice.say(message, beep=beep)
 
     # ---------------------------------------------------
     # FPS
@@ -410,5 +448,6 @@ while True:
 # Cleanup
 # ---------------------------------------------------
 
+voice.shutdown()
 camera.release()
 cv2.destroyAllWindows()
