@@ -9,13 +9,16 @@ so the engine is created and used only inside that worker thread.
 import queue
 import sys
 import threading
+import time
 
 from config import (
     VOICE_ALERTS_ENABLED,
     VOICE_RATE,
     VOICE_VOLUME,
+    PREFERRED_VOICE_LANGUAGES,
     BEEP_FREQUENCY,
     BEEP_DURATION_MS,
+    BEEP_GAP_MS,
 )
 
 try:
@@ -27,6 +30,47 @@ try:
     import winsound
 except ImportError:
     winsound = None
+
+
+# Windows (SAPI5) voices often have no language code, only a name
+# like "Microsoft Zira Desktop - English (United States)".
+LANGUAGE_NAMES = {
+    "en-in": "india",
+    "en-us": "united states",
+    "en-gb": "great britain",
+}
+
+
+def pick_voice(voices, preferred=PREFERRED_VOICE_LANGUAGES):
+    """Return the first voice matching the preferred languages, in order."""
+
+    for language in preferred:
+        for voice in voices:
+            if _voice_matches(voice, language):
+                return voice
+
+    return None
+
+
+def _voice_matches(voice, language):
+
+    language = language.lower()
+
+    codes = []
+
+    for code in getattr(voice, "languages", None) or []:
+        if isinstance(code, bytes):
+            code = code.decode("utf-8", errors="ignore")
+        codes.append(str(code))
+
+    # Normalise "TTS_MS_EN-US_ZIRA" / "en_US" to "en-us"
+    text = " ".join(
+        [voice.id or "", voice.name or ""] + codes
+    ).lower().replace("_", "-")
+
+    country = LANGUAGE_NAMES.get(language)
+
+    return language in text or (country is not None and country in text)
 
 
 class VoiceAlert:
@@ -49,14 +93,14 @@ class VoiceAlert:
         self.worker = threading.Thread(target=self._run, daemon=True)
         self.worker.start()
 
-    def say(self, message, beep=False):
-        """Queue an alert. Never blocks the caller."""
+    def say(self, message, beeps=0, beep_ms=BEEP_DURATION_MS):
+        """Queue an alert (optionally preceded by beeps). Never blocks the caller."""
 
         if not self.enabled:
             return
 
         try:
-            self.queue.put_nowait((message, beep))
+            self.queue.put_nowait((message, beeps, beep_ms))
         except queue.Full:
             pass
 
@@ -88,12 +132,11 @@ class VoiceAlert:
             if item is None:
                 break
 
-            message, beep = item
+            message, beeps, beep_ms = item
 
             print(f"[Voice Alert] {message}")
 
-            if beep:
-                self._beep()
+            self._beep(beeps, beep_ms)
 
             if engine is None:
                 continue
@@ -120,20 +163,32 @@ class VoiceAlert:
             engine = pyttsx3.init()
             engine.setProperty("rate", VOICE_RATE)
             engine.setProperty("volume", VOICE_VOLUME)
+
+            voice = pick_voice(engine.getProperty("voices"))
+
+            if voice is not None:
+                engine.setProperty("voice", voice.id)
+                print(f"Voice Alert: using voice '{voice.name}'")
+
             return engine
 
         except Exception as e:
             print("Voice Alert Error: could not start text-to-speech:", e)
             return None
 
-    def _beep(self):
+    def _beep(self, count, duration_ms):
 
         try:
-            if winsound is not None:
-                winsound.Beep(BEEP_FREQUENCY, BEEP_DURATION_MS)
-            else:
-                sys.stdout.write("\a")
-                sys.stdout.flush()
+            for i in range(count):
+
+                if i > 0:
+                    time.sleep(BEEP_GAP_MS / 1000)
+
+                if winsound is not None:
+                    winsound.Beep(BEEP_FREQUENCY, duration_ms)
+                else:
+                    sys.stdout.write("\a")
+                    sys.stdout.flush()
 
         except Exception as e:
             print("Voice Alert Error:", e)
