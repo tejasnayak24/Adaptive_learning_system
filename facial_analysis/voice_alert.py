@@ -123,7 +123,14 @@ class VoiceAlert:
 
     def _run(self):
 
-        engine = self._init_engine()
+        # On Windows, SAPI5 needs COM initialised in the thread using it
+        try:
+            import comtypes
+            comtypes.CoInitialize()
+        except Exception:
+            pass
+
+        voice_announced = False
 
         while True:
 
@@ -138,29 +145,35 @@ class VoiceAlert:
 
             self._beep(beeps, beep_ms)
 
+            # A reused pyttsx3 engine only speaks the first message on
+            # Windows; later runAndWait() calls return silently. So a
+            # fresh engine is created for every alert.
+            engine = self._init_engine(announce_voice=not voice_announced)
+
             if engine is None:
                 continue
+
+            voice_announced = True
 
             try:
                 engine.say(message)
                 engine.runAndWait()
+                engine.stop()
             except Exception as e:
                 print("Voice Alert Error:", e)
 
-    def _init_engine(self):
+            del engine
+
+    def _init_engine(self, announce_voice=False):
 
         if pyttsx3 is None:
             return None
 
-        # On Windows, SAPI5 needs COM initialised in the thread using it
         try:
-            import comtypes
-            comtypes.CoInitialize()
-        except Exception:
-            pass
-
-        try:
-            engine = pyttsx3.init()
+            # pyttsx3.Engine() instead of pyttsx3.init(): init() hands
+            # back a cached engine while one is still alive, which would
+            # bring back the "only the first message is spoken" bug.
+            engine = pyttsx3.Engine()
             engine.setProperty("rate", VOICE_RATE)
             engine.setProperty("volume", VOICE_VOLUME)
 
@@ -168,7 +181,9 @@ class VoiceAlert:
 
             if voice is not None:
                 engine.setProperty("voice", voice.id)
-                print(f"Voice Alert: using voice '{voice.name}'")
+
+                if announce_voice:
+                    print(f"Voice Alert: using voice '{voice.name}'")
 
             return engine
 
