@@ -1,5 +1,7 @@
 export function getSubjectFromLesson(lesson) {
   if (!lesson) return 'Science'
+
+  // Use the subject directly if it is provided
   if (lesson.subject) return lesson.subject
 
   const title = (lesson.title || '').toLowerCase()
@@ -7,6 +9,46 @@ export function getSubjectFromLesson(lesson) {
   const content = (lesson.content || '').toLowerCase()
   const allText = `${title} ${topic} ${content}`
 
+  // Check Social Science FIRST
+  if (
+    topic.includes('social science') ||
+    title.includes('social science') ||
+    allText.includes('indian constitution') ||
+    allText.includes('history') ||
+    allText.includes('geography') ||
+    allText.includes('civics') ||
+    allText.includes('democracy') ||
+    allText.includes('economics') ||
+    allText.includes('society') ||
+    allText.includes('social science')
+  ) {
+    return 'Social Science'
+  }
+
+  // Mathematics
+  if (
+    allText.includes('mathematics') ||
+    allText.includes('math') ||
+    allText.includes('algebra') ||
+    allText.includes('geometry') ||
+    allText.includes('calculus') ||
+    allText.includes('number')
+  ) {
+    return 'Mathematics'
+  }
+
+  // English
+  if (
+    allText.includes('english') ||
+    allText.includes('grammar') ||
+    allText.includes('reading') ||
+    allText.includes('vocabulary') ||
+    allText.includes('literature')
+  ) {
+    return 'English'
+  }
+
+  // Science
   if (
     allText.includes('cell') ||
     allText.includes('biology') ||
@@ -21,32 +63,6 @@ export function getSubjectFromLesson(lesson) {
   ) {
     return 'Science'
   }
-  if (
-    allText.includes('math') ||
-    allText.includes('algebra') ||
-    allText.includes('geometry') ||
-    allText.includes('calculus') ||
-    allText.includes('number')
-  ) {
-    return 'Mathematics'
-  }
-  if (
-    allText.includes('history') ||
-    allText.includes('geography') ||
-    allText.includes('civics') ||
-    allText.includes('society') ||
-    allText.includes('social')
-  ) {
-    return 'Social Science'
-  }
-  if (
-    allText.includes('english') ||
-    allText.includes('grammar') ||
-    allText.includes('reading') ||
-    allText.includes('vocabulary') ||
-    allText.includes('literature')
-  ) {
-    return 'English'
-  }
-  return 'Science' // default fallback
+
+  return 'Science'
 }

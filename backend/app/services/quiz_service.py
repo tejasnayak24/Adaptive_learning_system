@@ -8,61 +8,36 @@ from app.models.progress import Progress
 class QuizService:
 
     @staticmethod
-    def get_quiz_by_id(
-        db: Session,
-        quiz_id: int,
-    ):
-        return (
+    def start_quiz(db: Session, quiz_id: int):
+        quiz = (
             db.query(Quiz)
             .filter(Quiz.id == quiz_id)
             .first()
         )
 
-    @staticmethod
-    def get_quizzes_by_lesson(
-        db: Session,
-        lesson_id: int,
-    ):
-        return (
-            db.query(Quiz)
-            .filter(Quiz.lesson_id == lesson_id)
-            .order_by(Quiz.id)
-            .all()
-        )
-
-    @staticmethod
-    def get_questions_by_quiz(
-        db: Session,
-        quiz_id: int,
-    ):
-        return (
-            db.query(Question)
-            .filter(Question.quiz_id == quiz_id)
-            .all()
-        )
-
-    @staticmethod
-    def start_quiz(
-        db: Session,
-        quiz_id: int,
-    ):
-        quiz = QuizService.get_quiz_by_id(
-            db,
-            quiz_id,
-        )
-
-        if not quiz:
+        if quiz is None:
             return None
 
-        questions = QuizService.get_questions_by_quiz(
-            db,
-            quiz_id,
+        questions = (
+            db.query(Question)
+            .filter(Question.quiz_id == quiz_id)
+            .order_by(Question.id)
+            .all()
         )
 
         return {
             "quiz": quiz,
             "questions": questions,
         }
+
+    @staticmethod
+    def get_quizzes_by_lesson(db: Session, lesson_id: int):
+        return (
+            db.query(Quiz)
+            .filter(Quiz.lesson_id == lesson_id)
+            .order_by(Quiz.id)
+            .all()
+        )
 
     @staticmethod
     def submit_quiz(
@@ -84,8 +59,12 @@ class QuizService:
             completed=True,
         )
 
-        db.add(progress)
-        db.commit()
-        db.refresh(progress)
+        try:
+            db.add(progress)
+            db.commit()
+            db.refresh(progress)
+            return progress
 
-        return progress
+        except Exception:
+            db.rollback()
+            raise
