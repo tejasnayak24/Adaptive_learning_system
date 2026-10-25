@@ -1,7 +1,6 @@
 export function getSubjectFromLesson(lesson) {
   if (!lesson) return 'Science'
 
-  // Use the subject directly if it is provided
   if (lesson.subject) return lesson.subject
 
   const title = (lesson.title || '').toLowerCase()
@@ -9,7 +8,18 @@ export function getSubjectFromLesson(lesson) {
   const content = (lesson.content || '').toLowerCase()
   const allText = `${title} ${topic} ${content}`
 
-  // Check Social Science FIRST
+  // General Knowledge
+  if (
+    topic.includes('general knowledge') ||
+    title.includes('general knowledge') ||
+    topic === 'gk' ||
+    title.startsWith('gk:') ||
+    allText.includes('general knowledge')
+  ) {
+    return 'General Knowledge'
+  }
+
+  // Social Science
   if (
     topic.includes('social science') ||
     title.includes('social science') ||
@@ -19,8 +29,7 @@ export function getSubjectFromLesson(lesson) {
     allText.includes('civics') ||
     allText.includes('democracy') ||
     allText.includes('economics') ||
-    allText.includes('society') ||
-    allText.includes('social science')
+    allText.includes('society')
   ) {
     return 'Social Science'
   }
