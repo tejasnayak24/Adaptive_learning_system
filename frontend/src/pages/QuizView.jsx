@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+﻿import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { quizService } from '../services/quizService'
@@ -58,10 +58,28 @@ export default function QuizView() {
   }
 
   useEffect(() => {
-    async function loadQuizData() {
-      try {
-        setError('')
+    let cancelled = false
 
+    async function loadQuizData() {
+      setLoading(true)
+      setError('')
+
+      // Reset the previous quiz's state when the quiz ID changes.
+      setQuiz(null)
+      setLesson(null)
+      setQuestions([])
+      setProgressHistory([])
+      setAllLessons([])
+      setCurrentQuestionIdx(0)
+      setSelectedAnswers({})
+      setHintsRevealed({})
+      setHintsCount(0)
+      setSecondsElapsed(0)
+      setIsFinished(false)
+      setResults(null)
+      setRlRecommendation(null)
+
+      try {
         await resetQuizTelemetry()
 
         const quizRes = await quizService.getQuiz(id)
@@ -73,47 +91,40 @@ export default function QuizView() {
         const quizData = quizRes.data.quiz
         const questionsList = quizRes.data.questions || []
 
-        setQuiz(quizData)
-        setQuestions(questionsList)
-
         const lessonRes = await lessonService.getLesson(
           quizData.lesson_id
         )
 
-        if (lessonRes.success) {
-          setLesson(lessonRes.data)
-        } else {
+        if (!lessonRes.success) {
           throw new Error('Could not load lesson details')
         }
 
+        let lessons = []
+
         try {
-          const allLessonsRes =
-            await lessonService.getLessons()
+          const allLessonsRes = await lessonService.getLessons()
 
           if (allLessonsRes.success) {
-            setAllLessons(allLessonsRes.data || [])
+            lessons = allLessonsRes.data || []
           }
         } catch (lessonListError) {
           console.warn(
             'Could not load all lessons:',
             lessonListError
           )
-          setAllLessons([])
         }
+
+        let history = []
 
         try {
           const studentId = user?.id ?? user?.sub
 
           if (studentId) {
             const progressRes =
-              await progressService.getStudentProgress(
-                studentId
-              )
+              await progressService.getStudentProgress(studentId)
 
             if (progressRes.success) {
-              setProgressHistory(
-                progressRes.data || []
-              )
+              history = progressRes.data || []
             }
           }
         } catch (progressError) {
@@ -121,25 +132,33 @@ export default function QuizView() {
             'Progress could not be loaded:',
             progressError
           )
-
-          setProgressHistory([])
         }
-      } catch (err) {
-        console.error(
-          'Quiz initialization error:',
-          err
-        )
 
-        setError(
-          err.message ||
-            'Failed to initialize quiz'
-        )
+        // Ignore stale responses if the user has already switched quizzes.
+        if (cancelled) return
+
+        setQuiz(quizData)
+        setQuestions(questionsList)
+        setLesson(lessonRes.data)
+        setAllLessons(lessons)
+        setProgressHistory(history)
+      } catch (err) {
+        if (cancelled) return
+
+        console.error('Quiz initialization error:', err)
+        setError(err.message || 'Failed to initialize quiz')
       } finally {
-        setLoading(false)
+        if (!cancelled) {
+          setLoading(false)
+        }
       }
     }
 
     loadQuizData()
+
+    return () => {
+      cancelled = true
+    }
   }, [id, user?.id, user?.sub])
 
   useEffect(() => {
@@ -171,7 +190,7 @@ export default function QuizView() {
   if (error || !quiz || !lesson) {
     return (
       <div className="max-w-md mx-auto space-y-6 text-center py-12">
-        <div className="text-5xl">⚠️</div>
+        <div className="text-5xl">ΓÜá∩╕Å</div>
 
         <h3 className="text-xl font-bold text-white">
           Assessment Error
@@ -195,7 +214,7 @@ export default function QuizView() {
   if (!questions.length) {
     return (
       <div className="max-w-md mx-auto space-y-6 text-center py-12">
-        <div className="text-5xl">⚠️</div>
+        <div className="text-5xl">ΓÜá∩╕Å</div>
 
         <h3 className="text-xl font-bold text-white">
           No Questions Found
@@ -636,9 +655,7 @@ export default function QuizView() {
   }
 
   const renderNextStepsButton = () => {
-    if (!rlRecommendation) {
-      return null
-    }
+    if (!rlRecommendation) return null
 
     if (rlRecommendation.error) {
       return (
@@ -651,23 +668,14 @@ export default function QuizView() {
       )
     }
 
-    const action =
-      rlRecommendation.action
+    const action = rlRecommendation.action
 
-    if (
-      action ===
-      'INCREASE_DIFFICULTY'
-    ) {
-      const currentDifficulty =
-        String(
-          quiz.difficulty
-        ).toUpperCase()
-
+    if (action === 'INCREASE_DIFFICULTY') {
+      const currentDifficulty = String(quiz.difficulty || '').toUpperCase()
       const nextDifficulty =
         currentDifficulty === 'EASY'
           ? 'Medium'
-          : currentDifficulty ===
-              'MEDIUM'
+          : currentDifficulty === 'MEDIUM'
             ? 'Hard'
             : null
 
@@ -682,46 +690,41 @@ export default function QuizView() {
         )
       }
 
-      const targetQuiz =
-        getQuizOfDifficulty(
-          nextDifficulty
-        )
+      const targetQuiz = getQuizOfDifficulty(nextDifficulty)
 
       return (
         <button
+          type="button"
           onClick={() => {
-            if (targetQuiz?.id) {
-              navigate(
-                `/quiz/${targetQuiz.id}`
-              )
-            } else {
-              alert(
-                `No ${nextDifficulty} quiz is available for this lesson yet.`
-              )
+            console.log('[Adaptive quiz] Button clicked')
+            console.log('[Adaptive quiz] Current quiz:', quiz)
+            console.log('[Adaptive quiz] Lesson:', lesson)
+            console.log('[Adaptive quiz] lesson.quizzes:', lesson?.quizzes)
+            console.log('[Adaptive quiz] Requested difficulty:', nextDifficulty)
+            console.log('[Adaptive quiz] Target quiz:', targetQuiz)
+
+            if (targetQuiz?.id != null) {
+              navigate(`/quiz/${targetQuiz.id}`)
+              return
             }
+
+            alert(
+              `No ${nextDifficulty} quiz was found in the lesson data. Open the browser console (F12 → Console) and share the [Adaptive quiz] logs so we can connect the button to the correct quiz endpoint.`
+            )
           }}
           className="px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-sm shadow-md shadow-indigo-500/20 transition-all"
         >
-          Calibrate to{' '}
-          {nextDifficulty} Quiz →
+          Calibrate to {nextDifficulty} Quiz →
         </button>
       )
     }
 
-    if (
-      action ===
-      'DECREASE_DIFFICULTY'
-    ) {
-      const currentDifficulty =
-        String(
-          quiz.difficulty
-        ).toUpperCase()
-
+    if (action === 'DECREASE_DIFFICULTY') {
+      const currentDifficulty = String(quiz.difficulty || '').toUpperCase()
       const previousDifficulty =
         currentDifficulty === 'HARD'
           ? 'Medium'
-          : currentDifficulty ===
-              'MEDIUM'
+          : currentDifficulty === 'MEDIUM'
             ? 'Easy'
             : null
 
@@ -736,47 +739,32 @@ export default function QuizView() {
         )
       }
 
-      const targetQuiz =
-        getQuizOfDifficulty(
-          previousDifficulty
-        )
+      const targetQuiz = getQuizOfDifficulty(previousDifficulty)
 
       return (
         <button
+          type="button"
           onClick={() => {
-            if (targetQuiz?.id) {
-              navigate(
-                `/quiz/${targetQuiz.id}`
-              )
+            console.log('[Adaptive quiz] Requested easier difficulty:', previousDifficulty)
+            console.log('[Adaptive quiz] Target quiz:', targetQuiz)
+            if (targetQuiz?.id != null) {
+              navigate(`/quiz/${targetQuiz.id}`)
             } else {
-              alert(
-                `No ${previousDifficulty} quiz is available for this lesson yet.`
-              )
+              alert(`No ${previousDifficulty} quiz is available for this lesson yet.`)
             }
           }}
           className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow-md shadow-amber-500/20 transition-all"
         >
-          Return to{' '}
-          {previousDifficulty} Quiz →
+          Return to {previousDifficulty} Quiz →
         </button>
       )
     }
 
-    /*
-     * For low scores, the recommendation is now
-     * REPEAT_LESSON, which is the preferred behavior.
-     */
-    if (
-      action ===
-      'REPEAT_LESSON'
-    ) {
+    if (action === 'REPEAT_LESSON') {
       return (
         <button
-          onClick={() =>
-            navigate(
-              `/lesson/${lesson.id}`
-            )
-          }
+          type="button"
+          onClick={() => navigate(`/lesson/${lesson.id}`)}
           className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 hover:bg-slate-800 text-slate-200 font-bold text-sm transition-all"
         >
           Review Lesson Material →
@@ -784,30 +772,14 @@ export default function QuizView() {
       )
     }
 
-    if (
-      action ===
-      'NEXT_LESSON'
-    ) {
-      const sortedLessons =
-        [...allLessons].sort(
-          (a, b) =>
-            (a.id ?? 0) -
-            (b.id ?? 0)
-        )
-
-      const currentIndex =
-        sortedLessons.findIndex(
-          (item) =>
-            item.id === lesson.id
-        )
-
+    if (action === 'NEXT_LESSON') {
+      const sortedLessons = [...allLessons].sort(
+        (a, b) => (a.id ?? 0) - (b.id ?? 0)
+      )
+      const currentIndex = sortedLessons.findIndex((item) => item.id === lesson.id)
       const nextLesson =
-        currentIndex !== -1 &&
-        currentIndex <
-          sortedLessons.length - 1
-          ? sortedLessons[
-              currentIndex + 1
-            ]
+        currentIndex !== -1 && currentIndex < sortedLessons.length - 1
+          ? sortedLessons[currentIndex + 1]
           : null
 
       if (!nextLesson) {
@@ -823,32 +795,26 @@ export default function QuizView() {
 
       return (
         <button
-          onClick={() =>
-            navigate(
-              `/lesson/${nextLesson.id}`
-            )
-          }
-          className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-md shadow-emerald-500/20 transition-all"
+          type="button"
+          onClick={() => navigate(`/lesson/${nextLesson.id}`)}
+          className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-md shadow-emerald-500/20"
         >
           Advance to Next Lesson →
         </button>
       )
     }
 
-    if (
-      action ===
-      'FOCUS_RECOVERY'
-    ) {
+    if (action === 'FOCUS_RECOVERY') {
       return (
         <button
+          type="button"
           onClick={() => {
             alert(
               'Aegis Coach Break:\n\nTake a 30-second breathing break. Look away from the screen, take a deep breath in, and slowly breathe out. When ready, continue learning.'
             )
-
             navigate('/subjects')
           }}
-          className="px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm shadow-md shadow-sky-500/20 transition-all"
+          className="px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm shadow-md shadow-sky-500/20"
         >
           Start Focus Recovery →
         </button>
@@ -1074,7 +1040,7 @@ export default function QuizView() {
                 <div>
                   <h3 className="text-xl font-bold text-white flex items-center gap-2">
                     <span className="text-teal-400">
-                      ✦
+                      Γ£ª
                     </span>
 
                     Reinforcement Learning Policy Decision
@@ -1162,7 +1128,7 @@ export default function QuizView() {
           to={`/lesson/${lesson.id}`}
           className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-slate-500 hover:text-slate-300 transition-colors"
         >
-          ← Abort to Lesson
+          ΓåÉ Abort to Lesson
         </Link>
       </div>
 
@@ -1174,7 +1140,7 @@ export default function QuizView() {
             </span>
 
             <span className="text-slate-600">
-              •
+              ΓÇó
             </span>
 
             <span className="font-semibold text-slate-300 truncate max-w-[150px] inline-block">
@@ -1268,7 +1234,7 @@ export default function QuizView() {
               currentQuestion.id
             ] ? (
               <div className="text-xs text-indigo-400 leading-relaxed font-medium">
-                💡 Hint: Review the core reading sections matching the topic of{' '}
+                ≡ƒÆí Hint: Review the core reading sections matching the topic of{' '}
                 {lesson.topic}.
               </div>
             ) : (
@@ -1278,7 +1244,7 @@ export default function QuizView() {
                 }
                 className="text-xs font-semibold text-slate-500 hover:text-slate-300 transition-colors flex items-center gap-1"
               >
-                💡 Need a hint?
+                ≡ƒÆí Need a hint?
               </button>
             )}
           </div>

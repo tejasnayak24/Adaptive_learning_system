@@ -26,6 +26,15 @@ LOW_ATTENTION_THRESHOLD: Final[float] = 0.40
 MEDIUM_ATTENTION_THRESHOLD: Final[float] = 0.60
 
 
+def _format_attention(state: StudentState) -> str:
+    """Format attention without treating missing telemetry as zero."""
+
+    if state.attention_score is None:
+        return "unavailable"
+
+    return f"{state.attention_score:.2f}"
+
+
 class QLearningAgent:
     """Tabular Q-learning agent with educational policy constraints."""
 
@@ -232,8 +241,17 @@ class QLearningAgent:
 
         return 2
 
-    def _bucket_attention(self, attention: float) -> int:
-        """Convert attention into low, medium, or high bucket."""
+    def _bucket_attention(self, attention: float | None) -> int:
+        """
+        Convert attention into a bucket.
+
+        Missing attention is mapped to the middle bucket for Q-table
+        representation only. It is not treated as genuinely low attention
+        by the educational policy.
+        """
+
+        if attention is None:
+            return 1
 
         if attention < self.config.attention_low_threshold:
             return 0
@@ -262,47 +280,36 @@ class QLearningAgent:
         """
         Apply deterministic educational rules.
 
-        Returns None when the Q-learning policy should decide.
+        Missing attention telemetry does not trigger focus recovery.
+        Actual low attention, yawning, or looking away can trigger it.
         """
 
         score = state.current_quiz_score
         attention = state.attention_score
 
-        # ---------------------------------------------------------
-        # 1. Very poor performance:
-        #    Study/repeat the lesson before attempting more quizzes.
-        # ---------------------------------------------------------
-
+        # 1. Poor performance: repeat the lesson.
         if score < REPEAT_SCORE_THRESHOLD:
             return Action.REPEAT_LESSON
 
-        # ---------------------------------------------------------
-        # 2. Attention problems:
-        #    Only use focus recovery when academic performance is
-        #    already acceptable.
-        # ---------------------------------------------------------
+        # 2. Trigger focus recovery only for an observed issue.
+        # None means the attention measurement is unavailable.
+        attention_is_low = (
+            attention is not None
+            and attention < LOW_ATTENTION_THRESHOLD
+        )
 
         if (
-            attention < LOW_ATTENTION_THRESHOLD
+            attention_is_low
             or state.yawning
             or state.looking_away
         ):
-            if score >= REPEAT_SCORE_THRESHOLD:
-                return Action.FOCUS_RECOVERY
+            return Action.FOCUS_RECOVERY
 
-        # ---------------------------------------------------------
-        # 3. Medium performance:
-        #    Practice the concept after studying it.
-        # ---------------------------------------------------------
-
+        # 3. Scores from 70% to 79%: additional practice.
         if score < PRACTICE_SCORE_THRESHOLD:
             return Action.PRACTICE_QUIZ
 
-        # ---------------------------------------------------------
-        # 4. Excellent performance:
-        #    Never decrease difficulty.
-        # ---------------------------------------------------------
-
+        # 4. Scores of 80% or above: advance appropriately.
         if score >= HIGH_SCORE_THRESHOLD:
 
             if state.difficulty == Difficulty.EASY:
@@ -350,7 +357,6 @@ class QLearningAgent:
         """Calculate softmax confidence from Q-values."""
 
         q_values = self.q_table[state_key]
-
         max_value = max(q_values.values())
 
         exponentials = {
@@ -372,9 +378,7 @@ class QLearningAgent:
         builder = _EXPLANATION_BUILDERS.get(action)
 
         if builder is None:
-            raise ValueError(
-                f"Unrecognized action: {action}"
-            )
+            raise ValueError(f"Unrecognized action: {action}")
 
         return builder(state)
 
@@ -383,10 +387,9 @@ _EXPLANATION_BUILDERS: dict[
     Action,
     Callable[[StudentState], str],
 ] = {
-
     Action.NEXT_LESSON: lambda state: (
         f"Quiz score is strong at {state.current_quiz_score}% "
-        f"with {state.attention_score:.2f} attention; "
+        f"with {_format_attention(state)} attention; "
         "recommending the next lesson."
     ),
 
@@ -398,7 +401,7 @@ _EXPLANATION_BUILDERS: dict[
 
     Action.INCREASE_DIFFICULTY: lambda state: (
         f"Quiz score is {state.current_quiz_score}% with "
-        f"attention at {state.attention_score:.2f}; "
+        f"attention at {_format_attention(state)}; "
         f"the current difficulty is {state.difficulty.name}. "
         "Recommending a higher difficulty level."
     ),
@@ -414,9 +417,9 @@ _EXPLANATION_BUILDERS: dict[
     ),
 
     Action.QUICK_CHALLENGE: lambda state: (
-        f"Student is attentive at {state.attention_score:.2f} "
-        f"and performing well with a score of "
-        f"{state.current_quiz_score}%; recommending a quick challenge."
+        f"Student attention is {_format_attention(state)} "
+        f"and the quiz score is {state.current_quiz_score}%; "
+        "recommending a quick challenge."
     ),
 
     Action.SHOW_WORKED_EXAMPLE: lambda state: (
@@ -431,7 +434,7 @@ _EXPLANATION_BUILDERS: dict[
     ),
 
     Action.FOCUS_RECOVERY: lambda state: (
-        f"Attention is {state.attention_score:.2f}"
+        f"Attention is {_format_attention(state)}"
         + (
             " and the student is yawning"
             if state.yawning
@@ -446,23 +449,21 @@ _EXPLANATION_BUILDERS: dict[
     ),
 
     Action.SHOW_REAL_WORLD_APPLICATION: lambda state: (
-        f"Attention is {state.attention_score:.2f} while "
+        f"Attention is {_format_attention(state)} while "
         f"performance is acceptable at {state.current_quiz_score}%; "
         "recommending a real-world application."
     ),
 
     Action.SKIP_TO_ADVANCED_TOPIC: lambda state: (
         f"Quiz score is {state.current_quiz_score}% with "
-        f"previous score {state.previous_quiz_score}% and strong "
-        f"attention ({state.attention_score:.2f}); "
+        f"previous score {state.previous_quiz_score}% and attention "
+        f"{_format_attention(state)}; "
         "recommending advanced material."
     ),
 }
 
 
-_missing_explanations = (
-    set(Action) - _EXPLANATION_BUILDERS.keys()
-)
+_missing_explanations = set(Action) - _EXPLANATION_BUILDERS.keys()
 
 if _missing_explanations:
     raise ValueError(

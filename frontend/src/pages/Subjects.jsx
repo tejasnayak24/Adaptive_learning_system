@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
@@ -31,13 +32,16 @@ export default function Subjects() {
 
         if (lessonsRes.success) {
           setLessons(lessonsRes.data || [])
+        } else {
+          setError(lessonsRes.message || 'Failed to load lessons')
         }
       } catch (err) {
         setError(err.message || 'Failed to load lessons')
       }
 
       try {
-        const progressRes = await progressService.getStudentProgress(studentId)
+        const progressRes =
+          await progressService.getStudentProgress(studentId)
 
         if (progressRes.success) {
           setProgress(progressRes.data || [])
@@ -52,27 +56,9 @@ export default function Subjects() {
     loadData()
   }, [user?.id, user?.sub])
 
-  if (loading) {
-    return (
-      <div className="space-y-6 animate-pulse">
-        <div className="h-10 w-1/4 bg-slate-800 rounded-xl"></div>
-        <div className="h-4 w-1/2 bg-slate-800 rounded-lg"></div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="h-64 bg-slate-800 rounded-3xl"
-            ></div>
-          ))}
-        </div>
-      </div>
-    )
-  }
-
   const getLessonStats = (lessonId) => {
     const attempts = progress.filter(
-      (p) => p.lesson_id === lessonId
+      (p) => Number(p.lesson_id) === Number(lessonId)
     )
 
     if (attempts.length === 0) {
@@ -107,8 +93,7 @@ export default function Subjects() {
   }
 
   const filteredLessons = lessons.filter(
-    (lesson) =>
-      getSubjectFromLesson(lesson) === selectedSubject
+    (lesson) => getSubjectFromLesson(lesson) === selectedSubject
   )
 
   const groupedLessons = filteredLessons.reduce((acc, lesson) => {
@@ -122,6 +107,24 @@ export default function Subjects() {
 
     return acc
   }, {})
+
+  if (loading) {
+    return (
+      <div className="space-y-6 animate-pulse">
+        <div className="h-10 w-1/4 bg-slate-800 rounded-xl"></div>
+        <div className="h-4 w-1/2 bg-slate-800 rounded-lg"></div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="h-64 bg-slate-800 rounded-3xl"
+            ></div>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-8">
@@ -148,9 +151,11 @@ export default function Subjects() {
           'Science',
           'Social Science',
           'English',
+          'General Knowledge',
         ].map((sub) => (
           <button
             key={sub}
+            type="button"
             onClick={() => setSelectedSubject(sub)}
             className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition-all duration-200 ${
               selectedSubject === sub
@@ -219,7 +224,6 @@ export default function Subjects() {
                                     d="M5 13l4 4L19 7"
                                   />
                                 </svg>
-
                                 Completed
                               </span>
                             ) : stats?.attempts > 0 ? (
@@ -259,7 +263,7 @@ export default function Subjects() {
                                 </span>
 
                                 <span className="text-[10px] font-semibold bg-slate-900 px-1.5 py-0.5 rounded text-slate-400">
-                                  {stats.difficulty}
+                                  {stats.difficulty || 'N/A'}
                                 </span>
                               </div>
                             </div>
