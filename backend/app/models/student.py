@@ -51,6 +51,13 @@ class Student(Base):
         default=datetime.utcnow,
     )
 
+    # School grade (6-10). NULL for accounts created before Phase 5; the
+    # student chooses it on first sign-in. Curriculum is filtered by it.
+    grade: Mapped[int | None] = mapped_column(
+        Integer,
+        nullable=True,
+    )
+
     # One Student -> Many Progress Records
     progress = relationship(
         "Progress",

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ConfigDict, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
 
 class RegisterRequest(BaseModel):
@@ -6,6 +6,13 @@ class RegisterRequest(BaseModel):
     email: EmailStr
     password: str
     age: int
+    # School grade 6-10. Optional so older clients keep working; students
+    # without a grade are asked to choose one before browsing lessons.
+    grade: int | None = Field(default=None, ge=6, le=10)
+
+
+class GradeUpdate(BaseModel):
+    grade: int = Field(ge=6, le=10)
 
 
 class LoginRequest(BaseModel):

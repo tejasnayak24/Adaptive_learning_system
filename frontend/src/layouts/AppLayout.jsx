@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
+import GradeGate from '../components/GradeGate'
 import { useAuth } from '../context/AuthContext'
 
 export default function AppLayout() {
@@ -172,7 +173,9 @@ export default function AppLayout() {
 
         {/* Central Router Output */}
         <main className="flex-1 overflow-y-auto px-4 py-6 md:px-8 md:py-8 relative">
-          <Outlet />
+          <GradeGate>
+            <Outlet />
+          </GradeGate>
         </main>
       </div>
     </div>

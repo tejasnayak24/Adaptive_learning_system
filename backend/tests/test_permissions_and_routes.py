@@ -30,8 +30,9 @@ def test_students_cannot_modify_lessons(client, auth, lesson_with_quiz):
     assert client.delete(f"/lesson/{lesson_id}", headers=headers).status_code == 403
     assert client.post("/lesson", json=NEW_LESSON).status_code == 401
 
-    # Curriculum is untouched.
-    assert client.get(f"/lesson/{lesson_id}").json()["data"]["title"] == "Cell Biology"
+    # Curriculum is untouched. Lesson content now requires signing in.
+    assert client.get(f"/lesson/{lesson_id}").status_code == 401
+    assert client.get(f"/lesson/{lesson_id}", headers=headers).json()["data"]["title"] == "Cell Biology"
 
 
 def test_teacher_can_manage_lessons_and_partial_update_keeps_fields(client, db_session, lesson_with_quiz):

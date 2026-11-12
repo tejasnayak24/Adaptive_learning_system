@@ -7,7 +7,7 @@ from app.auth.dependencies import get_current_student
 from app.auth.jwt_handler import create_access_token
 from app.database.connection import get_db
 from app.models.student import Student
-from app.schemas.auth import LoginRequest, RegisterRequest, TokenResponse
+from app.schemas.auth import LoginRequest, RegisterRequest, TokenResponse, GradeUpdate
 from app.services.student_service import StudentService
 from fastapi.security import OAuth2PasswordRequestForm
 
@@ -68,6 +68,7 @@ def register(
             "id": new_student.id,
             "name": new_student.name,
             "email": new_student.email,
+            "grade": new_student.grade,
         },
     }
 
@@ -115,6 +116,19 @@ def profile(
             "email": student.email,
             "age": student.age,
             "role": student.role,
+            "grade": student.grade,
             "created_at": student.created_at,
         },
     }
+
+
+@router.put("/profile/grade")
+def set_grade(
+    update: GradeUpdate,
+    db: Session = Depends(get_db),
+    student: Student = Depends(get_current_student),
+) -> dict[str, Any]:
+    """Choose (or change) the student's own grade. Progress is kept."""
+    student.grade = update.grade
+    db.commit()
+    return {"success": True, "message": f"Grade set to {update.grade}", "data": {"grade": student.grade}}

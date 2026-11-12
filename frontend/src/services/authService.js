@@ -10,13 +10,18 @@ export const authService = {
     return response
   },
 
-  async register(name, email, password, age) {
+  async register(name, email, password, age, grade) {
     return await api.post('/register', {
       name,
       email,
       password,
       age: parseInt(age, 10),
+      grade: grade ? parseInt(grade, 10) : null,
     })
+  },
+
+  async setGrade(grade) {
+    return await api.put('/profile/grade', { grade })
   },
 
   async getProfile() {

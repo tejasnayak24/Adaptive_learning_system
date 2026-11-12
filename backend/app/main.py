@@ -38,6 +38,7 @@ from app.models.monitoring import MonitoringConsent, MonitoringSession  # noqa: 
 
 from app.routers import (  # noqa: E402
     auth,
+    curriculum,
     lesson,
     progress,
     quiz,
@@ -71,3 +72,4 @@ app.include_router(progress.router)
 app.include_router(integration.router)
 app.include_router(rl.router)
 app.include_router(monitoring.router)
+app.include_router(curriculum.router)

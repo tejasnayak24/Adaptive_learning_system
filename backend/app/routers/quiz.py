@@ -7,6 +7,7 @@ from app.auth.dependencies import get_current_student
 from app.database.connection import get_db
 from app.models.student import Student
 from app.schemas.quiz import QuizStartRequest, QuizSubmitRequest
+from app.services import curriculum_service as cs
 from app.services import monitoring_service as ms
 from app.services import telemetry_service
 from app.services.grading_service import GradingError
@@ -22,16 +23,16 @@ from app.utils.response import progress_to_dict
 router = APIRouter(tags=["Quiz"])
 
 
-def _quiz_payload_or_404(db: Session, quiz_id: int) -> dict[str, Any]:
-    quiz_data = QuizService.start_quiz(db, quiz_id)
-
-    if quiz_data is None:
+def _quiz_payload_or_404(db: Session, quiz_id: int, student: Student) -> dict[str, Any]:
+    quiz = QuizService.get_quiz_by_id(db, quiz_id)
+    if quiz is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Quiz not found",
         )
+    cs.check_lesson_access(student, quiz.lesson)
 
-    return quiz_data
+    return QuizService.start_quiz(db, quiz_id)
 
 
 @router.post("/quiz/start")
@@ -43,7 +44,7 @@ def start_quiz(
     return {
         "success": True,
         "message": "Quiz started successfully",
-        "data": _quiz_payload_or_404(db, request.quiz_id),
+        "data": _quiz_payload_or_404(db, request.quiz_id, student),
     }
 
 
@@ -53,6 +54,11 @@ def get_quizzes_by_lesson(
     db: Session = Depends(get_db),
     student: Student = Depends(get_current_student),
 ) -> dict[str, Any]:
+    from app.models.lesson import Lesson
+
+    lesson = db.get(Lesson, lesson_id)
+    if lesson is not None:
+        cs.check_lesson_access(student, lesson)
     quizzes = QuizService.get_quizzes_by_lesson(db, lesson_id)
 
     return {
@@ -72,7 +78,7 @@ def get_quiz(
     return {
         "success": True,
         "message": "Quiz fetched successfully",
-        "data": _quiz_payload_or_404(db, quiz_id),
+        "data": _quiz_payload_or_404(db, quiz_id, student),
     }
 
 
@@ -102,6 +108,7 @@ def submit_quiz(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Quiz not found",
         )
+    cs.check_lesson_access(student, quiz.lesson)
 
     # Camera monitoring is mandatory: the attempt must belong to one of the
     # student's own monitored sessions that has not ended.
@@ -132,6 +139,7 @@ def submit_quiz(
             looking_away=camera["looking_away"],
             drowsy=camera["drowsy"],
             monitoring_session_id=monitoring.id,
+            attempt_mode=request.mode,
         )
     except GradingError as exc:
         db.rollback()
@@ -150,6 +158,10 @@ def submit_quiz(
     if recommendation is not None:
         db.refresh(recommendation)
 
+    explanations = {
+        q.id: q.explanation for q in QuizService.get_questions_by_quiz(db, quiz.id)
+    }
+
     return {
         "success": True,
         "message": "Quiz submitted successfully",
@@ -165,6 +177,8 @@ def submit_quiz(
                         "selected_answer": r.selected_answer,
                         "correct_answer": r.correct_answer,
                         "is_correct": r.is_correct,
+                        # Revealed only now, after submission.
+                        "explanation": explanations.get(r.question_id),
                     }
                     for r in grading.results
                 ],

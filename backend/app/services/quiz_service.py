@@ -17,6 +17,9 @@ def question_to_public_dict(question: Question) -> dict:
         "option_b": question.option_b,
         "option_c": question.option_c,
         "option_d": question.option_d,
+        # A topic-specific nudge; never the answer. Revealing it is counted
+        # as a hint used by the quiz page.
+        "hint": question.hint,
     }
 
 
@@ -94,6 +97,7 @@ class QuizService:
         looking_away: bool | None,
         drowsy: bool | None,
         monitoring_session_id: str | None = None,
+        attempt_mode: str | None = None,
     ) -> tuple[Progress, GradingResult]:
         """Grade the answers on the server and store the attempt.
 
@@ -117,6 +121,7 @@ class QuizService:
             looking_away=looking_away,
             drowsy=drowsy,
             monitoring_session_id=monitoring_session_id,
+            attempt_mode=attempt_mode,
             difficulty=quiz.difficulty,
             completed=True,
         )

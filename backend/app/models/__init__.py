@@ -7,6 +7,7 @@ script that imports only a few models (e.g. the seed script) fails.
 """
 
 from app.models.student import Student  # noqa: F401
+from app.models.curriculum import CurriculumTopic, CurriculumUnit  # noqa: F401
 from app.models.lesson import Lesson  # noqa: F401
 from app.models.quiz import Quiz  # noqa: F401
 from app.models.question import Question  # noqa: F401

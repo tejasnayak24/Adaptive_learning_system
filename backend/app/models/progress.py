@@ -75,6 +75,12 @@ class Progress(Base):
         nullable=True,
     )
 
+    # standard | practice | hints | challenge (NULL for attempts before Phase 5)
+    attempt_mode = Column(
+        String(16),
+        nullable=True,
+    )
+
     # The monitored learning session whose camera telemetry produced the
     # attention values of this attempt. NULL for attempts recorded before
     # monitoring sessions existed.

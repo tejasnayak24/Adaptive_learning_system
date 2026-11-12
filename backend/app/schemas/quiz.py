@@ -47,6 +47,9 @@ class QuizSubmitRequest(BaseModel):
     answers: dict[int, str] = Field(min_length=1)
     response_time: float = Field(ge=0)
     hints_used: int = Field(default=0, ge=0)
+    # How the attempt was taken: standard, practice (recommended retake),
+    # hints (retry with hints) or challenge (timed).
+    mode: str = Field(default="standard", pattern="^(standard|practice|hints|challenge)$")
 
     @field_validator("answers")
     @classmethod
