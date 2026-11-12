@@ -31,9 +31,24 @@ class Progress(Base):
         nullable=False,
     )
 
+    # Average attention (0.0-1.0) measured by the camera during the attempt.
+    # NULL means valid camera telemetry was unavailable -- it is never a
+    # stand-in for low attention.
     attention_score = Column(
         Float,
-        nullable=False,
+        nullable=True,
+    )
+
+    # Whether yawning / looking away were observed during the attempt.
+    # NULL means unknown (no valid camera telemetry).
+    yawning = Column(
+        Boolean,
+        nullable=True,
+    )
+
+    looking_away = Column(
+        Boolean,
+        nullable=True,
     )
 
     difficulty = Column(

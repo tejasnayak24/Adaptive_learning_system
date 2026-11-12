@@ -16,7 +16,7 @@ export default function Subjects() {
 
   useEffect(() => {
     async function loadData() {
-      const studentId = user?.id ?? user?.sub
+      const studentId = user?.id
 
       if (!studentId) {
         setLoading(false)
@@ -50,7 +50,7 @@ export default function Subjects() {
     }
 
     loadData()
-  }, [user?.id, user?.sub])
+  }, [user?.id])
 
   if (loading) {
     return (

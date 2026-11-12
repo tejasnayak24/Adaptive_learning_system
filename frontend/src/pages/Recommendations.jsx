@@ -13,11 +13,12 @@ export default function Recommendations() {
   const [lessons, setLessons] = useState([])
   const [recommendation, setRecommendation] = useState(null)
   const [error, setError] = useState('')
+  const [unavailableNote, setUnavailableNote] = useState('')
 
   useEffect(() => {
     async function loadRecommendation() {
       try {
-        const progressRes = await progressService.getStudentProgress(user.id)
+        const progressRes = await progressService.getStudentProgress(user?.id)
         const lessonsRes = await lessonService.getLessons()
         
         if (lessonsRes.success) setLessons(lessonsRes.data)
@@ -50,12 +51,22 @@ export default function Recommendations() {
             response_time: latest.response_time,
             hints_used: 0,
             lesson_attempts: attemptsCount,
-            completed_lessons: completedLessonsCount
-          }
-          if (latest.attention_score !== null && latest.attention_score !== undefined) {
-            payload.attention_score = latest.attention_score
+            completed_lessons: completedLessonsCount,
+            // Camera metrics stored with the attempt; null = unavailable.
+            attention_score: latest.attention_score ?? null,
+            yawning: latest.yawning ?? null,
+            looking_away: latest.looking_away ?? null
           }
           const rlRes = await rlService.getRecommendation(payload)
+
+          if (!rlRes?.action) {
+            setUnavailableNote(
+              rlRes?.telemetry_available === false
+                ? 'Your latest quiz had no camera telemetry, so the coach could not generate an adaptive recommendation. Keep the camera agent running during your next quiz.'
+                : 'The coach could not generate a recommendation for your latest attempt.'
+            )
+            return
+          }
 
           setRecommendation({
             ...rlRes,
@@ -72,7 +83,7 @@ export default function Recommendations() {
       }
     }
     loadRecommendation()
-  }, [user.id])
+  }, [user?.id])
 
   if (loading) {
     return (
@@ -115,9 +126,12 @@ export default function Recommendations() {
       {!recommendation ? (
         <div className="glass-panel rounded-3xl p-8 border border-slate-900 shadow-md text-center py-12 space-y-4">
           <div className="text-5xl">🤖</div>
-          <h3 className="text-lg font-bold text-white">AI Coach is Calibrating</h3>
+          <h3 className="text-lg font-bold text-white">
+            {unavailableNote ? 'Camera Data Unavailable' : 'AI Coach is Calibrating'}
+          </h3>
           <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
-            The coach needs at least one quiz log to evaluate your study habits and output recommendations. Jump into subjects to begin.
+            {unavailableNote ||
+              'The coach needs at least one quiz log to evaluate your study habits and output recommendations. Jump into subjects to begin.'}
           </p>
           <Link to="/subjects" className="inline-flex px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold text-xs shadow-md transition-all">
             Browse Subjects

@@ -12,6 +12,7 @@ export default function Dashboard() {
   const [lessons, setLessons] = useState([])
   const [progress, setProgress] = useState([])
   const [recommendation, setRecommendation] = useState(null)
+  const [recommendationNote, setRecommendationNote] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -25,7 +26,7 @@ export default function Dashboard() {
   }
 
   const loadData = useCallback(async () => {
-    const studentId = user?.id ?? user?.sub
+    const studentId = user?.id
 
     if (!studentId) {
       setError('Student information is not available.')
@@ -120,17 +121,10 @@ export default function Dashboard() {
         completed_lessons:
           completedLessonsCount,
 
-        attention_score:
-          latest.attention_score !== null &&
-          latest.attention_score !== undefined
-            ? Number(latest.attention_score)
-            : undefined,
-
-        yawning:
-          latest.yawning === true,
-
-        looking_away:
-          latest.looking_away === true,
+        // Camera metrics stored with the attempt; null = unavailable.
+        attention_score: latest.attention_score ?? null,
+        yawning: latest.yawning ?? null,
+        looking_away: latest.looking_away ?? null,
       }
 
       try {
@@ -138,8 +132,14 @@ export default function Dashboard() {
 
         if (rlRes?.action) {
           setRecommendation(rlRes)
+          setRecommendationNote('')
         } else {
           setRecommendation(null)
+          setRecommendationNote(
+            rlRes?.telemetry_available === false
+              ? 'Your latest quiz had no camera telemetry, so no adaptive recommendation was generated. Keep the camera agent running during your next quiz.'
+              : ''
+          )
         }
       } catch (rlError) {
         console.error('Failed to load recommendation:', rlError)
@@ -154,7 +154,7 @@ export default function Dashboard() {
     } finally {
       setLoading(false)
     }
-  }, [user?.id, user?.sub])
+  }, [user?.id])
 
   useEffect(() => {
     loadData()
@@ -535,13 +535,12 @@ export default function Dashboard() {
                   </div>
 
                   <p className="text-sm font-semibold text-slate-300">
-                    Ready to calibrate
+                    {recommendationNote ? 'Camera data unavailable' : 'Ready to calibrate'}
                   </p>
 
                   <p className="text-xs text-slate-500 leading-relaxed">
-                    Complete a quiz at the end of any lesson.
-                    The Reinforcement Learning engine will analyze
-                    your engagement and accuracy.
+                    {recommendationNote ||
+                      'Complete a quiz at the end of any lesson. The adaptive engine will analyze your engagement and accuracy.'}
                   </p>
 
                 </div>

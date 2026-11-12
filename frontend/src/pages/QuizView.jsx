@@ -5,6 +5,7 @@ import { quizService } from '../services/quizService'
 import { lessonService } from '../services/lessonService'
 import { progressService } from '../services/progressService'
 import { rlService } from '../services/rlService'
+import { telemetryService } from '../services/telemetryService'
 
 export default function QuizView() {
   const { id } = useParams()
@@ -32,23 +33,16 @@ export default function QuizView() {
   const [results, setResults] = useState(null)
   const [rlRecommendation, setRlRecommendation] = useState(null)
 
+  const studentId = user?.id
+
   const resetQuizTelemetry = async () => {
     try {
-      const studentId = user?.id ?? user?.sub
-
       if (!studentId) {
-        console.warn(
-          'No student ID available for telemetry reset.'
-        )
         return
       }
 
-      await fetch(
-        `/api/attention/${studentId}/reset`,
-        {
-          method: 'POST',
-        }
-      )
+      // Start a fresh aggregation window for this attempt.
+      await telemetryService.resetSession(studentId)
     } catch (err) {
       console.error(
         'Failed to reset quiz telemetry:',
@@ -102,8 +96,6 @@ export default function QuizView() {
         }
 
         try {
-          const studentId = user?.id ?? user?.sub
-
           if (studentId) {
             const progressRes =
               await progressService.getStudentProgress(
@@ -140,7 +132,7 @@ export default function QuizView() {
     }
 
     loadQuizData()
-  }, [id, user?.id, user?.sub])
+  }, [id, studentId])
 
   useEffect(() => {
     if (loading || isFinished) {
@@ -276,46 +268,11 @@ export default function QuizView() {
 
   const getLatestTelemetry = async () => {
     try {
-      const studentId = user?.id ?? user?.sub
-
       if (!studentId) {
-        console.warn(
-          'No student ID available for telemetry.'
-        )
-
         return null
       }
 
-      console.log(
-        'Fetching facial telemetry for student:',
-        studentId
-      )
-
-      const response = await fetch(
-        `/api/attention/${studentId}`
-      )
-
-      if (!response.ok) {
-        console.warn(
-          'Telemetry request failed:',
-          response.status
-        )
-
-        return null
-      }
-
-      const data = await response.json()
-
-      console.log(
-        'Facial telemetry response:',
-        data
-      )
-
-      if (!data.success) {
-        return null
-      }
-
-      return data.data
+      return await telemetryService.getTelemetry(studentId)
     } catch (err) {
       console.error(
         'Failed to fetch facial telemetry:',
@@ -346,8 +303,6 @@ export default function QuizView() {
       return
     }
 
-    const studentId = user?.id ?? user?.sub
-
     if (!studentId) {
       alert(
         'Student session could not be identified. Please log in again.'
@@ -375,60 +330,24 @@ export default function QuizView() {
 
     try {
       /*
-       * Read telemetry at submission.
-       *
-       * The backend should return:
-       *
-       * attention_score
-       * yawning
-       * yawning_observed
-       * looking_away
-       * looking_away_observed
-       *
-       * We prefer the "_observed" values because they
-       * remember whether the event happened at ANY
-       * point during the quiz.
+       * Read camera telemetry at submission. When the camera is offline
+       * or its data is stale, every metric is null -- missing telemetry
+       * is recorded as missing, never as low attention.
        */
-      const telemetry =
-        await getLatestTelemetry()
-
-      console.log(
-        'FINAL TELEMETRY USED FOR QUIZ:',
-        telemetry
-      )
-
-      const currentAttention = telemetry?.attention_score
-
-      const currentYawning =
-        telemetry?.yawning_observed ??
-        telemetry?.yawning ??
-        false
-
-      const currentLookingAway =
-        telemetry?.looking_away_observed ??
-        telemetry?.looking_away ??
-        false
-
-      console.log(
-        'FINAL YAWNING STATE:',
-        currentYawning
-      )
-
-      console.log(
-        'FINAL LOOKING AWAY STATE:',
-        currentLookingAway
-      )
+      const telemetry = await getLatestTelemetry()
+      const camera = telemetryService.toAttemptMetrics(telemetry)
 
       /*
-       * 1. Save quiz result to PostgreSQL.
+       * 1. Save the quiz result (recorded for the signed-in student).
        */
       const submitRes =
         await quizService.submitQuiz({
-          studentId,
           lessonId: lesson.id,
           quizScore: finalScore,
           responseTime: secondsElapsed,
-          attentionScore: currentAttention,
+          attentionScore: camera.attentionScore,
+          yawning: camera.yawning,
+          lookingAway: camera.lookingAway,
           difficulty: quiz.difficulty
         })
 
@@ -479,79 +398,35 @@ export default function QuizView() {
         ).length
 
       /*
-       * 3. Ask the RL engine for a recommendation.
+       * 3. Ask the RL engine for a recommendation. Without real camera
+       *    telemetry the backend declines instead of guessing.
        */
       let rlRes = null
 
       try {
-        const payload = {
+        rlRes = await rlService.getRecommendation({
           subject: resolvedSubject,
-          topic:
-            lesson.topic ||
-            lesson.title ||
-            quiz.title,
-          lesson:
-            lesson.title ||
-            quiz.title,
+          topic: lesson.topic || lesson.title || quiz.title,
+          lesson: lesson.title || quiz.title,
+          previous_quiz_score: previousAttempt.quiz_score || 0,
+          current_quiz_score: finalScore,
+          difficulty: quiz.difficulty,
+          response_time: secondsElapsed,
+          hints_used: hintsCount,
+          lesson_attempts: attemptsCount,
+          completed_lessons: completedLessonsCount,
+          attention_score: camera.attentionScore,
+          yawning: camera.yawning,
+          looking_away: camera.lookingAway
+        })
 
-          previous_quiz_score:
-            Math.round(
-              Number(
-                previousAttempt.quiz_score || 0
-              )
-            ),
-
-          current_quiz_score:
-            finalScore,
-
-          difficulty:
-            quiz.difficulty,
-
-          response_time:
-            Number(secondsElapsed),
-
-          hints_used:
-            Number(hintsCount),
-
-          lesson_attempts:
-            Number(attemptsCount),
-
-          completed_lessons:
-            Number(
-              completedLessonsCount
-            ),
-
-          /*
-           * Persistent telemetry.
-           */
-          yawning:
-            Boolean(currentYawning),
-
-          looking_away:
-            Boolean(currentLookingAway)
+        if (rlRes && rlRes.telemetry_available === false) {
+          rlRes = {
+            error:
+              'Camera telemetry was unavailable for this attempt, so no adaptive recommendation was generated.',
+            telemetryUnavailable: true
+          }
         }
-
-        if (
-          currentAttention !== null
-        ) {
-          payload.attention_score =
-            Number(currentAttention)
-        }
-
-        console.log(
-          'RL recommendation payload:',
-          payload
-        )
-
-        rlRes =
-          await rlService.getRecommendation(
-            payload
-          )
-
-        console.log(
-          'RL recommendation response:',
-          rlRes
-        )
       } catch (rlError) {
         console.error(
           'RL recommendation failed:',
@@ -563,7 +438,7 @@ export default function QuizView() {
          */
         rlRes = {
           error:
-            'Unable to get an adaptive recommendation: Telemetry is offline.'
+            `Unable to get an adaptive recommendation: ${rlError.message || 'the recommendation service failed.'}`
         }
       }
 
@@ -578,19 +453,16 @@ export default function QuizView() {
         timeTaken:
           secondsElapsed,
 
+        // null = camera telemetry unavailable (not zero attention)
         attentionUsed:
-          currentAttention,
+          camera.attentionScore,
 
-        /*
-         * IMPORTANT:
-         * This is the persistent observed value,
-         * not just the latest frame.
-         */
+        // Observed at any point during the attempt; null = unknown.
         yawned:
-          Boolean(currentYawning),
+          camera.yawning,
 
         lookedAway:
-          Boolean(currentLookingAway)
+          camera.lookingAway
       })
 
       setRlRecommendation(rlRes)
@@ -960,13 +832,13 @@ export default function QuizView() {
                 </span>
 
                 <span className="font-semibold text-white">
-                  {results.attentionUsed !==
-                  null
+                  {results.attentionUsed !== null &&
+                  results.attentionUsed !== undefined
                     ? `${Math.round(
                         results.attentionUsed *
                           100
                       )}%`
-                    : 'Unavailable'}
+                    : 'Unavailable (no camera data)'}
                 </span>
               </div>
 
@@ -982,9 +854,12 @@ export default function QuizView() {
                       : 'text-slate-400'
                   }`}
                 >
-                  {results.yawned
-                    ? 'Yes'
-                    : 'No'}
+                  {results.yawned === null ||
+                  results.yawned === undefined
+                    ? 'Unknown'
+                    : results.yawned
+                      ? 'Yes'
+                      : 'No'}
                 </span>
               </div>
 
@@ -1000,9 +875,12 @@ export default function QuizView() {
                       : 'text-slate-400'
                   }`}
                 >
-                  {results.lookedAway
-                    ? 'Looking away'
-                    : 'Stable'}
+                  {results.lookedAway === null ||
+                  results.lookedAway === undefined
+                    ? 'Unknown'
+                    : results.lookedAway
+                      ? 'Looking away'
+                      : 'Stable'}
                 </span>
               </div>
             </div>
@@ -1055,7 +933,9 @@ export default function QuizView() {
             </p>
 
             <p className="text-xs text-slate-500">
-              The reinforcement learning engine could not resolve a recommendation.
+              {rlRecommendation.telemetryUnavailable
+                ? 'Your quiz result was saved. Start the Aegis camera agent before your next attempt to receive adaptive recommendations.'
+                : 'The recommendation engine could not resolve a recommendation.'}
             </p>
 
             <Link
@@ -1081,7 +961,7 @@ export default function QuizView() {
                   </h3>
 
                   <p className="text-xs text-slate-500 mt-1">
-                    Generated by our Q-Learning Agent mapping student engagement metrics to target content difficulty
+                    Generated by the Aegis adaptive policy from your quiz performance and camera engagement metrics
                   </p>
                 </div>
 

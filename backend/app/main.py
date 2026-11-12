@@ -1,38 +1,14 @@
 import os
-
-from fastapi import FastAPI
-from dotenv import load_dotenv
-
 from pathlib import Path
+
+from dotenv import load_dotenv
+from fastapi import FastAPI
 
 load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
-from app.database.connection import Base, engine
-
-# Import all models so SQLAlchemy registers them
-from app.models.student import Student
-from app.models.lesson import Lesson
-from app.models.quiz import Quiz
-from app.models.question import Question
-from app.models.progress import Progress
-from app.models.session import LearningSession
-from app.models.reward import RewardHistory
-
-from app.routers import (
-    auth,
-    lesson,
-    progress,
-    quiz,
-    integration,
-    rl,
-)
-
-
-# Create database tables
-Base.metadata.create_all(bind=engine)
-
-
-# Validate required environment variables
+# Validate required environment variables before anything touches the
+# database or signs tokens, so a misconfiguration fails with a clear
+# message instead of an obscure SQLAlchemy/JWT error.
 required_env_vars = [
     "DATABASE_URL",
     "SECRET_KEY",
@@ -45,6 +21,26 @@ for var in required_env_vars:
         raise RuntimeError(
             f"Required environment variable '{var}' is not set."
         )
+
+# Import all models so SQLAlchemy registers them. The schema itself is
+# managed by Alembic migrations (backend/migrations); run
+# `alembic upgrade head` from backend/ before starting the API.
+from app.models.student import Student  # noqa: E402,F401
+from app.models.lesson import Lesson  # noqa: E402,F401
+from app.models.quiz import Quiz  # noqa: E402,F401
+from app.models.question import Question  # noqa: E402,F401
+from app.models.progress import Progress  # noqa: E402,F401
+from app.models.session import LearningSession  # noqa: E402,F401
+from app.models.reward import RewardHistory  # noqa: E402,F401
+
+from app.routers import (  # noqa: E402
+    auth,
+    lesson,
+    progress,
+    quiz,
+    integration,
+    rl,
+)
 
 
 app = FastAPI(
@@ -70,9 +66,3 @@ app.include_router(quiz.router)
 app.include_router(progress.router)
 app.include_router(integration.router)
 app.include_router(rl.router)
-
-
-
-
-
-

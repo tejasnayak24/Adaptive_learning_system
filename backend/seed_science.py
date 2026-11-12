@@ -6,8 +6,11 @@ Creates:
 - 15 quizzes (Easy/Medium/Hard for each lesson)
 - 75 questions (5 per difficulty per lesson)
 
-Run from the project root:
+Run from the project root (after `alembic upgrade head` in backend/):
     python backend/seed_science.py
+
+The script is idempotent: existing lessons, quizzes and questions are
+detected and left untouched.
 """
 
 from pathlib import Path
@@ -57,8 +60,11 @@ def seed():
                 db.flush()
                 created_lessons += 1
 
-            for difficulty, questions in lesson_data["quizzes"]:
-                quiz_title = f"{title} - {difficulty} Quiz"
+            for difficulty_label, questions in lesson_data["quizzes"]:
+                # Stored difficulty is canonical uppercase (EASY/MEDIUM/HARD);
+                # the human-readable label is kept for the quiz title.
+                difficulty = difficulty_label.upper()
+                quiz_title = f"{title} - {difficulty_label} Quiz"
 
                 quiz = (
                     db.query(Quiz)

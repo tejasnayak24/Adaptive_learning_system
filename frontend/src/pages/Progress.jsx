@@ -15,7 +15,7 @@ export default function Progress() {
   useEffect(() => {
     async function loadProgressData() {
       try {
-        const progressRes = await progressService.getStudentProgress(user.id)
+        const progressRes = await progressService.getStudentProgress(user?.id)
         const lessonsRes = await lessonService.getLessons()
 
         if (progressRes.success) setProgress(progressRes.data)
@@ -27,7 +27,7 @@ export default function Progress() {
       }
     }
     loadProgressData()
-  }, [user.id])
+  }, [user?.id])
 
   if (loading) {
     return (
@@ -52,9 +52,17 @@ export default function Progress() {
     ? Math.round(progress.reduce((acc, p) => acc + p.quiz_score, 0) / totalAttempts) 
     : 0
   
-  const avgAttention = totalAttempts > 0 
-    ? Math.round((progress.reduce((acc, p) => acc + p.attention_score, 0) / totalAttempts) * 100) 
-    : 0
+  // Attention is only averaged over attempts that had real camera
+  // telemetry. Attempts without it (attention_score === null) are excluded,
+  // never counted as zero attention.
+  const hasAttention = (p) => p.attention_score !== null && p.attention_score !== undefined
+  const averageAttentionPercent = (items) => {
+    const measured = items.filter(hasAttention)
+    if (measured.length === 0) return null
+    return Math.round((measured.reduce((acc, p) => acc + p.attention_score, 0) / measured.length) * 100)
+  }
+  const measuredAttempts = progress.filter(hasAttention).length
+  const avgAttention = averageAttentionPercent(progress)
 
   // Format Recharts data
   const sortedProgress = [...progress].sort((a, b) => a.id - b.id)
@@ -62,15 +70,13 @@ export default function Progress() {
   const lineChartData = sortedProgress.map((p, idx) => ({
     attempt: `Quiz ${idx + 1}`,
     score: p.quiz_score,
-    attention: Math.round(p.attention_score * 100)
+    attention: hasAttention(p) ? Math.round(p.attention_score * 100) : null
   }))
 
   const topicAggregate = lessons.map(lesson => {
     const attempts = progress.filter(p => p.lesson_id === lesson.id)
     const highestScore = attempts.length > 0 ? Math.max(...attempts.map(a => a.quiz_score)) : 0
-    const avgAtt = attempts.length > 0 
-      ? Math.round((attempts.reduce((acc, a) => acc + a.attention_score, 0) / attempts.length) * 100) 
-      : 0
+    const avgAtt = averageAttentionPercent(attempts)
     
     return {
       name: lesson.title,
@@ -126,8 +132,12 @@ export default function Progress() {
         <div className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-md">
           <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Avg attention metric</p>
           <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-white">{avgAttention}%</span>
-            <span className="text-xs text-teal-400">focus index</span>
+            <span className="text-3xl font-extrabold text-white">{avgAttention === null ? '—' : `${avgAttention}%`}</span>
+            <span className="text-xs text-teal-400">
+              {avgAttention === null
+                ? 'no camera data yet'
+                : `focus index · ${measuredAttempts}/${totalAttempts} with camera`}
+            </span>
           </div>
         </div>
       </div>
@@ -229,7 +239,7 @@ export default function Progress() {
                           </span>
                         </td>
                         <td className="py-4 px-6 font-semibold text-white">{Math.round(item.quiz_score)}%</td>
-                        <td className="py-4 px-6 font-semibold text-teal-400">{Math.round(item.attention_score * 100)}%</td>
+                        <td className="py-4 px-6 font-semibold text-teal-400">{hasAttention(item) ? `${Math.round(item.attention_score * 100)}%` : <span className="text-slate-500 font-normal">No camera data</span>}</td>
                         <td className="py-4 px-6 text-slate-450">{item.response_time}s</td>
                         <td className="py-4 px-6 text-slate-500 font-medium">✓ Synced</td>
                       </tr>

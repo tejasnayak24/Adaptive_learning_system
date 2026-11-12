@@ -29,7 +29,7 @@ export default function LessonDetail() {
     }
 
     try {
-      const studentId = user?.id ?? user?.sub
+      const studentId = user?.id
 
       if (studentId) {
         const progressRes = await progressService.getStudentProgress(studentId)
@@ -49,7 +49,7 @@ export default function LessonDetail() {
   }
 
   loadLessonData()
-}, [id, user?.id, user?.sub])
+}, [id, user?.id])
 
   if (loading) {
     return (

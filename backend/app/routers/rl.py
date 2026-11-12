@@ -41,16 +41,34 @@ def recommend(request: RecommendationRequest) -> dict[str, Any]:
             ``RecommendationRequest``.
 
     Returns:
-        A JSON-serializable mapping with exactly three keys:
-            action: The recommended action's name (e.g. "NEXT_LESSON").
-            confidence: The policy's confidence in the recommendation.
+        A JSON-serializable mapping with four keys:
+            action: The recommended action's name (e.g. "NEXT_LESSON"),
+                or ``None`` when camera telemetry was unavailable.
+            confidence: The policy's confidence in the recommendation
+                (``None`` when no recommendation was produced).
             explanation: A human-readable justification for it.
+            telemetry_available: Whether real camera telemetry was
+                supplied. When false, no recommendation is generated.
 
     Raises:
         HTTPException: With status 422 if ``RLService`` rejects the
             request data as invalid, or with status 500 if obtaining a
             recommendation fails for any other reason.
     """
+    # Without real camera telemetry the engagement part of the state is
+    # unknown. Rather than guess it, report that no recommendation could
+    # be produced.
+    if not request.telemetry_available:
+        return {
+            "action": None,
+            "confidence": None,
+            "explanation": (
+                "Camera telemetry was unavailable for this attempt, so an "
+                "adaptive recommendation was not generated."
+            ),
+            "telemetry_available": False,
+        }
+
     try:
         recommendation = _rl_service.get_recommendation(request.model_dump())
     except (ValueError, KeyError) as exc:
@@ -64,4 +82,5 @@ def recommend(request: RecommendationRequest) -> dict[str, Any]:
         "action": recommendation.action.name,
         "confidence": recommendation.confidence,
         "explanation": recommendation.explanation,
+        "telemetry_available": True,
     }

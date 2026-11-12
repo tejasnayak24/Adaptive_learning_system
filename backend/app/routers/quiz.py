@@ -3,10 +3,13 @@ from typing import Any
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.auth.dependencies import get_current_user
+from app.auth.dependencies import get_current_student, get_current_user
 from app.database.connection import get_db
+from app.models.student import Student
 from app.schemas.quiz import QuizStartRequest, QuizSubmitRequest
+from app.services.lesson_service import LessonService
 from app.services.quiz_service import QuizService
+from app.utils.response import progress_to_dict
 
 router = APIRouter(tags=["Quiz"])
 
@@ -114,29 +117,35 @@ def get_quiz(
 def submit_quiz(
     request: QuizSubmitRequest,
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
+    student: Student = Depends(get_current_student),
 ) -> dict[str, Any]:
+    # The attempt always belongs to the authenticated student.
+    if request.student_id is not None and request.student_id != student.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Cannot submit a quiz for another student",
+        )
+
+    if LessonService.get_lesson_by_id(db, request.lesson_id) is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Lesson not found",
+        )
+
     progress = QuizService.submit_quiz(
         db=db,
-        student_id=request.student_id,
+        student_id=student.id,
         lesson_id=request.lesson_id,
         quiz_score=request.quiz_score,
         response_time=request.response_time,
         attention_score=request.attention_score,
+        yawning=request.yawning,
+        looking_away=request.looking_away,
         difficulty=request.difficulty,
     )
 
     return {
         "success": True,
         "message": "Quiz submitted successfully",
-        "data": {
-            "id": progress.id,
-            "student_id": progress.student_id,
-            "lesson_id": progress.lesson_id,
-            "quiz_score": progress.quiz_score,
-            "response_time": progress.response_time,
-            "attention_score": progress.attention_score,
-            "difficulty": progress.difficulty,
-            "completed": progress.completed,
-        },
+        "data": progress_to_dict(progress),
     }

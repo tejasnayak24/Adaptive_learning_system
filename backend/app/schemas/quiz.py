@@ -1,11 +1,13 @@
-from pydantic import BaseModel
 from typing import List
+
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+
+from app.utils.constants import normalize_difficulty
 
 
 class QuizBase(BaseModel):
     lesson_id: int
     title: str
-    total_questions: int
     difficulty: str
 
 
@@ -20,8 +22,7 @@ class QuizUpdate(QuizBase):
 class QuizResponse(QuizBase):
     id: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class QuizStartRequest(BaseModel):
@@ -29,24 +30,40 @@ class QuizStartRequest(BaseModel):
 
 
 class QuizSubmitRequest(BaseModel):
-    student_id: int
+    """Quiz result submitted by the authenticated student.
+
+    ``student_id`` is accepted only for backward compatibility; the
+    backend always records the attempt against the student in the access
+    token and rejects a mismatching value.
+
+    Camera fields are optional: ``None`` means valid telemetry was not
+    available for this attempt. They must never be filled with guesses.
+    """
+
+    student_id: int | None = None
     lesson_id: int
-    quiz_score: float
-    response_time: float
-    attention_score: float
+    quiz_score: float = Field(ge=0, le=100)
+    response_time: float = Field(ge=0)
+    attention_score: float | None = Field(default=None, ge=0.0, le=1.0)
+    yawning: bool | None = None
+    looking_away: bool | None = None
     difficulty: str
+
+    @field_validator("difficulty")
+    @classmethod
+    def _normalize_difficulty(cls, value: str) -> str:
+        return normalize_difficulty(value)
 
 
 class QuestionResponse(BaseModel):
     id: int
-    question_text: str
+    question: str
     option_a: str
     option_b: str
     option_c: str
     option_d: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class QuizStartResponse(BaseModel):

@@ -71,8 +71,10 @@ class QuizService:
         lesson_id: int,
         quiz_score: float,
         response_time: float,
-        attention_score: float,
+        attention_score: float | None,
         difficulty: str,
+        yawning: bool | None = None,
+        looking_away: bool | None = None,
     ):
         progress = Progress(
             student_id=student_id,
@@ -80,6 +82,8 @@ class QuizService:
             quiz_score=quiz_score,
             response_time=response_time,
             attention_score=attention_score,
+            yawning=yawning,
+            looking_away=looking_away,
             difficulty=difficulty,
             completed=True,
         )
