@@ -1,0 +1,566 @@
+{
+  "grade": 6,
+  "subject": "Social Science",
+  "units": [
+    {
+      "slug": "g6-sst-u-geography",
+      "title": "Geography: The Earth",
+      "topics": [
+        {
+          "slug": "g6-sst-t-maps-globes",
+          "title": "Globes and Maps",
+          "description": "Locating places on the Earth using latitudes, longitudes and maps.",
+          "lessons": [
+            {
+              "slug": "g6-sst-latitudes-longitudes",
+              "title": "The Globe: Latitudes and Longitudes",
+              "objectives": [
+                "Describe the globe as a model of the Earth",
+                "Explain latitudes and longitudes and how they are numbered",
+                "Identify the Equator, the Tropics, the Arctic and Antarctic Circles and the Prime Meridian",
+                "Relate longitude to time and explain Indian Standard Time"
+              ],
+              "intro": "The Earth is not a perfect sphere; it is slightly flattened at the North and South Poles and bulges a little at the middle. A globe is a small model of the Earth that shows its shape, the continents and the oceans correctly. To find any place on this round surface, geographers imagine a network of lines drawn on the globe. These imaginary lines, called latitudes and longitudes, work like the rows and columns of a giant grid.",
+              "sections": [
+                [
+                  "Latitudes",
+                  "The Equator is an imaginary line running around the middle of the Earth, halfway between the poles. It divides the Earth into the Northern and Southern Hemispheres and is numbered 0°. Lines drawn parallel to the Equator are called parallels of latitude. They become smaller towards the poles, and the poles themselves are points at 90° N and 90° S. Important parallels are the Tropic of Cancer (23½° N), the Tropic of Capricorn (23½° S), the Arctic Circle (66½° N) and the Antarctic Circle (66½° S). The Tropic of Cancer passes through the middle of India."
+                ],
+                [
+                  "Heat zones",
+                  "Latitudes help explain climate. The Sun is overhead at least once a year at every place between the two Tropics, so this Torrid Zone receives the most heat. Between the Tropics and the Arctic and Antarctic Circles lie the Temperate Zones, where the Sun is never overhead and temperatures are moderate. Beyond the Arctic and Antarctic Circles are the Frigid Zones, very cold regions where the Sun stays low in the sky. This is why it is hot in Chennai, mild in much of Europe and freezing in Greenland."
+                ],
+                [
+                  "Longitudes and time",
+                  "Longitudes, or meridians, are semicircles running from the North Pole to the South Pole. All meridians are the same length. The Prime Meridian, numbered 0°, passes through Greenwich near London. There are 180° of longitude to the east and 180° to the west; together the 0° and 180° meridians divide the Earth into the Eastern and Western Hemispheres. The Earth rotates 360° in 24 hours, so time changes by one hour for every 15° of longitude, or four minutes per degree. Places east of Greenwich are ahead in time. India uses the 82½° E meridian, so Indian Standard Time is 5 hours 30 minutes ahead of Greenwich Mean Time."
+                ]
+              ],
+              "definitions": [
+                ["Globe", "A true, small model of the Earth."],
+                ["Equator", "The 0° latitude dividing the Earth into Northern and Southern Hemispheres."],
+                ["Latitude", "Angular distance of a place north or south of the Equator."],
+                ["Longitude", "Angular distance of a place east or west of the Prime Meridian."],
+                ["Standard time", "The local time of a central meridian adopted for a whole country."]
+              ],
+              "examples": [
+                "New Delhi lies at about 28.6° N, 77.2° E.",
+                "When it is 12 noon at Greenwich, it is 5:30 p.m. in India."
+              ],
+              "worked": [
+                {
+                  "problem": "Place A is at 30° E and place B is at 75° E. If it is 8:00 a.m. at A, what time is it at B?",
+                  "steps": [
+                    "Difference in longitude = 75° − 30° = 45°.",
+                    "Time changes 4 minutes per degree: 45 × 4 = 180 minutes = 3 hours.",
+                    "B is further east, so it is ahead: 8:00 a.m. + 3 hours."
+                  ],
+                  "answer": "11:00 a.m. at B"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Important parallels of latitude",
+                "columns": ["Line", "Latitude", "Heat zone it bounds"],
+                "rows": [
+                  ["Equator", "0°", "Centre of Torrid Zone"],
+                  ["Tropic of Cancer / Capricorn", "23½° N / S", "Torrid–Temperate boundary"],
+                  ["Arctic / Antarctic Circle", "66½° N / S", "Temperate–Frigid boundary"],
+                  ["North / South Pole", "90° N / S", "Frigid Zone"]
+                ]
+              },
+              "real_world": "Every GPS device and phone map gives your position as latitude and longitude. Pilots and ship captains navigate by these coordinates, and time zones decide when a cricket match in Australia is broadcast live in India.",
+              "takeaways": [
+                "Latitudes run east–west and measure distance north or south of the Equator.",
+                "Longitudes run pole to pole and measure distance east or west of Greenwich.",
+                "The Torrid Zone between the Tropics is the hottest.",
+                "15° of longitude = 1 hour of time; IST is GMT + 5:30."
+              ],
+              "practice": [
+                ["Which hemisphere is India in?", "Northern and Eastern Hemispheres."],
+                ["How many minutes of time correspond to 1° of longitude?", "4 minutes."],
+                ["Which important latitude passes through India?", "The Tropic of Cancer."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What is the latitude of the Equator?", ["90°", "0°", "23½°", "180°"], "B", "It is the starting line for latitudes.", "The Equator is numbered 0°."],
+                  ["The Prime Meridian passes through:", ["New Delhi", "Tokyo", "Greenwich", "New York"], "C", "It is near London.", "The 0° meridian passes through Greenwich, England."],
+                  ["Which latitude passes through the middle of India?", ["Tropic of Cancer", "Equator", "Arctic Circle", "Tropic of Capricorn"], "A", "It is at 23½° N.", "The Tropic of Cancer crosses the middle of India."],
+                  ["Lines of longitude are also called:", ["Parallels", "Tropics", "Circles", "Meridians"], "D", "They run from pole to pole.", "Longitudes are called meridians."]
+                ],
+                "MEDIUM": [
+                  ["Which heat zone receives the most heat?", ["Frigid", "Torrid", "Temperate", "Polar"], "B", "Where is the Sun overhead?", "The Sun is overhead within the Torrid Zone, so it is hottest."],
+                  ["By how much does time change for every 15° of longitude?", ["4 minutes", "1 minute", "1 hour", "15 minutes"], "C", "The Earth turns 360° in 24 hours.", "360° ÷ 24 = 15° per hour."],
+                  ["Indian Standard Time is based on which meridian?", ["82½° E", "0°", "90° E", "68° E"], "A", "It passes near Mirzapur.", "The 82½° E meridian is used for IST."],
+                  ["What is unusual about all meridians?", ["They are parallel", "They get shorter towards the poles", "They all pass through India", "They are all of equal length"], "D", "Compare them with parallels of latitude.", "All meridians run from pole to pole and so are equal in length."]
+                ],
+                "HARD": [
+                  ["When it is 12 noon at Greenwich, what time is it in India?", ["6:30 a.m.", "5:30 p.m.", "12 midnight", "4:30 p.m."], "B", "India is 5 h 30 min ahead.", "12:00 + 5:30 = 5:30 p.m."],
+                  ["A place at 45° W has what time when it is 9 a.m. at Greenwich?", ["12 noon", "8 a.m.", "6 a.m.", "3 a.m."], "C", "West of Greenwich is behind in time.", "45° × 4 min = 3 hours behind: 9 a.m. − 3 h = 6 a.m."],
+                  ["Why are the Frigid Zones very cold?", ["The Sun's rays reach them at a very low angle", "They are below sea level", "They have no air", "They face away from the Sun all year"], "A", "Think about the slant of sunlight.", "Slanting rays spread over a large area, giving little heat."],
+                  ["Which pair of lines together divides the Earth into Eastern and Western Hemispheres?", ["Equator and Tropic of Cancer", "Arctic and Antarctic Circles", "Tropics of Cancer and Capricorn", "0° and 180° meridians"], "D", "Hemispheres east and west are divided by meridians.", "The Prime Meridian and the 180° meridian form a full circle dividing east from west."]
+                ]
+              }
+            },
+            {
+              "slug": "g6-sst-maps",
+              "title": "Reading Maps",
+              "objectives": [
+                "Compare maps and globes and identify types of maps",
+                "Use the three components of a map: distance, direction and symbols",
+                "Use a scale to calculate real distances",
+                "Read cardinal and intermediate directions"
+              ],
+              "intro": "A globe is accurate but awkward: you cannot fold it into your pocket, and it is too small to show your town. A map is a drawing of all or part of the Earth's surface on a flat sheet, reduced to scale. Maps can show the whole world or just one street, and they can be made for many purposes. Learning to read a map is one of the most useful skills in geography.",
+              "sections": [
+                [
+                  "Types of maps",
+                  "Physical or relief maps show natural features such as mountains, plateaus, plains, rivers and oceans. Political maps show countries, states, cities and their boundaries. Thematic maps focus on one theme, such as rainfall, forests, roads or population. A collection of maps is called an atlas. A sketch is a rough drawing made from memory without exact scale, such as the route from your home to school. A plan is a drawing of a small area, such as a classroom or house, on a large scale."
+                ],
+                [
+                  "Distance and scale",
+                  "Maps are always smaller than the area they show, so a scale is used. A scale is the ratio between distance on the map and the actual distance on the ground. It can be written as a statement (1 cm represents 5 km), as a ratio (1:5,00,000) or as a line divided into parts. A large-scale map shows a small area in great detail, like a town plan. A small-scale map shows a large area with less detail, like a map of the world. To find a real distance, measure on the map and multiply by the scale."
+                ],
+                [
+                  "Direction and symbols",
+                  "Most maps have an arrow marked N showing north. The four cardinal directions are north, south, east and west; between them are the intermediate directions north-east, south-east, south-west and north-west. A compass, whose needle always points north–south, helps find direction on the ground. Because there is no room to draw every building or tree, maps use conventional symbols, colours and letters that are understood everywhere. Blue is used for water, green for forests and plains, brown for mountains and plateaus, and special signs for railways, roads, bridges and places of worship. The key or legend explains the symbols."
+                ]
+              ],
+              "definitions": [
+                ["Map", "A drawing of the Earth's surface or part of it on a flat surface, according to a scale."],
+                ["Scale", "The ratio between a distance on the map and the actual distance on the ground."],
+                ["Cardinal directions", "The four main directions: north, south, east and west."],
+                ["Conventional symbols", "Standard signs, colours and letters used on maps worldwide."],
+                ["Legend (key)", "The part of a map that explains the symbols used."]
+              ],
+              "examples": [
+                "On a map with scale 1 cm = 50 km, two cities 4.5 cm apart are 225 km apart.",
+                "On most maps, a blue line is a river and a brown patch is a mountain region."
+              ],
+              "worked": [
+                {
+                  "problem": "The scale of a map is 1:2,00,000. Two villages are 6 cm apart on the map. Find the real distance in kilometres.",
+                  "steps": [
+                    "1 cm on the map = 2,00,000 cm on the ground.",
+                    "6 cm on the map = 6 × 2,00,000 = 12,00,000 cm.",
+                    "1 km = 1,00,000 cm, so 12,00,000 cm = 12 km."
+                  ],
+                  "answer": "12 km"
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Three components of a map",
+                "items": [
+                  ["Distance", "Shown by the scale: statement, ratio or line"],
+                  ["Direction", "North arrow; cardinal and intermediate directions"],
+                  ["Symbols", "Colours and signs explained in the legend"]
+                ]
+              },
+              "real_world": "Delivery riders, cab drivers and hikers all depend on maps. Disaster-relief teams use thematic maps of flooding to decide where to send help, and town planners use large-scale maps to plan new roads, schools and parks.",
+              "takeaways": [
+                "Maps are flat, portable and can show large or small areas in detail.",
+                "Physical, political and thematic maps serve different purposes.",
+                "Every map needs distance (scale), direction and symbols.",
+                "Large-scale maps show small areas in detail; small-scale maps show large areas."
+              ],
+              "practice": [
+                ["What colour usually shows water bodies on a map?", "Blue."],
+                ["Name the four intermediate directions.", "NE, SE, SW, NW."],
+                ["Is a map of your school a large-scale or small-scale map?", "Large-scale."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A collection of maps is called a/an:", ["Globe", "Atlas", "Sketch", "Plan"], "B", "You use one in geography class.", "An atlas is a book of maps."],
+                  ["Which map shows countries and their boundaries?", ["Physical map", "Thematic map", "Political map", "Weather map"], "C", "Boundaries are decided by governments.", "Political maps show countries, states and cities."],
+                  ["Which colour is commonly used for mountains?", ["Brown", "Blue", "Green", "Yellow"], "A", "Think of high, dry land.", "Brown is used for mountains and plateaus."],
+                  ["Which instrument helps find directions?", ["Thermometer", "Barometer", "Rain gauge", "Compass"], "D", "Its needle points north–south.", "A magnetic compass shows directions."]
+                ],
+                "MEDIUM": [
+                  ["What does the legend of a map explain?", ["The scale only", "The meaning of the symbols used", "The history of the area", "The population"], "B", "It is also called the key.", "The legend explains the map's symbols and colours."],
+                  ["Which direction lies between north and east?", ["South-east", "North-west", "North-east", "South-west"], "C", "Combine the two names.", "Halfway between north and east is north-east."],
+                  ["A drawing of a room on a large scale is called a:", ["Plan", "Globe", "Sketch", "Atlas"], "A", "It is used by architects.", "A plan shows a small area on a large scale."],
+                  ["Why are conventional symbols used on maps?", ["They look decorative", "They hide information", "They make maps heavier", "There is no room to draw every feature, and symbols are understood everywhere"], "D", "Maps are small and read by many people.", "Symbols save space and are internationally understood."]
+                ],
+                "HARD": [
+                  ["On a map with scale 1 cm = 25 km, two towns are 7.2 cm apart. What is the real distance?", ["32.2 km", "180 km", "250 km", "72 km"], "B", "Multiply the map distance by the scale.", "7.2 × 25 = 180 km."],
+                  ["Which map has the LARGEST scale?", ["A world map", "A map of Asia", "A map of your town", "A map of India"], "C", "Large scale = small area, lots of detail.", "A town map shows the smallest area in the most detail."],
+                  ["A ratio scale of 1:1,00,000 means 1 cm on the map equals:", ["1 km", "10 km", "100 m", "100 km"], "A", "1 km = 1,00,000 cm.", "1,00,000 cm is exactly 1 km."],
+                  ["Why is a map more useful than a globe for a journey across a city?", ["A map shows the Earth's true shape", "A globe shows more detail", "Globes have no oceans", "A map can show a small area in detail and is easy to carry"], "D", "Compare portability and detail.", "Maps can be large-scale and folded, unlike a globe."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g6-sst-u-history",
+      "title": "History: Early Societies",
+      "topics": [
+        {
+          "slug": "g6-sst-t-early-societies",
+          "title": "From Early Humans to the First Cities",
+          "description": "How hunter-gatherers became farmers, and the cities of the Harappan civilisation.",
+          "lessons": [
+            {
+              "slug": "g6-sst-early-humans",
+              "title": "Early Humans: Hunter-Gatherers to Farmers",
+              "objectives": [
+                "Describe the life of early hunter-gatherers",
+                "Explain how historians learn about the distant past",
+                "Describe the beginning of farming and herding",
+                "Explain how farming changed the way people lived"
+              ],
+              "intro": "Hundreds of thousands of years ago, people in the Indian subcontinent did not live in houses, grow crops or keep animals. They moved from place to place, hunting wild animals, catching fish and gathering fruits, roots, nuts and seeds. They are called hunter-gatherers. Over a very long time, people learned to grow plants and tame animals. This slow change, which began around 12,000 years ago in different parts of the world, transformed human life.",
+              "sections": [
+                [
+                  "Life of hunter-gatherers",
+                  "Hunter-gatherers moved because staying in one place would use up the plants and animals nearby, because animals moved in search of food, and because plants and fruits ripen in different seasons. They needed water, so they often lived near rivers and lakes. They made tools from stone, wood and bone: stone choppers and scrapers, axes and arrowheads. Sites where tools were made, called factory sites, have been found near sources of good stone. People sheltered in caves and rock shelters, such as those at Bhimbetka in Madhya Pradesh, where they also painted animals on the walls. The discovery of fire gave light, warmth, protection from animals and a way to cook meat."
+                ],
+                [
+                  "How we know",
+                  "Early people left no writing, so historians and archaeologists study the objects they left behind. Archaeologists excavate sites carefully to find tools, bones, burnt grain, pottery and remains of houses. Animal bones with cut marks show what was hunted; charred grains show which crops were grown. By studying the layers of soil in which objects are found, archaeologists work out which objects are older. Scientific methods also help to date remains. Each find is like a clue that helps rebuild the story of daily life."
+                ],
+                [
+                  "Beginning of farming and herding",
+                  "As the climate became warmer, grasslands spread, and people noticed where grains grew. They began to plant seeds and look after the plants, becoming farmers. They also tamed animals, beginning with the dog, and later sheep, goats, cattle and pigs, becoming herders. Farming meant people had to stay in one place to look after crops, so they built settled villages. At Mehrgarh, in present-day Pakistan, some of the earliest evidence of farming in the subcontinent has been found, with remains of barley, wheat, sheep and goats. Farmers made pots to store grain, wove cloth and developed new polished stone tools."
+                ]
+              ],
+              "definitions": [
+                ["Hunter-gatherers", "People who obtained food by hunting animals and gathering wild plants."],
+                ["Archaeologist", "A person who studies the past by excavating and examining material remains."],
+                ["Domestication", "Taming wild plants and animals so that people can grow or raise them."],
+                ["Rock shelter", "A natural overhang or cave used as a home by early people."]
+              ],
+              "examples": [
+                "The Bhimbetka rock shelters contain paintings of animals made thousands of years ago.",
+                "At Mehrgarh, square or rectangular mud houses with storage areas have been found."
+              ],
+              "worked": [
+                {
+                  "problem": "An archaeologist finds charred barley grains, goat bones and a storage pot buried in one layer at a site. What can be concluded?",
+                  "steps": [
+                    "Charred barley shows that the people ate, and probably grew, barley.",
+                    "Goat bones suggest goats were kept or eaten; many bones of young animals suggest herding.",
+                    "A storage pot suggests that people stored surplus grain, which settled farmers did.",
+                    "Together these clues point to a settled farming and herding community."
+                  ],
+                  "answer": "The site belonged to settled farmers and herders who grew barley, kept goats and stored grain."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "From hunting to farming",
+                "items": ["Hunting and gathering, moving with seasons", "Observing where grains grow", "Planting seeds and taming animals", "Settling in villages", "Storing grain, making pots, weaving"]
+              },
+              "real_world": "Many crops we eat today, such as wheat, barley and rice, were first domesticated by early farmers. The dog, our oldest animal companion, was tamed by hunter-gatherers. Museums display the tools and pots found at sites like Mehrgarh so we can see how our ancestors lived.",
+              "takeaways": [
+                "Hunter-gatherers moved in search of food and water and used stone tools and fire.",
+                "Archaeologists learn about the past from tools, bones, grains and pottery.",
+                "Farming and herding began as people domesticated plants and animals.",
+                "Farming led to settled villages, storage and new crafts."
+              ],
+              "practice": [
+                ["Give two reasons why hunter-gatherers moved from place to place.", "Food ran out nearby; animals migrated; fruits ripened in different seasons."],
+                ["What was the first animal to be tamed?", "The dog (wolf ancestor)."],
+                ["Why did farmers build permanent houses?", "They had to stay to look after crops and store grain."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Hunter-gatherers obtained food by:", ["Buying it in markets", "Hunting animals and gathering plants", "Growing crops only", "Fishing only"], "B", "Their name gives the answer.", "They hunted wild animals and gathered fruits, roots and seeds."],
+                  ["Where are famous early rock paintings found in India?", ["Mumbai", "Delhi", "Bhimbetka", "Kolkata"], "C", "It is in Madhya Pradesh.", "The Bhimbetka rock shelters have ancient paintings."],
+                  ["Which animal was tamed first?", ["Dog", "Horse", "Camel", "Elephant"], "A", "It descended from the wolf.", "The dog was the first animal to be domesticated."],
+                  ["People who study the past by digging up remains are:", ["Astronomers", "Geologists", "Doctors", "Archaeologists"], "D", "They excavate sites.", "Archaeologists excavate and study material remains."]
+                ],
+                "MEDIUM": [
+                  ["Why did hunter-gatherers often live near rivers and lakes?", ["To build boats", "Water was needed by people and animals", "To grow rice", "To trade"], "B", "What does everyone need every day?", "Rivers and lakes provided water, and animals came there to drink."],
+                  ["Which site gives early evidence of farming in the subcontinent?", ["Bhimbetka", "Hampi", "Mehrgarh", "Agra"], "C", "It is in present-day Pakistan.", "Mehrgarh shows early barley, wheat, sheep and goats."],
+                  ["Why did farming lead to settled life?", ["Farmers had to look after crops in one place", "Farmers disliked travel", "Hunting became illegal", "Rivers dried up"], "A", "Crops take months to grow.", "Crops need care until harvest, so farmers stayed in one place."],
+                  ["Burnt grain found at an ancient site tells us:", ["The date of a king's rule", "The language spoken", "The weather that year", "Which plants the people ate or grew"], "D", "Grains are food remains.", "Charred grains survive and show which crops were used."]
+                ],
+                "HARD": [
+                  ["Which change in climate encouraged farming about 12,000 years ago?", ["The climate became colder and drier", "The climate became warmer and grasslands spread", "Rivers froze", "Forests covered all grasslands"], "B", "More grasses meant more grain-bearing plants.", "Warmer conditions spread grasslands, giving more grain and grazing animals."],
+                  ["Why were pots important to early farmers?", ["To cook only meat", "As decorations", "To store grain and other food", "To carry water to hunt"], "C", "Farmers often had extra grain after harvest.", "Pots stored surplus grain and food for later use."],
+                  ["A factory site of early people is a place where:", ["Stone tools were made", "Cloth was woven in machines", "Coins were minted", "Kings lived"], "A", "Good stone was found there.", "Factory sites are where people made stone tools near good stone."],
+                  ["How do archaeologists usually tell that one object is older than another at the same site?", ["By its colour", "By its weight", "By asking local people", "By the soil layer it is found in — deeper layers are usually older"], "D", "Layers build up over time.", "Lower layers were laid down earlier, so objects in them are usually older."]
+                ]
+              }
+            },
+            {
+              "slug": "g6-sst-harappan-civilisation",
+              "title": "The Harappan Civilisation",
+              "objectives": [
+                "Locate major Harappan cities",
+                "Describe town planning, drainage and buildings in Harappan cities",
+                "Explain the occupations, crafts and trade of the Harappans",
+                "Discuss possible reasons for the decline of the cities"
+              ],
+              "intro": "About 4,700 years ago, some of the world's earliest cities grew up in the valley of the Indus river and its tributaries. The first city to be discovered was Harappa, so this civilisation is called the Harappan or Indus Valley civilisation. Other important cities were Mohenjodaro, Lothal, Kalibangan and Dholavira. These cities were carefully planned and show that the people were skilled builders, farmers, craftspeople and traders.",
+              "sections": [
+                [
+                  "Planned cities",
+                  "Many Harappan cities were divided into two parts. The western part was smaller but raised, called the citadel; the eastern part was larger and lower, called the lower town. Walls of baked bricks surrounded parts of the city. The bricks were of a standard size and laid in an interlocking pattern so the walls were strong. Streets were laid out in a grid, crossing at right angles. Houses were usually one or two storeys high, built around a courtyard, and many had separate bathing areas and wells. At Mohenjodaro, archaeologists found the Great Bath, a large tank lined with bricks and made watertight with a layer of natural tar, which may have been used for special ceremonies."
+                ],
+                [
+                  "Drains and storage",
+                  "The Harappans built an excellent system of covered drains. Drains from houses were connected to larger drains along the streets, and there were inspection holes for cleaning. Such planning means someone organised the city carefully. Large buildings that may have been storehouses, or granaries, were found in some cities. Lothal in Gujarat had a structure that some archaeologists believe was a dockyard where boats could load and unload goods. Dholavira had large reservoirs to store water in a dry region."
+                ],
+                [
+                  "Work, trade and the end of the cities",
+                  "Farmers outside the cities grew wheat, barley, pulses, peas, rice, sesame, linseed and mustard, and brought food to the cities. Herders kept cattle, sheep, goats and buffaloes. Craftspeople made beautiful beads of carnelian, tools and ornaments of copper and bronze, pottery with black designs, and seals of stone with animals and a script that has not yet been read. Raw materials such as copper, tin, gold and precious stones were brought from distant places, and Harappan objects have been found as far away as Mesopotamia. Around 3,900 years ago, people began to leave many cities. Possible reasons include rivers drying up or changing course, floods, and the cutting of forests; no single reason explains every city."
+                ]
+              ],
+              "definitions": [
+                ["Citadel", "The raised western part of a Harappan city with important buildings."],
+                ["Granary", "A large building used to store grain."],
+                ["Seal", "A small carved stone, often with an animal and script, probably used to mark goods."],
+                ["Civilisation", "An advanced society with cities, crafts, trade and organised government."]
+              ],
+              "examples": [
+                "The Great Bath at Mohenjodaro measures about 12 m by 7 m.",
+                "Carnelian beads made in Harappan workshops reached Mesopotamia."
+              ],
+              "worked": [
+                {
+                  "problem": "Use evidence to explain why historians think Harappan cities were well organised.",
+                  "steps": [
+                    "Streets were in a grid, which needs planning before building.",
+                    "Bricks were of standard size across many cities, suggesting common rules.",
+                    "Covered drains connected houses to street drains with inspection holes, which needs maintenance.",
+                    "Granaries and reservoirs show food and water were stored for many people."
+                  ],
+                  "answer": "Grid streets, standard bricks, connected drains and shared storage all point to careful planning and organisation."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Major Harappan sites",
+                "columns": ["Site", "Present location", "Known for"],
+                "rows": [
+                  ["Harappa", "Punjab, Pakistan", "First site discovered"],
+                  ["Mohenjodaro", "Sindh, Pakistan", "Great Bath, citadel"],
+                  ["Lothal", "Gujarat, India", "Possible dockyard, bead making"],
+                  ["Kalibangan", "Rajasthan, India", "Fire altars, ploughed field"],
+                  ["Dholavira", "Gujarat, India", "Water reservoirs"]
+                ]
+              },
+              "real_world": "Modern town planners still admire Harappan drainage, and the problems of keeping drains clean and storing water in dry regions are still important in Indian cities today. Dholavira was declared a UNESCO World Heritage Site in 2021.",
+              "takeaways": [
+                "Harappan cities had citadels, lower towns, grid streets and standard baked bricks.",
+                "Covered drains, granaries and reservoirs show careful planning.",
+                "Farmers, herders, craftspeople and traders all contributed to city life.",
+                "The cities declined around 3,900 years ago for several possible reasons."
+              ],
+              "practice": [
+                ["Name two Harappan sites in present-day India.", "Lothal and Dholavira (also Kalibangan, Rakhigarhi)."],
+                ["What was the Great Bath made watertight with?", "A layer of natural tar (bitumen)."],
+                ["Why has the Harappan script not helped historians much?", "It has not been deciphered yet."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which was the first Harappan city to be discovered?", ["Lothal", "Harappa", "Dholavira", "Kalibangan"], "B", "The civilisation is named after it.", "Harappa was discovered first and gives the civilisation its name."],
+                  ["The Great Bath was found at:", ["Lothal", "Harappa", "Mohenjodaro", "Delhi"], "C", "It is in Sindh, Pakistan.", "The Great Bath is at Mohenjodaro."],
+                  ["Harappan houses were built mostly of:", ["Baked bricks", "Steel", "Glass", "Plastic"], "A", "They were made in kilns.", "The Harappans used standard-sized baked bricks."],
+                  ["The Harappan civilisation grew along which river?", ["Ganga", "Kaveri", "Narmada", "Indus"], "D", "It is also called the ___ Valley civilisation.", "It developed along the Indus and its tributaries."]
+                ],
+                "MEDIUM": [
+                  ["What was the citadel of a Harappan city?", ["A market", "A raised western part with important buildings", "The farming area", "A river port"], "B", "It was higher than the lower town.", "The citadel was the smaller, raised western section."],
+                  ["Which site may have had a dockyard?", ["Harappa", "Kalibangan", "Lothal", "Mehrgarh"], "C", "It is in Gujarat, near the coast.", "Lothal has a large basin thought by some to be a dockyard."],
+                  ["Harappan seals usually showed:", ["Animals and a script", "Pictures of kings", "Maps of cities", "Coins"], "A", "The script is still unread.", "Seals had animal figures and signs of the Harappan script."],
+                  ["Why did Dholavira have large reservoirs?", ["For boat racing", "To keep fish", "To bathe animals", "To store water in a dry region"], "D", "Kutch receives little rain.", "Reservoirs stored scarce rainwater for the people."]
+                ],
+                "HARD": [
+                  ["Which evidence best shows that the Harappans traded over long distances?", ["Their grid streets", "Harappan beads and seals found in Mesopotamia", "Their drains", "Their baked bricks"], "B", "Look for Harappan objects found far away.", "Objects found in distant Mesopotamia show long-distance trade."],
+                  ["Why is it hard to know exactly why the Harappan cities declined?", ["Nothing survives from them", "The cities were never built", "Different cities may have declined for different reasons and the script cannot be read", "They declined last year"], "C", "Think about the evidence available.", "Without readable records, historians weigh several possible causes for different cities."],
+                  ["Standard brick sizes in distant Harappan cities suggest that:", ["There were common rules followed across the region", "Every city used different measurements", "Bricks were imported from Egypt", "Only one city existed"], "A", "Why would bricks be the same everywhere?", "Shared standards point to common practices or organisation over a wide area."],
+                  ["Covered drains with inspection holes show that the Harappans:", ["Had no rain", "Disliked water", "Did not live in houses", "Planned for cleaning and maintaining drains"], "D", "Why would you leave a hole to look inside a drain?", "Inspection holes allowed drains to be cleaned, showing planning for maintenance."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g6-sst-u-civics",
+      "title": "Civics: Government Near Us",
+      "topics": [
+        {
+          "slug": "g6-sst-t-local-government",
+          "title": "Local Government",
+          "description": "How villages and towns govern themselves through elected local bodies.",
+          "lessons": [
+            {
+              "slug": "g6-sst-panchayati-raj",
+              "title": "Panchayati Raj: Rural Local Government",
+              "objectives": [
+                "Explain why local government is needed",
+                "Describe the Gram Sabha and the Gram Panchayat and their roles",
+                "Explain the three levels of Panchayati Raj",
+                "Explain how people participate in village decisions"
+              ],
+              "intro": "Many problems are best solved close to where people live: a broken hand pump, a muddy village road or a need for a new school room. The state or national government cannot look after every village in detail. In India, villages manage many of their own affairs through a system of elected local bodies called Panchayati Raj. It allows ordinary people to take part directly in decisions that affect their daily lives.",
+              "sections": [
+                [
+                  "The Gram Sabha",
+                  "The Gram Sabha is a meeting of all adults who live in the area covered by a Panchayat and whose names are on the voters' list. Every adult aged 18 or above can attend. The Gram Sabha meets regularly to discuss the village's needs, approve the plans of the Gram Panchayat and check how money has been spent. It also chooses who should benefit from government schemes, such as housing for the poor. Because every voter can speak there, the Gram Sabha keeps the Gram Panchayat from doing wrong things and makes local government accountable."
+                ],
+                [
+                  "The Gram Panchayat",
+                  "A village, or a group of villages, elects a Gram Panchayat for five years. It is headed by a Sarpanch (also called Pradhan) and has elected members called ward members or Panchs. A Secretary, appointed by the government, keeps records and calls meetings. The Gram Panchayat builds and maintains village roads, water sources and drainage, looks after common land, carries out government schemes for employment and housing, and levies some local taxes, such as on houses and market places. It also receives funds from state and central government."
+                ],
+                [
+                  "Three levels",
+                  "Panchayati Raj works at three levels. The Gram Panchayat works at the village level. Several Gram Panchayats together form a Block or Panchayat Samiti, which plans for a larger area. All the Panchayat Samitis in a district form the Zila Parishad, which makes plans for the whole district and shares funds among the levels. The 73rd Amendment to the Constitution in 1992 made regular Panchayat elections compulsory and reserved one-third of the seats for women, as well as seats for Scheduled Castes and Scheduled Tribes, so that more people could share power."
+                ]
+              ],
+              "definitions": [
+                ["Gram Sabha", "A meeting of all adult voters of a Panchayat area."],
+                ["Gram Panchayat", "The elected council that governs a village or group of villages."],
+                ["Sarpanch", "The elected head of a Gram Panchayat."],
+                ["Zila Parishad", "The district-level body in Panchayati Raj."]
+              ],
+              "examples": [
+                "A Gram Sabha may decide that a new well is more urgent than repairing the Panchayat office.",
+                "A Panchayat may use funds from a rural employment scheme to deepen a village pond."
+              ],
+              "worked": [
+                {
+                  "problem": "The hand pump in a village has stopped working. Describe how villagers could get it repaired through Panchayati Raj.",
+                  "steps": [
+                    "Villagers raise the problem with their ward member or the Sarpanch.",
+                    "The issue is discussed at the Gram Sabha meeting, where people agree it is urgent.",
+                    "The Gram Panchayat sets aside money from its funds or a government scheme and arranges the repair.",
+                    "At the next Gram Sabha, villagers check that the work was done and the money properly spent."
+                  ],
+                  "answer": "Raise it with the elected members, discuss and approve it at the Gram Sabha, let the Panchayat repair it, and check the accounts at the next meeting."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Three tiers of Panchayati Raj",
+                "items": ["Gram Panchayat (village)", "Panchayat Samiti (block)", "Zila Parishad (district)"]
+              },
+              "real_world": "Today India has over 2.5 lakh Gram Panchayats and lakhs of elected women representatives. Village decisions about water, roads, and who receives housing and pensions are taken in these bodies, so attending the Gram Sabha is a real way for citizens to improve their village.",
+              "takeaways": [
+                "Local government lets people solve local problems themselves.",
+                "The Gram Sabha includes all adult voters and keeps the Panchayat accountable.",
+                "The Gram Panchayat, led by the Sarpanch, provides village services and raises some funds.",
+                "Panchayati Raj has three levels: village, block and district."
+              ],
+              "practice": [
+                ["Who can attend the Gram Sabha?", "All adults (18+) on the voters' list of the area."],
+                ["For how many years is a Gram Panchayat elected?", "Five years."],
+                ["Name two sources of income of a Gram Panchayat.", "Local taxes; funds from state and central governments."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Who heads a Gram Panchayat?", ["Collector", "Sarpanch", "Governor", "Chief Minister"], "B", "Also called the Pradhan.", "The elected Sarpanch heads the Gram Panchayat."],
+                  ["The Gram Sabha consists of:", ["Only the Sarpanch", "Government officers", "All adult voters of the area", "Only women"], "C", "Every adult on the voters' list belongs.", "All adults on the voters' list are members of the Gram Sabha."],
+                  ["A Gram Panchayat is elected for:", ["5 years", "1 year", "10 years", "Life"], "A", "The same as most elected bodies in India.", "Panchayats are elected for five years."],
+                  ["The district level of Panchayati Raj is the:", ["Gram Sabha", "Lok Sabha", "Ward", "Zila Parishad"], "D", "Zila means district.", "The Zila Parishad works at the district level."]
+                ],
+                "MEDIUM": [
+                  ["Why is the Gram Sabha important?", ["It collects all national taxes", "It keeps the Gram Panchayat accountable to the people", "It runs schools directly", "It appoints the Sarpanch"], "B", "It checks plans and spending.", "Voters discuss plans and accounts, so the Panchayat must answer to them."],
+                  ["Which is a function of the Gram Panchayat?", ["Making laws for India", "Printing currency", "Maintaining village roads and water sources", "Running the army"], "C", "Think of village-level work.", "Village roads, water and drainage are Panchayat responsibilities."],
+                  ["Who keeps the records of the Gram Panchayat?", ["The Secretary", "The Prime Minister", "The ward members' children", "The police"], "A", "This person is appointed by the government.", "The Panchayat Secretary keeps records and calls meetings."],
+                  ["Several Gram Panchayats together form a:", ["Zila Parishad", "Gram Sabha", "Lok Sabha", "Panchayat Samiti"], "D", "This is the middle level.", "Gram Panchayats of a block form the Panchayat Samiti."]
+                ],
+                "HARD": [
+                  ["The 73rd Constitutional Amendment (1992) required:", ["Abolishing Panchayats", "Regular Panchayat elections and reservation of one-third seats for women", "Appointment of Sarpanches by the President", "Only men in Panchayats"], "B", "It strengthened local democracy.", "It made Panchayat elections regular and reserved seats for women, SCs and STs."],
+                  ["If the Sarpanch spends money on projects that villagers did not want, the best place to question this is the:", ["Supreme Court", "Lok Sabha", "Gram Sabha meeting", "District hospital"], "C", "Which body includes all villagers?", "The Gram Sabha discusses and checks the Panchayat's spending."],
+                  ["Why does India need local government in addition to state and central governments?", ["Local bodies understand and can quickly solve local problems", "State governments have no money", "Villages are not part of India", "Local bodies make national laws"], "A", "Who knows a village's needs best?", "Local bodies are close to the people and can act on local needs."],
+                  ["Which is a source of income for a Gram Panchayat?", ["Customs duties on imports", "Income tax", "Sale of railway tickets", "Taxes on houses and market places"], "D", "Local bodies collect local taxes.", "Panchayats levy local taxes such as on houses and markets, and get government grants."]
+                ]
+              }
+            },
+            {
+              "slug": "g6-sst-urban-local-bodies",
+              "title": "Urban Local Bodies",
+              "objectives": [
+                "Explain why cities need local government",
+                "Describe the work of a Municipal Corporation and Municipal Council",
+                "Explain the roles of ward councillors and the Commissioner",
+                "Describe how citizens can participate in city government"
+              ],
+              "intro": "A city is home to lakhs of people living close together. Streets must be lit, garbage collected, water supplied, drains cleaned, and parks and markets maintained every single day. These services are managed by urban local bodies. Big cities have a Municipal Corporation, while smaller towns have a Municipal Council or a Nagar Panchayat. Like Panchayats in villages, they are elected by the people.",
+              "sections": [
+                [
+                  "Councillors and administration",
+                  "A city is divided into areas called wards. The people of each ward elect a ward councillor for five years. All the councillors together form the municipal council, which meets to discuss problems, decide priorities and pass the budget. The head of a Municipal Corporation is the Mayor. Decisions are carried out by paid staff, headed by the Municipal Commissioner, a government officer, with engineers, health officers and workers. Councillors decide what should be done; the administrative staff do the work. This division keeps elected representatives answerable to the people and officers responsible for doing the job well."
+                ],
+                [
+                  "Services and money",
+                  "Urban local bodies supply drinking water, collect and dispose of waste, clean streets and drains, maintain roads and streetlights, run dispensaries, schools and parks, register births and deaths, and control the spread of diseases such as dengue and malaria. All this costs a great deal of money. A large part comes from property tax paid by people who own houses and shops, along with water tax, taxes on entertainment and fees for licences. Cities also receive grants from the state and central governments."
+                ],
+                [
+                  "Citizens make a difference",
+                  "Citizens can complain to their councillor, use helplines and websites to report problems, attend ward meetings and join residents' associations. Sometimes they protest peacefully when services fail, as in many towns where residents pressed authorities to stop dumping garbage near homes. Some cities have introduced participatory budgeting, letting residents suggest how part of the budget is spent. Citizens also have duties: paying taxes, not littering, separating wet and dry waste, and not wasting water. Good city services depend on both the government and its citizens."
+                ]
+              ],
+              "definitions": [
+                ["Ward", "A division of a city that elects one councillor."],
+                ["Ward councillor", "The elected representative of a ward in a municipal body."],
+                ["Municipal Commissioner", "The government officer who heads the administration of a Municipal Corporation."],
+                ["Property tax", "A tax paid by owners of houses, shops and other buildings to the local body."]
+              ],
+              "examples": [
+                "A councillor may push for a new streetlight on a dark road where accidents happen.",
+                "Many cities now ask households to give wet and dry waste separately to garbage collectors."
+              ],
+              "worked": [
+                {
+                  "problem": "Garbage in a colony has not been collected for a week. List the steps residents could take.",
+                  "steps": [
+                    "Report the problem on the municipal helpline or website and note the complaint number.",
+                    "Inform the ward councillor, who can raise it with officials and in council meetings.",
+                    "Organise the residents' association to write a joint letter to the Municipal Commissioner.",
+                    "Meanwhile, separate wet and dry waste and store it safely to reduce health risks."
+                  ],
+                  "answer": "Use the complaint system, involve the councillor, act together through a residents' association, and follow good waste practices."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "How a city decision is carried out",
+                "items": ["Residents raise a need", "Ward councillor takes it to the council", "Council approves work and budget", "Commissioner's staff carry it out", "Residents check the result"]
+              },
+              "real_world": "Cleanliness rankings of Indian cities, such as the Swachh Survekshan survey, have shown that cities improve fastest when municipal bodies and citizens work together, for example when residents separate waste at home and councillors make sure it is collected every day.",
+              "takeaways": [
+                "Cities need local bodies to provide daily services to many people.",
+                "Elected ward councillors decide priorities; the Commissioner's staff carry them out.",
+                "Property tax and government grants pay for city services.",
+                "Citizens participate through complaints, meetings, associations and good civic behaviour."
+              ],
+              "practice": [
+                ["Who heads a Municipal Corporation?", "The Mayor (administration headed by the Municipal Commissioner)."],
+                ["Name three services provided by a municipality.", "Water supply, garbage collection, streetlights (also roads, parks, dispensaries)."],
+                ["What is the main tax collected by urban local bodies?", "Property tax."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A big city is governed by a:", ["Gram Panchayat", "Municipal Corporation", "Zila Parishad", "Gram Sabha"], "B", "Gram bodies are for villages.", "Large cities have Municipal Corporations."],
+                  ["A city is divided into areas called:", ["Districts", "Blocks", "Wards", "States"], "C", "Each elects a councillor.", "Cities are divided into wards."],
+                  ["Which is a service of the municipality?", ["Collecting garbage", "Defending borders", "Issuing passports", "Running the railways"], "A", "Think of daily city services.", "Garbage collection is a municipal service."],
+                  ["Who is elected from each ward?", ["Mayor's assistant", "Municipal Commissioner", "Governor", "Ward councillor"], "D", "This person represents the ward.", "Each ward elects a councillor."]
+                ],
+                "MEDIUM": [
+                  ["What is the role of the Municipal Commissioner?", ["To elect councillors", "To head the administration that carries out decisions", "To make national laws", "To judge court cases"], "B", "This officer is appointed, not elected.", "The Commissioner heads the staff who implement the council's decisions."],
+                  ["A major source of a municipality's income is:", ["Income tax", "Customs duty", "Property tax", "Sale of crops"], "C", "Owners of buildings pay it.", "Property tax on houses and shops is a main source of income."],
+                  ["Which is a duty of citizens towards their city?", ["Separating wet and dry waste", "Throwing litter on roads", "Refusing all taxes", "Wasting water"], "A", "What helps garbage collection?", "Separating waste at home helps proper disposal and recycling."],
+                  ["A small town is usually governed by a:", ["Lok Sabha", "Zila Parishad", "Municipal Corporation", "Municipal Council or Nagar Panchayat"], "D", "Corporations are for large cities.", "Smaller towns have Municipal Councils or Nagar Panchayats."]
+                ],
+                "HARD": [
+                  ["Why are decisions made by councillors but carried out by officers?", ["Officers are elected", "Elected representatives set priorities while trained staff do the technical work", "Councillors cannot read", "Officers make laws"], "B", "Think of who answers to voters and who has technical skills.", "Councillors answer to voters; officers have the skills to do the work."],
+                  ["Participatory budgeting means:", ["Only the Mayor decides spending", "Taxes are abolished", "Residents suggest how part of the city budget is spent", "The budget is kept secret"], "C", "It involves citizens in money decisions.", "Residents get a say in spending part of the budget."],
+                  ["Which problem would mainly be handled by an urban local body?", ["A blocked drain causing mosquito breeding", "A dispute between two countries", "Printing new currency notes", "Building a national highway between states"], "A", "Which is a neighbourhood-level issue?", "Drains and mosquito control are municipal responsibilities."],
+                  ["If property tax is not paid by many residents, the most likely effect is:", ["Faster services", "Free electricity", "More national holidays", "Less money for city services such as roads and garbage collection"], "D", "Where does the money for services come from?", "Lower tax income leaves less money for municipal services."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

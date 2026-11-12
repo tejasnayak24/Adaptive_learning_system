@@ -1,0 +1,584 @@
+{
+  "grade": 6,
+  "subject": "English",
+  "units": [
+    {
+      "slug": "g6-eng-u-grammar",
+      "title": "Grammar",
+      "topics": [
+        {
+          "slug": "g6-eng-t-nouns-pronouns",
+          "title": "Nouns and Pronouns",
+          "description": "Naming words and the words that replace them.",
+          "lessons": [
+            {
+              "slug": "g6-eng-nouns",
+              "title": "Kinds of Nouns",
+              "objectives": [
+                "Identify nouns in sentences",
+                "Classify nouns as common, proper, collective, material and abstract",
+                "Form plurals of regular and irregular nouns",
+                "Use countable and uncountable nouns correctly"
+              ],
+              "intro": "Every sentence is about someone or something. The words that name people, places, animals, things and ideas are called nouns. In the sentence 'Priya kept her courage during the storm in Chennai', the nouns are Priya, courage, storm and Chennai. Knowing the different kinds of nouns helps you use capital letters correctly, choose the right verb and write more precise sentences.",
+              "sections": [
+                [
+                  "Common, proper and collective nouns",
+                  "A common noun is the general name for any person, place or thing of a kind, such as girl, city or river. A proper noun is the particular name of one person, place or thing, such as Priya, Mumbai or the Ganga. Proper nouns always begin with a capital letter, wherever they appear in a sentence. A collective noun names a group as one unit: a team of players, a flock of birds, a bunch of keys, a herd of cattle, a fleet of ships. A collective noun usually takes a singular verb when the group acts as one: 'The team is ready.'"
+                ],
+                [
+                  "Material and abstract nouns",
+                  "A material noun names a substance from which things are made, such as gold, cotton, wood or glass. 'The ring is made of gold' uses gold as a material noun. An abstract noun names a quality, feeling, state or idea that cannot be seen or touched: honesty, happiness, childhood, freedom, courage. Many abstract nouns are formed from adjectives, verbs or other nouns: brave becomes bravery, know becomes knowledge, child becomes childhood, and free becomes freedom."
+                ],
+                [
+                  "Number: singular and plural",
+                  "Most nouns form the plural by adding -s: book, books. Nouns ending in s, sh, ch, x or z add -es: bus, buses; box, boxes. Nouns ending in a consonant + y change y to i and add -es: city, cities; but day becomes days because a vowel comes before y. Many nouns ending in f or fe change to -ves: leaf, leaves; knife, knives. Some plurals are irregular: man, men; child, children; tooth, teeth; mouse, mice. A few nouns are the same in both forms, such as sheep and deer. Uncountable nouns, such as water, rice, advice and furniture, have no plural and take a singular verb: 'The furniture is new.'"
+                ]
+              ],
+              "definitions": [
+                ["Noun", "A word that names a person, place, animal, thing or idea."],
+                ["Proper noun", "The particular name of a person, place or thing, written with a capital letter."],
+                ["Collective noun", "A noun that names a group of people, animals or things taken as a whole."],
+                ["Abstract noun", "A noun that names a quality, feeling or idea that cannot be touched."],
+                ["Uncountable noun", "A noun that cannot be counted and has no plural form, such as milk."]
+              ],
+              "examples": [
+                "A swarm of bees (collective) attacked the boy near Lake Pichola (proper).",
+                "Her kindness (abstract) is as precious as gold (material)."
+              ],
+              "worked": [
+                {
+                  "problem": "Identify and classify the nouns: 'The class showed great patience while Mr Rao repaired the wooden desk.'",
+                  "steps": [
+                    "Find the naming words: class, patience, Mr Rao, desk.",
+                    "class names a group of students → collective noun.",
+                    "patience is a quality → abstract noun.",
+                    "Mr Rao is a particular person → proper noun; desk is a general thing → common noun."
+                  ],
+                  "answer": "class (collective), patience (abstract), Mr Rao (proper), desk (common)."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Plural rules",
+                "columns": ["Ending", "Rule", "Example"],
+                "rows": [
+                  ["Most nouns", "Add -s", "pen → pens"],
+                  ["s, sh, ch, x, z", "Add -es", "church → churches"],
+                  ["Consonant + y", "y → ies", "baby → babies"],
+                  ["f / fe", "→ ves", "wolf → wolves"],
+                  ["Irregular", "Learn them", "foot → feet"]
+                ]
+              },
+              "real_world": "Using proper nouns correctly matters in addresses, forms and letters: writing 'new delhi' instead of 'New Delhi' looks careless. Collective and uncountable nouns are where many writers make agreement mistakes, such as 'The informations are wrong' instead of 'The information is wrong'.",
+              "takeaways": [
+                "Nouns name people, places, things and ideas.",
+                "Proper nouns need capital letters; common nouns do not.",
+                "Collective nouns name groups; abstract nouns name qualities and ideas.",
+                "Learn the regular plural rules and the common irregular plurals."
+              ],
+              "practice": [
+                ["Give the abstract noun of 'wise'.", "Wisdom."],
+                ["Write the plural of 'potato', 'wife' and 'ox'.", "Potatoes, wives, oxen."],
+                ["Correct the sentence: 'She gave me many advices.'", "She gave me a lot of advice / many pieces of advice."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which word is a proper noun?", ["river", "Kolkata", "city", "teacher"], "B", "It names one particular place.", "Kolkata is the name of a particular city and needs a capital letter."],
+                  ["What is the plural of 'child'?", ["childs", "childes", "children", "childrens"], "C", "It is an irregular plural.", "The plural of child is children."],
+                  ["Choose the collective noun: 'a ___ of sheep'.", ["flock", "bunch", "fleet", "team"], "A", "Sheep move together in this group.", "A group of sheep is a flock."],
+                  ["Which is an abstract noun?", ["chair", "Ravi", "water", "honesty"], "D", "You cannot touch it.", "Honesty is a quality, so it is an abstract noun."]
+                ],
+                "MEDIUM": [
+                  ["What is the plural of 'city'?", ["citys", "cities", "cityes", "cites"], "B", "It ends in consonant + y.", "Change y to i and add -es: cities."],
+                  ["Choose the correct sentence.", ["The furnitures are new.", "The furniture are new.", "The furniture is new.", "A furnitures is new."], "C", "Furniture is uncountable.", "Uncountable nouns take a singular verb: The furniture is new."],
+                  ["In 'This bracelet is made of silver', silver is a:", ["Material noun", "Collective noun", "Proper noun", "Abstract noun"], "A", "It is a substance things are made from.", "Silver is a material noun here."],
+                  ["The abstract noun formed from 'child' is:", ["childish", "children", "childly", "childhood"], "D", "It names the state of being a child.", "Childhood is the abstract noun."]
+                ],
+                "HARD": [
+                  ["Which plural is INCORRECT?", ["leaves", "roofs", "knifes", "teeth"], "C", "Words ending in -fe usually change to -ves.", "The plural of knife is knives, not knifes."],
+                  ["Choose the correct sentence.", ["The committee has made its decision.", "The committee have made its decision.", "The committee has made their decision.", "The committees has made its decision."], "A", "The committee acts as one unit.", "A collective noun acting as one takes a singular verb and 'its'."],
+                  ["Which sentence uses capital letters correctly?", ["we visited the taj mahal in agra.", "We visited the Taj mahal in agra.", "we visited The Taj Mahal in Agra.", "We visited the Taj Mahal in Agra."], "D", "Proper nouns and the first word need capitals.", "The sentence starts with a capital, and Taj Mahal and Agra are proper nouns."],
+                  ["Identify the abstract nouns: 'Their friendship gave him strength and joy.'", ["Their, him", "friendship, strength, joy", "gave, and", "him, joy"], "B", "Look for feelings and qualities.", "Friendship, strength and joy cannot be touched; they are abstract nouns."]
+                ]
+              }
+            },
+            {
+              "slug": "g6-eng-pronouns",
+              "title": "Pronouns",
+              "objectives": [
+                "Explain why pronouns are used",
+                "Use personal pronouns in subject and object forms",
+                "Use possessive, reflexive and demonstrative pronouns correctly",
+                "Make pronouns agree with the nouns they replace"
+              ],
+              "intro": "Read this: 'Arjun picked up Arjun's bag because Arjun was late for Arjun's bus.' It sounds odd because the same noun is repeated. Pronouns solve the problem: 'Arjun picked up his bag because he was late for his bus.' A pronoun is a word used in place of a noun. The noun it replaces is called its antecedent. Pronouns make writing smoother, but they must be chosen carefully so that the reader always knows who or what they refer to.",
+              "sections": [
+                [
+                  "Personal pronouns",
+                  "Personal pronouns refer to people or things: I, we (first person, the speaker); you (second person, the listener); he, she, it, they (third person, the person or thing spoken about). They change form depending on their job in the sentence. Subject forms are I, we, you, he, she, it, they: 'She sings.' Object forms are me, us, you, him, her, it, them: 'The teacher praised her.' A common error is using the wrong form after 'and': say 'Ravi and I went' (subject) but 'between you and me' (object, after a preposition)."
+                ],
+                [
+                  "Possessive and reflexive pronouns",
+                  "Possessive pronouns show ownership and stand alone without a noun: mine, ours, yours, his, hers, its, theirs. 'This pen is mine.' Do not confuse them with possessive adjectives, which come before a noun: my pen, your book. Possessive pronouns never take an apostrophe: write 'The bag is hers' and 'The dog wagged its tail', not her's or it's. (It's means 'it is'.) Reflexive pronouns end in -self or -selves: myself, yourself, himself, herself, itself, ourselves, yourselves, themselves. They are used when the subject and object are the same: 'She taught herself to swim.'"
+                ],
+                [
+                  "Demonstrative pronouns and agreement",
+                  "Demonstrative pronouns point to things: this and these for things near, that and those for things far. 'This is my seat; those are yours.' Use this and that for singular, these and those for plural. A pronoun must agree with its antecedent in number and gender: 'The girls finished their work' (plural), 'The cat licked its paw' (singular, neuter). Make sure the antecedent is clear. 'Riya told Meena that she had won' is confusing because we do not know who won; rewrite it as 'Riya told Meena, “You have won.”'"
+                ]
+              ],
+              "definitions": [
+                ["Pronoun", "A word used in place of a noun."],
+                ["Antecedent", "The noun that a pronoun refers to."],
+                ["Possessive pronoun", "A pronoun showing ownership that stands alone, such as mine or theirs."],
+                ["Reflexive pronoun", "A pronoun ending in -self or -selves referring back to the subject."],
+                ["Demonstrative pronoun", "A pronoun that points to something: this, that, these, those."]
+              ],
+              "examples": [
+                "The children cleaned the classroom themselves.",
+                "Is this umbrella yours or hers?"
+              ],
+              "worked": [
+                {
+                  "problem": "Correct the errors: 'Me and Sita went to the market. The shopkeeper gave a discount to Sita and I. The bag is her's.'",
+                  "steps": [
+                    "'Me and Sita' is the subject, so use the subject form and put yourself last: 'Sita and I went'.",
+                    "'to Sita and I' follows the preposition 'to', so use the object form: 'to Sita and me'.",
+                    "Possessive pronouns have no apostrophe: 'hers'."
+                  ],
+                  "answer": "Sita and I went to the market. The shopkeeper gave a discount to Sita and me. The bag is hers."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Personal pronoun forms",
+                "columns": ["Subject", "Object", "Possessive", "Reflexive"],
+                "rows": [
+                  ["I", "me", "mine", "myself"],
+                  ["you", "you", "yours", "yourself"],
+                  ["he / she / it", "him / her / it", "his / hers / its", "himself / herself / itself"],
+                  ["we", "us", "ours", "ourselves"],
+                  ["they", "them", "theirs", "themselves"]
+                ]
+              },
+              "real_world": "In emails, reports and stories, unclear pronouns cause real confusion: 'Tell the manager that he must call him' could mean anything. Writers and editors check that every pronoun has a clear antecedent. Correct forms such as 'between you and me' also make your speech sound confident in interviews.",
+              "takeaways": [
+                "Pronouns replace nouns to avoid repetition.",
+                "Use subject forms (I, he, they) as subjects and object forms (me, him, them) as objects.",
+                "Possessive pronouns (hers, its, theirs) never take an apostrophe.",
+                "A pronoun must agree with, and clearly refer to, its antecedent."
+              ],
+              "practice": [
+                ["Fill in: The birds built ___ nest in the tree.", "their"],
+                ["Fill in: I hurt ___ while playing.", "myself"],
+                ["Choose: (This/These) are my books.", "These"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Choose the pronoun: 'Rahul is tall. ___ plays basketball.'", ["Him", "He", "His", "Himself"], "B", "We need the subject form.", "He is the subject form that replaces Rahul."],
+                  ["Which is a reflexive pronoun?", ["mine", "them", "themselves", "these"], "C", "It ends in -selves.", "Themselves refers back to the subject."],
+                  ["Fill in: 'This book is ___.' (belongs to me)", ["mine", "my", "me", "I"], "A", "It must stand alone without a noun.", "Mine is the possessive pronoun that stands alone."],
+                  ["Which is a demonstrative pronoun?", ["she", "ours", "myself", "those"], "D", "It points to something.", "Those points to things that are far away."]
+                ],
+                "MEDIUM": [
+                  ["Choose the correct sentence.", ["Me and Asha are friends.", "Asha and I are friends.", "Asha and me are friends.", "I and Asha is friends."], "B", "It is the subject of the sentence.", "Use the subject form I and place yourself last: Asha and I."],
+                  ["Fill in: 'The dog wagged ___ tail.'", ["it's", "its'", "its", "it"], "C", "No apostrophe for possession.", "Its (no apostrophe) shows possession; it's means it is."],
+                  ["Fill in: 'Keep this secret between you and ___.'", ["me", "I", "myself", "mine"], "A", "'Between' is a preposition.", "After a preposition we use the object form me."],
+                  ["Fill in: 'The students did the project by ___.'", ["themself", "theirselves", "them", "themselves"], "D", "The plural reflexive pronoun.", "Themselves is the correct plural reflexive form."]
+                ],
+                "HARD": [
+                  ["Which sentence has an unclear pronoun?", ["The girls packed their bags.", "Anil told Vikram that he was late.", "I bought myself a book.", "These are hers."], "B", "Can you tell who 'he' is?", "'He' could mean Anil or Vikram, so the antecedent is unclear."],
+                  ["Choose the correct sentence.", ["Each of the boys has done their homework.", "The team lost its' match.", "Each of the boys has done his homework.", "Everyone of the boys have done his homework."], "C", "'Each' is singular.", "'Each' takes a singular verb and pronoun: has done his homework."],
+                  ["Which word in the sentence is a possessive ADJECTIVE, not a pronoun? 'Your bag is heavier than mine.'", ["Your", "mine", "bag", "than"], "A", "Possessive adjectives come before a noun.", "'Your' comes before 'bag'; 'mine' stands alone as a pronoun."],
+                  ["Choose the correct form: 'He is taller than ___.'", ["me", "myself", "mine", "I (am)"], "D", "Complete the comparison: 'than I am'.", "The full sentence is 'He is taller than I am', so I is correct in formal English."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g6-eng-u-reading",
+      "title": "Reading and Vocabulary",
+      "topics": [
+        {
+          "slug": "g6-eng-t-reading-meaning",
+          "title": "Reading for Meaning",
+          "description": "Finding the main idea of a passage and using synonyms and antonyms.",
+          "lessons": [
+            {
+              "slug": "g6-eng-main-idea",
+              "title": "Finding the Main Idea and Details",
+              "objectives": [
+                "Identify the main idea of a paragraph",
+                "Distinguish main ideas from supporting details",
+                "Use topic sentences to understand a passage",
+                "Write a short summary in your own words"
+              ],
+              "intro": "When a friend asks what a story or article was about, you do not repeat every sentence; you tell the most important point. That point is the main idea. Good readers look for the main idea of each paragraph and then notice the details that explain or support it. This skill helps you answer comprehension questions, take notes and remember what you read.",
+              "sections": [
+                [
+                  "Topic and main idea",
+                  "The topic is what a paragraph is about, usually in a word or two, such as 'honeybees'. The main idea is the most important point the writer makes about that topic, in a full sentence: 'Honeybees are essential for growing many of our crops.' Often the main idea is stated in a topic sentence. The topic sentence is frequently the first sentence of a paragraph, but it can also come at the end, as a conclusion, or in the middle. Sometimes the main idea is not stated at all and you must work it out from the details."
+                ],
+                [
+                  "Supporting details",
+                  "Supporting details are facts, examples, reasons and descriptions that explain or prove the main idea. In a paragraph about honeybees, details might include: bees carry pollen from flower to flower; about one-third of the food we eat depends on pollinators; fruits such as apples and mangoes need pollination. To check whether a sentence is a main idea or a detail, ask: does it explain something else in the paragraph, or do the other sentences explain it? Details answer questions such as who, what, where, when, why and how."
+                ],
+                [
+                  "Summarising",
+                  "A summary is a short version of a text in your own words that keeps the main ideas and leaves out minor details and examples. To summarise, read the whole passage, find the main idea of each paragraph, and combine them into a few sentences. Do not add your own opinions or new information. A useful check is the 'one-sentence test': if you can state the whole passage in one clear sentence, you have understood it. Summaries are usually about one-third of the length of the original or shorter."
+                ]
+              ],
+              "definitions": [
+                ["Main idea", "The most important point a writer makes about the topic."],
+                ["Topic sentence", "The sentence that states the main idea of a paragraph."],
+                ["Supporting details", "Facts, reasons and examples that explain the main idea."],
+                ["Summary", "A brief restatement of the main ideas of a text in your own words."]
+              ],
+              "examples": [
+                "Topic: libraries. Main idea: Libraries give everyone free access to knowledge.",
+                "Detail supporting that idea: Many libraries lend e-books and offer free internet."
+              ],
+              "worked": [
+                {
+                  "problem": "Find the main idea: 'Mangroves grow along tropical coasts. Their tangled roots slow down waves and protect villages from storms. They provide homes for fish, crabs and birds. They also store large amounts of carbon. Clearly, mangroves are valuable to both people and nature.'",
+                  "steps": [
+                    "Topic: mangroves.",
+                    "Details: protect coasts from storms, home for animals, store carbon.",
+                    "The last sentence sums up these details; the others explain it.",
+                    "So the topic sentence is at the end."
+                  ],
+                  "answer": "Main idea: Mangroves are valuable to both people and nature."
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Paragraph structure",
+                "items": [
+                  ["Topic sentence", "States the main idea"],
+                  ["Detail 1", "A fact or reason"],
+                  ["Detail 2", "An example"],
+                  ["Detail 3", "Another supporting point"],
+                  ["Concluding sentence", "Restates or sums up"]
+                ]
+              },
+              "real_world": "Newspaper headlines are main ideas squeezed into a few words, and the first paragraph of a news report gives the key facts. Students who can find main ideas take better notes and revise faster, and adults use the same skill to understand instructions, reports and contracts.",
+              "takeaways": [
+                "The topic is what a text is about; the main idea is the key point about it.",
+                "Topic sentences often, but not always, come first.",
+                "Details explain, prove or illustrate the main idea.",
+                "A summary keeps main ideas, drops minor details and uses your own words."
+              ],
+              "practice": [
+                ["What is the difference between a topic and a main idea?", "A topic is a word or phrase; the main idea is a full statement about it."],
+                ["Should a summary include your opinion?", "No."],
+                ["Where can a topic sentence appear?", "Beginning, middle or end of a paragraph."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The main idea of a paragraph is:", ["Its first word", "The most important point about the topic", "The longest sentence", "A difficult word"], "B", "What is the paragraph mainly saying?", "The main idea is the key point the writer makes."],
+                  ["A sentence that states the main idea is called the:", ["Detail sentence", "Question sentence", "Topic sentence", "Example sentence"], "C", "It is often the first sentence.", "The topic sentence states the main idea."],
+                  ["Facts and examples that explain the main idea are:", ["Supporting details", "Titles", "Headings", "Opinions"], "A", "They support the main point.", "Supporting details give facts, reasons and examples."],
+                  ["A summary should be:", ["Longer than the original", "Copied word for word", "Full of your opinions", "Short and in your own words"], "D", "Think of telling a friend briefly.", "A summary is short, keeps the main ideas and uses your own words."]
+                ],
+                "MEDIUM": [
+                  ["'Many animals hibernate in winter. Bears sleep in caves. Frogs bury themselves in mud.' Which is the main idea?", ["Bears sleep in caves.", "Many animals hibernate in winter.", "Frogs bury themselves in mud.", "Winter is cold."], "B", "Which sentence do the others explain?", "The other two sentences are examples of animals hibernating."],
+                  ["Which question helps you find a supporting detail?", ["What is the title?", "Who wrote it?", "Why or how does this happen?", "How many pages are there?"], "C", "Details explain the main idea.", "Details answer why, how, when and where about the main idea."],
+                  ["Which is a topic rather than a main idea?", ["Solar energy", "Solar energy is clean and renewable.", "Solar panels cut electricity bills.", "India is building large solar parks."], "A", "A topic is just a word or phrase.", "'Solar energy' names the topic; the others are statements."],
+                  ["What should you leave out of a summary?", ["The main idea", "Key facts", "The writer's main argument", "Minor examples and your own opinion"], "D", "Keep only the important points.", "Summaries omit minor details and personal opinions."]
+                ],
+                "HARD": [
+                  ["'Bicycles cause no pollution. They are cheap to maintain. Cycling keeps us fit. For short trips, the bicycle is the best choice.' Where is the topic sentence?", ["First sentence", "Last sentence", "Second sentence", "There is none"], "B", "Which sentence sums up the reasons?", "The last sentence is the main idea that the earlier reasons support."],
+                  ["A paragraph describes rainfall, rivers and dams in a region but never states one point. To find the main idea you should:", ["Pick the first sentence", "Pick the longest sentence", "Work out what the details have in common", "Ignore the paragraph"], "C", "The main idea is implied.", "When it is not stated, infer it from what the details share."],
+                  ["Which is the best one-sentence summary of a story in which a lost puppy is helped home by children who read the address on its collar?", ["Children used a collar's address to return a lost puppy home.", "A puppy had a collar.", "Children like puppies.", "Puppies get lost in many cities every day."], "A", "Include who, what and how in brief.", "It keeps the key events without minor details."],
+                  ["Which sentence would NOT support the main idea 'Trees improve city life'?", ["Trees give shade on hot days.", "Trees absorb dust and noise.", "Birds nest in city trees.", "Most trees are taller than people."], "D", "Does the sentence show a benefit to city life?", "Height alone does not show how trees improve city life."]
+                ]
+              }
+            },
+            {
+              "slug": "g6-eng-synonyms-antonyms",
+              "title": "Synonyms and Antonyms",
+              "objectives": [
+                "Recognise synonyms and antonyms",
+                "Choose the most suitable synonym for the context",
+                "Form antonyms using prefixes such as un-, in-, im-, dis- and non-",
+                "Use a dictionary and thesaurus to build vocabulary"
+              ],
+              "intro": "Words are a writer's tools, and having more tools lets you say exactly what you mean. Synonyms are words with similar meanings, such as big and large. Antonyms are words with opposite meanings, such as big and small. Learning synonyms and antonyms makes your writing more interesting, helps you avoid repeating the same word, and lets you understand new words by connecting them to ones you know.",
+              "sections": [
+                [
+                  "Synonyms and shades of meaning",
+                  "Synonyms are seldom exactly the same; they often have different shades of meaning. Happy, glad, cheerful and delighted all describe a good feeling, but delighted is stronger than glad. Walk, stroll, march and stride all mean moving on foot, but a stroll is slow and relaxed while a march is firm and regular. Some synonyms are formal and others informal: purchase is more formal than buy. When choosing a synonym, think about the context: 'a heavy bag' is fine, but 'a heavy rain' sounds better than 'a weighty rain'."
+                ],
+                [
+                  "Antonyms",
+                  "Antonyms are opposites. Some are completely different words: hot and cold, ancient and modern, generous and mean. Others are formed by adding a prefix: happy becomes unhappy, possible becomes impossible, honest becomes dishonest, correct becomes incorrect, legal becomes illegal, regular becomes irregular, and violent becomes non-violent. The prefix im- is usually used before words beginning with p, b or m (impolite, immature), il- before l (illogical) and ir- before r (irresponsible). Some words have different antonyms in different contexts: the opposite of 'light' is 'heavy' for a bag but 'dark' for a room."
+                ],
+                [
+                  "Building vocabulary",
+                  "A dictionary gives the meaning, pronunciation and usage of a word. A thesaurus lists synonyms and antonyms. When you meet a new word, try to guess its meaning from the sentence first, then check it. Keep a vocabulary notebook with the word, its meaning, a synonym, an antonym and your own sentence. Read widely, because books, newspapers and magazines show words in natural use. Try using one new word each day in speech or writing; using a word is the best way to remember it."
+                ]
+              ],
+              "definitions": [
+                ["Synonym", "A word with the same or nearly the same meaning as another."],
+                ["Antonym", "A word with the opposite meaning to another."],
+                ["Prefix", "A group of letters added to the beginning of a word to change its meaning."],
+                ["Thesaurus", "A reference book that lists words with similar and opposite meanings."]
+              ],
+              "examples": [
+                "The brave (synonym: courageous; antonym: cowardly) soldier was rewarded.",
+                "The answer seemed logical, but her friend thought it was illogical."
+              ],
+              "worked": [
+                {
+                  "problem": "Replace the repeated word 'nice' with better synonyms: 'We had a nice trip. The weather was nice and the food was nice.'",
+                  "steps": [
+                    "Think about what each 'nice' really means in its context.",
+                    "A trip that was enjoyable → 'wonderful' or 'enjoyable'.",
+                    "Weather that was pleasant → 'pleasant' or 'sunny'.",
+                    "Food that tasted good → 'delicious'."
+                  ],
+                  "answer": "We had a wonderful trip. The weather was pleasant and the food was delicious."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Prefixes that make antonyms",
+                "columns": ["Prefix", "Used with", "Examples"],
+                "rows": [
+                  ["un-", "many words", "unkind, unhappy"],
+                  ["in- / im-", "im- before p, b, m", "incorrect, impossible"],
+                  ["il- / ir-", "il- before l, ir- before r", "illegal, irregular"],
+                  ["dis-", "many verbs and adjectives", "disagree, dishonest"],
+                  ["non-", "some nouns and adjectives", "non-violent, non-living"]
+                ]
+              },
+              "real_world": "Writers and journalists use synonyms to keep articles lively, and lawyers choose precise words because synonyms can change meaning. Many competitive examinations and job interviews test vocabulary, and a wide vocabulary helps you express ideas clearly in everyday conversation.",
+              "takeaways": [
+                "Synonyms have similar meanings but different shades and levels of formality.",
+                "Antonyms are opposites; many are formed with un-, in-, im-, il-, ir-, dis- or non-.",
+                "Choose words that fit the context.",
+                "Use a dictionary, a thesaurus and a vocabulary notebook to grow your word bank."
+              ],
+              "practice": [
+                ["Give a synonym for 'begin'.", "Start / commence."],
+                ["Give the antonym of 'patient' using a prefix.", "Impatient."],
+                ["What is the antonym of 'light' in 'a light room'?", "Dark."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A synonym of 'large' is:", ["tiny", "big", "short", "thin"], "B", "It means the same thing.", "Big and large have similar meanings."],
+                  ["The antonym of 'ancient' is:", ["old", "historic", "modern", "early"], "C", "It means the opposite of very old.", "Modern is the opposite of ancient."],
+                  ["Which prefix makes the antonym of 'kind'?", ["un-", "dis-", "im-", "ir-"], "A", "Not kind = ___kind.", "Unkind is the antonym of kind."],
+                  ["A book that lists synonyms and antonyms is a:", ["Diary", "Atlas", "Novel", "Thesaurus"], "D", "It is a word-finder for writers.", "A thesaurus lists synonyms and antonyms."]
+                ],
+                "MEDIUM": [
+                  ["The antonym of 'possible' is:", ["unpossible", "impossible", "dispossible", "inpossible"], "B", "Im- is used before p.", "Impossible is the correct antonym."],
+                  ["Which word is the strongest synonym of 'happy'?", ["okay", "content", "delighted", "fine"], "C", "Think of shades of meaning.", "Delighted expresses a very strong happy feeling."],
+                  ["Choose the antonym of 'regular'.", ["irregular", "unregular", "inregular", "disregular"], "A", "The word begins with r.", "Ir- is used before r: irregular."],
+                  ["Which synonym fits best? 'The old man ___ slowly along the beach in the evening.'", ["marched", "raced", "dashed", "strolled"], "D", "The movement is slow and relaxed.", "Strolled means walked slowly and calmly."]
+                ],
+                "HARD": [
+                  ["What is the antonym of 'light' in 'This box is light'?", ["dark", "heavy", "dim", "bright"], "B", "Think about weight, not brightness.", "For weight, the opposite of light is heavy."],
+                  ["Which pair are NOT synonyms?", ["brave – courageous", "purchase – buy", "generous – mean", "rapid – quick"], "C", "Look for a pair of opposites.", "Generous and mean are antonyms."],
+                  ["Which word correctly completes 'His explanation was ___; it made no sense.'?", ["illogical", "unlogical", "dislogical", "inlogical"], "A", "The word begins with l.", "Il- is used before l: illogical."],
+                  ["Which sentence uses the more formal synonym correctly?", ["I wanna purchase a ticket.", "Kindly buy me a ticket, dude.", "Gimme a ticket.", "Passengers must purchase tickets before boarding."], "D", "Purchase is formal; check the whole sentence's tone.", "The formal word purchase suits a formal notice."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g6-eng-u-writing",
+      "title": "Writing Skills",
+      "topics": [
+        {
+          "slug": "g6-eng-t-sentences-paragraphs",
+          "title": "Sentences and Paragraphs",
+          "description": "Writing complete, varied sentences and organising them into paragraphs.",
+          "lessons": [
+            {
+              "slug": "g6-eng-sentence-types",
+              "title": "Types of Sentences",
+              "objectives": [
+                "Identify the subject and predicate of a sentence",
+                "Recognise declarative, interrogative, imperative and exclamatory sentences",
+                "Use correct end punctuation",
+                "Avoid sentence fragments and run-on sentences"
+              ],
+              "intro": "A sentence is a group of words that makes complete sense. It begins with a capital letter and ends with a full stop, a question mark or an exclamation mark. 'The train arrived late' is a sentence; 'arrived late' is not, because we do not know what arrived. Every complete sentence has two parts and does one of four jobs: it tells, asks, orders or exclaims.",
+              "sections": [
+                [
+                  "Subject and predicate",
+                  "The subject is the person or thing the sentence is about. The predicate tells what the subject does or is. In 'My little brother plays the flute', the subject is 'My little brother' and the predicate is 'plays the flute'. To find the subject, ask 'who or what?' before the verb: who plays? My little brother. In commands, the subject 'you' is understood but not written: '(You) Close the door.' In questions the subject often comes after the helping verb: 'Is your sister at home?'"
+                ],
+                [
+                  "Four kinds of sentences",
+                  "A declarative (assertive) sentence makes a statement and ends with a full stop: 'The Sun rises in the east.' An interrogative sentence asks a question and ends with a question mark: 'Where do you live?' An imperative sentence gives a command, request or advice and usually ends with a full stop: 'Please pass the salt.' An exclamatory sentence expresses strong feeling, such as surprise, joy or anger, and ends with an exclamation mark: 'What a beautiful sunset!' Using all four kinds makes writing lively."
+                ],
+                [
+                  "Fragments and run-ons",
+                  "A sentence fragment is an incomplete sentence missing a subject or a verb, or one that does not finish a thought: 'Because it was raining.' Fix it by joining it to a complete sentence: 'We stayed indoors because it was raining.' A run-on sentence joins two complete sentences without proper punctuation: 'I finished my homework I went out to play.' Fix it with a full stop ('I finished my homework. I went out to play.'), a joining word ('I finished my homework, and then I went out to play.') or a semicolon. Reading your work aloud helps you hear where sentences should end."
+                ]
+              ],
+              "definitions": [
+                ["Sentence", "A group of words that makes complete sense."],
+                ["Subject", "The part of a sentence that tells who or what the sentence is about."],
+                ["Predicate", "The part of a sentence that tells something about the subject."],
+                ["Imperative sentence", "A sentence that gives a command, request or advice."],
+                ["Run-on sentence", "Two or more sentences joined without correct punctuation or a joining word."]
+              ],
+              "examples": [
+                "Interrogative: Have you watered the plants?",
+                "Exclamatory: How tall that tower is!"
+              ],
+              "worked": [
+                {
+                  "problem": "Rewrite correctly: 'my cousin lives in shimla it snows there in winter what fun'",
+                  "steps": [
+                    "Find the complete thoughts: 'my cousin lives in shimla' / 'it snows there in winter' / 'what fun'.",
+                    "Add capitals at the start of each sentence and for the proper noun Shimla.",
+                    "The first two are statements → full stops. The last shows strong feeling → exclamation mark."
+                  ],
+                  "answer": "My cousin lives in Shimla. It snows there in winter. What fun!"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Four kinds of sentences",
+                "columns": ["Kind", "Job", "End mark", "Example"],
+                "rows": [
+                  ["Declarative", "Tells", ".", "Water boils at 100 °C."],
+                  ["Interrogative", "Asks", "?", "Did you see the match?"],
+                  ["Imperative", "Orders/requests", ". or !", "Shut the window."],
+                  ["Exclamatory", "Shows feeling", "!", "What a surprise!"]
+                ]
+              },
+              "real_world": "Clear sentences matter in messages, applications and instructions. A run-on text message can be misunderstood, and a set of instructions written as clear imperative sentences ('Switch off the power. Remove the cover.') is far safer to follow than a long, confusing paragraph.",
+              "takeaways": [
+                "Every sentence has a subject and a predicate and makes complete sense.",
+                "Declarative, interrogative, imperative and exclamatory sentences tell, ask, order and exclaim.",
+                "Use the correct end mark: . ? !",
+                "Fix fragments by completing them and run-ons by punctuating or joining them."
+              ],
+              "practice": [
+                ["Underline the subject: 'The old banyan tree gives shade.'", "The old banyan tree"],
+                ["Change into a question: 'She can swim.'", "Can she swim?"],
+                ["Fix the run-on: 'It was late we went home.'", "It was late, so we went home."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which is a complete sentence?", ["Running in the park.", "The children played cricket.", "Because he was tired.", "On the table."], "B", "It needs a subject and a verb and complete sense.", "'The children played cricket' has a subject and predicate and makes sense."],
+                  ["Which end mark does an interrogative sentence need?", ["Full stop", "Comma", "Question mark", "Colon"], "C", "Interrogative sentences ask.", "Questions end with a question mark."],
+                  ["'Please open the window.' This sentence is:", ["Imperative", "Interrogative", "Exclamatory", "Declarative"], "A", "It is a request.", "Commands and requests are imperative sentences."],
+                  ["'What a lovely garden!' is:", ["Declarative", "Interrogative", "Imperative", "Exclamatory"], "D", "It shows strong feeling.", "It expresses delight and ends with an exclamation mark."]
+                ],
+                "MEDIUM": [
+                  ["What is the subject of 'Every morning, my grandmother waters the plants'?", ["Every morning", "my grandmother", "waters", "the plants"], "B", "Who waters?", "My grandmother is the one doing the action."],
+                  ["Which is a sentence fragment?", ["Close the door.", "She smiled.", "When the bell rang.", "Birds fly."], "C", "Does it complete a thought?", "'When the bell rang' leaves us waiting for what happened."],
+                  ["In 'Sit down', what is the subject?", ["You (understood)", "Sit", "down", "There is no subject"], "A", "Who is being told to sit?", "In commands the subject 'you' is understood."],
+                  ["Which correctly fixes 'I was hungry I ate an apple'?", ["I was hungry I, ate an apple.", "I was, hungry I ate an apple.", "I was hungry? I ate an apple.", "I was hungry, so I ate an apple."], "D", "Join with a comma and a joining word.", "Adding ', so' correctly joins the two sentences."]
+                ],
+                "HARD": [
+                  ["Which sentence is punctuated correctly?", ["Where are you going.", "How kind you are!", "Please help me?", "Is it raining!"], "B", "Match each sentence to its kind.", "'How kind you are!' is exclamatory and correctly ends with !"],
+                  ["Identify the predicate: 'The boy with the red cap won the race.'", ["The boy", "with the red cap", "won the race", "The boy with the red cap"], "C", "What does the subject do?", "The subject is 'The boy with the red cap'; the predicate is 'won the race'."],
+                  ["Which is a run-on sentence?", ["The rain stopped the sun came out.", "The rain stopped, and the sun came out.", "The rain stopped. The sun came out.", "When the rain stopped, the sun came out."], "A", "Look for two sentences with nothing joining them.", "Two complete sentences are joined without punctuation or a conjunction."],
+                  ["Change 'You must finish your work' into an imperative sentence.", ["Must you finish your work?", "You finished your work.", "What work you finish!", "Finish your work."], "D", "Imperatives usually start with the verb.", "'Finish your work.' gives a direct command."]
+                ]
+              }
+            },
+            {
+              "slug": "g6-eng-paragraph-writing",
+              "title": "Writing a Paragraph",
+              "objectives": [
+                "Plan a paragraph around one main idea",
+                "Write a clear topic sentence, supporting sentences and a concluding sentence",
+                "Use linking words to connect ideas",
+                "Revise and edit a paragraph"
+              ],
+              "intro": "A paragraph is a group of sentences about one main idea. Paragraphs break writing into manageable pieces, like rooms in a house. When you start a new idea, you start a new paragraph. A well-written paragraph has a clear beginning, middle and end, and every sentence in it belongs there. In this lesson you will learn a simple method that you can use for any paragraph, from a story to a science answer.",
+              "sections": [
+                [
+                  "Planning",
+                  "Before writing, decide on your main idea and jot down three or four points that support it. If the topic is 'My favourite festival', your main idea might be 'Pongal is my favourite festival because it brings my whole family together.' Supporting points could be: cooking sweet pongal together, decorating the house with kolam, visiting relatives, and thanking the Sun and farm animals for the harvest. Arrange your points in a sensible order, such as time order, order of importance, or from general to specific."
+                ],
+                [
+                  "Writing the paragraph",
+                  "Begin with a topic sentence that states the main idea and catches the reader's interest. Then write supporting sentences that explain each point with details, examples or reasons. Use linking words to show how ideas connect: first, next, then and finally for order; also, besides and moreover to add ideas; for example and such as to give examples; however and but to contrast; because and so to show reasons and results. End with a concluding sentence that sums up or gives a final thought: 'For me, Pongal is not just a festival but a celebration of family.'"
+                ],
+                [
+                  "Revising and editing",
+                  "Read your paragraph again. Revising means improving the content: does every sentence support the main idea? Remove sentences that wander off the topic, add details where ideas are thin, and vary your sentence beginnings. Editing means correcting mistakes in spelling, capital letters, punctuation and grammar. Reading aloud helps you catch missing words and awkward phrases. A useful checklist is: clear topic sentence, three or more supporting details, linking words, a concluding sentence, and no errors."
+                ]
+              ],
+              "definitions": [
+                ["Paragraph", "A group of related sentences about one main idea."],
+                ["Concluding sentence", "The final sentence that sums up the paragraph."],
+                ["Linking words", "Words such as first, however and because that connect ideas."],
+                ["Revising", "Improving the content and organisation of writing."],
+                ["Editing", "Correcting spelling, punctuation and grammar errors."]
+              ],
+              "examples": [
+                "Topic sentence: Reading before bed is a habit everyone should try.",
+                "Concluding sentence: Ten minutes with a book can end any day on a peaceful note."
+              ],
+              "worked": [
+                {
+                  "problem": "Write a paragraph on 'Why we should plant trees' using the plan-write-revise method.",
+                  "steps": [
+                    "Main idea: Planting trees is one of the simplest ways to protect our planet.",
+                    "Points: clean air, shade and cooler cities, homes for birds, prevent soil erosion.",
+                    "Write with linking words: 'First, trees give us oxygen and absorb dust. Moreover, they provide shade… Besides, birds and insects… Finally, their roots hold the soil…'",
+                    "Conclude: 'If every student planted one tree, our towns would be greener and healthier.' Then check spelling and punctuation."
+                  ],
+                  "answer": "A paragraph with a topic sentence, four supported points joined by linking words, and a concluding sentence."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "The paragraph 'burger'",
+                "items": ["Topic sentence (top bun)", "Detail 1 with example", "Detail 2 with example", "Detail 3 with example", "Concluding sentence (bottom bun)"]
+              },
+              "real_world": "Every email, school answer and job application is made of paragraphs. Readers decide quickly whether writing is worth reading; a strong topic sentence makes them keep going. In examinations, well-organised paragraphs earn more marks because the examiner can see your ideas clearly.",
+              "takeaways": [
+                "A paragraph develops one main idea.",
+                "Plan your points, then write a topic sentence, supporting details and a concluding sentence.",
+                "Linking words make the paragraph flow.",
+                "Revise for content and edit for errors."
+              ],
+              "practice": [
+                ["Write a topic sentence for a paragraph about your school library.", "For example: Our school library is my favourite place to explore new worlds."],
+                ["Give three linking words that show order.", "First, next, finally."],
+                ["What is the difference between revising and editing?", "Revising improves content; editing fixes errors."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A paragraph should be about:", ["Many unrelated ideas", "One main idea", "Only facts", "Only feelings"], "B", "One paragraph, one…", "Each paragraph develops one main idea."],
+                  ["The sentence that sums up a paragraph is the:", ["Topic sentence", "Detail sentence", "Concluding sentence", "Title"], "C", "It comes at the end.", "The concluding sentence sums up the paragraph."],
+                  ["Which is a linking word that shows contrast?", ["However", "First", "Also", "Then"], "A", "It shows a difference.", "However introduces a contrasting idea."],
+                  ["Correcting spelling and punctuation is called:", ["Planning", "Revising", "Summarising", "Editing"], "D", "It fixes errors.", "Editing corrects spelling, punctuation and grammar."]
+                ],
+                "MEDIUM": [
+                  ["Which is the best topic sentence for a paragraph about the benefits of exercise?", ["I went to the park.", "Regular exercise keeps our body and mind healthy.", "Football is a game.", "Some people run."], "B", "It should state the main idea clearly.", "It clearly introduces the benefits that the paragraph will explain."],
+                  ["In a paragraph about saving water, which sentence does NOT belong?", ["Turn off the tap while brushing.", "Fix leaking pipes quickly.", "My uncle bought a new car.", "Reuse water from washing vegetables."], "C", "Does it support the main idea?", "The car has nothing to do with saving water."],
+                  ["Which linking word adds another idea?", ["Moreover", "However", "But", "Although"], "A", "It means 'in addition'.", "Moreover adds a further point."],
+                  ["Arranging the steps of making tea in a paragraph should follow:", ["Order of importance", "Random order", "Alphabetical order", "Time order"], "D", "The steps happen one after another.", "A process is best described in time order."]
+                ],
+                "HARD": [
+                  ["Which revision makes this paragraph better? 'Dogs are loyal. Dogs are friendly. Dogs are protective.'", ["Delete all sentences", "Vary sentence beginnings and add examples", "Add more 'Dogs are' sentences", "Change dogs to cats"], "B", "The sentences sound repetitive and thin.", "Varying beginnings and adding details makes writing livelier and stronger."],
+                  ["Which concluding sentence best fits a paragraph on 'Why I enjoy reading'?", ["Books are made of paper.", "My friend prefers football.", "Reading lets me travel to new worlds without leaving my room.", "Libraries close at five."], "C", "It should sum up the main idea.", "It restates the main idea in an interesting way."],
+                  ["A paragraph moves from 'Our town has many parks' to 'The biggest park has a lake' to 'Its lake has rare birds'. This order is:", ["General to specific", "Time order", "Random", "Specific to general"], "A", "Does it narrow down or widen out?", "It starts broad and becomes more specific."],
+                  ["Choose the correctly linked pair: 'The road was blocked. We took another route.'", ["The road was blocked, however we took another route because.", "The road was blocked, but because we took another route.", "Although the road was blocked, so we took another route.", "The road was blocked, so we took another route."], "D", "Which word shows a result?", "'So' shows that taking another route was the result of the block."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

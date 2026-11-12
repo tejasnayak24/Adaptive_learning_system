@@ -36,7 +36,7 @@ def _check_question(q: Any, where: str, problems: list[str]) -> str | None:
         problems.append(f"{where}: empty question text")
     if not (isinstance(options, list) and len(options) == 4 and all(str(o).strip() for o in options)):
         problems.append(f"{where}: needs four non-empty options")
-    elif len({str(o).strip().lower() for o in options}) != 4:
+    elif len({str(o).strip() for o in options}) != 4:  # case matters (capitalisation questions)
         problems.append(f"{where}: duplicate options")
     if answer not in ("A", "B", "C", "D"):
         problems.append(f"{where}: answer must be A-D")
