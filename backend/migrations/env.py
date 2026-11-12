@@ -27,6 +27,7 @@ from app.database.connection import Base  # noqa: E402
 from app.models import (  # noqa: E402,F401
     attempt_answer,
     lesson,
+    monitoring,
     progress,
     question,
     quiz,

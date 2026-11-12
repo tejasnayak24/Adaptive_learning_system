@@ -64,12 +64,12 @@ npm run dev
 
 The Vite dev server forwards `/api/*` to the backend on port 8000.
 
-## 4. Facial analysis
+## 4. Facial analysis (camera agent — required for lessons)
 
 ```powershell
 cd C:\Users\tejas\Adaptive_learning_system\facial_analysis
 .\venv\Scripts\Activate.ps1
-python main.py --student-id <your student id>
+python main.py
 ```
 
 If the venv does not exist:
@@ -80,10 +80,15 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
-Your student id is shown by `GET /profile` after logging in. Quiz attempts
-taken without live camera telemetry are saved with **no attention data**
-(shown as "Unavailable"), and no adaptive recommendation is generated for them.
+The agent listens on `http://127.0.0.1:8765` and keeps the webcam **off**
+until a lesson starts. The website pairs with it automatically using a
+single-use token — no student id is configured anywhere. Lessons and quizzes
+unlock only after camera monitoring is verified, and pause if it fails.
+See `facial_analysis/README.md` for details and troubleshooting, and
+`docs/WEBCAM_ACCEPTANCE_CHECKLIST.md` for the real-webcam test plan.
 
 ## 5. Use the app
 
 Keep all three services running, then open http://localhost:5173.
+The first lesson asks for camera-monitoring consent (students under 18 also
+confirm parent/guardian and school authorisation).

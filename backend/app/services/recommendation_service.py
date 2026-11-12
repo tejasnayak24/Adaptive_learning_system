@@ -67,6 +67,7 @@ def build_state(db: Session, progress: Progress) -> dict[str, Any] | None:
         "attention_score": float(progress.attention_score),
         "yawning": bool(progress.yawning),
         "looking_away": bool(progress.looking_away),
+        "drowsy": bool(progress.drowsy),
         "difficulty": progress.difficulty,
         "response_time": float(progress.response_time),
         "hints_used": int(progress.hints_used or 0),

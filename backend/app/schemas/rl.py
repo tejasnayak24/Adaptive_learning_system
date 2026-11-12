@@ -112,6 +112,13 @@ class RecommendationRequest(BaseModel):
             "(null = unknown)."
         ),
     )
+    drowsy: bool | None = Field(
+        default=None,
+        description=(
+            "Whether possible drowsiness (sustained eye closure) was observed "
+            "(null = unknown). An attention signal, not a medical assessment."
+        ),
+    )
     difficulty: str = Field(
         min_length=1,
         description="The difficulty level of the content currently being presented.",

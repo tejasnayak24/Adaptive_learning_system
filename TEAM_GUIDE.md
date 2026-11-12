@@ -185,16 +185,16 @@ Roles are changed only with `python backend/scripts/set_role.py <email> <role>`.
   "answers": { "11": "B", "12": "A" },
   "response_time": 42.0,
   "hints_used": 1,
-  "attention_score": 0.82,
-  "yawning": false,
-  "looking_away": false,
-  "drowsy": null
+  "monitoring_session_id": "ms_…"
 }
 ```
 
 * The **server grades** the answers; a client-sent score is ignored.
 * Every question of the quiz must be answered once (else **422**).
-* Camera fields are `null` when telemetry was unavailable — never guessed.
+* `monitoring_session_id` (the student's own, not ended) is required.
+  Camera measurements are taken by the server from that session's agent
+  telemetry; any camera values sent by the browser are ignored. They are
+  `null` when nothing was measured — never guessed.
 * Response `data`: `progress` (stored attempt), `grading`
   (`score`, `correct_count`, `total_questions`, per-question `results`
   including the correct answer — revealed only after submission),
@@ -217,16 +217,45 @@ student's next attempt arrives, its outcome is recorded in `reward_history`.
 
 The old `POST /recommend` placeholder has been removed.
 
-## Facial-analysis telemetry
+## Camera monitoring (local agent)
+
+Lessons and quizzes require a verified monitored session. The camera agent
+(`facial_analysis/main.py`) listens on `http://127.0.0.1:8765` (see
+`facial_analysis/README.md`).
+
+| Method | Path | Caller | Notes |
+|---|---|---|---|
+| GET | `/monitoring/consent` 🔒 | browser | `{required_version, is_minor, valid, consent}` |
+| POST | `/monitoring/consent` 🔒 | browser | `{accept: true, guardian_authorization_confirmed, school_authorization_confirmed}`; both confirmations required when age < 18 |
+| DELETE | `/monitoring/consent` 🔒 | browser | Withdraw; ends open sessions |
+| POST | `/monitoring/sessions` 🔒 | browser | `{lesson_id}` → `{session_id, pairing_token, …}` (403 without consent). Ends the student's other open sessions |
+| POST | `/monitoring/sessions/{id}/pairing` 🔒👤 | browser | Reconnect: new single-use pairing token, old agent token revoked |
+| GET | `/monitoring/sessions/{id}` 🔒👤 | browser | `{state, verified, camera_error, lighting_ok, …}`; also keeps the session alive |
+| POST | `/monitoring/sessions/{id}/end` 🔒👤 | browser | End the session (agent releases the camera) |
+| POST | `/monitoring/sessions/{id}/claim` | agent | `{pairing_token}` → `{agent_token, heartbeat_interval}`; single use, 2-minute TTL |
+| POST | `/monitoring/heartbeat` | agent (Bearer agent token) | Once per second: `{sequence, captured_at, camera_ok, face_detected, face_stable, attention_score, yawning, looking_away, possible_drowsiness, …}` |
+| POST | `/monitoring/agent/end` | agent (Bearer agent token) | Agent shutting down; session waits for reconnection |
+
+`state` is `awaiting_agent`, `stale` (no heartbeat within 5 s),
+`camera_unavailable`, `no_face`, `verifying`, `verified` or `ended`.
+Only `verified` permits learning. A session the browser stops polling for
+60 s is ended automatically.
+
+Tokens are never put in URLs, never logged, and only their SHA-256 hashes are
+stored. The agent never sends a student id: the backend derives it from the
+token. Out-of-order heartbeats (409) and measurements captured more than 3 s
+earlier are rejected as not live.
+
+## Facial-analysis telemetry (read-only)
 
 | Method | Path | Notes |
 |---|---|---|
-| POST | `/attention` | Camera agent → `{student_id, attention_score (0–1), yawning, looking_away}` once per second |
-| GET | `/attention/{student_id}` 🔒👤 | `{available, status, age_seconds, attention_score, …, session_average_attention}` |
-| POST | `/attention/{student_id}/reset` 🔒👤 | Start a new per-quiz aggregation window |
+| GET | `/attention/{student_id}` 🔒👤 | Live view: `{available, status, age_seconds, attention_score, possible_drowsiness, …, session_average_attention}` |
+| POST | `/attention/{student_id}/reset` 🔒👤 | Start a new per-quiz measurement window |
 
-`status` is `live`, `stale` (no reading for more than 5 s) or `no_data`.
-When not `live`, every measurement is `null`.
+`status` is `live`, `no_face`, `camera_unavailable`, `stale` or `no_data`;
+when not live, measurements are `null`. The old unauthenticated
+`POST /attention` was removed.
 
 ## Student progress
 

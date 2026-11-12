@@ -7,6 +7,8 @@ from app.auth.dependencies import get_current_student
 from app.database.connection import get_db
 from app.models.student import Student
 from app.schemas.quiz import QuizStartRequest, QuizSubmitRequest
+from app.services import monitoring_service as ms
+from app.services import telemetry_service
 from app.services.grading_service import GradingError
 from app.services.quiz_service import QuizService, quiz_to_dict
 from app.services.recommendation_service import (
@@ -101,6 +103,22 @@ def submit_quiz(
             detail="Quiz not found",
         )
 
+    # Camera monitoring is mandatory: the attempt must belong to one of the
+    # student's own monitored sessions that has not ended.
+    try:
+        monitoring = ms.owned_session(db, student, request.monitoring_session_id)
+    except ms.MonitoringError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.detail) from exc
+    if monitoring.status == ms.ENDED:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="The monitoring session has ended; restart camera monitoring and retake the quiz",
+        )
+
+    # Measured by the paired camera agent during this attempt (None when
+    # nothing was measured). Never taken from the browser.
+    camera = telemetry_service.attempt_metrics(student.id, monitoring.id)
+
     try:
         progress, grading = QuizService.grade_and_record(
             db,
@@ -109,10 +127,11 @@ def submit_quiz(
             answers=request.answers,
             response_time=request.response_time,
             hints_used=request.hints_used,
-            attention_score=request.attention_score,
-            yawning=request.yawning,
-            looking_away=request.looking_away,
-            drowsy=request.drowsy,
+            attention_score=camera["attention_score"],
+            yawning=camera["yawning"],
+            looking_away=camera["looking_away"],
+            drowsy=camera["drowsy"],
+            monitoring_session_id=monitoring.id,
         )
     except GradingError as exc:
         db.rollback()

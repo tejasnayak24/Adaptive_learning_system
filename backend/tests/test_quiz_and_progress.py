@@ -1,4 +1,4 @@
-from conftest import register_and_login
+from conftest import heartbeat, register_and_login, start_monitoring
 
 # lesson_with_quiz creates two questions; correct answers are B then A.
 ALL_CORRECT = ["B", "A"]
@@ -9,9 +9,35 @@ def _answers(client, headers, quiz_id, letters):
     return {str(q["id"]): letter for q, letter in zip(questions, letters)}
 
 
-def _submit(client, headers, quiz_id, letters=ALL_CORRECT, **overrides):
+import pytest
+
+_SESSIONS = {}
+
+
+@pytest.fixture(autouse=True)
+def _fresh_sessions():
+    _SESSIONS.clear()
+    yield
+    _SESSIONS.clear()
+
+
+def _monitoring(client, headers):
+    key = headers["Authorization"]
+    if key not in _SESSIONS:
+        _SESSIONS[key] = start_monitoring(client, headers)
+    return _SESSIONS[key]
+
+
+def _submit(client, headers, quiz_id, letters=ALL_CORRECT, camera=None, **overrides):
+    """Submit answers; ``camera`` is a list of heartbeat dicts sent first."""
+    monitoring = _monitoring(client, headers)
+    me = client.get("/profile", headers=headers).json()["data"]["id"]
+    client.post(f"/attention/{me}/reset", headers=headers)
+    for beat in camera or []:
+        assert heartbeat(client, monitoring, **beat).status_code == 200
     body = {
         "quiz_id": quiz_id,
+        "monitoring_session_id": monitoring["session_id"],
         "answers": _answers(client, headers, quiz_id, letters),
         "response_time": 42,
     }
@@ -61,14 +87,18 @@ def test_incomplete_or_invalid_answers_rejected(client, auth, lesson_with_quiz):
     answers = _answers(client, headers, quiz_id, ALL_CORRECT)
     first_id = next(iter(answers))
 
-    partial = {"quiz_id": quiz_id, "answers": {first_id: "B"}, "response_time": 5}
-    assert client.post("/quiz/submit", json=partial, headers=headers).status_code == 422
+    session_id = _monitoring(client, headers)["session_id"]
+    partial = {"quiz_id": quiz_id, "monitoring_session_id": session_id, "answers": {first_id: "B"}, "response_time": 5}
+    response = client.post("/quiz/submit", json=partial, headers=headers)
+    assert response.status_code == 422 and "Unanswered" in response.text
 
-    foreign = {"quiz_id": quiz_id, "answers": {**answers, "999999": "A"}, "response_time": 5}
-    assert client.post("/quiz/submit", json=foreign, headers=headers).status_code == 422
+    foreign = {**partial, "answers": {**answers, "999999": "A"}}
+    response = client.post("/quiz/submit", json=foreign, headers=headers)
+    assert response.status_code == 422 and "not in this quiz" in response.text
 
-    bad_letter = {"quiz_id": quiz_id, "answers": {**answers, first_id: "E"}, "response_time": 5}
-    assert client.post("/quiz/submit", json=bad_letter, headers=headers).status_code == 422
+    bad_letter = {**partial, "answers": {**answers, first_id: "E"}}
+    response = client.post("/quiz/submit", json=bad_letter, headers=headers)
+    assert response.status_code == 422 and "A, B, C or D" in response.text
 
     assert client.post("/quiz/submit", json={**partial, "quiz_id": 424242}, headers=headers).status_code == 404
 
@@ -90,14 +120,11 @@ def test_submission_with_telemetry_stores_recommendation(client, auth, lesson_wi
         client,
         headers,
         lesson_with_quiz["quiz_id"],
-        attention_score=0.82,
-        yawning=False,
-        looking_away=False,
-        drowsy=False,
+        camera=[{"attention_score": 0.80}, {"attention_score": 0.84}],
         hints_used=1,
     ).json()["data"]
 
-    assert data["progress"]["attention_score"] == 0.82
+    assert data["progress"]["attention_score"] == 0.82  # server-side average of the heartbeats
     assert data["progress"]["hints_used"] == 1
     assert data["recommendation_status"] == "available"
     rec = data["recommendation"]
@@ -119,10 +146,8 @@ def test_next_attempt_records_reward_for_previous_recommendation(client, auth, l
 
     headers, _ = auth
     quiz_id = lesson_with_quiz["quiz_id"]
-    camera = {"attention_score": 0.5, "yawning": False, "looking_away": False}
-
-    first = _submit(client, headers, quiz_id, letters=["C", "C"], **camera).json()["data"]
-    second = _submit(client, headers, quiz_id, letters=ALL_CORRECT, **{**camera, "attention_score": 0.9}).json()["data"]
+    first = _submit(client, headers, quiz_id, letters=["C", "C"], camera=[{"attention_score": 0.5}]).json()["data"]
+    second = _submit(client, headers, quiz_id, letters=ALL_CORRECT, camera=[{"attention_score": 0.9}]).json()["data"]
 
     rows = db_session.query(RewardHistory).all()
     assert len(rows) == 1
@@ -162,7 +187,7 @@ def test_submission_is_always_recorded_for_token_owner(client, auth, lesson_with
 
 def test_progress_is_owner_only(client, auth, lesson_with_quiz):
     headers, profile = auth
-    _submit(client, headers, lesson_with_quiz["quiz_id"], attention_score=0.7, yawning=False, looking_away=False)
+    _submit(client, headers, lesson_with_quiz["quiz_id"], camera=[{"attention_score": 0.7}])
 
     own = client.get(f"/progress/{profile['id']}", headers=headers)
     assert own.status_code == 200

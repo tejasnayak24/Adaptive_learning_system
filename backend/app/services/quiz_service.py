@@ -93,6 +93,7 @@ class QuizService:
         yawning: bool | None,
         looking_away: bool | None,
         drowsy: bool | None,
+        monitoring_session_id: str | None = None,
     ) -> tuple[Progress, GradingResult]:
         """Grade the answers on the server and store the attempt.
 
@@ -115,6 +116,7 @@ class QuizService:
             yawning=yawning,
             looking_away=looking_away,
             drowsy=drowsy,
+            monitoring_session_id=monitoring_session_id,
             difficulty=quiz.difficulty,
             completed=True,
         )

@@ -1,4 +1,4 @@
-from conftest import register_and_login
+from conftest import heartbeat, register_and_login, start_monitoring
 
 NEW_LESSON = {
     "title": "Photosynthesis",
@@ -54,7 +54,7 @@ def test_teacher_can_manage_lessons_and_partial_update_keeps_fields(client, db_s
 def test_telemetry_reads_are_owner_only(client, auth):
     headers, profile = auth
     sid = profile["id"]
-    client.post("/attention", json={"student_id": sid, "attention_score": 0.6, "yawning": False, "looking_away": False})
+    heartbeat(client, start_monitoring(client, headers), attention_score=0.6)
 
     assert client.get(f"/attention/{sid}", headers=headers).status_code == 200
     assert client.get(f"/attention/{sid}").status_code == 401
@@ -64,14 +64,10 @@ def test_telemetry_reads_are_owner_only(client, auth):
     assert client.post(f"/attention/{sid}/reset", headers=other_headers).status_code == 403
 
 
-def test_attention_sample_is_validated(client):
-    assert client.post("/attention", json={"student_id": 1, "attention_score": 1.7}).status_code == 422
-    # Extra diagnostic fields sent by the camera agent are accepted and ignored.
-    ok = client.post(
-        "/attention",
-        json={"student_id": 1, "attention_score": 0.4, "status": "Attentive", "head_direction": "Forward"},
-    )
-    assert ok.status_code == 200
+def test_unauthenticated_attention_post_was_removed(client):
+    # The camera can no longer post telemetry for an arbitrary student id.
+    response = client.post("/attention", json={"student_id": 1, "attention_score": 0.4})
+    assert response.status_code == 404
 
 
 def test_rl_endpoint_requires_auth_and_stub_route_removed(client):

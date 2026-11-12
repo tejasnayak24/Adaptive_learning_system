@@ -128,3 +128,60 @@ def register_and_login(client, email="student@example.com", password="Passw0rd!"
 def auth(client):
     """Register a student and return (headers, profile)."""
     return register_and_login(client)
+
+
+def start_monitoring(client, headers, lesson_id=None):
+    """Consent, create a monitoring session and pair a (simulated) agent.
+
+    Returns ``{"session_id", "agent_headers", "pairing_token"}``.
+    """
+    consent = client.post(
+        "/monitoring/consent",
+        json={
+            "accept": True,
+            "guardian_authorization_confirmed": True,
+            "school_authorization_confirmed": True,
+        },
+        headers=headers,
+    )
+    assert consent.status_code == 200, consent.text
+
+    created = client.post("/monitoring/sessions", json={"lesson_id": lesson_id}, headers=headers)
+    assert created.status_code == 200, created.text
+    data = created.json()["data"]
+
+    claimed = client.post(
+        f"/monitoring/sessions/{data['session_id']}/claim",
+        json={"pairing_token": data["pairing_token"]},
+    )
+    assert claimed.status_code == 200, claimed.text
+    agent_token = claimed.json()["data"]["agent_token"]
+
+    return {
+        "session_id": data["session_id"],
+        "pairing_token": data["pairing_token"],
+        "agent_headers": {"Authorization": f"Bearer {agent_token}"},
+        "sequence": [0],
+    }
+
+
+def heartbeat(client, monitoring, **fields):
+    """Send one agent heartbeat with a face-present default measurement."""
+    import time
+
+    monitoring["sequence"][0] += 1
+    body = {
+        "sequence": monitoring["sequence"][0],
+        "sent_at": time.time(),
+        "captured_at": time.time(),
+        "camera_ok": True,
+        "face_detected": True,
+        "face_stable": True,
+        "lighting_ok": True,
+        "attention_score": 0.8,
+        "yawning": False,
+        "looking_away": False,
+        "possible_drowsiness": False,
+    }
+    body.update(fields)
+    return client.post("/monitoring/heartbeat", json=body, headers=monitoring["agent_headers"])

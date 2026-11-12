@@ -75,6 +75,15 @@ class Progress(Base):
         nullable=True,
     )
 
+    # The monitored learning session whose camera telemetry produced the
+    # attention values of this attempt. NULL for attempts recorded before
+    # monitoring sessions existed.
+    monitoring_session_id = Column(
+        String(64),
+        ForeignKey("monitoring_sessions.id", ondelete="SET NULL"),
+        nullable=True,
+    )
+
     difficulty = Column(
         String,
         nullable=False,

@@ -1,21 +1,17 @@
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import cv2
 
 from camera import Camera
 from face_detector import FaceDetector
-from eye_tracker import EyeTracker
 from head_pose import HeadPoseEstimator
-from attention_score import AttentionScorer
 
 camera = Camera()
 detector = FaceDetector()
-eye = EyeTracker()
 head = HeadPoseEstimator()
-attention = AttentionScorer()
 
 while True:
 
@@ -28,36 +24,39 @@ while True:
 
     if found:
 
-        eye_result = eye.process(landmarks)
-        head_result = head.process(landmarks)
-
-        result = attention.calculate(
-            face_detected=True,
-            eyes_open=eye_result["eyes_open"],
-            head_direction=head_result["direction"]
-        )
+        result = head.process(landmarks)
 
         cv2.putText(
             frame,
-            f"Attention : {result['score']}",
+            f"Yaw : {result['yaw']}",
             (20,40),
             cv2.FONT_HERSHEY_SIMPLEX,
-            0.8,
+            0.7,
             (0,255,0),
             2
         )
 
         cv2.putText(
             frame,
-            result["status"],
+            f"Pitch : {result['pitch']}",
             (20,80),
             cv2.FONT_HERSHEY_SIMPLEX,
-            0.8,
+            0.7,
+            (0,255,0),
+            2
+        )
+
+        cv2.putText(
+            frame,
+            result["direction"],
+            (20,120),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            1,
             (255,0,0),
             2
         )
 
-    cv2.imshow("Attention Score", frame)
+    cv2.imshow("Head Pose", frame)
 
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break

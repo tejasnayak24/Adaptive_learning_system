@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useMonitoring } from '../context/MonitoringContext'
 import { quizService } from '../services/quizService'
 import { lessonService } from '../services/lessonService'
-import { rlService } from '../services/rlService'
 import { telemetryService } from '../services/telemetryService'
 
 export default function QuizView() {
@@ -32,6 +32,13 @@ export default function QuizView() {
   const [rlRecommendation, setRlRecommendation] = useState(null)
 
   const studentId = user?.id
+  const monitoring = useMonitoring()
+  const monitoringVerified = monitoring.verified
+
+  // In-progress answers survive a reload or a camera interruption. Only
+  // answers, position, elapsed time and hints are stored -- never tokens.
+  const draftKey = studentId ? `aegis.quizDraft.${studentId}.${id}` : null
+  const [draftLoaded, setDraftLoaded] = useState(false)
 
   const resetQuizTelemetry = async () => {
     try {
@@ -54,7 +61,24 @@ export default function QuizView() {
       try {
         setError('')
 
-        await resetQuizTelemetry()
+        let restored = null
+        try {
+          restored = draftKey ? JSON.parse(sessionStorage.getItem(draftKey) || 'null') : null
+        } catch {
+          restored = null
+        }
+
+        if (restored) {
+          setSelectedAnswers(restored.answers || {})
+          setCurrentQuestionIdx(restored.index || 0)
+          setSecondsElapsed(restored.seconds || 0)
+          setHintsRevealed(restored.hintsRevealed || {})
+          setHintsCount(restored.hints || 0)
+        } else {
+          // New attempt: start a fresh camera-measurement window.
+          await resetQuizTelemetry()
+        }
+        setDraftLoaded(true)
 
         const quizRes = await quizService.getQuiz(id)
 
@@ -111,8 +135,10 @@ export default function QuizView() {
     loadQuizData()
   }, [id, studentId])
 
+  // The quiz timer only runs while camera monitoring is verified; any
+  // interruption pauses it.
   useEffect(() => {
-    if (loading || isFinished) {
+    if (loading || isFinished || !monitoringVerified) {
       return
     }
 
@@ -121,7 +147,25 @@ export default function QuizView() {
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [loading, isFinished])
+  }, [loading, isFinished, monitoringVerified])
+
+  useEffect(() => {
+    if (!draftKey || !draftLoaded || isFinished) return
+    try {
+      sessionStorage.setItem(
+        draftKey,
+        JSON.stringify({
+          answers: selectedAnswers,
+          index: currentQuestionIdx,
+          seconds: secondsElapsed,
+          hintsRevealed,
+          hints: hintsCount,
+        })
+      )
+    } catch {
+      // Storage unavailable: answers still live in memory.
+    }
+  }, [draftKey, draftLoaded, isFinished, selectedAnswers, currentQuestionIdx, secondsElapsed, hintsRevealed, hintsCount])
 
   if (loading) {
     return (
@@ -243,23 +287,6 @@ export default function QuizView() {
     }
   }
 
-  const getLatestTelemetry = async () => {
-    try {
-      if (!studentId) {
-        return null
-      }
-
-      return await telemetryService.getTelemetry(studentId)
-    } catch (err) {
-      console.error(
-        'Failed to fetch facial telemetry:',
-        err
-      )
-
-      return null
-    }
-  }
-
   const handleSubmitQuiz = async () => {
     if (submitLoading) {
       return
@@ -288,29 +315,25 @@ export default function QuizView() {
       return
     }
 
+    if (!monitoringVerified || !monitoring.sessionId) {
+      alert('Camera monitoring must be active to submit the quiz.')
+      return
+    }
+
     setSubmitLoading(true)
 
     try {
       /*
-       * Read camera telemetry at submission. When the camera is offline
-       * or its data is stale, every metric is null -- missing telemetry
-       * is recorded as missing, never as low attention.
-       */
-      const telemetry = await getLatestTelemetry()
-      const camera = telemetryService.toAttemptMetrics(telemetry)
-
-      /*
-       * The server grades the selected answers, stores the attempt and
-       * generates the adaptive recommendation from the stored data.
+       * The server grades the selected answers, takes the camera
+       * measurements its paired agent reported for this monitored session,
+       * stores the attempt and generates the adaptive recommendation.
        */
       const submitRes = await quizService.submitQuiz({
         quizId: quiz.id,
+        monitoringSessionId: monitoring.sessionId,
         answers: selectedAnswers,
         responseTime: secondsElapsed,
-        hintsUsed: hintsCount,
-        attentionScore: camera.attentionScore,
-        yawning: camera.yawning,
-        lookingAway: camera.lookingAway
+        hintsUsed: hintsCount
       })
 
       if (!submitRes?.success) {
@@ -319,8 +342,14 @@ export default function QuizView() {
         )
       }
 
-      const { grading, recommendation, recommendation_status: recommendationStatus } =
+      const { grading, progress, recommendation, recommendation_status: recommendationStatus } =
         submitRes.data
+
+      try {
+        if (draftKey) sessionStorage.removeItem(draftKey)
+      } catch {
+        // ignore
+      }
 
       let rlRes
       if (recommendation) {
@@ -345,16 +374,13 @@ export default function QuizView() {
         timeTaken:
           secondsElapsed,
 
-        // null = camera telemetry unavailable (not zero attention)
-        attentionUsed:
-          camera.attentionScore,
+        // Measured by the camera agent; null = no measurement (not zero attention)
+        attentionUsed: progress.attention_score,
 
         // Observed at any point during the attempt; null = unknown.
-        yawned:
-          camera.yawning,
-
-        lookedAway:
-          camera.lookingAway
+        yawned: progress.yawning,
+        lookedAway: progress.looking_away,
+        drowsy: progress.drowsy
       })
 
       setRlRecommendation(rlRes)
@@ -775,6 +801,24 @@ export default function QuizView() {
                       : 'Stable'}
                 </span>
               </div>
+
+              <div className="flex justify-between text-sm">
+                <span className="text-slate-400">
+                  Possible drowsiness
+                </span>
+
+                <span
+                  className={`font-semibold ${
+                    results.drowsy ? 'text-amber-400' : 'text-slate-400'
+                  }`}
+                >
+                  {results.drowsy === null || results.drowsy === undefined
+                    ? 'Unknown'
+                    : results.drowsy
+                      ? 'Observed'
+                      : 'Not observed'}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -1120,6 +1164,7 @@ export default function QuizView() {
                 }
                 disabled={
                   submitLoading ||
+                  !monitoringVerified ||
                   Object.keys(
                     selectedAnswers
                   ).length <

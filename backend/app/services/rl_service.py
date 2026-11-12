@@ -207,6 +207,7 @@ class RLService:
             hints_used=hints_used,
             lesson_attempts=lesson_attempts,
             completed_lessons=completed_lessons,
+            drowsy=bool(data.get("drowsy") or False),
         )
 
     @staticmethod

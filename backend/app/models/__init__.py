@@ -15,3 +15,4 @@ from app.models.attempt_answer import AttemptAnswer  # noqa: F401
 from app.models.session import LearningSession  # noqa: F401
 from app.models.recommendation import RecommendationHistory  # noqa: F401
 from app.models.reward import RewardHistory  # noqa: F401
+from app.models.monitoring import MonitoringConsent, MonitoringSession  # noqa: F401

@@ -98,9 +98,11 @@ def test_session_aggregates_and_reset():
 
 
 def test_telemetry_endpoints(client, auth):
+    from conftest import heartbeat, start_monitoring
+
     headers, profile = auth
     sid = profile["id"]
-    client.post("/attention", json={"student_id": sid, "attention_score": 0.75, "yawning": False, "looking_away": False})
+    heartbeat(client, start_monitoring(client, headers), attention_score=0.75)
     body = client.get(f"/attention/{sid}", headers=headers).json()["data"]
     assert body["available"] is True
     assert body["attention_score"] == 0.75

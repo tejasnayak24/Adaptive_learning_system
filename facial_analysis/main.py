@@ -1,6 +1,6 @@
 """
-Adaptive Learning System
-Facial Analysis Module
+Adaptive Learning System (Aegis)
+Facial Analysis Module -- local camera agent
 
 Features:
 
@@ -10,405 +10,167 @@ Features:
 - Gaze Detection
 - Head Pose Estimation
 - Attention Scoring
-- Looking Away Detection
+- Looking Away Detection (sustained)
 - Yawning Detection
 - Face Presence Detection
+- Possible-drowsiness alerts (sustained eye closure) with voice alerts
+- On-screen Dashboard (HUD)
 - Session Logging
-- FPS Counter
+
+Usage:
+
+    python main.py            # run the camera agent (normal use)
+    python main.py --preview  # local camera preview only, no backend
+
+In agent mode the webcam stays OFF until the Aegis website starts a
+learning session. The website pairs with this agent through
+http://127.0.0.1:8765; the student id is never configured here -- the
+backend derives it from the session token.
 """
 
 import argparse
-import cv2
+import signal
+import sys
 import time
 
-from api_client import APIClient
-from config import STUDENT_ID as DEFAULT_STUDENT_ID, SEND_INTERVAL
-from camera import Camera
-from face_detector import FaceDetector
-from eye_tracker import EyeTracker
-from head_pose import HeadPoseEstimator
-from gaze_tracker import GazeTracker
-from attention_engine import AttentionEngine
-from logger import SessionLogger
-from looking_away import LookingAwayDetector
-from yawn_detector import YawnDetector
-from face_presence import FacePresence
+from config import AGENT_HOST, AGENT_PORT, SHOW_HUD
 
 
-# ---------------------------------------------------
-# Student Configuration
-# ---------------------------------------------------
+def run_agent(display):
+    from agent_server import AgentServer
+    from monitor import MonitoringController
+    from voice_alert import VoiceAlert
 
-parser = argparse.ArgumentParser(
-    description="Adaptive Learning System - Facial Analysis"
-)
+    voice = VoiceAlert()
+    controller = MonitoringController(voice=voice, display=display)
 
-parser.add_argument(
-    "--student-id",
-    type=int,
-    default=DEFAULT_STUDENT_ID,
-    help="Student ID to associate with facial telemetry",
-)
-
-args = parser.parse_args()
-student_id = args.student_id
-
-
-# ---------------------------------------------------
-# Initialize Modules
-# ---------------------------------------------------
-
-camera = Camera()
-detector = FaceDetector()
-eye_tracker = EyeTracker()
-head_pose = HeadPoseEstimator()
-gaze_tracker = GazeTracker()
-looking_detector = LookingAwayDetector()
-yawn_detector = YawnDetector()
-attention = AttentionEngine()
-logger = SessionLogger()
-presence = FacePresence()
-api = APIClient()
-
-backend_status = "Disconnected"
-
-
-# ---------------------------------------------------
-# Timers
-# ---------------------------------------------------
-
-prev_time = time.time()
-last_log_time = time.time()
-last_api_time = time.time()
-
-
-# ---------------------------------------------------
-# Main Loop
-# ---------------------------------------------------
-
-while True:
-
-    frame = camera.read_frame()
-
-    if frame is None:
-        break
-
-    face_found, landmarks, frame = detector.detect(frame)
-
-    presence_result = presence.update(face_found)
-
-    if face_found:
-
-        # -----------------------------
-        # Eye Tracking
-        # -----------------------------
-
-        eye_result = eye_tracker.process(landmarks)
-
-        # -----------------------------
-        # Gaze Detection
-        # -----------------------------
-
-        gaze_result = gaze_tracker.process(landmarks)
-
-        # -----------------------------
-        # Head Pose
-        # -----------------------------
-
-        head_result = head_pose.process(landmarks)
-
-        # -----------------------------
-        # Looking At Screen
-        # -----------------------------
-
-        looking_at_screen = (
-            gaze_result["gaze"] == "Center"
-            and head_result["direction"] == "Forward"
+    try:
+        server = AgentServer(controller).start()
+    except OSError as exc:
+        print(
+            f"Could not listen on http://{AGENT_HOST}:{AGENT_PORT} ({exc}).\n"
+            "Is another Aegis camera agent already running?",
+            file=sys.stderr,
         )
+        return 1
 
-        # -----------------------------
-        # Looking Away Detection
-        # -----------------------------
+    print(f"Aegis camera agent ready on http://{AGENT_HOST}:{server.port}")
+    print("The webcam stays off until you start a lesson on the Aegis website.")
+    print("Press Ctrl+C to quit.")
 
-        looking_result = looking_detector.process(
-            head_result["direction"],
-            gaze_result["gaze"]
-        )
+    def _stop(*_):
+        controller.shutdown()
 
-        # -----------------------------
-        # Yawn Detection
-        # -----------------------------
+    signal.signal(signal.SIGINT, _stop)
 
-        yawn_result = yawn_detector.process(landmarks)
+    try:
+        controller.run_forever()
+    except KeyboardInterrupt:
+        controller.shutdown()
+    finally:
+        server.stop()
+        voice.shutdown()
 
-        # -----------------------------
-        # Attention Engine
-        # -----------------------------
+    return 0
 
-        attention_result = attention.update(
-            face=face_found,
-            eyes_open=eye_result["eyes_open"],
-            head_direction=head_result["direction"],
-            blink_rate=eye_result["blink_rate"],
-            looking_away=looking_result["looking_away"],
-            yawning=yawn_result["yawning"]
-        )
 
-        # -----------------------------
-        # Log Once Every Second
-        # -----------------------------
+def run_preview():
+    """Standalone preview of every detector, without the backend."""
+    import cv2
 
-        current_time = time.time()
+    from camera import Camera, CameraError
+    from frame_processor import FrameProcessor
+    from hud import HUD
+    from logger import SessionLogger
+    from voice_alert import VoiceAlert
 
-        if current_time - last_log_time >= 1:
+    try:
+        camera = Camera()
+    except CameraError as exc:
+        print(f"Camera error ({exc.code}): {exc.message}", file=sys.stderr)
+        return 1
 
-            logger.log(
-                attention=attention_result["score"],
-                status=attention_result["status"],
-                head_direction=head_result["direction"],
-                eyes_open=eye_result["eyes_open"],
-                blink_count=eye_result["blink_count"],
-                blink_rate=eye_result["blink_rate"]
-            )
+    processor = FrameProcessor()
+    hud = HUD("preview")
+    voice = VoiceAlert()
+    logger = SessionLogger()
 
-            last_log_time = current_time
+    prev_time = time.time()
+    last_log_time = time.time()
 
-        # -----------------------------
-        # Send Data To Backend
-        # -----------------------------
+    try:
+        while True:
+            frame = camera.read_frame()
+            if frame is None:
+                break
 
-        current_time = time.time()
+            now = time.time()
+            result = processor.process(frame, now=now)
 
-        if current_time - last_api_time >= SEND_INTERVAL:
+            for alert in result["drowsy"]["alerts"]:
+                voice.say(alert["message"], beeps=alert["beeps"], beep_ms=alert["beep_ms"])
+                hud.show_alert(alert["type"], alert["message"])
 
-            try:
+            if result["face_detected"] and now - last_log_time >= 1:
+                logger.log(
+                    attention=result["attention"]["score"],
+                    status=result["attention"]["status"],
+                    head_direction=result["head"]["direction"],
+                    eyes_open=result["eye"]["eyes_open"],
+                    blink_count=result["eye"]["blink_count"],
+                    blink_rate=result["eye"]["blink_rate"],
+                )
+                last_log_time = now
 
-                api.send_attention_data(
-                    student_id=student_id,
-                    attention_score=attention_result["score"],
-                    status=attention_result["status"],
-                    eyes_open=eye_result["eyes_open"],
-                    head_direction=head_result["direction"],
-                    looking_away=looking_result["looking_away"],
-                    yawning=yawn_result["yawning"]
+            elapsed = now - prev_time
+            fps = 1 / elapsed if elapsed > 0 else 0
+            prev_time = now
+
+            if SHOW_HUD:
+                hud.draw(
+                    result["frame"],
+                    fps=fps,
+                    backend_connected=False,
+                    presence=result["presence"],
+                    drowsy=result["drowsy"],
+                    eye=result["eye"],
+                    head=result["head"],
+                    gaze=result["gaze"],
+                    attention=result["attention"],
                 )
 
-                backend_status = "Connected"
+            cv2.imshow("Aegis Facial Analysis - Preview", result["frame"])
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord("q"):
+                break
+            if key == ord("h"):
+                hud.toggle_compact()
+    finally:
+        voice.shutdown()
+        camera.release()
+        cv2.destroyAllWindows()
 
-            except Exception:
+    return 0
 
-                backend_status = "Disconnected"
 
-            last_api_time = current_time
-
-        # -----------------------------
-        # Display Information
-        # -----------------------------
-
-        cv2.putText(
-            frame,
-            f"Attention : {attention_result['score']}%",
-            (20, 40),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (0, 255, 0),
-            2
-        )
-
-        cv2.putText(
-            frame,
-            f"Status : {attention_result['status']}",
-            (20, 75),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (255, 0, 0),
-            2
-        )
-
-        cv2.putText(
-            frame,
-            f"Head : {head_result['direction']}",
-            (20, 110),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (0, 255, 255),
-            2
-        )
-
-        cv2.putText(
-            frame,
-            f"Looking : {'YES' if looking_at_screen else 'NO'}",
-            (20, 145),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (0, 255, 0) if looking_at_screen else (0, 0, 255),
-            2
-        )
-
-        cv2.putText(
-            frame,
-            f"Gaze : {gaze_result['gaze']}",
-            (20, 180),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (255, 255, 0),
-            2
-        )
-
-        cv2.putText(
-            frame,
-            f"EAR : {eye_result['ear']:.3f}",
-            (20, 215),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (255, 255, 255),
-            2
-        )
-
-        cv2.putText(
-            frame,
-            f"Blinks : {eye_result['blink_count']}",
-            (20, 250),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (255, 255, 255),
-            2
-        )
-
-        cv2.putText(
-            frame,
-            f"Blink Rate : {eye_result['blink_rate']:.1f}/min",
-            (20, 285),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (255, 255, 255),
-            2
-        )
-
-        cv2.putText(
-            frame,
-            f"Looking Away : {'Yes' if looking_result['looking_away'] else 'No'}",
-            (20, 320),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (255, 255, 255),
-            2
-        )
-
-        cv2.putText(
-            frame,
-            f"MAR : {yawn_result['mar']:.2f}",
-            (20, 355),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (255, 255, 255),
-            2
-        )
-
-        cv2.putText(
-            frame,
-            f"Yawning : {'Yes' if yawn_result['yawning'] else 'No'}",
-            (20, 390),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            (0, 255, 255),
-            2
-        )
-
-    else:
-
-        cv2.putText(
-            frame,
-            "No Face Detected",
-            (20, 40),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.8,
-            (0, 0, 255),
-            2
-        )
-
-    # ---------------------------------------------------
-    # FPS
-    # ---------------------------------------------------
-
-    current_time = time.time()
-
-    elapsed = current_time - prev_time
-
-    fps = 1 / elapsed if elapsed > 0 else 0
-
-    prev_time = current_time
-
-    cv2.putText(
-        frame,
-        f"FPS : {int(fps)}",
-        (20, 425),
-        cv2.FONT_HERSHEY_SIMPLEX,
-        0.7,
-        (0, 255, 255),
-        2
+def main(argv=None):
+    parser = argparse.ArgumentParser(description="Aegis facial analysis camera agent")
+    parser.add_argument(
+        "--preview",
+        action="store_true",
+        help="Show a local camera preview without connecting to the backend",
     )
-
-    # ---------------------------------------------------
-    # Face Presence
-    # ---------------------------------------------------
-
-    cv2.putText(
-        frame,
-        f"Face : {presence_result['status']}",
-        (20, 460),
-        cv2.FONT_HERSHEY_SIMPLEX,
-        0.7,
-        (0, 255, 0)
-        if presence_result["status"] == "Present"
-        else (0, 0, 255),
-        2
+    parser.add_argument(
+        "--no-window",
+        action="store_true",
+        help="Agent mode without the on-screen camera window",
     )
+    args = parser.parse_args(argv)
 
-    cv2.putText(
-        frame,
-        f"Absent : {presence_result['absent_time']} sec",
-        (20, 495),
-        cv2.FONT_HERSHEY_SIMPLEX,
-        0.7,
-        (0, 255, 255),
-        2
-    )
-
-    # ---------------------------------------------------
-    # Backend Status
-    # ---------------------------------------------------
-
-    cv2.putText(
-        frame,
-        f"Backend : {backend_status}",
-        (20, 530),
-        cv2.FONT_HERSHEY_SIMPLEX,
-        0.7,
-        (0, 255, 0)
-        if backend_status == "Connected"
-        else (0, 0, 255),
-        2
-    )
-
-    # ---------------------------------------------------
-    # Show Window
-    # ---------------------------------------------------
-
-    cv2.imshow(
-        "Adaptive Learning System - Facial Analysis",
-        frame
-    )
-
-    key = cv2.waitKey(1) & 0xFF
-
-    if key == ord("q"):
-        break
+    if args.preview:
+        return run_preview()
+    return run_agent(display=SHOW_HUD and not args.no_window)
 
 
-# ---------------------------------------------------
-# Cleanup
-# ---------------------------------------------------
-
-camera.release()
-cv2.destroyAllWindows()
+if __name__ == "__main__":
+    raise SystemExit(main())

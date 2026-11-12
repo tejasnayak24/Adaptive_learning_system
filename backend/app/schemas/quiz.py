@@ -35,19 +35,18 @@ class QuizSubmitRequest(BaseModel):
     client-computed score is never accepted. ``student_id`` is optional
     and only checked against the access token.
 
-    Camera fields are optional: ``None`` means valid telemetry was not
-    available for this attempt. They must never be filled with guesses.
+    Camera measurements are never accepted from the browser: the server
+    takes them from the telemetry its paired camera agent reported for
+    ``monitoring_session_id`` (which must belong to the student). Values
+    the client might send for attention, yawning etc. are ignored.
     """
 
     student_id: int | None = None
     quiz_id: int
+    monitoring_session_id: str = Field(min_length=8, max_length=64)
     answers: dict[int, str] = Field(min_length=1)
     response_time: float = Field(ge=0)
     hints_used: int = Field(default=0, ge=0)
-    attention_score: float | None = Field(default=None, ge=0.0, le=1.0)
-    yawning: bool | None = None
-    looking_away: bool | None = None
-    drowsy: bool | None = None
 
     @field_validator("answers")
     @classmethod

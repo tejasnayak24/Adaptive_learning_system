@@ -34,6 +34,7 @@ from app.models.session import LearningSession  # noqa: E402,F401
 from app.models.reward import RewardHistory  # noqa: E402,F401
 from app.models.attempt_answer import AttemptAnswer  # noqa: E402,F401
 from app.models.recommendation import RecommendationHistory  # noqa: E402,F401
+from app.models.monitoring import MonitoringConsent, MonitoringSession  # noqa: E402,F401
 
 from app.routers import (  # noqa: E402
     auth,
@@ -41,6 +42,7 @@ from app.routers import (  # noqa: E402
     progress,
     quiz,
     integration,
+    monitoring,
     rl,
 )
 
@@ -68,3 +70,4 @@ app.include_router(quiz.router)
 app.include_router(progress.router)
 app.include_router(integration.router)
 app.include_router(rl.router)
+app.include_router(monitoring.router)
