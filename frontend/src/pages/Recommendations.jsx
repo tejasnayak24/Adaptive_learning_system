@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { progressService } from '../services/progressService'
-import { lessonService } from '../services/lessonService'
 import { rlService } from '../services/rlService'
-import { getSubjectFromLesson } from '../utils/subjectHelper'
 
 export default function Recommendations() {
   const { user } = useAuth()
   const [loading, setLoading] = useState(true)
-  const [progress, setProgress] = useState([])
-  const [lessons, setLessons] = useState([])
   const [recommendation, setRecommendation] = useState(null)
   const [error, setError] = useState('')
   const [unavailableNote, setUnavailableNote] = useState('')
@@ -18,66 +13,29 @@ export default function Recommendations() {
   useEffect(() => {
     async function loadRecommendation() {
       try {
-        const progressRes = await progressService.getStudentProgress(user?.id)
-        const lessonsRes = await lessonService.getLessons()
-        
-        if (lessonsRes.success) setLessons(lessonsRes.data)
-        if (progressRes.success) setProgress(progressRes.data)
+        // Recommendations are generated and stored by the server when a
+        // quiz is graded, from the attempt's real data.
+        const latest = await rlService.getLatest()
+        const attempt = latest.attempt
 
-        if (progressRes.success && progressRes.data.length > 0 && lessonsRes.success) {
-          // Find the most recent progress record
-          const sorted = [...progressRes.data].sort((a, b) => b.id - a.id)
-          const latest = sorted[0]
-
-          const matchedLesson = lessonsRes.data.find(l => l.id === latest.lesson_id) || {
-            title: 'Unknown Lesson',
-            topic: 'General'
-          }
-
-          const previousAttempt = sorted[1] || { quiz_score: 0 }
-          const completedLessonsCount = new Set(
-            progressRes.data.filter(p => p.completed).map(p => p.lesson_id)
-          ).size
-          const attemptsCount = progressRes.data.filter(p => p.lesson_id === latest.lesson_id).length
-
-          // Fetch the RL recommendation
-          const payload = {
-            subject: getSubjectFromLesson(matchedLesson),
-            topic: matchedLesson.topic,
-            lesson: matchedLesson.title,
-            previous_quiz_score: Math.round(previousAttempt.quiz_score),
-            current_quiz_score: Math.round(latest.quiz_score),
-            difficulty: latest.difficulty,
-            response_time: latest.response_time,
-            hints_used: 0,
-            lesson_attempts: attemptsCount,
-            completed_lessons: completedLessonsCount,
-            // Camera metrics stored with the attempt; null = unavailable.
-            attention_score: latest.attention_score ?? null,
-            yawning: latest.yawning ?? null,
-            looking_away: latest.looking_away ?? null
-          }
-          const rlRes = await rlService.getRecommendation(payload)
-
-          if (!rlRes?.action) {
-            setUnavailableNote(
-              rlRes?.telemetry_available === false
-                ? 'Your latest quiz had no camera telemetry, so the coach could not generate an adaptive recommendation. Keep the camera agent running during your next quiz.'
-                : 'The coach could not generate a recommendation for your latest attempt.'
-            )
-            return
-          }
-
+        if (latest.status === 'available' && latest.recommendation?.action) {
           setRecommendation({
-            ...rlRes,
-            lessonTitle: matchedLesson.title,
-            topicName: matchedLesson.topic,
-            lastScore: latest.quiz_score,
-            lastDifficulty: latest.difficulty
+            ...latest.recommendation,
+            lessonId: attempt?.lesson_id,
+            lessonTitle: attempt?.lesson_title,
+            topicName: attempt?.topic,
+            lastScore: Math.round(attempt?.quiz_score ?? 0),
+            lastDifficulty: attempt?.difficulty
           })
+        } else if (latest.status === 'telemetry_unavailable') {
+          setUnavailableNote(
+            'Your latest quiz had no camera telemetry, so the coach could not generate an adaptive recommendation. Keep the camera agent running during your next quiz.'
+          )
+        } else if (latest.status === 'not_generated') {
+          setUnavailableNote('The coach could not generate a recommendation for your latest attempt.')
         }
       } catch (err) {
-        setError(err.message || 'Failed to generate recommendation logs')
+        setError(err.message || 'Failed to load your recommendation')
       } finally {
         setLoading(false)
       }
@@ -194,7 +152,7 @@ export default function Recommendations() {
               
               <div className="pt-2">
                 <Link
-                  to={`/lesson/${progress.find(p => p.lesson_id)?.lesson_id}`}
+                  to={`/lesson/${recommendation.lessonId}`}
                   className="w-full inline-flex justify-center py-2.5 rounded-xl bg-indigo-500 text-white font-bold text-[11px] shadow hover:bg-indigo-650 transition-colors"
                 >
                   Resume study session

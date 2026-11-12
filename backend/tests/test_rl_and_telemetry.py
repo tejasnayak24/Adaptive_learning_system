@@ -14,8 +14,9 @@ BASE_RL = {
 }
 
 
-def test_rl_reports_unavailable_without_telemetry(client):
-    response = client.post("/rl/recommend", json=BASE_RL)
+def test_rl_reports_unavailable_without_telemetry(client, auth):
+    headers, _ = auth
+    response = client.post("/rl/recommend", json=BASE_RL, headers=headers)
     assert response.status_code == 200
     body = response.json()
     assert body["telemetry_available"] is False
@@ -23,27 +24,32 @@ def test_rl_reports_unavailable_without_telemetry(client):
     assert body["confidence"] is None
 
 
-def test_rl_partial_telemetry_is_still_unavailable(client):
-    body = client.post("/rl/recommend", json={**BASE_RL, "attention_score": 0.9}).json()
+def test_rl_partial_telemetry_is_still_unavailable(client, auth):
+    headers, _ = auth
+    body = client.post("/rl/recommend", json={**BASE_RL, "attention_score": 0.9}, headers=headers).json()
     assert body["telemetry_available"] is False
 
 
-def test_rl_recommends_with_real_telemetry(client):
+def test_rl_recommends_with_real_telemetry(client, auth):
+    headers, _ = auth
     response = client.post(
         "/rl/recommend",
         json={**BASE_RL, "attention_score": 0.9, "yawning": False, "looking_away": False},
+        headers=headers,
     )
     assert response.status_code == 200
     body = response.json()
     assert body["telemetry_available"] is True
     assert isinstance(body["action"], str)
     assert 0.0 <= body["confidence"] <= 1.0
+    assert body["policy"] in ("rules", "q_learning")
 
 
-def test_rl_rejects_invalid_values(client):
+def test_rl_rejects_invalid_values(client, auth):
+    headers, _ = auth
     bad = {**BASE_RL, "attention_score": 0.9, "yawning": False, "looking_away": False}
-    assert client.post("/rl/recommend", json={**bad, "difficulty": "MIXED"}).status_code == 422
-    assert client.post("/rl/recommend", json={**bad, "current_quiz_score": 101}).status_code == 422
+    assert client.post("/rl/recommend", json={**bad, "difficulty": "MIXED"}, headers=headers).status_code == 422
+    assert client.post("/rl/recommend", json={**bad, "current_quiz_score": 101}, headers=headers).status_code == 422
 
 
 def test_telemetry_without_data_is_unavailable():
@@ -91,11 +97,13 @@ def test_session_aggregates_and_reset():
     assert after["yawning_observed"] is False
 
 
-def test_telemetry_endpoints(client):
-    client.post("/attention", json={"student_id": 5, "attention_score": 0.75, "yawning": False, "looking_away": False})
-    body = client.get("/attention/5").json()["data"]
+def test_telemetry_endpoints(client, auth):
+    headers, profile = auth
+    sid = profile["id"]
+    client.post("/attention", json={"student_id": sid, "attention_score": 0.75, "yawning": False, "looking_away": False})
+    body = client.get(f"/attention/{sid}", headers=headers).json()["data"]
     assert body["available"] is True
     assert body["attention_score"] == 0.75
 
-    reset = client.post("/attention/5/reset").json()["data"]
+    reset = client.post(f"/attention/{sid}/reset", headers=headers).json()["data"]
     assert reset["session_samples"] == 0

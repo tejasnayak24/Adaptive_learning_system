@@ -3,7 +3,6 @@ import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { quizService } from '../services/quizService'
 import { lessonService } from '../services/lessonService'
-import { progressService } from '../services/progressService'
 import { rlService } from '../services/rlService'
 import { telemetryService } from '../services/telemetryService'
 
@@ -20,7 +19,6 @@ export default function QuizView() {
   const [quiz, setQuiz] = useState(null)
   const [lesson, setLesson] = useState(null)
   const [questions, setQuestions] = useState([])
-  const [progressHistory, setProgressHistory] = useState([])
   const [allLessons, setAllLessons] = useState([])
 
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0)
@@ -95,27 +93,6 @@ export default function QuizView() {
           setAllLessons([])
         }
 
-        try {
-          if (studentId) {
-            const progressRes =
-              await progressService.getStudentProgress(
-                studentId
-              )
-
-            if (progressRes.success) {
-              setProgressHistory(
-                progressRes.data || []
-              )
-            }
-          }
-        } catch (progressError) {
-          console.warn(
-            'Progress could not be loaded:',
-            progressError
-          )
-
-          setProgressHistory([])
-        }
       } catch (err) {
         console.error(
           'Quiz initialization error:',
@@ -311,21 +288,6 @@ export default function QuizView() {
       return
     }
 
-    let correctCount = 0
-
-    questions.forEach((question) => {
-      if (
-        selectedAnswers[question.id] ===
-        question.correct_answer
-      ) {
-        correctCount += 1
-      }
-    })
-
-    const finalScore = Math.round(
-      (correctCount / questions.length) * 100
-    )
-
     setSubmitLoading(true)
 
     try {
@@ -338,18 +300,18 @@ export default function QuizView() {
       const camera = telemetryService.toAttemptMetrics(telemetry)
 
       /*
-       * 1. Save the quiz result (recorded for the signed-in student).
+       * The server grades the selected answers, stores the attempt and
+       * generates the adaptive recommendation from the stored data.
        */
-      const submitRes =
-        await quizService.submitQuiz({
-          lessonId: lesson.id,
-          quizScore: finalScore,
-          responseTime: secondsElapsed,
-          attentionScore: camera.attentionScore,
-          yawning: camera.yawning,
-          lookingAway: camera.lookingAway,
-          difficulty: quiz.difficulty
-        })
+      const submitRes = await quizService.submitQuiz({
+        quizId: quiz.id,
+        answers: selectedAnswers,
+        responseTime: secondsElapsed,
+        hintsUsed: hintsCount,
+        attentionScore: camera.attentionScore,
+        yawning: camera.yawning,
+        lookingAway: camera.lookingAway
+      })
 
       if (!submitRes?.success) {
         throw new Error(
@@ -357,99 +319,29 @@ export default function QuizView() {
         )
       }
 
-      /*
-       * 2. Build updated progress history.
-       */
-      const updatedProgressHistory = [
-        ...progressHistory,
+      const { grading, recommendation, recommendation_status: recommendationStatus } =
         submitRes.data
-      ]
 
-      const sortedHistory = [
-        ...updatedProgressHistory
-      ].sort(
-        (a, b) =>
-          (b.id ?? 0) - (a.id ?? 0)
-      )
-
-      const previousAttempt =
-        sortedHistory[1] || {
-          quiz_score: 0
-        }
-
-      const completedLessonsCount =
-        new Set(
-          updatedProgressHistory
-            .filter(
-              (progress) =>
-                progress.completed
-            )
-            .map(
-              (progress) =>
-                progress.lesson_id
-            )
-        ).size
-
-      const attemptsCount =
-        updatedProgressHistory.filter(
-          (progress) =>
-            progress.lesson_id ===
-            lesson.id
-        ).length
-
-      /*
-       * 3. Ask the RL engine for a recommendation. Without real camera
-       *    telemetry the backend declines instead of guessing.
-       */
-      let rlRes = null
-
-      try {
-        rlRes = await rlService.getRecommendation({
-          subject: resolvedSubject,
-          topic: lesson.topic || lesson.title || quiz.title,
-          lesson: lesson.title || quiz.title,
-          previous_quiz_score: previousAttempt.quiz_score || 0,
-          current_quiz_score: finalScore,
-          difficulty: quiz.difficulty,
-          response_time: secondsElapsed,
-          hints_used: hintsCount,
-          lesson_attempts: attemptsCount,
-          completed_lessons: completedLessonsCount,
-          attention_score: camera.attentionScore,
-          yawning: camera.yawning,
-          looking_away: camera.lookingAway
-        })
-
-        if (rlRes && rlRes.telemetry_available === false) {
-          rlRes = {
-            error:
-              'Camera telemetry was unavailable for this attempt, so no adaptive recommendation was generated.',
-            telemetryUnavailable: true
-          }
-        }
-      } catch (rlError) {
-        console.error(
-          'RL recommendation failed:',
-          rlError
-        )
-
-        /*
-         * Do NOT crash the results page if RL fails.
-         */
+      let rlRes
+      if (recommendation) {
+        rlRes = recommendation
+      } else if (recommendationStatus === 'telemetry_unavailable') {
         rlRes = {
           error:
-            `Unable to get an adaptive recommendation: ${rlError.message || 'the recommendation service failed.'}`
+            'Camera telemetry was unavailable for this attempt, so no adaptive recommendation was generated.',
+          telemetryUnavailable: true
+        }
+      } else {
+        rlRes = {
+          error: 'The recommendation engine could not produce a recommendation for this attempt.'
         }
       }
 
-      /*
-       * 4. Store result state.
-       */
       setResults({
-        score: finalScore,
-        correctCount,
-        totalQuestions:
-          questions.length,
+        score: Math.round(grading.score),
+        correctCount: grading.correct_count,
+        totalQuestions: grading.total_questions,
+        review: grading.results,
         timeTaken:
           secondsElapsed,
 
@@ -925,6 +817,45 @@ export default function QuizView() {
             </div>
           </div>
         </div>
+
+        {Array.isArray(results.review) && results.review.length > 0 && (
+          <div className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-md space-y-4">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
+              Answer Review
+            </h3>
+
+            <ol className="space-y-3">
+              {results.review.map((item, index) => {
+                const question = questions.find((q) => q.id === item.question_id)
+                const optionText = (letter) =>
+                  question ? question[`option_${String(letter).toLowerCase()}`] : ''
+
+                return (
+                  <li
+                    key={item.question_id}
+                    className={`rounded-2xl border p-4 text-sm ${
+                      item.is_correct
+                        ? 'border-emerald-500/20 bg-emerald-500/5'
+                        : 'border-rose-500/20 bg-rose-500/5'
+                    }`}
+                  >
+                    <p className="font-semibold text-slate-200">
+                      {index + 1}. {question?.question}
+                    </p>
+                    <p className={`mt-1 text-xs ${item.is_correct ? 'text-emerald-400' : 'text-rose-400'}`}>
+                      {item.is_correct ? '✓ Correct' : '✗ Incorrect'} — your answer: {item.selected_answer}. {optionText(item.selected_answer)}
+                    </p>
+                    {!item.is_correct && (
+                      <p className="mt-1 text-xs text-slate-400">
+                        Correct answer: {item.correct_answer}. {optionText(item.correct_answer)}
+                      </p>
+                    )}
+                  </li>
+                )
+              })}
+            </ol>
+          </div>
+        )}
 
         {rlRecommendation?.error ? (
           <div className="glass-panel rounded-3xl p-8 border border-slate-900 shadow-xl space-y-6 text-center">

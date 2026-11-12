@@ -2,7 +2,6 @@ from typing import List
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-from app.utils.constants import normalize_difficulty
 
 
 class QuizBase(BaseModel):
@@ -30,29 +29,38 @@ class QuizStartRequest(BaseModel):
 
 
 class QuizSubmitRequest(BaseModel):
-    """Quiz result submitted by the authenticated student.
+    """Answers submitted by the authenticated student for one quiz.
 
-    ``student_id`` is accepted only for backward compatibility; the
-    backend always records the attempt against the student in the access
-    token and rejects a mismatching value.
+    The server grades ``answers`` (question id -> option letter A-D); a
+    client-computed score is never accepted. ``student_id`` is optional
+    and only checked against the access token.
 
     Camera fields are optional: ``None`` means valid telemetry was not
     available for this attempt. They must never be filled with guesses.
     """
 
     student_id: int | None = None
-    lesson_id: int
-    quiz_score: float = Field(ge=0, le=100)
+    quiz_id: int
+    answers: dict[int, str] = Field(min_length=1)
     response_time: float = Field(ge=0)
+    hints_used: int = Field(default=0, ge=0)
     attention_score: float | None = Field(default=None, ge=0.0, le=1.0)
     yawning: bool | None = None
     looking_away: bool | None = None
-    difficulty: str
+    drowsy: bool | None = None
 
-    @field_validator("difficulty")
+    @field_validator("answers")
     @classmethod
-    def _normalize_difficulty(cls, value: str) -> str:
-        return normalize_difficulty(value)
+    def _normalize_answers(cls, value: dict[int, str]) -> dict[int, str]:
+        normalized = {}
+        for question_id, option in value.items():
+            letter = str(option).strip().upper()
+            if letter not in ("A", "B", "C", "D"):
+                raise ValueError(
+                    f"answer for question {question_id} must be A, B, C or D"
+                )
+            normalized[question_id] = letter
+        return normalized
 
 
 class QuestionResponse(BaseModel):

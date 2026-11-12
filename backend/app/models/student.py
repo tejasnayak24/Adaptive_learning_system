@@ -37,6 +37,15 @@ class Student(Base):
         nullable=False,
     )
 
+    # Authorization role: "student" (default), "teacher" or "admin".
+    # Only teachers and admins may create, edit or delete curriculum.
+    role: Mapped[str] = mapped_column(
+        String(20),
+        nullable=False,
+        default="student",
+        server_default="student",
+    )
+
     created_at: Mapped[datetime] = mapped_column(
         DateTime,
         default=datetime.utcnow,
@@ -62,3 +71,14 @@ class Student(Base):
         back_populates="student",
         cascade="all, delete-orphan",
     )
+
+    # One Student -> Many Recommendations
+    recommendations = relationship(
+        "RecommendationHistory",
+        back_populates="student",
+        cascade="all, delete-orphan",
+    )
+
+    @property
+    def can_manage_curriculum(self) -> bool:
+        return self.role in ("teacher", "admin")

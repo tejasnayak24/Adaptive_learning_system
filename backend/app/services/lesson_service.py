@@ -53,10 +53,10 @@ class LessonService:
         if not existing:
             return None
 
-        existing.title = lesson.title
-        existing.topic = lesson.topic
-        existing.difficulty = lesson.difficulty
-        existing.content = lesson.content
+        # Partial update: only fields the client actually sent are changed.
+        for field, value in lesson.model_dump(exclude_unset=True).items():
+            if value is not None:
+                setattr(existing, field, value)
 
         db.commit()
         db.refresh(existing)

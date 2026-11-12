@@ -114,6 +114,7 @@ def profile(
             "name": student.name,
             "email": student.email,
             "age": student.age,
+            "role": student.role,
             "created_at": student.created_at,
         },
     }

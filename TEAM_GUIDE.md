@@ -139,59 +139,108 @@ Tejas should avoid changing frontend code unless integration requires it.
 
 # 🔌 API Contracts
 
-These API names are fixed.
+These are the endpoints the backend actually serves (source of truth:
+`backend/app/routers/`; interactive docs at `http://localhost:8000/docs`).
+All responses use `{ "success", "message", "data" }` unless noted.
+
+🔒 = requires `Authorization: Bearer <token>`. 👤 = owner only (a student
+can only access their own records; others get **403**).
+🎓 = teacher or admin role only.
 
 ## Authentication
 
-POST /login
+| Method | Path | Notes |
+|---|---|---|
+| POST | `/register` | `{name, email, password, age}` → new account (role `student`) |
+| POST | `/login` | `{email, password}` → `{access_token, token_type}` |
+| POST | `/token` | OAuth2 form login (used by the Swagger "Authorize" button) |
+| GET | `/profile` 🔒 | The signed-in student: `{id, name, email, age, role, created_at}` |
 
-POST /register
-
----
+Roles are changed only with `python backend/scripts/set_role.py <email> <role>`.
 
 ## Lessons
 
-GET /lessons
-
-GET /lesson/{id}
-
----
+| Method | Path | Notes |
+|---|---|---|
+| GET | `/lessons` | All lessons |
+| GET | `/lesson/{id}` | Lesson content + its quizzes |
+| POST | `/lesson` 🔒🎓 | Create a lesson |
+| PUT | `/lesson/{id}` 🔒🎓 | Partial update (only sent fields change) |
+| DELETE | `/lesson/{id}` 🔒🎓 | Delete a lesson |
 
 ## Quiz
 
-POST /quiz/start
+| Method | Path | Notes |
+|---|---|---|
+| GET | `/quiz/lesson/{lesson_id}` 🔒 | Quizzes of a lesson |
+| GET | `/quiz/{id}` 🔒 | Quiz + questions. **Never includes correct answers.** |
+| POST | `/quiz/start` 🔒 | `{quiz_id}` → same payload as `GET /quiz/{id}` |
+| POST | `/quiz/submit` 🔒 | See below |
 
-POST /quiz/submit
+`POST /quiz/submit` body:
 
----
+```json
+{
+  "quiz_id": 3,
+  "answers": { "11": "B", "12": "A" },
+  "response_time": 42.0,
+  "hints_used": 1,
+  "attention_score": 0.82,
+  "yawning": false,
+  "looking_away": false,
+  "drowsy": null
+}
+```
 
-## RL Recommendation
+* The **server grades** the answers; a client-sent score is ignored.
+* Every question of the quiz must be answered once (else **422**).
+* Camera fields are `null` when telemetry was unavailable — never guessed.
+* Response `data`: `progress` (stored attempt), `grading`
+  (`score`, `correct_count`, `total_questions`, per-question `results`
+  including the correct answer — revealed only after submission),
+  `recommendation` (or `null`) and `recommendation_status`
+  (`available` | `telemetry_unavailable`).
 
-POST /recommend
+## Adaptive recommendations (RL)
 
-Returns
+| Method | Path | Notes |
+|---|---|---|
+| GET | `/recommendations/latest` 🔒 | `{status, recommendation, attempt}`; status is `available`, `telemetry_unavailable`, `not_generated` or `no_attempts` |
+| GET | `/recommendations` 🔒 | The student's recommendation history |
+| POST | `/rl/recommend` 🔒 | Stateless recommendation for a supplied state (13 fields, see `/docs`). Returns `{action, confidence, explanation, policy, telemetry_available}`; `action` is `null` when any camera field is `null`. |
 
-- Recommended Content
-- Difficulty
-- Next Action
+Recommendations are generated **by the server when a quiz is graded**, from
+the stored attempt, and saved to `recommendation_history`. When the
+student's next attempt arrives, its outcome is recorded in `reward_history`.
+`policy` reports whether a rule (`rules`) or the learned Q-table
+(`q_learning`) chose the action.
 
----
+The old `POST /recommend` placeholder has been removed.
 
-## Facial Analysis
+## Facial-analysis telemetry
 
-POST /attention
+| Method | Path | Notes |
+|---|---|---|
+| POST | `/attention` | Camera agent → `{student_id, attention_score (0–1), yawning, looking_away}` once per second |
+| GET | `/attention/{student_id}` 🔒👤 | `{available, status, age_seconds, attention_score, …, session_average_attention}` |
+| POST | `/attention/{student_id}/reset` 🔒👤 | Start a new per-quiz aggregation window |
 
-Returns
+`status` is `live`, `stale` (no reading for more than 5 s) or `no_data`.
+When not `live`, every measurement is `null`.
 
-- Attention Score
-- Looking At Screen
-- Head Direction
+## Student progress
 
----
+| Method | Path | Notes |
+|---|---|---|
+| GET | `/progress/{student_id}` 🔒👤 | All attempts, oldest first |
+| GET | `/progress/{student_id}/{lesson_id}` 🔒👤 | Latest attempt for a lesson |
+| PUT | `/progress/{progress_id}` 🔒👤 | Update an attempt |
 
-## Student Progress
+## Database changes
 
-GET /progress
+The schema is managed with Alembic (`backend/migrations`). Never change
+tables by hand: add a migration (`python -m alembic revision -m "..."`),
+test it on a copy of the database, then run `python -m alembic upgrade head`.
 
 ---
 

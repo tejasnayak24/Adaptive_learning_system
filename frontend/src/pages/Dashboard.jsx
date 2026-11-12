@@ -54,89 +54,18 @@ export default function Dashboard() {
       setLessons(lessonsData)
       setProgress(progressData)
 
-      if (progressData.length === 0) {
-        setRecommendation(null)
-        return
-      }
-
-      const sortedProgress = [...progressData].sort(
-        (a, b) => Number(b.id || 0) - Number(a.id || 0)
-      )
-
-      const latest = sortedProgress[0]
-      const previousAttempt = sortedProgress[1] || null
-
-      const matchedLesson =
-        lessonsData.find(
-          lesson => Number(lesson.id) === Number(latest.lesson_id)
-        ) || null
-
-      const completedLessonsCount = new Set(
-        progressData
-          .filter(item => item.completed === true)
-          .map(item => item.lesson_id)
-      ).size
-
-      const attemptsCount = progressData.filter(
-        item => Number(item.lesson_id) === Number(latest.lesson_id)
-      ).length
-
-      const payload = {
-        subject:
-          latest.subject ||
-          matchedLesson?.subject ||
-          'Science',
-
-        topic:
-          latest.topic ||
-          matchedLesson?.topic ||
-          'General',
-
-        lesson:
-          latest.lesson ||
-          matchedLesson?.title ||
-          'Current Lesson',
-
-        previous_quiz_score: previousAttempt
-          ? Math.round(Number(previousAttempt.quiz_score) || 0)
-          : 0,
-
-        current_quiz_score:
-          Math.round(Number(latest.quiz_score) || 0),
-
-        difficulty:
-          latest.difficulty ||
-          matchedLesson?.difficulty ||
-          'EASY',
-
-        response_time:
-          Number(latest.response_time) || 0,
-
-        hints_used:
-          Number(latest.hints_used) || 0,
-
-        lesson_attempts:
-          attemptsCount,
-
-        completed_lessons:
-          completedLessonsCount,
-
-        // Camera metrics stored with the attempt; null = unavailable.
-        attention_score: latest.attention_score ?? null,
-        yawning: latest.yawning ?? null,
-        looking_away: latest.looking_away ?? null,
-      }
-
+      // The recommendation is generated and stored by the server when a
+      // quiz is graded; the dashboard only displays the latest one.
       try {
-        const rlRes = await rlService.getRecommendation(payload)
+        const latest = await rlService.getLatest()
 
-        if (rlRes?.action) {
-          setRecommendation(rlRes)
+        if (latest.status === 'available' && latest.recommendation?.action) {
+          setRecommendation(latest.recommendation)
           setRecommendationNote('')
         } else {
           setRecommendation(null)
           setRecommendationNote(
-            rlRes?.telemetry_available === false
+            latest.status === 'telemetry_unavailable'
               ? 'Your latest quiz had no camera telemetry, so no adaptive recommendation was generated. Keep the camera agent running during your next quiz.'
               : ''
           )

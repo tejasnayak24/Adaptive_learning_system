@@ -3,27 +3,25 @@ from typing import Any
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.auth.dependencies import get_current_student, get_current_user
+from app.auth.dependencies import get_current_student
 from app.database.connection import get_db
 from app.models.student import Student
 from app.schemas.quiz import QuizStartRequest, QuizSubmitRequest
-from app.services.lesson_service import LessonService
-from app.services.quiz_service import QuizService
+from app.services.grading_service import GradingError
+from app.services.quiz_service import QuizService, quiz_to_dict
+from app.services.recommendation_service import (
+    recommend_for_attempt,
+    recommendation_to_dict,
+    record_outcome_of_previous,
+)
+from app.services.rl_service import get_rl_service
 from app.utils.response import progress_to_dict
 
 router = APIRouter(tags=["Quiz"])
 
 
-@router.post("/quiz/start")
-def start_quiz(
-    request: QuizStartRequest,
-    db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
-) -> dict[str, Any]:
-    quiz_data = QuizService.start_quiz(
-        db,
-        request.quiz_id,
-    )
+def _quiz_payload_or_404(db: Session, quiz_id: int) -> dict[str, Any]:
+    quiz_data = QuizService.start_quiz(db, quiz_id)
 
     if quiz_data is None:
         raise HTTPException(
@@ -31,13 +29,19 @@ def start_quiz(
             detail="Quiz not found",
         )
 
+    return quiz_data
+
+
+@router.post("/quiz/start")
+def start_quiz(
+    request: QuizStartRequest,
+    db: Session = Depends(get_db),
+    student: Student = Depends(get_current_student),
+) -> dict[str, Any]:
     return {
         "success": True,
         "message": "Quiz started successfully",
-        "data": {
-            "quiz": quiz_data["quiz"],
-            "questions": quiz_data["questions"],
-        },
+        "data": _quiz_payload_or_404(db, request.quiz_id),
     }
 
 
@@ -45,25 +49,14 @@ def start_quiz(
 def get_quizzes_by_lesson(
     lesson_id: int,
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
+    student: Student = Depends(get_current_student),
 ) -> dict[str, Any]:
-    quizzes = QuizService.get_quizzes_by_lesson(
-        db,
-        lesson_id,
-    )
+    quizzes = QuizService.get_quizzes_by_lesson(db, lesson_id)
 
     return {
         "success": True,
         "message": "Quizzes fetched successfully",
-        "data": [
-            {
-                "id": quiz.id,
-                "lesson_id": quiz.lesson_id,
-                "title": quiz.title,
-                "difficulty": quiz.difficulty,
-            }
-            for quiz in quizzes
-        ],
+        "data": [quiz_to_dict(quiz) for quiz in quizzes],
     }
 
 
@@ -71,45 +64,13 @@ def get_quizzes_by_lesson(
 def get_quiz(
     quiz_id: int,
     db: Session = Depends(get_db),
+    student: Student = Depends(get_current_student),
 ) -> dict[str, Any]:
-    quiz_data = QuizService.start_quiz(
-        db,
-        quiz_id,
-    )
-
-    if quiz_data is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Quiz not found",
-        )
-
-    quiz = quiz_data["quiz"]
-    questions = quiz_data["questions"]
-
+    """Quiz questions for answering. Correct answers are never included."""
     return {
         "success": True,
         "message": "Quiz fetched successfully",
-        "data": {
-            "quiz": {
-                "id": quiz.id,
-                "lesson_id": quiz.lesson_id,
-                "title": quiz.title,
-                "difficulty": quiz.difficulty,
-            },
-            "questions": [
-                {
-                    "id": question.id,
-                    "quiz_id": question.quiz_id,
-                    "question": question.question,
-                    "option_a": question.option_a,
-                    "option_b": question.option_b,
-                    "option_c": question.option_c,
-                    "option_d": question.option_d,
-                    "correct_answer": question.correct_answer,
-                }
-                for question in questions
-            ],
-        },
+        "data": _quiz_payload_or_404(db, quiz_id),
     }
 
 
@@ -119,6 +80,13 @@ def submit_quiz(
     db: Session = Depends(get_db),
     student: Student = Depends(get_current_student),
 ) -> dict[str, Any]:
+    """Grade the submitted answers on the server and store the attempt.
+
+    The response contains the server-computed result, the per-question
+    review (correct answers are revealed only now, after submission) and
+    the adaptive recommendation -- or ``None`` when the attempt had no
+    camera telemetry.
+    """
     # The attempt always belongs to the authenticated student.
     if request.student_id is not None and request.student_id != student.id:
         raise HTTPException(
@@ -126,26 +94,65 @@ def submit_quiz(
             detail="Cannot submit a quiz for another student",
         )
 
-    if LessonService.get_lesson_by_id(db, request.lesson_id) is None:
+    quiz = QuizService.get_quiz_by_id(db, request.quiz_id)
+    if quiz is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Lesson not found",
+            detail="Quiz not found",
         )
 
-    progress = QuizService.submit_quiz(
-        db=db,
-        student_id=student.id,
-        lesson_id=request.lesson_id,
-        quiz_score=request.quiz_score,
-        response_time=request.response_time,
-        attention_score=request.attention_score,
-        yawning=request.yawning,
-        looking_away=request.looking_away,
-        difficulty=request.difficulty,
-    )
+    try:
+        progress, grading = QuizService.grade_and_record(
+            db,
+            student_id=student.id,
+            quiz=quiz,
+            answers=request.answers,
+            response_time=request.response_time,
+            hints_used=request.hints_used,
+            attention_score=request.attention_score,
+            yawning=request.yawning,
+            looking_away=request.looking_away,
+            drowsy=request.drowsy,
+        )
+    except GradingError as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=422,
+            detail=str(exc),
+        ) from exc
+
+    # This attempt is the observed outcome of the previous recommendation.
+    record_outcome_of_previous(db, progress)
+
+    recommendation = recommend_for_attempt(db, get_rl_service(), progress)
+
+    db.commit()
+    db.refresh(progress)
+    if recommendation is not None:
+        db.refresh(recommendation)
 
     return {
         "success": True,
         "message": "Quiz submitted successfully",
-        "data": progress_to_dict(progress),
+        "data": {
+            "progress": progress_to_dict(progress),
+            "grading": {
+                "score": grading.score,
+                "correct_count": grading.correct_count,
+                "total_questions": grading.total_questions,
+                "results": [
+                    {
+                        "question_id": r.question_id,
+                        "selected_answer": r.selected_answer,
+                        "correct_answer": r.correct_answer,
+                        "is_correct": r.is_correct,
+                    }
+                    for r in grading.results
+                ],
+            },
+            "recommendation": recommendation_to_dict(recommendation),
+            "recommendation_status": (
+                "available" if recommendation is not None else "telemetry_unavailable"
+            ),
+        },
     }

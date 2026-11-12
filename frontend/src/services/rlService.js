@@ -32,4 +32,19 @@ export const rlService = {
 
     return await api.post('/rl/recommend', payload)
   },
+
+  /**
+   * The signed-in student's most recent stored recommendation.
+   * Resolves to { status, recommendation, attempt } where status is
+   * "available", "telemetry_unavailable", "not_generated" or "no_attempts".
+   */
+  async getLatest() {
+    const response = await api.get('/recommendations/latest')
+    return response?.data ?? { status: 'no_attempts', recommendation: null, attempt: null }
+  },
+
+  async getHistory() {
+    const response = await api.get('/recommendations')
+    return response?.data ?? []
+  },
 }

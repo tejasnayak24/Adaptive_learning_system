@@ -14,6 +14,8 @@ module; nothing here modifies, subclasses, or duplicates any logic from
 """
 
 from collections.abc import Mapping
+from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -21,6 +23,26 @@ from rl_engine.core.config import RLConfig
 from rl_engine.models.recommendation import Recommendation
 from rl_engine.models.student_state import Difficulty, StudentState
 from rl_engine.training.agent import QLearningAgent
+
+
+# backend/app/services/rl_service.py -> parents[3] is the project root.
+DEFAULT_Q_TABLE_PATH = Path(__file__).resolve().parents[3] / "rl_engine" / "q_table.json"
+
+
+@dataclass(frozen=True)
+class Decision:
+    """A recommendation plus how it was reached.
+
+    Attributes:
+        recommendation: The RL engine's ``Recommendation``.
+        state_key: The discretised Q-table key the agent used.
+        policy: ``"rules"`` when a deterministic educational rule chose
+            the action, ``"q_learning"`` when the learned Q-table did.
+    """
+
+    recommendation: Recommendation
+    state_key: tuple
+    policy: str
 
 
 class RLService:
@@ -112,6 +134,24 @@ class RLService:
         student_state = self._build_student_state(student_data)
         return self._agent.recommend(student_state)
 
+    def decide(self, student_data: Mapping[str, Any]) -> Decision:
+        """Like ``get_recommendation``, but also report the state key and
+        which policy (rules or Q-table) produced the action, so stored
+        recommendation history describes the decision truthfully."""
+        if not isinstance(student_data, Mapping):
+            raise TypeError("student_data must be a mapping of StudentState fields.")
+
+        student_state = self._build_student_state(student_data)
+        recommendation = self._agent.recommend(student_state)
+        rule_action = self._agent._policy_action(student_state)
+        policy = "rules" if rule_action is not None else "q_learning"
+
+        return Decision(
+            recommendation=recommendation,
+            state_key=self._agent._state_to_key(student_state),
+            policy=policy,
+        )
+
     def _build_student_state(self, data: Mapping[str, Any]) -> StudentState:
         """Convert plain backend data into a ``StudentState``.
 
@@ -194,3 +234,8 @@ class RLService:
             except KeyError as exc:
                 raise ValueError(f"Unknown difficulty level: {value!r}") from exc
         raise TypeError("difficulty must be a Difficulty instance or a string.")
+
+@lru_cache(maxsize=1)
+def get_rl_service() -> RLService:
+    """Process-wide RLService: the trained agent is loaded once and reused."""
+    return RLService(DEFAULT_Q_TABLE_PATH)

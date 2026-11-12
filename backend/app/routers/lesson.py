@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
-from app.auth.dependencies import get_current_user
+from app.auth.dependencies import require_curriculum_manager
 from app.database.connection import get_db
 from app.schemas.lesson import LessonCreate, LessonUpdate
 from app.services.lesson_service import LessonService
@@ -67,7 +67,7 @@ def get_lesson(
 def create_lesson(
     lesson: LessonCreate,
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
+    manager=Depends(require_curriculum_manager),
 ) -> dict[str, Any]:
     new_lesson = LessonService.create_lesson(db, lesson)
 
@@ -83,7 +83,7 @@ def update_lesson(
     lesson_id: int,
     lesson: LessonUpdate,
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
+    manager=Depends(require_curriculum_manager),
 ) -> dict[str, Any]:
     updated = LessonService.update_lesson(
         db,
@@ -108,7 +108,7 @@ def update_lesson(
 def delete_lesson(
     lesson_id: int,
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
+    manager=Depends(require_curriculum_manager),
 ) -> dict[str, Any]:
     deleted = LessonService.delete_lesson(db, lesson_id)
 

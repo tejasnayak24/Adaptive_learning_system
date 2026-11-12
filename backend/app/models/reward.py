@@ -41,6 +41,19 @@ class RewardHistory(Base):
         default=datetime.utcnow
     )
 
+    # The recommendation this reward evaluates, and the attempt whose
+    # result produced it. Nullable for any rows recorded before linking.
+    recommendation_id: Mapped[int | None] = mapped_column(
+        ForeignKey("recommendation_history.id", ondelete="SET NULL"),
+        nullable=True,
+        index=True,
+    )
+
+    progress_id: Mapped[int | None] = mapped_column(
+        ForeignKey("progress.id", ondelete="SET NULL"),
+        nullable=True,
+    )
+
     student = relationship(
         "Student",
         back_populates="reward_history"

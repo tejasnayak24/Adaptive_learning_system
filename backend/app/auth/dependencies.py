@@ -49,3 +49,16 @@ def get_current_student(
         raise _unauthorized("Student account not found")
 
     return student
+
+
+def require_curriculum_manager(
+    student: Student = Depends(get_current_student),
+) -> Student:
+    """Allow only teachers and admins (e.g. to change lessons)."""
+    if not student.can_manage_curriculum:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only teachers or admins can modify the curriculum",
+        )
+
+    return student

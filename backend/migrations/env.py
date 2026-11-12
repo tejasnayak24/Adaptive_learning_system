@@ -25,10 +25,12 @@ from app.database.connection import Base  # noqa: E402
 
 # Import every model so the metadata is complete for autogenerate.
 from app.models import (  # noqa: E402,F401
+    attempt_answer,
     lesson,
     progress,
     question,
     quiz,
+    recommendation,
     reward,
     session,
     student,

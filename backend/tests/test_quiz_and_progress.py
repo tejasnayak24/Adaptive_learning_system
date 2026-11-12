@@ -1,80 +1,168 @@
 from conftest import register_and_login
 
+# lesson_with_quiz creates two questions; correct answers are B then A.
+ALL_CORRECT = ["B", "A"]
 
-def _submit(client, headers, lesson_id, **overrides):
+
+def _answers(client, headers, quiz_id, letters):
+    questions = client.get(f"/quiz/{quiz_id}", headers=headers).json()["data"]["questions"]
+    return {str(q["id"]): letter for q, letter in zip(questions, letters)}
+
+
+def _submit(client, headers, quiz_id, letters=ALL_CORRECT, **overrides):
     body = {
-        "lesson_id": lesson_id,
-        "quiz_score": 80,
+        "quiz_id": quiz_id,
+        "answers": _answers(client, headers, quiz_id, letters),
         "response_time": 42,
-        "difficulty": "Easy",
     }
     body.update(overrides)
     return client.post("/quiz/submit", json=body, headers=headers)
 
 
-def test_submission_without_telemetry_is_saved_as_null(client, auth, lesson_with_quiz):
+def test_quiz_delivery_never_exposes_answers(client, auth, lesson_with_quiz):
+    headers, _ = auth
+    quiz_id = lesson_with_quiz["quiz_id"]
+
+    for response in (
+        client.get(f"/quiz/{quiz_id}", headers=headers),
+        client.post("/quiz/start", json={"quiz_id": quiz_id}, headers=headers),
+    ):
+        assert response.status_code == 200
+        questions = response.json()["data"]["questions"]
+        assert len(questions) == 2
+        assert all("correct_answer" not in q for q in questions)
+
+    assert client.get(f"/quiz/{quiz_id}").status_code == 401
+
+
+def test_server_grades_answers_and_ignores_client_score(client, auth, lesson_with_quiz):
     headers, profile = auth
-    response = _submit(client, headers, lesson_with_quiz["lesson_id"])
+    response = _submit(client, headers, lesson_with_quiz["quiz_id"], letters=["B", "C"], quiz_score=100)
 
     assert response.status_code == 200, response.text
     data = response.json()["data"]
-    assert data["student_id"] == profile["id"]
-    assert data["attention_score"] is None
-    assert data["yawning"] is None
-    assert data["looking_away"] is None
-    assert data["telemetry_available"] is False
+    assert data["grading"]["score"] == 50.0
+    assert data["grading"]["correct_count"] == 1
+    assert data["grading"]["total_questions"] == 2
+    # Correct answers are revealed only after submission.
+    assert [r["correct_answer"] for r in data["grading"]["results"]] == ["B", "A"]
+
+    progress = data["progress"]
+    assert progress["student_id"] == profile["id"]
+    assert progress["quiz_id"] == lesson_with_quiz["quiz_id"]
+    assert progress["quiz_score"] == 50.0
+    assert progress["difficulty"] == "EASY"
+    assert progress["created_at"] is not None
 
 
-def test_submission_with_telemetry_is_saved(client, auth, lesson_with_quiz):
+def test_incomplete_or_invalid_answers_rejected(client, auth, lesson_with_quiz):
     headers, _ = auth
-    response = _submit(
+    quiz_id = lesson_with_quiz["quiz_id"]
+    answers = _answers(client, headers, quiz_id, ALL_CORRECT)
+    first_id = next(iter(answers))
+
+    partial = {"quiz_id": quiz_id, "answers": {first_id: "B"}, "response_time": 5}
+    assert client.post("/quiz/submit", json=partial, headers=headers).status_code == 422
+
+    foreign = {"quiz_id": quiz_id, "answers": {**answers, "999999": "A"}, "response_time": 5}
+    assert client.post("/quiz/submit", json=foreign, headers=headers).status_code == 422
+
+    bad_letter = {"quiz_id": quiz_id, "answers": {**answers, first_id: "E"}, "response_time": 5}
+    assert client.post("/quiz/submit", json=bad_letter, headers=headers).status_code == 422
+
+    assert client.post("/quiz/submit", json={**partial, "quiz_id": 424242}, headers=headers).status_code == 404
+
+
+def test_submission_without_telemetry_is_saved_as_null(client, auth, lesson_with_quiz):
+    headers, _ = auth
+    data = _submit(client, headers, lesson_with_quiz["quiz_id"]).json()["data"]
+
+    assert data["progress"]["attention_score"] is None
+    assert data["progress"]["yawning"] is None
+    assert data["progress"]["telemetry_available"] is False
+    assert data["recommendation"] is None
+    assert data["recommendation_status"] == "telemetry_unavailable"
+
+
+def test_submission_with_telemetry_stores_recommendation(client, auth, lesson_with_quiz):
+    headers, _ = auth
+    data = _submit(
         client,
         headers,
-        lesson_with_quiz["lesson_id"],
+        lesson_with_quiz["quiz_id"],
         attention_score=0.82,
         yawning=False,
-        looking_away=True,
-    )
-    data = response.json()["data"]
-    assert data["attention_score"] == 0.82
-    assert data["looking_away"] is True
-    assert data["telemetry_available"] is True
+        looking_away=False,
+        drowsy=False,
+        hints_used=1,
+    ).json()["data"]
+
+    assert data["progress"]["attention_score"] == 0.82
+    assert data["progress"]["hints_used"] == 1
+    assert data["recommendation_status"] == "available"
+    rec = data["recommendation"]
+    assert isinstance(rec["action"], str)
+    assert rec["policy"] in ("rules", "q_learning")
+
+    latest = client.get("/recommendations/latest", headers=headers).json()["data"]
+    assert latest["status"] == "available"
+    assert latest["recommendation"]["id"] == rec["id"]
+    assert latest["attempt"]["lesson_title"] == "Cell Biology"
+
+    history = client.get("/recommendations", headers=headers).json()["data"]
+    assert [row["id"] for row in history] == [rec["id"]]
 
 
-def test_difficulty_is_normalised_to_uppercase(client, auth, lesson_with_quiz):
+def test_next_attempt_records_reward_for_previous_recommendation(client, auth, lesson_with_quiz, db_session):
+    from app.models.recommendation import RecommendationHistory
+    from app.models.reward import RewardHistory
+
     headers, _ = auth
-    data = _submit(client, headers, lesson_with_quiz["lesson_id"], difficulty=" medium ").json()["data"]
-    assert data["difficulty"] == "MEDIUM"
+    quiz_id = lesson_with_quiz["quiz_id"]
+    camera = {"attention_score": 0.5, "yawning": False, "looking_away": False}
+
+    first = _submit(client, headers, quiz_id, letters=["C", "C"], **camera).json()["data"]
+    second = _submit(client, headers, quiz_id, letters=ALL_CORRECT, **{**camera, "attention_score": 0.9}).json()["data"]
+
+    rows = db_session.query(RewardHistory).all()
+    assert len(rows) == 1
+    reward = rows[0]
+    assert reward.recommendation_id == first["recommendation"]["id"]
+    assert reward.progress_id == second["progress"]["id"]
+    assert reward.action == first["recommendation"]["action"]
+    # 0% -> 100%: +5 (capped delta) +3 (mastery) +2*(0.9-0.5) = 8.8
+    assert reward.reward == 8.8
+
+    closed = db_session.get(RecommendationHistory, first["recommendation"]["id"])
+    assert closed.outcome_progress_id == second["progress"]["id"]
 
 
-def test_invalid_difficulty_and_scores_rejected(client, auth, lesson_with_quiz):
+def test_latest_recommendation_states(client, auth, lesson_with_quiz):
     headers, _ = auth
-    lesson_id = lesson_with_quiz["lesson_id"]
-    assert _submit(client, headers, lesson_id, difficulty="MIXED").status_code == 422
-    assert _submit(client, headers, lesson_id, quiz_score=140).status_code == 422
-    assert _submit(client, headers, lesson_id, attention_score=1.5).status_code == 422
+    empty = client.get("/recommendations/latest", headers=headers).json()["data"]
+    assert empty["status"] == "no_attempts"
+
+    _submit(client, headers, lesson_with_quiz["quiz_id"])
+    no_camera = client.get("/recommendations/latest", headers=headers).json()["data"]
+    assert no_camera["status"] == "telemetry_unavailable"
+    assert no_camera["recommendation"] is None
+    assert no_camera["attempt"]["telemetry_available"] is False
 
 
 def test_submission_is_always_recorded_for_token_owner(client, auth, lesson_with_quiz):
     headers, profile = auth
     _, other = register_and_login(client, email="other@example.com")
 
-    forged = _submit(client, headers, lesson_with_quiz["lesson_id"], student_id=other["id"])
+    forged = _submit(client, headers, lesson_with_quiz["quiz_id"], student_id=other["id"])
     assert forged.status_code == 403
 
-    same = _submit(client, headers, lesson_with_quiz["lesson_id"], student_id=profile["id"])
+    same = _submit(client, headers, lesson_with_quiz["quiz_id"], student_id=profile["id"])
     assert same.status_code == 200
-
-
-def test_submission_requires_auth_and_existing_lesson(client, auth, lesson_with_quiz):
-    headers, _ = auth
-    assert _submit(client, {}, lesson_with_quiz["lesson_id"]).status_code == 401
-    assert _submit(client, headers, 99999).status_code == 404
 
 
 def test_progress_is_owner_only(client, auth, lesson_with_quiz):
     headers, profile = auth
-    _submit(client, headers, lesson_with_quiz["lesson_id"], attention_score=0.7, yawning=False, looking_away=False)
+    _submit(client, headers, lesson_with_quiz["quiz_id"], attention_score=0.7, yawning=False, looking_away=False)
 
     own = client.get(f"/progress/{profile['id']}", headers=headers)
     assert own.status_code == 200
@@ -82,7 +170,7 @@ def test_progress_is_owner_only(client, auth, lesson_with_quiz):
     assert len(rows) == 1
     assert rows[0]["attention_score"] == 0.7
 
-    other_headers, other = register_and_login(client, email="peer@example.com")
+    other_headers, _ = register_and_login(client, email="peer@example.com")
     assert client.get(f"/progress/{profile['id']}", headers=other_headers).status_code == 403
     assert client.get(f"/progress/{profile['id']}").status_code == 401
 
@@ -103,8 +191,8 @@ def test_progress_is_owner_only(client, auth, lesson_with_quiz):
 def test_lesson_progress_returns_latest_attempt(client, auth, lesson_with_quiz):
     headers, profile = auth
     lesson_id = lesson_with_quiz["lesson_id"]
-    _submit(client, headers, lesson_id, quiz_score=40)
-    _submit(client, headers, lesson_id, quiz_score=95)
+    _submit(client, headers, lesson_with_quiz["quiz_id"], letters=["C", "C"])
+    _submit(client, headers, lesson_with_quiz["quiz_id"], letters=ALL_CORRECT)
 
     latest = client.get(f"/progress/{profile['id']}/{lesson_id}", headers=headers).json()["data"]
-    assert latest["quiz_score"] == 95
+    assert latest["quiz_score"] == 100.0

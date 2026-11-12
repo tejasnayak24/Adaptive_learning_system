@@ -32,6 +32,8 @@ from app.models.question import Question  # noqa: E402,F401
 from app.models.progress import Progress  # noqa: E402,F401
 from app.models.session import LearningSession  # noqa: E402,F401
 from app.models.reward import RewardHistory  # noqa: E402,F401
+from app.models.attempt_answer import AttemptAnswer  # noqa: E402,F401
+from app.models.recommendation import RecommendationHistory  # noqa: E402,F401
 
 from app.routers import (  # noqa: E402
     auth,
