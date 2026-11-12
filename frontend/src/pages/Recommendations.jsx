@@ -2,6 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { rlService } from '../services/rlService'
+import { lessonService } from '../services/lessonService'
+import {
+  ACTION_CATALOGUE,
+  ALL_ACTIONS,
+  CONFIDENCE_NOTE,
+  POLICY_LABELS,
+  actionInfo,
+  resolveNextStep
+} from '../utils/recommendationActions'
 
 export default function Recommendations() {
   const { user } = useAuth()
@@ -9,6 +18,7 @@ export default function Recommendations() {
   const [recommendation, setRecommendation] = useState(null)
   const [error, setError] = useState('')
   const [unavailableNote, setUnavailableNote] = useState('')
+  const [lessons, setLessons] = useState([])
 
   useEffect(() => {
     async function loadRecommendation() {
@@ -22,6 +32,7 @@ export default function Recommendations() {
           setRecommendation({
             ...latest.recommendation,
             lessonId: attempt?.lesson_id,
+            quizId: attempt?.quiz_id,
             lessonTitle: attempt?.lesson_title,
             topicName: attempt?.topic,
             lastScore: Math.round(attempt?.quiz_score ?? 0),
@@ -33,6 +44,12 @@ export default function Recommendations() {
           )
         } else if (latest.status === 'not_generated') {
           setUnavailableNote('The coach could not generate a recommendation for your latest attempt.')
+        }
+        try {
+          const lessonRes = await lessonService.getLessons()
+          if (lessonRes?.success) setLessons(lessonRes.data || [])
+        } catch {
+          // Lesson list only refines the next-step link.
         }
       } catch (err) {
         setError(err.message || 'Failed to load your recommendation')
@@ -53,14 +70,24 @@ export default function Recommendations() {
     )
   }
 
-  // Guide helper explaining what each action represents in our RL engine
-  const rlStrategies = [
-    { name: 'NEXT_LESSON', desc: 'Advance to the next lesson sequence in the curriculum.', icon: '🚀' },
-    { name: 'INCREASE_DIFFICULTY', desc: 'Upgrade upcoming quizzes from Easy to Medium or Medium to Hard.', icon: '⚡' },
-    { name: 'REPEAT_LESSON', desc: 'Assigned to re-review lesson reading contents to build a firmer foundation.', icon: '🔁' },
-    { name: 'DECREASE_DIFFICULTY', desc: 'Calibration tool lowering questions difficulty for remedial practice.', icon: '🛠️' },
-    { name: 'FOCUS_RECOVERY', desc: 'Attention-recovery breather to reduce screen fatigue and regain concentration.', icon: '🧘' }
-  ]
+  const rlStrategies = ALL_ACTIONS.map((name) => ({ name, ...ACTION_CATALOGUE[name] }))
+
+  const currentLesson = lessons.find((l) => l.id === recommendation?.lessonId)
+  const nextStep = recommendation
+    ? resolveNextStep(recommendation.action, {
+        lessonId: recommendation.lessonId,
+        quizId: recommendation.quizId,
+        difficulty: recommendation.lastDifficulty,
+        lessonQuizzes: currentLesson?.quizzes,
+        lessons
+      })
+    : null
+  const nextStepLink =
+    nextStep && (nextStep.kind === 'navigate' || nextStep.kind === 'retry')
+      ? { to: nextStep.to, state: { ...(nextStep.state || {}), mode: nextStep.mode, attempt: nextStep.kind === 'retry' ? Date.now() : undefined } }
+      : recommendation
+        ? { to: `/lesson/${recommendation.lessonId}`, state: { recommendedAction: recommendation.action } }
+        : null
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
@@ -70,7 +97,7 @@ export default function Recommendations() {
           AI Pedagogy Coach
         </h1>
         <p className="text-slate-400 text-sm leading-relaxed max-w-2xl">
-          Meet your personal reinforcement-learning tutor. Aegis analyzes quiz scores, response times, and attention logs to adjust your curriculum difficulty.
+          Your reinforcement-learning coach. After each quiz, Aegis combines your score, difficulty, hints, attempts and camera engagement signals to recommend a next step.
         </p>
       </div>
 
@@ -107,8 +134,11 @@ export default function Recommendations() {
               <h2 className="text-xl font-bold text-white">Curriculum Recommendation</h2>
             </div>
             
-            <div className="shrink-0 flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5">
-              <span className="text-[9px] text-slate-500 font-extrabold uppercase">Policy Confidence</span>
+            <div
+              className="shrink-0 flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5"
+              title={CONFIDENCE_NOTE}
+            >
+              <span className="text-[9px] text-slate-500 font-extrabold uppercase">Decision strength</span>
               <span className="text-teal-400 font-extrabold text-sm">{Math.round(recommendation.confidence * 100)}%</span>
             </div>
           </div>
@@ -119,8 +149,14 @@ export default function Recommendations() {
               <div className="space-y-1">
                 <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Coach Action Suggestion</span>
                 <p className="text-2xl font-extrabold text-white">
-                  {recommendation.action.replace(/_/g, ' ')}
+                  {actionInfo(recommendation.action).icon} {actionInfo(recommendation.action).label}
                 </p>
+                <p className="text-xs text-slate-400">{actionInfo(recommendation.action).description}</p>
+                {recommendation.policy && (
+                  <p className="text-[10px] text-slate-500">
+                    Decided by: {POLICY_LABELS[recommendation.policy] || recommendation.policy}
+                  </p>
+                )}
               </div>
 
               {/* Justification */}
@@ -151,12 +187,17 @@ export default function Recommendations() {
               </div>
               
               <div className="pt-2">
-                <Link
-                  to={`/lesson/${recommendation.lessonId}`}
-                  className="w-full inline-flex justify-center py-2.5 rounded-xl bg-indigo-500 text-white font-bold text-[11px] shadow hover:bg-indigo-650 transition-colors"
-                >
-                  Resume study session
-                </Link>
+                {nextStepLink && (
+                  <Link
+                    to={nextStepLink.to}
+                    state={nextStepLink.state}
+                    className="w-full inline-flex justify-center py-2.5 rounded-xl bg-indigo-500 text-white font-bold text-[11px] shadow hover:bg-indigo-650 transition-colors"
+                  >
+                    {nextStep && nextStep.kind !== 'unknown' && nextStep.kind !== 'review' && nextStep.kind !== 'break'
+                      ? nextStep.label
+                      : `${actionInfo(recommendation.action).label}: open the lesson →`}
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -168,7 +209,9 @@ export default function Recommendations() {
         <div>
           <h3 className="text-lg font-bold text-white">How the Coach Adapts</h3>
           <p className="text-xs text-slate-500 mt-1">
-            Our Reinforcement Learning policy uses a discrete state-action matrix. Here are the core actions it can trigger:
+            A tabular Q-learning policy, trained offline on simulated students, scores all 11 actions for your
+            current situation. Safety rules first remove unsuitable actions (for example, moving on before
+            passing); the action with the highest learned value is recommended.
           </p>
         </div>
 

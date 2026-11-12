@@ -5,6 +5,12 @@ import { useMonitoring } from '../context/MonitoringContext'
 import { quizService } from '../services/quizService'
 import { lessonService } from '../services/lessonService'
 import { telemetryService } from '../services/telemetryService'
+import {
+  CONFIDENCE_NOTE,
+  POLICY_LABELS,
+  actionInfo,
+  resolveNextStep
+} from '../utils/recommendationActions'
 
 export default function QuizView() {
   const { id } = useParams()
@@ -30,6 +36,7 @@ export default function QuizView() {
   const [isFinished, setIsFinished] = useState(false)
   const [results, setResults] = useState(null)
   const [rlRecommendation, setRlRecommendation] = useState(null)
+  const [breakSecondsLeft, setBreakSecondsLeft] = useState(null)
 
   const studentId = user?.id
   const monitoring = useMonitoring()
@@ -166,6 +173,13 @@ export default function QuizView() {
       // Storage unavailable: answers still live in memory.
     }
   }, [draftKey, draftLoaded, isFinished, selectedAnswers, currentQuestionIdx, secondsElapsed, hintsRevealed, hintsCount])
+
+  // Focus-recovery break countdown (recommended by the RL engine).
+  useEffect(() => {
+    if (breakSecondsLeft === null || breakSecondsLeft <= 0) return
+    const timer = setTimeout(() => setBreakSecondsLeft((left) => left - 1), 1000)
+    return () => clearTimeout(timer)
+  }, [breakSecondsLeft])
 
   if (loading) {
     return (
@@ -425,6 +439,40 @@ export default function QuizView() {
     return target || null
   }
 
+  // Every one of the RL engine's 11 actions maps to a concrete next step
+  // (utils/recommendationActions.js); nothing falls back to a generic button.
+  const nextStep =
+    rlRecommendation && !rlRecommendation.error
+      ? resolveNextStep(rlRecommendation.action, {
+          lessonId: lesson.id,
+          quizId: quiz.id,
+          difficulty: quiz.difficulty,
+          lessonQuizzes: Array.isArray(lesson.quizzes) ? lesson.quizzes : [],
+          lessons: allLessons,
+          onResults: true
+        })
+      : null
+
+  const performNextStep = (step) => {
+    if (step.kind === 'navigate') {
+      navigate(step.to, { state: { ...(step.state || {}), subject: resolvedSubject } })
+    } else if (step.kind === 'retry') {
+      // A new `attempt` remounts the quiz page with a fresh attempt.
+      navigate(step.to, {
+        state: {
+          subject: resolvedSubject,
+          attempt: Date.now(),
+          mode: step.mode,
+          recommendedAction: rlRecommendation?.action
+        }
+      })
+    } else if (step.kind === 'review') {
+      document.getElementById('answer-review')?.scrollIntoView({ behavior: 'smooth' })
+    } else if (step.kind === 'break') {
+      setBreakSecondsLeft(60)
+    }
+  }
+
   const renderNextStepsButton = () => {
     if (!rlRecommendation) {
       return null
@@ -441,217 +489,53 @@ export default function QuizView() {
       )
     }
 
-    const action =
-      rlRecommendation.action
-
-    if (
-      action ===
-      'INCREASE_DIFFICULTY'
-    ) {
-      const currentDifficulty =
-        String(
-          quiz.difficulty
-        ).toUpperCase()
-
-      const nextDifficulty =
-        currentDifficulty === 'EASY'
-          ? 'Medium'
-          : currentDifficulty ===
-              'MEDIUM'
-            ? 'Hard'
-            : null
-
-      if (!nextDifficulty) {
-        return (
-          <Link
-            to="/subjects"
-            className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm"
-          >
-            Continue Learning →
-          </Link>
-        )
-      }
-
-      const targetQuiz =
-        getQuizOfDifficulty(
-          nextDifficulty
-        )
-
+    if (!nextStep || nextStep.kind === 'unknown') {
       return (
-        <button
-          onClick={() => {
-            if (targetQuiz?.id) {
-              navigate(
-                `/quiz/${targetQuiz.id}`
-              )
-            } else {
-              alert(
-                `No ${nextDifficulty} quiz is available for this lesson yet.`
-              )
-            }
-          }}
-          className="px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-sm shadow-md shadow-indigo-500/20 transition-all"
-        >
-          Calibrate to{' '}
-          {nextDifficulty} Quiz →
-        </button>
-      )
-    }
-
-    if (
-      action ===
-      'DECREASE_DIFFICULTY'
-    ) {
-      const currentDifficulty =
-        String(
-          quiz.difficulty
-        ).toUpperCase()
-
-      const previousDifficulty =
-        currentDifficulty === 'HARD'
-          ? 'Medium'
-          : currentDifficulty ===
-              'MEDIUM'
-            ? 'Easy'
-            : null
-
-      if (!previousDifficulty) {
-        return (
-          <Link
-            to={`/lesson/${lesson.id}`}
-            className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 font-bold text-sm"
-          >
-            Review Lesson
-          </Link>
-        )
-      }
-
-      const targetQuiz =
-        getQuizOfDifficulty(
-          previousDifficulty
-        )
-
-      return (
-        <button
-          onClick={() => {
-            if (targetQuiz?.id) {
-              navigate(
-                `/quiz/${targetQuiz.id}`
-              )
-            } else {
-              alert(
-                `No ${previousDifficulty} quiz is available for this lesson yet.`
-              )
-            }
-          }}
-          className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow-md shadow-amber-500/20 transition-all"
-        >
-          Return to{' '}
-          {previousDifficulty} Quiz →
-        </button>
-      )
-    }
-
-    /*
-     * For low scores, the recommendation is now
-     * REPEAT_LESSON, which is the preferred behavior.
-     */
-    if (
-      action ===
-      'REPEAT_LESSON'
-    ) {
-      return (
-        <button
-          onClick={() =>
-            navigate(
-              `/lesson/${lesson.id}`
-            )
-          }
-          className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 hover:bg-slate-800 text-slate-200 font-bold text-sm transition-all"
-        >
-          Review Lesson Material →
-        </button>
-      )
-    }
-
-    if (
-      action ===
-      'NEXT_LESSON'
-    ) {
-      const sortedLessons =
-        [...allLessons].sort(
-          (a, b) =>
-            (a.id ?? 0) -
-            (b.id ?? 0)
-        )
-
-      const currentIndex =
-        sortedLessons.findIndex(
-          (item) =>
-            item.id === lesson.id
-        )
-
-      const nextLesson =
-        currentIndex !== -1 &&
-        currentIndex <
-          sortedLessons.length - 1
-          ? sortedLessons[
-              currentIndex + 1
-            ]
-          : null
-
-      if (!nextLesson) {
-        return (
-          <Link
-            to="/subjects"
-            className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm"
-          >
-            Back to Subjects →
-          </Link>
-        )
-      }
-
-      return (
-        <button
-          onClick={() =>
-            navigate(
-              `/lesson/${nextLesson.id}`
-            )
-          }
-          className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-md shadow-emerald-500/20 transition-all"
-        >
-          Advance to Next Lesson →
-        </button>
-      )
-    }
-
-    if (
-      action ===
-      'FOCUS_RECOVERY'
-    ) {
-      return (
-        <button
-          onClick={() => {
-            alert(
-              'Aegis Coach Break:\n\nTake a 30-second breathing break. Look away from the screen, take a deep breath in, and slowly breathe out. When ready, continue learning.'
-            )
-
-            navigate('/subjects')
-          }}
-          className="px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm shadow-md shadow-sky-500/20 transition-all"
-        >
-          Start Focus Recovery →
-        </button>
+        <span className="text-xs font-semibold text-amber-400">
+          {actionInfo(rlRecommendation.action).label}
+        </span>
       )
     }
 
     return (
-      <Link
-        to="/subjects"
-        className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 hover:bg-slate-800 text-slate-200 font-bold text-sm"
+      <button
+        onClick={() => performNextStep(nextStep)}
+        className="px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-sm shadow-md shadow-indigo-500/20 transition-all"
       >
-        Back to Subjects
-      </Link>
+        {nextStep.label}
+      </button>
+    )
+  }
+
+  const renderBreakPanel = () => {
+    if (breakSecondsLeft === null) return null
+    const done = breakSecondsLeft <= 0
+    return (
+      <div className="rounded-2xl border border-sky-500/30 bg-sky-500/5 p-5 space-y-3">
+        <p className="text-sm font-bold text-sky-300">
+          {done ? 'Break complete. Welcome back.' : `Focus-recovery break: ${breakSecondsLeft}s`}
+        </p>
+        <p className="text-xs text-slate-300 leading-relaxed">
+          Look away from the screen at something far away, blink slowly, and take a few deep
+          breaths. Stretch your shoulders. Continue when you feel alert.
+        </p>
+        <div className="flex gap-3">
+          <Link
+            to={`/lesson/${lesson.id}`}
+            className="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs"
+          >
+            Continue learning →
+          </Link>
+          {!done && (
+            <button
+              onClick={() => setBreakSecondsLeft(null)}
+              className="px-4 py-2 rounded-xl border border-slate-700 text-slate-300 text-xs font-semibold"
+            >
+              Skip break
+            </button>
+          )}
+        </div>
+      </div>
     )
   }
 
@@ -863,7 +747,7 @@ export default function QuizView() {
         </div>
 
         {Array.isArray(results.review) && results.review.length > 0 && (
-          <div className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-md space-y-4">
+          <div id="answer-review" className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-md space-y-4">
             <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
               Answer Review
             </h3>
@@ -940,9 +824,12 @@ export default function QuizView() {
                   </p>
                 </div>
 
-                <div className="shrink-0 flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-2xl px-4 py-2">
+                <div
+                  className="shrink-0 flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-2xl px-4 py-2"
+                  title={CONFIDENCE_NOTE}
+                >
                   <span className="text-slate-500 text-[10px] uppercase font-bold tracking-wide">
-                    CONFIDENCE
+                    DECISION STRENGTH
                   </span>
 
                   <span className="text-teal-400 font-extrabold text-sm">
@@ -964,14 +851,19 @@ export default function QuizView() {
                   </span>
 
                   <span className="text-2xl font-extrabold text-white">
-                    {String(
-                      rlRecommendation.action ||
-                        'CONTINUE'
-                    ).replace(
-                      /_/g,
-                      ' '
-                    )}
+                    {actionInfo(rlRecommendation.action).icon}{' '}
+                    {actionInfo(rlRecommendation.action).label}
                   </span>
+
+                  <span className="text-xs text-slate-400">
+                    {actionInfo(rlRecommendation.action).description}
+                  </span>
+
+                  {rlRecommendation.policy && (
+                    <span className="text-[10px] text-slate-500">
+                      Decided by: {POLICY_LABELS[rlRecommendation.policy] || rlRecommendation.policy}
+                    </span>
+                  )}
                 </div>
 
                 <div className="flex flex-col gap-1">
@@ -990,13 +882,15 @@ export default function QuizView() {
 
               <div className="border-t border-slate-800/80 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <span className="text-xs text-slate-400">
-                  Aegis adapted the curriculum sequence. Click the button to advance:
+                  Your recommended next step:
                 </span>
 
                 <div className="flex items-center gap-3">
                   {renderNextStepsButton()}
                 </div>
               </div>
+
+              {renderBreakPanel()}
             </div>
           )
         )}
@@ -1010,8 +904,21 @@ export default function QuizView() {
       100
   )
 
+  const attemptMode = location.state?.mode
+  const modeBanner = {
+    practice: 'Practice attempt recommended by your coach: focus on the questions you missed last time.',
+    hints: 'Retry with hints: press the hint button on any question you are unsure about.',
+    challenge: `Quick challenge: try to finish all ${questions.length} questions in under ${Math.max(1, Math.round((questions.length * 30) / 60))} minute(s).`
+  }[attemptMode]
+
   return (
     <div className="max-w-3xl mx-auto space-y-6">
+      {modeBanner && (
+        <div className="rounded-2xl border border-indigo-500/30 bg-indigo-500/5 px-4 py-3 text-xs font-semibold text-indigo-300">
+          {modeBanner}
+        </div>
+      )}
+
       <div>
         <Link
           to={`/lesson/${lesson.id}`}

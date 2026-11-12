@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
+import { actionInfo } from '../utils/recommendationActions'
 import { useAuth } from '../context/AuthContext'
 import { lessonService } from '../services/lessonService'
 import { progressService } from '../services/progressService'
@@ -90,6 +91,22 @@ export default function LessonDetail() {
 
   const subject = location.state?.subject || lesson.subject || ''
 
+  // Guidance when the student arrives here because of a recommendation.
+  const recommendedAction = location.state?.recommendedAction
+  const recommendationGuide = {
+    REPEAT_LESSON: 'Read the lesson again slowly. Note the key terms and try to explain each paragraph in your own words before retaking a quiz.',
+    SHOW_REAL_WORLD_APPLICATION: `As you read, look for where ${lesson.topic} shows up in everyday life (at home, in sport, in the news) and jot down one example before retaking a quiz.`,
+    SHOW_WORKED_EXAMPLE: 'Retake a quiz and, after submitting, study the Answer Review: each question shows the correct answer next to yours.',
+    NEXT_LESSON: 'You are ready for this lesson. Start with the Easy quiz after reading.',
+    SKIP_TO_ADVANCED_TOPIC: 'You skipped ahead because of strong results. Start with the Medium or Hard quiz after reading.',
+    INCREASE_DIFFICULTY: 'Choose the next harder quiz below.',
+    DECREASE_DIFFICULTY: 'Choose an easier quiz below to rebuild confidence.',
+    PRACTICE_QUIZ: 'Retake a quiz below for practice.',
+    PROVIDE_HINT: 'Retake a quiz below and use the hint button on questions you are unsure about.',
+    QUICK_CHALLENGE: 'Pick a quiz below and try to finish it quickly.',
+    FOCUS_RECOVERY: 'Take a short break before continuing.'
+  }[recommendedAction]
+
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Navigation Breadcrumb */}
@@ -124,6 +141,15 @@ export default function LessonDetail() {
           {lesson.title}
         </h1>
       </div>
+
+      {recommendationGuide && (
+        <div className="rounded-2xl border border-teal-500/30 bg-teal-500/5 px-5 py-4 space-y-1">
+          <p className="text-xs font-bold uppercase tracking-wider text-teal-300">
+            {actionInfo(recommendedAction).icon} Coach recommendation: {actionInfo(recommendedAction).label}
+          </p>
+          <p className="text-sm text-slate-300">{recommendationGuide}</p>
+        </div>
+      )}
 
       {/* Reading pane */}
       <article className="prose prose-invert max-w-none text-slate-300 leading-relaxed text-sm md:text-base space-y-6">

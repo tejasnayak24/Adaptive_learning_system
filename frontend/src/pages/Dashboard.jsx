@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import { lessonService } from '../services/lessonService'
 import { progressService } from '../services/progressService'
 import { rlService } from '../services/rlService'
+import { CONFIDENCE_NOTE, POLICY_LABELS, actionInfo } from '../utils/recommendationActions'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
 export default function Dashboard() {
@@ -482,8 +483,14 @@ export default function Dashboard() {
                     </p>
 
                     <p className="text-lg font-extrabold text-white">
-                      {recommendation.action.replace(/_/g, ' ')}
+                      {actionInfo(recommendation.action).icon} {actionInfo(recommendation.action).label}
                     </p>
+
+                    {recommendation.policy && (
+                      <p className="text-[10px] text-slate-500">
+                        Decided by: {POLICY_LABELS[recommendation.policy] || recommendation.policy}
+                      </p>
+                    )}
                   </div>
 
                   <div className="space-y-1">
@@ -496,10 +503,10 @@ export default function Dashboard() {
                     </p>
                   </div>
 
-                  <div className="space-y-1.5">
+                  <div className="space-y-1.5" title={CONFIDENCE_NOTE}>
                     <div className="flex items-center justify-between text-xs">
                       <span className="font-semibold text-slate-500 uppercase tracking-wider text-[10px]">
-                        Confidence
+                        Decision strength (not a probability)
                       </span>
 
                       <span className="font-bold text-teal-400">

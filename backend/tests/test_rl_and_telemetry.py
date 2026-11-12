@@ -42,7 +42,10 @@ def test_rl_recommends_with_real_telemetry(client, auth):
     assert body["telemetry_available"] is True
     assert isinstance(body["action"], str)
     assert 0.0 <= body["confidence"] <= 1.0
-    assert body["policy"] in ("rules", "q_learning")
+    assert body["policy"] in ("q_learning", "q_learning_nearest_state", "fallback")
+    assert body["confidence_kind"] == "heuristic_decision_strength"
+    assert body["state_key"] and len(body["state_key"]) == 8
+    assert body["action"] not in body["blocked_actions"]
 
 
 def test_rl_rejects_invalid_values(client, auth):

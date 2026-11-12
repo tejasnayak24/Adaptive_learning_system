@@ -18,6 +18,8 @@ from app.models.progress import Progress
 from app.models.recommendation import RecommendationHistory
 from app.models.reward import RewardHistory
 from app.services.rl_service import RLService
+from app.utils.constants import normalize_difficulty
+from rl_engine.training.rewards import REWARD_VERSION, RewardBreakdown, observed_reward
 
 # Until the multi-subject curriculum stores a subject per lesson, every
 # seeded lesson belongs to the Science curriculum.
@@ -76,30 +78,62 @@ def build_state(db: Session, progress: Progress) -> dict[str, Any] | None:
     }
 
 
-def outcome_reward(previous: Progress, outcome: Progress) -> float:
-    """Reward observed after a recommendation, from the next real attempt.
+def outcome_breakdown(previous: Progress, outcome: Progress) -> RewardBreakdown:
+    """Observed reward of a recommendation, from the student's next attempt.
 
-    * score change between the attempts, scaled to [-5, +5];
-    * +3 when the new attempt reaches mastery (>= 80%), -3 when it is
-      poor (< 50%);
-    * when both attempts have camera telemetry, +2 x the change in
-      attention (so a recovery from distraction is rewarded).
-
-    The formula is intentionally simple and transparent; it only uses
-    values that were actually measured.
+    Uses the same outcome-based reward as offline training
+    (``rl_engine.training.rewards.observed_reward``, reward version 2):
+    difficulty-adjusted score change on the same lesson, or the quality of
+    the advancement when the next attempt is on a different lesson, plus
+    the change in measured attention and possible drowsiness. Camera
+    values that were not measured (NULL) are left out, never guessed.
     """
-    delta = (outcome.quiz_score - previous.quiz_score) / 10.0
-    reward = max(-5.0, min(5.0, delta))
+    advanced = 1 if outcome.lesson_id != previous.lesson_id else 0
+    return observed_reward(
+        score_before=previous.quiz_score,
+        score_after=outcome.quiz_score,
+        difficulty_before=normalize_difficulty(previous.difficulty),
+        difficulty_after=normalize_difficulty(outcome.difficulty),
+        lessons_advanced=advanced,
+        attention_before=previous.attention_score,
+        attention_after=outcome.attention_score,
+        drowsy_before=previous.drowsy,
+        drowsy_after=outcome.drowsy,
+    )
 
-    if outcome.quiz_score >= 80:
-        reward += 3.0
-    elif outcome.quiz_score < 50:
-        reward -= 3.0
 
-    if previous.attention_score is not None and outcome.attention_score is not None:
-        reward += 2.0 * (outcome.attention_score - previous.attention_score)
+def outcome_reward(previous: Progress, outcome: Progress) -> float:
+    return outcome_breakdown(previous, outcome).total
 
-    return round(reward, 4)
+
+_DIFFICULTY_ORDER = {"EASY": 0, "MEDIUM": 1, "HARD": 2}
+_SAME_LESSON_ACTIONS = {
+    "REPEAT_LESSON",
+    "PRACTICE_QUIZ",
+    "SHOW_WORKED_EXAMPLE",
+    "PROVIDE_HINT",
+}
+
+
+def infer_followed(action: str, previous: Progress, outcome: Progress) -> bool | None:
+    """Whether the next attempt is consistent with following ``action``.
+
+    Returns None when quiz records cannot show it (e.g. whether the student
+    actually took a break or read a real-world example).
+    """
+    same_lesson = outcome.lesson_id == previous.lesson_id
+    before = _DIFFICULTY_ORDER.get(normalize_difficulty(previous.difficulty))
+    after = _DIFFICULTY_ORDER.get(normalize_difficulty(outcome.difficulty))
+
+    if action in ("NEXT_LESSON", "SKIP_TO_ADVANCED_TOPIC"):
+        return not same_lesson
+    if action == "INCREASE_DIFFICULTY":
+        return same_lesson and before is not None and after is not None and after > before
+    if action == "DECREASE_DIFFICULTY":
+        return same_lesson and before is not None and after is not None and after < before
+    if action in _SAME_LESSON_ACTIONS:
+        return same_lesson
+    return None
 
 
 def record_outcome_of_previous(db: Session, new_progress: Progress) -> RewardHistory | None:
@@ -123,13 +157,17 @@ def record_outcome_of_previous(db: Session, new_progress: Progress) -> RewardHis
     if previous is None:
         return None
 
+    breakdown = outcome_breakdown(previous, new_progress)
     reward_row = RewardHistory(
         student_id=new_progress.student_id,
-        reward=outcome_reward(previous, new_progress),
+        reward=breakdown.total,
         state=pending.state_key,
         action=pending.action,
         recommendation_id=pending.id,
         progress_id=new_progress.id,
+        reward_version=REWARD_VERSION,
+        followed=infer_followed(pending.action, previous, new_progress),
+        reward_detail=json.dumps(breakdown.as_dict(), sort_keys=True),
     )
 
     pending.outcome_progress_id = new_progress.id
@@ -163,21 +201,39 @@ def recommend_for_attempt(
         state=json.dumps(state, sort_keys=True),
         state_key=json.dumps(list(decision.state_key)),
         policy=decision.policy,
+        model_version=decision.model_version or None,
+        decision_detail=json.dumps(decision.detail, sort_keys=True),
     )
     db.add(row)
     return row
 
 
+def _load_json(text: str | None) -> Any:
+    if not text:
+        return None
+    try:
+        return json.loads(text)
+    except ValueError:
+        return None
+
+
 def recommendation_to_dict(row: RecommendationHistory | None) -> dict[str, Any] | None:
     if row is None:
         return None
+    detail = _load_json(row.decision_detail) or {}
     return {
         "id": row.id,
         "progress_id": row.progress_id,
         "action": row.action,
         "confidence": row.confidence,
         "explanation": row.explanation,
+        "confidence_kind": "heuristic_decision_strength",
         "policy": row.policy,
+        "model_version": row.model_version,
+        "q_values": detail.get("q_values"),
+        "runner_up": detail.get("runner_up"),
+        "blocked_actions": detail.get("blocked_actions"),
+        "state_visits": detail.get("state_visits"),
         "created_at": row.created_at,
         "outcome_progress_id": row.outcome_progress_id,
         "telemetry_available": True,

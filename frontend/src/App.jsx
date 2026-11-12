@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { MonitoringProvider } from './context/MonitoringContext'
 import MonitoringGate from './components/MonitoringGate'
@@ -28,9 +28,12 @@ function MonitoredLesson() {
 
 function MonitoredQuiz() {
   const { id } = useParams()
+  // A recommended retry navigates with a new `attempt`, which remounts the
+  // quiz for a fresh attempt while the monitoring session stays connected.
+  const attempt = useLocation().state?.attempt ?? ''
   return (
     <MonitoringGate>
-      <QuizView key={id} />
+      <QuizView key={`${id}:${attempt}`} />
     </MonitoringGate>
   )
 }

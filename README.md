@@ -87,7 +87,26 @@ unlock only after camera monitoring is verified, and pause if it fails.
 See `facial_analysis/README.md` for details and troubleshooting, and
 `docs/WEBCAM_ACCEPTANCE_CHECKLIST.md` for the real-webcam test plan.
 
-## 5. Use the app
+## 5. Recommendation engine (offline Q-learning)
+
+The backend loads the trained Q-table `rl_engine/q_table.json` (state-key
+version 3). To retrain it offline (about a minute) and run the RL tests:
+
+```powershell
+cd C:\Users\tejas\Adaptive_learning_system
+python -m rl_engine.train
+cd rl_engine
+python -m pytest
+```
+
+Training only replaces the table if the new one passes validation against
+the previous rule policy and a random policy; the old table is archived in
+`rl_engine/archive/`. Restart the backend afterwards. See
+`docs/RL_ENGINE.md` for the full design (state, actions, rewards, update
+rule, simulator, evaluation). Real outcomes can be summarised with
+`python backend\scripts\rl_outcome_report.py`.
+
+## 6. Use the app
 
 Keep all three services running, then open http://localhost:5173.
 The first lesson asks for camera-monitoring consent (students under 18 also

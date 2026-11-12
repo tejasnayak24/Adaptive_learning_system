@@ -70,3 +70,18 @@ camera works.** Mark each line ✅ / ❌ and note anything odd.
 | E2 | Backend terminal output | No tokens or passwords printed |
 
 Report results (✅/❌ with notes) back so failures can be fixed before Phase 4.
+
+## Results
+
+**2026-11-12: real-webcam acceptance run on the team lead's Windows laptop.**
+
+Reported outcome: the facial-analysis system, the voice alerts and camera
+recovery worked correctly on the real webcam, and Phase 4 was approved to
+start. Results for the individual check IDs above were not reported one by
+one, so no single line is marked ✅ here. The overall outcome covers the
+detection (B), voice-alert (B4–B8) and recovery (C) areas as reported.
+
+The database contains two quiz attempts from a student account during the
+testing window (progress rows 62–63, 2026-11-12 09:01 UTC) with camera
+attention values and a monitoring session. This is consistent with real
+camera telemetry reaching the backend during the run.

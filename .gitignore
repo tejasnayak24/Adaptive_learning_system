@@ -21,3 +21,6 @@ backups/
 # Runtime logs
 logs/
 *.log
+
+# RL training candidate (only promoted after validation)
+rl_engine/q_table.candidate.json

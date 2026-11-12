@@ -207,13 +207,24 @@ Roles are changed only with `python backend/scripts/set_role.py <email> <role>`.
 |---|---|---|
 | GET | `/recommendations/latest` 🔒 | `{status, recommendation, attempt}`; status is `available`, `telemetry_unavailable`, `not_generated` or `no_attempts` |
 | GET | `/recommendations` 🔒 | The student's recommendation history |
-| POST | `/rl/recommend` 🔒 | Stateless recommendation for a supplied state (13 fields, see `/docs`). Returns `{action, confidence, explanation, policy, telemetry_available}`; `action` is `null` when any camera field is `null`. |
+| POST | `/rl/recommend` 🔒 | Stateless recommendation for a supplied state (13 fields + optional `drowsy`, see `/docs`). Returns `{action, confidence, confidence_kind, explanation, policy, model_version, state_key, q_values, runner_up, margin, blocked_actions, untested_actions, state_visits, telemetry_available}`; `action` is `null` when any camera field is `null`. |
+| GET | `/rl/model` 🔒 | Loaded Q-table: `model_version`, `trained_at`, `states_learned`, `state_key_version` (3), `training: "offline_simulation"`, `online_updates: false` |
 
 Recommendations are generated **by the server when a quiz is graded**, from
-the stored attempt, and saved to `recommendation_history`. When the
-student's next attempt arrives, its outcome is recorded in `reward_history`.
-`policy` reports whether a rule (`rules`) or the learned Q-table
-(`q_learning`) chose the action.
+the stored attempt, and saved to `recommendation_history` (with
+`model_version` and `decision_detail`). When the student's next attempt
+arrives, its observed reward (reward version 2, same formula as training) is
+recorded in `reward_history` with `followed` and `reward_detail`.
+
+`policy` is `q_learning` (learned Q-table chose among the permitted actions),
+`q_learning_nearest_state` (state not learned; most similar learned state
+used) or `fallback` (nothing learned applies; `REPEAT_LESSON`, confidence 0).
+Rows from before Phase 4 say `rules`. `confidence` is a heuristic decision
+strength, **not a probability**. Safety constraints only remove unsuitable
+actions; they never choose one. Full details: `docs/RL_ENGINE.md`.
+
+Retrain offline with `python -m rl_engine.train` (validates before replacing
+`rl_engine/q_table.json`); the running backend never changes the table.
 
 The old `POST /recommend` placeholder has been removed.
 

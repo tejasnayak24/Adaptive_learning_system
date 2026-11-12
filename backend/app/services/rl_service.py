@@ -13,13 +13,15 @@ module; nothing here modifies, subclasses, or duplicates any logic from
 ``rl_engine``.
 """
 
+import hashlib
 from collections.abc import Mapping
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
 from rl_engine.core.config import RLConfig
+from rl_engine.core.state_encoding import STATE_KEY_VERSION
 from rl_engine.models.recommendation import Recommendation
 from rl_engine.models.student_state import Difficulty, StudentState
 from rl_engine.training.agent import QLearningAgent
@@ -35,14 +37,20 @@ class Decision:
 
     Attributes:
         recommendation: The RL engine's ``Recommendation``.
-        state_key: The discretised Q-table key the agent used.
-        policy: ``"rules"`` when a deterministic educational rule chose
-            the action, ``"q_learning"`` when the learned Q-table did.
+        state_key: The discretised (version 3) Q-table key of the state.
+        policy: ``"q_learning"`` when the learned Q-table chose among the
+            permitted actions, ``"q_learning_nearest_state"`` when the
+            exact state was not learned and the most similar learned state
+            was used, ``"fallback"`` when no learned values applied.
+        model_version: Identifies the loaded Q-table file.
+        detail: Q-values, blocked actions and visit counts (JSON-ready).
     """
 
     recommendation: Recommendation
     state_key: tuple
     policy: str
+    model_version: str = ""
+    detail: dict[str, Any] = field(default_factory=dict)
 
 
 class RLService:
@@ -96,6 +104,16 @@ class RLService:
                 f"Failed to load Q-table from '{resolved_path}': {exc}"
             ) from exc
 
+        digest = hashlib.sha256(resolved_path.read_bytes()).hexdigest()[:12]
+        trained_at = str(self._agent.metadata.get("trained_at", "unknown"))
+        self.model_version = f"v{STATE_KEY_VERSION}-{digest}"
+        self.model_info = {
+            "model_version": self.model_version,
+            "trained_at": trained_at,
+            "states_learned": len(self._agent.q_table),
+            "state_key_version": STATE_KEY_VERSION,
+        }
+
     def get_recommendation(self, student_data: Mapping[str, Any]) -> Recommendation:
         """Return the agent's recommendation for a student described by ``student_data``.
 
@@ -135,21 +153,22 @@ class RLService:
         return self._agent.recommend(student_state)
 
     def decide(self, student_data: Mapping[str, Any]) -> Decision:
-        """Like ``get_recommendation``, but also report the state key and
-        which policy (rules or Q-table) produced the action, so stored
+        """Like ``get_recommendation``, but also report the state key, the
+        policy path (learned Q-table, nearest learned state or fallback),
+        the Q-table version and the Q-values behind the choice, so stored
         recommendation history describes the decision truthfully."""
         if not isinstance(student_data, Mapping):
             raise TypeError("student_data must be a mapping of StudentState fields.")
 
         student_state = self._build_student_state(student_data)
-        recommendation = self._agent.recommend(student_state)
-        rule_action = self._agent._policy_action(student_state)
-        policy = "rules" if rule_action is not None else "q_learning"
+        decision = self._agent.decide(student_state)
 
         return Decision(
-            recommendation=recommendation,
-            state_key=self._agent._state_to_key(student_state),
-            policy=policy,
+            recommendation=decision.to_recommendation(),
+            state_key=decision.state_key,
+            policy=decision.policy,
+            model_version=self.model_version,
+            detail=decision.as_dict(),
         )
 
     def _build_student_state(self, data: Mapping[str, Any]) -> StudentState:

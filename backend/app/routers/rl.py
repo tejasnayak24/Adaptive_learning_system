@@ -1,6 +1,7 @@
 """FastAPI router exposing the RL recommendation endpoints.
 
 * ``POST /rl/recommend`` -- stateless recommendation for a supplied state.
+* ``GET /rl/model`` -- which offline-trained Q-table is loaded.
 * ``GET /recommendations/latest`` -- the signed-in student's most recent
   stored recommendation (generated server-side when a quiz is graded).
 * ``GET /recommendations`` -- the signed-in student's recommendation history.
@@ -36,8 +37,10 @@ def recommend(
     """Return the RL agent's recommendation for a supplied student state.
 
     Returns:
-        A mapping with ``action`` (or ``None``), ``confidence`` (or
-        ``None``), ``explanation``, ``policy`` and ``telemetry_available``.
+        A mapping with ``action`` (or ``None``), ``confidence`` (a heuristic
+        decision-strength indicator, not a probability, or ``None``),
+        ``explanation``, ``policy``, the Q-values of the eligible actions,
+        the blocked actions with reasons, and ``telemetry_available``.
         When real camera telemetry is missing no recommendation is
         generated.
 
@@ -66,12 +69,32 @@ def recommend(
             status_code=500, detail="Failed to generate a recommendation."
         ) from exc
 
+    detail = decision.detail
     return {
         "action": decision.recommendation.action.name,
         "confidence": decision.recommendation.confidence,
+        "confidence_kind": "heuristic_decision_strength",
         "explanation": decision.recommendation.explanation,
         "policy": decision.policy,
+        "model_version": decision.model_version,
+        "state_key": list(decision.state_key),
+        "state_features": detail.get("state_features"),
+        "q_values": detail.get("q_values"),
+        "runner_up": detail.get("runner_up"),
+        "margin": detail.get("margin"),
+        "blocked_actions": detail.get("blocked_actions"),
+        "untested_actions": detail.get("untested_actions"),
+        "state_visits": detail.get("state_visits"),
         "telemetry_available": True,
+    }
+
+
+@router.get("/rl/model")
+def model_info(student: Student = Depends(get_current_student)) -> dict[str, Any]:
+    """Which trained Q-table is loaded (offline-trained; not updated online)."""
+    return {
+        "success": True,
+        "data": {**get_rl_service().model_info, "training": "offline_simulation", "online_updates": False},
     }
 
 
@@ -81,6 +104,7 @@ def _attempt_summary(progress: Progress | None) -> dict[str, Any] | None:
     return {
         "progress_id": progress.id,
         "lesson_id": progress.lesson_id,
+        "quiz_id": progress.quiz_id,
         "lesson_title": progress.lesson.title if progress.lesson else None,
         "topic": progress.lesson.topic if progress.lesson else None,
         "quiz_score": progress.quiz_score,

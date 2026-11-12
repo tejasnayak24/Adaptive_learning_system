@@ -129,7 +129,10 @@ def test_submission_with_telemetry_stores_recommendation(client, auth, lesson_wi
     assert data["recommendation_status"] == "available"
     rec = data["recommendation"]
     assert isinstance(rec["action"], str)
-    assert rec["policy"] in ("rules", "q_learning")
+    assert rec["policy"] in ("q_learning", "q_learning_nearest_state", "fallback")
+    assert rec["model_version"].startswith("v3-")
+    assert rec["confidence_kind"] == "heuristic_decision_strength"
+    assert rec["action"] not in (rec["blocked_actions"] or {})
 
     latest = client.get("/recommendations/latest", headers=headers).json()["data"]
     assert latest["status"] == "available"
@@ -155,8 +158,23 @@ def test_next_attempt_records_reward_for_previous_recommendation(client, auth, l
     assert reward.recommendation_id == first["recommendation"]["id"]
     assert reward.progress_id == second["progress"]["id"]
     assert reward.action == first["recommendation"]["action"]
-    # 0% -> 100%: +5 (capped delta) +3 (mastery) +2*(0.9-0.5) = 8.8
-    assert reward.reward == 8.8
+    # Reward version 2 (rl_engine.training.rewards.observed_reward), same lesson
+    # and difficulty, 0% -> 100%: learning gain +3.0 (clipped), engagement
+    # 2*(0.9-0.5) = +0.8, step cost -0.5  ->  3.3
+    assert reward.reward == 3.3
+    assert reward.reward_version == 2
+    import json as _json
+
+    detail = _json.loads(reward.reward_detail)
+    assert detail["learning_gain"] == 3.0 and detail["engagement_change"] == 0.8
+    # Same lesson and same quiz level: consistent with same-lesson actions,
+    # not observable for break/real-world/challenge.
+    expected_followed = {
+        "REPEAT_LESSON": True, "PRACTICE_QUIZ": True, "SHOW_WORKED_EXAMPLE": True, "PROVIDE_HINT": True,
+        "DECREASE_DIFFICULTY": False, "INCREASE_DIFFICULTY": False,
+        "FOCUS_RECOVERY": None, "SHOW_REAL_WORLD_APPLICATION": None, "QUICK_CHALLENGE": None,
+    }
+    assert reward.followed == expected_followed[reward.action]
 
     closed = db_session.get(RecommendationHistory, first["recommendation"]["id"])
     assert closed.outcome_progress_id == second["progress"]["id"]

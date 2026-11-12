@@ -38,8 +38,15 @@ class RecommendationHistory(Base):
     state: Mapped[str] = mapped_column(Text, nullable=False)
     state_key: Mapped[str] = mapped_column(String(255), nullable=False)
 
-    # Which policy produced the decision, e.g. "q_learning" or "rules".
+    # Which policy produced the decision: "q_learning",
+    # "q_learning_nearest_state" or "fallback" (Phase 4), or "rules" for
+    # rows recorded before Phase 4 when hand-written rules decided.
     policy: Mapped[str] = mapped_column(String(32), nullable=False)
+
+    # Phase 4: the Q-table that produced the decision, and a JSON record
+    # of the Q-values, blocked actions and visit counts behind it.
+    model_version: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    decision_detail: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime,
