@@ -1,0 +1,606 @@
+{
+  "grade": 7,
+  "subject": "Mathematics",
+  "units": [
+    {
+      "slug": "g7-math-u-integers",
+      "title": "Integers",
+      "topics": [
+        {
+          "slug": "g7-math-t-integers",
+          "title": "Working with Integers",
+          "description": "Positive and negative numbers on the number line and the four operations on them.",
+          "lessons": [
+            {
+              "slug": "g7-math-integers-number-line",
+              "title": "Integers and the Number Line",
+              "objectives": [
+                "Represent positive and negative integers on a number line",
+                "Compare and order integers",
+                "Find the absolute value of an integer",
+                "Add and subtract integers using the number line"
+              ],
+              "intro": "Temperatures in Leh can fall to 15 degrees below zero, a submarine can be 200 m below sea level, and a bank account can be overdrawn by ₹500. To describe quantities below zero we use negative numbers. The integers are all the whole numbers together with their negatives: …, −3, −2, −1, 0, 1, 2, 3, …. Zero is neither positive nor negative. Integers let us describe gains and losses, rises and falls, and positions above and below a reference level.",
+              "sections": [
+                [
+                  "The number line and ordering",
+                  "On a number line, zero is in the middle, positive integers lie to the right and negative integers lie to the left, at equal spacing. Every integer has an opposite at the same distance from zero on the other side: the opposite of 4 is −4, and the opposite of −7 is 7. A number further to the right is always greater. So 3 > −5, −1 > −6 and 0 > −2. This surprises many students: −2 is greater than −10, just as a temperature of −2 °C is warmer than −10 °C."
+                ],
+                [
+                  "Absolute value",
+                  "The absolute value of an integer is its distance from zero, ignoring direction. It is written with vertical bars: |−8| = 8 and |8| = 8. Absolute value is never negative. It is useful when only the size of a change matters, such as the depth of a diver or the size of a loss. Comparing absolute values helps with addition: when adding integers with different signs, the answer takes the sign of the number with the larger absolute value."
+                ],
+                [
+                  "Adding and subtracting on the number line",
+                  "To add a positive integer, move to the right; to add a negative integer, move to the left. For 3 + (−5), start at 3 and move 5 steps left to reach −2. Subtraction means adding the opposite: 4 − 7 = 4 + (−7) = −3, and 2 − (−6) = 2 + 6 = 8. So subtracting a negative number moves you to the right. Rules that follow from the number line: adding two positives gives a positive; adding two negatives gives a negative (−3 + −4 = −7); for different signs, subtract the absolute values and keep the sign of the larger one (−9 + 4 = −5)."
+                ]
+              ],
+              "definitions": [
+                ["Integer", "Any whole number, its negative, or zero."],
+                ["Negative integer", "An integer less than zero."],
+                ["Opposite (additive inverse)", "The integer at the same distance from zero on the other side, such as 5 and −5."],
+                ["Absolute value", "The distance of a number from zero, written |a|."]
+              ],
+              "examples": [
+                "A lift goes from floor 3 down 5 floors to the basement level −2.",
+                "Temperature rises from −6 °C by 9 degrees to reach 3 °C."
+              ],
+              "worked": [
+                {
+                  "problem": "Find (−8) + 13 − (−4).",
+                  "steps": [
+                    "Rewrite subtraction as adding the opposite: (−8) + 13 + 4.",
+                    "(−8) + 13: different signs, 13 − 8 = 5, sign of the larger absolute value (13) is +, so 5.",
+                    "5 + 4 = 9."
+                  ],
+                  "answer": "9"
+                },
+                {
+                  "problem": "At 6 a.m. the temperature in Shimla was −4 °C. By noon it rose by 11 °C, and by midnight it fell by 9 °C. What was the midnight temperature?",
+                  "steps": [
+                    "Noon: −4 + 11 = 7 °C.",
+                    "Midnight: 7 − 9 = −2 °C."
+                  ],
+                  "answer": "−2 °C"
+                }
+              ],
+              "diagram": {
+                "type": "number_line",
+                "title": "3 + (−5) = −2",
+                "min": -6,
+                "max": 6,
+                "points": [[3, "start 3"], [-2, "end −2"], [0, "0"]]
+              },
+              "real_world": "Bank statements show deposits as positive and withdrawals as negative, golf scores use negative numbers for under par, and the Dead Sea shore is about 430 m below sea level (−430 m). Weather reports in cold regions use negative temperatures every winter.",
+              "takeaways": [
+                "Integers include positive numbers, negative numbers and zero.",
+                "On the number line, numbers to the right are greater.",
+                "Absolute value is distance from zero and is never negative.",
+                "Subtracting an integer is the same as adding its opposite."
+              ],
+              "practice": [
+                ["Arrange in ascending order: 4, −7, 0, −2, 5.", "−7, −2, 0, 4, 5"],
+                ["Find |−15| + |6|.", "21"],
+                ["Find −12 − (−20).", "8"],
+                ["A diver at −18 m rises 7 m. Where is she now?", "−11 m"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which integer is greater: −3 or −8?", ["−8", "−3", "They are equal", "Cannot be compared"], "B", "Which is further to the right on the number line?", "−3 lies to the right of −8, so −3 is greater."],
+                  ["What is the opposite of 9?", ["0", "1/9", "−9", "9"], "C", "Same distance from zero, other side.", "The opposite of 9 is −9."],
+                  ["What is |−12|?", ["12", "−12", "0", "1"], "A", "Absolute value is a distance.", "−12 is 12 units from zero, so |−12| = 12."],
+                  ["What is 5 + (−5)?", ["10", "−10", "5", "0"], "D", "A number plus its opposite.", "A number and its opposite add to zero."]
+                ],
+                "MEDIUM": [
+                  ["What is (−7) + 4?", ["−11", "−3", "3", "11"], "B", "Different signs: subtract and keep the sign of the larger.", "7 − 4 = 3 and 7 is larger and negative, so −3."],
+                  ["What is 6 − (−9)?", ["−3", "−15", "15", "3"], "C", "Subtracting a negative means adding.", "6 − (−9) = 6 + 9 = 15."],
+                  ["Which list is in descending order?", ["4, 0, −1, −6", "−6, −1, 0, 4", "0, −1, 4, −6", "4, −1, 0, −6"], "A", "Start with the greatest.", "4 > 0 > −1 > −6."],
+                  ["A submarine at −120 m rises 45 m. What is its new position?", ["−165 m", "165 m", "75 m", "−75 m"], "D", "Rising means adding.", "−120 + 45 = −75 m."]
+                ],
+                "HARD": [
+                  ["Find (−15) + 8 − (−6) − 4.", ["−13", "−5", "5", "13"], "B", "Change subtractions to additions of opposites.", "−15 + 8 + 6 − 4 = −5."],
+                  ["How many integers lie strictly between −4 and 3?", ["7", "5", "6", "8"], "C", "List them: −3, −2, …", "−3, −2, −1, 0, 1, 2 are six integers."],
+                  ["The temperature at noon was 5 °C and at midnight −7 °C. By how many degrees did it fall?", ["12 °C", "2 °C", "−2 °C", "−12 °C"], "A", "Find the difference: 5 − (−7).", "5 − (−7) = 12, so it fell by 12 °C."],
+                  ["If a + (−6) = −2, what is a?", ["−8", "−4", "8", "4"], "D", "What added to −6 gives −2?", "4 + (−6) = −2, so a = 4."]
+                ]
+              }
+            },
+            {
+              "slug": "g7-math-integer-operations",
+              "title": "Multiplying and Dividing Integers",
+              "objectives": [
+                "Multiply and divide integers using sign rules",
+                "Explain why a negative times a negative is positive",
+                "Use properties of integer operations",
+                "Solve word problems involving integers"
+              ],
+              "intro": "If you lose ₹20 every day for 3 days, your total change is −₹60: three groups of −20. Multiplication of integers extends multiplication of whole numbers, but we must take care with signs. The rules for signs are short and easy to remember once you understand the patterns behind them. Division follows the same sign rules because it is the reverse of multiplication.",
+              "sections": [
+                [
+                  "Sign rules for multiplication",
+                  "A positive times a positive is positive: 4 × 3 = 12. A positive times a negative is negative: 3 × (−4) means three groups of −4, which is −12. A negative times a positive is also negative, because multiplication is commutative. A negative times a negative is positive. Look at the pattern: (−3) × 2 = −6, (−3) × 1 = −3, (−3) × 0 = 0. Each time the second number goes down by 1, the answer goes up by 3. Continuing, (−3) × (−1) = 3 and (−3) × (−2) = 6. In short: like signs give a positive product, unlike signs give a negative product."
+                ],
+                [
+                  "Many factors and division",
+                  "When multiplying several integers, count the negative factors. An even number of negatives gives a positive product; an odd number gives a negative product. So (−1) × (−2) × (−3) = −6 (three negatives) and (−2)⁴ = 16 (four negatives). Division uses the same rules: 24 ÷ (−6) = −4, (−35) ÷ (−7) = 5 and (−18) ÷ 3 = −6. Division by zero is not defined, but 0 divided by any non-zero integer is 0."
+                ],
+                [
+                  "Properties",
+                  "Integers are closed under addition, subtraction and multiplication, but not under division: (−7) ÷ 2 is not an integer. Multiplication of integers is commutative and associative, and it distributes over addition: (−5) × (4 + 6) = (−5) × 4 + (−5) × 6 = −20 + (−30) = −50. The multiplicative identity is 1, and multiplying by −1 gives the opposite: (−1) × 9 = −9. These properties let us rearrange calculations: (−25) × 37 × (−4) = (−25 × −4) × 37 = 100 × 37 = 3,700."
+                ]
+              ],
+              "definitions": [
+                ["Product", "The result of multiplying numbers."],
+                ["Quotient", "The result of dividing one number by another."],
+                ["Closure", "An operation is closed if the result is always in the same set of numbers."],
+                ["Multiplicative identity", "The number 1, which leaves any number unchanged when multiplied."]
+              ],
+              "examples": [
+                "A freezer cools by 3 °C every hour; in 5 hours the change is 5 × (−3) = −15 °C.",
+                "(−48) ÷ (−8) = 6, because (−8) × 6 = −48."
+              ],
+              "worked": [
+                {
+                  "problem": "In a quiz, each correct answer scores +4 and each wrong answer scores −2. Riya answered 12 correctly and 7 wrongly. What was her score?",
+                  "steps": [
+                    "Marks for correct answers: 12 × 4 = 48.",
+                    "Marks for wrong answers: 7 × (−2) = −14.",
+                    "Total: 48 + (−14) = 34."
+                  ],
+                  "answer": "34"
+                },
+                {
+                  "problem": "Evaluate (−2) × (−3) × (−5) × 4.",
+                  "steps": [
+                    "There are three negative factors (odd), so the product is negative.",
+                    "Multiply absolute values: 2 × 3 × 5 × 4 = 120.",
+                    "Answer: −120."
+                  ],
+                  "answer": "−120"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Sign rules for × and ÷",
+                "columns": ["First", "Second", "Result"],
+                "rows": [["+", "+", "+"], ["+", "−", "−"], ["−", "+", "−"], ["−", "−", "+"]]
+              },
+              "real_world": "Engineers model temperature drops, accountants calculate repeated losses, and scientists measure changes below a starting point using multiplication of integers. Video games often use negative points for penalties, and the total is found by multiplying penalties by the number of mistakes.",
+              "takeaways": [
+                "Like signs give positive; unlike signs give negative, for both × and ÷.",
+                "An even number of negative factors gives a positive product.",
+                "Integers are not closed under division, and division by zero is undefined.",
+                "Use commutativity, associativity and distributivity to simplify calculations."
+              ],
+              "practice": [
+                ["Find (−9) × (−7).", "63"],
+                ["Find (−72) ÷ 8.", "−9"],
+                ["Find (−1)⁵.", "−1"],
+                ["Use the distributive property: (−8) × 97 + (−8) × 3.", "(−8) × 100 = −800"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What is (−6) × 4?", ["24", "−24", "−10", "10"], "B", "Unlike signs give a negative product.", "6 × 4 = 24 and the signs differ, so −24."],
+                  ["What is (−5) × (−3)?", ["−15", "−8", "15", "8"], "C", "Like signs give a positive product.", "5 × 3 = 15, and two negatives make a positive."],
+                  ["What is (−20) ÷ 5?", ["−4", "4", "−100", "−15"], "A", "Division follows the same sign rules.", "20 ÷ 5 = 4; unlike signs give −4."],
+                  ["What is 0 × (−17)?", ["−17", "17", "1", "0"], "D", "Anything times zero is…", "Any integer multiplied by 0 is 0."]
+                ],
+                "MEDIUM": [
+                  ["What is (−2) × (−2) × (−2)?", ["8", "−8", "−6", "6"], "B", "Count the negative factors.", "Three negatives give a negative product: −8."],
+                  ["What is (−45) ÷ (−9)?", ["−5", "−36", "5", "36"], "C", "Like signs in division.", "45 ÷ 9 = 5 and like signs give a positive answer."],
+                  ["Which statement is TRUE?", ["(−8) ÷ 3 is not an integer", "Integers are closed under division", "(−1) × (−1) = −1", "5 ÷ 0 = 0"], "A", "Test closure under division.", "−8 ÷ 3 is not a whole number, so integers are not closed under division."],
+                  ["A diver descends 4 m every minute. What is the change in position after 9 minutes?", ["36 m", "13 m", "−13 m", "−36 m"], "D", "Descending is a negative change.", "9 × (−4) = −36 m."]
+                ],
+                "HARD": [
+                  ["Evaluate (−25) × 43 × (−4).", ["−4,300", "4,300", "−1,075", "430"], "B", "Group −25 with −4 first.", "(−25) × (−4) = 100, and 100 × 43 = 4,300."],
+                  ["In a test, +3 for correct and −1 for wrong. Asha scored 20 with 10 correct answers. How many were wrong?", ["5", "30", "10", "2"], "C", "Marks from correct answers minus marks lost.", "10 × 3 = 30; 30 − 20 = 10 marks lost, so 10 wrong answers."],
+                  ["Which is the value of (−1)²⁰²⁵?", ["−1", "1", "0", "2025"], "A", "Is the exponent odd or even?", "An odd number of −1 factors gives −1."],
+                  ["If a × (−6) = 42, what is a?", ["7", "−36", "36", "−7"], "D", "Divide 42 by −6.", "42 ÷ (−6) = −7; check: (−7) × (−6) = 42."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g7-math-u-algebra",
+      "title": "Algebra",
+      "topics": [
+        {
+          "slug": "g7-math-t-simple-equations",
+          "title": "Simple Equations",
+          "description": "Writing equations from situations and solving them step by step.",
+          "lessons": [
+            {
+              "slug": "g7-math-forming-equations",
+              "title": "Variables, Expressions and Equations",
+              "objectives": [
+                "Use letters to represent unknown numbers",
+                "Write algebraic expressions from word statements",
+                "Distinguish an expression from an equation",
+                "Check whether a value satisfies an equation"
+              ],
+              "intro": "Suppose a matchbox holds an unknown number of matchsticks and you have 3 full boxes and 4 loose sticks. You cannot write the total as a single number, but you can write it as 3x + 4, where x is the number in one box. A letter that stands for a number that can vary is called a variable. Algebra lets us write rules and solve puzzles in a short, exact form.",
+              "sections": [
+                [
+                  "Variables and expressions",
+                  "A variable is a letter, such as x, n or a, that stands for an unknown or changing number. An algebraic expression combines numbers and variables with operations: 2n + 5, 7 − y, 3(a + b). We write 3 × x as 3x and x × x as x². Some useful translations: 'five more than a number' is x + 5; 'four less than a number' is x − 4; 'twice a number' is 2x; 'a number divided by 3' is x/3; 'three times the sum of a number and 2' is 3(x + 2). Notice the difference between 3x + 2 and 3(x + 2)."
+                ],
+                [
+                  "Equations",
+                  "An equation is a statement that two expressions are equal, and it always contains an equals sign: 2x + 5 = 17. An expression such as 2x + 5 has no equals sign and cannot be 'solved', only simplified or evaluated. The left-hand side (LHS) and right-hand side (RHS) of an equation must balance, like a weighing scale. Forming an equation from a word problem means identifying the unknown, choosing a variable, and writing what is said about it. 'A number multiplied by 4 and then increased by 7 gives 31' becomes 4x + 7 = 31."
+                ],
+                [
+                  "Checking a solution",
+                  "A solution of an equation is a value of the variable that makes the LHS equal to the RHS. To check whether x = 6 is a solution of 4x + 7 = 31, substitute: 4 × 6 + 7 = 24 + 7 = 31, which equals the RHS, so x = 6 is the solution. If we try x = 5, the LHS is 27, which is not 31, so 5 is not a solution. A simple equation has exactly one solution. Trial and error works for small numbers, but in the next lesson we learn a systematic method."
+                ]
+              ],
+              "definitions": [
+                ["Variable", "A letter that represents a number which can take different values."],
+                ["Algebraic expression", "A combination of numbers, variables and operations, without an equals sign."],
+                ["Equation", "A statement that two expressions are equal."],
+                ["Solution", "A value of the variable that makes an equation true."]
+              ],
+              "examples": [
+                "If a pen costs ₹p, then 6 pens cost ₹6p.",
+                "'The sum of a number and 9 is 23' is the equation n + 9 = 23."
+              ],
+              "worked": [
+                {
+                  "problem": "Rahul is 4 years older than twice his sister's age. Rahul is 18. Write an equation and check whether the sister is 7.",
+                  "steps": [
+                    "Let the sister's age be s years.",
+                    "Twice her age is 2s; four more than that is 2s + 4.",
+                    "Equation: 2s + 4 = 18.",
+                    "Check s = 7: 2 × 7 + 4 = 18. LHS = RHS, so the sister is 7."
+                  ],
+                  "answer": "2s + 4 = 18; yes, s = 7."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Words to algebra",
+                "columns": ["Words", "Expression"],
+                "rows": [
+                  ["7 more than x", "x + 7"],
+                  ["x decreased by 3", "x − 3"],
+                  ["5 times x", "5x"],
+                  ["one-fourth of x", "x/4"],
+                  ["twice the sum of x and 1", "2(x + 1)"]
+                ]
+              },
+              "real_world": "Formulas are algebraic expressions used everywhere: a taxi fare might be ₹50 + ₹12 × (number of km), and a phone plan might cost ₹199 + ₹2 per extra minute. Spreadsheets and computer programs use variables in exactly this way.",
+              "takeaways": [
+                "A variable stands for an unknown or changing number.",
+                "Expressions have no equals sign; equations do.",
+                "Translate words carefully, especially 'less than' and 'the sum of'.",
+                "A solution makes the LHS equal to the RHS."
+              ],
+              "practice": [
+                ["Write 'eight less than three times y'.", "3y − 8"],
+                ["Is 2x + 3 an equation or an expression?", "An expression."],
+                ["Check whether n = 9 satisfies 5n − 4 = 41.", "5 × 9 − 4 = 41, so yes."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which is an equation?", ["3x + 2", "3x + 2 = 11", "3x", "x + y"], "B", "Look for an equals sign.", "Only 3x + 2 = 11 states that two expressions are equal."],
+                  ["'A number increased by 6' is:", ["6x", "x − 6", "x + 6", "x/6"], "C", "Increased means added.", "Increasing x by 6 gives x + 6."],
+                  ["If a book costs ₹b, then 4 books cost:", ["₹4b", "₹b + 4", "₹b/4", "₹4 − b"], "A", "Four times the cost of one.", "4 × b = 4b."],
+                  ["Which value of x makes x + 5 = 12 true?", ["5", "17", "12", "7"], "D", "What added to 5 gives 12?", "7 + 5 = 12."]
+                ],
+                "MEDIUM": [
+                  ["'Three less than twice a number' is:", ["3 − 2x", "2x − 3", "2(x − 3)", "3x − 2"], "B", "Find twice the number first, then subtract 3.", "Twice the number is 2x; three less than it is 2x − 3."],
+                  ["Which equation represents 'one-third of a number is 8'?", ["3x = 8", "x + 3 = 8", "x/3 = 8", "x − 3 = 8"], "C", "One-third means divided by 3.", "One-third of x is x/3, so x/3 = 8."],
+                  ["Is m = 4 a solution of 3m − 5 = 7?", ["Yes", "No", "Only if m is negative", "Cannot tell"], "A", "Substitute m = 4.", "3 × 4 − 5 = 7, so yes."],
+                  ["Which expression means 'five times the sum of a and 2'?", ["5a + 2", "a + 10", "5 + a + 2", "5(a + 2)"], "D", "The sum must be found first.", "Brackets show the sum is multiplied by 5."]
+                ],
+                "HARD": [
+                  ["A rectangle's length is 3 cm more than its breadth b, and its perimeter is 26 cm. Which equation is correct?", ["b + 3 = 26", "2(b + b + 3) = 26", "b(b + 3) = 26", "2b + 3 = 26"], "B", "Perimeter = 2(length + breadth).", "Length is b + 3, so 2(b + (b + 3)) = 26."],
+                  ["Which value is the solution of 7 − 2x = 1?", ["−3", "4", "3", "1"], "C", "Try substituting each option.", "7 − 2 × 3 = 1, so x = 3."],
+                  ["Meena has ₹x. She spends ₹40 and then has half her money left. Which equation fits?", ["x − 40 = x/2", "x + 40 = 2x", "x/2 − 40 = x", "2x − 40 = x"], "A", "What is left equals half of what she had.", "Money left after spending is x − 40, which equals x/2."],
+                  ["The sum of three consecutive integers is 48. If the smallest is n, which equation is correct?", ["3n = 48 + 3", "n + 2n + 3n = 48", "n + 1 + 2 = 48", "n + (n + 1) + (n + 2) = 48"], "D", "Consecutive integers increase by 1.", "The integers are n, n + 1 and n + 2, and their sum is 48."]
+                ]
+              }
+            },
+            {
+              "slug": "g7-math-solving-equations",
+              "title": "Solving Simple Equations",
+              "objectives": [
+                "Solve equations by doing the same operation on both sides",
+                "Solve equations by transposing terms",
+                "Solve equations with brackets and with the variable on both sides",
+                "Use equations to solve word problems"
+              ],
+              "intro": "Think of an equation as a balanced weighing scale. If you add 5 kg to one pan, you must add 5 kg to the other to keep it balanced. Solving an equation means finding the value of the variable by keeping the balance while you get the variable alone on one side. This systematic method works for any simple equation, however large the numbers.",
+              "sections": [
+                [
+                  "The balance method",
+                  "We may add, subtract, multiply or divide both sides of an equation by the same number (except dividing by zero), and the equation stays true. To solve x + 9 = 15, subtract 9 from both sides: x = 6. To solve 4x = 28, divide both sides by 4: x = 7. To solve x/5 = 3, multiply both sides by 5: x = 15. For two-step equations such as 3x − 4 = 17, first undo the subtraction (add 4 to both sides: 3x = 21), then undo the multiplication (divide by 3: x = 7). Undo operations in the reverse order of how they were applied."
+                ],
+                [
+                  "Transposing",
+                  "A shortcut for the balance method is transposing: moving a term to the other side and changing its operation. A term added on one side becomes subtracted on the other, and a factor multiplying on one side becomes a divisor on the other. In 5x + 8 = 43, transpose 8 to get 5x = 43 − 8 = 35, then transpose 5 to get x = 35 ÷ 5 = 7. Transposing is just a quicker way of writing the balance steps."
+                ],
+                [
+                  "Brackets, both sides and word problems",
+                  "If there are brackets, expand them first or divide both sides: 4(x − 2) = 20 gives x − 2 = 5, so x = 7. If the variable appears on both sides, collect variable terms on one side and numbers on the other: 5x − 3 = 2x + 12 gives 3x = 15, so x = 5. For word problems, (1) choose a variable for the unknown, (2) write an equation from the information, (3) solve it, and (4) check the answer in the original words, not just the equation. Always state the answer with units."
+                ]
+              ],
+              "definitions": [
+                ["Solving an equation", "Finding the value of the variable that makes the equation true."],
+                ["Transposing", "Moving a term to the other side of an equation and changing its operation."],
+                ["LHS / RHS", "Left-hand side and right-hand side of an equation."],
+                ["Inverse operations", "Operations that undo each other, such as addition and subtraction."]
+              ],
+              "examples": [
+                "2x + 7 = 19 → 2x = 12 → x = 6.",
+                "(x/4) − 1 = 5 → x/4 = 6 → x = 24."
+              ],
+              "worked": [
+                {
+                  "problem": "The sum of two numbers is 64 and one number is 12 more than the other. Find the numbers.",
+                  "steps": [
+                    "Let the smaller number be x; the larger is x + 12.",
+                    "Equation: x + (x + 12) = 64, so 2x + 12 = 64.",
+                    "Transpose: 2x = 52, so x = 26.",
+                    "Larger number = 26 + 12 = 38. Check: 26 + 38 = 64 ✓."
+                  ],
+                  "answer": "26 and 38"
+                },
+                {
+                  "problem": "Solve 7x − 9 = 3x + 15.",
+                  "steps": [
+                    "Subtract 3x from both sides: 4x − 9 = 15.",
+                    "Add 9 to both sides: 4x = 24.",
+                    "Divide by 4: x = 6. Check: 7(6) − 9 = 33 and 3(6) + 15 = 33 ✓."
+                  ],
+                  "answer": "x = 6"
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Solving 3x − 4 = 17",
+                "items": ["3x − 4 = 17", "Add 4 to both sides: 3x = 21", "Divide both sides by 3: x = 7", "Check: 3(7) − 4 = 17 ✓"]
+              },
+              "real_world": "Shopkeepers solve simple equations to set prices that give a target profit, and travellers use them to work out how many days a budget will last. If a phone plan costs ₹99 plus ₹3 per GB and your bill is ₹159, solving 99 + 3g = 159 tells you that you used 20 GB.",
+              "takeaways": [
+                "Do the same operation to both sides to keep the equation balanced.",
+                "Undo operations in reverse order.",
+                "Transposing changes + to −, × to ÷ and vice versa.",
+                "Check solutions in the original problem."
+              ],
+              "practice": [
+                ["Solve 6y + 5 = 41.", "y = 6"],
+                ["Solve 3(p + 4) = 33.", "p = 7"],
+                ["Solve 9a − 4 = 5a + 20.", "a = 6"],
+                ["A number tripled and decreased by 7 is 20. Find it.", "9"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Solve x + 8 = 15.", ["23", "7", "−7", "8"], "B", "Subtract 8 from both sides.", "x = 15 − 8 = 7."],
+                  ["Solve 5x = 45.", ["40", "50", "9", "225"], "C", "Divide both sides by 5.", "x = 45 ÷ 5 = 9."],
+                  ["Solve x − 6 = 10.", ["16", "4", "−4", "60"], "A", "Add 6 to both sides.", "x = 10 + 6 = 16."],
+                  ["Solve x/3 = 7.", ["10", "4", "7/3", "21"], "D", "Multiply both sides by 3.", "x = 7 × 3 = 21."]
+                ],
+                "MEDIUM": [
+                  ["Solve 4x − 7 = 21.", ["3.5", "7", "28", "14"], "B", "Add 7, then divide by 4.", "4x = 28, so x = 7."],
+                  ["Solve 2(x + 3) = 18.", ["9", "7.5", "6", "12"], "C", "Divide both sides by 2 first.", "x + 3 = 9, so x = 6."],
+                  ["Solve 5x + 2 = 3x + 14.", ["6", "8", "2", "16"], "A", "Collect x terms on one side.", "2x = 12, so x = 6."],
+                  ["Twice a number plus 9 equals 35. What is the number?", ["22", "17", "44", "13"], "D", "Write 2n + 9 = 35.", "2n = 26, so n = 13."]
+                ],
+                "HARD": [
+                  ["Solve (x/4) + 5 = 2.", ["28", "−12", "12", "−28"], "B", "Subtract 5 first.", "x/4 = −3, so x = −12."],
+                  ["The perimeter of a square is 4 cm more than 3 times its side s, and the perimeter is 4s. Find s.", ["1 cm", "2 cm", "4 cm", "8 cm"], "C", "Write 4s = 3s + 4.", "4s − 3s = 4, so s = 4 cm."],
+                  ["Ravi's father is 3 times as old as Ravi. In 12 years he will be twice as old. How old is Ravi now?", ["12", "24", "36", "6"], "A", "Let Ravi be r: 3r + 12 = 2(r + 12).", "3r + 12 = 2r + 24, so r = 12."],
+                  ["Solve 3(2x − 1) = 2(x + 5) + 7.", ["2.5", "3.5", "4", "5"], "D", "Expand both sides first.", "6x − 3 = 2x + 17, so 4x = 20 and x = 5."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g7-math-u-ratio",
+      "title": "Comparing Quantities",
+      "topics": [
+        {
+          "slug": "g7-math-t-ratio-percentage",
+          "title": "Ratio, Proportion and Percentage",
+          "description": "Comparing quantities using ratios, proportions and percentages.",
+          "lessons": [
+            {
+              "slug": "g7-math-ratio-proportion",
+              "title": "Ratio and Proportion",
+              "objectives": [
+                "Express a comparison as a ratio in simplest form",
+                "Divide a quantity in a given ratio",
+                "Check whether four quantities are in proportion",
+                "Use the unitary method to solve problems"
+              ],
+              "intro": "If a class has 18 girls and 12 boys, we can compare them by subtraction (6 more girls) or by division (18 ÷ 12 = 3/2). Comparison by division is called a ratio, written 18 : 12 or 3 : 2. Ratios tell us how many times one quantity is of another. They are used in recipes, maps, mixing paint, sharing money and comparing prices.",
+              "sections": [
+                [
+                  "Ratios",
+                  "The ratio of a to b is a : b, which means a/b. A ratio has no units, so both quantities must be in the same unit before comparing: the ratio of 50 cm to 2 m is 50 : 200 = 1 : 4, not 50 : 2. Like fractions, ratios can be simplified by dividing both terms by their HCF: 36 : 24 = 3 : 2. Order matters: the ratio of girls to boys (3 : 2) is different from boys to girls (2 : 3). Equivalent ratios such as 2 : 5, 4 : 10 and 6 : 15 are obtained by multiplying or dividing both terms by the same number."
+                ],
+                [
+                  "Dividing in a ratio",
+                  "To share a quantity in a given ratio, add the parts of the ratio and find each share as a fraction of the total. To divide ₹600 between Asha and Bina in the ratio 2 : 3, there are 2 + 3 = 5 parts, each worth ₹600 ÷ 5 = ₹120. Asha gets 2 × 120 = ₹240 and Bina gets 3 × 120 = ₹360. Check that the shares add up to the total and are in the correct ratio: 240 : 360 = 2 : 3."
+                ],
+                [
+                  "Proportion and the unitary method",
+                  "Four quantities a, b, c, d are in proportion if a : b = c : d, written a : b :: c : d. Then the product of the extremes equals the product of the means: a × d = b × c. For example, 3 : 4 :: 15 : 20 because 3 × 20 = 4 × 15 = 60. The unitary method first finds the value of one unit and then multiplies. If 5 notebooks cost ₹175, one costs ₹35, so 8 cost ₹280. This method works for any direct proportion, where both quantities increase or decrease together."
+                ]
+              ],
+              "definitions": [
+                ["Ratio", "A comparison of two quantities of the same kind by division, written a : b."],
+                ["Equivalent ratios", "Ratios that represent the same comparison, such as 1 : 2 and 3 : 6."],
+                ["Proportion", "An equality of two ratios, a : b :: c : d."],
+                ["Unitary method", "Finding the value of one unit first, then the value of the required number of units."]
+              ],
+              "examples": [
+                "A recipe uses rice and dal in the ratio 3 : 1; for 6 cups of rice, use 2 cups of dal.",
+                "If 4 m of cloth costs ₹360, then 7 m costs (360 ÷ 4) × 7 = ₹630."
+              ],
+              "worked": [
+                {
+                  "problem": "Find the ratio of 45 minutes to 2 hours in simplest form.",
+                  "steps": [
+                    "Convert to the same unit: 2 hours = 120 minutes.",
+                    "Ratio = 45 : 120.",
+                    "HCF of 45 and 120 is 15: 45 ÷ 15 = 3 and 120 ÷ 15 = 8."
+                  ],
+                  "answer": "3 : 8"
+                },
+                {
+                  "problem": "Are 2.5 kg : 4 kg and ₹50 : ₹80 in proportion?",
+                  "steps": [
+                    "2.5 : 4 = 25 : 40 = 5 : 8.",
+                    "50 : 80 = 5 : 8.",
+                    "The ratios are equal."
+                  ],
+                  "answer": "Yes, both are 5 : 8."
+                }
+              ],
+              "diagram": {
+                "type": "bar",
+                "title": "Sharing ₹600 in the ratio 2 : 3",
+                "unit": "₹",
+                "items": [["Asha (2 parts)", 240], ["Bina (3 parts)", 360]]
+              },
+              "real_world": "Mobile screens are described by ratios such as 16 : 9, maps use ratio scales, and medicines for children are given in proportion to body weight. Shoppers use the unitary method to compare which pack is better value: a 500 g pack for ₹60 (₹12 per 100 g) or a 1 kg pack for ₹110 (₹11 per 100 g).",
+              "takeaways": [
+                "A ratio compares quantities of the same kind by division and has no units.",
+                "Convert to the same units before writing a ratio.",
+                "To divide in a ratio, find the value of one part first.",
+                "In a proportion, product of extremes = product of means."
+              ],
+              "practice": [
+                ["Simplify 84 : 63.", "4 : 3"],
+                ["Divide 72 sweets in the ratio 5 : 3.", "45 and 27"],
+                ["Find x if 4 : x :: 12 : 27.", "x = 9"],
+                ["If 6 pens cost ₹90, find the cost of 10 pens.", "₹150"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The ratio 12 : 18 in simplest form is:", ["3 : 2", "2 : 3", "6 : 9", "4 : 5"], "B", "Divide both terms by their HCF, 6.", "12 ÷ 6 = 2 and 18 ÷ 6 = 3, giving 2 : 3."],
+                  ["In a class of 20 girls and 15 boys, the ratio of boys to girls is:", ["4 : 3", "20 : 15", "3 : 4", "1 : 1"], "C", "Boys come first.", "15 : 20 = 3 : 4."],
+                  ["If 1 kg of apples costs ₹120, 3 kg cost:", ["₹360", "₹123", "₹40", "₹240"], "A", "Multiply the cost of one unit.", "3 × 120 = ₹360."],
+                  ["Which ratio is equivalent to 1 : 3?", ["3 : 1", "2 : 3", "1 : 6", "4 : 12"], "D", "Multiply both terms by the same number.", "1 : 3 × 4 = 4 : 12."]
+                ],
+                "MEDIUM": [
+                  ["What is the ratio of 75 paise to ₹3?", ["75 : 3", "1 : 4", "4 : 1", "25 : 1"], "B", "Convert ₹3 into paise.", "₹3 = 300 paise; 75 : 300 = 1 : 4."],
+                  ["Divide ₹450 in the ratio 4 : 5. The larger share is:", ["₹200", "₹225", "₹250", "₹90"], "C", "There are 9 parts.", "Each part is ₹50; the larger share is 5 × 50 = ₹250."],
+                  ["Which four numbers are in proportion?", ["2, 5, 6, 15", "2, 5, 6, 12", "3, 4, 5, 6", "1, 2, 3, 5"], "A", "Check whether product of extremes = product of means.", "2 × 15 = 30 and 5 × 6 = 30."],
+                  ["If 8 workers earn ₹4,000 a day, how much do 5 workers earn at the same rate?", ["₹2,000", "₹3,200", "₹6,400", "₹2,500"], "D", "Find the earning of one worker.", "One worker earns ₹500; 5 earn ₹2,500."]
+                ],
+                "HARD": [
+                  ["Find x if 3 : 8 :: x : 56.", ["16", "21", "24", "19"], "B", "Product of extremes = product of means.", "3 × 56 = 8x, so x = 168 ÷ 8 = 21."],
+                  ["The ages of A and B are in the ratio 5 : 7, and B is 8 years older. What is A's age?", ["14", "28", "20", "35"], "C", "The difference corresponds to 2 parts.", "2 parts = 8 years, so 1 part = 4; A = 5 × 4 = 20."],
+                  ["Which pack is better value: 400 g for ₹60 or 1 kg for ₹140?", ["1 kg pack", "400 g pack", "Same value", "Cannot tell"], "A", "Compare the price per 100 g.", "400 g: ₹15 per 100 g; 1 kg: ₹14 per 100 g, so the 1 kg pack is cheaper."],
+                  ["Sand and cement are mixed in the ratio 5 : 2. How much cement is needed for 35 kg of sand?", ["70 kg", "17.5 kg", "7 kg", "14 kg"], "D", "5 parts = 35 kg.", "1 part = 7 kg, so cement = 2 × 7 = 14 kg."]
+                ]
+              }
+            },
+            {
+              "slug": "g7-math-percentages",
+              "title": "Percentages and Their Uses",
+              "objectives": [
+                "Convert between fractions, decimals and percentages",
+                "Find a percentage of a quantity",
+                "Calculate percentage increase and decrease",
+                "Solve problems on profit, loss and discount"
+              ],
+              "intro": "Per cent means 'per hundred', and the symbol % stands for /100. A test score of 18 out of 25 and a score of 36 out of 50 are hard to compare until we turn both into percentages: both are 72%. Percentages give every comparison a common denominator of 100, which is why they are used for marks, discounts, interest rates, election results and population growth.",
+              "sections": [
+                [
+                  "Converting",
+                  "To change a percentage to a fraction, write it over 100 and simplify: 35% = 35/100 = 7/20. To change it to a decimal, divide by 100: 35% = 0.35. To change a fraction to a percentage, multiply by 100: 3/8 × 100 = 37.5%. To change a decimal to a percentage, multiply by 100: 0.6 = 60%. Some useful ones to remember are 1/2 = 50%, 1/4 = 25%, 3/4 = 75%, 1/5 = 20%, 1/10 = 10% and 1/3 ≈ 33.3%."
+                ],
+                [
+                  "Percentage of a quantity and change",
+                  "To find a percentage of a quantity, multiply: 15% of 480 = (15/100) × 480 = 72. To express one quantity as a percentage of another, divide and multiply by 100: 18 out of 24 = (18/24) × 100 = 75%. Percentage increase or decrease compares the change with the original value: percentage change = (change ÷ original) × 100. If a price rises from ₹250 to ₹300, the increase is ₹50 and the percentage increase is (50 ÷ 250) × 100 = 20%. Always divide by the original, not the new, value."
+                ],
+                [
+                  "Profit, loss and discount",
+                  "The cost price (CP) is what a shopkeeper pays; the selling price (SP) is what the customer pays. If SP > CP there is a profit = SP − CP; if SP < CP there is a loss = CP − SP. Profit or loss percentage is always calculated on the cost price: profit % = (profit ÷ CP) × 100. The marked price (MP) is the price written on the label, and a discount is a reduction on the marked price: discount % = (discount ÷ MP) × 100. If a shirt marked ₹800 is sold at 25% off, the discount is ₹200 and the selling price is ₹600."
+                ]
+              ],
+              "definitions": [
+                ["Per cent", "Out of a hundred; x% means x/100."],
+                ["Percentage change", "(change ÷ original value) × 100."],
+                ["Cost price", "The price at which an article is bought."],
+                ["Selling price", "The price at which an article is sold."],
+                ["Discount", "A reduction given on the marked price."]
+              ],
+              "examples": [
+                "A student scoring 42 out of 60 scores 70%.",
+                "A town's population grows from 20,000 to 23,000: an increase of 15%."
+              ],
+              "worked": [
+                {
+                  "problem": "A shopkeeper buys a fan for ₹1,600 and sells it for ₹1,840. Find the profit percentage.",
+                  "steps": [
+                    "Profit = SP − CP = 1,840 − 1,600 = ₹240.",
+                    "Profit % = (240 ÷ 1,600) × 100.",
+                    "240 ÷ 1,600 = 0.15, so the profit is 15%."
+                  ],
+                  "answer": "15% profit"
+                },
+                {
+                  "problem": "A bag marked ₹1,250 is sold at a discount of 12%. Find the selling price.",
+                  "steps": [
+                    "Discount = 12% of 1,250 = 0.12 × 1,250 = ₹150.",
+                    "SP = MP − discount = 1,250 − 150 = ₹1,100."
+                  ],
+                  "answer": "₹1,100"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Fractions, decimals and percentages",
+                "columns": ["Fraction", "Decimal", "Percentage"],
+                "rows": [["1/2", "0.5", "50%"], ["1/4", "0.25", "25%"], ["3/4", "0.75", "75%"], ["1/5", "0.2", "20%"], ["1/8", "0.125", "12.5%"]]
+              },
+              "real_world": "Sale signs ('40% off'), GST on bills, bank interest rates, mobile battery levels and exam results are all percentages. Understanding percentage change helps you judge news such as 'prices rose by 8%' and spot misleading claims, such as a 50% rise followed by a 50% fall, which does not bring a price back to where it started.",
+              "takeaways": [
+                "Per cent means out of 100.",
+                "Multiply by 100 to convert fractions or decimals into percentages.",
+                "Percentage change is calculated on the original value.",
+                "Profit and loss are percentages of the cost price; discount is a percentage of the marked price."
+              ],
+              "practice": [
+                ["Write 0.08 as a percentage.", "8%"],
+                ["Find 35% of 260.", "91"],
+                ["A price falls from ₹400 to ₹340. Find the percentage decrease.", "15%"],
+                ["CP = ₹500, SP = ₹450. Find the loss percentage.", "10%"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What is 25% as a fraction in lowest terms?", ["25/10", "1/4", "1/25", "2/5"], "B", "Write it over 100 and simplify.", "25/100 = 1/4."],
+                  ["What is 10% of 350?", ["3.5", "350", "35", "10"], "C", "10% means one-tenth.", "350 ÷ 10 = 35."],
+                  ["Write 3/5 as a percentage.", ["60%", "35%", "30%", "53%"], "A", "Multiply by 100.", "3/5 × 100 = 60%."],
+                  ["If CP = ₹200 and SP = ₹250, there is a:", ["Loss of ₹50", "Loss of ₹250", "No profit or loss", "Profit of ₹50"], "D", "Is SP more than CP?", "SP > CP, so profit = 250 − 200 = ₹50."]
+                ],
+                "MEDIUM": [
+                  ["A student scored 54 out of 75. What is the percentage?", ["54%", "72%", "75%", "21%"], "B", "Divide and multiply by 100.", "(54 ÷ 75) × 100 = 72%."],
+                  ["A price rises from ₹80 to ₹100. What is the percentage increase?", ["20%", "80%", "25%", "15%"], "C", "Divide the increase by the original price.", "Increase ₹20; (20 ÷ 80) × 100 = 25%."],
+                  ["A shirt marked ₹600 is sold at 15% discount. What is the selling price?", ["₹510", "₹585", "₹90", "₹690"], "A", "Find 15% of 600 first.", "Discount ₹90; SP = 600 − 90 = ₹510."],
+                  ["CP = ₹1,200 and SP = ₹1,080. What is the loss percentage?", ["12%", "11.1%", "120%", "10%"], "D", "Loss % is on the cost price.", "Loss ₹120; (120 ÷ 1,200) × 100 = 10%."]
+                ],
+                "HARD": [
+                  ["A price increases by 50% and then decreases by 50%. Compared with the original, the final price is:", ["Unchanged", "25% lower", "25% higher", "50% lower"], "B", "Try an original price of ₹100.", "100 → 150 → 75, which is 25% lower than 100."],
+                  ["After a 20% discount, a watch costs ₹1,600. What was its marked price?", ["₹1,920", "₹1,280", "₹2,000", "₹1,800"], "C", "₹1,600 is 80% of the marked price.", "MP = 1,600 ÷ 0.8 = ₹2,000."],
+                  ["A dealer sells a phone for ₹9,200 at a 15% profit. What was the cost price?", ["₹8,000", "₹7,820", "₹10,580", "₹8,500"], "A", "SP is 115% of CP.", "CP = 9,200 ÷ 1.15 = ₹8,000."],
+                  ["A school's enrolment fell from 1,250 to 1,100. What is the percentage decrease?", ["13.6%", "15%", "150%", "12%"], "D", "Divide the decrease by the original number.", "Decrease 150; (150 ÷ 1,250) × 100 = 12%."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
