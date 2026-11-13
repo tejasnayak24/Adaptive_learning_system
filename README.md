@@ -116,3 +116,8 @@ rule, simulator, evaluation). Real outcomes can be summarised with
 Keep all three services running, then open http://localhost:5173.
 The first lesson asks for camera-monitoring consent (students under 18 also
 confirm parent/guardian and school authorisation).
+
+The Dashboard, Progress & Analytics and AI Coach pages are computed from
+the signed-in student's own saved attempts. See `docs/ANALYTICS.md` for
+how each metric is calculated, the limits of the per-quiz camera data,
+and a browser acceptance checklist.

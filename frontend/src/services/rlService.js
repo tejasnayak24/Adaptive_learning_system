@@ -43,8 +43,10 @@ export const rlService = {
     return response?.data ?? { status: 'no_attempts', recommendation: null, attempt: null }
   },
 
-  async getHistory() {
-    const response = await api.get('/recommendations')
+  /** Recommendations, newest first, each with `context` (the attempt
+   *  that produced it) and `outcome` (pending, or the next attempt's result). */
+  async getHistory(limit = 20) {
+    const response = await api.get('/recommendations', { params: { limit } })
     return response?.data ?? []
   },
 }

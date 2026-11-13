@@ -219,8 +219,8 @@ Content is imported from `backend/curriculum/content/*.json` with
 
 | Method | Path | Notes |
 |---|---|---|
-| GET | `/recommendations/latest` 🔒 | `{status, recommendation, attempt}`; status is `available`, `telemetry_unavailable`, `not_generated` or `no_attempts` |
-| GET | `/recommendations` 🔒 | The student's recommendation history |
+| GET | `/recommendations/latest` 🔒 | `{status, recommendation, next_step, attempt}`; status is `available`, `telemetry_unavailable`, `not_generated` or `no_attempts`. `attempt` includes `subject`, `grade` and `curriculum_topic` |
+| GET | `/recommendations` 🔒 | `?limit=1..200` (default 20). The student's recommendations, newest first, each with `context` (lesson, subject, topic, score of the attempt that produced it) and `outcome` (`{status: "pending"}` until the next quiz, then that quiz's score, `score_change`, `followed` (true/false/null = not observable) and `reward`) |
 | POST | `/rl/recommend` 🔒 | Stateless recommendation for a supplied state (13 fields + optional `drowsy`, see `/docs`). Returns `{action, confidence, confidence_kind, explanation, policy, model_version, state_key, q_values, runner_up, margin, blocked_actions, untested_actions, state_visits, telemetry_available}`; `action` is `null` when any camera field is `null`. |
 | GET | `/rl/model` 🔒 | Loaded Q-table: `model_version`, `trained_at`, `states_learned`, `state_key_version` (3), `training: "offline_simulation"`, `online_updates: false` |
 
@@ -289,6 +289,12 @@ when not live, measurements are `null`. The old unauthenticated
 | GET | `/progress/{student_id}` 🔒👤 | All attempts, oldest first |
 | GET | `/progress/{student_id}/{lesson_id}` 🔒👤 | Latest attempt for a lesson |
 | PUT | `/progress/{progress_id}` 🔒👤 | Update an attempt |
+
+## Learning analytics (Phase 6)
+
+| Method | Path | Notes |
+|---|---|---|
+| GET | `/analytics/summary` 🔒 | The signed-in student's own analytics (no student id parameter, so no cross-student access): `student`, `overview`, `subjects`, `topics`, `topic_status_counts`, `trend`, `attention`, `activity`, `milestones`, `definitions`. See [docs/ANALYTICS.md](docs/ANALYTICS.md) for every calculation |
 
 ## Database changes
 

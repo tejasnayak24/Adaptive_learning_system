@@ -1,623 +1,266 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { lessonService } from '../services/lessonService'
-import { progressService } from '../services/progressService'
+import { analyticsService } from '../services/analyticsService'
 import { rlService } from '../services/rlService'
 import { CONFIDENCE_NOTE, POLICY_LABELS, actionInfo } from '../utils/recommendationActions'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import { continueTarget, formatPercent, relativeDay } from '../utils/analytics'
+import {
+  ActivityFeed,
+  ErrorState,
+  LoadingSkeleton,
+  Panel,
+  ProgressBar,
+  StatTile,
+  SubjectPerformance,
+  TelemetryBadge
+} from '../components/AnalyticsPanels'
+
+function greeting() {
+  const hour = new Date().getHours()
+  if (hour < 12) return 'Good morning'
+  if (hour < 17) return 'Good afternoon'
+  return 'Good evening'
+}
 
 export default function Dashboard() {
   const { user } = useAuth()
-
-  const [lessons, setLessons] = useState([])
-  const [progress, setProgress] = useState([])
-  const [recommendation, setRecommendation] = useState(null)
-  const [recommendationNote, setRecommendationNote] = useState('')
+  const [summary, setSummary] = useState(null)
+  const [coach, setCoach] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
-  const getGreeting = () => {
-    const hr = new Date().getHours()
-
-    if (hr < 12) return 'Good morning'
-    if (hr < 17) return 'Good afternoon'
-
-    return 'Good evening'
-  }
-
-  const loadData = useCallback(async () => {
-    const studentId = user?.id
-
-    if (!studentId) {
-      setError('Student information is not available.')
-      setLoading(false)
-      return
-    }
-
-    setLoading(true)
+  const load = useCallback(async () => {
     setError('')
-
     try {
-      const [lessonsRes, progressRes] = await Promise.all([
-        lessonService.getLessons(),
-        progressService.getStudentProgress(studentId),
+      const [data, latest] = await Promise.all([
+        analyticsService.getSummary(),
+        // The coach card is optional: a failure there must not hide the dashboard.
+        rlService.getLatest().catch(() => null)
       ])
-
-      const lessonsData = Array.isArray(lessonsRes?.data)
-        ? lessonsRes.data
-        : []
-
-      const progressData = Array.isArray(progressRes?.data)
-        ? progressRes.data
-        : []
-
-      setLessons(lessonsData)
-      setProgress(progressData)
-
-      // The recommendation is generated and stored by the server when a
-      // quiz is graded; the dashboard only displays the latest one.
-      try {
-        const latest = await rlService.getLatest()
-
-        if (latest.status === 'available' && latest.recommendation?.action) {
-          setRecommendation(latest.recommendation)
-          setRecommendationNote('')
-        } else {
-          setRecommendation(null)
-          setRecommendationNote(
-            latest.status === 'telemetry_unavailable'
-              ? 'Your latest quiz had no camera telemetry, so no adaptive recommendation was generated. Keep the camera agent running during your next quiz.'
-              : ''
-          )
-        }
-      } catch (rlError) {
-        console.error('Failed to load recommendation:', rlError)
-        setRecommendation(null)
-      }
+      setSummary(data)
+      setCoach(latest)
     } catch (err) {
-      console.error('Dashboard loading error:', err)
-      setError(err.message || 'Failed to load dashboard data')
-      setLessons([])
-      setProgress([])
-      setRecommendation(null)
+      setError(err.message || 'Failed to load the dashboard')
     } finally {
       setLoading(false)
     }
-  }, [user?.id])
+  }, [])
 
   useEffect(() => {
-    loadData()
-  }, [loadData])
+    load()
+  }, [load, user?.grade])
 
   useEffect(() => {
-    const handleFocus = () => {
-      loadData()
-    }
+    const onFocus = () => load()
+    window.addEventListener('focus', onFocus)
+    return () => window.removeEventListener('focus', onFocus)
+  }, [load])
 
-    window.addEventListener('focus', handleFocus)
+  if (loading) return <LoadingSkeleton blocks={5} />
+  if (error && !summary) return <ErrorState message={error} onRetry={load} />
 
-    return () => {
-      window.removeEventListener('focus', handleFocus)
-    }
-  }, [loadData])
-
-  if (loading) {
-    return (
-      <div className="space-y-8 animate-pulse">
-        <div className="h-16 w-2/3 bg-slate-800 rounded-2xl"></div>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {[...Array(4)].map((_, i) => (
-            <div
-              key={i}
-              className="h-32 bg-slate-800 rounded-3xl"
-            ></div>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 h-80 bg-slate-800 rounded-3xl"></div>
-          <div className="h-80 bg-slate-800 rounded-3xl"></div>
-        </div>
-      </div>
-    )
-  }
-
-  const distinctCompleted = new Set(
-    progress
-      .filter(item => item.completed === true)
-      .map(item => item.lesson_id)
-  )
-
-  const completionPercentage =
-    lessons.length > 0
-      ? Math.min(
-          100,
-          Math.round(
-            (distinctCompleted.size / lessons.length) * 100
-          )
-        )
-      : 0
-
-  const validScores = progress
-    .map(item => Number(item.quiz_score))
-    .filter(score => Number.isFinite(score))
-
-  const avgScore =
-    validScores.length > 0
-      ? Math.round(
-          validScores.reduce((sum, score) => sum + score, 0) /
-            validScores.length
-        )
-      : 0
-
-  const continueLesson =
-    lessons.find(
-      lesson => !distinctCompleted.has(lesson.id)
-    ) || lessons[0]
-
-  const chartData = [...progress]
-    .sort(
-      (a, b) =>
-        Number(a.id || 0) - Number(b.id || 0)
-    )
-    .map((item, index) => {
-      const attention =
-        item.attention_score !== null &&
-        item.attention_score !== undefined
-          ? Number(item.attention_score)
-          : null
-
-      return {
-        attempt: `Quiz ${index + 1}`,
-        score: Number(item.quiz_score) || 0,
-        attention:
-          attention !== null
-            ? Math.round(attention * 100)
-            : null,
-      }
-    })
+  const o = summary.overview
+  const latest = o.latest_activity
+  const next = continueTarget(summary)
+  const recommendation = coach?.status === 'available' ? coach.recommendation : null
+  const coachAttempt = coach?.attempt
 
   return (
-    <div className="space-y-8">
-
-      {error && (
-        <div className="rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-300">
-          {error}
-        </div>
-      )}
-
+    <div className="space-y-6 sm:space-y-8">
       {/* Greeting */}
-      <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-r from-indigo-950/40 via-slate-900/40 to-slate-950 p-8 shadow-2xl">
-        <div className="absolute top-0 right-0 h-40 w-40 bg-indigo-500/10 blur-3xl pointer-events-none"></div>
-
+      <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-r from-indigo-950/40 via-slate-900/40 to-slate-950 p-6 sm:p-8 shadow-2xl">
+        <div className="absolute top-0 right-0 h-40 w-40 bg-indigo-500/10 blur-3xl pointer-events-none" />
         <div className="relative z-10 space-y-2">
+          <div className="flex flex-wrap items-center gap-2">
+            {summary.student.grade && (
+              <span className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 rounded-lg">
+                Grade {summary.student.grade}
+              </span>
+            )}
+            {o.current_streak_days > 1 && (
+              <span
+                className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 text-amber-300 border border-amber-500/20 rounded-lg"
+                title="Consecutive days (UTC) with at least one quiz submitted"
+              >
+                🔥 {o.current_streak_days}-day streak
+              </span>
+            )}
+          </div>
           <h1 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-white">
-            {getGreeting()},{' '}
+            {greeting()},{' '}
             <span className="bg-gradient-to-r from-indigo-400 to-teal-300 bg-clip-text text-transparent">
-              {user?.name || 'Student'}
+              {summary.student.name}
             </span>
             !
           </h1>
-
-          <p className="text-slate-400 max-w-xl text-sm leading-relaxed">
-            {distinctCompleted.size === 0
-              ? "Welcome to Aegis! Click on 'Continue Learning' below to launch your first science lesson and adaptive assessment."
-              : `You have completed ${distinctCompleted.size} out of ${lessons.length} curriculum lessons. Let's keep the momentum going!`}
+          <p className="text-slate-400 max-w-2xl text-sm leading-relaxed">
+            {o.quiz_attempts === 0
+              ? 'Welcome to Aegis! Open a lesson, read it, then take its quiz. Your progress and your AI coach start working after your first quiz.'
+              : `You have completed ${o.lessons_completed} of ${o.lessons_total} lessons in your grade. A lesson counts as completed when you pass one of its quizzes (${summary.definitions.pass_score}% or more).`}
           </p>
         </div>
       </div>
+
+      {error && (
+        <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 px-4 py-3 text-xs text-amber-200">
+          Showing your last loaded data — refresh failed: {error}
+        </div>
+      )}
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <div className="glass-panel rounded-3xl p-6 relative border border-slate-900 shadow-md">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Overall Progress
-          </p>
-
-          <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-white">
-              {completionPercentage}%
-            </span>
-
-            <span className="text-xs text-teal-400 font-medium">
-              completed
-            </span>
-          </div>
-
-          <div className="mt-3 w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
-            <div
-              className="bg-gradient-to-r from-indigo-500 to-teal-400 h-1.5 rounded-full"
-              style={{
-                width: `${completionPercentage}%`,
-              }}
-            ></div>
-          </div>
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
+        <div className="col-span-2 lg:col-span-1 glass-panel rounded-3xl p-5 border border-slate-900 shadow-md space-y-3">
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Curriculum completion</p>
+          <p className="text-3xl font-extrabold text-white tabular-nums">{formatPercent(o.completion_percent, '0%')}</p>
+          <ProgressBar percent={o.completion_percent} label="Curriculum completion" />
         </div>
-
-        <div className="glass-panel rounded-3xl p-6 relative border border-slate-900 shadow-md">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Lessons Finished
-          </p>
-
-          <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-white">
-              {distinctCompleted.size}
-            </span>
-
-            <span className="text-xs text-slate-400">
-              / {lessons.length} lessons
-            </span>
-          </div>
-
-          <div className="absolute right-6 bottom-6 text-2xl">
-            📚
-          </div>
-        </div>
-
-        <div className="glass-panel rounded-3xl p-6 relative border border-slate-900 shadow-md">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Avg Quiz Score
-          </p>
-
-          <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-white">
-              {avgScore}%
-            </span>
-
-            <span
-              className={`text-xs font-medium ${
-                avgScore >= 80
-                  ? 'text-emerald-400'
-                  : avgScore >= 60
-                    ? 'text-amber-400'
-                    : 'text-slate-400'
-              }`}
-            >
-              {avgScore >= 80
-                ? 'Excellent'
-                : avgScore >= 60
-                  ? 'Passing'
-                  : 'Needs Practice'}
-            </span>
-          </div>
-
-          <div className="absolute right-6 bottom-6 text-2xl">
-            🎯
-          </div>
-        </div>
-
-        <div className="glass-panel rounded-3xl p-6 relative border border-slate-900 shadow-md">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-            Assessments
-          </p>
-
-          <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-white">
-              {progress.length}
-            </span>
-
-            <span className="text-xs text-slate-400">
-              attempts
-            </span>
-          </div>
-
-          <div className="absolute right-6 bottom-6 text-2xl">
-            📝
-          </div>
-        </div>
-
+        <StatTile label="Lessons completed" value={`${o.lessons_completed}/${o.lessons_total}`} sub={`${o.lessons_attempted} started`} icon="📚" />
+        <StatTile label="Quiz attempts" value={o.quiz_attempts} sub={o.days_active ? `on ${o.days_active} day${o.days_active === 1 ? '' : 's'}` : 'none yet'} icon="📝" />
+        <StatTile
+          label="Average score"
+          value={formatPercent(o.average_score)}
+          sub={o.average_score === null ? 'take a quiz to see it' : `best ${formatPercent(o.best_score)}`}
+          icon="🎯"
+        />
+        <StatTile label="Subjects" value={o.subjects_available} sub={summary.student.grade ? `in Grade ${summary.student.grade}` : 'choose a grade'} icon="🧭" />
       </div>
 
-      {/* Main content */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-        <div className="lg:col-span-2 space-y-8">
-
-          {/* Continue Learning */}
-          {continueLesson && (
-            <div className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-lg relative overflow-hidden flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 space-y-6">
+          {/* Continue + latest activity */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="glass-panel rounded-3xl p-5 border border-slate-900 shadow-lg flex flex-col justify-between gap-4">
               <div className="space-y-1.5">
-                <span className="inline-flex px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-lg">
-                  Continue Learning
+                <span className="inline-flex px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 rounded-lg">
+                  Continue learning
                 </span>
-
-                <h3 className="text-xl font-bold text-white">
-                  {continueLesson.title}
-                </h3>
-
-                <p className="text-xs text-slate-400">
-                  Subject: {continueLesson.subject || 'Science'}
-                  {' • '}
-                  Topic: {continueLesson.topic}
-                </p>
+                {next ? (
+                  <>
+                    <h3 className="text-lg font-bold text-white">{next.lesson_title}</h3>
+                    <p className="text-xs text-slate-400">
+                      {next.subject} · {next.topic}
+                    </p>
+                  </>
+                ) : (
+                  <p className="text-sm text-slate-300">
+                    {o.lessons_total > 0 ? '🏆 Every lesson in your grade is completed!' : 'Choose your grade to start.'}
+                  </p>
+                )}
               </div>
-
               <Link
-                to={`/lesson/${continueLesson.id}`}
-                className="shrink-0 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-indigo-500 text-white font-semibold text-sm hover:bg-indigo-600 transition-colors shadow-md"
+                to={next ? `/lesson/${next.lesson_id}` : '/subjects'}
+                className="inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-indigo-500 text-white font-semibold text-sm hover:bg-indigo-600 transition-colors"
               >
-                Resume Lesson
+                {next ? 'Open lesson →' : 'Browse subjects →'}
               </Link>
-
-            </div>
-          )}
-
-          {/* Performance Chart */}
-          <div className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-lg space-y-4">
-
-            <div>
-              <h3 className="text-lg font-bold text-white">
-                Learning Performance
-              </h3>
-
-              <p className="text-xs text-slate-500">
-                Tracks quiz scores and attention metrics
-              </p>
             </div>
 
-            {chartData.length === 0 ? (
-              <div className="flex h-52 flex-col items-center justify-center text-center p-4">
-                <div className="text-3xl mb-2">
-                  📊
-                </div>
-
-                <p className="text-sm font-medium text-slate-400">
-                  No assessment data logged yet
-                </p>
-
-                <p className="text-xs text-slate-500 mt-1">
-                  Complete a lesson quiz to populate progress charts.
-                </p>
-              </div>
-            ) : (
-              <div className="h-64">
-                <ResponsiveContainer
-                  width="100%"
-                  height="100%"
-                >
-                  <LineChart
-                    data={chartData}
-                    margin={{
-                      top: 10,
-                      right: 10,
-                      left: -20,
-                      bottom: 0,
-                    }}
-                  >
-                    <CartesianGrid
-                      strokeDasharray="3 3"
-                      stroke="#1e293b"
-                      opacity={0.3}
-                    />
-
-                    <XAxis
-                      dataKey="attempt"
-                      stroke="#475569"
-                      fontSize={11}
-                      tickLine={false}
-                    />
-
-                    <YAxis
-                      stroke="#475569"
-                      fontSize={11}
-                      tickLine={false}
-                      domain={[0, 100]}
-                    />
-
-                    <Tooltip />
-
-                    <Line
-                      type="monotone"
-                      dataKey="score"
-                      stroke="#6366f1"
-                      strokeWidth={3}
-                      name="Quiz Score %"
-                      dot={{ r: 4 }}
-                      activeDot={{ r: 6 }}
-                    />
-
-                    <Line
-                      type="monotone"
-                      dataKey="attention"
-                      stroke="#14b8a6"
-                      strokeWidth={2}
-                      name="Attention %"
-                      strokeDasharray="5 5"
-                      dot={{ r: 3 }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            )}
-
+            <div className="glass-panel rounded-3xl p-5 border border-slate-900 shadow-lg space-y-2">
+              <span className="inline-flex px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider bg-slate-800 text-slate-300 border border-slate-700 rounded-lg">
+                Latest activity
+              </span>
+              {latest ? (
+                <>
+                  <h3 className="text-base font-bold text-white">{latest.lesson_title}</h3>
+                  <p className="text-xs text-slate-400">
+                    {latest.subject} · {String(latest.difficulty).toLowerCase()} quiz · {relativeDay(latest.at)}
+                  </p>
+                  <p className="text-2xl font-extrabold text-white tabular-nums">
+                    {formatPercent(latest.score)}{' '}
+                    <span className={`text-xs font-semibold ${latest.passed ? 'text-emerald-300' : 'text-amber-300'}`}>
+                      {latest.passed ? '✓ passed' : '✗ not passed yet'}
+                    </span>
+                  </p>
+                  <TelemetryBadge telemetry={latest.telemetry} />
+                </>
+              ) : (
+                <p className="text-sm text-slate-400">No quizzes yet.</p>
+              )}
+            </div>
           </div>
+
+          <Panel
+            title="Your subjects"
+            subtitle={summary.student.grade ? `Grade ${summary.student.grade} — progress counts passed lessons` : undefined}
+            action={
+              <Link to="/progress" className="text-xs font-bold text-indigo-300 hover:text-indigo-200">
+                Full analytics →
+              </Link>
+            }
+          >
+            <SubjectPerformance subjects={summary.subjects} compact />
+          </Panel>
         </div>
 
         {/* AI Coach */}
-        <div className="space-y-6">
-
-          <div className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-lg h-full flex flex-col justify-between">
-
-            <div className="space-y-4">
-
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                  <span className="text-teal-400">✦</span>
-                  AI Learning Coach
-                </h3>
-
-                {recommendation && (
-                  <span className="px-2 py-0.5 text-[9px] font-bold bg-teal-500/10 text-teal-400 rounded border border-teal-500/20">
-                    Active recommendation
-                  </span>
-                )}
-              </div>
-
-              {!recommendation ? (
-                <div className="space-y-4 py-6 text-center">
-
-                  <div className="text-4xl">
-                    🤖
-                  </div>
-
-                  <p className="text-sm font-semibold text-slate-300">
-                    {recommendationNote ? 'Camera data unavailable' : 'Ready to calibrate'}
-                  </p>
-
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    {recommendationNote ||
-                      'Complete a quiz at the end of any lesson. The adaptive engine will analyze your engagement and accuracy.'}
-                  </p>
-
-                </div>
-              ) : (
-                <div className="space-y-4 pt-2">
-
-                  <div className="rounded-2xl bg-indigo-500/10 border border-indigo-500/20 p-4 space-y-1">
-                    <p className="text-[10px] font-semibold text-indigo-400 uppercase tracking-wider">
-                      PEDAGOGICAL ACTION
-                    </p>
-
-                    <p className="text-lg font-extrabold text-white">
-                      {actionInfo(recommendation.action).icon} {actionInfo(recommendation.action).label}
-                    </p>
-
-                    {recommendation.policy && (
-                      <p className="text-[10px] text-slate-500">
-                        Decided by: {POLICY_LABELS[recommendation.policy] || recommendation.policy}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="space-y-1">
-                    <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
-                      Coach Justification
-                    </p>
-
-                    <p className="text-sm text-slate-300 leading-relaxed">
-                      "{recommendation.explanation}"
-                    </p>
-                  </div>
-
-                  <div className="space-y-1.5" title={CONFIDENCE_NOTE}>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-semibold text-slate-500 uppercase tracking-wider text-[10px]">
-                        Decision strength (not a probability)
-                      </span>
-
-                      <span className="font-bold text-teal-400">
-                        {Math.round(
-                          recommendation.confidence * 100
-                        )}%
-                      </span>
-                    </div>
-
-                    <div className="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
-                      <div
-                        className="bg-teal-500 h-1.5 rounded-full"
-                        style={{
-                          width: `${recommendation.confidence * 100}%`,
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-
-                </div>
-              )}
-
-            </div>
-
-            <div className="border-t border-slate-800/80 pt-4 mt-6">
-
-              <Link
-                to="/recommendations"
-                className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-xs font-semibold text-slate-300 hover:text-white transition-colors"
-              >
-                Go to AI Coach page
-              </Link>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      {/* Curriculum */}
-      <div className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-lg space-y-6">
-
-        <div className="flex items-center justify-between">
-
-          <div>
-            <h3 className="text-lg font-bold text-white">
-              Your Curriculum
+        <div className="glass-panel rounded-3xl p-5 sm:p-6 border border-slate-900 shadow-lg flex flex-col justify-between gap-6">
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              <span className="text-teal-400">✦</span> AI Learning Coach
             </h3>
-
-            <p className="text-xs text-slate-500">
-              Track your current studies
-            </p>
-          </div>
-
-          <Link
-            to="/subjects"
-            className="text-xs font-bold text-indigo-400 hover:text-indigo-300 transition-colors"
-          >
-            View Subject Browser →
-          </Link>
-
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-          {lessons.slice(0, 4).map(lesson => {
-
-            const isCompleted =
-              distinctCompleted.has(lesson.id)
-
-            return (
-              <div
-                key={lesson.id}
-                className="flex items-center justify-between p-4 rounded-2xl bg-slate-900/30 border border-slate-800/80"
-              >
-
-                <div className="space-y-1 min-w-0">
-
-                  <p className="text-sm font-bold text-slate-200 truncate">
-                    {lesson.title}
-                  </p>
-
-                  <p className="text-xs text-slate-500 truncate">
-                    Topic: {lesson.topic}
-                  </p>
-
+            {!recommendation ? (
+              <div className="space-y-3 py-4 text-center">
+                <div className="text-4xl" aria-hidden="true">
+                  🤖
                 </div>
-
-                {isCompleted ? (
-                  <span className="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">
-                    ✓ Completed
-                  </span>
-                ) : (
-                  <Link
-                    to={`/lesson/${lesson.id}`}
-                    className="shrink-0 px-3 py-1.5 text-[11px] font-semibold bg-slate-900 border border-slate-700 hover:bg-indigo-600 hover:border-indigo-600 hover:text-white rounded-lg text-slate-300 transition-all"
-                  >
-                    Start Study
-                  </Link>
-                )}
-
+                <p className="text-sm font-semibold text-slate-300">
+                  {coach?.status === 'telemetry_unavailable' ? 'Camera data unavailable' : 'No advice yet'}
+                </p>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  {coach?.status === 'telemetry_unavailable'
+                    ? 'Your latest quiz had no valid camera reading, so the coach did not guess. Keep the camera agent running during your next quiz.'
+                    : 'Take a quiz with the camera agent running. The coach then suggests your next step.'}
+                </p>
               </div>
-            )
-          })}
-
+            ) : (
+              <div className="space-y-4">
+                <div className="rounded-2xl bg-indigo-500/10 border border-indigo-500/20 p-4 space-y-1">
+                  <p className="text-[10px] font-semibold text-indigo-300 uppercase tracking-wider">Suggested next step</p>
+                  <p className="text-lg font-extrabold text-white">
+                    {actionInfo(recommendation.action).icon} {actionInfo(recommendation.action).label}
+                  </p>
+                  <p className="text-xs text-slate-400">{actionInfo(recommendation.action).description}</p>
+                  {coachAttempt && (
+                    <p className="text-[11px] text-slate-500">
+                      After: {coachAttempt.lesson_title} ({coachAttempt.subject}
+                      {coachAttempt.curriculum_topic ? ` · ${coachAttempt.curriculum_topic}` : ''})
+                    </p>
+                  )}
+                </div>
+                <p className="text-sm text-slate-300 leading-relaxed">“{recommendation.explanation}”</p>
+                <div className="space-y-1.5" title={CONFIDENCE_NOTE}>
+                  <div className="flex items-center justify-between text-[10px] uppercase tracking-wider">
+                    <span className="font-semibold text-slate-500">Decision strength (not a probability)</span>
+                    <span className="font-bold text-teal-300">{Math.round(recommendation.confidence * 100)}%</span>
+                  </div>
+                  <ProgressBar percent={recommendation.confidence * 100} color="#0d9488" label="Decision strength" />
+                  {recommendation.policy && (
+                    <p className="text-[10px] text-slate-500">Decided by: {POLICY_LABELS[recommendation.policy] || recommendation.policy}</p>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+          <Link
+            to="/recommendations"
+            className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-xs font-semibold text-slate-300 hover:text-white transition-colors"
+          >
+            Open the AI Coach →
+          </Link>
         </div>
-
       </div>
 
+      <Panel
+        title="Recent activity"
+        action={
+          <Link to="/progress#activity" className="text-xs font-bold text-indigo-300 hover:text-indigo-200">
+            All activity →
+          </Link>
+        }
+      >
+        <ActivityFeed events={summary.activity} limit={5} />
+      </Panel>
     </div>
   )
 }

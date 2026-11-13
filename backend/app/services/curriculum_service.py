@@ -17,6 +17,7 @@ from app.models.curriculum import GRADES, SUBJECTS, CurriculumTopic, CurriculumU
 from app.models.lesson import Lesson
 from app.models.progress import Progress
 from app.models.student import Student
+from rl_engine.core.constraints import PASS_SCORE
 
 MANAGER_ROLES = ("teacher", "admin")
 GRADE_REQUIRED = "grade_required"
@@ -129,7 +130,10 @@ def _best_scores(db: Session, student: Student) -> dict[int, dict[str, Any]]:
         entry["attempts"] += 1
         if entry["best_score"] is None or row.quiz_score > entry["best_score"]:
             entry["best_score"] = row.quiz_score
-        entry["completed"] = entry["completed"] or bool(row.completed)
+    # A lesson is completed once one of its quizzes is passed (the RL pass
+    # mark); ``progress.completed`` only records that a quiz was submitted.
+    for entry in best.values():
+        entry["completed"] = entry["best_score"] is not None and entry["best_score"] >= PASS_SCORE
     return best
 
 

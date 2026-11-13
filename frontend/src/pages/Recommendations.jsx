@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { rlService } from '../services/rlService'
@@ -11,230 +11,257 @@ import {
   actionInfo,
   resolveNextStep
 } from '../utils/recommendationActions'
+import { formatDate, formatPercent, outcomeText } from '../utils/analytics'
+import { EmptyState, ErrorState, LoadingSkeleton, Panel, ProgressBar } from '../components/AnalyticsPanels'
+
+const OUTCOME_TONE = {
+  emerald: 'text-emerald-300',
+  rose: 'text-rose-300',
+  slate: 'text-slate-400'
+}
 
 export default function Recommendations() {
   const { user } = useAuth()
   const [loading, setLoading] = useState(true)
-  const [recommendation, setRecommendation] = useState(null)
   const [error, setError] = useState('')
-  const [unavailableNote, setUnavailableNote] = useState('')
-  const [lessons, setLessons] = useState([])
+  const [latest, setLatest] = useState(null)
+  const [history, setHistory] = useState([])
+  const [historyError, setHistoryError] = useState('')
   const [currentLesson, setCurrentLesson] = useState(null)
 
-  useEffect(() => {
-    async function loadRecommendation() {
-      try {
-        // Recommendations are generated and stored by the server when a
-        // quiz is graded, from the attempt's real data.
-        const latest = await rlService.getLatest()
-        const attempt = latest.attempt
-
-        if (latest.status === 'available' && latest.recommendation?.action) {
-          setRecommendation({
-            ...latest.recommendation,
-            lessonId: attempt?.lesson_id,
-            quizId: attempt?.quiz_id,
-            lessonTitle: attempt?.lesson_title,
-            topicName: attempt?.topic,
-            lastScore: Math.round(attempt?.quiz_score ?? 0),
-            lastDifficulty: attempt?.difficulty
-          })
-        } else if (latest.status === 'telemetry_unavailable') {
-          setUnavailableNote(
-            'Your latest quiz had no camera telemetry, so the coach could not generate an adaptive recommendation. Keep the camera agent running during your next quiz.'
-          )
-        } else if (latest.status === 'not_generated') {
-          setUnavailableNote('The coach could not generate a recommendation for your latest attempt.')
-        }
+  const load = useCallback(async () => {
+    setLoading(true)
+    setError('')
+    try {
+      // Recommendations are produced by the server's Q-learning policy when
+      // a quiz is graded; this page only displays them.
+      const [latestRes, historyRes] = await Promise.all([
+        rlService.getLatest(),
+        rlService.getHistory(20).catch((err) => {
+          setHistoryError(err.message || 'Could not load earlier advice')
+          return []
+        })
+      ])
+      setLatest(latestRes)
+      setHistory(Array.isArray(historyRes) ? historyRes : [])
+      if (latestRes?.attempt?.lesson_id) {
         try {
-          if (attempt?.lesson_id) {
-            // Lesson detail carries its quizzes and its place in the
-            // student's grade/subject sequence (navigation).
-            const lessonRes = await lessonService.getLesson(attempt.lesson_id)
-            if (lessonRes?.success) setCurrentLesson(lessonRes.data)
-          } else {
-            const lessonRes = await lessonService.getLessons()
-            if (lessonRes?.success) setLessons(lessonRes.data || [])
-          }
+          // Lesson detail carries its quizzes and its place in the grade/subject sequence.
+          const lessonRes = await lessonService.getLesson(latestRes.attempt.lesson_id)
+          if (lessonRes?.success) setCurrentLesson(lessonRes.data)
         } catch {
-          // The lesson only refines the next-step link.
+          // Only refines the next-step link.
         }
-      } catch (err) {
-        setError(err.message || 'Failed to load your recommendation')
-      } finally {
-        setLoading(false)
       }
+    } catch (err) {
+      setError(err.message || 'Failed to load your recommendation')
+    } finally {
+      setLoading(false)
     }
-    loadRecommendation()
-  }, [user?.id])
+  }, [])
 
-  if (loading) {
-    return (
-      <div className="space-y-6 animate-pulse">
-        <div className="h-10 w-1/4 bg-slate-800 rounded-xl"></div>
-        <div className="h-4 w-1/2 bg-slate-800 rounded-lg"></div>
-        <div className="h-64 bg-slate-800 rounded-3xl mt-8"></div>
-      </div>
-    )
-  }
+  useEffect(() => {
+    load()
+  }, [load, user?.id])
 
-  const rlStrategies = ALL_ACTIONS.map((name) => ({ name, ...ACTION_CATALOGUE[name] }))
+  if (loading) return <LoadingSkeleton blocks={0} />
+  if (error) return <ErrorState message={error} onRetry={load} />
+
+  const attempt = latest?.attempt
+  const recommendation = latest?.status === 'available' ? latest.recommendation : null
+  const info = recommendation ? actionInfo(recommendation.action) : null
+  const runnerUp = typeof recommendation?.runner_up === 'string' ? recommendation.runner_up : recommendation?.runner_up?.action
 
   const nextStep = recommendation
     ? resolveNextStep(recommendation.action, {
-        lessonId: recommendation.lessonId,
-        quizId: recommendation.quizId,
-        difficulty: recommendation.lastDifficulty,
+        lessonId: attempt?.lesson_id,
+        quizId: attempt?.quiz_id,
+        difficulty: attempt?.difficulty,
         lessonQuizzes: currentLesson?.quizzes,
-        navigation: currentLesson?.navigation,
-        lessons
+        navigation: currentLesson?.navigation
       })
     : null
   const nextStepLink =
     nextStep && (nextStep.kind === 'navigate' || nextStep.kind === 'retry')
       ? { to: nextStep.to, state: { ...(nextStep.state || {}), mode: nextStep.mode, attempt: nextStep.kind === 'retry' ? Date.now() : undefined } }
-      : recommendation
-        ? { to: `/lesson/${recommendation.lessonId}`, state: { recommendedAction: recommendation.action } }
+      : recommendation && attempt
+        ? { to: `/lesson/${attempt.lesson_id}`, state: { recommendedAction: recommendation.action } }
         : null
+  const nextStepLabel =
+    nextStep && !['unknown', 'review', 'break'].includes(nextStep.kind)
+      ? nextStep.label
+      : nextStep?.kind === 'break'
+        ? 'Take a 2–5 minute break, then reopen the lesson →'
+        : `${info?.label}: open the lesson →`
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
-      {/* Header */}
+    <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
       <div className="space-y-1.5">
-        <h1 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-          AI Pedagogy Coach
-        </h1>
-        <p className="text-slate-400 text-sm leading-relaxed max-w-2xl">
-          Your reinforcement-learning coach. After each quiz, Aegis combines your score, difficulty, hints, attempts and camera engagement signals to recommend a next step.
+        <h1 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">AI Coach</h1>
+        <p className="text-slate-400 text-sm leading-relaxed max-w-3xl">
+          After every quiz, your coach looks at your score, the quiz level, hints, how many tries you needed and what the camera noticed, then
+          picks one of 11 next steps. It learned which steps help most by practising on thousands of simulated students.
         </p>
       </div>
 
-      {error && (
-        <div className="rounded-2xl bg-rose-500/10 border border-rose-500/20 p-4 text-sm text-rose-400">
-          {error}
-        </div>
-      )}
-
-      {/* Active Coach Suggestion */}
+      {/* Latest recommendation */}
       {!recommendation ? (
-        <div className="glass-panel rounded-3xl p-8 border border-slate-900 shadow-md text-center py-12 space-y-4">
-          <div className="text-5xl">🤖</div>
-          <h3 className="text-lg font-bold text-white">
-            {unavailableNote ? 'Camera Data Unavailable' : 'AI Coach is Calibrating'}
-          </h3>
-          <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
-            {unavailableNote ||
-              'The coach needs at least one quiz log to evaluate your study habits and output recommendations. Jump into subjects to begin.'}
-          </p>
-          <Link to="/subjects" className="inline-flex px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold text-xs shadow-md transition-all">
-            Browse Subjects
-          </Link>
-        </div>
+        <Panel>
+          <EmptyState
+            icon="🤖"
+            title={
+              latest?.status === 'telemetry_unavailable'
+                ? 'No advice for your last quiz — camera data was unavailable'
+                : latest?.status === 'not_generated'
+                  ? 'The coach could not give advice for your last quiz'
+                  : 'No advice yet'
+            }
+            text={
+              latest?.status === 'telemetry_unavailable'
+                ? 'The coach needs a real camera reading from the quiz and never guesses how focused you were. Keep the camera agent running during your next quiz.'
+                : latest?.status === 'not_generated'
+                  ? 'Take another quiz and the coach will try again.'
+                  : 'Finish a lesson quiz with the camera agent running and your first piece of advice will appear here.'
+            }
+            action={
+              <Link to="/subjects" className="mt-2 inline-flex px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold text-xs">
+                Browse subjects
+              </Link>
+            }
+          />
+        </Panel>
       ) : (
-        <div className="glass-panel rounded-3xl p-8 border border-slate-900 shadow-xl space-y-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 h-48 w-48 bg-indigo-500/5 blur-3xl pointer-events-none"></div>
-
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-5">
-            <div className="space-y-1.5">
-              <span className="px-2.5 py-0.5 text-[9px] font-bold bg-teal-500/10 text-teal-400 border border-teal-500/20 rounded">
-                Active Pedagogy Advice
-              </span>
-              <h2 className="text-xl font-bold text-white">Curriculum Recommendation</h2>
-            </div>
-            
-            <div
-              className="shrink-0 flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5"
-              title={CONFIDENCE_NOTE}
-            >
-              <span className="text-[9px] text-slate-500 font-extrabold uppercase">Decision strength</span>
-              <span className="text-teal-400 font-extrabold text-sm">{Math.round(recommendation.confidence * 100)}%</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="md:col-span-2 space-y-6">
-              {/* Action Banner */}
+        <section className="glass-panel rounded-3xl p-5 sm:p-8 border border-slate-900 shadow-xl space-y-6 relative overflow-hidden">
+          <div className="absolute top-0 right-0 h-48 w-48 bg-indigo-500/5 blur-3xl pointer-events-none" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div className="md:col-span-2 space-y-5">
               <div className="space-y-1">
-                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Coach Action Suggestion</span>
+                <span className="text-[10px] text-teal-300 font-bold uppercase tracking-wider">Your next step</span>
                 <p className="text-2xl font-extrabold text-white">
-                  {actionInfo(recommendation.action).icon} {actionInfo(recommendation.action).label}
+                  {info.icon} {info.label}
                 </p>
-                <p className="text-xs text-slate-400">{actionInfo(recommendation.action).description}</p>
-                {recommendation.policy && (
-                  <p className="text-[10px] text-slate-500">
-                    Decided by: {POLICY_LABELS[recommendation.policy] || recommendation.policy}
-                  </p>
-                )}
+                <p className="text-sm text-slate-300">{info.description}</p>
               </div>
 
-              {/* Justification */}
               <div className="space-y-2">
-                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">AI tutor Justification</span>
-                <p className="text-sm text-slate-300 italic bg-slate-900/30 border border-slate-850 p-4 rounded-2xl leading-relaxed">
-                  "{recommendation.explanation}"
+                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Why the coach chose this</span>
+                <p className="text-sm text-slate-300 bg-slate-900/40 border border-slate-800 p-4 rounded-2xl leading-relaxed">
+                  {recommendation.explanation}
                 </p>
               </div>
+
+              {nextStepLink && (
+                <Link
+                  to={nextStepLink.to}
+                  state={nextStepLink.state}
+                  className="inline-flex justify-center px-5 py-3 rounded-xl bg-indigo-500 text-white font-bold text-sm shadow hover:bg-indigo-600 transition-colors"
+                >
+                  {nextStepLabel}
+                </Link>
+              )}
             </div>
 
-            {/* Performance Snapshot */}
-            <div className="space-y-4 rounded-2xl bg-slate-925 border border-slate-850 p-5 h-fit">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Trigger State Log</h4>
-              <div className="space-y-3 text-xs">
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Lesson context</span>
-                  <span className="font-semibold text-slate-300 truncate max-w-[120px]">{recommendation.lessonTitle}</span>
+            <div className="space-y-4 rounded-2xl bg-slate-925 border border-slate-800 p-5 h-fit">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400">Based on your quiz</h2>
+              <dl className="space-y-2.5 text-xs">
+                <Row label="Subject" value={attempt?.subject} />
+                <Row label="Topic" value={attempt?.curriculum_topic || attempt?.topic} />
+                <Row label="Lesson" value={attempt?.lesson_title} />
+                <Row label="Score" value={`${formatPercent(attempt?.quiz_score)} (${String(attempt?.difficulty || '').toLowerCase()})`} />
+                <Row label="Attention" value={formatPercent(attempt?.attention_score === null || attempt?.attention_score === undefined ? null : attempt.attention_score * 100)} />
+                <Row label="When" value={formatDate(attempt?.created_at, { withTime: true })} />
+              </dl>
+              <div className="pt-2 space-y-1.5" title={CONFIDENCE_NOTE}>
+                <div className="flex justify-between text-[10px] uppercase tracking-wider">
+                  <span className="text-slate-500 font-semibold">Decision strength</span>
+                  <span className="text-teal-300 font-bold">{Math.round(recommendation.confidence * 100)}%</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Last score</span>
-                  <span className="font-bold text-white">{recommendation.lastScore}%</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Last difficulty</span>
-                  <span className="font-semibold text-slate-300">{recommendation.lastDifficulty}</span>
-                </div>
-              </div>
-              
-              <div className="pt-2">
-                {nextStepLink && (
-                  <Link
-                    to={nextStepLink.to}
-                    state={nextStepLink.state}
-                    className="w-full inline-flex justify-center py-2.5 rounded-xl bg-indigo-500 text-white font-bold text-[11px] shadow hover:bg-indigo-650 transition-colors"
-                  >
-                    {nextStep && nextStep.kind !== 'unknown' && nextStep.kind !== 'review' && nextStep.kind !== 'break'
-                      ? nextStep.label
-                      : `${actionInfo(recommendation.action).label}: open the lesson →`}
-                  </Link>
+                <ProgressBar percent={recommendation.confidence * 100} color="#0d9488" label="Decision strength" />
+                <p className="text-[10px] text-slate-500 leading-relaxed">
+                  How clearly this step beat the others. It is not a probability.
+                  {runnerUp && ACTION_CATALOGUE[runnerUp] ? ` Second choice: ${ACTION_CATALOGUE[runnerUp].label}.` : ''}
+                </p>
+                {recommendation.policy && (
+                  <p className="text-[10px] text-slate-500">Decided by: {POLICY_LABELS[recommendation.policy] || recommendation.policy}</p>
                 )}
               </div>
             </div>
           </div>
-        </div>
+        </section>
       )}
 
-      {/* Guide to RL Coach Strategy */}
-      <div className="glass-panel rounded-3xl p-6 md:p-8 border border-slate-900 shadow-lg space-y-6">
-        <div>
-          <h3 className="text-lg font-bold text-white">How the Coach Adapts</h3>
-          <p className="text-xs text-slate-500 mt-1">
-            A tabular Q-learning policy, trained offline on simulated students, scores all 11 actions for your
-            current situation. Safety rules first remove unsuitable actions (for example, moving on before
-            passing); the action with the highest learned value is recommended.
-          </p>
-        </div>
+      {/* History */}
+      <Panel
+        title="Earlier advice and what happened next"
+        subtitle="Each piece of advice is checked against your next quiz. “Followed” is worked out from that quiz (for example, whether you moved to a harder level); some steps, like taking a break, cannot be checked."
+      >
+        {historyError && <p className="text-xs text-amber-300">{historyError}</p>}
+        {history.length === 0 ? (
+          <EmptyState icon="🕘" title="No earlier advice yet" text="Advice from your quizzes will be listed here." />
+        ) : (
+          <ol className="space-y-2">
+            {history.map((item) => {
+              const itemInfo = actionInfo(item.action)
+              const outcome = outcomeText(item.outcome)
+              return (
+                <li key={item.id} className="rounded-2xl bg-slate-900/40 border border-slate-800 px-4 py-3 space-y-1">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <p className="text-sm font-semibold text-white">
+                      <span aria-hidden="true">{itemInfo.icon}</span> {itemInfo.label}
+                    </p>
+                    <span className="text-[10px] text-slate-500">{formatDate(item.created_at, { withTime: true })}</span>
+                  </div>
+                  <p className="text-[11px] text-slate-400">
+                    After {formatPercent(item.context?.score)} on “{item.context?.lesson_title || 'a lesson'}”
+                    {item.context?.subject ? ` · ${item.context.subject}` : ''}
+                    {item.context?.topic ? ` · ${item.context.topic}` : ''}
+                  </p>
+                  <p className={`text-[11px] ${OUTCOME_TONE[outcome.tone]}`}>{outcome.text}</p>
+                </li>
+              )
+            })}
+          </ol>
+        )}
+      </Panel>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {rlStrategies.map((strategy) => (
-            <div key={strategy.name} className="flex gap-4 p-4 bg-slate-900/30 border border-slate-850 rounded-2xl">
-              <span className="text-2xl select-none">{strategy.icon}</span>
-              <div className="space-y-1">
-                <h4 className="text-xs font-extrabold text-white tracking-wide">{strategy.name.replace(/_/g, ' ')}</h4>
-                <p className="text-xs text-slate-400 leading-relaxed">{strategy.desc}</p>
+      {/* All 11 actions */}
+      <Panel
+        title="The 11 steps your coach can suggest"
+        subtitle="A Q-learning table, trained offline on simulated students, gives every step a score for your situation. Safety rules first remove unsuitable steps (for example, moving on before you pass), then the highest-scoring step is chosen."
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {ALL_ACTIONS.map((name) => {
+            const strategy = ACTION_CATALOGUE[name]
+            const active = recommendation?.action === name
+            return (
+              <div
+                key={name}
+                className={`flex gap-3 p-4 rounded-2xl border ${active ? 'bg-indigo-500/10 border-indigo-500/30' : 'bg-slate-900/30 border-slate-800'}`}
+              >
+                <span className="text-2xl select-none" aria-hidden="true">
+                  {strategy.icon}
+                </span>
+                <div className="space-y-1">
+                  <h3 className="text-xs font-extrabold text-white tracking-wide">
+                    {strategy.label}
+                    {active && <span className="ml-2 text-[10px] font-bold text-teal-300">Current advice</span>}
+                  </h3>
+                  <p className="text-xs text-slate-400 leading-relaxed">{strategy.description}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
-      </div>
+      </Panel>
+    </div>
+  )
+}
+
+function Row({ label, value }) {
+  return (
+    <div className="flex justify-between gap-3">
+      <dt className="text-slate-500 shrink-0">{label}</dt>
+      <dd className="font-semibold text-slate-200 text-right truncate">{value || '—'}</dd>
     </div>
   )
 }

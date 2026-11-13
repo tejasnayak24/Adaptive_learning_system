@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { GradePicker } from '../components/GradeGate'
 import { SUBJECTS, curriculumService } from '../services/curriculumService'
@@ -63,7 +63,11 @@ function LessonCard({ lesson, subject }) {
 export default function Subjects() {
   const { user } = useAuth()
   const [curriculum, setCurriculum] = useState(null)
-  const [selectedSubject, setSelectedSubject] = useState(SUBJECTS[0])
+  const location = useLocation()
+  // Analytics pages link here with the subject to open.
+  const [selectedSubject, setSelectedSubject] = useState(
+    SUBJECTS.includes(location.state?.subject) ? location.state.subject : SUBJECTS[0]
+  )
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [changingGrade, setChangingGrade] = useState(false)

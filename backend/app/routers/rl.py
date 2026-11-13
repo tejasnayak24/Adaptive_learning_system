@@ -11,7 +11,7 @@ All endpoints require authentication.
 
 from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from app.auth.dependencies import get_current_student
@@ -24,6 +24,7 @@ from app.services.recommendation_service import (
     has_camera_telemetry,
     recommendation_to_dict,
 )
+from app.services import analytics_service
 from app.services import curriculum_service as cs
 from app.services.rl_service import get_rl_service
 
@@ -108,6 +109,11 @@ def _attempt_summary(progress: Progress | None) -> dict[str, Any] | None:
         "quiz_id": progress.quiz_id,
         "lesson_title": progress.lesson.title if progress.lesson else None,
         "topic": progress.lesson.topic if progress.lesson else None,
+        "subject": (progress.lesson.subject or "Science") if progress.lesson else None,
+        "grade": progress.lesson.grade if progress.lesson else None,
+        "curriculum_topic": progress.lesson.curriculum_topic.title
+        if progress.lesson and progress.lesson.curriculum_topic
+        else None,
         "quiz_score": progress.quiz_score,
         "difficulty": progress.difficulty,
         "attention_score": progress.attention_score,
@@ -176,18 +182,17 @@ def latest_recommendation(
 
 @router.get("/recommendations")
 def recommendation_history(
+    limit: int = Query(default=20, ge=1, le=200),
     db: Session = Depends(get_db),
     student: Student = Depends(get_current_student),
 ) -> dict[str, Any]:
-    rows = (
-        db.query(RecommendationHistory)
-        .filter(RecommendationHistory.student_id == student.id)
-        .order_by(RecommendationHistory.id.desc())
-        .all()
-    )
-
+    """The student's recommendations, newest first. Each item adds
+    ``context`` (lesson, subject, topic and score of the attempt that
+    produced it) and ``outcome`` (``status: "pending"`` until the student's
+    next attempt is graded, then that attempt's result, the score change,
+    whether it looks like the advice was followed, and the reward)."""
     return {
         "success": True,
         "message": "Recommendation history fetched",
-        "data": [recommendation_to_dict(row) for row in rows],
+        "data": analytics_service.coach_history(db, student, limit),
     }

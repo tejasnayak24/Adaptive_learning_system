@@ -37,6 +37,7 @@ from app.models.recommendation import RecommendationHistory  # noqa: E402,F401
 from app.models.monitoring import MonitoringConsent, MonitoringSession  # noqa: E402,F401
 
 from app.routers import (  # noqa: E402
+    analytics,
     auth,
     curriculum,
     lesson,
@@ -73,3 +74,4 @@ app.include_router(integration.router)
 app.include_router(rl.router)
 app.include_router(monitoring.router)
 app.include_router(curriculum.router)
+app.include_router(analytics.router)
