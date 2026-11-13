@@ -1,0 +1,569 @@
+{
+  "grade": 8,
+  "subject": "Social Science",
+  "units": [
+    {
+      "slug": "g8-sst-u-history",
+      "title": "History: Colonial India",
+      "topics": [
+        {
+          "slug": "g8-sst-t-colonialism",
+          "title": "Colonialism and the National Movement",
+          "description": "How the East India Company gained power and how Indians organised to win freedom.",
+          "lessons": [
+            {
+              "slug": "g8-sst-company-rule",
+              "title": "From Trade to Territory: The East India Company",
+              "objectives": [
+                "Explain how the East India Company came to India as a trading company",
+                "Describe the battles of Plassey and Buxar and their results",
+                "Explain policies such as subsidiary alliance and the doctrine of lapse",
+                "Describe the causes and outcome of the revolt of 1857"
+              ],
+              "intro": "In 1600 Queen Elizabeth I of England granted a charter to the East India Company, giving it the sole right to trade with the East. The Company came to India to buy cotton, silk, indigo, pepper and other spices cheaply and sell them in Europe at a high profit. Within about 150 years this trading company had become the ruler of large parts of India. How did merchants become rulers? The story shows how trade, war and diplomacy were combined to build an empire.",
+              "sections": [
+                [
+                  "From trade to political power",
+                  "The Company set up trading posts, called factories, at places such as Surat, Madras, Bombay and Calcutta, and fortified them. It competed with Portuguese, Dutch and French companies. In Bengal, the Company misused trade privileges, refusing to pay taxes. The Nawab of Bengal, Siraj-ud-daulah, tried to stop this, and in 1757 the Company's forces under Robert Clive defeated him at the Battle of Plassey, helped by the treachery of the Nawab's commander Mir Jafar. In 1764, the Company defeated the combined forces of the Nawab of Bengal, the Nawab of Awadh and the Mughal emperor at Buxar. In 1765 the Mughal emperor granted the Company the Diwani of Bengal, the right to collect revenue, which gave it enormous wealth."
+                ],
+                [
+                  "Expansion of Company rule",
+                  "The Company expanded through wars and through policies. Under the subsidiary alliance introduced by Lord Wellesley, Indian rulers had to keep Company troops in their territory and pay for them, and could not have their own armed forces or ally with others without permission; Hyderabad and Awadh accepted it. The Company fought four wars against Mysore, finally defeating Tipu Sultan in 1799, and wars against the Marathas. Under Lord Dalhousie's doctrine of lapse, if a ruler died without a natural male heir, his kingdom would 'lapse' to the Company. Satara, Jhansi and Nagpur were annexed this way, and Awadh was taken in 1856 on the ground of misgovernment."
+                ],
+                [
+                  "The revolt of 1857",
+                  "Resentment grew among many groups. Rulers had lost their kingdoms, peasants suffered under heavy revenue demands, artisans lost markets to British machine-made goods, and sepoys (Indian soldiers in the Company army) were unhappy with low pay and rules that hurt their religious feelings. When new cartridges, rumoured to be greased with cow and pig fat, were introduced, sepoys at Meerut rebelled in May 1857 and marched to Delhi, proclaiming the old Mughal emperor Bahadur Shah Zafar their leader. The revolt spread to Kanpur, Lucknow, Jhansi and other places, led by figures such as Rani Lakshmibai, Nana Saheb and Begum Hazrat Mahal. The British crushed it by 1859, but in 1858 the British Crown took over the government of India from the Company."
+                ]
+              ],
+              "definitions": [
+                ["Factory (trading post)", "A Company warehouse and office where goods were stored and traded."],
+                ["Diwani", "The right to collect land revenue."],
+                ["Subsidiary alliance", "An arrangement making Indian rulers maintain and pay for Company troops."],
+                ["Doctrine of lapse", "A policy annexing states whose rulers died without a natural male heir."],
+                ["Sepoy", "An Indian soldier in the Company's army."]
+              ],
+              "examples": [
+                "Jhansi was annexed under the doctrine of lapse, and Rani Lakshmibai later fought the British in 1857.",
+                "After 1858, India was ruled by a Viceroy representing the British Crown."
+              ],
+              "worked": [
+                {
+                  "problem": "Explain why the Diwani of Bengal (1765) was so important for the Company.",
+                  "steps": [
+                    "Bengal was one of the richest provinces, with large land revenue.",
+                    "With the Diwani, the Company itself collected this revenue.",
+                    "It could now buy Indian goods with Indian revenue instead of bringing gold from Britain, and pay for its army and expansion."
+                  ],
+                  "answer": "It gave the Company a huge, regular income from Bengal's revenue, funding trade, troops and further conquest."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "From traders to rulers",
+                "items": ["1600: Charter to trade", "1757: Battle of Plassey", "1764: Battle of Buxar", "1765: Diwani of Bengal", "1798–1856: Subsidiary alliance, wars, doctrine of lapse", "1857: Revolt", "1858: Crown rule"]
+              },
+              "real_world": "The memory of 1857 and of leaders like Rani Lakshmibai became an inspiration for the later freedom struggle. Historians still debate the period using Company records, letters and Indian accounts, showing how the same events can be seen from different points of view.",
+              "takeaways": [
+                "The Company came to trade and gradually gained political power.",
+                "Plassey (1757) and Buxar (1764) gave it control over Bengal; the Diwani gave it revenue.",
+                "Subsidiary alliance, wars and the doctrine of lapse expanded Company territory.",
+                "The revolt of 1857 ended Company rule; the Crown took over in 1858."
+              ],
+              "practice": [
+                ["Who won the Battle of Plassey?", "The East India Company under Robert Clive."],
+                ["Who introduced the doctrine of lapse?", "Lord Dalhousie."],
+                ["Where did the revolt of 1857 begin?", "Meerut."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["In which year was the Battle of Plassey fought?", ["1764", "1757", "1857", "1600"], "B", "It was a century before the great revolt.", "The Battle of Plassey was fought in 1757."],
+                  ["The revolt of 1857 began at:", ["Delhi", "Kanpur", "Meerut", "Lucknow"], "C", "Sepoys then marched to Delhi.", "The revolt started at Meerut in May 1857."],
+                  ["Who introduced the doctrine of lapse?", ["Lord Dalhousie", "Robert Clive", "Lord Wellesley", "Warren Hastings"], "A", "He annexed Jhansi and Satara.", "Lord Dalhousie used the doctrine of lapse."],
+                  ["Tipu Sultan ruled:", ["Bengal", "Awadh", "Hyderabad", "Mysore"], "D", "He was called the Tiger of…", "Tipu Sultan was the ruler of Mysore."]
+                ],
+                "MEDIUM": [
+                  ["What did the Diwani give the Company?", ["The right to make laws in Britain", "The right to collect revenue in Bengal", "Control of the navy", "The Mughal throne"], "B", "Diwani relates to revenue.", "Diwani was the right to collect land revenue."],
+                  ["Under the subsidiary alliance, Indian rulers had to:", ["Join the British Parliament", "Stop all trade", "Maintain and pay for Company troops", "Move to England"], "C", "Think of troops and payment.", "Rulers paid for Company forces stationed in their states."],
+                  ["Who was proclaimed leader by the rebels of 1857 in Delhi?", ["Bahadur Shah Zafar", "Tipu Sultan", "Siraj-ud-daulah", "Akbar"], "A", "The last Mughal emperor.", "Rebels declared Bahadur Shah Zafar their leader."],
+                  ["Which change came after the revolt of 1857?", ["The Company got more power", "India became independent", "Trade with Britain ended", "The British Crown took over India's government"], "D", "The Company lost its role.", "In 1858 the Crown took direct control."]
+                ],
+                "HARD": [
+                  ["Why did artisans join the discontent before 1857?", ["They received higher wages", "Cheap British machine-made goods destroyed their markets", "They were made sepoys", "They were given land"], "B", "Think about imported cloth.", "Imported factory goods ruined Indian handicraft industries."],
+                  ["Which is the best explanation of how the Company won at Plassey?", ["Superior numbers of soldiers", "Help from the Mughal emperor", "Clive's forces were aided by Mir Jafar's betrayal of the Nawab", "The Nawab surrendered without fighting for religious reasons"], "C", "A commander changed sides.", "Mir Jafar's treachery weakened the Nawab's army."],
+                  ["Why was Awadh's annexation in 1856 especially resented?", ["It was taken on the ground of misgovernment, removing a popular ruler and hurting many people's interests", "Awadh had no ruler", "It was done by the Mughals", "It increased Awadh's independence"], "A", "Consider the reason given and its effects.", "The annexation was seen as unjust and affected nobles, sepoys and peasants."],
+                  ["The new cartridges in 1857 angered sepoys because:", ["They were too heavy", "They exploded easily", "They were imported from France", "They were rumoured to be greased with cow and pig fat"], "D", "It concerned religious beliefs.", "The rumour offended both Hindu and Muslim sepoys."]
+                ]
+              }
+            },
+            {
+              "slug": "g8-sst-national-movement",
+              "title": "The Indian National Movement",
+              "objectives": [
+                "Explain the rise of nationalism in the late nineteenth century",
+                "Describe the moderate and radical phases of the Congress",
+                "Explain Gandhiji's mass movements",
+                "Describe the path to independence and partition in 1947"
+              ],
+              "intro": "After 1857, more and more Indians began to think of India as one nation whose people, whatever their language, religion or region, shared a common interest in freedom from British rule. Newspapers, railways and modern education helped spread these ideas. Over the next ninety years, a national movement grew from petitions by a few educated leaders into mass movements involving millions, and finally won independence in 1947.",
+              "sections": [
+                [
+                  "Early nationalism and the Congress",
+                  "In 1885 the Indian National Congress was founded in Bombay. Its early leaders, called Moderates, such as Dadabhai Naoroji and Gopal Krishna Gokhale, believed in petitions, speeches and meetings to demand reforms such as Indian representation in councils. Dadabhai Naoroji showed how British rule drained India's wealth. By the 1890s, Radicals or Extremists such as Bal Gangadhar Tilak, Lala Lajpat Rai and Bipin Chandra Pal argued for self-rule (swaraj) through more direct action. Tilak declared, 'Freedom is my birthright and I shall have it!' The partition of Bengal by Lord Curzon in 1905 led to the Swadeshi movement, in which people boycotted British goods and used Indian-made products."
+                ],
+                [
+                  "The Gandhian era",
+                  "Mahatma Gandhi returned from South Africa in 1915, where he had developed satyagraha, a method of non-violent resistance. After leading local struggles at Champaran, Kheda and Ahmedabad, he launched the Non-Cooperation Movement in 1920, partly in response to the Jallianwala Bagh massacre of 1919, in which British troops fired on a peaceful crowd in Amritsar. People boycotted British goods, schools, courts and titles. In 1930 Gandhiji began the Civil Disobedience Movement with the Salt March from Sabarmati to Dandi, breaking the salt law. In 1942, he launched the Quit India Movement with the call 'Do or die'. Many others contributed, including Subhas Chandra Bose, who formed the Indian National Army, and revolutionaries such as Bhagat Singh."
+                ],
+                [
+                  "Independence and partition",
+                  "After the Second World War, Britain was weakened and could no longer hold India against the demand for freedom. At the same time, divisions had grown between the Congress and the Muslim League, which under Muhammad Ali Jinnah demanded a separate nation, Pakistan, for Muslims. Negotiations failed, and communal violence spread. On 15 August 1947 India became independent, but the subcontinent was partitioned into India and Pakistan. Partition caused one of the largest migrations in history and terrible violence in which many lost their lives and homes. Independent India then began writing its own Constitution."
+                ]
+              ],
+              "definitions": [
+                ["Nationalism", "A feeling of belonging to one nation and a desire for its freedom and unity."],
+                ["Swadeshi", "Using goods made in one's own country."],
+                ["Satyagraha", "Gandhiji's method of non-violent resistance based on truth."],
+                ["Boycott", "Refusing to buy, use or take part in something as a protest."],
+                ["Partition", "The division of British India into India and Pakistan in 1947."]
+              ],
+              "examples": [
+                "During the Swadeshi movement, people burnt foreign cloth and wore khadi.",
+                "The Salt March of 1930 covered about 385 km in 24 days."
+              ],
+              "worked": [
+                {
+                  "problem": "Why did Gandhiji choose salt for the Civil Disobedience Movement?",
+                  "steps": [
+                    "Salt was used by everyone, rich and poor, in every part of India.",
+                    "The British had a monopoly on salt and taxed it, so the law hurt ordinary people.",
+                    "Breaking the salt law was simple, non-violent and could be done by anyone, uniting people across groups."
+                  ],
+                  "answer": "Salt affected everyone and its tax was unjust, so breaking the salt law was a powerful, simple, united act of non-violent defiance."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Milestones of the national movement",
+                "items": ["1885: Congress founded", "1905: Swadeshi movement", "1919: Jallianwala Bagh", "1920: Non-Cooperation", "1930: Salt March / Civil Disobedience", "1942: Quit India", "1947: Independence and Partition"]
+              },
+              "real_world": "Independence Day on 15 August and Gandhi Jayanti on 2 October remind us of the freedom struggle. The ideas of non-violent protest developed in India inspired civil rights movements around the world, including the work of Martin Luther King Jr. in the United States and Nelson Mandela in South Africa.",
+              "takeaways": [
+                "Nationalism grew after 1857; the Congress was founded in 1885.",
+                "Moderates used petitions; Radicals demanded swaraj; Swadeshi followed Bengal's partition.",
+                "Gandhiji led mass non-violent movements: Non-Cooperation, Civil Disobedience, Quit India.",
+                "India won independence on 15 August 1947, along with partition."
+              ],
+              "practice": [
+                ["When was the Indian National Congress founded?", "1885."],
+                ["Which movement began with the Dandi March?", "The Civil Disobedience Movement (1930)."],
+                ["What was the slogan of the Quit India Movement?", "'Do or die'."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The Indian National Congress was founded in:", ["1857", "1885", "1905", "1947"], "B", "Late nineteenth century.", "The Congress was founded in 1885 in Bombay."],
+                  ["Who led the Salt March to Dandi?", ["Jawaharlal Nehru", "Bal Gangadhar Tilak", "Mahatma Gandhi", "Subhas Chandra Bose"], "C", "He developed satyagraha.", "Gandhiji led the Dandi March in 1930."],
+                  ["India became independent on:", ["15 August 1947", "26 January 1950", "2 October 1947", "15 August 1950"], "A", "Independence Day.", "India became independent on 15 August 1947."],
+                  ["Who said 'Freedom is my birthright'?", ["Gopal Krishna Gokhale", "Dadabhai Naoroji", "Lord Curzon", "Bal Gangadhar Tilak"], "D", "A Radical leader.", "Tilak made this famous declaration."]
+                ],
+                "MEDIUM": [
+                  ["The Swadeshi movement began in response to:", ["The Salt Law", "The partition of Bengal in 1905", "The Jallianwala Bagh massacre", "World War II"], "B", "Lord Curzon's decision.", "Bengal's partition in 1905 triggered Swadeshi."],
+                  ["Moderate leaders mainly used which methods?", ["Armed revolt", "Boycott of all schools", "Petitions, speeches and meetings", "Hunger strikes only"], "C", "They believed in gradual reform.", "Moderates used constitutional methods like petitions."],
+                  ["The Jallianwala Bagh massacre took place in:", ["Amritsar", "Delhi", "Lucknow", "Calcutta"], "A", "It is in Punjab.", "It happened in Amritsar in 1919."],
+                  ["Who formed the Indian National Army?", ["Mahatma Gandhi", "Jawaharlal Nehru", "Bhagat Singh", "Subhas Chandra Bose"], "D", "He was called Netaji.", "Subhas Chandra Bose led the INA."]
+                ],
+                "HARD": [
+                  ["Why was the Non-Cooperation Movement a turning point?", ["It was led only by lawyers", "It turned nationalism into a mass movement involving millions", "It immediately won independence", "It used armed rebellion"], "B", "Who took part?", "Peasants, workers and students joined in large numbers."],
+                  ["Which factor most directly led to partition in 1947?", ["The Salt March", "The Swadeshi movement", "The demand of the Muslim League for Pakistan and failed negotiations", "The founding of the Congress"], "C", "Consider political divisions in the 1940s.", "Divisions and the demand for Pakistan led to partition."],
+                  ["What was the main idea of satyagraha?", ["Resisting injustice through truth and non-violence", "Defeating the British in battle", "Boycotting all Indian goods", "Leaving India"], "A", "Gandhiji's method.", "Satyagraha is non-violent resistance based on truth."],
+                  ["Why did Dadabhai Naoroji's 'drain theory' matter to nationalists?", ["It praised British rule", "It explained the rules of cricket", "It argued for more British officers", "It showed that British rule was draining India's wealth"], "D", "It was an economic critique.", "It gave evidence that colonial rule impoverished India."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g8-sst-u-geography",
+      "title": "Geography: Resources",
+      "topics": [
+        {
+          "slug": "g8-sst-t-resources",
+          "title": "Resources and Their Conservation",
+          "description": "Types of resources and the use and conservation of land, soil and water.",
+          "lessons": [
+            {
+              "slug": "g8-sst-types-of-resources",
+              "title": "Types of Resources",
+              "objectives": [
+                "Define a resource and explain how something becomes a resource",
+                "Classify resources as natural, human-made and human",
+                "Distinguish renewable and non-renewable resources",
+                "Explain sustainable development"
+              ],
+              "intro": "Water, sunlight, coal, a bicycle, a bridge and a skilled doctor are all resources. A resource is anything that can be used to satisfy a need and has value, whether economic, like money, or something else, like the beauty of a landscape. Something becomes a resource only when people find a use for it. For centuries, crude oil was simply a sticky black liquid; it became a valuable resource when people learned to refine it into fuels.",
+              "sections": [
+                [
+                  "Natural, human-made and human resources",
+                  "Natural resources are drawn from nature and used without much change, such as air, water, soil, minerals, forests and sunlight. Human-made resources are created by people using natural resources, such as buildings, roads, machinery, vehicles and computers. Human resources are people themselves, with their knowledge, skills, health and technology. Natural resources are useful only when people have the knowledge and technology to use them, which is why education and good health, called human resource development, are so important for a country."
+                ],
+                [
+                  "Renewable and non-renewable",
+                  "Renewable resources are replenished quickly by nature, such as solar energy, wind, water and forests. Some, like sunlight and wind, are practically unlimited. Others, like water and forests, can be exhausted if overused or polluted. Non-renewable resources have a limited stock and take millions of years to form, such as coal, petroleum and natural gas. Once used up, they cannot be replaced within a human lifetime. Resources can also be classified by distribution: ubiquitous resources, like air, are found everywhere, while localised resources, like copper and iron ore, are found only in certain places."
+                ],
+                [
+                  "Conservation and sustainable development",
+                  "Using resources carefully so they last longer is called conservation. We can conserve resources by reducing consumption, reusing items and recycling materials, the three Rs. Carefully balancing the use of resources with their conservation is called sustainable development: meeting the needs of the present without compromising the ability of future generations to meet their own needs. Principles of sustainable development include respecting all forms of life, improving the quality of human life, conserving the Earth's diversity, minimising the use of non-renewable resources and enabling communities to care for their own environment."
+                ]
+              ],
+              "definitions": [
+                ["Resource", "Anything that can be used to satisfy a need and has value."],
+                ["Renewable resource", "A resource that is replenished naturally and quickly."],
+                ["Non-renewable resource", "A resource with a limited stock that cannot be quickly replaced."],
+                ["Human resource", "People with their skills, knowledge and health."],
+                ["Sustainable development", "Development that meets present needs without harming future generations' ability to meet theirs."]
+              ],
+              "examples": [
+                "Solar panels on rooftops use a renewable resource.",
+                "A skilled software engineer is an example of a human resource."
+              ],
+              "worked": [
+                {
+                  "problem": "Classify: coal, a dam, a farmer, sunlight, a forest, petroleum.",
+                  "steps": [
+                    "Natural and non-renewable: coal, petroleum.",
+                    "Natural and renewable: sunlight, forest.",
+                    "Human-made: a dam.",
+                    "Human resource: a farmer."
+                  ],
+                  "answer": "Coal, petroleum — natural non-renewable; sunlight, forest — natural renewable; dam — human-made; farmer — human resource."
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Classification of resources",
+                "items": [
+                  ["Natural", "Air, water, soil, minerals, forests"],
+                  ["Human-made", "Buildings, roads, machines, technology"],
+                  ["Human", "People's skills, knowledge and health"],
+                  ["Renewable vs non-renewable", "Sunlight, wind, forests vs coal, oil, gas"]
+                ]
+              },
+              "real_world": "India is expanding solar and wind power to reduce dependence on coal and imported oil. Recycling programmes for paper, plastic and electronic waste, and campaigns such as 'Reduce, Reuse, Recycle', apply the idea of conservation to everyday life.",
+              "takeaways": [
+                "Resources have value and become resources when people find a use for them.",
+                "Resources are natural, human-made or human.",
+                "Renewable resources replenish; non-renewable resources have limited stock.",
+                "Sustainable development balances present use with future needs."
+              ],
+              "practice": [
+                ["Give two examples of non-renewable resources.", "Coal and petroleum."],
+                ["What are the three Rs?", "Reduce, reuse, recycle."],
+                ["Why are people called a resource?", "Their skills and knowledge create and use other resources."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which is a renewable resource?", ["Coal", "Solar energy", "Petroleum", "Natural gas"], "B", "It comes from the Sun every day.", "Solar energy is replenished continuously."],
+                  ["A bridge is a:", ["Natural resource", "Human resource", "Human-made resource", "Non-renewable mineral"], "C", "People built it.", "Bridges are made by humans."],
+                  ["The three Rs of conservation are reduce, reuse and:", ["Recycle", "Remove", "Repeat", "Refill"], "A", "Turning waste into new products.", "Reduce, reuse, recycle."],
+                  ["Which is a human resource?", ["A river", "A road", "Iron ore", "A trained nurse"], "D", "People with skills.", "A trained nurse is a human resource."]
+                ],
+                "MEDIUM": [
+                  ["When does a substance become a resource?", ["When it is found underground", "When people find a use for it and it has value", "Only when it is renewable", "When it is very old"], "B", "Think of crude oil's history.", "Utility and value make something a resource."],
+                  ["Which is a localised resource?", ["Air", "Sunlight", "Copper ore", "Oxygen"], "C", "Found only in certain places.", "Mineral ores like copper are found in specific places."],
+                  ["Why is human resource development important?", ["Skilled, healthy people can use other resources better", "It increases coal deposits", "It reduces rainfall", "It makes land renewable"], "A", "People use resources.", "Education and health increase people's ability to create and use resources."],
+                  ["Which resource can be exhausted if overused even though it is renewable?", ["Wind", "Sunlight", "Tides", "Groundwater"], "D", "Consider over-pumping.", "Groundwater can run out if extracted faster than it recharges."]
+                ],
+                "HARD": [
+                  ["Which best describes sustainable development?", ["Using all resources as fast as possible", "Meeting present needs without harming future generations' ability to meet theirs", "Stopping all development", "Using only non-renewable resources"], "B", "Think of future generations.", "This is the standard definition of sustainable development."],
+                  ["Crude oil was not considered a resource for a long time because:", ["It was renewable", "It was too common", "People lacked the technology to use it", "It was a human-made resource"], "C", "Value depends on use.", "Technology turned crude oil into a valuable resource."],
+                  ["A region relies heavily on coal power. Which step best supports sustainability?", ["Adding solar and wind energy and improving efficiency", "Opening more coal mines only", "Increasing electricity wastage", "Cutting forests for fuel"], "A", "Reduce non-renewable dependence.", "Renewables and efficiency reduce reliance on finite coal."],
+                  ["Which pair is correctly matched?", ["Forest – non-renewable", "Petroleum – renewable", "Knowledge – natural resource", "Natural gas – non-renewable"], "D", "Check each type.", "Natural gas has a limited stock and is non-renewable."]
+                ]
+              }
+            },
+            {
+              "slug": "g8-sst-land-soil-water",
+              "title": "Land, Soil and Water Resources",
+              "objectives": [
+                "Describe how land is used and why land use differs from place to place",
+                "Explain how soil is formed and the factors affecting soil formation",
+                "Describe causes of land degradation and soil conservation methods",
+                "Explain water scarcity and methods of water conservation"
+              ],
+              "intro": "Land, soil and water are the foundations of life. Land provides space for farming, forests, cities and industries; soil supports the crops that feed us; and water is needed for drinking, farming and industry. Only about 30 per cent of the Earth's surface is land, and not all of it is usable. As populations grow, these resources are under great pressure, so using them wisely is essential.",
+              "sections": [
+                [
+                  "Land use",
+                  "Land is used for agriculture, forests, pastures, mining, housing, roads and industries. How land is used depends on physical factors such as topography, soil, climate, minerals and water, and on human factors such as population and technology. Most people live in plains and river valleys, where land is fertile and flat, while steep mountains and dry deserts are sparsely populated. Land can be privately owned or community land used by all, such as village grazing grounds. Growing cities and farms are causing forests to be cleared, which is a serious concern."
+                ],
+                [
+                  "Soil: formation and conservation",
+                  "Soil is the thin layer of fine particles on the Earth's surface in which plants grow. It forms very slowly when rocks are broken down by weathering, and organic matter from dead plants and animals (humus) is mixed in. Factors affecting soil formation include the parent rock, climate, relief (slope), flora and fauna, and time; it can take hundreds of years to form one centimetre of soil. Soil is degraded by deforestation, overgrazing, overuse of chemical fertilisers, and erosion by wind and water. It can be conserved by afforestation, terrace farming on slopes, contour ploughing, shelter belts of trees to block wind, mulching, rock dams to slow running water, and intercropping."
+                ],
+                [
+                  "Water: scarcity and conservation",
+                  "Although three-quarters of the Earth is covered by water, only about 2.7 per cent is fresh water, and most of that is locked in ice sheets and deep groundwater. Fresh water is unevenly distributed, and many regions face scarcity because of low rainfall, overuse for irrigation, pollution by sewage and industrial waste, and rising demand from growing cities. Water can be conserved through rainwater harvesting, drip and sprinkler irrigation that reduce waste, treating and reusing wastewater, protecting lakes and wetlands, and simple household habits such as fixing leaks."
+                ]
+              ],
+              "definitions": [
+                ["Land use", "The way land is utilised, such as for farming, forests or housing."],
+                ["Weathering", "The breaking down of rocks by heat, water, ice and living things."],
+                ["Humus", "Decayed organic matter that makes soil fertile."],
+                ["Terrace farming", "Growing crops on flat steps cut into hillsides to reduce soil erosion."],
+                ["Drip irrigation", "Supplying water drop by drop to plant roots through pipes."]
+              ],
+              "examples": [
+                "Terrace fields on hillsides in Uttarakhand prevent soil from washing away.",
+                "Rajasthan's traditional stepwells and tankas store scarce rainwater."
+              ],
+              "worked": [
+                {
+                  "problem": "A farmer on a hill slope finds that rain washes away topsoil each monsoon. Suggest three suitable conservation methods and explain each.",
+                  "steps": [
+                    "Terrace farming: cut flat steps into the slope so water flows slowly and soil stays in place.",
+                    "Contour ploughing: plough along the slope's contour lines so furrows trap water.",
+                    "Afforestation or planting grass on edges: roots bind the soil."
+                  ],
+                  "answer": "Terracing, contour ploughing and planting trees/grass to bind the soil."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Soil conservation methods",
+                "columns": ["Method", "How it helps"],
+                "rows": [
+                  ["Terrace farming", "Flat steps slow water on slopes"],
+                  ["Contour ploughing", "Furrows across the slope trap water"],
+                  ["Shelter belts", "Rows of trees reduce wind erosion"],
+                  ["Mulching", "Covering soil with organic matter retains moisture"],
+                  ["Rock dams", "Slow down running water to prevent gullies"]
+                ]
+              },
+              "real_world": "Farmers in Maharashtra and Rajasthan have revived dry areas through watershed management and check dams. Drip irrigation is now widely used for sugarcane, grapes and vegetables, saving large amounts of water.",
+              "takeaways": [
+                "Land use depends on physical and human factors.",
+                "Soil forms very slowly from weathered rock and humus.",
+                "Erosion and degradation can be reduced by terracing, contour ploughing, shelter belts and afforestation.",
+                "Fresh water is scarce and must be conserved through harvesting, efficient irrigation and reuse."
+              ],
+              "practice": [
+                ["Name two factors that affect soil formation.", "Parent rock and climate (also relief, flora and fauna, time)."],
+                ["What percentage of the Earth's water is fresh water?", "About 2.7%."],
+                ["Why is drip irrigation useful?", "It delivers water directly to roots with little waste."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Decayed organic matter in soil is called:", ["Gravel", "Humus", "Sand", "Silt"], "B", "It makes soil fertile.", "Humus is decomposed organic matter."],
+                  ["Steps cut into hillsides for farming are called:", ["Shelter belts", "Mulching", "Terrace farming", "Canals"], "C", "Like a staircase.", "Terrace farming uses flat steps on slopes."],
+                  ["Most of the Earth's fresh water is found in:", ["Ice sheets and glaciers", "Rivers", "Ponds", "Clouds"], "A", "Frozen water at the poles.", "Most fresh water is locked in ice."],
+                  ["Which is a method of water conservation?", ["Washing cars with a running hose", "Leaving taps open", "Dumping waste in lakes", "Rainwater harvesting"], "D", "Collecting rain.", "Rainwater harvesting stores and recharges water."]
+                ],
+                "MEDIUM": [
+                  ["Why do most people live in plains and river valleys?", ["They are the coldest areas", "Flat, fertile land and water are available", "There are no rivers", "Land is rocky"], "B", "Think of farming needs.", "Fertile soil and water support farming and settlement."],
+                  ["Shelter belts mainly reduce:", ["Water pollution", "Air temperature", "Wind erosion of soil", "Rainfall"], "C", "Rows of trees block wind.", "Shelter belts slow the wind that blows soil away."],
+                  ["Which human activity causes land degradation?", ["Overgrazing", "Afforestation", "Terrace farming", "Mulching"], "A", "Too many animals on pasture.", "Overgrazing removes vegetation that protects soil."],
+                  ["Drip irrigation saves water because it:", ["Floods fields", "Uses river water only", "Stops plants from growing", "Delivers water slowly to plant roots"], "D", "Water drops directly at the roots.", "Little water is lost to evaporation or run-off."]
+                ],
+                "HARD": [
+                  ["Why can soil be considered effectively non-renewable on a human time scale?", ["It is made in factories", "It takes hundreds of years to form even a few centimetres", "It cannot be eroded", "It is found only in deserts"], "B", "Think about how long formation takes.", "Soil forms so slowly that lost soil cannot be quickly replaced."],
+                  ["Contour ploughing helps because:", ["It speeds up water flow downhill", "It removes humus", "Furrows across the slope trap water and soil", "It increases wind speed"], "C", "Ploughing along the contour lines.", "Furrows act as small barriers that slow run-off."],
+                  ["A city's lakes are being filled in for buildings while water shortages grow. Which explanation is best?", ["Lakes store rainwater and recharge groundwater, so losing them reduces water supply", "Lakes cause water shortages", "Buildings increase rainfall", "Groundwater is unrelated to lakes"], "A", "What do lakes do in the water cycle?", "Lakes hold rain and recharge groundwater; filling them reduces supply."],
+                  ["Which combination best conserves water in a dry farming region?", ["Flood irrigation and growing water-hungry crops", "Pumping more groundwater", "Clearing all trees", "Drip irrigation, check dams and drought-resistant crops"], "D", "Reduce use and increase storage.", "These methods cut waste, store rain and suit dry conditions."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g8-sst-u-civics",
+      "title": "Civics: The Constitution and Parliament",
+      "topics": [
+        {
+          "slug": "g8-sst-t-constitution-parliament",
+          "title": "The Constitution and Parliament",
+          "description": "Key features of the Indian Constitution and how Parliament makes laws.",
+          "lessons": [
+            {
+              "slug": "g8-sst-indian-constitution",
+              "title": "The Indian Constitution",
+              "objectives": [
+                "Explain why a country needs a constitution",
+                "Describe the making of the Indian Constitution",
+                "Explain key features: federalism, parliamentary government, separation of powers, Fundamental Rights and secularism",
+                "Distinguish Fundamental Rights from Fundamental Duties"
+              ],
+              "intro": "Every group, from a cricket club to a country, needs rules about who makes decisions, how they are made and what limits apply. A constitution is the set of basic rules and ideals that a country agrees to govern itself by. India's Constitution, which came into force on 26 January 1950, is the longest written national constitution in the world. It sets out the structure of government, the rights of citizens and the values India stands for.",
+              "sections": [
+                [
+                  "Making the Constitution",
+                  "The Constitution was written by the Constituent Assembly, about 300 members elected in 1946 from across India, who met from December 1946 to November 1949. Dr Rajendra Prasad was its President and Dr B. R. Ambedkar chaired the Drafting Committee. The members debated every article carefully, drawing on India's freedom struggle and on the constitutions of other countries. The Constitution was adopted on 26 November 1949, now celebrated as Constitution Day, and came into effect on 26 January 1950, Republic Day. Its Preamble declares India to be a sovereign, socialist, secular, democratic republic committed to justice, liberty, equality and fraternity."
+                ],
+                [
+                  "Key features",
+                  "Federalism: there are governments at more than one level, the Union and the states (and now local bodies), each with its own powers. Parliamentary form of government: citizens elect representatives, and the government is answerable to the elected legislature; universal adult franchise gives every adult a vote. Separation of powers: the legislature makes laws, the executive implements them and the judiciary interprets them and settles disputes, each checking the others to prevent misuse of power. Secularism: the state does not favour any religion and treats all religions equally."
+                ],
+                [
+                  "Rights and duties",
+                  "The Constitution guarantees Fundamental Rights: the Right to Equality, the Right to Freedom (of speech, expression, assembly, movement and profession), the Right against Exploitation (banning forced labour and child labour in hazardous work), the Right to Freedom of Religion, Cultural and Educational Rights, and the Right to Constitutional Remedies, which lets citizens go to court if their rights are violated. Dr Ambedkar called this last right the 'heart and soul' of the Constitution. The Constitution also lists Fundamental Duties, such as respecting the Constitution and the national flag, protecting the environment and promoting harmony. The Directive Principles of State Policy guide the government to work towards social and economic justice."
+                ]
+              ],
+              "definitions": [
+                ["Constitution", "The fundamental set of rules and ideals by which a country is governed."],
+                ["Constituent Assembly", "The elected body that wrote India's Constitution (1946–1949)."],
+                ["Federalism", "A system with more than one level of government, each with its own powers."],
+                ["Separation of powers", "Division of government into legislature, executive and judiciary."],
+                ["Secularism", "The state does not promote any religion and treats all equally."]
+              ],
+              "examples": [
+                "The Right to Education Act (2009) made free education a right for children aged 6–14.",
+                "A citizen whose freedom of speech is wrongly restricted can approach the High Court or Supreme Court."
+              ],
+              "worked": [
+                {
+                  "problem": "Why does India have a separation of powers between the legislature, executive and judiciary?",
+                  "steps": [
+                    "If one group made laws, carried them out and judged disputes, it could misuse power without check.",
+                    "Separating powers means each organ has its own role.",
+                    "Each organ checks the others, for example courts can strike down laws that violate the Constitution."
+                  ],
+                  "answer": "To prevent the concentration and misuse of power, with each organ checking the others."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Three organs of government",
+                "columns": ["Organ", "Main role", "Example"],
+                "rows": [
+                  ["Legislature", "Makes laws", "Parliament, State Assemblies"],
+                  ["Executive", "Implements laws", "Prime Minister, ministers, officials"],
+                  ["Judiciary", "Interprets laws, settles disputes", "Supreme Court, High Courts"]
+                ]
+              },
+              "real_world": "Courts regularly decide cases using the Constitution, for example striking down laws that violate equality or upholding citizens' right to privacy. Citizens can use the Right to Constitutional Remedies to protect themselves when officials act unfairly.",
+              "takeaways": [
+                "A constitution sets out the rules and ideals of government.",
+                "India's Constitution was made by the Constituent Assembly and came into force on 26 January 1950.",
+                "Key features: federalism, parliamentary government, separation of powers, secularism and Fundamental Rights.",
+                "Fundamental Duties and Directive Principles complement the rights."
+              ],
+              "practice": [
+                ["When did the Constitution come into force?", "26 January 1950."],
+                ["Which right did Ambedkar call the 'heart and soul' of the Constitution?", "The Right to Constitutional Remedies."],
+                ["Name the three organs of government.", "Legislature, executive and judiciary."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The Indian Constitution came into force on:", ["15 August 1947", "26 January 1950", "26 November 1949", "2 October 1950"], "B", "Celebrated as Republic Day.", "The Constitution came into force on 26 January 1950."],
+                  ["Who chaired the Drafting Committee?", ["Jawaharlal Nehru", "Rajendra Prasad", "Dr B. R. Ambedkar", "Sardar Patel"], "C", "He is called the architect of the Constitution.", "Dr Ambedkar chaired the Drafting Committee."],
+                  ["Which organ of government makes laws?", ["Legislature", "Judiciary", "Executive", "Police"], "A", "Parliament belongs to it.", "The legislature makes laws."],
+                  ["A secular state:", ["Has one official religion", "Bans all religions", "Pays only one religious group", "Treats all religions equally"], "D", "No favouritism.", "A secular state does not favour any religion."]
+                ],
+                "MEDIUM": [
+                  ["Federalism means:", ["Only one government for the whole country", "Governments at more than one level, each with its own powers", "Rule by the army", "Rule by a king"], "B", "Union and states.", "Federalism divides power between levels of government."],
+                  ["Which is a Fundamental Right?", ["Right to own a car", "Right to a government job", "Right to Freedom of Religion", "Right to free electricity"], "C", "It is listed in the Constitution.", "Freedom of religion is a Fundamental Right."],
+                  ["Constitution Day, when the Constitution was adopted, is:", ["26 November", "26 January", "15 August", "2 October"], "A", "Adopted in 1949.", "It was adopted on 26 November 1949."],
+                  ["Which is a Fundamental Duty?", ["Voting for a particular party", "Paying for others' education", "Joining the army", "Protecting the natural environment"], "D", "Duties of citizens.", "Protecting the environment is a Fundamental Duty."]
+                ],
+                "HARD": [
+                  ["Why is the Right to Constitutional Remedies so important?", ["It gives free land", "It allows citizens to go to court to enforce all their Fundamental Rights", "It lets the government suspend courts", "It is only for judges"], "B", "Rights need protection.", "Without a way to enforce rights, they would be meaningless."],
+                  ["A law is passed that violates the Right to Equality. Which organ can declare it invalid?", ["The executive", "The Election Commission", "The judiciary", "The Governor"], "C", "Who interprets the Constitution?", "Courts can strike down unconstitutional laws."],
+                  ["Separation of powers mainly aims to:", ["Prevent any one organ from misusing power", "Make government faster", "Reduce the number of laws", "Give all power to judges"], "A", "Checks and balances.", "Each organ checks the others, preventing abuse."],
+                  ["The Right against Exploitation prohibits:", ["Freedom of speech", "Equality before law", "Religious practice", "Forced labour and child labour in hazardous work"], "D", "It protects the vulnerable.", "It bans forced labour and hazardous child labour."]
+                ]
+              }
+            },
+            {
+              "slug": "g8-sst-parliament-law",
+              "title": "Parliament and the Making of Laws",
+              "objectives": [
+                "Describe the composition of Parliament",
+                "Explain how the government is formed and held accountable",
+                "Describe how a bill becomes a law",
+                "Explain how citizens can influence laws"
+              ],
+              "intro": "In a democracy, the people rule through their elected representatives. India's highest law-making body is Parliament, which meets in New Delhi. It makes laws for the whole country, controls the government and decides how public money is spent. Understanding how Parliament works helps citizens take an active part in shaping the laws they live under.",
+              "sections": [
+                [
+                  "Composition of Parliament",
+                  "Parliament consists of the President and two Houses. The Lok Sabha (House of the People) has members elected directly by voters from constituencies across India for five years; it can have up to 552 members, and currently has 543 elected seats. The Rajya Sabha (Council of States) represents the states; most of its members are elected by the members of the state Legislative Assemblies, and a few are nominated by the President for their contributions to art, literature, science and social service. The Rajya Sabha is a permanent house: one-third of its members retire every two years."
+                ],
+                [
+                  "Forming and controlling the government",
+                  "After a general election, the party or coalition with a majority in the Lok Sabha (at least 272 of 543 seats) forms the government. Its leader is appointed Prime Minister by the President, and the Prime Minister selects ministers to form the Council of Ministers. The government must keep the support of the Lok Sabha. Parliament controls the government through the Question Hour, when MPs ask ministers about their work; through debates; through approving the budget; and through motions. The opposition plays a vital role by questioning the government and highlighting problems."
+                ],
+                [
+                  "How a bill becomes a law",
+                  "A proposed law is called a bill. It can be introduced in either House (money bills only in the Lok Sabha). It goes through three readings: introduction, detailed discussion clause by clause (often after study by a committee), and a final vote. If passed, it goes to the other House, which goes through the same steps. Once both Houses pass it, it is sent to the President, whose assent turns it into an Act, or law. Citizens influence laws through elected representatives, petitions, media, peaceful protest and public consultation. For example, the Protection of Women from Domestic Violence Act (2005) followed years of campaigning by women's groups."
+                ]
+              ],
+              "definitions": [
+                ["Parliament", "The national legislature: the President, the Lok Sabha and the Rajya Sabha."],
+                ["Lok Sabha", "The House of the People, directly elected by voters."],
+                ["Rajya Sabha", "The Council of States, representing the states."],
+                ["Bill", "A proposed law presented in a legislature."],
+                ["Question Hour", "Time in Parliament when MPs ask ministers questions."]
+              ],
+              "examples": [
+                "A Member of Parliament asks the railway minister why trains in her constituency are delayed.",
+                "The Right to Information Act (2005) allows citizens to request information from government offices."
+              ],
+              "worked": [
+                {
+                  "problem": "Trace the steps by which a bill introduced in the Lok Sabha becomes an Act.",
+                  "steps": [
+                    "First reading: the bill is introduced in the Lok Sabha.",
+                    "Second reading: it is discussed in detail, possibly by a committee, and amended.",
+                    "Third reading: the Lok Sabha votes and passes it.",
+                    "The Rajya Sabha follows the same three readings and passes it.",
+                    "The President gives assent, and the bill becomes an Act."
+                  ],
+                  "answer": "Introduction → detailed discussion → vote in Lok Sabha → same in Rajya Sabha → President's assent → Act."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "From bill to law",
+                "items": ["Bill introduced", "Discussed and amended in one House", "Passed by vote", "Passed by the other House", "President's assent", "Becomes an Act"]
+              },
+              "real_world": "Parliamentary debates are broadcast live on Sansad TV, and anyone can read bills and committee reports online. Citizens send suggestions during public consultations on draft laws, and Right to Information requests help people check how laws are being implemented.",
+              "takeaways": [
+                "Parliament = President + Lok Sabha + Rajya Sabha.",
+                "The majority in the Lok Sabha forms the government, led by the Prime Minister.",
+                "Parliament controls the government through questions, debates and the budget.",
+                "A bill needs both Houses and the President's assent to become law."
+              ],
+              "practice": [
+                ["How many elected seats does the Lok Sabha currently have?", "543."],
+                ["Who nominates some members of the Rajya Sabha?", "The President."],
+                ["What is a bill?", "A proposed law."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Members of the Lok Sabha are elected by:", ["State Assemblies", "The voters directly", "The President", "The Supreme Court"], "B", "It is the House of the People.", "Voters elect Lok Sabha members directly."],
+                  ["A proposed law is called a:", ["Constitution", "Budget", "Bill", "Petition"], "C", "It becomes an Act when passed.", "A bill is a proposed law."],
+                  ["Who appoints the Prime Minister?", ["The President", "The Chief Justice", "The Rajya Sabha", "The Governor"], "A", "The head of the state.", "The President appoints the leader of the majority."],
+                  ["The Rajya Sabha is also called the:", ["House of the People", "Lower House", "State Assembly", "Council of States"], "D", "It represents the states.", "The Rajya Sabha is the Council of States."]
+                ],
+                "MEDIUM": [
+                  ["How many seats are needed for a majority in a 543-seat Lok Sabha?", ["250", "272", "300", "543"], "B", "More than half.", "Half of 543 is 271.5, so 272 seats are needed."],
+                  ["During Question Hour, MPs:", ["Elect the President", "Pass the budget only", "Ask ministers questions about their work", "Appoint judges"], "C", "It keeps the government accountable.", "MPs question ministers in Question Hour."],
+                  ["After both Houses pass a bill, it becomes law when:", ["The President gives assent", "The Prime Minister signs it", "The Supreme Court approves it", "It is printed in newspapers"], "A", "The final step.", "Presidential assent turns a bill into an Act."],
+                  ["Money bills can be introduced only in the:", ["Rajya Sabha", "Supreme Court", "State Assembly", "Lok Sabha"], "D", "The directly elected house controls money.", "Money bills originate only in the Lok Sabha."]
+                ],
+                "HARD": [
+                  ["Why is the Rajya Sabha called a 'permanent' house?", ["Its members serve for life", "It is never dissolved; one-third of members retire every two years", "It meets every day of the year", "Its members are judges"], "B", "Think of staggered retirement.", "It is never dissolved as a whole."],
+                  ["Which is the best example of citizens influencing a law?", ["Ignoring all elections", "Writing a novel", "Campaigning, petitioning and working with MPs for a new law", "Changing one's address"], "C", "Peaceful public action.", "Campaigns and petitions can lead Parliament to make laws."],
+                  ["What happens if the government loses majority support in the Lok Sabha?", ["It cannot continue and may have to resign", "Nothing changes", "The Rajya Sabha takes over", "The President becomes Prime Minister"], "A", "The government needs the Lok Sabha's confidence.", "A government without majority support cannot stay in office."],
+                  ["Why is the opposition important in Parliament?", ["It passes all government bills", "It appoints ministers", "It runs the judiciary", "It questions the government and highlights problems, keeping it accountable"], "D", "Its role is scrutiny.", "The opposition holds the government to account."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
