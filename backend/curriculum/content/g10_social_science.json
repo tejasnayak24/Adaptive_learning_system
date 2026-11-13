@@ -1,0 +1,577 @@
+{
+  "grade": 10,
+  "subject": "Social Science",
+  "units": [
+    {
+      "slug": "g10-sst-u-history",
+      "title": "History: Nationalism in India",
+      "topics": [
+        {
+          "slug": "g10-sst-t-nationalism",
+          "title": "Nationalism in India",
+          "description": "How mass movements under Gandhiji united people across India against colonial rule.",
+          "lessons": [
+            {
+              "slug": "g10-sst-non-cooperation",
+              "title": "The First World War, Satyagraha and Non-Cooperation",
+              "objectives": [
+                "Explain how the First World War created new economic and political conditions",
+                "Describe Gandhiji's early satyagraha movements",
+                "Explain the Rowlatt Act and the Jallianwala Bagh massacre",
+                "Describe how different groups took part in the Non-Cooperation Movement"
+              ],
+              "intro": "Modern nationalism in India grew together with the anti-colonial movement. People began to discover a sense of unity in their shared struggle against colonial rule. Each class and group felt the effects of colonialism differently and had different ideas of what freedom meant, but the Congress under Mahatma Gandhi tried to forge these groups together into one movement. The years after the First World War marked a turning point.",
+              "sections": [
+                [
+                  "The war and its effects",
+                  "The First World War (1914–1918) created a new economic and political situation in India. Defence expenditure rose sharply and was financed through war loans and increased taxes: customs duties were raised and income tax was introduced. Prices doubled between 1913 and 1918, causing hardship for common people. Villages were asked to supply soldiers, and forced recruitment caused widespread anger. In 1918–19 and 1920–21, crops failed in many parts of India, resulting in food shortages, and an influenza epidemic took millions of lives. People hoped their hardships would end after the war, but that did not happen."
+                ],
+                [
+                  "Satyagraha and the Rowlatt Act",
+                  "Mahatma Gandhi returned to India in January 1915 from South Africa, where he had fought racism using satyagraha, a method of mass agitation based on the power of truth and non-violent resistance. In 1917 he inspired peasants in Champaran, Bihar, to struggle against the oppressive plantation system; also in 1917 he supported peasants of Kheda, Gujarat, who could not pay revenue because of crop failure; and in 1918 he organised a satyagraha among cotton mill workers in Ahmedabad. In 1919 the government passed the Rowlatt Act, which allowed detention of political prisoners without trial for two years. Gandhiji called for a nationwide hartal. On 13 April 1919, General Dyer ordered troops to fire on a peaceful crowd gathered at Jallianwala Bagh in Amritsar, killing hundreds."
+                ],
+                [
+                  "The Non-Cooperation Movement",
+                  "Gandhiji argued that British rule survived only because of Indians' cooperation, and if Indians refused to cooperate, British rule would collapse within a year. In 1920, combining the Khilafat issue (supporting the Ottoman Caliph) with the demand for swaraj, the Congress launched the Non-Cooperation Movement. It involved surrendering government titles, boycotting civil services, the army, police, courts, legislative councils, schools and foreign goods. In towns, students left government schools, lawyers gave up their practice, and foreign cloth was burnt in huge bonfires. In the countryside, peasants in Awadh led by Baba Ramchandra fought high rents, tribal people in the Gudem Hills of Andhra Pradesh resisted forest laws under Alluri Sitaram Raju, and plantation workers in Assam left their estates. In February 1922, after a violent clash at Chauri Chaura, Gandhiji withdrew the movement."
+                ]
+              ],
+              "definitions": [
+                ["Satyagraha", "A method of non-violent mass resistance based on truth."],
+                ["Rowlatt Act", "A 1919 law allowing detention of political prisoners without trial."],
+                ["Hartal", "A general strike in which shops and businesses close in protest."],
+                ["Boycott", "Refusing to deal with or use something as a form of protest."],
+                ["Khilafat Movement", "A movement in support of the Ottoman Caliph after the First World War."]
+              ],
+              "examples": [
+                "Between 1921 and 1922, the import of foreign cloth fell sharply during Non-Cooperation.",
+                "Rabindranath Tagore renounced his knighthood in protest against the Jallianwala Bagh massacre."
+              ],
+              "worked": [
+                {
+                  "problem": "Why did different social groups join the Non-Cooperation Movement for different reasons?",
+                  "steps": [
+                    "Middle-class people in towns wanted swaraj and an end to colonial institutions.",
+                    "Peasants in Awadh wanted reduced rents and an end to forced labour (begar).",
+                    "Tribal people wanted freedom to use forests closed by forest laws.",
+                    "Plantation workers wanted to move freely and return to their villages.",
+                    "Each group interpreted 'swaraj' according to its own needs, which gave the movement wide support."
+                  ],
+                  "answer": "Each group saw swaraj as the end of its own particular oppression, so diverse groups joined one movement."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Road to Non-Cooperation",
+                "items": ["First World War hardships (1914–18)", "Champaran, Kheda, Ahmedabad satyagrahas (1917–18)", "Rowlatt Act and hartal (1919)", "Jallianwala Bagh massacre (13 April 1919)", "Non-Cooperation–Khilafat Movement (1920–22)", "Chauri Chaura; movement withdrawn (1922)"]
+              },
+              "real_world": "Peaceful methods developed in this period, such as boycotts, strikes and non-violent protest, are still used in democracies worldwide. Jallianwala Bagh is today a national memorial reminding visitors of the cost of freedom.",
+              "takeaways": [
+                "The First World War brought high prices, taxes and forced recruitment.",
+                "Gandhiji's satyagrahas at Champaran, Kheda and Ahmedabad built mass support.",
+                "The Rowlatt Act and Jallianwala Bagh massacre intensified anger.",
+                "Non-Cooperation united towns, peasants, tribals and workers, each with its own idea of swaraj."
+              ],
+              "practice": [
+                ["When did the Jallianwala Bagh massacre take place?", "13 April 1919."],
+                ["Why was the Non-Cooperation Movement withdrawn?", "Because of violence at Chauri Chaura in 1922."],
+                ["Who led tribal resistance in the Gudem Hills?", "Alluri Sitaram Raju."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["When did Mahatma Gandhi return to India from South Africa?", ["1910", "1915", "1920", "1930"], "B", "During the First World War.", "He returned in January 1915."],
+                  ["The Jallianwala Bagh massacre took place in:", ["Delhi", "Lucknow", "Amritsar", "Calcutta"], "C", "It is in Punjab.", "It happened in Amritsar on 13 April 1919."],
+                  ["Which act allowed detention without trial for two years?", ["Rowlatt Act", "Government of India Act", "Indian Councils Act", "Salt Act"], "A", "Passed in 1919.", "The Rowlatt Act permitted detention without trial."],
+                  ["The Non-Cooperation Movement was withdrawn after violence at:", ["Dandi", "Meerut", "Champaran", "Chauri Chaura"], "D", "February 1922.", "Gandhiji withdrew it after Chauri Chaura."]
+                ],
+                "MEDIUM": [
+                  ["Gandhiji's first satyagraha in India was against the plantation system in:", ["Kheda", "Champaran", "Ahmedabad", "Bardoli"], "B", "It is in Bihar.", "Champaran (1917) was his first major satyagraha."],
+                  ["Which was a way the First World War caused hardship in India?", ["Prices fell sharply", "Taxes were abolished", "Prices doubled and taxes increased", "More food was available"], "C", "Think of war costs.", "War expenses led to high prices and taxes."],
+                  ["Who led peasants in Awadh during Non-Cooperation?", ["Baba Ramchandra", "Alluri Sitaram Raju", "Sardar Patel", "Bhagat Singh"], "A", "A sanyasi who had been an indentured labourer.", "Baba Ramchandra led the Awadh peasants."],
+                  ["Why did the Congress combine the Khilafat issue with Non-Cooperation?", ["To end trade", "To support the British", "To start a war", "To bring Hindus and Muslims together in a broad movement"], "D", "Unity.", "It aimed to unite Hindus and Muslims in a single movement."]
+                ],
+                "HARD": [
+                  ["Why did Gandhiji believe non-cooperation could end British rule?", ["Britain was bankrupt", "British rule depended on Indians' cooperation", "The army had left India", "The British had promised freedom"], "B", "Who ran the administration?", "If Indians stopped cooperating, the colonial system would collapse."],
+                  ["For plantation workers in Assam, 'swaraj' meant:", ["Becoming plantation owners", "Joining the army", "The right to move freely in and out of the plantations and return home", "Paying more taxes"], "C", "They were confined by the Inland Emigration Act.", "Freedom of movement was their idea of swaraj."],
+                  ["Why did Tagore renounce his knighthood in 1919?", ["To protest against the Jallianwala Bagh massacre", "To join the army", "Because he moved to England", "To support the Rowlatt Act"], "A", "A response to brutality.", "He returned it in protest against the massacre."],
+                  ["Which economic effect of Non-Cooperation hurt British interests?", ["Indian exports to Britain rose", "British cloth became cheaper", "More Indians joined the civil services", "Import of foreign cloth fell as people boycotted it"], "D", "Boycott of foreign goods.", "Boycott sharply reduced foreign cloth imports."]
+                ]
+              }
+            },
+            {
+              "slug": "g10-sst-civil-disobedience",
+              "title": "Civil Disobedience and the Sense of Collective Belonging",
+              "objectives": [
+                "Explain the causes of the Civil Disobedience Movement",
+                "Describe the Salt March and its significance",
+                "Explain how different groups participated and their limits",
+                "Describe how symbols, songs and history created a sense of nationhood"
+              ],
+              "intro": "In 1930, Mahatma Gandhi set out from Sabarmati Ashram with 78 volunteers on a march of about 240 miles to the coastal village of Dandi. There, on 6 April, he broke the salt law by making salt from seawater. This simple act launched the Civil Disobedience Movement, in which people were asked not only to refuse cooperation but to break colonial laws. It showed how an everyday item could become a powerful symbol of national unity.",
+              "sections": [
+                [
+                  "Towards Civil Disobedience",
+                  "In 1928 the Simon Commission arrived in India to review the constitutional system, but it had no Indian member, so it was greeted with the slogan 'Go back, Simon'. In December 1929, under Jawaharlal Nehru's presidency, the Lahore Congress formalised the demand for Purna Swaraj, or complete independence, and declared that 26 January 1930 would be celebrated as Independence Day. Gandhiji then sent a letter to Viceroy Irwin with eleven demands, the most stirring being the demand to abolish the salt tax. Salt was consumed by rich and poor alike, so the tax affected everyone and became a symbol of British oppression."
+                ],
+                [
+                  "The movement and its participants",
+                  "After the Salt March, thousands broke the salt law, boycotted foreign cloth, picketed liquor shops, and peasants refused to pay revenue. Rich peasant communities such as the Patidars of Gujarat and Jats of Uttar Pradesh joined because of falling prices during the Depression. Poor peasants wanted rents remitted. Business classes, led by figures such as G. D. Birla, supported the movement to protect Indian industry against imports. Women participated in large numbers, joining protest marches, manufacturing salt and picketing. However, industrial workers took part only selectively, and many Dalits, led by Dr B. R. Ambedkar, demanded separate electorates; the Poona Pact of 1932 gave reserved seats for the 'depressed classes' instead. Many Muslims felt alienated as relations between communities worsened. In 1931 Gandhiji attended the Second Round Table Conference in London, but negotiations failed, and the movement ended in 1934."
+                ],
+                [
+                  "A sense of collective belonging",
+                  "Nationalism spreads when people feel they belong to the same nation. Images helped: Abanindranath Tagore painted Bharat Mata as a calm, divine mother figure. Bankim Chandra Chattopadhyay's hymn 'Vande Mataram' was widely sung during the Swadeshi movement. Folklore was collected to rediscover a shared culture. A tricolour flag with a spinning wheel at its centre, designed during the Swadeshi era and later developed in 1921, became a symbol of defiance. Reinterpretations of history taught Indians to take pride in past achievements in art, science and governance. These symbols united many, though some, such as images drawn from one community's traditions, could make others feel excluded."
+                ]
+              ],
+              "definitions": [
+                ["Purna Swaraj", "Complete independence, demanded by the Congress in 1929."],
+                ["Civil disobedience", "Deliberately and non-violently breaking unjust laws."],
+                ["Simon Commission", "A 1928 statutory commission without any Indian member."],
+                ["Poona Pact", "A 1932 agreement giving reserved seats to depressed classes in legislatures."],
+                ["Picketing", "Protesting by blocking the entrance to a shop or building."]
+              ],
+              "examples": [
+                "Sarojini Naidu led satyagrahis at the Dharasana salt works in 1930.",
+                "26 January was later chosen as Republic Day in memory of the 1930 Independence Day pledge."
+              ],
+              "worked": [
+                {
+                  "problem": "Why was salt a clever choice for launching the Civil Disobedience Movement?",
+                  "steps": [
+                    "Salt was an essential item used by every household, rich and poor.",
+                    "The British monopoly and tax on salt affected everyone, so the grievance was universal.",
+                    "Making salt was simple and could be done by anyone near the coast, so people across groups could participate.",
+                    "A peaceful march and the act of making salt drew national and international attention."
+                  ],
+                  "answer": "Salt united all classes against a universal tax and made law-breaking simple, peaceful and highly visible."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Civil Disobedience timeline",
+                "items": ["1928: Simon Commission boycotted", "1929: Lahore Congress demands Purna Swaraj", "26 Jan 1930: Independence Day pledge", "12 Mar–6 Apr 1930: Dandi March", "1931: Gandhi–Irwin Pact; Second Round Table Conference", "1932: Poona Pact", "1934: Movement ends"]
+              },
+              "real_world": "26 January became India's Republic Day, directly linked to the Purna Swaraj declaration. The Dandi March remains one of the world's most famous examples of non-violent protest, and national symbols such as the flag and 'Vande Mataram' continue to express a shared identity.",
+              "takeaways": [
+                "The Simon Commission and Purna Swaraj resolution set the stage for Civil Disobedience.",
+                "The Salt March (1930) launched mass law-breaking against an unjust tax.",
+                "Peasants, businessmen and women joined, but workers, Dalits and many Muslims had reservations.",
+                "Images, songs, the flag and history created a sense of collective belonging."
+              ],
+              "practice": [
+                ["What was demanded at the Lahore Congress of 1929?", "Purna Swaraj (complete independence)."],
+                ["Where did Gandhiji break the salt law?", "Dandi."],
+                ["Who painted Bharat Mata?", "Abanindranath Tagore."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The Salt March ended at:", ["Sabarmati", "Dandi", "Bombay", "Champaran"], "B", "A coastal village in Gujarat.", "Gandhiji broke the salt law at Dandi."],
+                  ["The demand for Purna Swaraj was made at the:", ["Calcutta Congress", "Madras Congress", "Lahore Congress, 1929", "Nagpur Congress"], "C", "Nehru presided.", "The Lahore Congress demanded complete independence."],
+                  ["The Simon Commission was opposed because it:", ["Had no Indian member", "Was too large", "Wanted independence", "Met in India"], "A", "Who was missing?", "It had no Indian members."],
+                  ["'Vande Mataram' was written by:", ["Rabindranath Tagore", "Mahatma Gandhi", "Jawaharlal Nehru", "Bankim Chandra Chattopadhyay"], "D", "From his novel Anandamath.", "Bankim Chandra wrote 'Vande Mataram'."]
+                ],
+                "MEDIUM": [
+                  ["Why did rich peasants join the Civil Disobedience Movement?", ["They wanted to become soldiers", "Falling prices during the Depression made revenue hard to pay", "They were forced by the British", "They supported the salt tax"], "B", "Think of the economic crisis.", "The Depression reduced their income while revenue demands stayed high."],
+                  ["The Poona Pact of 1932 gave:", ["Separate electorates to Muslims", "Independence to India", "Reserved seats for the depressed classes in legislatures", "Abolition of salt tax"], "C", "Agreement between Gandhi and Ambedkar.", "It gave reserved seats rather than separate electorates."],
+                  ["Which was a feature of the Civil Disobedience Movement?", ["Breaking colonial laws such as the salt law", "Only petitions", "Armed revolt", "Supporting British goods"], "A", "Disobedience of laws.", "People deliberately broke unjust laws."],
+                  ["Who painted the famous image of Bharat Mata?", ["Raja Ravi Varma", "Nandalal Bose", "M. F. Husain", "Abanindranath Tagore"], "D", "A Bengal School artist.", "Abanindranath Tagore painted Bharat Mata."]
+                ],
+                "HARD": [
+                  ["Why did industrial workers participate only selectively in Civil Disobedience?", ["They supported British rule", "The Congress was reluctant to include their demands, fearing alienating industrialists", "They were not allowed to vote", "They had no grievances"], "B", "Balancing different groups.", "The Congress avoided worker demands that might upset industrialist supporters."],
+                  ["Why did Dr B. R. Ambedkar initially demand separate electorates for Dalits?", ["To leave India", "To support the British", "To give Dalits political power to secure their rights", "To join the Muslim League"], "C", "Political representation.", "He believed separate electorates would give Dalits real political voice."],
+                  ["How did reinterpretations of Indian history support nationalism?", ["They encouraged pride in India's past achievements", "They praised colonial rule", "They ignored the past", "They focused only on Britain"], "A", "Pride in the past.", "Highlighting past glory countered colonial claims and built confidence."],
+                  ["Why did some groups feel excluded by certain nationalist symbols?", ["The symbols were in English", "They were too modern", "They were only used abroad", "Some images drew mainly on one community's traditions"], "D", "Who might not see themselves in a symbol?", "Symbols rooted in one tradition could alienate other communities."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g10-sst-u-political-science",
+      "title": "Political Science: Sharing Power",
+      "topics": [
+        {
+          "slug": "g10-sst-t-federalism",
+          "title": "Federalism",
+          "description": "How power is divided between the Union, states and local governments in India.",
+          "lessons": [
+            {
+              "slug": "g10-sst-what-is-federalism",
+              "title": "What Is Federalism?",
+              "objectives": [
+                "Define federalism and contrast it with a unitary system",
+                "Identify the key features of federalism",
+                "Explain the division of powers in India through the three lists",
+                "Explain the role of the judiciary and the special status of some areas"
+              ],
+              "intro": "In a large and diverse country, one government in the capital cannot easily look after every village and town. Federalism is a system of government in which power is divided between a central authority and various constituent units of the country. India has a Union government for the whole country, state governments for each state, and local governments. Each level has its own powers, guaranteed by the Constitution.",
+              "sections": [
+                [
+                  "Features of federalism",
+                  "In a federation there are two or more levels (tiers) of government. Each tier governs the same citizens but has its own jurisdiction in specific matters of legislation, taxation and administration, specified in the constitution. The fundamental provisions of the constitution cannot be changed by one level alone; they require the consent of both. Courts have the power to interpret the constitution and settle disputes between levels. Sources of revenue are clearly specified for each level to ensure financial autonomy. In a unitary system, such as in Sri Lanka or the United Kingdom, there is either one level of government or sub-units are subordinate to the central government, which can pass orders to them."
+                ],
+                [
+                  "Division of powers in India",
+                  "The Indian Constitution divides legislative powers through three lists. The Union List includes subjects of national importance, such as defence, foreign affairs, banking, communications and currency, on which only Parliament can make laws. The State List includes subjects of state and local importance, such as police, trade within the state, agriculture and irrigation, on which state legislatures make laws. The Concurrent List includes subjects of common interest, such as education, forests, trade unions, marriage, adoption and succession, on which both can make laws; if their laws conflict, the Union law prevails. Subjects not mentioned in any list, such as computer software, are 'residuary' subjects, on which Parliament legislates."
+                ],
+                [
+                  "Holding together and special arrangements",
+                  "Federations form in two ways. In 'coming together' federations, such as the USA, Switzerland and Australia, independent states unite and usually have equal powers. In 'holding together' federations, such as India, Spain and Belgium, a large country divides power between the centre and states, and the centre tends to be more powerful. India's federation is not equal for all units: some states and areas have special provisions under the Constitution, and Union Territories, such as Chandigarh and Lakshadweep, are run largely by the Union government. The judiciary plays a key role by resolving disputes over division of powers, and the sharing of power cannot be changed unilaterally by Parliament; major changes need approval of both Houses with a two-thirds majority and, for certain matters, ratification by at least half the state legislatures."
+                ]
+              ],
+              "definitions": [
+                ["Federalism", "A system in which power is divided between a central authority and constituent units."],
+                ["Unitary government", "A system with one level of government or subordinate sub-units."],
+                ["Concurrent List", "Subjects on which both the Union and states can make laws."],
+                ["Residuary subjects", "Subjects not in any list; Parliament makes laws on them."],
+                ["Union Territory", "An area governed largely by the Union government."]
+              ],
+              "examples": [
+                "Defence is on the Union List; police is on the State List; education is on the Concurrent List.",
+                "Delhi, Puducherry and Ladakh are Union Territories."
+              ],
+              "worked": [
+                {
+                  "problem": "Classify into Union, State or Concurrent List: (a) currency, (b) agriculture, (c) forests, (d) foreign affairs, (e) police.",
+                  "steps": [
+                    "(a) Currency affects the whole nation → Union List.",
+                    "(b) Agriculture is a state matter → State List.",
+                    "(c) Forests are of common interest → Concurrent List.",
+                    "(d) Foreign affairs → Union List.",
+                    "(e) Police → State List."
+                  ],
+                  "answer": "Union: currency, foreign affairs; State: agriculture, police; Concurrent: forests."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Three lists of the Constitution",
+                "columns": ["List", "Who makes laws", "Examples"],
+                "rows": [
+                  ["Union", "Parliament", "Defence, foreign affairs, banking, currency"],
+                  ["State", "State legislatures", "Police, agriculture, trade within the state"],
+                  ["Concurrent", "Both (Union prevails in conflict)", "Education, forests, marriage, trade unions"],
+                  ["Residuary", "Parliament", "Computer software"]
+                ]
+              },
+              "real_world": "Debates on issues like the Goods and Services Tax (GST), managed by a council of Union and state finance ministers, show federalism in action. Disputes between states over river waters are resolved by tribunals and courts, demonstrating the judiciary's role.",
+              "takeaways": [
+                "Federalism divides power between levels of government, each with constitutionally guaranteed powers.",
+                "India divides legislative powers through Union, State and Concurrent Lists, with residuary powers for Parliament.",
+                "India is a 'holding together' federation with a relatively strong centre.",
+                "Courts resolve disputes, and changes to power-sharing need consent of both levels."
+              ],
+              "practice": [
+                ["Name two subjects on the Union List.", "Defence and currency (also foreign affairs, banking)."],
+                ["What happens if Union and state laws conflict on a Concurrent subject?", "The Union law prevails."],
+                ["Give an example of a 'coming together' federation.", "USA (also Switzerland, Australia)."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Federalism means power is divided between:", ["The rich and the poor", "A central authority and constituent units", "Courts and police", "Two political parties only"], "B", "Levels of government.", "Power is shared between the centre and units."],
+                  ["Defence is a subject on the:", ["State List", "Concurrent List", "Union List", "Residuary List"], "C", "National importance.", "Defence is on the Union List."],
+                  ["Police is a subject on the:", ["State List", "Union List", "Concurrent List", "Residuary List"], "A", "Law and order in states.", "Police is on the State List."],
+                  ["Which country has a unitary system?", ["USA", "India", "Australia", "Sri Lanka"], "D", "One main level of government.", "Sri Lanka has a unitary system."]
+                ],
+                "MEDIUM": [
+                  ["Education is on the:", ["Union List", "Concurrent List", "State List", "Residuary List"], "B", "Both levels legislate.", "Education is a Concurrent subject."],
+                  ["Who makes laws on residuary subjects like computer software?", ["State legislatures", "Gram Panchayats", "Parliament", "The Supreme Court"], "C", "Subjects not in any list.", "Parliament legislates on residuary subjects."],
+                  ["India is described as a 'holding together' federation because:", ["A large country divided powers among its units", "Independent states came together", "All states have equal power with the centre", "It has no central government"], "A", "How was the federation formed?", "Power was shared by dividing a large country."],
+                  ["Which institution settles disputes between the Union and states?", ["The Election Commission", "The Prime Minister", "The Governor", "The judiciary (courts)"], "D", "Interpreting the Constitution.", "Courts resolve disputes over division of powers."]
+                ],
+                "HARD": [
+                  ["If a state law on forests conflicts with a Union law, which prevails?", ["The state law", "The Union law", "Neither", "The older law"], "B", "Forests are Concurrent.", "In Concurrent subjects, Union law prevails."],
+                  ["Which is a key difference between federal and unitary systems?", ["Federal systems have no courts", "Unitary systems have constitutions guaranteeing state powers", "In federal systems, each level's powers are guaranteed by the constitution", "Unitary systems always have three tiers"], "C", "Guaranteed powers.", "Federal units have constitutionally protected powers."],
+                  ["How can the basic power-sharing arrangement in India be changed?", ["By both Houses with a two-thirds majority and, for some matters, ratification by half the states", "By the Prime Minister alone", "By a state government alone", "By a court order only"], "A", "Both levels must agree.", "Amendment needs special majorities and state ratification for federal provisions."],
+                  ["Which is an example of a 'coming together' federation?", ["India", "Spain", "Belgium", "USA"], "D", "Independent states united.", "The USA formed when independent states came together."]
+                ]
+              }
+            },
+            {
+              "slug": "g10-sst-decentralisation",
+              "title": "Federalism in Practice and Decentralisation",
+              "objectives": [
+                "Explain how linguistic states and language policy strengthened Indian federalism",
+                "Describe changes in Centre–State relations",
+                "Explain decentralisation and the 1992 constitutional amendments",
+                "Evaluate the strengths and challenges of local self-government"
+              ],
+              "intro": "A constitution can describe federalism, but its real success depends on how it works in practice. In India, the creation of linguistic states, a flexible language policy and changing Centre–State relations have shaped federalism. In 1992 India added a third tier of government, local self-government, making it one of the largest experiments in democracy in the world.",
+              "sections": [
+                [
+                  "Linguistic states and language policy",
+                  "After independence, many old state boundaries were redrawn in 1956 to create states where most people spoke the same language, such as Karnataka, Andhra Pradesh and Kerala. Some states, such as Nagaland, Uttarakhand and Jharkhand, were created on the basis of culture, ethnicity or geography. Some national leaders feared this would lead to disintegration, but the experience shows that linguistic states have made the country more united and administration easier. India has no national language; Hindi is the official language, and the Constitution recognises 22 languages in the Eighth Schedule. English continued to be used for official purposes along with Hindi, after protests in states such as Tamil Nadu against imposing Hindi."
+                ],
+                [
+                  "Centre–State relations",
+                  "For a long time, the same party ruled at the Centre and in most states, so state governments did not exercise their rights as autonomous units, and the Centre sometimes misused its constitutional powers to dismiss state governments ruled by rival parties. After 1990, the rise of regional parties and the era of coalition governments at the Centre changed this. Since no single party won a clear majority in the Lok Sabha for many years, national parties had to form alliances with regional parties, which led to more respect for state autonomy. A 1994 Supreme Court judgment made it difficult for the Centre to dismiss state governments arbitrarily."
+                ],
+                [
+                  "Decentralisation",
+                  "Decentralisation means taking power away from central and state governments and giving it to local governments. Many problems are best solved locally, and people can participate directly in decisions. In 1992, the 73rd and 74th Constitutional Amendments made local self-government more powerful: regular elections to local bodies became compulsory; seats were reserved for Scheduled Castes, Scheduled Tribes and Other Backward Classes; at least one-third of all positions were reserved for women; State Election Commissions were created to conduct local elections; and state governments must share some powers and revenue with local bodies. Today there are about 36 lakh elected local representatives. Challenges remain: Gram Sabhas do not always meet regularly, and many state governments have not transferred significant powers or resources."
+                ]
+              ],
+              "definitions": [
+                ["Linguistic states", "States formed on the basis of the language spoken by most people."],
+                ["Coalition government", "A government formed by two or more parties together."],
+                ["Decentralisation", "Transfer of power from central and state governments to local governments."],
+                ["Eighth Schedule", "The part of the Constitution listing recognised languages (22)."],
+                ["State Election Commission", "A body in each state that conducts local body elections."]
+              ],
+              "examples": [
+                "Kerala and Karnataka were formed on linguistic lines in 1956.",
+                "Women hold at least one-third of seats in Panchayats and municipal bodies."
+              ],
+              "worked": [
+                {
+                  "problem": "Why did coalition governments strengthen federalism in India after 1990?",
+                  "steps": [
+                    "No single national party won a majority in the Lok Sabha.",
+                    "National parties needed the support of regional parties to form the government.",
+                    "Regional parties pressed for respect for state powers and interests.",
+                    "This created a culture of power sharing and greater state autonomy."
+                  ],
+                  "answer": "Dependence on regional allies forced national parties to respect state autonomy, deepening power sharing."
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Key provisions of the 1992 amendments",
+                "items": [
+                  ["Regular elections", "Local body elections compulsory every five years"],
+                  ["Reservations", "Seats for SC, ST, OBC; at least one-third for women"],
+                  ["State Election Commission", "Independent body for local elections"],
+                  ["Sharing powers and revenue", "States must devolve some powers and funds"]
+                ]
+              },
+              "real_world": "Elected women Sarpanches across India have led changes in water supply, sanitation and schooling in their villages. Debates over sharing tax revenue between the Union and states, and over the role of Governors, continue to shape Indian federalism today.",
+              "takeaways": [
+                "Linguistic states and a flexible language policy strengthened unity.",
+                "Coalition politics after 1990 increased state autonomy.",
+                "The 73rd and 74th Amendments (1992) created a strong third tier of local government.",
+                "Local democracy has grown but needs more powers and resources."
+              ],
+              "practice": [
+                ["How many languages are in the Eighth Schedule?", "22."],
+                ["Which amendments strengthened local self-government in 1992?", "The 73rd and 74th Amendments."],
+                ["What fraction of local body seats is reserved for women?", "At least one-third."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["States reorganised on the basis of language are called:", ["Union Territories", "Linguistic states", "Federal states", "Coastal states"], "B", "Based on the language spoken.", "They are linguistic states."],
+                  ["The transfer of power to local governments is called:", ["Centralisation", "Federation", "Decentralisation", "Coalition"], "C", "Taking power away from the centre.", "It is decentralisation."],
+                  ["How many languages are recognised in the Eighth Schedule?", ["22", "18", "14", "29"], "A", "More than twenty.", "The Eighth Schedule lists 22 languages."],
+                  ["At least what fraction of local body seats is reserved for women?", ["One-half", "One-fourth", "One-tenth", "One-third"], "D", "Since the 1992 amendments.", "At least one-third are reserved for women."]
+                ],
+                "MEDIUM": [
+                  ["Which body conducts elections to local bodies?", ["Election Commission of India", "State Election Commission", "Supreme Court", "Gram Sabha"], "B", "A state-level body.", "State Election Commissions conduct local elections."],
+                  ["Why were some leaders worried about forming linguistic states?", ["They feared they would increase taxes", "They thought it would stop elections", "They feared it might lead to the disintegration of the country", "They wanted only one language"], "C", "Unity concerns.", "They feared division, but it actually strengthened unity."],
+                  ["Which is a reason for decentralisation?", ["Local problems are best solved by people who know them", "To end democracy", "To centralise all power", "To abolish states"], "A", "Local knowledge.", "Local people understand and can solve local issues."],
+                  ["Hindi's status in India is that of:", ["The only national language", "A foreign language", "A banned language", "An official language, with no single national language"], "D", "India has no national language.", "Hindi is an official language; India has no national language."]
+                ],
+                "HARD": [
+                  ["How did the 1994 Supreme Court judgment affect Centre–State relations?", ["It abolished states", "It made arbitrary dismissal of state governments difficult", "It gave all power to Governors", "It ended elections"], "B", "Protection for states.", "It limited the Centre's power to dismiss state governments."],
+                  ["Which is a major challenge for local self-government in India?", ["Too many powers given to local bodies", "Local bodies have no elections", "Many states have not transferred significant powers and funds", "Women cannot contest"], "C", "Resources and powers.", "Inadequate devolution of powers and funds limits local bodies."],
+                  ["Why did protests occur in Tamil Nadu in the 1960s?", ["Against imposing Hindi as the sole official language", "Against English", "For a separate country", "Against linguistic states"], "A", "Language policy.", "People opposed the imposition of Hindi, so English continued."],
+                  ["Why is India's local government considered one of the largest experiments in democracy?", ["It has very few elected representatives", "Only men participate", "It replaced the Parliament", "It has about 36 lakh elected representatives across villages and towns"], "D", "Scale of participation.", "Millions of elected local representatives make it uniquely large."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g10-sst-u-economics",
+      "title": "Economics: Development",
+      "topics": [
+        {
+          "slug": "g10-sst-t-development-sectors",
+          "title": "Development and Sectors of the Economy",
+          "description": "Measuring development and understanding the primary, secondary and tertiary sectors.",
+          "lessons": [
+            {
+              "slug": "g10-sst-understanding-development",
+              "title": "Understanding Development",
+              "objectives": [
+                "Explain that different people have different development goals",
+                "Compare countries and states using income and other indicators",
+                "Explain per capita income, infant mortality, literacy and HDI",
+                "Explain the meaning of sustainable development"
+              ],
+              "intro": "What does development mean? For a landless rural labourer it may mean more days of work and better wages; for an urban student it may mean good education and job opportunities; for a girl in a village it may mean the same freedom as her brother. Different people have different, and sometimes conflicting, development goals. Countries also need ways to compare their development. Economists use income and other indicators, such as health and education.",
+              "sections": [
+                [
+                  "Income and other goals",
+                  "People seek higher incomes, but they also value non-material things: equal treatment, freedom, security, respect and a safe environment. A job in a distant city with higher pay may be less attractive than a slightly lower-paid job near family. Development for one group may harm another: a dam may bring electricity to industries and irrigation to farmers but displace forest communities. So development involves balancing goals, and what counts as development can be debated."
+                ],
+                [
+                  "Comparing development",
+                  "Countries are often compared by their national income. Because populations differ, we use average income, or per capita income: total income of the country divided by its population. The World Bank uses per capita income to classify countries as low, middle or high income. But averages hide inequality: two countries with the same average may distribute income very differently. Income also does not measure everything. Kerala has lower per capita income than some richer states, yet it has a lower infant mortality rate (the number of children dying before age one per 1,000 live births), higher literacy and better school attendance, because of good public health and education facilities. Public facilities, such as a public distribution system for food, can improve well-being more than money alone."
+                ],
+                [
+                  "Human Development Index and sustainability",
+                  "The United Nations Development Programme (UNDP) publishes the Human Development Report, which ranks countries by the Human Development Index (HDI). It combines life expectancy at birth (health), mean and expected years of schooling (education), and per capita income. Countries like Sri Lanka have done better than India on several health and education indicators despite lower incomes. Development must also be sustainable: overusing groundwater, cutting forests and burning fossil fuels may raise incomes today but harm future generations. Scientists warn that groundwater is being overused in many parts of India, and resources such as crude oil are limited, so development should meet today's needs without compromising the future."
+                ]
+              ],
+              "definitions": [
+                ["Per capita income", "Total income of a country divided by its population."],
+                ["Infant mortality rate", "Number of children dying before one year of age per 1,000 live births."],
+                ["Literacy rate", "Proportion of literate population aged 7 and above."],
+                ["Human Development Index", "A UNDP index combining health, education and income."],
+                ["Sustainable development", "Development that meets present needs without harming future generations."]
+              ],
+              "examples": [
+                "Kerala's infant mortality rate is far lower than the national average.",
+                "A family may prefer a safe neighbourhood and good school over a slightly higher salary."
+              ],
+              "worked": [
+                {
+                  "problem": "Country A has five citizens with incomes 9,500, 10,500, 9,800, 10,000 and 10,200. Country B has incomes 500, 500, 500, 500 and 48,000. Compare their average incomes. Which would you prefer to live in?",
+                  "steps": [
+                    "Country A total = 50,000; average = 10,000.",
+                    "Country B total = 50,000; average = 10,000.",
+                    "Averages are equal, but in B four people earn very little and one earns almost everything.",
+                    "Most people would prefer A, where incomes are more equally distributed."
+                  ],
+                  "answer": "Both have an average of 10,000, but A is better for most people because income is shared more equally; averages hide inequality."
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Components of the HDI",
+                "items": [
+                  ["Health", "Life expectancy at birth"],
+                  ["Education", "Mean and expected years of schooling"],
+                  ["Standard of living", "Per capita income"]
+                ]
+              },
+              "real_world": "Governments use indicators such as infant mortality and literacy to plan health and education spending. NITI Aayog and the UNDP publish rankings that help citizens compare states and countries and push for better public services.",
+              "takeaways": [
+                "Different people have different, sometimes conflicting, development goals.",
+                "Per capita income is useful for comparison but hides inequality.",
+                "Health, education and public facilities matter as much as income; HDI combines them.",
+                "Development must be sustainable for future generations."
+              ],
+              "practice": [
+                ["How is per capita income calculated?", "Total national income ÷ population."],
+                ["What three things does HDI measure?", "Health, education and income."],
+                ["Why is Kerala's low infant mortality notable?", "It shows good health facilities can matter more than income."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Per capita income is:", ["Total income of the richest person", "Total national income divided by population", "Income of the government", "Income from exports"], "B", "Average income.", "It is national income ÷ population."],
+                  ["Who publishes the Human Development Report?", ["World Bank", "RBI", "UNDP", "WHO"], "C", "A UN programme.", "The UNDP publishes it."],
+                  ["Infant mortality rate measures deaths of children under:", ["1 year", "5 years", "10 years", "18 years"], "A", "Infants.", "It counts deaths before age one per 1,000 live births."],
+                  ["Which is a non-material development goal?", ["Higher salary", "More money", "Bigger car", "Freedom and equal treatment"], "D", "Not about money.", "Freedom and respect are non-material goals."]
+                ],
+                "MEDIUM": [
+                  ["Why is average income not a complete measure of development?", ["It is too difficult to calculate", "It hides how income is distributed", "It ignores money", "It only counts children"], "B", "Think of inequality.", "Averages can hide large differences between people."],
+                  ["The HDI combines life expectancy, education and:", ["Military strength", "Population", "Per capita income", "Number of cities"], "C", "Standard of living.", "Income is the third component."],
+                  ["Why can two development goals conflict?", ["What benefits one group may harm another", "Goals never differ", "All people want the same thing", "Development always benefits everyone"], "A", "Think of a dam.", "A dam may help some but displace others."],
+                  ["Which helps explain Kerala's better health indicators?", ["Highest income in India", "Large factories", "Cold climate", "Good public health and education facilities"], "D", "Public services.", "Investment in public facilities improved health and education."]
+                ],
+                "HARD": [
+                  ["Countries A and B have the same average income, but B has much greater inequality. Which statement is TRUE?", ["B is more developed", "Average income alone cannot show which is better for most people", "A has lower total income", "They are identical in every way"], "B", "Distribution matters.", "Equal averages can hide very different distributions."],
+                  ["Why is overuse of groundwater a sustainability concern?", ["It increases rainfall", "It improves soil", "It may exhaust a resource future generations need", "It reduces population"], "C", "Future needs.", "Using groundwater faster than it recharges threatens future supply."],
+                  ["Why might a country with lower income have a higher HDI rank than a richer one?", ["It performs better on health and education", "HDI ignores income", "Lower income always means higher HDI", "HDI only measures area"], "A", "HDI has three parts.", "Better health and education can raise HDI despite lower income."],
+                  ["Which is the best example of sustainable development?", ["Cutting forests for quick profit", "Burning more coal", "Pumping all groundwater", "Expanding solar power while protecting forests"], "D", "Meets present and future needs.", "Renewables and conservation balance today's and tomorrow's needs."]
+                ]
+              }
+            },
+            {
+              "slug": "g10-sst-sectors-economy",
+              "title": "Sectors of the Indian Economy",
+              "objectives": [
+                "Classify economic activities into primary, secondary and tertiary sectors",
+                "Explain GDP and how it is calculated",
+                "Describe changes in the importance of sectors and the problem of underemployment",
+                "Distinguish organised and unorganised sectors, and public and private sectors"
+              ],
+              "intro": "A farmer growing cotton, a factory spinning it into cloth, a truck transporting the cloth and a shop selling shirts are all part of the economy. Economists group activities into sectors to understand how an economy works and changes. Over time, the share of different sectors in production and employment shifts, and this has important consequences for jobs and incomes.",
+              "sections": [
+                [
+                  "Three sectors and GDP",
+                  "The primary sector uses natural resources directly: agriculture, dairy, fishing, forestry and mining. The secondary sector turns natural products into other forms through manufacturing, such as making cloth from cotton or sugar from sugarcane; it is also called the industrial sector. The tertiary (service) sector provides services that support the other two, such as transport, storage, communication, banking and trade, and also includes services like teaching, healthcare, software and tourism. The value of all final goods and services produced within a country in a year is its Gross Domestic Product (GDP). Only final goods are counted, not intermediate goods, to avoid counting the same value twice."
+                ],
+                [
+                  "Changing importance and underemployment",
+                  "In many developed countries, the share of the primary sector fell over time, then the secondary sector grew, and later the tertiary sector became the largest. In India, the tertiary sector has become the largest contributor to GDP. However, employment has not shifted to the same extent: a large share of workers is still in the primary sector, especially agriculture. Many farm families have more people working than are needed, a situation called disguised unemployment or underemployment: if some members left, production would not fall. Creating jobs through irrigation, rural roads, small-scale industries and services is important. The Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA) 2005 guarantees 100 days of paid work in a year to rural households who want it."
+                ],
+                [
+                  "Organised and unorganised; public and private",
+                  "The organised sector includes enterprises registered with the government, with regular jobs, fixed hours, paid leave, provident fund and job security. The unorganised sector consists of small, scattered units outside government control, where jobs are low-paid, irregular and without benefits: small shopkeepers, street vendors, construction workers and many farm labourers. Most Indian workers are in the unorganised sector and need protection through fair wages, safety and social security. By ownership, the public sector is owned by the government, such as Indian Railways and many power and water services, and aims at public welfare. The private sector is owned by individuals or companies, such as Tata Steel and Reliance Industries, and aims at profit."
+                ]
+              ],
+              "definitions": [
+                ["Primary sector", "Activities using natural resources directly, such as farming and mining."],
+                ["Secondary sector", "Manufacturing activities that transform raw materials."],
+                ["Tertiary sector", "Services that support production and meet people's needs."],
+                ["GDP", "Value of all final goods and services produced within a country in a year."],
+                ["Disguised unemployment", "More people working than needed, so their removal would not reduce output."]
+              ],
+              "examples": [
+                "A software engineer and a bus driver both work in the tertiary sector.",
+                "Five family members working on a small plot that needs only three show disguised unemployment."
+              ],
+              "worked": [
+                {
+                  "problem": "A farmer sells wheat worth ₹10,000 to a flour mill, which sells flour worth ₹15,000 to a bakery, which sells bread worth ₹20,000 to consumers. What is added to GDP?",
+                  "steps": [
+                    "Wheat and flour are intermediate goods used to make bread.",
+                    "Counting all three would count the wheat's value three times.",
+                    "Only the value of the final good, bread, is counted."
+                  ],
+                  "answer": "₹20,000 (the value of the final good)."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Sectors of the economy",
+                "columns": ["Sector", "Activities", "Examples"],
+                "rows": [
+                  ["Primary", "Using natural resources", "Farming, fishing, mining"],
+                  ["Secondary", "Manufacturing", "Textile mills, car factories"],
+                  ["Tertiary", "Services", "Banking, transport, teaching, IT"],
+                  ["Organised vs unorganised", "Regulated vs unregulated work", "Government office vs street vendor"]
+                ]
+              },
+              "real_world": "Budget debates often focus on creating jobs in manufacturing and services to absorb workers from agriculture. MGNREGA provides employment in villages, and programmes for street vendors and construction workers aim to extend social security to the unorganised sector.",
+              "takeaways": [
+                "Economic activities fall into primary, secondary and tertiary sectors.",
+                "GDP counts the value of final goods and services only.",
+                "The tertiary sector is now India's largest by output, but agriculture still employs many with underemployment.",
+                "Organised and unorganised sectors differ in job security; public and private sectors differ in ownership and aims."
+              ],
+              "practice": [
+                ["Which sector does a dairy farmer belong to?", "Primary."],
+                ["Why are intermediate goods not counted in GDP?", "To avoid double counting."],
+                ["How many days of work does MGNREGA guarantee?", "100 days a year."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Fishing belongs to the:", ["Secondary sector", "Primary sector", "Tertiary sector", "Organised sector only"], "B", "Uses natural resources directly.", "Fishing is a primary activity."],
+                  ["Banking and transport are part of the:", ["Primary sector", "Secondary sector", "Tertiary sector", "Unorganised sector only"], "C", "Services.", "They are tertiary (service) activities."],
+                  ["GDP counts the value of:", ["Final goods and services", "Intermediate goods only", "Imports only", "Raw materials only"], "A", "Avoid double counting.", "Only final goods and services are counted."],
+                  ["Indian Railways is part of the:", ["Private sector", "Unorganised sector", "Primary sector", "Public sector"], "D", "Owned by the government.", "It is a government-owned public sector enterprise."]
+                ],
+                "MEDIUM": [
+                  ["Disguised unemployment means:", ["Everyone has a full-time job", "More people work than needed, so removing some would not reduce output", "People refuse to work", "Only factory workers are unemployed"], "B", "Think of a small family farm.", "Extra workers add little or nothing to output."],
+                  ["Which sector contributes the most to India's GDP today?", ["Primary", "Secondary", "Tertiary", "None"], "C", "Services have grown rapidly.", "The tertiary sector is the largest contributor."],
+                  ["Which is a feature of the organised sector?", ["Regular jobs with paid leave and job security", "No government rules", "Very low and irregular pay", "No fixed working hours"], "A", "Registered and regulated.", "Organised-sector jobs have security and benefits."],
+                  ["MGNREGA guarantees:", ["Free housing", "A government job for life", "Free education", "100 days of paid work a year to rural households"], "D", "A rural employment law.", "It guarantees 100 days of wage employment."]
+                ],
+                "HARD": [
+                  ["A farmer sells sugarcane for ₹5,000 to a mill, which makes sugar sold for ₹12,000. What is added to GDP from these transactions?", ["₹17,000", "₹12,000", "₹5,000", "₹7,000 only"], "B", "Count only the final good.", "Only the final sugar value, ₹12,000, is counted."],
+                  ["Why has employment not shifted out of the primary sector as fast as output?", ["Agriculture pays the highest wages", "Factories employ too many people", "Not enough jobs were created in secondary and tertiary sectors", "Services are illegal in villages"], "C", "Job creation lagged.", "Other sectors did not create enough jobs to absorb workers."],
+                  ["Why do workers in the unorganised sector need protection?", ["Their jobs are irregular, low-paid and lack benefits and security", "They earn too much", "They work too few hours", "They are all government employees"], "A", "Vulnerability.", "Lack of security and benefits makes them vulnerable."],
+                  ["What is the main aim of public sector enterprises compared with private ones?", ["Maximum profit", "Exporting goods only", "Avoiding taxes", "Public welfare rather than only profit"], "D", "Government ownership.", "Public enterprises aim to serve public welfare."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

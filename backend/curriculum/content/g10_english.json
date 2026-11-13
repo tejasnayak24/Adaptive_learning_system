@@ -1,0 +1,580 @@
+{
+  "grade": 10,
+  "subject": "English",
+  "units": [
+    {
+      "slug": "g10-eng-u-grammar",
+      "title": "Advanced Grammar",
+      "topics": [
+        {
+          "slug": "g10-eng-t-conditionals-clauses",
+          "title": "Conditionals and Clauses",
+          "description": "Conditional sentences and complex sentences built with noun, adjective and adverb clauses.",
+          "lessons": [
+            {
+              "slug": "g10-eng-conditionals",
+              "title": "Conditional Sentences",
+              "objectives": [
+                "Identify the zero, first, second and third conditionals",
+                "Use the correct verb forms in each type",
+                "Express real, possible, unlikely and impossible situations",
+                "Use 'unless' and mixed conditionals correctly"
+              ],
+              "intro": "'If you heat ice, it melts.' 'If it rains tomorrow, we will stay home.' 'If I were a bird, I would fly over the mountains.' 'If she had left earlier, she would have caught the train.' All four sentences describe a condition and its result, but they refer to very different situations: a general truth, a real possibility, an imaginary present and an imagined past. These are conditional sentences, and each type uses particular verb forms.",
+              "sections": [
+                [
+                  "Zero and first conditionals",
+                  "A conditional sentence has an if-clause (the condition) and a main clause (the result). The zero conditional describes general truths and scientific facts: if + simple present, simple present. 'If you mix blue and yellow, you get green.' Here 'if' means 'whenever'. The first conditional describes real and likely future possibilities: if + simple present, will + base verb. 'If you study regularly, you will do well.' Note that we do not use 'will' in the if-clause: say 'If it rains', not 'If it will rain'. The clauses can be reversed: 'You will do well if you study regularly.' When the if-clause comes first, it is followed by a comma."
+                ],
+                [
+                  "Second and third conditionals",
+                  "The second conditional describes unlikely or imaginary situations in the present or future: if + simple past, would + base verb. 'If I won a lottery, I would build a school.' With 'be', formal English uses 'were' for all subjects: 'If I were you, I would apologise.' The third conditional describes imaginary situations in the past, which can no longer change, often expressing regret: if + past perfect, would have + past participle. 'If he had saved money, he would have bought the bicycle.' (He did not save, so he did not buy it.) Could and might can replace would to show ability or possibility: 'If we had left earlier, we might have caught the bus.'"
+                ],
+                [
+                  "Unless and mixed conditionals",
+                  "'Unless' means 'if … not': 'Unless you hurry, you will miss the bus' = 'If you do not hurry, you will miss the bus.' Do not use 'not' again after unless. Other conditional expressions include 'provided that', 'as long as' and 'in case'. Mixed conditionals combine times: a past condition with a present result: 'If I had taken the medicine yesterday, I would feel better now.' Inversion is used in formal writing: 'Had I known' = 'If I had known'; 'Were she here' = 'If she were here'. Choosing the right conditional shows the reader how likely you think the situation is."
+                ]
+              ],
+              "definitions": [
+                ["Conditional sentence", "A sentence with a condition (if-clause) and a result (main clause)."],
+                ["First conditional", "if + present, will + base verb; a real future possibility."],
+                ["Second conditional", "if + past, would + base verb; an unlikely or imaginary present."],
+                ["Third conditional", "if + past perfect, would have + past participle; an imagined past."],
+                ["Unless", "A conjunction meaning 'if … not'."]
+              ],
+              "examples": [
+                "Zero: If you press this button, the machine starts.",
+                "Third: If they had checked the tyres, the accident would not have happened."
+              ],
+              "worked": [
+                {
+                  "problem": "Complete with the correct form: (a) If water ___ (reach) 0 °C, it freezes. (b) If you ___ (not water) the plants, they will die. (c) If I ___ (be) the principal, I would extend the break. (d) If we ___ (know) about the traffic, we would have left earlier.",
+                  "steps": [
+                    "(a) A scientific fact → zero conditional → reaches.",
+                    "(b) Real future possibility → first conditional → do not water / don't water.",
+                    "(c) Imaginary present → second conditional → were.",
+                    "(d) Imagined past → third conditional → had known."
+                  ],
+                  "answer": "(a) reaches, (b) do not water, (c) were, (d) had known"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Types of conditionals",
+                "columns": ["Type", "If-clause", "Main clause", "Use"],
+                "rows": [
+                  ["Zero", "simple present", "simple present", "General truths"],
+                  ["First", "simple present", "will + verb", "Likely future"],
+                  ["Second", "simple past (were)", "would + verb", "Unlikely/imaginary present"],
+                  ["Third", "past perfect", "would have + past participle", "Imaginary past"]
+                ]
+              },
+              "real_world": "Instructions, safety notices and contracts use conditionals ('If the alarm sounds, leave the building'), negotiations and plans use first conditionals, and reflections and apologies often use third conditionals ('If I had listened, this would not have happened').",
+              "takeaways": [
+                "Zero: facts; first: likely future; second: imaginary present; third: imaginary past.",
+                "Never use 'will' in the if-clause of a first conditional.",
+                "Use 'were' for all subjects in formal second conditionals.",
+                "Unless = if … not; mixed conditionals combine past and present."
+              ],
+              "practice": [
+                ["Rewrite with unless: If you don't practise, you won't improve.", "Unless you practise, you won't improve."],
+                ["Complete: If I ___ (have) wings, I would fly.", "had"],
+                ["Which conditional expresses regret about the past?", "The third conditional."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["'If you heat ice, it melts' is a:", ["First conditional", "Zero conditional", "Second conditional", "Third conditional"], "B", "A general truth.", "General truths use the zero conditional."],
+                  ["Complete: 'If it rains, we ___ indoors.'", ["would stay", "stayed", "will stay", "had stayed"], "C", "A likely future.", "First conditional: will + verb."],
+                  ["'Unless' means:", ["If … not", "Because", "Although", "So that"], "A", "A negative condition.", "Unless means if not."],
+                  ["Complete: 'If I ___ you, I would apologise.'", ["am", "will be", "was being", "were"], "D", "Formal second conditional.", "Use 'were' for all subjects."]
+                ],
+                "MEDIUM": [
+                  ["Complete: 'If she had studied, she ___ the exam.'", ["will pass", "would have passed", "would pass", "passes"], "B", "Third conditional.", "if + past perfect, would have + past participle."],
+                  ["Which sentence is correct?", ["If it will rain, we will cancel.", "If it rained, we will cancel.", "If it rains, we will cancel.", "If it raining, we cancel."], "C", "No 'will' in the if-clause.", "First conditional: if + present, will + verb."],
+                  ["Rewrite: 'If you don't hurry, you'll miss the bus.'", ["Unless you hurry, you'll miss the bus.", "Unless you don't hurry, you'll miss the bus.", "Unless you hurry, you won't miss the bus.", "If you hurry, you'll miss the bus."], "A", "Unless already contains 'not'.", "Unless you hurry = If you don't hurry."],
+                  ["'If I won a lottery, I would travel the world' expresses:", ["A general truth", "A past regret", "A certain future plan", "An unlikely or imaginary situation"], "D", "Second conditional.", "It describes an unlikely situation."]
+                ],
+                "HARD": [
+                  ["Which is a mixed conditional?", ["If you work hard, you will succeed.", "If I had slept earlier, I would not be tired now.", "If I were rich, I would help.", "If you heat water, it boils."], "B", "Past condition, present result.", "It combines a past condition with a present result."],
+                  ["'Had I known about the test, I would have prepared.' This is equivalent to:", ["If I know about the test, I will prepare.", "If I knew about the test, I would prepare.", "If I had known about the test, I would have prepared.", "Unless I knew, I prepared."], "C", "Inverted third conditional.", "'Had I known' = 'If I had known'."],
+                  ["Find the error: 'If he would have called me, I would have helped him.'", ["'would have called' should be 'had called'", "'I' should be 'me'", "'helped' should be 'help'", "No error"], "A", "Third conditional if-clause.", "The if-clause takes the past perfect: had called."],
+                  ["Which sentence suggests the speaker thinks passing is unlikely?", ["If I pass, I will celebrate.", "If you pass, you celebrate.", "When I pass, I will celebrate.", "If I passed, I would celebrate."], "D", "Second conditional implies unlikelihood.", "The second conditional presents the event as unlikely or imaginary."]
+                ]
+              }
+            },
+            {
+              "slug": "g10-eng-clauses",
+              "title": "Clauses and Complex Sentences",
+              "objectives": [
+                "Distinguish main (independent) and subordinate (dependent) clauses",
+                "Identify noun, adjective (relative) and adverb clauses",
+                "Use relative pronouns correctly, including defining and non-defining clauses",
+                "Combine simple sentences into complex and compound sentences"
+              ],
+              "intro": "Mature writing combines ideas smoothly. Instead of 'I met a girl. She plays chess. She lives next door', we can write 'I met a girl who plays chess and lives next door.' A clause is a group of words with a subject and a verb. Learning how clauses work lets you build varied sentences, link ideas logically and avoid choppy writing, which is valued in examinations and in all formal communication.",
+              "sections": [
+                [
+                  "Main and subordinate clauses",
+                  "A main (independent) clause makes complete sense on its own: 'The match was cancelled.' A subordinate (dependent) clause has a subject and verb but cannot stand alone: 'because it rained'. A simple sentence has one main clause. A compound sentence joins two or more main clauses with coordinating conjunctions such as and, but, or, so and yet: 'It rained, so the match was cancelled.' A complex sentence has one main clause and at least one subordinate clause: 'The match was cancelled because it rained.' Subordinate clauses are introduced by subordinating conjunctions or relative pronouns."
+                ],
+                [
+                  "Noun and adjective clauses",
+                  "A noun clause does the work of a noun, acting as subject, object or complement: 'What he said surprised everyone' (subject); 'I know that she is honest' (object); 'The problem is that we are late' (complement). Noun clauses often begin with that, what, whether, if, who and why. An adjective (relative) clause describes a noun and begins with a relative pronoun: who (people), which (things), that (people or things), whose (possession), where and when. 'The book that you lent me was exciting.' A defining relative clause identifies which person or thing is meant and takes no commas: 'Students who finish early may leave.' A non-defining clause adds extra information, is set off by commas and never uses 'that': 'My father, who is a doctor, works at night.'"
+                ],
+                [
+                  "Adverb clauses and combining sentences",
+                  "An adverb clause modifies a verb and tells when, where, why, how, under what condition or in spite of what. Common conjunctions are when, while, before, after, until (time); where (place); because, since, as (reason); so that (purpose); if, unless (condition); although, though, even though (contrast). 'Although the road was flooded, the bus reached on time.' When an adverb clause comes first, put a comma after it. To combine sentences, decide the relationship between ideas, choose the right connector, and avoid using two conjunctions for one link: 'Although it was late, but we continued' is wrong; use either 'although' or 'but'."
+                ]
+              ],
+              "definitions": [
+                ["Clause", "A group of words containing a subject and a verb."],
+                ["Main clause", "A clause that makes complete sense on its own."],
+                ["Subordinate clause", "A clause that depends on a main clause for its meaning."],
+                ["Relative clause", "An adjective clause introduced by who, which, that, whose, where or when."],
+                ["Complex sentence", "A sentence with one main clause and at least one subordinate clause."]
+              ],
+              "examples": [
+                "Noun clause: Nobody knows where the treasure is hidden.",
+                "Adverb clause: She smiled when she saw her results."
+              ],
+              "worked": [
+                {
+                  "problem": "Combine into one complex sentence: 'The scientist won an award. She discovered a new vaccine. The vaccine saved thousands of lives.'",
+                  "steps": [
+                    "Choose the main idea: The scientist won an award.",
+                    "Describe the scientist with a relative clause: who discovered a new vaccine.",
+                    "Describe the vaccine with another relative clause: that saved thousands of lives."
+                  ],
+                  "answer": "The scientist who discovered a vaccine that saved thousands of lives won an award."
+                },
+                {
+                  "problem": "Identify the clause type in: 'I wonder whether he will come.'",
+                  "steps": [
+                    "Main clause: I wonder.",
+                    "'whether he will come' answers 'wonder what?' and acts as the object.",
+                    "A clause acting as an object is a noun clause."
+                  ],
+                  "answer": "Noun clause (object of 'wonder')."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Types of subordinate clauses",
+                "columns": ["Clause", "Function", "Typical words", "Example"],
+                "rows": [
+                  ["Noun", "Subject/object/complement", "that, what, whether", "I believe that he is right."],
+                  ["Adjective", "Describes a noun", "who, which, that, whose", "The girl who won is my sister."],
+                  ["Adverb", "When/why/how/condition/contrast", "because, although, when, if", "We left early because it was late."]
+                ]
+              },
+              "real_world": "Professional writers combine clauses to make reports and emails concise and clear. Legal documents and scientific papers rely heavily on complex sentences, and examination answers that show varied sentence structure score better for language quality.",
+              "takeaways": [
+                "A clause has a subject and a verb; main clauses stand alone, subordinate clauses do not.",
+                "Noun clauses act as nouns; adjective clauses describe nouns; adverb clauses modify verbs.",
+                "Non-defining relative clauses take commas and never use 'that'.",
+                "Use one connector per link; avoid 'although … but'."
+              ],
+              "practice": [
+                ["Identify the clause: 'The house where I was born has been sold.'", "Adjective (relative) clause: where I was born."],
+                ["Combine: 'He was tired. He kept working.' (although)", "Although he was tired, he kept working."],
+                ["Correct: 'My brother, that lives in Pune, is a pilot.'", "My brother, who lives in Pune, is a pilot."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A clause must contain:", ["Only a noun", "A subject and a verb", "A comma", "Two verbs"], "B", "Who does what.", "Every clause has a subject and a verb."],
+                  ["Which is a subordinate clause?", ["She sang.", "The dog barked.", "because she was happy", "We won."], "C", "It cannot stand alone.", "'because she was happy' depends on another clause."],
+                  ["Which relative pronoun is used for people?", ["who", "which", "where", "when"], "A", "Not for things.", "'Who' refers to people."],
+                  ["A sentence with one main clause and one subordinate clause is:", ["Simple", "Compound", "Fragment", "Complex"], "D", "Main + dependent.", "That is a complex sentence."]
+                ],
+                "MEDIUM": [
+                  ["In 'What she said was true', the clause 'What she said' is a:", ["Adverb clause", "Noun clause", "Adjective clause", "Main clause"], "B", "It is the subject.", "A clause acting as subject is a noun clause."],
+                  ["Choose the correct sentence.", ["My mother, that is a teacher, loves books.", "My mother which is a teacher loves books.", "My mother, who is a teacher, loves books.", "My mother, whom is a teacher, loves books."], "C", "Non-defining clause for a person.", "Use who with commas in a non-defining clause."],
+                  ["In 'We stayed indoors because it was raining', the clause shows:", ["Reason", "Time", "Place", "Contrast"], "A", "Why?", "'because' introduces a reason (adverb clause)."],
+                  ["Which sentence is a compound sentence?", ["Although it rained, we played.", "The boy who won smiled.", "I know that you are right.", "It rained, but we played."], "D", "Two main clauses with a coordinating conjunction.", "Two independent clauses joined by 'but'."]
+                ],
+                "HARD": [
+                  ["Find the error: 'Although he worked hard, but he failed.'", ["'worked' should be 'works'", "Use either 'although' or 'but', not both", "'failed' should be 'fail'", "No error"], "B", "One connector per link.", "'Although' already shows contrast, so 'but' must be removed."],
+                  ["In 'Students who submit late will lose marks', the relative clause is:", ["Non-defining, needing commas", "A noun clause", "Defining, identifying which students", "An adverb clause of time"], "C", "Does it identify which students?", "It defines which students, so no commas are used."],
+                  ["Combine correctly: 'This is the village. My grandfather was born here.'", ["This is the village where my grandfather was born.", "This is the village which my grandfather was born.", "This is the village who my grandfather was born.", "This is the village that my grandfather was born here."], "A", "Place relative.", "'where' links a place to the clause correctly."],
+                  ["In 'The question is whether we can finish on time', the clause after 'is' functions as a:", ["Adverb clause of condition", "Adjective clause", "Main clause", "Noun clause (complement)"], "D", "It completes 'The question is …'.", "It is a noun clause acting as a complement."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g10-eng-u-reading",
+      "title": "Analytical Reading",
+      "topics": [
+        {
+          "slug": "g10-eng-t-analytical-reading",
+          "title": "Reading Critically",
+          "description": "Identifying a writer's tone and purpose, and summarising texts.",
+          "lessons": [
+            {
+              "slug": "g10-eng-tone-purpose",
+              "title": "Author's Tone and Purpose",
+              "objectives": [
+                "Identify the author's purpose: to inform, persuade, entertain or describe",
+                "Recognise tone from word choice and style",
+                "Distinguish tone from mood",
+                "Detect bias and loaded language"
+              ],
+              "intro": "Two articles can report the same event very differently. One might calmly present facts; another might use emotional words to make readers angry or excited. Understanding why an author is writing (purpose) and how the author feels about the subject (tone) is essential for reading critically. These skills help you interpret literature, evaluate news and advertisements, and answer analytical comprehension questions.",
+              "sections": [
+                [
+                  "Purpose",
+                  "Authors write for four main purposes. To inform: textbooks, news reports and encyclopaedias present facts and explanations. To persuade: advertisements, editorials and speeches try to convince readers to believe or do something. To entertain: stories, jokes and many novels aim to amuse or engage. To describe or express: poems, travelogues and personal essays share experiences and feelings. Many texts combine purposes; a magazine feature may inform and entertain. Clues to purpose include the type of text, the presence of arguments and calls to action, and the balance of facts and opinions."
+                ],
+                [
+                  "Tone and mood",
+                  "Tone is the author's attitude towards the subject or audience, shown through diction (word choice), sentence structure and details. Tone can be formal, informal, serious, humorous, sarcastic, critical, admiring, nostalgic, optimistic, pessimistic, urgent or neutral. Compare 'The council finally got round to fixing the potholes' (critical, sarcastic) with 'The council repaired the potholes on Tuesday' (neutral). Mood is different: it is the feeling the text creates in the reader, such as suspense, gloom or cheerfulness. A writer's tone can be calm while the mood created is tense."
+                ],
+                [
+                  "Bias and loaded language",
+                  "Loaded words carry strong positive or negative associations. Calling protesters 'brave citizens' or 'troublemakers' reveals the writer's stance. Bias is a one-sided presentation that favours one view, often by including only supporting facts, using loaded words, quoting only one side or making sweeping generalisations ('Everyone knows…'). To read critically, ask: What is the author's purpose? Which words show their attitude? Are other viewpoints represented? What facts might be missing? Critical readers do not simply accept what they read; they evaluate it."
+                ]
+              ],
+              "definitions": [
+                ["Author's purpose", "The reason an author writes: to inform, persuade, entertain or describe."],
+                ["Tone", "The author's attitude towards the subject, shown through word choice."],
+                ["Mood", "The feeling a text creates in the reader."],
+                ["Diction", "The writer's choice of words."],
+                ["Bias", "A one-sided presentation favouring a particular view."]
+              ],
+              "examples": [
+                "Persuasive purpose: 'Join the clean-up drive this Sunday and make our city shine!'",
+                "Nostalgic tone: 'Those long summer afternoons under the mango tree seem a lifetime away.'"
+              ],
+              "worked": [
+                {
+                  "problem": "Identify the purpose and tone: 'Once again, commuters were left stranded for hours as the so-called “express” train crawled into the station. Is this what we pay our fares for?'",
+                  "steps": [
+                    "Purpose: it criticises the railway service and seeks to make readers agree → to persuade.",
+                    "Clues to tone: 'Once again', 'so-called', 'crawled', rhetorical question.",
+                    "These words show irritation and mockery → critical, sarcastic tone."
+                  ],
+                  "answer": "Purpose: to persuade (criticise). Tone: critical and sarcastic."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Purpose clues",
+                "columns": ["Purpose", "Typical texts", "Clues"],
+                "rows": [
+                  ["Inform", "News, textbooks", "Facts, neutral language"],
+                  ["Persuade", "Ads, editorials, speeches", "Opinions, calls to action, emotive words"],
+                  ["Entertain", "Stories, comics", "Plot, humour, characters"],
+                  ["Describe/express", "Poems, travelogues", "Sensory imagery, feelings"]
+                ]
+              },
+              "real_world": "Media literacy depends on recognising tone and bias in news and social media. Consumers identify persuasive purpose in advertisements, and voters evaluate the tone and bias of political messages before making decisions.",
+              "takeaways": [
+                "Purpose: inform, persuade, entertain or describe; many texts mix purposes.",
+                "Tone is the author's attitude; mood is the reader's feeling.",
+                "Diction and details reveal tone.",
+                "Watch for loaded language and one-sided presentation."
+              ],
+              "practice": [
+                ["What is the purpose of a product advertisement?", "To persuade."],
+                ["What is the difference between tone and mood?", "Tone is the author's attitude; mood is the reader's feeling."],
+                ["Give a loaded word and a neutral alternative.", "E.g. 'mob' (loaded) vs 'crowd' (neutral)."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The main purpose of a news report is usually to:", ["Entertain", "Inform", "Sell a product", "Tell a joke"], "B", "Facts about events.", "News reports mainly inform."],
+                  ["An author's attitude towards the subject is the:", ["Mood", "Plot", "Tone", "Setting"], "C", "Shown through word choice.", "Tone is the author's attitude."],
+                  ["An advertisement mainly aims to:", ["Persuade", "Inform only", "Describe a landscape", "Entertain only"], "A", "It wants you to buy.", "Advertisements persuade."],
+                  ["The feeling a text creates in the reader is the:", ["Tone", "Purpose", "Diction", "Mood"], "D", "Reader's response.", "Mood is the reader's feeling."]
+                ],
+                "MEDIUM": [
+                  ["'The minister finally bothered to visit the flooded village.' The tone is:", ["Admiring", "Critical", "Neutral", "Joyful"], "B", "Look at 'finally bothered'.", "The phrase shows criticism and irritation."],
+                  ["Which word is loaded rather than neutral?", ["Crowd", "Group", "Mob", "Gathering"], "C", "Which has negative associations?", "'Mob' suggests disorder and violence."],
+                  ["A travelogue describing a sunrise over the Himalayas mainly aims to:", ["Describe and share an experience", "Sell a phone", "Report a crime", "Teach grammar"], "A", "Sensory, personal writing.", "Travelogues describe experiences."],
+                  ["Which is a sign of bias in an article?", ["Quoting several viewpoints", "Using neutral language", "Giving sources", "Presenting only facts that support one side"], "D", "One-sidedness.", "Selective facts show bias."]
+                ],
+                "HARD": [
+                  ["A writer calmly describes a haunted house, but readers feel frightened. This shows that:", ["Tone and mood are always the same", "Tone and mood can differ", "The writer is angry", "There is no mood"], "B", "Author's attitude vs reader's feeling.", "A calm tone can create a tense mood."],
+                  ["Which sentence has a neutral tone?", ["The heroic volunteers saved the day!", "The useless officials did nothing again.", "The festival was held on 12 March at the town square.", "Sadly, only a pathetic few turned up."], "C", "No emotive words.", "It states facts without judgement."],
+                  ["'Everyone knows that online classes are useless.' Which critical question best tests this claim?", ["What evidence supports this, and are other views considered?", "How many words does it have?", "Who printed the page?", "Is it in a large font?"], "A", "Look for evidence and other viewpoints.", "A sweeping generalisation needs evidence."],
+                  ["A text includes facts and humour about the history of chocolate. Its purposes are most likely:", ["Only to persuade", "Only to criticise", "Only to warn", "To inform and entertain"], "D", "Mixed purposes.", "Facts inform, humour entertains."]
+                ]
+              }
+            },
+            {
+              "slug": "g10-eng-summarising",
+              "title": "Summarising and Note-Making",
+              "objectives": [
+                "Identify key ideas and supporting details in a passage",
+                "Make structured notes with headings, sub-headings and abbreviations",
+                "Write a concise summary from notes",
+                "Paraphrase without changing meaning"
+              ],
+              "intro": "In higher classes and in life, you must process large amounts of information quickly: chapters, articles, reports and lectures. Summarising and note-making help you capture the essential ideas, remember them and use them later. A summary is a short version of a text in your own words, and notes are a structured record of key points. Many examinations test these skills directly with a passage, notes and a summary of about 80 words.",
+              "sections": [
+                [
+                  "Reading for key ideas",
+                  "Read the passage once for overall understanding, then again carefully. Identify the central theme, which often suggests a title. Find the main idea of each paragraph, usually in the topic sentence, and the important supporting details. Ignore examples, repetitions, quotations and descriptive flourishes unless they are essential. Ask: if I could keep only three or four points, which would they be? Underlining key words and noting the structure, such as causes and effects or problem and solution, helps organise your thinking."
+                ],
+                [
+                  "Making notes",
+                  "Notes use a clear format: a title; numbered headings for main points (1, 2, 3); and indented sub-headings for supporting points (1.1, 1.2 or a, b). Write in phrases, not full sentences. Use recognisable abbreviations, such as 'govt' for government, 'imp.' for important, '&' for and and 'w/o' for without, and list them in a key at the end. Use symbols carefully, such as an arrow for 'leads to'. Good notes are brief but complete enough to rebuild the passage's argument. They should keep the logical order and relationships between ideas."
+                ],
+                [
+                  "Writing the summary",
+                  "A summary is written in complete sentences and connected prose, in your own words, usually about one-third of the original or less. Use the notes as a base: start with the main idea, then the key points in logical order, linked with connectors such as however, therefore and as a result. Paraphrase: express ideas in different words without changing their meaning. Do not add opinions, new information or examples. Keep the tone objective, check the word limit and give a suitable title if asked."
+                ]
+              ],
+              "definitions": [
+                ["Summary", "A short, connected restatement of the main ideas of a text in one's own words."],
+                ["Note-making", "Recording key points of a text in a structured, brief form."],
+                ["Paraphrase", "Restating a text in different words without changing its meaning."],
+                ["Key to abbreviations", "A list explaining the short forms used in notes."]
+              ],
+              "examples": [
+                "Abbreviation: 'envt' for environment; 'approx.' for approximately.",
+                "Paraphrase: 'He was exhausted after the marathon' → 'The marathon left him very tired.'"
+              ],
+              "worked": [
+                {
+                  "problem": "Make notes on: 'Plastic pollution harms the environment in many ways. Plastics take hundreds of years to decompose. Animals mistake plastic bags for food and die. Burning plastic releases toxic gases. Solutions include reducing single-use plastic, recycling and using cloth bags.'",
+                  "steps": [
+                    "Title: Plastic Pollution — Effects and Solutions.",
+                    "1. Harmful effects: 1.1 take 100s of yrs to decompose; 1.2 animals mistake for food → die; 1.3 burning → toxic gases.",
+                    "2. Solutions: 2.1 reduce single-use plastic; 2.2 recycle; 2.3 use cloth bags.",
+                    "Key: yrs – years; → – leads to."
+                  ],
+                  "answer": "Structured notes with a title, two headings, sub-points, abbreviations and a key."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "From passage to summary",
+                "items": ["Read for overall meaning", "Identify main ideas and key details", "Make structured notes with a key", "Write connected sentences in your own words", "Check word limit, accuracy and objectivity"]
+              },
+              "real_world": "Students make notes in lectures, professionals write executive summaries of long reports, journalists condense press releases, and researchers summarise papers. Good summarising saves time and improves understanding for everyone who reads your work.",
+              "takeaways": [
+                "Identify the central theme and main points; drop examples and repetition.",
+                "Notes: title, numbered headings, indented sub-points, abbreviations with a key.",
+                "Summaries are connected prose in your own words, about a third of the length.",
+                "Do not add opinions or new information."
+              ],
+              "practice": [
+                ["Should notes be written in full sentences?", "No, in brief phrases."],
+                ["What should a key to abbreviations contain?", "The meanings of the short forms used."],
+                ["Paraphrase: 'The meeting was postponed due to heavy rain.'", "Heavy rain caused the meeting to be put off."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A summary should be written:", ["Copied word for word", "In your own words", "Longer than the original", "With your opinions"], "B", "Restate the main ideas.", "Summaries use your own words."],
+                  ["Notes are best written in:", ["Long paragraphs", "Full essays", "Brief phrases", "Poems"], "C", "Short and quick.", "Notes use concise phrases."],
+                  ["What should accompany abbreviations in notes?", ["A key", "A poem", "A drawing", "A signature"], "A", "So readers understand them.", "A key explains the abbreviations."],
+                  ["Which should be left out of a summary?", ["The main idea", "Key points", "Logical connections", "Minor examples and repetitions"], "D", "Keep only essentials.", "Examples and repetitions are omitted."]
+                ],
+                "MEDIUM": [
+                  ["Which is a correct paraphrase of 'The project was abandoned owing to a lack of funds'?", ["The project had lots of money.", "The project was given up because there was not enough money.", "The funds were abandoned by the project.", "The project was completed early."], "B", "Same meaning, different words.", "It keeps the meaning in new words."],
+                  ["Numbered headings and indented sub-points in notes help to:", ["Make notes longer", "Hide information", "Show the structure and relationship between ideas", "Replace the summary"], "C", "Organisation.", "They show main and supporting points clearly."],
+                  ["A summary is usually about what fraction of the original?", ["One-third or less", "Twice as long", "The same length", "Three-quarters"], "A", "Much shorter.", "Summaries are about a third of the original or less."],
+                  ["Which connector best shows a result in a summary?", ["However", "Although", "For example", "As a result"], "D", "Cause and effect.", "'As a result' shows consequence."]
+                ],
+                "HARD": [
+                  ["Which note is best written for 'The government has introduced several schemes to improve rural healthcare'?", ["The government has introduced several schemes to improve rural healthcare in many ways.", "Govt schemes → improve rural healthcare", "Schemes", "Healthcare is good"], "B", "Brief but complete.", "It is concise and keeps the key relationship."],
+                  ["Why should a summary avoid adding the writer's own opinions?", ["Opinions are always wrong", "Summaries must be long", "A summary must faithfully represent the original text", "Opinions are not allowed in English"], "C", "Faithfulness.", "A summary restates the original objectively."],
+                  ["A passage lists three causes of air pollution with examples for each. In notes, the best structure is:", ["One heading 'Causes' with three sub-points", "Copy every example as a separate heading", "Write the passage again", "Only the title"], "A", "Main point with sub-points.", "Group the causes under one heading as sub-points."],
+                  ["Which title best suits a passage about how mangroves protect coasts and support fish?", ["Fish", "Trees Are Green", "The Ocean", "Mangroves: Guardians of the Coast"], "D", "Reflect the central theme.", "It captures the main idea of protection and value."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g10-eng-u-writing",
+      "title": "Writing Skills",
+      "topics": [
+        {
+          "slug": "g10-eng-t-persuasive-writing",
+          "title": "Persuasive Writing",
+          "description": "Writing argumentative essays and letters to the editor.",
+          "lessons": [
+            {
+              "slug": "g10-eng-argumentative-essay",
+              "title": "Writing an Argumentative Essay",
+              "objectives": [
+                "Write a clear thesis statement",
+                "Support arguments with reasons, evidence and examples",
+                "Address counter-arguments",
+                "Use persuasive techniques ethically"
+              ],
+              "intro": "Should homework be banned? Should cities ban private cars from central areas? An argumentative essay takes a clear position on a debatable issue and supports it with logical reasoning and evidence, while acknowledging and answering opposing views. It is not a shouting match; it is a careful, reasoned attempt to convince a thoughtful reader. This skill is valued in examinations, debates, college applications and civic life.",
+              "sections": [
+                [
+                  "Thesis and structure",
+                  "The introduction captures attention with a hook, such as a striking fact, a question or a short anecdote, gives brief background on the issue, and ends with a thesis statement: one clear sentence stating your position and main reasons. For example: 'Schools should replace a portion of homework with project-based learning because it builds deeper understanding, reduces stress and develops teamwork.' The body usually has three paragraphs, each developing one reason, followed by a paragraph addressing the counter-argument. The conclusion restates the thesis in new words, summarises the reasons and ends with a call to action or thought-provoking statement."
+                ],
+                [
+                  "Evidence and reasoning",
+                  "Each body paragraph should begin with a topic sentence stating one reason, then support it with evidence: facts, statistics, expert opinions, examples or logical reasoning. Explain how the evidence supports your claim; evidence without explanation does not persuade. Use reliable sources and avoid exaggeration. Logical connectors such as furthermore, moreover, consequently, for instance and therefore guide the reader. Avoid logical fallacies such as attacking the person instead of the argument, generalising from a single case or presenting only two options when more exist."
+                ],
+                [
+                  "Counter-arguments and persuasion",
+                  "A strong essay anticipates opposing views and responds to them fairly: 'Some argue that homework teaches discipline. While this is true, project work can build discipline more effectively because…' Acknowledging other views makes you appear fair and reasonable. Persuasive techniques include appeals to logic (reasons and evidence), to credibility (showing knowledge and fairness) and to emotion (relatable examples), along with rhetorical questions and the rule of three ('cleaner, safer and healthier'). Use emotional appeals responsibly and never invent facts. Keep a formal, confident tone, using 'I believe' sparingly."
+                ]
+              ],
+              "definitions": [
+                ["Thesis statement", "A sentence stating the writer's position and main reasons."],
+                ["Counter-argument", "An opposing view that the writer addresses."],
+                ["Rebuttal", "The writer's response showing why the counter-argument is weaker."],
+                ["Logical fallacy", "An error in reasoning that weakens an argument."],
+                ["Rhetorical question", "A question asked for effect, not for an answer."]
+              ],
+              "examples": [
+                "Hook: 'Every year, India loses lakhs of hectares of forest — is our convenience worth that price?'",
+                "Rule of three: 'Public transport is cheaper, cleaner and safer.'"
+              ],
+              "worked": [
+                {
+                  "problem": "Plan an essay: 'Should mobile phones be allowed in schools?' (position: allowed with clear rules).",
+                  "steps": [
+                    "Thesis: Phones should be allowed in schools under clear rules, because they support learning, ensure safety and teach responsible use.",
+                    "Body 1: learning — dictionaries, research, educational apps (example).",
+                    "Body 2: safety — contact with parents during emergencies.",
+                    "Body 3: digital responsibility — guided use builds good habits.",
+                    "Counter-argument: distraction and cyberbullying → rebuttal: phone-free class periods, monitoring and digital citizenship lessons.",
+                    "Conclusion: restate, summarise, call for a balanced policy."
+                  ],
+                  "answer": "An essay plan with a thesis, three reasoned body paragraphs, a counter-argument with rebuttal and a conclusion."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Argumentative essay structure",
+                "items": ["Hook and background", "Thesis statement", "Reason 1 with evidence", "Reason 2 with evidence", "Reason 3 with evidence", "Counter-argument and rebuttal", "Conclusion and call to action"]
+              },
+              "real_world": "Lawyers, policymakers, journalists and business leaders build arguments the same way. Debating competitions, Model United Nations and college admission essays reward clear theses, evidence and fair treatment of opposing views.",
+              "takeaways": [
+                "State a clear thesis with your position and reasons.",
+                "Support each reason with evidence and explain it.",
+                "Address and rebut counter-arguments fairly.",
+                "Persuade ethically using logic, credibility and appropriate emotion."
+              ],
+              "practice": [
+                ["Write a thesis on 'Should school uniforms be compulsory?'", "E.g. Uniforms should be compulsory because they promote equality, save time and build school identity."],
+                ["What is a rebuttal?", "A response showing why an opposing argument is weaker."],
+                ["Name one logical fallacy.", "Attacking the person instead of the argument (ad hominem)."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The sentence stating the writer's position is the:", ["Hook", "Thesis statement", "Conclusion", "Title"], "B", "It comes at the end of the introduction.", "The thesis states the position and reasons."],
+                  ["An opposing view addressed in an essay is a:", ["Thesis", "Hook", "Counter-argument", "Topic sentence"], "C", "The other side.", "It is a counter-argument."],
+                  ["Which is a good hook?", ["A startling statistic", "A list of references", "The writer's address", "An unrelated joke"], "A", "Grab attention.", "A striking fact captures interest."],
+                  ["Evidence in an argumentative essay includes:", ["Made-up numbers", "Personal insults", "Repeating the thesis", "Facts, statistics and examples"], "D", "Support for claims.", "Reliable facts and examples support arguments."]
+                ],
+                "MEDIUM": [
+                  ["Why should a writer address counter-arguments?", ["To lengthen the essay", "To appear fair and strengthen their own position", "To agree with the opposition", "To change the topic"], "B", "Credibility.", "Answering opposing views makes the argument more convincing."],
+                  ["Which is a logical fallacy?", ["Citing an expert", "Giving statistics", "Saying an idea is wrong because the person proposing it is unpopular", "Using an example"], "C", "Attacking the person.", "This is an ad hominem fallacy."],
+                  ["'Cleaner, cheaper and safer' is an example of:", ["The rule of three", "A rebuttal", "A thesis", "A fallacy"], "A", "Three items for impact.", "Listing three qualities is the rule of three."],
+                  ["The conclusion of an argumentative essay should:", ["Introduce a completely new argument", "Copy the introduction word for word", "End mid-sentence", "Restate the thesis and end with a call to action or strong thought"], "D", "Wrap up persuasively.", "It restates the position and leaves a lasting impression."]
+                ],
+                "HARD": [
+                  ["Which thesis is strongest?", ["Pollution is bad.", "Cities should expand public transport because it reduces pollution, traffic congestion and travel costs.", "Some people use buses.", "Is pollution a problem?"], "B", "Clear position plus reasons.", "It states a debatable position with specific reasons."],
+                  ["'Either we ban all cars, or our city will be destroyed.' This is a fallacy because it:", ["Uses statistics", "Cites an expert", "Presents only two extreme options when others exist", "Is a rebuttal"], "C", "False dilemma.", "It ignores middle-ground solutions."],
+                  ["Which use of emotional appeal is most responsible?", ["A true story of a family helped by a new hospital, supporting the argument for more health funding", "Inventing a tragic story", "Insulting opponents", "Exaggerating numbers ten times"], "A", "Honest and relevant.", "A genuine, relevant example supports the argument ethically."],
+                  ["Which sentence best rebuts 'Homework teaches discipline'?", ["Homework is stupid.", "Nobody likes homework.", "My friend agrees with me.", "Discipline can be built even better through regular project deadlines, which also deepen understanding."], "D", "Acknowledge and answer with reasoning.", "It offers a reasoned alternative addressing the point."]
+                ]
+              }
+            },
+            {
+              "slug": "g10-eng-letter-to-editor",
+              "title": "Letter to the Editor",
+              "objectives": [
+                "Explain the purpose of a letter to the editor",
+                "Use the correct format of a letter to the editor",
+                "Present a public issue with facts, effects and suggestions",
+                "Maintain a polite, formal and persuasive tone"
+              ],
+              "intro": "Newspapers publish letters from readers on issues that matter to the public: poor roads, pollution, safety, education or the misuse of public spaces. A letter to the editor is a formal letter addressed to the editor of a newspaper, but its real audience is the public and the authorities who read it. A well-argued letter can raise awareness and even prompt action, so it combines the format of a formal letter with the reasoning of persuasive writing.",
+              "sections": [
+                [
+                  "Format",
+                  "The letter includes: the sender's address; the date; the receiver: 'The Editor, (name of newspaper), (city)'; a subject line stating the issue, for example 'Subject: Need for safe pedestrian crossings near schools'; the salutation 'Sir/Madam,' or 'Respected Sir/Madam,'; the body; the complimentary close 'Yours faithfully,'; and the sender's signature and name. A common opening is: 'Through the columns of your esteemed newspaper, I wish to draw the attention of the authorities concerned to…'. Letters to the editor are usually about 120 to 150 words in examinations."
+                ],
+                [
+                  "Content of the body",
+                  "The first paragraph introduces the issue and the purpose of writing. The second presents the problem in detail: facts, figures, how long it has continued and specific locations. The third explains its effects on people, such as accidents, health hazards, inconvenience or financial loss. The fourth offers practical suggestions, such as installing traffic signals, deploying traffic police near schools, launching awareness drives or strictly enforcing rules, and appeals to the authorities and the public. End with a hopeful note: 'I hope the authorities will take prompt action.'"
+                ],
+                [
+                  "Tone and style",
+                  "The tone should be formal, polite and objective, even when expressing concern or dissatisfaction. Avoid personal attacks on officials, exaggeration and slang. Use facts rather than vague complaints: 'Three accidents have occurred at this crossing in the last month' is more powerful than 'Many accidents happen.' Persuasive devices from argumentative writing, such as clear reasons, the rule of three and a call to action, make the letter effective. Write as a responsible citizen, speaking for the community rather than only for yourself."
+                ]
+              ],
+              "definitions": [
+                ["Letter to the editor", "A formal letter to a newspaper editor on a public issue, meant for publication."],
+                ["Subject line", "A brief statement of the issue the letter addresses."],
+                ["Call to action", "A request urging readers or authorities to act."],
+                ["Objective tone", "A tone based on facts rather than personal feelings."]
+              ],
+              "examples": [
+                "Subject: Rising noise pollution during late-night celebrations",
+                "Opening: 'Through the columns of your esteemed daily, I wish to highlight…'"
+              ],
+              "worked": [
+                {
+                  "problem": "Plan a letter to the editor about stray plastic waste choking city drains.",
+                  "steps": [
+                    "Format: address, date, 'The Editor, The Daily Chronicle, Pune'; Subject: Plastic waste blocking city drains.",
+                    "Para 1: purpose — draw attention to plastic choking drains in several localities.",
+                    "Para 2: details — drains blocked in X and Y areas; waterlogging after even light rain; collection irregular.",
+                    "Para 3: effects — flooding, mosquito breeding, dengue risk, damaged roads.",
+                    "Para 4: suggestions — enforce the plastic ban, regular drain cleaning, segregation awareness, fines; hope for prompt action. Close: Yours faithfully, name."
+                  ],
+                  "answer": "A correctly formatted letter with purpose, factual details, effects, practical suggestions and a polite close."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Letter to the editor layout",
+                "items": ["Sender's address and date", "The Editor, newspaper, city", "Subject", "Sir/Madam,", "Issue → details → effects → suggestions", "Yours faithfully, signature, name"]
+              },
+              "real_world": "Newspapers' letters pages give citizens a platform, and authorities often respond to well-documented complaints. Similar skills are used in online petitions, complaints to civic portals and op-ed articles.",
+              "takeaways": [
+                "Address the Editor of a newspaper; the real audience is the public and authorities.",
+                "Include subject, salutation, structured body and 'Yours faithfully'.",
+                "Move from issue to facts, effects and practical suggestions.",
+                "Keep the tone formal, polite and factual, speaking for the community."
+              ],
+              "practice": [
+                ["Who is a letter to the editor addressed to?", "The Editor of a newspaper."],
+                ["Which complimentary close is used?", "Yours faithfully."],
+                ["Rewrite vaguely: 'Roads are very bad.'", "E.g. 'The main road in Sector 5 has developed potholes up to a foot deep.'"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A letter to the editor is addressed to:", ["The Prime Minister", "The Editor of a newspaper", "A friend", "The school principal"], "B", "Published in newspapers.", "It is addressed to a newspaper's Editor."],
+                  ["The complimentary close of a letter to the editor is usually:", ["Your loving friend,", "Cheers,", "Yours faithfully,", "With love,"], "C", "Formal close.", "'Yours faithfully' is standard."],
+                  ["The main purpose of a letter to the editor is to:", ["Raise awareness about a public issue", "Order a product", "Apply for a job", "Thank a relative"], "A", "Public interest.", "It highlights public issues."],
+                  ["Which is a suitable subject line?", ["Hello Editor", "Something important", "My life story", "Subject: Lack of streetlights on MG Road"], "D", "Clear and specific.", "It names the issue and location."]
+                ],
+                "MEDIUM": [
+                  ["Which opening is most appropriate?", ["Hey, read this!", "Through the columns of your esteemed newspaper, I wish to draw attention to…", "I am very angry and want to shout.", "Dear friend, how are you?"], "B", "Formal and conventional.", "It is formal and introduces the issue."],
+                  ["Which detail makes a letter more persuasive?", ["Roads are bad.", "Things are terrible.", "Three accidents occurred at the school crossing last month.", "Everyone is upset."], "C", "Specific facts.", "Specific facts are more convincing than vague complaints."],
+                  ["The paragraph after describing the problem should usually explain its:", ["Effects on people", "History of the newspaper", "Writer's hobbies", "Unrelated issues"], "A", "Why it matters.", "Effects show why action is needed."],
+                  ["Which should be avoided in a letter to the editor?", ["Practical suggestions", "Facts and figures", "A formal tone", "Personal attacks on officials"], "D", "Stay polite.", "Personal attacks weaken credibility."]
+                ],
+                "HARD": [
+                  ["Why should the writer speak for the community rather than only personal inconvenience?", ["It is shorter", "Public interest issues are more likely to be published and acted upon", "Editors dislike facts", "It removes the need for suggestions"], "B", "Who is the audience?", "Letters on wider public concerns carry more weight."],
+                  ["Which suggestion is most practical for unsafe crossings near a school?", ["Close all schools", "Ban all vehicles from the city", "Install speed breakers and a zebra crossing and post traffic police at school hours", "Ask students to stay home"], "C", "Realistic and specific.", "It addresses the problem with feasible measures."],
+                  ["How does a letter to the editor differ from a complaint letter to an official?", ["It is written for publication and aims to inform the public as well as the authorities", "It has no format", "It uses informal language", "It is never about public issues"], "A", "Audience and purpose.", "It addresses the public through the newspaper."],
+                  ["Which closing line best ends the letter?", ["That's all, bye.", "Do whatever you want.", "I don't care anymore.", "I hope the authorities will take prompt and effective action."], "D", "Polite and hopeful.", "It ends politely with an appeal for action."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
