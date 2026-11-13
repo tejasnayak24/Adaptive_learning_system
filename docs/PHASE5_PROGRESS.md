@@ -19,8 +19,8 @@ Validate with `python backend/scripts/check_curriculum_file.py backend/curriculu
 | Grade | Mathematics | Science | Social Science | English |
 |---|---|---|---|---|
 | 6 | ✅ | ✅ | ✅ | ✅ |
-| 7 | ✅ | ✅ | ⏳ next | ⏳ |
-| 8 | ⏳ | ⏳ | ⏳ | ⏳ |
+| 7 | ✅ | ✅ | ✅ | ✅ |
+| 8 | ⏳ next | ⏳ | ⏳ | ⏳ |
 | 9 | ⏳ | ⏳ (adopts 3 original lessons) | ⏳ | ⏳ |
 | 10 | ⏳ | ⏳ (adopts 2 original lessons) | ⏳ | ⏳ |
 
@@ -46,7 +46,7 @@ Each file: ≥ 3 topics × 2 lessons, full material, Easy/Medium/Hard quizzes
 
 ## Exact next task
 
-Write `backend/curriculum/content/g07_social_science.json`, validate it, then continue down the table.
+Write `backend/curriculum/content/g08_mathematics.json`, validate it, then continue down the table.
 After all 20 files: add a test asserting `validate_curriculum(load_all())` is empty, run
 `python backend/scripts/import_curriculum.py` against the live DB (after a pg_dump backup),
 commit "Phase 5B complete", then milestones C, D, E.
