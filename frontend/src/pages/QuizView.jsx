@@ -39,6 +39,12 @@ export default function QuizView() {
   const [breakSecondsLeft, setBreakSecondsLeft] = useState(null)
 
   const studentId = user?.id
+  // How this attempt is taken: standard, practice, hints or challenge
+  // (set by a recommended next step). Recorded with the attempt.
+  const attemptMode = ['practice', 'hints', 'challenge'].includes(location.state?.mode)
+    ? location.state.mode
+    : 'standard'
+  const CHALLENGE_SECONDS_PER_QUESTION = 30
   const monitoring = useMonitoring()
   const monitoringVerified = monitoring.verified
 
@@ -347,7 +353,8 @@ export default function QuizView() {
         monitoringSessionId: monitoring.sessionId,
         answers: selectedAnswers,
         responseTime: secondsElapsed,
-        hintsUsed: hintsCount
+        hintsUsed: hintsCount,
+        mode: attemptMode
       })
 
       if (!submitRes?.success) {
@@ -385,6 +392,9 @@ export default function QuizView() {
         correctCount: grading.correct_count,
         totalQuestions: grading.total_questions,
         review: grading.results,
+        mode: attemptMode,
+        challengeTarget:
+          attemptMode === 'challenge' ? questions.length * CHALLENGE_SECONDS_PER_QUESTION : null,
         timeTaken:
           secondsElapsed,
 
@@ -746,6 +756,18 @@ export default function QuizView() {
           </div>
         </div>
 
+        {results.mode && results.mode !== 'standard' && (
+          <div className="rounded-2xl border border-indigo-500/30 bg-indigo-500/5 px-4 py-3 text-xs font-semibold text-indigo-300">
+            {results.mode === 'challenge'
+              ? results.timeTaken <= results.challengeTarget
+                ? `Quick challenge complete: ${results.timeTaken}s, within the ${results.challengeTarget}s target.`
+                : `Quick challenge: ${results.timeTaken}s, ${results.timeTaken - results.challengeTarget}s over the ${results.challengeTarget}s target. Try again to beat it.`
+              : results.mode === 'hints'
+                ? `Retry with hints: you used ${hintsCount} hint(s).`
+                : 'Practice attempt recorded.'}
+          </div>
+        )}
+
         {Array.isArray(results.review) && results.review.length > 0 && (
           <div id="answer-review" className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-md space-y-4">
             <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
@@ -776,6 +798,12 @@ export default function QuizView() {
                     {!item.is_correct && (
                       <p className="mt-1 text-xs text-slate-400">
                         Correct answer: {item.correct_answer}. {optionText(item.correct_answer)}
+                      </p>
+                    )}
+                    {item.explanation && (
+                      <p className="mt-2 text-xs text-slate-300 leading-relaxed">
+                        <span className="font-semibold text-indigo-300">Why: </span>
+                        {item.explanation}
                       </p>
                     )}
                   </li>
@@ -904,11 +932,10 @@ export default function QuizView() {
       100
   )
 
-  const attemptMode = location.state?.mode
   const modeBanner = {
     practice: 'Practice attempt recommended by your coach: focus on the questions you missed last time.',
     hints: 'Retry with hints: press the hint button on any question you are unsure about.',
-    challenge: `Quick challenge: try to finish all ${questions.length} questions in under ${Math.max(1, Math.round((questions.length * 30) / 60))} minute(s).`
+    challenge: `Quick challenge: answer all ${questions.length} questions within ${questions.length * CHALLENGE_SECONDS_PER_QUESTION} seconds.`
   }[attemptMode]
 
   return (
@@ -956,6 +983,17 @@ export default function QuizView() {
               Time:{' '}
               <span className="text-white font-semibold font-mono">
                 {secondsElapsed}s
+                {attemptMode === 'challenge' && (
+                  <span
+                    className={`ml-2 ${
+                      secondsElapsed > questions.length * CHALLENGE_SECONDS_PER_QUESTION
+                        ? 'text-rose-400'
+                        : 'text-teal-400'
+                    }`}
+                  >
+                    / target {questions.length * CHALLENGE_SECONDS_PER_QUESTION}s
+                  </span>
+                )}
               </span>
             </span>
           </div>
@@ -1030,8 +1068,9 @@ export default function QuizView() {
               currentQuestion.id
             ] ? (
               <div className="text-xs text-indigo-400 leading-relaxed font-medium">
-                💡 Hint: Review the core reading sections matching the topic of{' '}
-                {lesson.topic}.
+                💡 Hint:{' '}
+                {currentQuestion.hint ||
+                  `Review the lesson section on ${lesson.topic}.`}
               </div>
             ) : (
               <button

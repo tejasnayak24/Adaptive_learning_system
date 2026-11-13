@@ -19,6 +19,7 @@ def progress_to_dict(progress) -> dict[str, Any]:
         "yawning": progress.yawning,
         "looking_away": progress.looking_away,
         "drowsy": progress.drowsy,
+        "attempt_mode": progress.attempt_mode,
         "monitoring_session_id": progress.monitoring_session_id,
         "telemetry_available": progress.attention_score is not None,
         "difficulty": progress.difficulty,

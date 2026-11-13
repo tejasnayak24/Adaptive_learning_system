@@ -22,6 +22,7 @@ export const quizService = {
       answers: data.answers,
       response_time: data.responseTime,
       hints_used: data.hintsUsed ?? 0,
+      mode: data.mode || 'standard',
     })
   },
 }
