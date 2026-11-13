@@ -1,0 +1,615 @@
+{
+  "grade": 9,
+  "subject": "Mathematics",
+  "units": [
+    {
+      "slug": "g9-math-u-algebra",
+      "title": "Algebra",
+      "topics": [
+        {
+          "slug": "g9-math-t-polynomials",
+          "title": "Polynomials",
+          "description": "Polynomials, their degrees and zeroes, and the remainder and factor theorems.",
+          "lessons": [
+            {
+              "slug": "g9-math-polynomial-basics",
+              "title": "Polynomials, Degrees and Zeroes",
+              "objectives": [
+                "Identify polynomials in one variable",
+                "Classify polynomials by degree and number of terms",
+                "Evaluate a polynomial for a given value",
+                "Find zeroes of linear polynomials and verify zeroes"
+              ],
+              "intro": "Expressions such as 3x² − 5x + 2 appear throughout mathematics and science: in the path of a thrown ball, the area of a garden, or the profit of a business. Such expressions are called polynomials. A polynomial in one variable x is an expression made of terms of the form axⁿ, where a is a real number and n is a whole number. Understanding their structure lets us evaluate them, find when they become zero and factorise them.",
+              "sections": [
+                [
+                  "What is a polynomial?",
+                  "A polynomial in x is a sum of terms such as 4x³, −2x and 7, where the exponents of x are whole numbers (0, 1, 2, …). Expressions with negative or fractional exponents, or with x in a denominator or under a square root, are not polynomials: x⁻¹ + 2, √x + 1 and 1/x are not polynomials. The numbers multiplying the powers of x are coefficients. A constant such as 9 is a polynomial of degree 0, and the zero polynomial 0 has no defined degree."
+                ],
+                [
+                  "Degree and types",
+                  "The degree of a polynomial is the highest power of the variable with a non-zero coefficient. In 5x³ − 2x² + x − 8 the degree is 3. Polynomials of degree 1 are linear (2x + 3), of degree 2 quadratic (x² − 4x + 1), and of degree 3 cubic. By number of terms, a polynomial with one term is a monomial (7x²), two terms a binomial (x + 5) and three terms a trinomial (x² + x + 1). The general linear polynomial is ax + b with a ≠ 0, and the general quadratic is ax² + bx + c with a ≠ 0."
+                ],
+                [
+                  "Value and zeroes",
+                  "We write a polynomial as p(x). Its value at x = a is p(a), found by substituting a: if p(x) = x² − 3x + 2, then p(4) = 16 − 12 + 2 = 6. A zero (or root) of p(x) is a number c for which p(c) = 0. For p(x) above, p(1) = 1 − 3 + 2 = 0 and p(2) = 4 − 6 + 2 = 0, so 1 and 2 are zeroes. A linear polynomial ax + b has exactly one zero, x = −b/a. A polynomial of degree n has at most n zeroes, and a non-zero constant polynomial has none."
+                ]
+              ],
+              "definitions": [
+                ["Polynomial", "An expression of terms axⁿ where n is a whole number."],
+                ["Degree", "The highest power of the variable with a non-zero coefficient."],
+                ["Coefficient", "The number multiplying a power of the variable."],
+                ["Zero of a polynomial", "A value of the variable that makes the polynomial equal to 0."],
+                ["Quadratic polynomial", "A polynomial of degree 2."]
+              ],
+              "examples": [
+                "p(y) = 4y³ − y + 6 is a cubic trinomial.",
+                "The zero of 3x − 12 is x = 4."
+              ],
+              "worked": [
+                {
+                  "problem": "For p(x) = 2x³ − 3x² + x − 5, find p(2) and p(−1).",
+                  "steps": [
+                    "p(2) = 2(8) − 3(4) + 2 − 5 = 16 − 12 + 2 − 5 = 1.",
+                    "p(−1) = 2(−1) − 3(1) + (−1) − 5 = −2 − 3 − 1 − 5 = −11."
+                  ],
+                  "answer": "p(2) = 1, p(−1) = −11"
+                },
+                {
+                  "problem": "Verify whether 3 and −2 are zeroes of p(x) = x² − x − 6.",
+                  "steps": [
+                    "p(3) = 9 − 3 − 6 = 0, so 3 is a zero.",
+                    "p(−2) = 4 + 2 − 6 = 0, so −2 is a zero."
+                  ],
+                  "answer": "Both 3 and −2 are zeroes."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Classifying polynomials",
+                "columns": ["Polynomial", "Degree", "Name by degree", "Name by terms"],
+                "rows": [
+                  ["7", "0", "Constant", "Monomial"],
+                  ["3x − 2", "1", "Linear", "Binomial"],
+                  ["x² + 2x + 1", "2", "Quadratic", "Trinomial"],
+                  ["5x³", "3", "Cubic", "Monomial"]
+                ]
+              },
+              "real_world": "Engineers model the height of a projectile with quadratic polynomials, economists use polynomials to model cost and revenue, and computer graphics draw smooth curves using cubic polynomials. Finding zeroes tells us, for example, when a thrown ball hits the ground.",
+              "takeaways": [
+                "Polynomials have whole-number exponents only.",
+                "Degree is the highest power with a non-zero coefficient.",
+                "p(a) is found by substitution; c is a zero if p(c) = 0.",
+                "A linear polynomial ax + b has the single zero −b/a."
+              ],
+              "practice": [
+                ["Is x² + 1/x a polynomial?", "No, because 1/x = x⁻¹."],
+                ["Find the degree of 4 − 2x + 7x⁵.", "5"],
+                ["Find the zero of 5x + 15.", "x = −3"],
+                ["Find p(0) for p(x) = x³ − 4x + 9.", "9"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What is the degree of 6x⁴ − 2x + 1?", ["1", "4", "6", "2"], "B", "Look for the highest power.", "The highest power of x is 4."],
+                  ["Which is a polynomial?", ["x⁻² + 1", "√x + 3", "x² − 5x + 6", "1/x + 2"], "C", "Exponents must be whole numbers.", "Only x² − 5x + 6 has whole-number exponents."],
+                  ["The zero of x − 7 is:", ["7", "−7", "0", "1/7"], "A", "Set x − 7 = 0.", "x = 7 makes x − 7 = 0."],
+                  ["A polynomial with three terms is a:", ["Monomial", "Binomial", "Cubic", "Trinomial"], "D", "'Tri' means three.", "Three terms make a trinomial."]
+                ],
+                "MEDIUM": [
+                  ["If p(x) = x² − 4x + 3, then p(2) is:", ["3", "−1", "1", "7"], "B", "Substitute x = 2.", "4 − 8 + 3 = −1."],
+                  ["The zero of 4x + 10 is:", ["2.5", "−10", "−2.5", "0.4"], "C", "Solve 4x + 10 = 0.", "x = −10/4 = −2.5."],
+                  ["Which is a zero of x² − 9?", ["3", "9", "0", "81"], "A", "Which value makes it zero?", "3² − 9 = 0."],
+                  ["The maximum number of zeroes of a cubic polynomial is:", ["1", "2", "4", "3"], "D", "At most the degree.", "A degree-3 polynomial has at most 3 zeroes."]
+                ],
+                "HARD": [
+                  ["For p(x) = kx² − 3x + 2, if p(1) = 4, what is k?", ["3", "5", "2", "−5"], "B", "Substitute x = 1.", "k − 3 + 2 = 4, so k = 5."],
+                  ["Which statement is TRUE?", ["Every polynomial has at least one zero", "The degree of 0 is 0", "A non-zero constant polynomial has no zero", "x^(1/2) is a polynomial term"], "C", "Can 5 ever equal 0?", "A non-zero constant is never zero."],
+                  ["If 2 is a zero of x² + ax − 6, what is a?", ["1", "−1", "5", "−5"], "A", "Substitute x = 2 and set equal to zero.", "4 + 2a − 6 = 0, so a = 1."],
+                  ["What is the degree of (x² + 1)(x³ − 2)?", ["2", "3", "6", "5"], "D", "Multiply the highest terms.", "x² × x³ = x⁵, so the degree is 5."]
+                ]
+              }
+            },
+            {
+              "slug": "g9-math-factor-theorem",
+              "title": "Remainder and Factor Theorems",
+              "objectives": [
+                "Divide a polynomial by a linear polynomial",
+                "Use the remainder theorem to find remainders quickly",
+                "Use the factor theorem to test and find factors",
+                "Factorise quadratic and cubic polynomials"
+              ],
+              "intro": "Dividing 17 by 5 gives quotient 3 and remainder 2, because 17 = 5 × 3 + 2. Polynomials can be divided in the same way. Two powerful results, the remainder theorem and the factor theorem, let us find remainders and factors without doing long division. These ideas are the key to factorising cubic polynomials and solving higher-degree equations.",
+              "sections": [
+                [
+                  "Division and the remainder theorem",
+                  "When a polynomial p(x) is divided by a non-zero polynomial g(x), we get p(x) = g(x) × q(x) + r(x), where q(x) is the quotient and r(x) the remainder, with the remainder of lower degree than g(x). The remainder theorem says: if p(x) is divided by the linear polynomial (x − a), the remainder is p(a). For example, dividing p(x) = x³ − 2x + 1 by (x − 2) gives remainder p(2) = 8 − 4 + 1 = 5. To divide by (x + 3), use a = −3; to divide by (2x − 1), use a = 1/2."
+                ],
+                [
+                  "The factor theorem",
+                  "The factor theorem follows directly: (x − a) is a factor of p(x) if and only if p(a) = 0. In other words, a is a zero of p(x) exactly when (x − a) divides p(x) with no remainder. For p(x) = x³ − 6x² + 11x − 6, p(1) = 1 − 6 + 11 − 6 = 0, so (x − 1) is a factor. To find integer zeroes of a polynomial with integer coefficients and leading coefficient 1, test the factors of the constant term: here ±1, ±2, ±3, ±6."
+                ],
+                [
+                  "Factorising",
+                  "Quadratics ax² + bx + c can be factorised by splitting the middle term: find two numbers whose product is ac and whose sum is b. For 2x² + 7x + 3, ac = 6, and 6 + 1 = 7, so 2x² + 6x + x + 3 = 2x(x + 3) + 1(x + 3) = (2x + 1)(x + 3). For a cubic, find one factor using the factor theorem, divide to get a quadratic, then factorise the quadratic. For x³ − 6x² + 11x − 6, dividing by (x − 1) gives x² − 5x + 6 = (x − 2)(x − 3), so the polynomial is (x − 1)(x − 2)(x − 3)."
+                ]
+              ],
+              "definitions": [
+                ["Remainder theorem", "When p(x) is divided by (x − a), the remainder is p(a)."],
+                ["Factor theorem", "(x − a) is a factor of p(x) if and only if p(a) = 0."],
+                ["Quotient", "The result of dividing one polynomial by another."],
+                ["Splitting the middle term", "Writing bx as a sum of two terms to factorise a quadratic by grouping."]
+              ],
+              "examples": [
+                "The remainder when x² + 3x − 1 is divided by (x + 1) is p(−1) = 1 − 3 − 1 = −3.",
+                "x² − 7x + 12 = (x − 3)(x − 4)."
+              ],
+              "worked": [
+                {
+                  "problem": "Find k if (x − 2) is a factor of 2x³ − 5x² + kx − 2.",
+                  "steps": [
+                    "By the factor theorem, p(2) = 0.",
+                    "p(2) = 2(8) − 5(4) + 2k − 2 = 16 − 20 + 2k − 2 = 2k − 6.",
+                    "2k − 6 = 0, so k = 3."
+                  ],
+                  "answer": "k = 3"
+                },
+                {
+                  "problem": "Factorise x³ + 2x² − 5x − 6.",
+                  "steps": [
+                    "Test factors of −6: p(−1) = −1 + 2 + 5 − 6 = 0, so (x + 1) is a factor.",
+                    "Divide: x³ + 2x² − 5x − 6 = (x + 1)(x² + x − 6).",
+                    "Factorise the quadratic: x² + x − 6 = (x + 3)(x − 2)."
+                  ],
+                  "answer": "(x + 1)(x − 2)(x + 3)"
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Factorising a cubic",
+                "items": ["List factors of the constant term", "Test them: find a with p(a) = 0", "(x − a) is a factor", "Divide to get a quadratic", "Factorise the quadratic"]
+              },
+              "real_world": "Factorising polynomials helps engineers find the critical points of systems, and computer algebra systems use these theorems to solve equations. Error-detecting codes used in digital communication rely on polynomial division and remainders.",
+              "takeaways": [
+                "p(x) = g(x)q(x) + r(x).",
+                "Dividing by (x − a) leaves remainder p(a).",
+                "(x − a) is a factor exactly when p(a) = 0.",
+                "Factorise cubics by finding one factor and factorising the remaining quadratic."
+              ],
+              "practice": [
+                ["Find the remainder when x³ + 1 is divided by (x + 1).", "0"],
+                ["Is (x − 3) a factor of x² − 5x + 6?", "Yes; p(3) = 0."],
+                ["Factorise 6x² + 5x − 6.", "(2x + 3)(3x − 2)"],
+                ["Factorise x³ − 7x + 6.", "(x − 1)(x − 2)(x + 3)"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The remainder when p(x) is divided by (x − 3) is:", ["p(−3)", "p(3)", "3", "0 always"], "B", "Remainder theorem.", "Dividing by (x − a) leaves p(a)."],
+                  ["(x − a) is a factor of p(x) if:", ["p(a) = 1", "a = 0", "p(a) = 0", "p(0) = a"], "C", "Factor theorem.", "(x − a) is a factor exactly when p(a) = 0."],
+                  ["Factorise x² + 5x + 6.", ["(x + 2)(x + 3)", "(x + 1)(x + 6)", "(x − 2)(x − 3)", "(x + 5)(x + 1)"], "A", "Two numbers: product 6, sum 5.", "2 × 3 = 6 and 2 + 3 = 5."],
+                  ["The remainder when x² + 4 is divided by (x − 1) is:", ["4", "3", "1", "5"], "D", "Find p(1).", "p(1) = 1 + 4 = 5."]
+                ],
+                "MEDIUM": [
+                  ["The remainder when x³ − 3x² + 4 is divided by (x + 1) is:", ["2", "0", "6", "−2"], "B", "Use a = −1.", "p(−1) = −1 − 3 + 4 = 0."],
+                  ["Which is a factor of x² − x − 12?", ["(x − 3)", "(x + 4)", "(x − 4)", "(x + 6)"], "C", "Test the zeroes.", "p(4) = 16 − 4 − 12 = 0, so (x − 4) is a factor."],
+                  ["Factorise 2x² + 7x + 3.", ["(2x + 1)(x + 3)", "(2x + 3)(x + 1)", "(x + 7)(2x + 3)", "(2x − 1)(x − 3)"], "A", "Split 7x using ac = 6.", "2x² + 6x + x + 3 = (2x + 1)(x + 3)."],
+                  ["The remainder when 4x² − 1 is divided by (2x − 1) is:", ["1", "2", "−1", "0"], "D", "Use a = 1/2.", "p(1/2) = 4(1/4) − 1 = 0."]
+                ],
+                "HARD": [
+                  ["If (x + 2) is a factor of x³ + kx² − 4, what is k?", ["2", "3", "−3", "−2"], "B", "Set p(−2) = 0.", "−8 + 4k − 4 = 0, so k = 3."],
+                  ["Factorise x³ − 2x² − x + 2.", ["(x − 1)(x + 1)(x + 2)", "(x − 2)²(x + 1)", "(x − 1)(x + 1)(x − 2)", "(x + 2)(x − 1)²"], "C", "Try grouping: x²(x − 2) − 1(x − 2).", "(x − 2)(x² − 1) = (x − 2)(x − 1)(x + 1)."],
+                  ["When p(x) = x³ + ax + 1 is divided by (x − 1), the remainder is 5. What is a?", ["3", "4", "5", "−3"], "A", "p(1) = 5.", "1 + a + 1 = 5, so a = 3."],
+                  ["How many factors of the form (x − a) with integer a does x³ − 6x² + 11x − 6 have?", ["0", "1", "2", "3"], "D", "Test 1, 2 and 3.", "It factorises as (x − 1)(x − 2)(x − 3)."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g9-math-u-coordinate",
+      "title": "Coordinate Geometry",
+      "topics": [
+        {
+          "slug": "g9-math-t-coordinate-linear",
+          "title": "Coordinate Geometry and Linear Equations",
+          "description": "The Cartesian plane and linear equations in two variables with their graphs.",
+          "lessons": [
+            {
+              "slug": "g9-math-cartesian-plane",
+              "title": "The Cartesian Plane",
+              "objectives": [
+                "Describe the x-axis, y-axis, origin and quadrants",
+                "Plot points given their coordinates",
+                "Identify the quadrant or axis on which a point lies",
+                "Find the distance between points on a horizontal or vertical line"
+              ],
+              "intro": "How do you tell a friend exactly where a seat is in a cinema hall? You give the row and the seat number. In the seventeenth century the French mathematician René Descartes used the same idea to locate any point on a flat surface with two numbers. This system, the Cartesian plane, joins algebra and geometry: equations can be drawn as graphs, and shapes can be studied using numbers.",
+              "sections": [
+                [
+                  "Axes and coordinates",
+                  "Two perpendicular number lines meet at the origin O. The horizontal line is the x-axis and the vertical line is the y-axis. Every point P is described by an ordered pair (x, y). The x-coordinate (abscissa) is its distance from the y-axis, measured along the x-axis, positive to the right and negative to the left. The y-coordinate (ordinate) is its distance from the x-axis, positive upwards and negative downwards. The origin is (0, 0). Order matters: (2, 5) and (5, 2) are different points."
+                ],
+                [
+                  "Quadrants and axes",
+                  "The axes divide the plane into four quadrants, numbered anticlockwise from the upper right. In Quadrant I both coordinates are positive (+, +); in Quadrant II (−, +); in Quadrant III (−, −); and in Quadrant IV (+, −). A point on the x-axis has y = 0, such as (4, 0) or (−3, 0), and a point on the y-axis has x = 0, such as (0, −6). Points on the axes do not belong to any quadrant. To plot (−3, 2), move 3 units left from the origin and then 2 units up."
+                ],
+                [
+                  "Using coordinates",
+                  "Coordinates allow us to describe shapes precisely. The points A(1, 1), B(5, 1), C(5, 4) and D(1, 4) form a rectangle. Distances along horizontal or vertical lines are easy to find: AB lies on the line y = 1, so AB = |5 − 1| = 4 units; BC lies on x = 5, so BC = |4 − 1| = 3 units. The area of the rectangle is 4 × 3 = 12 square units. All points with the same x-coordinate lie on a vertical line, and all points with the same y-coordinate lie on a horizontal line."
+                ]
+              ],
+              "definitions": [
+                ["Origin", "The point (0, 0) where the axes meet."],
+                ["Abscissa", "The x-coordinate of a point."],
+                ["Ordinate", "The y-coordinate of a point."],
+                ["Quadrant", "One of the four regions into which the axes divide the plane."],
+                ["Ordered pair", "A pair (x, y) in which the order of the numbers matters."]
+              ],
+              "examples": [
+                "(−4, −2) lies in Quadrant III.",
+                "(0, 7) lies on the positive y-axis."
+              ],
+              "worked": [
+                {
+                  "problem": "In which quadrant or axis do these lie: (3, −5), (−2, 4), (0, −1), (−6, −6)?",
+                  "steps": [
+                    "(3, −5): x positive, y negative → Quadrant IV.",
+                    "(−2, 4): x negative, y positive → Quadrant II.",
+                    "(0, −1): x = 0 → on the negative y-axis.",
+                    "(−6, −6): both negative → Quadrant III."
+                  ],
+                  "answer": "IV, II, y-axis, III."
+                },
+                {
+                  "problem": "Find the area of the triangle with vertices (0, 0), (6, 0) and (0, 4).",
+                  "steps": [
+                    "Base along the x-axis from (0, 0) to (6, 0): 6 units.",
+                    "Height along the y-axis from (0, 0) to (0, 4): 4 units.",
+                    "Area = ½ × 6 × 4 = 12 square units."
+                  ],
+                  "answer": "12 square units"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Signs of coordinates",
+                "columns": ["Quadrant", "x", "y", "Example"],
+                "rows": [
+                  ["I", "+", "+", "(2, 3)"],
+                  ["II", "−", "+", "(−2, 3)"],
+                  ["III", "−", "−", "(−2, −3)"],
+                  ["IV", "+", "−", "(2, −3)"]
+                ]
+              },
+              "real_world": "GPS uses latitude and longitude, a coordinate system on the globe. Computer screens locate every pixel with coordinates, game designers position characters with them, and engineers plan city grids and machine parts on coordinate plans.",
+              "takeaways": [
+                "A point is located by an ordered pair (x, y).",
+                "Quadrant signs: I (+,+), II (−,+), III (−,−), IV (+,−).",
+                "Points on the x-axis have y = 0; points on the y-axis have x = 0.",
+                "Horizontal and vertical distances are differences in coordinates."
+              ],
+              "practice": [
+                ["Write the coordinates of the origin.", "(0, 0)"],
+                ["Which quadrant contains (−7, 1)?", "Quadrant II"],
+                ["Find the distance between (2, 3) and (2, −5).", "8 units"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The coordinates of the origin are:", ["(1, 1)", "(0, 0)", "(1, 0)", "(0, 1)"], "B", "Where the axes meet.", "The origin is (0, 0)."],
+                  ["The point (4, −3) lies in Quadrant:", ["I", "II", "IV", "III"], "C", "x positive, y negative.", "(+, −) is Quadrant IV."],
+                  ["The x-coordinate of a point is also called its:", ["Abscissa", "Ordinate", "Origin", "Quadrant"], "A", "It starts with 'a'.", "The x-coordinate is the abscissa."],
+                  ["A point on the y-axis has:", ["y = 0", "x = y", "y = 1", "x = 0"], "D", "It is directly above or below the origin.", "Points on the y-axis have x = 0."]
+                ],
+                "MEDIUM": [
+                  ["Which point lies in Quadrant II?", ["(3, 5)", "(−3, 5)", "(−3, −5)", "(3, −5)"], "B", "x negative, y positive.", "(−, +) is Quadrant II."],
+                  ["The distance between (−2, 4) and (6, 4) is:", ["4", "2", "8", "10"], "C", "Same y-coordinate.", "|6 − (−2)| = 8 units."],
+                  ["The point (0, −5) lies on the:", ["Negative y-axis", "Positive x-axis", "Negative x-axis", "Quadrant III"], "A", "x = 0 and y < 0.", "It is on the negative y-axis."],
+                  ["Are (3, 7) and (7, 3) the same point?", ["Yes, same numbers", "Yes, if plotted carefully", "Only in Quadrant I", "No, order matters"], "D", "Ordered pair.", "(x, y) order matters, so they are different points."]
+                ],
+                "HARD": [
+                  ["A(1, 2), B(7, 2) and C(7, 6) are three vertices of a rectangle. What is the fourth vertex?", ["(6, 1)", "(1, 6)", "(7, 1)", "(2, 6)"], "B", "Match x with A and y with C.", "D must have A's x = 1 and C's y = 6."],
+                  ["What is the area of the rectangle with vertices (−2, −1), (4, −1), (4, 3) and (−2, 3)?", ["12", "18", "24", "20"], "C", "Find length and breadth.", "Length = 6, breadth = 4, area = 24 square units."],
+                  ["If (a − 2, 5) lies on the y-axis, then a is:", ["2", "−2", "5", "0"], "A", "On the y-axis, x = 0.", "a − 2 = 0, so a = 2."],
+                  ["The perpendicular distance of (−5, 3) from the x-axis is:", ["5", "−3", "8", "3"], "D", "Distance from the x-axis is |y|.", "|3| = 3 units."]
+                ]
+              }
+            },
+            {
+              "slug": "g9-math-linear-equations-two-variables",
+              "title": "Linear Equations in Two Variables",
+              "objectives": [
+                "Write linear equations in two variables from situations",
+                "Find solutions of a linear equation in two variables",
+                "Draw the graph of a linear equation",
+                "Interpret equations of lines parallel to the axes"
+              ],
+              "intro": "If a pen costs ₹x and a notebook costs ₹y, and together they cost ₹50, we can write x + y = 50. Unlike equations with one variable, this has many solutions: (10, 40), (25, 25), (35, 15) and so on. An equation of the form ax + by + c = 0, where a and b are not both zero, is a linear equation in two variables. All its solutions, when plotted, lie on a straight line.",
+              "sections": [
+                [
+                  "Solutions",
+                  "A solution of a linear equation in two variables is an ordered pair (x, y) that satisfies it. For 2x + y = 7, the pair (1, 5) is a solution because 2(1) + 5 = 7, and (3, 1) is also a solution. To find solutions, choose a convenient value for one variable and solve for the other: if x = 0, y = 7; if y = 0, x = 3.5. Such an equation has infinitely many solutions, because for every value of x there is a matching y."
+                ],
+                [
+                  "Drawing the graph",
+                  "To draw the graph of 2x + y = 7, find at least two (preferably three) solutions, plot them and join them with a straight line: for example (0, 7), (2, 3) and (3, 1). The third point is a check: if it does not lie on the line, there is a mistake. Every point on the line is a solution, and every solution lies on the line. The line crosses the y-axis where x = 0 and the x-axis where y = 0. The graph of y = mx passes through the origin."
+                ],
+                [
+                  "Special lines and applications",
+                  "The equation y = 3 represents a horizontal line parallel to the x-axis, 3 units above it, because every point on it has y-coordinate 3 whatever x is. Similarly, x = −2 is a vertical line parallel to the y-axis. The x-axis itself is y = 0 and the y-axis is x = 0. Linear equations model many real situations: if a taxi charges ₹50 plus ₹15 per km, the fare y for x km is y = 15x + 50. Its graph lets us read off the fare for any distance."
+                ]
+              ],
+              "definitions": [
+                ["Linear equation in two variables", "An equation of the form ax + by + c = 0, with a and b not both zero."],
+                ["Solution", "An ordered pair (x, y) that satisfies the equation."],
+                ["Graph of an equation", "The set of all points whose coordinates satisfy it."],
+                ["Intercept", "The point where a line crosses an axis."]
+              ],
+              "examples": [
+                "x + y = 10 has solutions (0, 10), (4, 6), (10, 0).",
+                "y = 2x passes through (0, 0), (1, 2) and (3, 6)."
+              ],
+              "worked": [
+                {
+                  "problem": "Find three solutions of 3x − 2y = 6 and say where its graph cuts the axes.",
+                  "steps": [
+                    "x = 0: −2y = 6, y = −3 → (0, −3).",
+                    "y = 0: 3x = 6, x = 2 → (2, 0).",
+                    "x = 4: 12 − 2y = 6, y = 3 → (4, 3).",
+                    "It cuts the y-axis at (0, −3) and the x-axis at (2, 0)."
+                  ],
+                  "answer": "(0, −3), (2, 0), (4, 3); intercepts at (0, −3) and (2, 0)."
+                },
+                {
+                  "problem": "A taxi charges ₹40 for the first km and ₹15 for each further km. Write an equation for the fare y when x km are travelled (x ≥ 1).",
+                  "steps": [
+                    "First km costs 40; remaining distance is (x − 1) km at ₹15.",
+                    "y = 40 + 15(x − 1) = 15x + 25.",
+                    "Check: for x = 1, y = 40 ✓; for x = 5, y = 100."
+                  ],
+                  "answer": "y = 15x + 25"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Table of values for y = 2x + 1",
+                "columns": ["x", "−1", "0", "1", "2"],
+                "rows": [["y", "−1", "1", "3", "5"]]
+              },
+              "real_world": "Mobile tariffs, electricity bills with fixed and per-unit charges, and conversion between Celsius and Fahrenheit are all linear relationships. Plotting them as straight-line graphs makes comparisons easy, for example deciding which phone plan is cheaper for a given usage.",
+              "takeaways": [
+                "ax + by + c = 0 has infinitely many solutions.",
+                "Its graph is a straight line; plot at least two points and check with a third.",
+                "y = k is horizontal; x = k is vertical.",
+                "Many real-life relationships are linear."
+              ],
+              "practice": [
+                ["Is (2, 1) a solution of x + 3y = 5?", "Yes: 2 + 3 = 5."],
+                ["Write the equation of the x-axis.", "y = 0"],
+                ["Find where 4x + y = 8 cuts the x-axis.", "(2, 0)"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["How many solutions does x + y = 5 have?", ["One", "Infinitely many", "Two", "None"], "B", "Any x gives a matching y.", "A linear equation in two variables has infinitely many solutions."],
+                  ["Which is a solution of x + y = 7?", ["(2, 4)", "(1, 5)", "(3, 4)", "(7, 1)"], "C", "Add the coordinates.", "3 + 4 = 7."],
+                  ["The graph of a linear equation in two variables is a:", ["Straight line", "Circle", "Parabola", "Point"], "A", "Linear means line.", "Linear equations give straight-line graphs."],
+                  ["The equation of the y-axis is:", ["y = 0", "x = y", "y = 1", "x = 0"], "D", "Every point on it has x = …", "All points on the y-axis have x = 0."]
+                ],
+                "MEDIUM": [
+                  ["Where does 2x + 3y = 12 cut the y-axis?", ["(6, 0)", "(0, 4)", "(0, 6)", "(4, 0)"], "B", "Put x = 0.", "3y = 12, so y = 4."],
+                  ["The line y = −3 is:", ["Vertical", "Through the origin", "Horizontal, 3 units below the x-axis", "The x-axis"], "C", "Every point has y = −3.", "It is parallel to the x-axis, 3 units below."],
+                  ["If (k, 2) is a solution of 3x − y = 10, then k is:", ["4", "8/3", "12", "2"], "A", "Substitute y = 2.", "3k − 2 = 10, so k = 4."],
+                  ["Which equation passes through the origin?", ["x + y = 1", "y = 2x + 3", "x = 4", "y = 5x"], "D", "Substitute (0, 0).", "0 = 5(0) is true for y = 5x."]
+                ],
+                "HARD": [
+                  ["The cost y of x kg of rice at ₹60/kg plus a ₹20 delivery fee is:", ["y = 20x + 60", "y = 60x + 20", "y = 80x", "x = 60y + 20"], "B", "Fixed charge plus rate × quantity.", "y = 60x + 20."],
+                  ["Which point lies on both x = 3 and y = −2?", ["(−2, 3)", "(3, 2)", "(3, −2)", "(−3, −2)"], "C", "It must satisfy both equations.", "x = 3 and y = −2 give (3, −2)."],
+                  ["For which value of a does (2, a) lie on 5x − 2y = 4?", ["3", "−3", "7", "2"], "A", "Substitute x = 2.", "10 − 2a = 4, so a = 3."],
+                  ["The lines x = 4 and y = 4 together with the axes enclose a square of area:", ["4", "8", "12", "16"], "D", "Side length 4.", "The square has side 4, area 16 square units."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g9-math-u-geometry",
+      "title": "Geometry",
+      "topics": [
+        {
+          "slug": "g9-math-t-triangles",
+          "title": "Triangles",
+          "description": "Congruence of triangles and finding area using Heron's formula.",
+          "lessons": [
+            {
+              "slug": "g9-math-congruence",
+              "title": "Congruence of Triangles",
+              "objectives": [
+                "Explain what congruent figures are",
+                "State and apply the SAS, ASA, AAS, SSS and RHS congruence rules",
+                "Use CPCT to prove parts equal",
+                "Prove properties of isosceles triangles"
+              ],
+              "intro": "Two photocopies of the same page, two coins of the same value or two identical tiles fit exactly on each other. Figures that have exactly the same shape and size are congruent. For triangles, we do not need to check all six parts (three sides and three angles) to know they are congruent; a few carefully chosen parts are enough. These shortcuts, the congruence rules, are the basis of many proofs in geometry.",
+              "sections": [
+                [
+                  "Congruence and correspondence",
+                  "Triangles ABC and PQR are congruent, written △ABC ≅ △PQR, if they can be made to coincide exactly, with A on P, B on Q and C on R. The order of letters shows which parts correspond: AB = PQ, BC = QR, CA = RP, ∠A = ∠P, ∠B = ∠Q and ∠C = ∠R. Once two triangles are proved congruent, all their corresponding parts are equal; this is written CPCT (corresponding parts of congruent triangles)."
+                ],
+                [
+                  "Congruence rules",
+                  "SAS: two sides and the included angle of one triangle equal those of the other. ASA: two angles and the included side are equal. AAS: two angles and any non-included side are equal (because the third angles must then be equal too). SSS: all three sides are equal. RHS: in right triangles, the hypotenuse and one other side are equal. Note that SSA (two sides and a non-included angle) and AAA (three angles) are NOT congruence rules: AAA triangles have the same shape but may differ in size."
+                ],
+                [
+                  "Isosceles triangles",
+                  "Congruence lets us prove important results. In an isosceles triangle ABC with AB = AC, draw the bisector AD of ∠A. In △ABD and △ACD, AB = AC, ∠BAD = ∠CAD and AD is common, so △ABD ≅ △ACD by SAS. By CPCT, ∠B = ∠C. So angles opposite equal sides are equal. The converse is also true: sides opposite equal angles are equal. Also from the same congruence, BD = DC and ∠ADB = ∠ADC = 90°, so the bisector of the vertex angle is the perpendicular bisector of the base."
+                ]
+              ],
+              "definitions": [
+                ["Congruent figures", "Figures with exactly the same shape and size."],
+                ["Included angle", "The angle between two given sides."],
+                ["CPCT", "Corresponding parts of congruent triangles are equal."],
+                ["Hypotenuse", "The side opposite the right angle in a right triangle."],
+                ["Isosceles triangle", "A triangle with two equal sides."]
+              ],
+              "examples": [
+                "If AB = DE, ∠B = ∠E and BC = EF, then △ABC ≅ △DEF by SAS.",
+                "In △PQR with PQ = PR and ∠Q = 70°, ∠R is also 70°, so ∠P = 40°."
+              ],
+              "worked": [
+                {
+                  "problem": "AB is a line segment and l is its perpendicular bisector meeting AB at M. P is any point on l. Prove PA = PB.",
+                  "steps": [
+                    "In △PMA and △PMB: AM = BM (M is the midpoint).",
+                    "∠PMA = ∠PMB = 90° (l is perpendicular to AB).",
+                    "PM = PM (common side).",
+                    "So △PMA ≅ △PMB by SAS, and PA = PB by CPCT."
+                  ],
+                  "answer": "PA = PB: every point on the perpendicular bisector is equidistant from A and B."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Congruence rules",
+                "columns": ["Rule", "Parts needed"],
+                "rows": [
+                  ["SAS", "Two sides and the included angle"],
+                  ["ASA", "Two angles and the included side"],
+                  ["AAS", "Two angles and a non-included side"],
+                  ["SSS", "Three sides"],
+                  ["RHS", "Right angle, hypotenuse and one side"]
+                ]
+              },
+              "real_world": "Factories make identical, congruent parts so they fit any machine of the same model. Bridge trusses and roof frames use congruent triangles for strength and easy assembly, and surveyors use congruence to measure distances they cannot reach directly, such as the width of a river.",
+              "takeaways": [
+                "Congruent triangles have all corresponding sides and angles equal.",
+                "Use SAS, ASA, AAS, SSS or RHS to prove congruence.",
+                "SSA and AAA do not guarantee congruence.",
+                "In an isosceles triangle, angles opposite equal sides are equal."
+              ],
+              "practice": [
+                ["Which rule applies if all three sides are equal?", "SSS"],
+                ["What does CPCT stand for?", "Corresponding parts of congruent triangles."],
+                ["In △ABC, AB = AC and ∠A = 50°. Find ∠B.", "65°"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Congruent figures have:", ["The same shape only", "The same shape and size", "The same colour", "The same area only"], "B", "They fit exactly.", "Congruent figures are identical in shape and size."],
+                  ["If all three sides of two triangles are equal, they are congruent by:", ["SAS", "ASA", "SSS", "RHS"], "C", "Side-side-side.", "Three equal sides give SSS congruence."],
+                  ["CPCT stands for:", ["Corresponding parts of congruent triangles", "Common parts of complete triangles", "Congruent pairs counted twice", "Central point of a circle and triangle"], "A", "Used after proving congruence.", "Corresponding parts of congruent triangles are equal."],
+                  ["Which is NOT a congruence rule?", ["SAS", "ASA", "RHS", "AAA"], "D", "Same angles, different sizes possible.", "AAA shows similarity, not congruence."]
+                ],
+                "MEDIUM": [
+                  ["In △ABC, AB = AC and ∠B = 55°. Find ∠A.", ["55°", "70°", "125°", "35°"], "B", "∠C = ∠B in an isosceles triangle.", "∠A = 180° − 55° − 55° = 70°."],
+                  ["Two right triangles have equal hypotenuses and one equal side. They are congruent by:", ["SSS", "ASA", "RHS", "AAS"], "C", "Right angle, hypotenuse, side.", "This is the RHS rule."],
+                  ["If AB = PQ, ∠A = ∠P and AC = PR, then △ABC ≅ △PQR by:", ["SAS", "ASA", "SSS", "AAS"], "A", "The angle lies between the two sides.", "Two sides and the included angle give SAS."],
+                  ["If △ABC ≅ △DEF, which is TRUE?", ["AB = EF", "∠A = ∠F", "BC = DE", "∠B = ∠E"], "D", "Match letters in order.", "B corresponds to E, so ∠B = ∠E."]
+                ],
+                "HARD": [
+                  ["Why is SSA not a congruence rule?", ["It always gives congruent triangles", "Two different triangles can share two sides and a non-included angle", "It only works for squares", "It needs four sides"], "B", "Think of the ambiguous case.", "Two non-congruent triangles can have SSA in common."],
+                  ["In △PQR, ∠Q = ∠R. Which must be true?", ["PQ = QR", "QR = PR", "PQ = PR", "All sides are unequal"], "C", "Sides opposite equal angles are equal.", "Side PR is opposite ∠Q and PQ is opposite ∠R, so PQ = PR."],
+                  ["In an equilateral triangle, each angle measures:", ["60°", "90°", "45°", "30°"], "A", "All sides equal means all angles equal.", "180° ÷ 3 = 60°."],
+                  ["AD bisects ∠A of isosceles △ABC (AB = AC) and meets BC at D. Which statement is TRUE?", ["AD = AB", "∠ADB = 45°", "BD = 2DC", "AD ⊥ BC and BD = DC"], "D", "△ABD ≅ △ACD by SAS.", "By CPCT, BD = DC and ∠ADB = ∠ADC = 90°."]
+                ]
+              }
+            },
+            {
+              "slug": "g9-math-herons-formula",
+              "title": "Area of a Triangle: Heron's Formula",
+              "objectives": [
+                "Recall the area of a triangle using base and height",
+                "Compute the semi-perimeter of a triangle",
+                "Use Heron's formula to find the area from three sides",
+                "Find areas of quadrilaterals by splitting them into triangles"
+              ],
+              "intro": "The area of a triangle is ½ × base × height, but in real life the height is often hard to measure. Imagine a triangular park whose sides you can pace out, but where you cannot easily draw a perpendicular height across the grass. Heron of Alexandria, a mathematician of the first century, found a formula that gives the area using only the lengths of the three sides.",
+              "sections": [
+                [
+                  "Semi-perimeter",
+                  "For a triangle with sides a, b and c, the perimeter is a + b + c and the semi-perimeter s is half of it: s = (a + b + c) ÷ 2. For a triangle with sides 13 cm, 14 cm and 15 cm, s = 42 ÷ 2 = 21 cm. Notice that s − a, s − b and s − c must all be positive; this is equivalent to the triangle inequality, which says that the sum of any two sides of a triangle is greater than the third side. If it fails, no triangle exists."
+                ],
+                [
+                  "Heron's formula",
+                  "Heron's formula states: Area = √[s(s − a)(s − b)(s − c)]. For the 13-14-15 triangle: s − a = 8, s − b = 7, s − c = 6, so Area = √(21 × 8 × 7 × 6) = √7,056 = 84 cm². Breaking numbers into prime factors before taking the square root often makes calculation easier: 21 × 8 × 7 × 6 = (3 × 7) × 2³ × 7 × (2 × 3) = 2⁴ × 3² × 7², whose square root is 2² × 3 × 7 = 84. For an equilateral triangle of side a, the formula gives (√3/4)a²."
+                ],
+                [
+                  "Quadrilaterals and applications",
+                  "Any quadrilateral can be divided by a diagonal into two triangles. If we know the four sides and one diagonal, we can find both triangles' areas with Heron's formula and add them. For example, a quadrilateral field ABCD with AB = 9 m, BC = 40 m, CD = 28 m, DA = 15 m and diagonal AC = 41 m splits into △ABC (9, 40, 41), which is right-angled with area 180 m², and △ACD (41, 28, 15), whose area by Heron's formula is 126 m². The total area is 306 m²."
+                ]
+              ],
+              "definitions": [
+                ["Semi-perimeter", "Half the perimeter of a triangle: s = (a + b + c)/2."],
+                ["Heron's formula", "Area of a triangle = √[s(s − a)(s − b)(s − c)]."],
+                ["Triangle inequality", "The sum of any two sides of a triangle is greater than the third."],
+                ["Scalene triangle", "A triangle with all sides of different lengths."]
+              ],
+              "examples": [
+                "A triangle with sides 5, 12, 13 has s = 15 and area √(15 × 10 × 3 × 2) = 30.",
+                "An equilateral triangle of side 6 cm has area (√3/4) × 36 ≈ 15.6 cm²."
+              ],
+              "worked": [
+                {
+                  "problem": "Find the area of a triangle with sides 7 cm, 24 cm and 25 cm using Heron's formula, and check with ½ × base × height.",
+                  "steps": [
+                    "s = (7 + 24 + 25)/2 = 28.",
+                    "s − a = 21, s − b = 4, s − c = 3.",
+                    "Area = √(28 × 21 × 4 × 3) = √7,056 = 84 cm².",
+                    "Check: 7² + 24² = 625 = 25², so it is right-angled; ½ × 7 × 24 = 84 ✓."
+                  ],
+                  "answer": "84 cm²"
+                },
+                {
+                  "problem": "The sides of a triangular plot are in the ratio 3 : 5 : 7 and its perimeter is 300 m. Find its area.",
+                  "steps": [
+                    "Sides: 3k + 5k + 7k = 300, so k = 20; sides are 60, 100, 140 m.",
+                    "s = 150; s − a = 90, s − b = 50, s − c = 10.",
+                    "Area = √(150 × 90 × 50 × 10) = √6,750,000 = 1,500√3 ≈ 2,598 m²."
+                  ],
+                  "answer": "1,500√3 m² ≈ 2,598 m²"
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Using Heron's formula",
+                "items": ["Write the three sides a, b, c", "Find s = (a + b + c)/2", "Find s − a, s − b, s − c", "Multiply s(s − a)(s − b)(s − c)", "Take the square root"]
+              },
+              "real_world": "Surveyors measure the sides of irregular plots and use Heron's formula to compute area for land records. Designers of triangular sails, roof panels and signboards use it to estimate material, especially when heights are awkward to measure.",
+              "takeaways": [
+                "s = (a + b + c)/2.",
+                "Area = √[s(s − a)(s − b)(s − c)].",
+                "Use prime factorisation to simplify the square root.",
+                "Split quadrilaterals into triangles using a diagonal."
+              ],
+              "practice": [
+                ["Find s for a triangle with sides 8, 15, 17.", "20"],
+                ["Find its area.", "√(20 × 12 × 5 × 3) = 60"],
+                ["Can sides 3, 4 and 8 form a triangle?", "No; 3 + 4 < 8."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The semi-perimeter of a triangle with sides 5, 6 and 7 is:", ["18", "9", "36", "12"], "B", "Half the perimeter.", "(5 + 6 + 7)/2 = 9."],
+                  ["Heron's formula needs:", ["Only the height", "One side and one angle", "The three sides", "The radius"], "C", "It uses side lengths only.", "Heron's formula uses the three sides."],
+                  ["Area by Heron's formula = √[s(s − a)(s − b)(s − c)], where s is:", ["Half the perimeter", "The longest side", "The height", "The perimeter"], "A", "Semi-perimeter.", "s is the semi-perimeter."],
+                  ["Which side lengths can form a triangle?", ["1, 2, 3", "2, 3, 6", "4, 4, 9", "5, 6, 7"], "D", "Sum of any two sides > third.", "5 + 6 > 7, 5 + 7 > 6 and 6 + 7 > 5."]
+                ],
+                "MEDIUM": [
+                  ["Find the area of a triangle with sides 6, 8 and 10.", ["48", "24", "30", "12"], "B", "s = 12.", "√(12 × 6 × 4 × 2) = √576 = 24."],
+                  ["The area of a triangle with sides 13, 14 and 15 is:", ["42", "168", "84", "91"], "C", "s = 21.", "√(21 × 8 × 7 × 6) = 84."],
+                  ["An equilateral triangle has side 4 cm. Its area is:", ["4√3 cm²", "8 cm²", "16 cm²", "2√3 cm²"], "A", "(√3/4)a².", "(√3/4) × 16 = 4√3 cm²."],
+                  ["A triangle has sides 5, 5 and 6. Its area is:", ["15", "30", "18", "12"], "D", "s = 8.", "√(8 × 3 × 3 × 2) = √144 = 12."]
+                ],
+                "HARD": [
+                  ["The sides of a triangle are 9, 10 and 17. Its area is:", ["45", "36", "72", "40"], "B", "s = 18.", "√(18 × 9 × 8 × 1) = √1,296 = 36."],
+                  ["A quadrilateral is split by a diagonal into triangles of sides (5, 12, 13) and (13, 14, 15). What is its total area?", ["124", "84", "114", "144"], "C", "Find each area and add.", "30 + 84 = 114 square units."],
+                  ["The perimeter of an isosceles triangle is 32 cm and its base is 12 cm. Its area is:", ["48 cm²", "60 cm²", "96 cm²", "36 cm²"], "A", "Equal sides are 10 cm each; s = 16.", "√(16 × 6 × 6 × 4) = √2,304 = 48 cm²."],
+                  ["If each side of a triangle is doubled, its area becomes:", ["Double", "Half", "Unchanged", "Four times"], "D", "s doubles and each factor doubles.", "Product inside √ multiplies by 16, so area multiplies by 4."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

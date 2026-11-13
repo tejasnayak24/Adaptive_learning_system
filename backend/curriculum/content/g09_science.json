@@ -1,0 +1,595 @@
+{
+  "grade": 9,
+  "subject": "Science",
+  "units": [
+    {
+      "slug": "g9-sci-u-physics",
+      "title": "Physics: Motion and Force",
+      "topics": [
+        {
+          "slug": "g9-sci-t-motion-force",
+          "title": "Motion and Force",
+          "description": "Describing motion with distance, displacement, speed, velocity and acceleration, and explaining it with Newton's laws.",
+          "lessons": [
+            {
+              "slug": "g9-sci-describing-motion",
+              "title": "Describing Motion",
+              "objectives": [
+                "Distinguish distance from displacement and speed from velocity",
+                "Calculate average speed and acceleration",
+                "Use the equations of uniformly accelerated motion",
+                "Interpret distance–time and velocity–time graphs"
+              ],
+              "intro": "A school bus leaves at 7:30, speeds up on the highway, slows at a signal and stops at the gate. To describe such motion precisely, physicists use a few carefully defined quantities: distance and displacement, speed and velocity, and acceleration. With these, and a handful of equations, we can predict where a moving object will be and how fast it will be going at any moment.",
+              "sections": [
+                [
+                  "Distance, displacement, speed and velocity",
+                  "Distance is the total length of the path travelled, and it has only magnitude (a scalar). Displacement is the shortest straight-line distance from the starting point to the final point in a particular direction, so it has magnitude and direction (a vector). If you walk 4 m east and then 3 m north, the distance is 7 m but the displacement is 5 m towards the north-east. Speed is distance travelled per unit time; average speed = total distance ÷ total time. Velocity is displacement per unit time, so it includes direction. The SI unit of both is metres per second (m/s); 1 km/h = 5/18 m/s."
+                ],
+                [
+                  "Acceleration",
+                  "Acceleration is the rate of change of velocity: a = (v − u) ÷ t, where u is the initial velocity, v the final velocity and t the time taken. Its SI unit is m/s². If velocity increases, acceleration is positive; if it decreases, acceleration is negative and is often called retardation or deceleration. Motion in which velocity changes by equal amounts in equal intervals of time is uniformly accelerated. An object moving in a circle at constant speed is also accelerating, because its direction, and so its velocity, keeps changing."
+                ],
+                [
+                  "Equations and graphs",
+                  "For uniformly accelerated motion in a straight line: (1) v = u + at; (2) s = ut + ½at²; (3) v² = u² + 2as, where s is displacement. On a distance–time graph, a straight sloping line shows uniform speed, and the slope gives the speed; a horizontal line shows the object at rest. On a velocity–time graph, a straight sloping line shows uniform acceleration, its slope gives the acceleration, and the area under the graph gives the displacement. Graphs let us read motion at a glance."
+                ]
+              ],
+              "definitions": [
+                ["Displacement", "The shortest distance from the initial to the final position in a given direction."],
+                ["Velocity", "Displacement per unit time; speed in a given direction."],
+                ["Acceleration", "Rate of change of velocity, a = (v − u)/t."],
+                ["Uniform motion", "Motion covering equal distances in equal intervals of time."],
+                ["Scalar and vector", "A scalar has only magnitude; a vector has magnitude and direction."]
+              ],
+              "examples": [
+                "A runner completing one lap of a 400 m track has distance 400 m but displacement 0.",
+                "A car going from 0 to 20 m/s in 10 s has acceleration 2 m/s²."
+              ],
+              "worked": [
+                {
+                  "problem": "A train starting from rest accelerates uniformly at 0.5 m/s² for 40 s. Find its final velocity and the distance covered.",
+                  "steps": [
+                    "u = 0, a = 0.5 m/s², t = 40 s.",
+                    "v = u + at = 0 + 0.5 × 40 = 20 m/s.",
+                    "s = ut + ½at² = 0 + ½ × 0.5 × 1,600 = 400 m."
+                  ],
+                  "answer": "20 m/s; 400 m"
+                },
+                {
+                  "problem": "A car moving at 72 km/h brakes and stops in 4 s. Find its retardation.",
+                  "steps": [
+                    "Convert: 72 km/h × 5/18 = 20 m/s.",
+                    "a = (v − u)/t = (0 − 20)/4 = −5 m/s².",
+                    "Retardation is 5 m/s²."
+                  ],
+                  "answer": "5 m/s² (acceleration −5 m/s²)"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Equations of motion (uniform acceleration)",
+                "columns": ["Equation", "Relates"],
+                "rows": [
+                  ["v = u + at", "velocity and time"],
+                  ["s = ut + ½at²", "displacement and time"],
+                  ["v² = u² + 2as", "velocity and displacement"]
+                ]
+              },
+              "real_world": "Traffic police calculate the braking distance of vehicles using v² = u² + 2as, which shows why stopping distance grows rapidly with speed. Sports scientists analyse sprinters' acceleration, and navigation apps estimate arrival time from average speed.",
+              "takeaways": [
+                "Distance and speed are scalars; displacement and velocity are vectors.",
+                "Acceleration a = (v − u)/t, in m/s².",
+                "Use v = u + at, s = ut + ½at², v² = u² + 2as for uniform acceleration.",
+                "Slope of distance–time graph = speed; slope of velocity–time = acceleration; area under velocity–time = displacement."
+              ],
+              "practice": [
+                ["Convert 54 km/h to m/s.", "15 m/s"],
+                ["A bike goes from 5 m/s to 15 m/s in 5 s. Find its acceleration.", "2 m/s²"],
+                ["What does a horizontal line on a distance–time graph mean?", "The object is at rest."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which is a vector quantity?", ["Distance", "Velocity", "Speed", "Time"], "B", "It has direction.", "Velocity includes direction."],
+                  ["The SI unit of acceleration is:", ["m/s", "km/h", "m/s²", "N"], "C", "Change in velocity per second.", "Acceleration is measured in m/s²."],
+                  ["A runner completes one full lap of a circular track. The displacement is:", ["Zero", "The track length", "Twice the radius", "Infinite"], "A", "Start and end points are the same.", "Returning to the start gives zero displacement."],
+                  ["Average speed equals:", ["Displacement ÷ time", "Time ÷ distance", "Velocity × time", "Total distance ÷ total time"], "D", "Speed uses distance.", "Average speed = total distance ÷ total time."]
+                ],
+                "MEDIUM": [
+                  ["72 km/h is equal to:", ["7.2 m/s", "20 m/s", "36 m/s", "2 m/s"], "B", "Multiply by 5/18.", "72 × 5/18 = 20 m/s."],
+                  ["A car goes from 10 m/s to 30 m/s in 4 s. Its acceleration is:", ["10 m/s²", "2.5 m/s²", "5 m/s²", "20 m/s²"], "C", "(v − u)/t.", "(30 − 10)/4 = 5 m/s²."],
+                  ["On a velocity–time graph, the area under the line gives:", ["Displacement", "Acceleration", "Speed", "Force"], "A", "velocity × time.", "Area under a v–t graph is displacement."],
+                  ["Someone walks 6 m east and then 8 m north. The displacement is:", ["14 m", "2 m", "48 m", "10 m"], "D", "Use Pythagoras.", "√(6² + 8²) = 10 m."]
+                ],
+                "HARD": [
+                  ["A ball is dropped from rest and falls for 3 s (take a = 10 m/s²). How far does it fall?", ["30 m", "45 m", "90 m", "15 m"], "B", "s = ut + ½at².", "½ × 10 × 9 = 45 m."],
+                  ["A car at 20 m/s stops with retardation 4 m/s². What is its stopping distance?", ["40 m", "80 m", "50 m", "100 m"], "C", "v² = u² + 2as.", "0 = 400 − 8s, so s = 50 m."],
+                  ["Why is an object moving in a circle at constant speed accelerating?", ["Its direction, and hence velocity, keeps changing", "Its speed keeps increasing", "It has no velocity", "Gravity becomes zero"], "A", "Velocity includes direction.", "Changing direction changes velocity, which is acceleration."],
+                  ["If stopping distance is found from v² = u² + 2as, doubling the initial speed makes the stopping distance:", ["Double", "Half", "The same", "Four times"], "D", "s is proportional to u².", "s = u²/2a, so doubling u quadruples s."]
+                ]
+              }
+            },
+            {
+              "slug": "g9-sci-force-and-motion",
+              "title": "Force and Motion",
+              "legacy_title": "Force and Motion",
+              "objectives": [
+                "State Newton's three laws of motion",
+                "Explain inertia and relate it to mass",
+                "Use F = ma to solve problems",
+                "Explain friction, gravity and terminal speed"
+              ],
+              "intro": "Why does a cricket ball stop rolling, why do passengers lurch forward when a bus brakes suddenly, and why does a rocket rise when gases rush downwards? Sir Isaac Newton answered all of these in 1687 with three laws of motion. They connect the forces acting on an object with the way it moves, and they explain everything from walking to launching satellites.",
+              "sections": [
+                [
+                  "First law and inertia",
+                  "Newton's first law states that an object remains at rest, or in uniform motion in a straight line, unless an unbalanced (net) external force acts on it. The tendency of an object to resist any change in its state of rest or motion is called inertia. Mass is a measure of inertia: a loaded truck is much harder to start or stop than a bicycle. When a bus suddenly stops, the passengers' bodies tend to keep moving forward because of inertia. When the net force on an object is zero, its acceleration is zero: it stays at rest or moves with constant velocity."
+                ],
+                [
+                  "Second law: F = ma",
+                  "Newton's second law states that the net force on an object equals its mass multiplied by its acceleration: F = ma. Force is measured in newtons; one newton is the force that gives a 1 kg mass an acceleration of 1 m/s². For a fixed mass, doubling the force doubles the acceleration. For a fixed force, a larger mass gets a smaller acceleration. A net force of 10 N on a 2 kg object produces an acceleration of 5 m/s². This law also explains why a cricketer pulls his hands back while catching: increasing the time of stopping the ball reduces the force on his hands."
+                ],
+                [
+                  "Third law, friction and gravity",
+                  "Newton's third law states that to every action there is an equal and opposite reaction. Forces always come in pairs acting on two different objects. When two skaters push each other, each experiences a force of the same size in opposite directions, so both move apart. A rocket pushes exhaust gases down, and the gases push the rocket up. Friction is a force that opposes relative sliding between surfaces. Gravity is the attractive force between masses; near Earth it gives freely falling objects an acceleration of about 9.8 m/s². A falling object in air speeds up until air resistance, which increases with speed, balances its weight; it then falls at a constant terminal speed."
+                ]
+              ],
+              "definitions": [
+                ["Inertia", "The tendency of an object to resist changes in its state of rest or motion."],
+                ["Net force", "The overall force on an object when all forces are combined."],
+                ["Newton (N)", "The force that gives a 1 kg mass an acceleration of 1 m/s²."],
+                ["Action–reaction pair", "Two equal and opposite forces acting on two different objects."],
+                ["Terminal speed", "The constant speed reached when air resistance balances weight."]
+              ],
+              "examples": [
+                "Shaking a tree makes fruit fall because the fruit tends to stay at rest while the branches move (inertia).",
+                "A 1,000 kg car accelerating at 2 m/s² needs a net force of 2,000 N."
+              ],
+              "worked": [
+                {
+                  "problem": "A net force of 15 N acts on a 3 kg trolley initially at rest. Find its acceleration and its velocity after 4 s.",
+                  "steps": [
+                    "a = F/m = 15/3 = 5 m/s².",
+                    "v = u + at = 0 + 5 × 4 = 20 m/s."
+                  ],
+                  "answer": "5 m/s²; 20 m/s"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Newton's laws of motion",
+                "columns": ["Law", "Statement", "Example"],
+                "rows": [
+                  ["First", "No net force → no change in motion (inertia)", "Passengers lurch forward when a bus brakes"],
+                  ["Second", "F = ma", "Harder kick → greater acceleration of the ball"],
+                  ["Third", "Action and reaction are equal and opposite", "Rocket and exhaust gases"]
+                ]
+              },
+              "real_world": "Seat belts and airbags protect passengers from the effects of inertia in a crash. Engineers use F = ma to design brakes and engines, and space agencies use the third law in every rocket launch. Parachutes work by greatly increasing air resistance so that the terminal speed is safe for landing.",
+              "takeaways": [
+                "Without a net force, motion does not change (inertia); mass measures inertia.",
+                "F = ma; force is measured in newtons.",
+                "Action and reaction forces are equal, opposite and act on different objects.",
+                "Friction opposes sliding; air resistance limits falling objects to a terminal speed."
+              ],
+              "practice": [
+                ["What force gives a 5 kg mass an acceleration of 4 m/s²?", "20 N"],
+                ["Why does a gun recoil when fired?", "Third law: the bullet is pushed forward, the gun is pushed back."],
+                ["Which has more inertia: a 2 kg ball or a 10 kg ball?", "The 10 kg ball."]
+              ],
+              "legacy_notes": {
+                "What is the SI unit of force?": ["It is named after the scientist who gave the laws of motion.", "Force is measured in newtons (N); 1 N gives 1 kg an acceleration of 1 m/s²."],
+                "What is speed?": ["Think of kilometres per hour.", "Speed is the distance travelled per unit time."],
+                "Which force pulls objects toward Earth?": ["It makes an apple fall.", "Gravity is the attractive force that pulls objects towards the Earth."],
+                "What happens when the net force on an object is zero?": ["Use F = ma with F = 0.", "If the net force is zero, a = F/m = 0, so the velocity does not change."],
+                "Which law is commonly written as F = ma?": ["It links force, mass and acceleration.", "Newton's second law states that net force equals mass times acceleration."],
+                "If the net force on a 2 kg object is 10 N, what is its acceleration?": ["Rearrange F = ma as a = F/m.", "a = 10 N ÷ 2 kg = 5 m/s²."],
+                "What does inertia describe?": ["Think of passengers in a bus that stops suddenly.", "Inertia is an object's resistance to any change in its state of rest or motion."],
+                "Why does friction usually oppose motion between surfaces?": ["Friction acts along the surfaces in contact.", "Friction resists the relative sliding (or attempted sliding) of surfaces in contact."],
+                "A car travels 100 m in 5 s. What is its average speed?": ["Divide distance by time.", "100 m ÷ 5 s = 20 m/s."],
+                "Which quantity includes both magnitude and direction?": ["Speed in a particular direction.", "Velocity is a vector: it has magnitude and direction."],
+                "A 4 kg object accelerates at 3 m/s². What net force acts on it?": ["Multiply mass by acceleration.", "F = ma = 4 kg × 3 m/s² = 12 N."],
+                "A passenger moves forward when a car suddenly stops. Which concept best explains this?": ["The body tends to keep moving.", "Because of inertia, the passenger's body continues moving forward when the car stops."],
+                "Two skaters push away from each other. Which statement best describes the interaction?": ["Newton's third law.", "Action and reaction forces are equal in magnitude and opposite in direction."],
+                "If the net force on an object doubles while its mass stays constant, what happens to acceleration?": ["a = F/m with m fixed.", "Acceleration is proportional to force for a fixed mass, so it doubles."],
+                "Why does a falling object eventually approach a terminal speed in air?": ["Air resistance grows as speed increases.", "When air resistance equals the weight, the net force is zero and speed stops increasing."]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g9-sci-u-chemistry",
+      "title": "Chemistry: Matter",
+      "topics": [
+        {
+          "slug": "g9-sci-t-matter",
+          "title": "Matter and Its Nature",
+          "description": "States and properties of matter, and the atoms and molecules that make it up.",
+          "lessons": [
+            {
+              "slug": "g9-sci-matter-properties",
+              "title": "Matter and Its Properties",
+              "legacy_title": "Matter and Its Properties",
+              "objectives": [
+                "Describe the particle arrangement in solids, liquids and gases",
+                "Explain changes of state and latent heat",
+                "Calculate density",
+                "Distinguish physical and chemical changes, elements, compounds and mixtures"
+              ],
+              "intro": "Everything that has mass and occupies space is matter: the air you breathe, the water you drink and the chair you sit on. Matter is made of extremely small particles that are constantly moving and attract one another. How closely the particles are packed and how freely they move decides whether a substance is a solid, a liquid or a gas, and explains everyday observations such as why ice melts, why perfume spreads across a room and why gases can be compressed.",
+              "sections": [
+                [
+                  "States of matter",
+                  "In a solid, particles are tightly packed in fixed positions and only vibrate, so solids have a fixed shape and fixed volume. In a liquid, particles are close but can slide past one another, so liquids have a fixed volume but take the shape of their container. In a gas, particles are far apart and move freely and rapidly in all directions, so gases have neither fixed shape nor fixed volume and can be compressed easily because of the large spaces between particles. Particles spread from regions of higher to lower concentration; this diffusion is fastest in gases."
+                ],
+                [
+                  "Changes of state",
+                  "Heating gives particles more kinetic energy. Temperature is related to the average kinetic energy of particles, so it generally rises when a substance is heated. At the melting point, a solid changes into a liquid; at the boiling point, a liquid changes into a gas throughout its volume. During melting and boiling, the temperature stays constant even though heat is supplied, because the energy (latent heat) is used to overcome the forces between particles rather than to increase their kinetic energy. Evaporation is the change of liquid into vapour at the surface, at any temperature below the boiling point; it causes cooling. Condensation changes gas into liquid, and sublimation changes a solid directly into gas, as with camphor."
+                ],
+                [
+                  "Density and kinds of substances",
+                  "Density is mass per unit volume: density = mass ÷ volume, measured in g/cm³ or kg/m³. Water's density is 1 g/cm³; objects denser than water sink, and less dense objects float. A pure substance has a fixed composition. An element contains only one kind of atom, such as iron or oxygen. A compound contains two or more elements chemically combined in a fixed ratio, such as water (H₂O). A mixture contains substances physically mixed in any proportion, such as air or salt water, and can be separated by physical methods. Physical changes, such as melting, do not create new substances; chemical changes, signalled by a new gas, colour change or heat, form new substances."
+                ]
+              ],
+              "definitions": [
+                ["Matter", "Anything that has mass and occupies space."],
+                ["Latent heat", "Heat absorbed or released during a change of state without a change in temperature."],
+                ["Density", "Mass per unit volume."],
+                ["Compound", "A substance of two or more elements chemically combined in a fixed ratio."],
+                ["Mixture", "Two or more substances physically mixed in any proportion."]
+              ],
+              "examples": [
+                "Steam at 100 °C causes worse burns than boiling water at 100 °C because it also releases latent heat as it condenses.",
+                "Iron (density about 7.9 g/cm³) sinks in water, while wood floats."
+              ],
+              "worked": [
+                {
+                  "problem": "A stone of mass 120 g displaces 40 cm³ of water. Find its density and say whether it floats.",
+                  "steps": [
+                    "Volume of the stone = volume of water displaced = 40 cm³.",
+                    "Density = 120 ÷ 40 = 3 g/cm³.",
+                    "3 g/cm³ is greater than water's 1 g/cm³, so it sinks."
+                  ],
+                  "answer": "3 g/cm³; it sinks."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "States of matter",
+                "columns": ["Property", "Solid", "Liquid", "Gas"],
+                "rows": [
+                  ["Shape", "Fixed", "Takes container's shape", "Fills container"],
+                  ["Volume", "Fixed", "Fixed", "Not fixed"],
+                  ["Particle spacing", "Very close", "Close", "Far apart"],
+                  ["Compressibility", "Negligible", "Very low", "High"]
+                ]
+              },
+              "real_world": "Earthen pots (matkas) keep water cool by evaporation through their pores, gas cylinders store large amounts of LPG by compressing it into liquid, and engineers choose low-density materials such as aluminium for aircraft.",
+              "takeaways": [
+                "Particle arrangement and motion explain the properties of solids, liquids and gases.",
+                "Temperature stays constant during melting and boiling because latent heat breaks attractions.",
+                "Density = mass ÷ volume; denser objects sink in less dense liquids.",
+                "Elements, compounds and mixtures differ in composition; chemical changes form new substances."
+              ],
+              "practice": [
+                ["Why does perfume spread through a room?", "Gas particles diffuse rapidly."],
+                ["Find the density of 500 g occupying 250 cm³.", "2 g/cm³"],
+                ["Is salt water a compound or a mixture?", "A mixture."]
+              ],
+              "legacy_notes": {
+                "Which state of matter has a fixed shape and fixed volume?": ["Its particles are fixed in place.", "Solids have tightly packed particles in fixed positions, giving fixed shape and volume."],
+                "What is density?": ["It compares mass with space occupied.", "Density = mass ÷ volume."],
+                "What change turns a liquid into a gas at the surface?": ["Wet clothes dry this way.", "Evaporation is the change of liquid to vapour at its surface."],
+                "Which state generally has particles farthest apart?": ["This state can be compressed easily.", "Gas particles are far apart with large spaces between them."],
+                "Which is a physical change?": ["No new substance is formed.", "Melting ice only changes state; it is still water, so it is a physical change."],
+                "Why can gases be compressed much more easily than solids?": ["Think about the spaces between particles.", "Gas particles have large empty spaces between them that can be squeezed."],
+                "What happens to the average kinetic energy of particles when temperature increases?": ["Temperature measures particle motion.", "Higher temperature means particles move faster, so average kinetic energy increases."],
+                "What process changes a gas into a liquid?": ["Water droplets on a cold glass.", "Condensation turns a gas into a liquid on cooling."],
+                "A substance has a mass of 200 g and a volume of 50 cm³. What is its density?": ["Divide mass by volume.", "200 g ÷ 50 cm³ = 4 g/cm³."],
+                "Why is boiling different from evaporation?": ["Where and at what temperature does each happen?", "Boiling happens throughout the liquid at its boiling point; evaporation happens only at the surface, at any temperature."],
+                "Why does the temperature of a pure substance remain constant during melting under constant pressure?": ["Where does the heat go?", "The heat (latent heat) is used to overcome attractions between particles, not to raise their average kinetic energy."],
+                "A metal cube sinks in water. What can be concluded if the water and cube are at the same temperature?": ["Compare densities.", "An object sinks when it is denser than the liquid."],
+                "Which observation is strongest evidence of a chemical change?": ["Look for a new substance.", "A new gas forming indicates a new substance, which means a chemical change."],
+                "Why does increasing temperature generally increase gas pressure in a sealed rigid container?": ["Particles move faster when heated.", "Faster particles hit the walls more often and with more force, increasing pressure."],
+                "A sample contains particles of two different elements chemically bonded together. How should the sample be classified?": ["Chemically combined elements.", "Two elements chemically bonded in a fixed ratio form a compound."]
+              }
+            },
+            {
+              "slug": "g9-sci-atoms-molecules",
+              "title": "Atoms and Molecules",
+              "objectives": [
+                "State the laws of chemical combination",
+                "Explain Dalton's atomic theory",
+                "Write symbols, formulae and valencies",
+                "Calculate molecular mass and use the mole concept"
+              ],
+              "intro": "If you keep cutting a piece of gold into smaller and smaller pieces, is there a smallest piece that is still gold? Ancient Indian philosopher Maharishi Kanad and Greek thinkers suggested that matter is made of tiny indivisible particles. In 1808 John Dalton turned this idea into a scientific theory based on experiments. Today we know that everything is made of atoms, which join to form molecules.",
+              "sections": [
+                [
+                  "Laws of chemical combination",
+                  "Antoine Lavoisier showed the law of conservation of mass: in a chemical reaction, mass is neither created nor destroyed, so the total mass of reactants equals the total mass of products. Joseph Proust stated the law of constant proportions: a pure compound always contains the same elements combined in the same proportion by mass, wherever it comes from. Water always contains hydrogen and oxygen in the mass ratio 1 : 8. Dalton explained these laws with his atomic theory: matter is made of atoms; atoms of an element are identical in mass and properties; atoms combine in small whole-number ratios to form compounds; and atoms are neither created nor destroyed in reactions."
+                ],
+                [
+                  "Atoms, molecules, symbols and formulae",
+                  "An atom is the smallest particle of an element that can take part in a chemical reaction. Atoms are extremely small; their radius is about 10⁻¹⁰ m. A molecule is a group of two or more atoms chemically bonded, such as O₂ (oxygen), H₂O (water) or CO₂. Each element has a symbol, often from its English or Latin name: H, O, C, Na (sodium, from natrium), Fe (iron, from ferrum). The combining capacity of an element is its valency: H is 1, O is 2, N is 3 and C is 4. To write a formula, cross over the valencies: aluminium (3) and oxygen (2) form Al₂O₃; calcium (2) and chloride (1) form CaCl₂. Ions are charged atoms or groups, such as Na⁺ and Cl⁻."
+                ],
+                [
+                  "Molecular mass and the mole",
+                  "Atomic masses are measured relative to carbon-12, in atomic mass units (u): H = 1 u, C = 12 u, N = 14 u, O = 16 u. The molecular mass of a substance is the sum of the atomic masses in its formula: H₂O = 2(1) + 16 = 18 u; CO₂ = 12 + 2(16) = 44 u. Since atoms are too small to count individually, chemists use the mole: one mole of any substance contains 6.022 × 10²³ particles (the Avogadro number). The mass of one mole in grams equals its atomic or molecular mass, so 1 mole of water weighs 18 g and contains 6.022 × 10²³ molecules."
+                ]
+              ],
+              "definitions": [
+                ["Atom", "The smallest particle of an element that takes part in a chemical reaction."],
+                ["Molecule", "Two or more atoms chemically bonded together."],
+                ["Valency", "The combining capacity of an element."],
+                ["Molecular mass", "The sum of the atomic masses of all atoms in a molecule."],
+                ["Mole", "The amount of substance containing 6.022 × 10²³ particles."]
+              ],
+              "examples": [
+                "12 g of carbon contains 6.022 × 10²³ carbon atoms.",
+                "The formula of magnesium oxide is MgO, since both have valency 2."
+              ],
+              "worked": [
+                {
+                  "problem": "Find the molecular mass of sulphuric acid, H₂SO₄ (H = 1, S = 32, O = 16), and the number of moles in 49 g.",
+                  "steps": [
+                    "Molecular mass = 2(1) + 32 + 4(16) = 2 + 32 + 64 = 98 u.",
+                    "Molar mass = 98 g/mol.",
+                    "Moles = 49 ÷ 98 = 0.5 mol."
+                  ],
+                  "answer": "98 u; 0.5 mol"
+                },
+                {
+                  "problem": "Write the formula of aluminium sulphate (Al valency 3, sulphate SO₄ valency 2).",
+                  "steps": [
+                    "Write the symbols: Al and SO₄.",
+                    "Cross over valencies: Al gets 2, SO₄ gets 3.",
+                    "Use brackets for the polyatomic ion: Al₂(SO₄)₃."
+                  ],
+                  "answer": "Al₂(SO₄)₃"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Common elements",
+                "columns": ["Element", "Symbol", "Atomic mass (u)", "Valency"],
+                "rows": [
+                  ["Hydrogen", "H", "1", "1"],
+                  ["Carbon", "C", "12", "4"],
+                  ["Nitrogen", "N", "14", "3"],
+                  ["Oxygen", "O", "16", "2"],
+                  ["Sodium", "Na", "23", "1"]
+                ]
+              },
+              "real_world": "Pharmacists and chemists use moles and molecular masses to prepare medicines with exact amounts of each substance. The law of conservation of mass is used to balance chemical equations in industries, and fertiliser bags list compositions based on formulae such as NH₄NO₃.",
+              "takeaways": [
+                "Mass is conserved in reactions; compounds have constant composition.",
+                "Dalton's theory explains these laws using indivisible atoms combining in whole-number ratios.",
+                "Write formulae by crossing valencies.",
+                "Molecular mass is the sum of atomic masses; one mole contains 6.022 × 10²³ particles."
+              ],
+              "practice": [
+                ["Find the molecular mass of NH₃ (N = 14, H = 1).", "17 u"],
+                ["How many molecules are in 2 moles of water?", "1.2044 × 10²⁴"],
+                ["Write the formula of calcium oxide.", "CaO"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Who proposed the atomic theory in 1808?", ["Lavoisier", "John Dalton", "Proust", "Newton"], "B", "An English chemist.", "John Dalton proposed his atomic theory in 1808."],
+                  ["What is the chemical symbol of sodium?", ["S", "So", "Na", "Sd"], "C", "From its Latin name natrium.", "Sodium's symbol is Na."],
+                  ["The valency of oxygen is:", ["2", "1", "3", "4"], "A", "Water is H₂O.", "Oxygen combines with two hydrogens, so its valency is 2."],
+                  ["One mole of a substance contains how many particles?", ["6.022 × 10²", "100", "6.022 × 10¹⁰", "6.022 × 10²³"], "D", "The Avogadro number.", "One mole contains 6.022 × 10²³ particles."]
+                ],
+                "MEDIUM": [
+                  ["The molecular mass of CO₂ (C = 12, O = 16) is:", ["28 u", "44 u", "32 u", "40 u"], "B", "Add the atomic masses.", "12 + 2 × 16 = 44 u."],
+                  ["Which law says a compound always has the same proportion of elements by mass?", ["Conservation of mass", "Newton's law", "Law of constant proportions", "Law of gravitation"], "C", "Proust's law.", "The law of constant proportions."],
+                  ["The formula for a compound of Al (valency 3) and O (valency 2) is:", ["Al₂O₃", "AlO", "Al₃O₂", "AlO₃"], "A", "Cross over the valencies.", "Al gets 2 and O gets 3: Al₂O₃."],
+                  ["How many moles are in 36 g of water (H₂O = 18 u)?", ["0.5", "18", "36", "2"], "D", "Moles = mass ÷ molar mass.", "36 ÷ 18 = 2 moles."]
+                ],
+                "HARD": [
+                  ["When 10 g of calcium carbonate is heated, it forms 5.6 g of calcium oxide and some carbon dioxide. What mass of CO₂ forms?", ["5.6 g", "4.4 g", "15.6 g", "10 g"], "B", "Conservation of mass.", "10 − 5.6 = 4.4 g."],
+                  ["How many molecules are present in 4.4 g of CO₂?", ["6.022 × 10²³", "1.2 × 10²⁴", "6.022 × 10²²", "4.4 × 10²³"], "C", "4.4 g is a tenth of a mole.", "0.1 mol × 6.022 × 10²³ = 6.022 × 10²²."],
+                  ["The formula of magnesium nitrate (Mg valency 2, NO₃ valency 1) is:", ["Mg(NO₃)₂", "MgNO₃", "Mg₂NO₃", "Mg₂(NO₃)₃"], "A", "Use brackets for the ion.", "Cross-over gives Mg(NO₃)₂."],
+                  ["Hydrogen and oxygen combine in a 1 : 8 mass ratio in water. How much oxygen reacts with 3 g of hydrogen?", ["8 g", "9 g", "11 g", "24 g"], "D", "Scale the ratio.", "3 × 8 = 24 g of oxygen."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g9-sci-u-biology",
+      "title": "Biology: The Fundamental Unit of Life",
+      "topics": [
+        {
+          "slug": "g9-sci-t-cell",
+          "title": "The Cell and Tissues",
+          "description": "The structure and functions of cells, and how cells form plant and animal tissues.",
+          "lessons": [
+            {
+              "slug": "g9-sci-cell-biology",
+              "title": "Cell Biology",
+              "legacy_title": "Cell Biology",
+              "objectives": [
+                "Describe the cell as the basic unit of life",
+                "Identify the main cell organelles and their functions",
+                "Compare plant and animal cells, and prokaryotic and eukaryotic cells",
+                "Explain diffusion and osmosis"
+              ],
+              "intro": "In 1665 Robert Hooke looked at a thin slice of cork through a microscope and saw tiny box-like compartments, which he called cells. Later scientists showed that all living things are made of cells, that the cell is the basic unit of structure and function, and that new cells come only from existing cells. These ideas form the cell theory, one of the foundations of biology.",
+              "sections": [
+                [
+                  "Parts of a cell",
+                  "Every cell is surrounded by a cell membrane (plasma membrane), which is selectively permeable: it allows some substances to enter or leave and blocks others. Inside is jelly-like cytoplasm, in which organelles are suspended. The nucleus, surrounded by a nuclear membrane, contains chromosomes made of DNA, which carry hereditary information and control the cell's activities. Mitochondria release energy from food during cellular respiration in the form of ATP, so they are called the powerhouses of the cell. Ribosomes make proteins. The endoplasmic reticulum transports materials, the Golgi apparatus packages and dispatches them, and lysosomes contain enzymes that break down waste."
+                ],
+                [
+                  "Plant and animal cells",
+                  "Plant cells have three structures not found in animal cells: a rigid cell wall made of cellulose outside the cell membrane, which gives support and protection; chloroplasts, which contain chlorophyll and carry out photosynthesis; and a large central vacuole that stores water and maintains firmness. Animal cells have small vacuoles or none, and have centrioles. Cells whose genetic material is not enclosed in a nuclear membrane, such as bacteria, are prokaryotic; cells with a true nucleus and membrane-bound organelles, such as those of plants and animals, are eukaryotic."
+                ],
+                [
+                  "Diffusion, osmosis and cell size",
+                  "Substances such as oxygen and carbon dioxide move into and out of cells by diffusion, from a region of higher concentration to lower concentration. Osmosis is the movement of water across a selectively permeable membrane from a region of higher water concentration (dilute solution) to lower water concentration (concentrated solution). A cell in a solution more concentrated than its cytoplasm loses water and shrinks; in a more dilute solution it gains water and swells. Cells stay small because, as a cell grows, its volume increases faster than its surface area, so a large cell's surface-area-to-volume ratio becomes too small for efficient exchange."
+                ]
+              ],
+              "definitions": [
+                ["Cell", "The basic structural and functional unit of living organisms."],
+                ["Organelle", "A specialised structure within a cell that performs a particular function."],
+                ["Selectively permeable", "Allowing some substances to pass while blocking others."],
+                ["Osmosis", "Movement of water across a selectively permeable membrane from dilute to concentrated solution."],
+                ["Eukaryotic cell", "A cell with a true nucleus enclosed by a membrane."]
+              ],
+              "examples": [
+                "Raisins swell when soaked in water because water enters them by osmosis.",
+                "Muscle cells contain many mitochondria to supply energy for movement."
+              ],
+              "worked": [
+                {
+                  "problem": "Salted cucumber slices become limp and release water. Explain using osmosis.",
+                  "steps": [
+                    "Salt on the surface makes a solution more concentrated than the cell contents.",
+                    "Water moves out of the cucumber cells through their selectively permeable membranes by osmosis.",
+                    "The cells lose water and become limp; the water appears on the plate."
+                  ],
+                  "answer": "Water leaves the cells by osmosis into the more concentrated salt solution, so the slices go limp."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Plant cell vs animal cell",
+                "columns": ["Feature", "Plant cell", "Animal cell"],
+                "rows": [
+                  ["Cell wall", "Present (cellulose)", "Absent"],
+                  ["Chloroplasts", "Present", "Absent"],
+                  ["Vacuole", "Large central", "Small or absent"],
+                  ["Centrioles", "Usually absent", "Present"]
+                ]
+              },
+              "real_world": "Doctors examine cells under microscopes to diagnose diseases such as cancer and anaemia. Saline drips in hospitals have the same salt concentration as blood, so blood cells neither swell nor shrink. Pickling and salting preserve food partly by drawing water out of microbial cells.",
+              "takeaways": [
+                "The cell is the basic unit of life; all cells come from pre-existing cells.",
+                "Key organelles: nucleus (control), mitochondria (energy), ribosomes (proteins), membrane (regulation).",
+                "Plant cells have a cell wall, chloroplasts and a large vacuole.",
+                "Diffusion and osmosis move substances; small cells exchange materials efficiently."
+              ],
+              "practice": [
+                ["Which organelle is called the powerhouse of the cell?", "Mitochondrion."],
+                ["Name one structure found only in plant cells.", "Cell wall (or chloroplast, large central vacuole)."],
+                ["What happens to a red blood cell placed in pure water?", "It gains water by osmosis, swells and may burst."]
+              ],
+              "legacy_notes": {
+                "What is the basic structural and functional unit of life?": ["Robert Hooke first saw these in cork.", "The cell is the basic structural and functional unit of all living things."],
+                "Which organelle contains most of a eukaryotic cell's DNA?": ["It is the control centre of the cell.", "The nucleus contains the chromosomes made of DNA."],
+                "Which organelle is mainly responsible for producing ATP during cellular respiration?": ["It is called the powerhouse of the cell.", "Mitochondria release energy from food as ATP."],
+                "Which structure controls what enters and leaves a cell?": ["It is selectively permeable.", "The cell membrane regulates the movement of substances."],
+                "Which structure is found in plant cells but not animal cells?": ["It is made of cellulose.", "Only plant cells have a rigid cell wall outside the membrane."],
+                "What is the main function of ribosomes?": ["They read instructions from DNA.", "Ribosomes are the sites of protein synthesis."],
+                "What process is the movement of water across a selectively permeable membrane?": ["It is a special kind of diffusion involving water.", "Osmosis is the movement of water across a selectively permeable membrane."],
+                "Why do plant cells contain chloroplasts?": ["They contain chlorophyll.", "Chloroplasts carry out photosynthesis to make food."],
+                "What would most directly happen if a cell membrane lost its selective permeability?": ["What is the membrane's job?", "The cell would no longer control which substances enter and leave."],
+                "Which structure provides support and protection outside the plant cell membrane?": ["It makes plant cells rigid.", "The cellulose cell wall supports and protects plant cells."],
+                "A cell is placed in a solution with a much higher solute concentration than its cytoplasm. What is most likely to happen?": ["Water moves towards the more concentrated solution.", "Water leaves the cell by osmosis, and the cell shrinks."],
+                "Why can a cell with many mitochondria generally support high energy demand?": ["What do mitochondria produce?", "More mitochondria give greater capacity to produce ATP."],
+                "A mutation prevents ribosomes from functioning. Which process would be directly affected first?": ["Ribosomes have one main job.", "Without working ribosomes, protein synthesis stops."],
+                "Why is a very large cell less efficient at exchanging materials with its environment?": ["Compare how surface area and volume grow.", "Volume grows faster than surface area, so the surface-area-to-volume ratio falls."],
+                "A plant is kept in darkness for a long period. Which cellular process is directly reduced because chloroplasts cannot receive light energy?": ["Which process needs light?", "Photosynthesis requires light energy captured by chloroplasts."]
+              }
+            },
+            {
+              "slug": "g9-sci-tissues",
+              "title": "Plant and Animal Tissues",
+              "objectives": [
+                "Define tissue and explain division of labour",
+                "Classify plant tissues as meristematic and permanent",
+                "Describe the four types of animal tissue",
+                "Relate the structure of tissues to their functions"
+              ],
+              "intro": "A single-celled amoeba performs every function of life in one cell. In multicellular organisms such as plants and humans, cells specialise: some carry water, some contract, some carry messages. A group of similar cells that work together to perform a particular function is called a tissue. This division of labour makes complex organisms efficient, just as a school works well when teachers, cooks and drivers each do specialised jobs.",
+              "sections": [
+                [
+                  "Plant tissues",
+                  "Plants grow only in certain regions, where meristematic tissue is found. Meristematic cells are actively dividing, with thin walls, dense cytoplasm and prominent nuclei. Apical meristem at the tips of roots and stems increases length; lateral meristem (cambium) increases girth; intercalary meristem at the base of leaves and internodes helps growth there. Cells produced by meristems mature into permanent tissues, which stop dividing. Simple permanent tissues include parenchyma (living cells that store food; with chlorophyll they form chlorenchyma), collenchyma (gives flexibility to stems and leaves) and sclerenchyma (dead, thick-walled cells that give strength, as in the husk of a coconut)."
+                ],
+                [
+                  "Conducting tissues of plants",
+                  "Complex permanent tissues are made of more than one type of cell. Xylem carries water and dissolved minerals from roots upward to the leaves; it consists of tracheids, vessels, xylem parenchyma and xylem fibres, and its tracheids and vessels are dead tube-like cells. Phloem carries food made in the leaves to other parts of the plant, both upward and downward; it consists of sieve tubes, companion cells, phloem parenchyma and phloem fibres, and except for the fibres its cells are living. Protective tissue, the epidermis, covers the plant; on leaves it has stomata for gas exchange, and older stems develop protective cork."
+                ],
+                [
+                  "Animal tissues",
+                  "Animals have four main tissue types. Epithelial tissue covers body surfaces and lines organs and cavities, forming protective barriers; skin and the lining of the mouth are examples. Connective tissue binds and supports other tissues: blood (with plasma, red and white cells and platelets), bone, cartilage, ligaments (connecting bone to bone), tendons (connecting muscle to bone) and adipose tissue that stores fat. Muscular tissue contracts to produce movement: striated (skeletal, voluntary) muscle moves bones, smooth (involuntary) muscle lines the stomach and blood vessels, and cardiac muscle in the heart contracts rhythmically throughout life. Nervous tissue, made of neurons, receives and transmits messages rapidly."
+                ]
+              ],
+              "definitions": [
+                ["Tissue", "A group of similar cells performing a particular function."],
+                ["Meristematic tissue", "Plant tissue of actively dividing cells found in growing regions."],
+                ["Xylem", "Plant tissue that carries water and minerals from roots to leaves."],
+                ["Phloem", "Plant tissue that transports food throughout the plant."],
+                ["Neuron", "A nerve cell that carries messages as electrical impulses."]
+              ],
+              "examples": [
+                "Tendons connect the calf muscle to the heel bone.",
+                "The stringy husk of a coconut is made of sclerenchyma."
+              ],
+              "worked": [
+                {
+                  "problem": "Match each function to a tissue: (a) carrying food from leaves to roots, (b) joining bone to bone, (c) increasing the girth of a tree, (d) beating of the heart.",
+                  "steps": [
+                    "(a) Food transport in plants → phloem.",
+                    "(b) Bone-to-bone connection → ligament (connective tissue).",
+                    "(c) Growth in girth → lateral meristem (cambium).",
+                    "(d) Rhythmic involuntary contraction of the heart → cardiac muscle."
+                  ],
+                  "answer": "(a) phloem, (b) ligament, (c) lateral meristem, (d) cardiac muscle."
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Four animal tissues",
+                "items": [
+                  ["Epithelial", "Covers and lines: skin, lining of mouth"],
+                  ["Connective", "Binds and supports: blood, bone, tendons, ligaments"],
+                  ["Muscular", "Contracts: skeletal, smooth, cardiac"],
+                  ["Nervous", "Carries messages: neurons in brain and nerves"]
+                ]
+              },
+              "real_world": "Tissue culture, in which meristematic tissue is grown in nutrient media, is used to produce thousands of identical disease-free banana and orchid plants. Doctors treat sports injuries of tendons and ligaments, and blood transfusions rely on understanding blood as a connective tissue.",
+              "takeaways": [
+                "Tissues are groups of similar cells with a common function.",
+                "Plants have growing meristematic tissue and permanent tissues; xylem carries water, phloem carries food.",
+                "Animals have epithelial, connective, muscular and nervous tissues.",
+                "Each tissue's structure suits its function."
+              ],
+              "practice": [
+                ["Which meristem increases the length of a root?", "Apical meristem."],
+                ["What connects muscle to bone?", "Tendon."],
+                ["Which muscle type is involuntary and found in the stomach wall?", "Smooth muscle."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A group of similar cells performing a function is a:", ["Organ", "Tissue", "Organism", "System"], "B", "Between cells and organs.", "Similar cells working together form a tissue."],
+                  ["Which plant tissue carries water from roots to leaves?", ["Phloem", "Cork", "Xylem", "Parenchyma"], "C", "It carries water upward.", "Xylem conducts water and minerals."],
+                  ["Which tissue makes up the heart wall muscle?", ["Cardiac muscle", "Smooth muscle", "Skeletal muscle", "Epithelium"], "A", "It beats throughout life.", "The heart is made of cardiac muscle."],
+                  ["Blood is a type of:", ["Muscular tissue", "Nervous tissue", "Epithelial tissue", "Connective tissue"], "D", "It connects and transports.", "Blood is a fluid connective tissue."]
+                ],
+                "MEDIUM": [
+                  ["Ligaments connect:", ["Muscle to bone", "Bone to bone", "Skin to muscle", "Nerve to muscle"], "B", "Tendons connect muscle to bone.", "Ligaments join bones at joints."],
+                  ["Which meristem increases the girth (thickness) of a stem?", ["Apical", "Intercalary", "Lateral", "Epidermal"], "C", "It lies along the sides.", "Lateral meristem (cambium) increases girth."],
+                  ["Phloem transports:", ["Food made in the leaves", "Water only", "Oxygen only", "Minerals only"], "A", "It moves the products of photosynthesis.", "Phloem carries food throughout the plant."],
+                  ["Which tissue covers the body surface and lines organs?", ["Nervous", "Muscular", "Connective", "Epithelial"], "D", "Skin is an example.", "Epithelial tissue covers and lines."]
+                ],
+                "HARD": [
+                  ["Why do multicellular organisms have tissues?", ["Cells cannot divide", "Division of labour makes functions more efficient", "Tissues prevent growth", "To make cells larger"], "B", "Specialisation.", "Specialised cells grouped into tissues perform functions efficiently."],
+                  ["Which is TRUE about xylem and phloem?", ["Both carry only water", "Xylem carries food down; phloem carries water up", "Xylem carries water upward; phloem carries food in both directions", "Both are made only of living cells"], "C", "Recall direction of transport.", "Xylem moves water up; phloem moves food up and down."],
+                  ["Sclerenchyma cells are suited to giving strength because they:", ["Are dead with thick, lignified walls", "Contain chlorophyll", "Divide rapidly", "Are filled with water"], "A", "Think of coconut husk.", "Thick walls give rigidity and strength."],
+                  ["A person cannot voluntarily stop their heartbeat. This is because cardiac muscle is:", ["Skeletal and voluntary", "Smooth and voluntary", "Connective tissue", "Involuntary"], "D", "Can you control your heartbeat?", "Cardiac muscle contracts involuntarily."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
