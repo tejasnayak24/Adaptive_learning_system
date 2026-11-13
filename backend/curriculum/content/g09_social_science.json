@@ -1,0 +1,577 @@
+{
+  "grade": 9,
+  "subject": "Social Science",
+  "units": [
+    {
+      "slug": "g9-sst-u-history",
+      "title": "History: Revolution and Modern Ideas",
+      "topics": [
+        {
+          "slug": "g9-sst-t-french-revolution",
+          "title": "The French Revolution",
+          "description": "Why revolution broke out in France in 1789 and how it changed ideas about rights and government.",
+          "lessons": [
+            {
+              "slug": "g9-sst-french-revolution-causes",
+              "title": "Causes and Outbreak of the French Revolution",
+              "objectives": [
+                "Describe French society under the Old Regime",
+                "Explain the economic and intellectual causes of the revolution",
+                "Narrate the events of 1789",
+                "Explain the significance of the storming of the Bastille"
+              ],
+              "intro": "On the morning of 14 July 1789, an angry crowd in Paris stormed the Bastille, a fortress-prison that stood for the king's absolute power. This event marked the beginning of the French Revolution, which ended the rule of an absolute monarchy and spread the ideas of liberty, equality and fraternity across the world. To understand why the people rose up, we must look at how French society was organised.",
+              "sections": [
+                [
+                  "Society of estates",
+                  "Eighteenth-century French society under the Old Regime was divided into three estates. The First Estate was the clergy and the Second Estate the nobility; together they were a small minority but enjoyed privileges by birth, including exemption from paying taxes to the state. The Third Estate, about 97 per cent of the population, included big merchants, lawyers, officials, peasants, artisans, labourers and servants. Peasants made up about 90 per cent of the population and paid taxes to the state (such as the taille), dues to the nobles and a tithe to the Church. Only members of the Third Estate paid taxes to the state."
+                ],
+                [
+                  "Crisis and new ideas",
+                  "When Louis XVI became king in 1774, the treasury was empty because of long wars, including help given to the American colonies against Britain, and the cost of the extravagant court at Versailles. To meet expenses, the state raised taxes. A growing population increased the demand for food grains, but production did not keep up, so the price of bread rose sharply while wages did not, leading to subsistence crises. Meanwhile, the growing middle class read philosophers who questioned privilege by birth. John Locke argued against the divine right of kings, Jean-Jacques Rousseau proposed a government based on a social contract with the people, and Montesquieu suggested dividing power among the legislative, executive and judiciary."
+                ],
+                [
+                  "The events of 1789",
+                  "In May 1789 Louis XVI called a meeting of the Estates General to approve new taxes. Each estate had one vote, so the first two could always outvote the Third Estate. The Third Estate demanded voting by head, one vote per member, and when this was refused, its representatives declared themselves the National Assembly and swore in the Tennis Court Oath not to separate until they had drafted a constitution limiting the king's powers. Paris was in turmoil because of food shortages, and on 14 July crowds stormed the Bastille. In the countryside, peasants attacked manor houses. In August, the Assembly abolished the feudal system and the privileges of the clergy and nobility, and issued the Declaration of the Rights of Man and Citizen."
+                ]
+              ],
+              "definitions": [
+                ["Old Regime", "The society and government of France before 1789."],
+                ["Estates General", "A political body with representatives of the three estates."],
+                ["Tithe", "A tax paid to the Church, usually one-tenth of agricultural produce."],
+                ["Subsistence crisis", "A situation in which basic means of livelihood are endangered."],
+                ["Social contract", "The idea that government is based on an agreement among people."]
+              ],
+              "examples": [
+                "A peasant paid the taille to the state, feudal dues to the noble and the tithe to the Church.",
+                "France celebrates 14 July as its national day, Bastille Day."
+              ],
+              "worked": [
+                {
+                  "problem": "Why did the Third Estate object to the voting system of the Estates General?",
+                  "steps": [
+                    "Each estate had one collective vote.",
+                    "The clergy and nobility, who shared privileges, could combine to outvote the Third Estate 2 to 1.",
+                    "The Third Estate represented about 97% of people but would always lose.",
+                    "So it demanded voting by head, which would reflect its numbers."
+                  ],
+                  "answer": "Voting by estate let the privileged minority outvote the majority; the Third Estate wanted one vote per member."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Society under the Old Regime",
+                "columns": ["Estate", "Who", "Paid taxes to the state?"],
+                "rows": [
+                  ["First", "Clergy", "No (privileged)"],
+                  ["Second", "Nobility", "No (privileged)"],
+                  ["Third", "Merchants, lawyers, peasants, artisans, labourers", "Yes"]
+                ]
+              },
+              "real_world": "The ideas of the French Revolution, especially that rights belong to all people rather than to a privileged few, influenced constitutions around the world, including India's commitment to liberty, equality and fraternity in the Preamble.",
+              "takeaways": [
+                "French society was divided into three estates; only the Third Estate paid state taxes.",
+                "An empty treasury, rising bread prices and new ideas fuelled discontent.",
+                "The Third Estate formed the National Assembly; the Bastille fell on 14 July 1789.",
+                "Feudal privileges were abolished and rights were declared."
+              ],
+              "practice": [
+                ["What was the Tennis Court Oath?", "A pledge by the National Assembly not to separate until a constitution was drafted."],
+                ["Name two philosophers whose ideas inspired the revolution.", "Rousseau and Montesquieu (also Locke)."],
+                ["Why did bread prices rise?", "Population grew faster than grain production."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The Bastille was stormed on:", ["14 July 1799", "14 July 1789", "4 August 1789", "1 January 1800"], "B", "France's national day.", "The Bastille fell on 14 July 1789."],
+                  ["Which estate paid taxes to the state?", ["First Estate", "Second Estate", "Third Estate", "None of them"], "C", "The majority.", "Only the Third Estate paid state taxes."],
+                  ["Who was the king of France in 1789?", ["Louis XVI", "Napoleon", "Louis XIV", "Charles I"], "A", "He became king in 1774.", "Louis XVI ruled France in 1789."],
+                  ["The First Estate consisted of the:", ["Peasants", "Nobility", "Merchants", "Clergy"], "D", "Church members.", "The clergy formed the First Estate."]
+                ],
+                "MEDIUM": [
+                  ["Why was the French treasury empty?", ["Too much trade", "Long wars and an extravagant court", "Too many schools", "High income from colonies"], "B", "Think of costs.", "Wars and the court's spending drained the treasury."],
+                  ["Which thinker proposed government based on a social contract?", ["Montesquieu", "Locke", "Rousseau", "Louis XVI"], "C", "He wrote 'The Social Contract'.", "Rousseau developed the social contract idea."],
+                  ["What did the Third Estate demand at the Estates General?", ["Voting by head, one vote per member", "Abolition of all taxes", "A new king", "Voting by estate"], "A", "They were the majority.", "They wanted each member to have one vote."],
+                  ["The tithe was a tax paid to the:", ["King", "Nobles", "Merchants", "Church"], "D", "About one-tenth of produce.", "The tithe went to the Church."]
+                ],
+                "HARD": [
+                  ["Why was the storming of the Bastille symbolically important?", ["It was a wealthy palace", "It stood for the king's despotic power", "It held the treasury", "It was the largest church"], "B", "What did the prison represent?", "The Bastille symbolised royal absolutism."],
+                  ["Montesquieu's idea of the division of power meant:", ["All power to the king", "Power only to the clergy", "Separating legislative, executive and judicial powers", "Abolishing all government"], "C", "Three organs of government.", "He proposed dividing power among three branches."],
+                  ["What was a subsistence crisis?", ["When basic means of livelihood were endangered, as bread became unaffordable", "When the king had too much money", "When nobles paid more taxes", "When wages rose faster than prices"], "A", "Think of bread prices and wages.", "High bread prices and low wages threatened survival."],
+                  ["Which event in August 1789 directly ended privileges of birth?", ["The Tennis Court Oath", "Storming of the Bastille", "Coronation of Louis XVI", "Abolition of the feudal system by the Assembly"], "D", "A decree by the Assembly.", "The Assembly abolished feudal dues and privileges."]
+                ]
+              }
+            },
+            {
+              "slug": "g9-sst-french-revolution-legacy",
+              "title": "France Becomes a Republic and the Legacy of the Revolution",
+              "objectives": [
+                "Describe the Constitution of 1791 and the Declaration of the Rights of Man",
+                "Explain how France became a republic and the Reign of Terror",
+                "Describe changes in daily life and women's struggle for rights",
+                "Evaluate the legacy of the revolution"
+              ],
+              "intro": "The fall of the Bastille was only the beginning. Over the next decade France tried a constitutional monarchy, became a republic, executed its king, lived through a period of terror and finally came under the rule of Napoleon Bonaparte. Despite the violence and turmoil, the revolution changed political ideas permanently: the idea that sovereignty belongs to the people, not to a king, spread across Europe and the world.",
+              "sections": [
+                [
+                  "Constitutional monarchy",
+                  "In 1791 the National Assembly completed a constitution that made France a constitutional monarchy, limiting the king's powers and dividing power among the legislature, executive and judiciary. However, only men above 25 who paid taxes equal to at least three days of a labourer's wage, called active citizens, could vote; women, children and poorer men were passive citizens without the vote. The Constitution began with the Declaration of the Rights of Man and Citizen, which declared that men are born free and equal in rights, and that rights such as liberty, property, security, freedom of speech and expression, and equality before the law are natural and cannot be taken away."
+                ],
+                [
+                  "Republic and the Reign of Terror",
+                  "Political clubs became centres of debate; the Jacobins, led by Maximilien Robespierre, drew support from less prosperous groups such as artisans and shopkeepers, many of whom wore long striped trousers and were called sans-culottes. In 1792 they led an insurrection, elections were held with all men over 21 allowed to vote, and France was declared a republic. Louis XVI was executed in January 1793. From 1793 to 1794, Robespierre's government followed a policy of severe control and punishment called the Reign of Terror, in which those seen as enemies of the republic were guillotined. It also controlled wages and prices. Eventually Robespierre himself was executed in 1794."
+                ],
+                [
+                  "Directory, Napoleon and legacy",
+                  "A Directory of five members then governed, but political instability allowed Napoleon Bonaparte, a military leader, to seize power in 1799; he crowned himself emperor in 1804. During the revolution, censorship was abolished, newspapers and pamphlets spread, and slavery in French colonies was abolished in 1794 (though Napoleon later reintroduced it, before it was finally ended in 1848). Women formed clubs and demanded equal rights, led by figures such as Olympe de Gouges, but they won the vote in France only in 1946. The ideas of liberty, equality and democratic rights, and of a nation of citizens, became the most important legacy, inspiring later movements including freedom struggles in colonies such as India."
+                ]
+              ],
+              "definitions": [
+                ["Constitutional monarchy", "A monarchy in which the ruler's powers are limited by a constitution."],
+                ["Republic", "A form of government with an elected head of state, not a hereditary ruler."],
+                ["Jacobins", "A radical political club led by Robespierre."],
+                ["Reign of Terror", "The period 1793–94 of harsh control and executions in France."],
+                ["Sans-culottes", "Literally 'without knee breeches'; working people who supported the Jacobins."]
+              ],
+              "examples": [
+                "The guillotine became the symbol of the Reign of Terror.",
+                "Raja Rammohan Roy and Tipu Sultan were among Indians who responded to ideas from revolutionary France."
+              ],
+              "worked": [
+                {
+                  "problem": "Was the Constitution of 1791 fully democratic? Give reasons.",
+                  "steps": [
+                    "It limited the king's power and declared rights, a big step towards democracy.",
+                    "But only 'active citizens' — men over 25 paying a minimum tax — could vote.",
+                    "Women, poorer men and children were excluded as 'passive citizens'.",
+                    "So it was not fully democratic, since many people were denied political rights."
+                  ],
+                  "answer": "No; despite declaring equal rights, it denied the vote to women and poorer men."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "France 1789–1804",
+                "items": ["1789: National Assembly, Bastille, Declaration of Rights", "1791: Constitutional monarchy", "1792: Republic declared", "1793: King executed; Reign of Terror", "1795: Directory", "1799: Napoleon takes power", "1804: Napoleon crowned emperor"]
+              },
+              "real_world": "Many modern rights in constitutions, including India's, such as freedom of speech, equality before law and protection of property, echo the Declaration of the Rights of Man. The French tricolour and the motto 'Liberty, Equality, Fraternity' remain powerful symbols of democracy.",
+              "takeaways": [
+                "The 1791 Constitution limited the monarchy but gave the vote only to some men.",
+                "France became a republic in 1792; the Reign of Terror followed.",
+                "Napoleon seized power in 1799.",
+                "The revolution's ideas of liberty, equality and popular sovereignty spread worldwide."
+              ],
+              "practice": [
+                ["Who led the Jacobins?", "Maximilien Robespierre."],
+                ["When did French women gain the right to vote?", "1946."],
+                ["When did France become a republic?", "1792."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Who led the Jacobin club?", ["Napoleon", "Robespierre", "Louis XVI", "Rousseau"], "B", "He led the Reign of Terror.", "Maximilien Robespierre led the Jacobins."],
+                  ["France was declared a republic in:", ["1789", "1804", "1792", "1815"], "C", "Three years after the Bastille.", "France became a republic in 1792."],
+                  ["Who seized power in France in 1799?", ["Napoleon Bonaparte", "Robespierre", "Louis XVI", "Olympe de Gouges"], "A", "A military leader.", "Napoleon took power in 1799."],
+                  ["The period of severe control and executions in 1793–94 is called:", ["The Directory", "The Old Regime", "The Estates General", "The Reign of Terror"], "D", "The guillotine was its symbol.", "It is known as the Reign of Terror."]
+                ],
+                "MEDIUM": [
+                  ["Under the 1791 Constitution, who could vote?", ["All adults", "Men over 25 who paid a minimum tax", "Only women", "Only nobles"], "B", "Active citizens.", "Only tax-paying men over 25 were active citizens."],
+                  ["The Declaration of the Rights of Man stated that:", ["Kings rule by divine right", "Only nobles have rights", "Men are born free and equal in rights", "Women cannot own property"], "C", "Natural rights for all.", "It declared that men are born free and equal."],
+                  ["Who were the sans-culottes?", ["Working people who supported the Jacobins", "Nobles", "Priests", "Foreign soldiers"], "A", "Long striped trousers.", "They were artisans and labourers supporting the Jacobins."],
+                  ["When did French women finally win the right to vote?", ["1791", "1848", "1804", "1946"], "D", "After the Second World War.", "French women won the vote in 1946."]
+                ],
+                "HARD": [
+                  ["Why is the 1791 Constitution described as only partly democratic?", ["It kept absolute monarchy", "It excluded women and poorer men from voting", "It gave everyone the vote", "It abolished all rights"], "B", "Who were passive citizens?", "Political rights were limited to some men."],
+                  ["Which statement about slavery and the revolution is correct?", ["Slavery was never discussed", "Napoleon abolished slavery permanently", "It was abolished in 1794, reintroduced by Napoleon, and finally ended in 1848", "France had no colonies"], "C", "There was a reversal.", "Abolition in 1794 was reversed and finally achieved in 1848."],
+                  ["What was the most lasting legacy of the French Revolution?", ["Ideas of liberty, equality and popular sovereignty", "The guillotine", "Napoleon's empire", "The Bastille fortress"], "A", "Ideas that spread worldwide.", "Its democratic ideas inspired movements around the world."],
+                  ["Olympe de Gouges is remembered for:", ["Leading the army", "Writing the Social Contract", "Being king", "Demanding equal rights for women"], "D", "Women's rights.", "She argued that women deserved the same rights as men."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g9-sst-u-geography",
+      "title": "Geography: India",
+      "topics": [
+        {
+          "slug": "g9-sst-t-india-geography",
+          "title": "India: Location, Relief and Climate",
+          "description": "India's position, physical divisions and the monsoon climate.",
+          "lessons": [
+            {
+              "slug": "g9-sst-india-location-physical",
+              "title": "India's Location and Physical Features",
+              "objectives": [
+                "Describe India's location using latitudes and longitudes",
+                "Explain the significance of India's location",
+                "Name and describe India's major physiographic divisions",
+                "Relate physical features to human activities"
+              ],
+              "intro": "India is a vast country with an area of about 3.28 million square kilometres, about 2.4 per cent of the world's land area, making it the seventh-largest country. It lies entirely in the Northern Hemisphere, between latitudes 8°4′N and 37°6′N and longitudes 68°7′E and 97°25′E. Within this area are snow-covered mountains, vast plains, deserts, plateaus, coasts and islands, which shape the lives of the people who live there.",
+              "sections": [
+                [
+                  "Location and size",
+                  "The Tropic of Cancer (23°30′N) passes almost through the middle of India, dividing it into two nearly equal parts. The southernmost point of the mainland is Kanyakumari; the southernmost point of the country is Indira Point in the Andaman and Nicobar Islands. The east–west extent is about 30 degrees of longitude, causing a time difference of about two hours between Arunachal Pradesh and Gujarat. To avoid confusion, Indian Standard Time is based on the 82°30′E meridian. India's central location between East and West Asia and its long coastline of about 7,500 km including islands, with the Indian Ocean named after the country, have long made it important for trade and cultural exchange."
+                ],
+                [
+                  "The Himalayas and the Northern Plains",
+                  "The Himalayas are young fold mountains stretching about 2,400 km along India's northern border. They have three parallel ranges: the Himadri (Greater Himalayas), with the highest peaks such as Kanchenjunga; the Himachal (Lesser Himalayas), with hill stations; and the Shiwaliks, the outermost range. South of the mountains lie the Northern Plains, formed by deposits of alluvium brought by the Indus, Ganga and Brahmaputra river systems. These are among the most fertile and densely populated regions of the world, producing large amounts of wheat, rice and sugarcane."
+                ],
+                [
+                  "Peninsula, desert, coasts and islands",
+                  "The Peninsular Plateau is made of old, hard crystalline rocks. It includes the Central Highlands and the Deccan Plateau, bordered by the Western Ghats and the Eastern Ghats; it is rich in minerals and has black soil good for cotton. The Indian Desert, the Thar, lies west of the Aravali hills, with little rain and sand dunes. Coastal plains run along the east and west: the western coast is narrow, while the eastern coast is wide, with deltas of rivers such as the Mahanadi, Godavari, Krishna and Kaveri. The Lakshadweep islands in the Arabian Sea are of coral origin, and the Andaman and Nicobar Islands in the Bay of Bengal are larger and more spread out."
+                ]
+              ],
+              "definitions": [
+                ["Physiography", "The physical features and divisions of a land."],
+                ["Fold mountains", "Mountains formed by the folding of the Earth's crust, such as the Himalayas."],
+                ["Alluvium", "Fertile soil deposited by rivers."],
+                ["Peninsula", "A landmass surrounded by water on three sides."],
+                ["Delta", "Land formed by deposits at the mouth of a river."]
+              ],
+              "examples": [
+                "Kanchenjunga, at 8,586 m, is the highest peak in India.",
+                "The Sundarbans delta is formed by the Ganga and Brahmaputra."
+              ],
+              "worked": [
+                {
+                  "problem": "Why does the Sun rise about two hours earlier in Arunachal Pradesh than in Gujarat?",
+                  "steps": [
+                    "India extends about 30° of longitude from west to east.",
+                    "The Earth rotates 15° per hour, so 30° corresponds to 2 hours.",
+                    "Places in the east see the Sun first, so Arunachal sees sunrise about 2 hours before Gujarat."
+                  ],
+                  "answer": "Because India spans about 30° of longitude, which corresponds to about 2 hours of time difference."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Physiographic divisions of India",
+                "columns": ["Division", "Key features"],
+                "rows": [
+                  ["Himalayas", "Young fold mountains; Himadri, Himachal, Shiwaliks"],
+                  ["Northern Plains", "Alluvial, fertile, densely populated"],
+                  ["Peninsular Plateau", "Old crystalline rocks; minerals; Ghats"],
+                  ["Indian Desert", "Thar; dry, sandy"],
+                  ["Coastal Plains", "Narrow west coast; wide east coast with deltas"],
+                  ["Islands", "Lakshadweep (coral); Andaman and Nicobar"]
+                ]
+              },
+              "real_world": "India's location along major sea routes makes ports such as Mumbai, Chennai and Kochi important for trade. The Himalayas protect India from cold Central Asian winds and feed rivers that irrigate the plains, supporting hundreds of millions of people.",
+              "takeaways": [
+                "India lies between 8°4′N–37°6′N and 68°7′E–97°25′E; the Tropic of Cancer crosses its middle.",
+                "IST is based on 82°30′E to manage a two-hour east–west time difference.",
+                "Six physical divisions: Himalayas, Northern Plains, Peninsular Plateau, Indian Desert, Coastal Plains and Islands.",
+                "Physical features shape agriculture, settlement and trade."
+              ],
+              "practice": [
+                ["Which latitude divides India into almost two equal halves?", "The Tropic of Cancer."],
+                ["Name the three ranges of the Himalayas.", "Himadri, Himachal and Shiwaliks."],
+                ["Which islands of India are of coral origin?", "Lakshadweep."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which latitude passes through the middle of India?", ["Equator", "Tropic of Cancer", "Tropic of Capricorn", "Arctic Circle"], "B", "It is at 23°30′N.", "The Tropic of Cancer crosses India's middle."],
+                  ["The southernmost point of India is:", ["Kanyakumari", "Rameswaram", "Indira Point", "Chennai"], "C", "It is in the Andaman and Nicobar Islands.", "Indira Point is India's southernmost point."],
+                  ["The Northern Plains are formed mainly by:", ["River deposits (alluvium)", "Volcanic lava", "Glaciers alone", "Coral reefs"], "A", "Indus, Ganga and Brahmaputra.", "Rivers deposited fertile alluvium."],
+                  ["The Lakshadweep Islands are of:", ["Volcanic origin", "Glacial origin", "Desert origin", "Coral origin"], "D", "Formed by tiny marine organisms.", "Lakshadweep consists of coral islands."]
+                ],
+                "MEDIUM": [
+                  ["Indian Standard Time is based on the meridian of:", ["68°7′E", "82°30′E", "97°25′E", "0°"], "B", "It passes near Mirzapur.", "IST uses 82°30′E."],
+                  ["The outermost range of the Himalayas is the:", ["Himadri", "Himachal", "Shiwaliks", "Aravali"], "C", "The lowest and southernmost range.", "The Shiwaliks are the outer Himalayas."],
+                  ["Which coastal plain has large river deltas?", ["Eastern coastal plain", "Western coastal plain", "Both equally", "Neither"], "A", "Mahanadi, Godavari, Krishna, Kaveri.", "Eastern rivers form deltas on the wide east coast."],
+                  ["The Peninsular Plateau is made of:", ["Fresh alluvium", "Coral", "Sand dunes", "Old, hard crystalline rocks"], "D", "It is one of the oldest landmasses.", "It consists of ancient crystalline rocks."]
+                ],
+                "HARD": [
+                  ["Why is there a time difference of about two hours between Gujarat and Arunachal Pradesh?", ["Different latitudes", "India spans about 30° of longitude", "Mountains block the Sun", "Different seasons"], "B", "15° = 1 hour.", "30° of longitude gives 2 hours."],
+                  ["Why are the Northern Plains densely populated?", ["They are very cold", "They are mountainous", "Fertile alluvial soil and water support intensive farming", "They have no rivers"], "C", "Think about farming.", "Fertile soil and rivers support agriculture and settlement."],
+                  ["How does India's location benefit its trade?", ["Its central position on the Indian Ocean lies on major sea routes between East and West", "It is landlocked", "It has no coastline", "It is near the North Pole"], "A", "Look at a world map.", "India's position between East and West Asia lies on key sea routes."],
+                  ["Which feature protects northern India from cold Central Asian winds?", ["The Western Ghats", "The Thar Desert", "The Deccan Plateau", "The Himalayas"], "D", "A mountain wall.", "The Himalayas block cold winds from the north."]
+                ]
+              }
+            },
+            {
+              "slug": "g9-sst-climate-monsoon",
+              "title": "Climate and the Indian Monsoon",
+              "objectives": [
+                "Explain the factors affecting India's climate",
+                "Describe the mechanism of the monsoon",
+                "Describe the four seasons of India",
+                "Explain the distribution of rainfall and the unifying role of the monsoon"
+              ],
+              "intro": "In June, farmers across India watch the sky anxiously for the first monsoon clouds. The monsoon decides whether crops will grow well, whether reservoirs will fill and even how the economy will perform. India's climate is described as a monsoon type: winds reverse their direction with the seasons, bringing a wet summer and a largely dry winter. Climate is the sum of weather conditions over a large area for a long time, more than thirty years.",
+              "sections": [
+                [
+                  "Factors affecting climate",
+                  "Climate depends on latitude, altitude, pressure and wind, distance from the sea, ocean currents and relief. Because the Tropic of Cancer passes through India, the south is tropical while the north has a sub-tropical climate. Altitude matters: hill stations are cooler. The Himalayas block cold winds and trap monsoon winds, causing rain. Places near the sea, such as Mumbai, have moderate (maritime) climates, while interior places, such as Delhi, have extreme (continental) climates with hot summers and cold winters."
+                ],
+                [
+                  "Mechanism of the monsoon",
+                  "The word monsoon comes from the Arabic 'mausim', meaning season. In summer, the land heats much more than the sea, creating an intense low-pressure area over north-western India, while high pressure lies over the Indian Ocean. Moist south-east trade winds from the southern hemisphere cross the Equator, are deflected to the right and blow as south-west monsoon winds towards India. The shifting of the Inter-Tropical Convergence Zone (ITCZ) northwards, the presence of easterly jet streams and conditions in the Pacific such as El Niño also influence the monsoon. The monsoon arrives at the Kerala coast around 1 June and covers the whole country by mid-July. It has 'breaks', dry spells between wet spells."
+                ],
+                [
+                  "Seasons and rainfall",
+                  "India has four seasons. The cold weather season (December to February) has cool, dry north-east winds, with some rain on the Tamil Nadu coast and western disturbances bringing winter rain to the north-west. The hot weather season (March to May) brings high temperatures, a hot dry wind called the loo in the north, and pre-monsoon showers such as 'mango showers' in Kerala. The advancing monsoon (June to September) brings most of India's rainfall. The retreating monsoon (October to November) brings clearing skies, 'October heat', and heavy rain to the Coromandel coast and cyclones in the Bay of Bengal. Rainfall is uneven: Mawsynram in Meghalaya receives over 1,100 cm a year, while western Rajasthan receives under 20 cm. The monsoon's shared rhythm of sowing, harvests and festivals unites the country."
+                ]
+              ],
+              "definitions": [
+                ["Climate", "The average weather conditions of an area over a long period."],
+                ["Monsoon", "Seasonal reversal of wind direction, bringing a rainy season."],
+                ["ITCZ", "Inter-Tropical Convergence Zone, a low-pressure belt where trade winds meet."],
+                ["Loo", "A hot, dry wind blowing over north India in summer afternoons."],
+                ["Break in the monsoon", "A dry spell during the rainy season."]
+              ],
+              "examples": [
+                "Mawsynram is one of the wettest places on Earth.",
+                "Tamil Nadu gets much of its rain from the north-east monsoon in October–November."
+              ],
+              "worked": [
+                {
+                  "problem": "Why does Chennai receive heavy rain in October–November when most of India is dry?",
+                  "steps": [
+                    "In winter the winds reverse and blow from the north-east, from land towards the sea.",
+                    "While crossing the Bay of Bengal they pick up moisture.",
+                    "These moist north-east winds then strike the Coromandel coast of Tamil Nadu, bringing rain."
+                  ],
+                  "answer": "Retreating/north-east monsoon winds gather moisture over the Bay of Bengal and shed it on the Tamil Nadu coast."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Seasons of India",
+                "columns": ["Season", "Months", "Key features"],
+                "rows": [
+                  ["Cold weather", "Dec–Feb", "Cool, dry; western disturbances"],
+                  ["Hot weather", "Mar–May", "High temperature; loo; mango showers"],
+                  ["Advancing monsoon", "Jun–Sep", "South-west winds; most rainfall"],
+                  ["Retreating monsoon", "Oct–Nov", "October heat; rain on Coromandel coast; cyclones"]
+                ]
+              },
+              "real_world": "The India Meteorological Department issues monsoon forecasts that guide farmers, water managers and the government. A weak monsoon can reduce crop production and raise food prices, while an excessive one can cause floods, so monsoon prediction is vital for the whole economy.",
+              "takeaways": [
+                "India has a monsoon climate shaped by latitude, altitude, relief and distance from the sea.",
+                "Differential heating of land and sea, the ITCZ and jet streams drive the monsoon.",
+                "Four seasons: cold weather, hot weather, advancing monsoon and retreating monsoon.",
+                "Rainfall is very uneven; the monsoon unites India's agricultural calendar and culture."
+              ],
+              "practice": [
+                ["When does the monsoon usually reach Kerala?", "Around 1 June."],
+                ["Name the hot dry summer wind of north India.", "Loo."],
+                ["Which place receives the highest rainfall in India?", "Mawsynram (Meghalaya)."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The word 'monsoon' comes from the Arabic word meaning:", ["Rain", "Season", "Wind", "Cloud"], "B", "Mausim.", "Mausim means season."],
+                  ["The monsoon usually arrives on the Kerala coast around:", ["1 March", "15 August", "1 June", "1 October"], "C", "Start of summer rains.", "It reaches Kerala around 1 June."],
+                  ["The hot, dry wind in north India during summer is the:", ["Loo", "Mango shower", "Western disturbance", "Kalbaisakhi"], "A", "It blows in May and June.", "The loo is a hot, dry summer wind."],
+                  ["Which place receives the highest rainfall in India?", ["Jaisalmer", "Delhi", "Chennai", "Mawsynram"], "D", "It is in Meghalaya.", "Mawsynram receives over 1,100 cm of rain."]
+                ],
+                "MEDIUM": [
+                  ["Why do coastal cities have moderate climates?", ["They are at high altitudes", "The sea moderates temperatures", "They receive no sunlight", "They have no wind"], "B", "Compare Mumbai and Delhi.", "The sea keeps temperatures from becoming extreme."],
+                  ["Which area receives rain from the north-east monsoon in winter?", ["Rajasthan", "Punjab", "Tamil Nadu coast", "Kashmir"], "C", "The Coromandel coast.", "North-east winds bring winter rain to Tamil Nadu."],
+                  ["A 'break' in the monsoon means:", ["A dry spell between rainy spells", "The monsoon ending for the year", "A flood", "The start of winter"], "A", "A pause in rain.", "Breaks are dry periods during the rainy season."],
+                  ["Pre-monsoon showers that help ripen mangoes in Kerala are called:", ["Loo", "Western disturbances", "Kalbaisakhi", "Mango showers"], "D", "Named after a fruit.", "They are known as mango showers."]
+                ],
+                "HARD": [
+                  ["What creates the low pressure that draws monsoon winds into India in summer?", ["Cold Himalayan air", "Intense heating of the land in north-western India", "High pressure over Rajasthan", "Snowfall in the Deccan"], "B", "Land heats faster than sea.", "Hot land creates a low-pressure area that attracts moist sea winds."],
+                  ["Why is Delhi's climate called continental (extreme)?", ["It is near the sea", "It is on an island", "It is far from the moderating influence of the sea", "It receives the highest rainfall"], "C", "Distance from the sea.", "Interior locations have large temperature differences."],
+                  ["Why do the south-east trade winds turn into south-west monsoon winds?", ["They are deflected to the right after crossing the Equator", "The Himalayas push them south", "They lose all moisture", "They blow from Europe"], "A", "Coriolis effect.", "After crossing the Equator they are deflected to the right."],
+                  ["Why is the monsoon called a unifying bond for India?", ["It brings the same rainfall everywhere", "It stops all cyclones", "It makes temperatures equal", "Life, farming and festivals across India revolve around it"], "D", "Shared rhythm of life.", "Farming cycles and festivals across India depend on the monsoon."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g9-sst-u-political-science",
+      "title": "Political Science: Democracy",
+      "topics": [
+        {
+          "slug": "g9-sst-t-democracy-elections",
+          "title": "Democracy and Elections",
+          "description": "What democracy means and how elections make it work in India.",
+          "lessons": [
+            {
+              "slug": "g9-sst-what-is-democracy",
+              "title": "What Is Democracy? Why Democracy?",
+              "objectives": [
+                "Define democracy and identify its key features",
+                "Distinguish democracies from non-democracies",
+                "Evaluate arguments for and against democracy",
+                "Explain the broader meaning of democracy"
+              ],
+              "intro": "Many countries call themselves democracies, but not all of them are. Some hold elections where only one party is allowed, and some rulers stay in power by force. Democracy is a form of government in which the rulers are elected by the people. But elections alone are not enough. To judge whether a country is truly democratic, we need to look at who makes decisions, how elections are held, and whether citizens' rights are protected.",
+              "sections": [
+                [
+                  "Features of democracy",
+                  "First, in a democracy the final decision-making power rests with representatives elected by the people; if real power lies with an unelected army or ruler, it is not a democracy. Second, elections must offer a free and fair choice and the opportunity to change the current rulers; elections in which the ruling party always wins through fraud or force are not democratic. Third, each adult citizen must have one vote and each vote one value. Fourth, a democratic government rules within limits set by constitutional law and citizens' rights, and is answerable to courts, the media and the people."
+                ],
+                [
+                  "Arguments for and against",
+                  "Critics argue that leaders in a democracy keep changing, causing instability; that democracy involves political competition and delays decision-making; that elected leaders may not know the people's best interests; that it leads to corruption because it is based on electoral competition; and that ordinary people may not know what is good for them. Supporters reply that democracy is more accountable because the government must answer to the people; it improves the quality of decision-making through consultation and discussion; it provides a way to deal with differences and conflicts peacefully; it enhances the dignity of citizens because it is based on political equality; and it allows mistakes to be corrected through public debate."
+                ],
+                [
+                  "A broader meaning",
+                  "Democracy is not only a form of government; it is also a principle that can be applied to any sphere of life, such as a family, a school or a workplace. In a democratic family, decisions are taken by discussion and everyone's views count. A direct democracy, in which all citizens take decisions together, is possible only in small communities, so modern democracies are representative: people elect representatives who make decisions on their behalf. A democratic decision involves consultation with and consent of all those affected, and those without power have the same say as those with power. No country is a perfect democracy; democracy must always be deepened."
+                ]
+              ],
+              "definitions": [
+                ["Democracy", "A form of government in which rulers are elected by the people."],
+                ["Representative democracy", "A system in which people elect representatives to make decisions for them."],
+                ["Free and fair election", "An election that offers real choice and allows rulers to be changed."],
+                ["Political equality", "Each adult citizen has one vote and each vote one value."],
+                ["Accountability", "The obligation of rulers to answer for their actions."]
+              ],
+              "examples": [
+                "A country where an unelected army chief overrules the elected government is not a full democracy.",
+                "A school student council elected by all students applies democratic principles."
+              ],
+              "worked": [
+                {
+                  "problem": "In Country X, elections are held regularly, but opposition parties are banned and newspapers cannot criticise the government. Is it a democracy?",
+                  "steps": [
+                    "Check free and fair choice: banning opposition parties removes real choice.",
+                    "Check the possibility of changing rulers: without opposition, the ruling party cannot be voted out.",
+                    "Check rights: censoring newspapers violates freedom of expression.",
+                    "So, despite elections, key democratic features are missing."
+                  ],
+                  "answer": "No; regular elections without free choice, opposition or rights do not make a democracy."
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Four features of democracy",
+                "items": [
+                  ["Elected decision-makers", "Final power with representatives elected by people"],
+                  ["Free and fair elections", "Real choice and ability to change rulers"],
+                  ["One person, one vote, one value", "Political equality"],
+                  ["Rule of law and rights", "Government works within constitutional limits"]
+                ]
+              },
+              "real_world": "India is the world's largest democracy, with about 97 crore registered voters in 2024. International organisations monitor elections around the world to report whether they are free and fair, and citizens' movements often defend democratic rights through courts and peaceful protest.",
+              "takeaways": [
+                "Democracy requires elected decision-makers, free and fair elections, political equality and the rule of law.",
+                "Elections alone do not make a country democratic.",
+                "Democracy is more accountable and protects dignity, though it can be slow.",
+                "Democratic principles apply to families, schools and workplaces too."
+              ],
+              "practice": [
+                ["What does 'one person, one vote, one value' mean?", "Every adult has one vote of equal weight."],
+                ["Give one argument against democracy.", "Decision-making can be slow (or leaders keep changing)."],
+                ["Why are modern democracies representative rather than direct?", "Countries are too large for all citizens to decide everything together."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["In a democracy, rulers are:", ["Chosen by birth", "Elected by the people", "Appointed by the army", "Chosen by a foreign power"], "B", "People choose them.", "Democracy means rulers are elected by the people."],
+                  ["'One person, one vote, one value' refers to:", ["Freedom of speech", "Rule of law", "Political equality", "Accountability"], "C", "Every vote is equal.", "It describes political equality."],
+                  ["A democracy in which people elect representatives is called:", ["Representative democracy", "Monarchy", "Military rule", "Dictatorship"], "A", "Modern democracies.", "People elect representatives to decide for them."],
+                  ["Which is NOT a feature of democracy?", ["Free elections", "Rule of law", "Political equality", "An army chief overruling elected leaders"], "D", "Who holds final power?", "Unelected power over elected leaders is undemocratic."]
+                ],
+                "MEDIUM": [
+                  ["Why are elections without a real choice not democratic?", ["They are too expensive", "People cannot change their rulers", "They happen too often", "They are held at night"], "B", "Can the ruling party lose?", "Without choice, rulers cannot be changed."],
+                  ["Which is an argument in favour of democracy?", ["Leaders change frequently", "It causes delays", "It is a more accountable form of government", "People do not know what is good for them"], "C", "Answering to the people.", "Accountability is a key argument for democracy."],
+                  ["Democracy improves decision-making mainly because:", ["Decisions involve consultation and discussion", "Only one person decides", "Decisions are taken in secret", "Experts never participate"], "A", "More voices, more ideas.", "Discussion brings more information and views."],
+                  ["Applying democracy in a family means:", ["Elders decide everything", "Children decide everything", "Decisions are random", "Decisions are taken through discussion with everyone's view counted"], "D", "Consultation and consent.", "Democratic families decide through discussion."]
+                ],
+                "HARD": [
+                  ["A government passes a law that violates citizens' fundamental rights, and courts strike it down. This shows that a democratic government:", ["Has unlimited powers", "Rules within limits set by constitutional law and rights", "Can ignore courts", "Need not hold elections"], "B", "Limits on power.", "Democratic governments work within constitutional limits."],
+                  ["Which situation best shows democracy allowing mistakes to be corrected?", ["A king passes a decree", "The army takes over", "Public debate leads to a law being amended", "Elections are cancelled"], "C", "Peaceful correction.", "Debate and pressure allow changes to bad decisions."],
+                  ["Why is democracy said to enhance the dignity of citizens?", ["It is based on political equality, treating the poorest and richest as equals", "Only educated people can vote", "Leaders are always wise", "It is the oldest form of government"], "A", "Equal status.", "Political equality gives every citizen equal standing."],
+                  ["Which statement is TRUE?", ["Holding elections is enough to be a democracy", "Democracy means the majority can ignore all minorities", "Direct democracy is common in large countries", "No country is a perfect democracy; it must keep being deepened"], "D", "Democracy is a continuing process.", "All democracies can improve; it is an ongoing process."]
+                ]
+              }
+            },
+            {
+              "slug": "g9-sst-electoral-politics",
+              "title": "Electoral Politics in India",
+              "objectives": [
+                "Explain why elections are needed in a democracy",
+                "Describe the system of constituencies and reserved seats",
+                "Describe the steps of an election in India",
+                "Explain the role of the Election Commission in ensuring free and fair elections"
+              ],
+              "intro": "Every five years, hundreds of millions of Indians queue at polling booths, get a mark of indelible ink on their finger and press a button on an electronic voting machine. Elections are the mechanism by which people choose their representatives at regular intervals and change them if they wish. Holding free and fair elections in a country as large and diverse as India is an enormous task.",
+              "sections": [
+                [
+                  "Why elections and what makes them democratic",
+                  "In a large community it is impossible for everyone to take part in every decision, so people choose representatives through elections. In an election, voters choose who will make laws, who will form the government and which party's policies will guide it. A democratic election has five minimum conditions: everyone should be able to choose, with one vote each; there should be parties and candidates free to contest, offering real choice; elections must be held regularly; the candidate preferred by the people should get elected; and elections must be conducted in a free and fair manner. Competition between parties is sometimes criticised as divisive, but it encourages parties to serve the people."
+                ],
+                [
+                  "Constituencies and reserved seats",
+                  "India follows area-based representation: the country is divided into constituencies, and voters in each elect one representative. For the Lok Sabha there are 543 constituencies, and the elected representative is a Member of Parliament (MP). Each state is similarly divided into Assembly constituencies electing MLAs. To ensure that weaker sections are represented, some constituencies are reserved for Scheduled Castes (SC) and Scheduled Tribes (ST): only candidates from these communities can contest there, though all voters can vote. One-third of seats in rural and urban local bodies are reserved for women. Every citizen aged 18 or above can vote, and the voters' list (electoral roll) is updated regularly; voters can show their Elector Photo Identity Card."
+                ],
+                [
+                  "The process and the Election Commission",
+                  "The steps include nomination of candidates (who must file details of criminal cases, assets, liabilities and education), election campaigns in which parties present manifestos and slogans, polling, and counting of votes. Elections are conducted by the Election Commission of India, an independent body whose Chief Election Commissioner is appointed by the President but cannot easily be removed. It enforces a Model Code of Conduct, controls government officials on election duty, and can order re-polls. Challenges to fair elections include the influence of money and muscle power, candidates with criminal records, and unequal resources among parties; yet high voter turnout, especially among poor and less privileged groups, and the frequent defeat of ruling parties show that Indian elections are largely free and fair."
+                ]
+              ],
+              "definitions": [
+                ["Constituency", "A geographical area whose voters elect one representative."],
+                ["Reserved constituency", "A constituency where only candidates from SC or ST communities can contest."],
+                ["Electoral roll", "The official list of people eligible to vote."],
+                ["Manifesto", "A document in which a party states its policies and promises."],
+                ["Model Code of Conduct", "Rules parties and candidates must follow during elections."]
+              ],
+              "examples": [
+                "Indelible ink on a voter's finger prevents voting twice.",
+                "The 2024 Lok Sabha election had about 64 crore votes cast."
+              ],
+              "worked": [
+                {
+                  "problem": "How does reserving constituencies for SCs and STs strengthen democracy, given that all voters still vote?",
+                  "steps": [
+                    "In open competition, candidates from historically disadvantaged groups might rarely win because of resources and prejudice.",
+                    "Reservation guarantees that some representatives come from these groups.",
+                    "All voters still choose among them, so the representative remains accountable to the whole constituency.",
+                    "This ensures diverse voices in the legislature, making democracy more inclusive."
+                  ],
+                  "answer": "It guarantees representation for weaker sections while keeping representatives accountable to all voters."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Steps in an election",
+                "items": ["Electoral roll updated", "Election announced; Model Code of Conduct", "Nomination of candidates", "Campaigning", "Polling with EVMs", "Counting and declaration of results"]
+              },
+              "real_world": "Voters can check candidates' declared criminal cases, assets and education online before voting. The Election Commission's apps let citizens report violations of the Model Code of Conduct, and campaigns by the Commission encourage first-time and women voters to participate.",
+              "takeaways": [
+                "Elections let people choose and change their representatives regularly.",
+                "India uses area-based constituencies; some are reserved for SCs and STs.",
+                "Every citizen aged 18+ can vote; candidates must declare their background.",
+                "The independent Election Commission ensures free and fair elections."
+              ],
+              "practice": [
+                ["How many Lok Sabha constituencies are there?", "543."],
+                ["Who conducts elections in India?", "The Election Commission of India."],
+                ["What is a manifesto?", "A document stating a party's policies and promises."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The minimum voting age in India is:", ["21", "18", "16", "25"], "B", "Lowered in 1989.", "Citizens aged 18 and above can vote."],
+                  ["Elections in India are conducted by the:", ["Supreme Court", "Prime Minister", "Election Commission", "Parliament"], "C", "An independent body.", "The Election Commission conducts elections."],
+                  ["A document stating a party's promises is called a:", ["Manifesto", "Bill", "Constitution", "Budget"], "A", "Released before elections.", "A manifesto lists a party's policies."],
+                  ["The representative elected to the Lok Sabha is called an:", ["MLA", "Mayor", "Sarpanch", "MP"], "D", "Member of Parliament.", "Lok Sabha members are MPs."]
+                ],
+                "MEDIUM": [
+                  ["In a reserved constituency for SCs:", ["Only SC voters can vote", "Only SC candidates can contest, but all voters vote", "No elections are held", "Only women can contest"], "B", "Candidates vs voters.", "Only SC candidates contest; every voter can vote."],
+                  ["Why must candidates declare their criminal cases and assets?", ["To pay more tax", "To get free campaign funds", "So voters can make informed choices", "To become ministers automatically"], "C", "Transparency for voters.", "Disclosure helps voters judge candidates."],
+                  ["Which is a sign that Indian elections are largely free and fair?", ["Ruling parties often lose elections", "Turnout is always zero", "Only one party contests", "Results are fixed in advance"], "A", "Can rulers be changed?", "Frequent defeats of ruling parties show real choice."],
+                  ["The Model Code of Conduct is meant to:", ["Fix the election result", "Allow unlimited spending", "Stop people from voting", "Ensure parties and candidates follow fair rules during elections"], "D", "Fair play.", "It sets rules of behaviour during elections."]
+                ],
+                "HARD": [
+                  ["Which is NOT one of the minimum conditions of a democratic election?", ["Regular elections", "Every voter must belong to a party", "Real choice among parties", "Free and fair conduct"], "B", "Party membership isn't required.", "Voters need not belong to any party."],
+                  ["Why is the Election Commission's independence important?", ["It allows it to campaign for the ruling party", "It makes elections cheaper", "It lets it act impartially even against the ruling party", "It decides who wins"], "C", "Fairness requires independence.", "Independence allows impartial conduct of elections."],
+                  ["Which is a major challenge to free and fair elections in India?", ["Influence of money and muscle power", "Too few voters", "Lack of polling booths in cities only", "No political parties"], "A", "Unequal resources.", "Wealth and intimidation can distort elections."],
+                  ["Why is political competition sometimes seen as useful despite causing divisions?", ["It removes all elections", "It reduces voter turnout", "It ensures one party rules forever", "It pushes parties to serve people to win votes"], "D", "Incentives for parties.", "Competition encourages parties to respond to voters."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

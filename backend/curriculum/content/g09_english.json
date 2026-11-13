@@ -1,0 +1,588 @@
+{
+  "grade": 9,
+  "subject": "English",
+  "units": [
+    {
+      "slug": "g9-eng-u-grammar",
+      "title": "Grammar",
+      "topics": [
+        {
+          "slug": "g9-eng-t-reported-agreement",
+          "title": "Reported Speech and Agreement",
+          "description": "Reporting what others said, and making subjects and verbs agree.",
+          "lessons": [
+            {
+              "slug": "g9-eng-reported-speech",
+              "title": "Direct and Indirect Speech",
+              "objectives": [
+                "Distinguish direct speech from reported (indirect) speech",
+                "Change tenses, pronouns and time words when reporting",
+                "Report statements, questions, commands and requests",
+                "Choose suitable reporting verbs"
+              ],
+              "intro": "When we repeat exactly what someone said, inside quotation marks, we use direct speech: Meera said, “I am tired.” When we report the meaning in our own sentence without quotation marks, we use indirect or reported speech: Meera said that she was tired. Reported speech is used constantly in news, stories and conversation, and it follows a few clear rules about tenses, pronouns and time expressions.",
+              "sections": [
+                [
+                  "Changing tenses and pronouns",
+                  "When the reporting verb is in the past (said, told, asked), the tense in the reported clause usually moves one step back: simple present becomes simple past ('I like tea' → she said that she liked tea); present continuous becomes past continuous; present perfect and simple past become past perfect ('I have finished' / 'I finished' → he said he had finished); will becomes would, can becomes could, may becomes might. Pronouns change to fit the reporter's point of view: 'I' may become he or she, and 'my' may become his or her. If the reported statement is a universal truth, the tense need not change: The teacher said that the Earth goes round the Sun."
+                ],
+                [
+                  "Time and place words",
+                  "Words showing time and place also shift because the report is made later or elsewhere: now → then; today → that day; tomorrow → the next day or the following day; yesterday → the previous day or the day before; ago → before; this → that; these → those; here → there. For example, Rohan said, “I will come here tomorrow” becomes Rohan said that he would go there the next day. If the report is made on the same day and in the same place, these changes may not be needed."
+                ],
+                [
+                  "Questions, commands and requests",
+                  "Reported questions use asked, enquired or wanted to know, and the word order becomes that of a statement, with no question mark. Yes/no questions use if or whether: She asked, “Are you ready?” → She asked if I was ready. Wh- questions keep the question word: He asked, “Where do you live?” → He asked where I lived. Commands and requests use told, ordered, advised or requested with the to-infinitive: The teacher said, “Open your books” → The teacher told us to open our books. Negative commands use not to: She said, “Don't shout” → She told them not to shout. Choosing a precise reporting verb, such as complained, explained, promised or warned, makes reported speech more vivid."
+                ]
+              ],
+              "definitions": [
+                ["Direct speech", "The exact words of a speaker, placed in quotation marks."],
+                ["Reported (indirect) speech", "The meaning of what was said, reported without quotation marks."],
+                ["Reporting verb", "The verb introducing reported speech, such as said, told or asked."],
+                ["Backshift", "Moving the tense of the reported clause one step into the past."]
+              ],
+              "examples": [
+                "Direct: Asha said, “I can swim.” Indirect: Asha said that she could swim.",
+                "Direct: He asked, “Why are you late?” Indirect: He asked why I was late."
+              ],
+              "worked": [
+                {
+                  "problem": "Change to reported speech: Priya said to me, “I am leaving for Delhi tomorrow.”",
+                  "steps": [
+                    "Reporting verb: 'said to me' → 'told me'.",
+                    "Pronoun: I → she.",
+                    "Tense: am leaving → was leaving.",
+                    "Time: tomorrow → the next day."
+                  ],
+                  "answer": "Priya told me that she was leaving for Delhi the next day."
+                },
+                {
+                  "problem": "Report: The doctor said to the patient, “Do not eat oily food.”",
+                  "steps": [
+                    "A command/advice → use advised or told + not to.",
+                    "Keep the infinitive: not to eat oily food."
+                  ],
+                  "answer": "The doctor advised the patient not to eat oily food."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Tense changes in reported speech",
+                "columns": ["Direct", "Reported"],
+                "rows": [
+                  ["is / are", "was / were"],
+                  ["writes", "wrote"],
+                  ["is writing", "was writing"],
+                  ["has written / wrote", "had written"],
+                  ["will", "would"],
+                  ["can / may", "could / might"]
+                ]
+              },
+              "real_world": "Journalists constantly report what officials and witnesses said ('The minister said that the bridge would open next month'). Minutes of meetings, police statements and story narratives all depend on accurate reported speech.",
+              "takeaways": [
+                "Direct speech uses exact words; reported speech conveys the meaning.",
+                "After a past reporting verb, backshift tenses and adjust pronouns.",
+                "Change time and place words: tomorrow → the next day, here → there.",
+                "Report questions with asked + if/whether or wh-word; commands with told + (not) to."
+              ],
+              "practice": [
+                ["Report: He said, “I live in Pune.”", "He said that he lived in Pune."],
+                ["Report: She asked, “Have you eaten?”", "She asked if I had eaten."],
+                ["Report: Mother said, “Close the door.”", "Mother told me to close the door."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which sentence is in reported speech?", ["She said, “I am hungry.”", "She said that she was hungry.", "“I am hungry,” she said.", "She: I am hungry."], "B", "No quotation marks.", "Reported speech conveys the meaning without quotation marks."],
+                  ["In reported speech, 'tomorrow' usually becomes:", ["yesterday", "today", "the next day", "now"], "C", "The report is made later.", "Tomorrow becomes the next day."],
+                  ["'will' in direct speech usually becomes ___ in reported speech.", ["would", "shall", "will", "can"], "A", "Backshift.", "will → would."],
+                  ["Which reporting verb suits a command?", ["asked if", "wondered", "said that", "told … to"], "D", "Commands use the infinitive.", "Commands are reported with told + to."]
+                ],
+                "MEDIUM": [
+                  ["Report: He said, “I have lost my keys.”", ["He said that he lost my keys.", "He said that he had lost his keys.", "He said that I have lost his keys.", "He says he lost keys."], "B", "Present perfect → past perfect; adjust pronouns.", "He said that he had lost his keys."],
+                  ["Report: She asked me, “Where do you work?”", ["She asked me where do I work.", "She asked me where did I work?", "She asked me where I worked.", "She asked me that where I work."], "C", "Statement word order, backshift.", "She asked me where I worked."],
+                  ["Report: The teacher said, “Water boils at 100 °C.”", ["The teacher said that water boils at 100 °C.", "The teacher said that water boiled at 100 °C only then.", "The teacher asked if water boils.", "The teacher told water boils."], "A", "A universal truth.", "Universal truths need not be backshifted."],
+                  ["Report: He said to them, “Don't make a noise.”", ["He told them don't make a noise.", "He said them not make noise.", "He asked them that not to make noise.", "He told them not to make a noise."], "D", "Negative command.", "Use told + not to."]
+                ],
+                "HARD": [
+                  ["Report: Ravi said, “I met her here yesterday.”", ["Ravi said that he met her here yesterday.", "Ravi said that he had met her there the previous day.", "Ravi said that I had met her there yesterday.", "Ravi said he meets her there the day before."], "B", "Change tense, place and time.", "met → had met; here → there; yesterday → the previous day."],
+                  ["Report: She said to me, “Could you please help me?”", ["She told me could I help her.", "She asked could you please help me.", "She requested me to help her.", "She ordered me help her."], "C", "A polite request.", "Requests use requested + to-infinitive."],
+                  ["Report: The guide asked, “Are these your bags?”", ["The guide asked if those were our bags.", "The guide asked are these our bags.", "The guide asked if these are your bags?", "The guide said those were bags."], "A", "Yes/no question; this/these change.", "if + statement order; these → those; are → were."],
+                  ["Which reporting verb best reports: “I'll definitely finish the project by Friday,” said Anu.", ["Anu complained that she would finish the project by Friday.", "Anu warned that she would finish the project by Friday.", "Anu denied that she would finish the project by Friday.", "Anu promised that she would finish the project by Friday."], "D", "She commits to doing something.", "'Promised' captures her commitment."]
+                ]
+              }
+            },
+            {
+              "slug": "g9-eng-subject-verb-agreement",
+              "title": "Subject–Verb Agreement",
+              "objectives": [
+                "Make verbs agree with singular and plural subjects",
+                "Apply agreement rules with compound subjects joined by and, or and nor",
+                "Handle indefinite pronouns, collective nouns and words like 'each' and 'every'",
+                "Identify the true subject when phrases come between subject and verb"
+              ],
+              "intro": "A singular subject takes a singular verb and a plural subject takes a plural verb: 'The bird sings' but 'The birds sing'. This rule, subject–verb agreement, sounds simple, but long sentences, collective nouns and tricky words like 'everyone' and 'neither' cause many errors. Agreement errors are among the most common mistakes in examinations and formal writing, so it is worth learning the main rules carefully.",
+              "sections": [
+                [
+                  "Finding the true subject",
+                  "First find the real subject of the verb. Phrases that come between the subject and the verb do not change it: 'The box of chocolates is on the table' (box is the subject, not chocolates). 'One of my friends lives in Goa' (one is singular). Phrases beginning with along with, as well as, together with and including do not make the subject plural: 'The captain, along with his players, was honoured.' In sentences beginning with 'There is/are', the subject comes after the verb: 'There are three books on the desk'; 'There is a book and two pens' (agrees with the nearer noun in informal use, though 'there are' is preferred in formal writing for a plural list)."
+                ],
+                [
+                  "Compound subjects",
+                  "Subjects joined by 'and' are usually plural: 'Ravi and Seema are cousins.' But if the two nouns refer to one person or idea, the verb is singular: 'Bread and butter is my breakfast'; 'The secretary and treasurer has resigned' (one person holding both posts). With 'or', 'either … or' and 'neither … nor', the verb agrees with the nearer subject: 'Neither the teacher nor the students were present'; 'Either the students or the teacher is responsible.' With 'each' or 'every' before singular nouns joined by 'and', the verb is singular: 'Every boy and girl has a library card.'"
+                ],
+                [
+                  "Special subjects",
+                  "Indefinite pronouns such as each, everyone, everybody, someone, nobody, anyone, either and neither take singular verbs: 'Everyone is welcome'; 'Neither of the answers is correct.' Collective nouns such as team, family, committee and jury take a singular verb when the group acts as one unit ('The jury has reached its verdict') and may take a plural verb when members act individually ('The jury were divided in their opinions'). Some nouns that look plural are singular: news, mathematics, physics. Amounts of money, time and distance treated as one quantity take singular verbs: 'Five hundred rupees is too much'; 'Ten kilometres is a long walk.' 'The number of' takes a singular verb, but 'a number of' takes a plural verb."
+                ]
+              ],
+              "definitions": [
+                ["Subject–verb agreement", "Matching a verb's number (singular or plural) to its subject."],
+                ["Compound subject", "Two or more subjects joined by and, or or nor."],
+                ["Indefinite pronoun", "A pronoun that does not refer to a specific person or thing, e.g. everyone."],
+                ["Collective noun", "A noun naming a group, such as team or family."]
+              ],
+              "examples": [
+                "The quality of these mangoes is excellent.",
+                "A number of students have joined the club; the number of members is now 60."
+              ],
+              "worked": [
+                {
+                  "problem": "Correct the errors: 'The list of items are long. Neither the manager nor his assistants was available. Mathematics are my favourite subject.'",
+                  "steps": [
+                    "Subject of the first sentence is 'list' (singular) → 'is long'.",
+                    "With neither … nor, the verb agrees with the nearer subject 'assistants' (plural) → 'were available'.",
+                    "'Mathematics' is singular in meaning → 'is my favourite subject'."
+                  ],
+                  "answer": "The list of items is long. Neither the manager nor his assistants were available. Mathematics is my favourite subject."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Agreement rules at a glance",
+                "columns": ["Subject", "Verb", "Example"],
+                "rows": [
+                  ["A and B", "Plural", "Ravi and Sita are here."],
+                  ["Either A or B / Neither A nor B", "Agrees with B", "Neither he nor I am late."],
+                  ["Each, everyone, nobody", "Singular", "Everyone has arrived."],
+                  ["The number of", "Singular", "The number of cars is rising."],
+                  ["A number of", "Plural", "A number of cars are parked."]
+                ]
+              },
+              "real_world": "Agreement errors in job applications, reports and emails create a poor impression. Editors and proofreaders check agreement carefully, and grammar sections of competitive examinations test exactly these rules.",
+              "takeaways": [
+                "Find the true subject; ignore phrases in between.",
+                "'And' usually makes the subject plural; with or/nor, agree with the nearer subject.",
+                "Each, every, everyone and neither take singular verbs.",
+                "Collective nouns are usually singular; 'the number of' is singular, 'a number of' is plural."
+              ],
+              "practice": [
+                ["Choose: The news (is/are) good.", "is"],
+                ["Choose: Each of the girls (has/have) a prize.", "has"],
+                ["Choose: Either my parents or my sister (is/are) coming.", "is"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Choose the correct verb: 'The dogs ___ loudly.'", ["barks", "bark", "is barking", "has barked"], "B", "Plural subject.", "Plural 'dogs' takes plural 'bark'."],
+                  ["Choose: 'Everyone ___ invited to the party.'", ["are", "were", "is", "have"], "C", "Everyone is singular.", "Indefinite pronouns like everyone take singular verbs."],
+                  ["Choose: 'Ravi and Meena ___ friends.'", ["are", "is", "was", "has"], "A", "Two people joined by 'and'.", "A compound subject with 'and' is plural."],
+                  ["Choose: 'Mathematics ___ my favourite subject.'", ["are", "were", "have been", "is"], "D", "Looks plural, but…", "Mathematics is singular in meaning."]
+                ],
+                "MEDIUM": [
+                  ["Choose: 'One of my brothers ___ in Canada.'", ["live", "lives", "are living", "have lived"], "B", "The subject is 'one'.", "One (singular) takes 'lives'."],
+                  ["Choose: 'Neither the teacher nor the students ___ ready.'", ["was", "is", "were", "has been"], "C", "Agree with the nearer subject.", "'Students' is plural, so 'were'."],
+                  ["Choose: 'The captain, along with his team, ___ honoured.'", ["was", "were", "are", "have been"], "A", "'Along with' does not add to the subject.", "The subject is 'captain' (singular)."],
+                  ["Choose: 'A number of students ___ absent today.'", ["is", "was", "has been", "are"], "D", "'A number of' means many.", "'A number of' takes a plural verb."]
+                ],
+                "HARD": [
+                  ["Choose: 'The number of road accidents ___ increasing.'", ["are", "is", "were", "have been"], "B", "'The number of' is singular.", "The subject is 'the number', which is singular."],
+                  ["Choose: 'Bread and butter ___ my usual breakfast.'", ["are", "were", "is", "have been"], "C", "One dish.", "When two nouns form one idea, the verb is singular."],
+                  ["Choose: 'Every boy and every girl ___ given a certificate.'", ["was", "were", "are", "have been"], "A", "'Every' makes each singular.", "'Every … and every …' takes a singular verb."],
+                  ["Which sentence is correct?", ["The list of names are on the board.", "There is many reasons for this.", "Either you or he are wrong.", "Five hundred rupees is enough for the trip."], "D", "Amounts as one quantity.", "A sum of money treated as one amount takes a singular verb."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g9-eng-u-literature",
+      "title": "Literature",
+      "topics": [
+        {
+          "slug": "g9-eng-t-poetry",
+          "title": "Understanding Poetry",
+          "description": "Figures of speech and close reading of poems.",
+          "lessons": [
+            {
+              "slug": "g9-eng-figures-of-speech",
+              "title": "Figures of Speech",
+              "objectives": [
+                "Identify simile, metaphor, personification, alliteration, hyperbole and onomatopoeia",
+                "Explain the effect of a figure of speech",
+                "Distinguish simile from metaphor",
+                "Use figures of speech in your own writing"
+              ],
+              "intro": "Poets and writers often say things that are not literally true in order to create vivid pictures and strong feelings. 'The classroom was a zoo' does not mean animals were present; it suggests noise and chaos. Such imaginative uses of language are called figures of speech. Recognising them helps you understand poems and stories more deeply, and using them makes your own writing more powerful.",
+              "sections": [
+                [
+                  "Comparisons: simile and metaphor",
+                  "A simile compares two different things using 'like' or 'as': 'Her smile was as bright as the morning sun'; 'He ran like the wind.' A metaphor makes the comparison directly, saying one thing is another: 'Time is a thief'; 'The world is a stage.' A metaphor is often stronger because it does not soften the comparison. To identify the effect, ask what qualities are shared: calling time a thief suggests it steals moments from our lives without our noticing."
+                ],
+                [
+                  "Personification and hyperbole",
+                  "Personification gives human qualities or actions to non-human things: 'The wind whispered through the trees'; 'The old house groaned in the storm.' It makes nature and objects feel alive and creates mood. Hyperbole is deliberate exaggeration for emphasis or humour: 'I have told you a million times'; 'My bag weighs a tonne.' Readers are not meant to take hyperbole literally; it expresses strong feeling."
+                ],
+                [
+                  "Sound devices",
+                  "Alliteration is the repetition of the same consonant sound at the beginning of nearby words: 'Peter Piper picked a peck of pickled peppers'; 'the silent, silver sea'. It creates rhythm and makes lines memorable. Onomatopoeia uses words that imitate sounds: buzz, crackle, splash, sizzle, thud. Assonance repeats vowel sounds: 'the light of the fire is a sight'. Repetition of words or lines emphasises an idea. When analysing a poem, do not just name the device; explain its effect on meaning and mood."
+                ]
+              ],
+              "definitions": [
+                ["Simile", "A comparison using 'like' or 'as'."],
+                ["Metaphor", "A direct comparison stating that one thing is another."],
+                ["Personification", "Giving human qualities to non-human things."],
+                ["Alliteration", "Repetition of initial consonant sounds in nearby words."],
+                ["Hyperbole", "Deliberate exaggeration for effect."]
+              ],
+              "examples": [
+                "Simile: The lake lay still as glass.",
+                "Personification: The sun peeped shyly from behind the clouds."
+              ],
+              "worked": [
+                {
+                  "problem": "Identify and explain the figures of speech in this original verse: 'The hungry fire roared and crackled, / its orange tongues licked the night; / my heart was a drum, / beating loud as thunder.'",
+                  "steps": [
+                    "'hungry fire roared' and 'tongues licked' → personification: the fire seems a fierce living creature.",
+                    "'crackled' → onomatopoeia: imitates the sound of burning wood.",
+                    "'my heart was a drum' → metaphor: the heart is beating hard.",
+                    "'loud as thunder' → simile (and hyperbole): emphasises fear or excitement."
+                  ],
+                  "answer": "Personification, onomatopoeia, metaphor and simile/hyperbole together create a frightening, intense scene."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Figures of speech",
+                "columns": ["Device", "Key sign", "Example"],
+                "rows": [
+                  ["Simile", "like / as", "brave as a lion"],
+                  ["Metaphor", "is / was (direct)", "Life is a journey."],
+                  ["Personification", "human action for non-human", "The clouds wept."],
+                  ["Alliteration", "same starting sound", "big brown bear"],
+                  ["Hyperbole", "exaggeration", "I'm so hungry I could eat a horse."],
+                  ["Onomatopoeia", "sound words", "buzz, splash"]
+                ]
+              },
+              "real_world": "Advertisers use alliteration and metaphor in slogans because they are memorable, and speechwriters use repetition and imagery to move audiences. Everyday speech is full of metaphors and hyperbole, from 'heart of gold' to 'waiting forever'.",
+              "takeaways": [
+                "Similes use like/as; metaphors compare directly.",
+                "Personification gives human qualities to things; hyperbole exaggerates.",
+                "Alliteration and onomatopoeia create sound effects.",
+                "Always explain the effect of a device, not just its name."
+              ],
+              "practice": [
+                ["Identify: 'The stars danced in the sky.'", "Personification."],
+                ["Turn 'He is brave' into a simile.", "He is as brave as a lion."],
+                ["Identify: 'Sizzle went the oil in the pan.'", "Onomatopoeia."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["'As busy as a bee' is a:", ["Metaphor", "Simile", "Hyperbole", "Alliteration"], "B", "Look for 'as'.", "It compares using 'as', so it is a simile."],
+                  ["'The leaves danced in the wind' is an example of:", ["Simile", "Alliteration", "Personification", "Onomatopoeia"], "C", "Leaves cannot really dance.", "Giving a human action to leaves is personification."],
+                  ["Which word is onomatopoeic?", ["buzz", "quiet", "large", "beautiful"], "A", "It imitates a sound.", "'Buzz' sounds like the noise it describes."],
+                  ["'I've told you a thousand times!' is:", ["Simile", "Personification", "Metaphor", "Hyperbole"], "D", "Is it literally true?", "It is a deliberate exaggeration."]
+                ],
+                "MEDIUM": [
+                  ["'Her voice was music to his ears' is a:", ["Simile", "Metaphor", "Onomatopoeia", "Alliteration"], "B", "No 'like' or 'as'.", "It directly compares her voice to music."],
+                  ["Which line shows alliteration?", ["The sun was hot.", "He walked home.", "Silly Sam sang sweet songs.", "The dog barked."], "C", "Repeated starting sounds.", "Repeated 's' sounds form alliteration."],
+                  ["What is the main difference between a simile and a metaphor?", ["A simile uses 'like' or 'as'; a metaphor compares directly", "A metaphor uses 'like'", "A simile exaggerates", "There is no difference"], "A", "Look for comparison words.", "Similes use like/as; metaphors do not."],
+                  ["'The old car coughed and wheezed up the hill' uses:", ["Hyperbole", "Simile", "Alliteration", "Personification"], "D", "Cars do not cough.", "Human actions given to a car are personification."]
+                ],
+                "HARD": [
+                  ["What is the effect of the metaphor 'Hope is a lamp in the dark'?", ["It shows hope is dangerous", "It suggests hope guides and comforts us in difficult times", "It describes electricity", "It means darkness is good"], "B", "What does a lamp do in the dark?", "A lamp gives light and direction, as hope does in hard times."],
+                  ["Which line combines personification and alliteration?", ["The kettle boiled.", "Rain fell like tears.", "The wild wind wailed through the window.", "I am as tall as a tree."], "C", "Look for repeated sounds and a human action.", "Repeated 'w' sounds and the wind 'wailing' like a person."],
+                  ["Why might a poet use onomatopoeia in a poem about a storm?", ["To let the reader hear the storm and feel its power", "To shorten the poem", "To compare the storm to a person", "To exaggerate its size"], "A", "Think of sound words like 'crash'.", "Sound words make the scene vivid and immediate."],
+                  ["'The classroom was a zoo' most likely suggests that the classroom was:", ["Full of animals", "Very quiet", "Beautifully decorated", "Noisy and chaotic"], "D", "What is a zoo like?", "The metaphor suggests noise and disorder."]
+                ]
+              }
+            },
+            {
+              "slug": "g9-eng-reading-poem",
+              "title": "Reading a Poem Closely",
+              "objectives": [
+                "Identify the speaker, subject, theme and tone of a poem",
+                "Recognise rhyme scheme, rhythm and stanza structure",
+                "Analyse imagery and word choice",
+                "Write a short critical response to a poem"
+              ],
+              "intro": "A poem says a great deal in a few words. Each word is chosen for its meaning, its sound and the feelings it creates. Reading a poem closely means reading it several times, slowly, paying attention to who is speaking, what is being described, how it sounds and what deeper idea it expresses. With a few questions as a guide, any poem can be opened up and understood.",
+              "sections": [
+                [
+                  "Speaker, subject, theme and tone",
+                  "The speaker is the voice in the poem; it may or may not be the poet. The subject is what the poem is about on the surface, such as a river, a grandmother or a rainy day. The theme is the deeper message or idea, such as the passing of time, the value of family or the beauty of nature. The tone is the poet's attitude, shown through word choice: joyful, sad, angry, nostalgic, hopeful or humorous. The mood is the feeling the poem creates in the reader. To find the theme, ask: What does the poem suggest about life, people or the world?"
+                ],
+                [
+                  "Structure and sound",
+                  "Poems are often arranged in stanzas, groups of lines like paragraphs. A rhyme scheme shows the pattern of rhyming words at the ends of lines, marked with letters: in a four-line stanza where lines 1 and 3 rhyme and lines 2 and 4 rhyme, the scheme is abab; if lines 1 and 2 rhyme and 3 and 4 rhyme, it is aabb. Rhythm is the pattern of stressed and unstressed syllables, which can make a poem feel calm, lively or urgent. Free verse has no fixed rhyme or rhythm, giving the poet freedom. Repetition of a line or refrain emphasises an idea."
+                ],
+                [
+                  "Imagery and response",
+                  "Imagery is language that appeals to the senses: sight, sound, smell, taste and touch. 'The scent of wet earth after the first rain' appeals to smell and brings back memories. Notice unusual or powerful word choices: why 'crept' rather than 'walked'? A good critical response states the theme, supports it with quotations, explains how devices such as imagery, rhyme and figures of speech help convey it, and gives a personal response. For example: The poem celebrates the monsoon; the imagery of 'dancing drops' and 'thirsty fields drinking' creates a joyful mood."
+                ]
+              ],
+              "definitions": [
+                ["Stanza", "A group of lines in a poem, like a paragraph."],
+                ["Rhyme scheme", "The pattern of end rhymes, shown with letters such as abab."],
+                ["Theme", "The central message or idea of a poem."],
+                ["Tone", "The poet's attitude towards the subject."],
+                ["Imagery", "Descriptive language that appeals to the senses."]
+              ],
+              "examples": [
+                "Free verse: lines without regular rhyme or metre.",
+                "Imagery of sound: 'the patter of rain on the tin roof'."
+              ],
+              "worked": [
+                {
+                  "problem": "Analyse this original stanza: 'Grandmother's hands are maps of years, / each line a road she walked alone; / they knead the dough, they wipe our tears, / and hold us fast as roots hold stone.'",
+                  "steps": [
+                    "Subject: a grandmother's hands. Speaker: a grandchild ('our').",
+                    "Rhyme scheme: years/tears (a), alone/stone (b) → abab.",
+                    "Devices: metaphor 'hands are maps of years'; simile 'as roots hold stone'.",
+                    "Theme and tone: love and gratitude for a grandmother's lifelong care and strength; tone is tender and admiring."
+                  ],
+                  "answer": "An abab stanza using metaphor and simile to express tender admiration for a grandmother's hard life and steady love."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Five questions for any poem",
+                "items": ["Who is speaking?", "What is it about (subject)?", "What deeper idea (theme)?", "How does it sound (rhyme, rhythm, repetition)?", "Which images and devices stand out, and why?"]
+              },
+              "real_world": "Song lyrics are poems set to music, and understanding imagery and rhyme helps you appreciate them. Greeting cards, advertisements and speeches use poetic techniques, and literature examinations ask students to analyse unseen poems using exactly these steps.",
+              "takeaways": [
+                "Identify speaker, subject, theme, tone and mood.",
+                "Mark the rhyme scheme with letters and notice rhythm and stanza form.",
+                "Imagery appeals to the senses; word choice carries meaning.",
+                "Support your interpretation with quotations and explain their effect."
+              ],
+              "practice": [
+                ["What is the rhyme scheme of lines ending sky/tree/high/free?", "abab"],
+                ["What is the difference between subject and theme?", "Subject is the surface topic; theme is the deeper message."],
+                ["Give an example of imagery appealing to smell.", "The aroma of freshly baked bread."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A group of lines in a poem is called a:", ["Paragraph", "Stanza", "Chapter", "Clause"], "B", "Like a paragraph in prose.", "Poems are divided into stanzas."],
+                  ["The deeper message of a poem is its:", ["Rhyme", "Stanza", "Theme", "Title"], "C", "Beyond the surface topic.", "The theme is the central idea."],
+                  ["Language that appeals to the senses is called:", ["Imagery", "Rhyme", "Prose", "Grammar"], "A", "Seeing, hearing, smelling…", "Imagery appeals to the senses."],
+                  ["A poem without regular rhyme or rhythm is written in:", ["Sonnet form", "Couplets", "Limerick form", "Free verse"], "D", "Free from rules.", "Free verse has no fixed rhyme or metre."]
+                ],
+                "MEDIUM": [
+                  ["Lines ending in 'day, night, play, light' have the rhyme scheme:", ["aabb", "abab", "abba", "abcd"], "B", "day/play = a; night/light = b.", "The pattern is abab."],
+                  ["The poet's attitude to the subject is the:", ["Theme", "Rhyme", "Tone", "Stanza"], "C", "Joyful, sad, angry…", "Tone is the poet's attitude."],
+                  ["'The scent of jasmine filled the evening air' appeals mainly to:", ["Smell", "Taste", "Touch", "Hearing"], "A", "Scent.", "It is olfactory imagery."],
+                  ["Why might a poet repeat a line at the end of each stanza?", ["To fill space", "To confuse readers", "Because rhyme is impossible", "To emphasise an important idea"], "D", "A refrain.", "Repetition emphasises key ideas and feelings."]
+                ],
+                "HARD": [
+                  ["In the stanza about grandmother's hands, why is 'maps of years' an effective metaphor?", ["It describes a geography lesson", "The lines on her hands are like roads, showing a long, hard life", "It shows she loves travelling", "It means her hands are small"], "B", "What do lines on a map show?", "The wrinkles are compared to routes, suggesting the journey of her life."],
+                  ["Which best states a theme rather than a subject?", ["The poem is about a river.", "The poem describes rain.", "Change is a natural and necessary part of life.", "The poem has four stanzas."], "C", "A theme is a general idea about life.", "Only this statement expresses a deeper message."],
+                  ["A poem uses words like 'gloomy', 'cold', 'empty' and 'grey'. Its mood is most likely:", ["Sad and lonely", "Joyful", "Exciting", "Humorous"], "A", "What feelings do these words create?", "These words create a melancholy mood."],
+                  ["Which is the best way to support an interpretation of a poem?", ["Give the poet's birth date", "Count the words", "Summarise the title only", "Quote words from the poem and explain their effect"], "D", "Evidence from the text.", "Quotations with explanation support interpretations."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g9-eng-u-writing",
+      "title": "Writing Skills",
+      "topics": [
+        {
+          "slug": "g9-eng-t-creative-writing",
+          "title": "Descriptive and Story Writing",
+          "description": "Writing vivid descriptions and well-structured short stories.",
+          "lessons": [
+            {
+              "slug": "g9-eng-descriptive-writing",
+              "title": "Descriptive Writing",
+              "objectives": [
+                "Use sensory details to describe people, places and events",
+                "Organise a description logically",
+                "Use precise vocabulary and figures of speech",
+                "Show rather than tell"
+              ],
+              "intro": "A good description lets the reader see, hear, smell, taste and feel what the writer experienced. Compare 'The market was crowded' with 'Shoppers jostled between stalls heaped with glossy aubergines and fiery red chillies, while vendors shouted prices over the clatter of handcarts.' The second paints a picture. Descriptive writing appears in stories, travel writing, essays and examination answers that ask you to describe a person, place or event.",
+              "sections": [
+                [
+                  "Using the senses",
+                  "Go beyond sight. Use sounds (the hiss of a pressure cooker, the chatter of mynas), smells (the aroma of cardamom tea, the sharp smell of diesel), textures (rough bark, silky sand) and tastes (tangy tamarind, sweet jaggery). Specific details are more powerful than general ones: instead of 'flowers', write 'marigolds and jasmine'. Select details that build a single dominant impression, such as peaceful, chaotic, eerie or festive, so that the description has a clear overall effect."
+                ],
+                [
+                  "Organisation",
+                  "Organise a description so the reader can follow it. For a place, use spatial order: from near to far, left to right, outside to inside, or from top to bottom. For an event, use chronological order: from the beginning to the end. For a person, move from general appearance to particular features, then to habits, speech and personality. Begin with an engaging opening that sets the scene and the dominant impression, develop it in the body, and end with a closing thought or feeling."
+                ],
+                [
+                  "Show, don't tell",
+                  "'Showing' means letting details reveal a quality rather than stating it. Instead of telling 'My grandfather was kind', show it: 'Every morning my grandfather saved a handful of rice for the sparrows and never let a beggar leave his door empty-handed.' Use strong verbs ('trudged', 'darted', 'gulped') and precise adjectives rather than vague words like 'nice' and 'good'. Figures of speech add vividness: a simile ('the river glinted like a silver ribbon') or personification ('the old fan groaned overhead'). Avoid piling up adjectives; choose a few precise ones."
+                ]
+              ],
+              "definitions": [
+                ["Sensory details", "Details that appeal to sight, sound, smell, taste or touch."],
+                ["Dominant impression", "The overall feeling a description creates."],
+                ["Spatial order", "Organising details according to their position in space."],
+                ["Show, don't tell", "Revealing qualities through details and actions rather than direct statements."]
+              ],
+              "examples": [
+                "Telling: The beach was beautiful. Showing: Turquoise waves curled onto pale sand as gulls wheeled overhead.",
+                "Strong verb: The puppy bounded across the lawn."
+              ],
+              "worked": [
+                {
+                  "problem": "Improve this description: 'The railway station was busy and noisy. It was hot.'",
+                  "steps": [
+                    "Choose a dominant impression: chaotic and stifling.",
+                    "Add sound: announcements crackling, porters shouting, trains screeching.",
+                    "Add sight and smell: red-shirted porters balancing trunks, the smell of fried samosas and engine oil.",
+                    "Show the heat: passengers fanning themselves with newspapers, sweat trickling down a vendor's face."
+                  ],
+                  "answer": "Announcements crackled over the din as red-shirted porters shouldered towering trunks through the crowd. The air, thick with the smell of fried samosas and engine oil, pressed down on passengers who fanned themselves with folded newspapers."
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Five senses checklist",
+                "items": [
+                  ["Sight", "colours, shapes, light, movement"],
+                  ["Sound", "voices, machines, nature"],
+                  ["Smell", "food, flowers, smoke, rain"],
+                  ["Touch", "textures, temperature, wind"],
+                  ["Taste", "sweet, sour, spicy, bitter"]
+                ]
+              },
+              "real_world": "Travel writers, food bloggers and journalists rely on vivid description to make readers feel present. Estate agents describe homes and tourism boards describe destinations in sensory language because it persuades people.",
+              "takeaways": [
+                "Use all five senses and specific details.",
+                "Build one dominant impression.",
+                "Organise spatially, chronologically or from general to particular.",
+                "Show through details and strong verbs instead of telling."
+              ],
+              "practice": [
+                ["Rewrite 'The food was good' using sensory details.", "E.g. The biryani was fragrant with saffron, each grain of rice tender and spiced."],
+                ["What is a dominant impression?", "The overall feeling a description creates."],
+                ["Give a strong verb to replace 'walked slowly'.", "Trudged / ambled / strolled."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Descriptive writing mainly aims to:", ["List facts briefly", "Help readers picture and feel an experience", "Argue a point", "Give instructions"], "B", "Think of painting with words.", "Descriptions make readers see and feel."],
+                  ["'The aroma of cardamom tea' appeals to:", ["Sight", "Touch", "Smell", "Hearing"], "C", "Aroma.", "Aroma is a smell."],
+                  ["Which is an example of 'showing'?", ["Her hands trembled and she bit her lip as the results were read out.", "She was nervous.", "She felt bad.", "She was very very nervous."], "A", "Details reveal the feeling.", "Actions reveal nervousness without naming it."],
+                  ["Describing a room from the door to the far window uses:", ["Chronological order", "Random order", "Alphabetical order", "Spatial order"], "D", "Position in space.", "Moving through space is spatial order."]
+                ],
+                "MEDIUM": [
+                  ["Which sentence has the most precise detail?", ["There were flowers.", "Marigolds and jasmine spilled from wicker baskets.", "There were nice flowers.", "Flowers were there and they were good."], "B", "Specific names and images.", "Named flowers and baskets give a precise image."],
+                  ["Which is a strong verb?", ["went", "got", "darted", "did"], "C", "It shows how the action happened.", "'Darted' shows quick, sudden movement."],
+                  ["Why should a description have a dominant impression?", ["It gives the writing a clear, unified effect", "It makes it longer", "It removes all details", "It replaces the conclusion"], "A", "Unity of effect.", "A single impression makes the description coherent."],
+                  ["Which is a weakness in descriptive writing?", ["Using sensory details", "Using a simile", "Organising details", "Piling up many vague adjectives like nice, good, beautiful"], "D", "Quality over quantity.", "Vague adjectives weaken description."]
+                ],
+                "HARD": [
+                  ["Which revision best 'shows' that a street is deserted at night?", ["The street was empty.", "A single streetlight flickered over shuttered shops while a stray dog's bark echoed down the lane.", "The street was very, very empty.", "Nobody was there, so it was deserted."], "B", "Use details, sound and light.", "Specific images and echoing sounds convey emptiness."],
+                  ["To describe a festival as an event, the most natural organisation is:", ["Spatial, left to right", "Alphabetical", "Chronological, from preparations to the end of the celebration", "Random"], "C", "Events happen over time.", "Events are best described in time order."],
+                  ["Which use of figurative language best suits a calm lake at dawn?", ["The lake lay still as a sheet of glass, blushing pink under the rising sun.", "The lake was a raging monster.", "The lake screamed loudly.", "The lake was wet."], "A", "Match the mood.", "The simile and personification create calm and beauty."],
+                  ["Which sentence describes a person by showing rather than telling?", ["Mr Rao was very strict.", "Mr Rao was strict and serious.", "Everyone thought Mr Rao was strict.", "Mr Rao's eyes narrowed over his spectacles whenever a pencil dropped."], "D", "Actions and expressions.", "A specific action reveals strictness."]
+                ]
+              }
+            },
+            {
+              "slug": "g9-eng-story-writing",
+              "title": "Story Writing",
+              "objectives": [
+                "Identify the elements of a short story",
+                "Plan a story using a plot structure",
+                "Create believable characters and dialogue",
+                "Write a story from a given beginning or outline"
+              ],
+              "intro": "Humans have told stories for as long as they have spoken, around fires, in temples and now on screens. A good story captures the reader's interest, makes them care about the characters and leaves them with a feeling or idea. In examinations, you may be asked to complete a story from a given opening or write one from an outline, usually in about 150 to 200 words. A clear structure and a few techniques make this much easier.",
+              "sections": [
+                [
+                  "Elements of a story",
+                  "Every story has characters (the people or animals in it, especially a main character or protagonist), a setting (where and when it happens), a plot (the sequence of events), a conflict (a problem or challenge the character faces) and a resolution (how the problem is solved or ends). Stories also have a point of view: first person ('I') lets readers share the narrator's thoughts, while third person ('she', 'they') lets the narrator describe several characters. Many stories also have a theme, such as courage, honesty or friendship."
+                ],
+                [
+                  "Plot structure",
+                  "A simple plot has five stages. Exposition introduces the characters, setting and situation. Rising action builds the conflict through complications. The climax is the turning point or moment of greatest tension. Falling action shows the results of the climax. The resolution ties up the story. For a short examination story, plan a strong opening that hooks the reader (a line of dialogue, a surprising event or a vivid setting), one clear conflict, a climax and a satisfying ending. Avoid too many characters or events."
+                ],
+                [
+                  "Characters, dialogue and style",
+                  "Make characters believable by giving them motives, feelings and small details: a nervous habit, a way of speaking. Dialogue brings characters to life and moves the plot forward; put each speaker's words in quotation marks and start a new line for each new speaker. Use the past tense consistently, varied sentence lengths (short sentences increase tension), and descriptive details that appeal to the senses. A good title should arouse curiosity without giving away the ending. Finally, check that the story follows any given opening, outline and word limit."
+                ]
+              ],
+              "definitions": [
+                ["Protagonist", "The main character of a story."],
+                ["Conflict", "The problem or challenge that drives the story."],
+                ["Climax", "The turning point or moment of greatest tension."],
+                ["Resolution", "The ending, in which the conflict is resolved."],
+                ["Point of view", "The perspective from which a story is told."]
+              ],
+              "examples": [
+                "Hook: 'The last thing I expected to find in Grandpa's trunk was a map with my name on it.'",
+                "Short sentences for tension: 'The door creaked. Footsteps. Then silence.'"
+              ],
+              "worked": [
+                {
+                  "problem": "Plan a story beginning: 'As the bus pulled away, Arjun realised his bag was still on the seat.'",
+                  "steps": [
+                    "Exposition: Arjun, a Class IX student, is on his way to a district quiz; the bag holds his admit card.",
+                    "Rising action: he runs after the bus, then borrows a phone to call the transport office; time is running out.",
+                    "Climax: a stranger, who saw the bag, arrives at the quiz venue on a scooter just as registration is closing.",
+                    "Resolution: Arjun registers, competes and later thanks the stranger; theme: kindness of strangers."
+                  ],
+                  "answer": "A five-stage plan with a hook, rising tension, a climax at the deadline and a warm resolution."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Plot structure",
+                "items": ["Exposition", "Rising action", "Climax", "Falling action", "Resolution"]
+              },
+              "real_world": "Screenwriters, novelists, game designers and advertisers all use plot structure to keep audiences engaged. Even job interviews and presentations benefit from storytelling: describing a challenge you faced, what you did and the result.",
+              "takeaways": [
+                "Stories need characters, setting, plot, conflict and resolution.",
+                "Plan exposition, rising action, climax, falling action and resolution.",
+                "Hook the reader early and keep to one main conflict.",
+                "Use dialogue, sensory detail and consistent past tense."
+              ],
+              "practice": [
+                ["What is the climax of a story?", "The turning point or moment of greatest tension."],
+                ["Write a hook for a story about a lost puppy.", "E.g. 'The whimper came from inside the storm drain.'"],
+                ["Why start a new line for each speaker in dialogue?", "So readers can tell who is speaking."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The main character of a story is the:", ["Narrator always", "Protagonist", "Setting", "Climax"], "B", "The central figure.", "The protagonist is the main character."],
+                  ["Where and when a story takes place is its:", ["Plot", "Theme", "Setting", "Conflict"], "C", "Time and place.", "The setting is the time and place."],
+                  ["The moment of greatest tension is the:", ["Climax", "Exposition", "Resolution", "Title"], "A", "The turning point.", "The climax is the peak of tension."],
+                  ["The problem a character faces is the:", ["Resolution", "Setting", "Dialogue", "Conflict"], "D", "It drives the story.", "Conflict is the central problem."]
+                ],
+                "MEDIUM": [
+                  ["A story told using 'I' is in the:", ["Third person", "First person", "Second person", "Passive voice"], "B", "The narrator is a character.", "'I' indicates first-person narration."],
+                  ["Which is the best opening hook?", ["This is a story.", "Once there was a boy. He was a boy.", "The phone rang at midnight, and the voice on the line knew my name.", "I will now write a story."], "C", "It should create curiosity.", "It creates mystery and tension."],
+                  ["Why should a short story have only one main conflict?", ["To keep it focused within the word limit", "Because conflicts are not allowed", "To make it longer", "Because there must be no climax"], "A", "Short length.", "One conflict keeps a short story clear and focused."],
+                  ["Which is correctly punctuated dialogue?", ["Where are you going asked Mother.", "“Where are you going asked Mother.”", "Where are you going? “asked Mother”", "“Where are you going?” asked Mother."], "D", "Quotation marks around spoken words.", "The spoken words and question mark go inside the quotation marks."]
+                ],
+                "HARD": [
+                  ["Which sentence best increases tension at a climax?", ["It was a long and pleasant evening with many people chatting.", "Then it moved.", "The weather was mild and the birds sang.", "She thought about what to cook for dinner the next week."], "B", "Short sentences create suspense.", "A short, abrupt sentence heightens tension."],
+                  ["A story's theme is 'honesty is rewarded'. Which plot best supports it?", ["A boy wins a race", "A girl finds a lost wallet, returns it, and the owner later helps her family", "A dog chases a cat", "A storm destroys a village"], "C", "The plot should illustrate the message.", "Returning the wallet and being rewarded expresses the theme."],
+                  ["Which ending is most satisfying for a story whose conflict is a student fearing stage performance?", ["She performs despite her fear and realises courage means acting while afraid", "The story stops suddenly mid-sentence", "She wakes up and it was all a dream", "An earthquake happens"], "A", "Resolve the conflict meaningfully.", "It resolves the conflict and shows growth."],
+                  ["Which is the best title for a story about a stranger returning a lost admit card just in time?", ["The Bag", "A Story", "Things That Happened", "Just in Time"], "D", "Curious but not giving everything away.", "It hints at tension without revealing the ending."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
