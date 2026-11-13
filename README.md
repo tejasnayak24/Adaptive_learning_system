@@ -29,12 +29,17 @@ python -m alembic upgrade head
 > python -m alembic upgrade head
 > ```
 
-Seed the Science curriculum (safe to re-run; existing rows are kept):
+Load the Grade 6–10 curriculum (Mathematics, Science, Social Science and
+English). It is safe to re-run: rows are matched by slug and never duplicated
+or deleted, and the original Science lessons keep their ids and progress.
 
 ```powershell
 cd C:\Users\tejas\Adaptive_learning_system
-python backend\seed_science.py
+python backend\scripts\import_curriculum.py --check   # validate content only
+python backend\scripts\import_curriculum.py           # import
 ```
+
+Content lives in `backend/curriculum/content/g<grade>_<subject>.json`.
 
 ## 2. Backend
 

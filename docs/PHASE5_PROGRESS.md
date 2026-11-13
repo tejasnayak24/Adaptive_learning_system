@@ -7,7 +7,7 @@ Branch: `final/project-completion` (never `main`).
 | Milestone | Status | Commit |
 |---|---|---|
 | A. Curriculum architecture and grade support | Done | `ccc0a01` |
-| B. Curriculum content (20 grade-subject files) | In progress | see below |
+| B. Curriculum content (20 grade-subject files) | Done; imported into live DB | 571827c |
 | C. Quiz and practice integration (hints, explanations, modes) | Backend partly done in A; UI pending | — |
 | D. Frontend curriculum experience | Pending | — |
 | E. Curriculum and RL integration | Pending | — |
@@ -22,7 +22,7 @@ Validate with `python backend/scripts/check_curriculum_file.py backend/curriculu
 | 7 | ✅ | ✅ | ✅ | ✅ |
 | 8 | ✅ | ✅ | ✅ | ✅ |
 | 9 | ✅ | ✅ (adopts 3 original lessons) | ✅ | ✅ |
-| 10 | ✅ | ✅ (adopts 2 original lessons) | ⏳ next | ⏳ |
+| 10 | ✅ | ✅ (adopts 2 original lessons) | ✅ | ✅ |
 
 Each file: ≥ 3 topics × 2 lessons, full material, Easy/Medium/Hard quizzes
 (4 questions each, hint + explanation, balanced answer key).
@@ -46,7 +46,14 @@ Each file: ≥ 3 topics × 2 lessons, full material, Easy/Medium/Hard quizzes
 
 ## Exact next task
 
-Write `backend/curriculum/content/g10_social_science.json`, validate it, then continue down the table.
-After all 20 files: add a test asserting `validate_curriculum(load_all())` is empty, run
-`python backend/scripts/import_curriculum.py` against the live DB (after a pg_dump backup),
-commit "Phase 5B complete", then milestones C, D, E.
+Milestone B is complete: 20 files, 122 lessons (117 new + 5 original Science),
+1,404 new questions plus hints/explanations for the 75 original ones. Imported into
+the live DB on 2026-11-13 after backup `backups/aegis_pre_phase5_import_*.dump`
+(rehearsed on aegis_test; second run created nothing; progress and original
+questions byte-identical).
+
+Next: milestone C (quiz UI: hints from the database, explanations in the answer
+review, practice/hints/challenge modes recorded via `mode`, challenge timer),
+then D (curriculum browser by grade/subject/unit/topic, lesson material pages with
+diagrams, worked examples, practice and navigation), then E (RL next-step resolver
+using `navigation`, simulator curriculum aligned with content files).
