@@ -458,6 +458,7 @@ export default function QuizView() {
           quizId: quiz.id,
           difficulty: quiz.difficulty,
           lessonQuizzes: Array.isArray(lesson.quizzes) ? lesson.quizzes : [],
+          navigation: lesson.navigation,
           lessons: allLessons,
           onResults: true
         })

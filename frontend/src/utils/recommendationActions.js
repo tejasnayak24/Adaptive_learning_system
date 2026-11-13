@@ -96,8 +96,11 @@ function lessonAfter(lessons, lessonId, steps) {
 /**
  * Turn a recommended action into a concrete next step.
  *
- * ctx: { lessonId, quizId, difficulty, lessonQuizzes, lessons, onResults }
- *   onResults -- true on the quiz results screen (answer review visible).
+ * ctx: { lessonId, quizId, difficulty, lessonQuizzes, navigation, lessons, onResults }
+ *   navigation -- the lesson's curriculum navigation from the API
+ *                 ({ next, skip, ... } within the student's grade and subject);
+ *                 preferred over `lessons` for pacing actions.
+ *   onResults  -- true on the quiz results screen (answer review visible).
  *
  * Returns { kind, label, to?, state?, mode?, level? } where kind is one of
  *   'navigate' -- go to `to` (with router `state`)
@@ -107,7 +110,7 @@ function lessonAfter(lessons, lessonId, steps) {
  *   'unknown'  -- unrecognised action (shown explicitly, never silently)
  */
 export function resolveNextStep(action, ctx = {}) {
-  const { lessonId, quizId, difficulty, lessonQuizzes, lessons, onResults } = ctx
+  const { lessonId, quizId, difficulty, lessonQuizzes, navigation, lessons, onResults } = ctx
   const level = String(difficulty || '').toUpperCase()
   const levelIndex = LEVELS.indexOf(level)
   const lessonPage = (label) => ({
@@ -125,7 +128,9 @@ export function resolveNextStep(action, ctx = {}) {
     case 'NEXT_LESSON':
     case 'SKIP_TO_ADVANCED_TOPIC': {
       const steps = action === 'NEXT_LESSON' ? 1 : 2
-      const target = lessonAfter(lessons, lessonId, steps)
+      const target = navigation
+        ? (action === 'NEXT_LESSON' ? navigation.next : navigation.skip) || null
+        : lessonAfter(lessons, lessonId, steps)
       if (target) {
         return {
           kind: 'navigate',
@@ -136,7 +141,7 @@ export function resolveNextStep(action, ctx = {}) {
       }
       return {
         kind: 'navigate',
-        label: lessons && lessons.length ? 'You finished this sequence — choose a subject →' : 'Browse lessons →',
+        label: navigation || (lessons && lessons.length) ? 'Subject complete — choose what to study next →' : 'Browse lessons →',
         to: '/subjects'
       }
     }
@@ -173,15 +178,20 @@ export function resolveNextStep(action, ctx = {}) {
       return retry('challenge', 'Start the quick challenge →')
 
     case 'SHOW_WORKED_EXAMPLE':
-      return onResults
-        ? { kind: 'review', label: 'Review the worked answers ↓' }
-        : lessonPage('Open the lesson and its worked answers →')
+      // Lessons now contain real step-by-step worked examples; the lesson page
+      // scrolls to and highlights them. Without a lesson, fall back to the
+      // answer review on the results screen.
+      return lessonId
+        ? lessonPage('Study the worked examples →')
+        : onResults
+          ? { kind: 'review', label: 'Review the worked answers ↓' }
+          : { kind: 'navigate', label: 'Browse lessons →', to: '/subjects' }
 
     case 'FOCUS_RECOVERY':
       return { kind: 'break', label: 'Start a short break →' }
 
     case 'SHOW_REAL_WORLD_APPLICATION':
-      return lessonPage('Revisit the lesson with a real-world lens →')
+      return lessonPage('See how this is used in real life →')
 
     default:
       return { kind: 'unknown', label: actionInfo(action).label }

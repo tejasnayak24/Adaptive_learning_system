@@ -67,16 +67,17 @@ actions work *on average* for each observable state.
 
 from __future__ import annotations
 
+import json
 import random
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Final
 
 from ..core.actions import Action
 from ..models.student_state import Difficulty, StudentState
 
-# Shape of the simulated curriculum (subject -> topic -> lessons). Topic
-# names do not affect the Q-table key; only the number of lessons matters
-# (it bounds an episode). Science topics match the seeded Science lessons.
+# Fallback curriculum, used only when the real content files are absent
+# (subject -> topic -> lessons). Topic names never affect the Q-table key.
 CURRICULUM: Final[dict[str, dict[str, list[str]]]] = {
     "Mathematics": {
         "Number System": ["Integers", "Fractions and Decimals"],
@@ -105,6 +106,30 @@ LESSON_SEQUENCE: Final[tuple[tuple[str, str, str], ...]] = tuple(
     for lesson in lessons
 )
 TOTAL_LESSONS: Final[int] = len(LESSON_SEQUENCE)
+
+# The real Aegis curriculum: one lesson sequence per (grade, subject), read
+# from backend/curriculum/content. A simulated student works through ONE
+# grade-subject sequence per episode, in curriculum order, exactly as a real
+# student does (recommendations stay within the student's grade and subject).
+CONTENT_DIR: Final[Path] = Path(__file__).resolve().parents[2] / "backend" / "curriculum" / "content"
+
+
+def _load_sequences(content_dir: Path = CONTENT_DIR) -> dict[tuple[int, str], tuple[tuple[str, str, str], ...]]:
+    sequences: dict[tuple[int, str], tuple[tuple[str, str, str], ...]] = {}
+    for path in sorted(content_dir.glob("g*_*.json")):
+        with open(path, encoding="utf-8") as handle:
+            data = json.load(handle)
+        sequences[(data["grade"], data["subject"])] = tuple(
+            (data["subject"], topic["title"], lesson["title"])
+            for unit in data["units"]
+            for topic in unit["topics"]
+            for lesson in topic["lessons"]
+        )
+    return sequences or {(0, "Mixed"): LESSON_SEQUENCE}
+
+
+CURRICULUM_SEQUENCES: Final[dict[tuple[int, str], tuple[tuple[str, str, str], ...]]] = _load_sequences()
+SEQUENCE_KEYS: Final[tuple[tuple[int, str], ...]] = tuple(sorted(CURRICULUM_SEQUENCES))
 
 DIFFICULTY_OFFSET: Final[dict[Difficulty, float]] = {
     Difficulty.EASY: -0.05,
@@ -192,6 +217,11 @@ class SimulatedStudent:
     response_time: float = 30.0
 
     history: list[str] = field(default_factory=list)
+    sequence: tuple[tuple[str, str, str], ...] = LESSON_SEQUENCE
+
+    @property
+    def total_lessons(self) -> int:
+        return len(self.sequence)
 
     # ------------------------------------------------------------------
     @classmethod
@@ -203,7 +233,8 @@ class SimulatedStudent:
             fatigue_rate=rng.uniform(0.01, 0.07),
             distractibility=rng.uniform(0.0, 0.5),
         )
-        student.lesson_index = rng.randrange(0, TOTAL_LESSONS - 3)
+        student.sequence = CURRICULUM_SEQUENCES[rng.choice(SEQUENCE_KEYS)]
+        student.lesson_index = rng.randrange(0, max(1, student.total_lessons - 2))
         student.completed_lessons = student.lesson_index
         student.mastery = rng.uniform(0.1, 0.9)
         student.fatigue = rng.uniform(0.0, 0.5)
@@ -219,7 +250,7 @@ class SimulatedStudent:
 
     # ------------------------------------------------------------------
     def observe(self) -> StudentState:
-        subject, topic, lesson = LESSON_SEQUENCE[min(self.lesson_index, TOTAL_LESSONS - 1)]
+        subject, topic, lesson = self.sequence[min(self.lesson_index, self.total_lessons - 1)]
         return StudentState(
             subject=subject,
             topic=topic,
@@ -239,7 +270,7 @@ class SimulatedStudent:
 
     @property
     def finished(self) -> bool:
-        return self.completed_lessons >= TOTAL_LESSONS
+        return self.completed_lessons >= self.total_lessons
 
     # ------------------------------------------------------------------
     def apply(self, action: Action) -> None:
@@ -251,8 +282,8 @@ class SimulatedStudent:
         if action in (Action.NEXT_LESSON, Action.SKIP_TO_ADVANCED_TOPIC):
             step = 1 if action == Action.NEXT_LESSON else 2
             carry = 0.3 * (self.mastery - 0.7) if step == 1 else 0.6 * (self.mastery - 0.85)
-            self.lesson_index = min(self.lesson_index + step, TOTAL_LESSONS - 1)
-            self.completed_lessons = min(self.completed_lessons + step, TOTAL_LESSONS)
+            self.lesson_index = min(self.lesson_index + step, self.total_lessons - 1)
+            self.completed_lessons = min(self.completed_lessons + step, self.total_lessons)
             start = rng.uniform(0.25, 0.45) * (0.7 + 0.3 * self.ability)
             self.mastery = _clip(start + carry, 0.05, 0.95)
             self.difficulty = Difficulty.EASY  # a new lesson starts with its EASY quiz

@@ -184,6 +184,10 @@ def submit_quiz(
                 ],
             },
             "recommendation": recommendation_to_dict(recommendation),
+            # Where the recommended action leads, within this grade and subject.
+            "next_step": cs.recommendation_next_step(
+                db, quiz.lesson, quiz, recommendation.action if recommendation else None
+            ),
             "recommendation_status": (
                 "available" if recommendation is not None else "telemetry_unavailable"
             ),

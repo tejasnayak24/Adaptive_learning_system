@@ -246,9 +246,14 @@ and a short-lived attention boost. The agent only sees the observable state.
   understanding makes the next lesson harder. Skipping two lessons uses a
   carry-over of 0.6 × (mastery − 0.85).
 
-The curriculum has 12 lessons across Mathematics, Science (the five seeded
-Science topics), Social Science and English. An episode ends when the
-curriculum is finished or after 60 steps.
+Since Phase 5 each episode uses one real grade-subject lesson sequence from
+`backend/curriculum/content` (20 sequences of 6 or 8 lessons, in curriculum
+order), matching how real recommendations stay within a student's grade and
+subject. An episode ends when that sequence is finished or after 60 steps.
+The shipped Phase 4 table was re-validated on this curriculum-aligned
+simulator (mean return −3.85 vs −24.22 legacy rules and −25.23 random,
+0 % premature advancement, 0 violations) and kept unchanged, so no retraining
+or state-version change was needed.
 
 While designing the simulator, profiling the learned policy exposed three
 exploits, which were fixed before shipping:

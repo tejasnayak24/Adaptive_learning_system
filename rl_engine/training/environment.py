@@ -19,7 +19,7 @@ import random
 from ..core.actions import Action
 from ..models.student_state import StudentState
 from .rewards import RewardBreakdown, RewardCalculator
-from .simulation import TOTAL_LESSONS, SimulatedStudent
+from .simulation import SimulatedStudent
 
 
 class LearningEnvironment:
@@ -47,5 +47,5 @@ class LearningEnvironment:
 
         self.last_breakdown = self.reward_calculator.breakdown(before, action, after)
         self.current_state = after
-        done = after.completed_lessons >= TOTAL_LESSONS
+        done = self.student.finished
         return after, self.last_breakdown.total, done

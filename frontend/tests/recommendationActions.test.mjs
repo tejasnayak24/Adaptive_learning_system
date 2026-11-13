@@ -83,8 +83,10 @@ test('practice, hint and challenge retry the quiz in the right mode', () => {
 })
 
 test('worked example, break and real-world actions', () => {
-  assert.equal(resolveNextStep('SHOW_WORKED_EXAMPLE', ctx).kind, 'review')
-  assert.equal(resolveNextStep('SHOW_WORKED_EXAMPLE', { lessonId: 2 }).to, '/lesson/2')
+  const worked = resolveNextStep('SHOW_WORKED_EXAMPLE', ctx)
+  assert.equal(worked.to, '/lesson/2')
+  assert.equal(worked.state.recommendedAction, 'SHOW_WORKED_EXAMPLE')
+  assert.equal(resolveNextStep('SHOW_WORKED_EXAMPLE', { onResults: true }).kind, 'review')
   assert.equal(resolveNextStep('FOCUS_RECOVERY', ctx).kind, 'break')
   const realWorld = resolveNextStep('SHOW_REAL_WORLD_APPLICATION', ctx)
   assert.equal(realWorld.state.recommendedAction, 'SHOW_REAL_WORLD_APPLICATION')
@@ -94,4 +96,14 @@ test('unknown actions are reported explicitly', () => {
   const step = resolveNextStep('TELEPORT', ctx)
   assert.equal(step.kind, 'unknown')
   assert.match(actionInfo('TELEPORT').label, /Unrecognised/)
+})
+
+test('pacing uses curriculum navigation (grade and subject order), not lesson ids', () => {
+  const navigation = { next: { id: 41, title: 'Tenses' }, skip: { id: 57, title: 'Letters' } }
+  const withNav = { ...ctx, lessonId: 40, navigation }
+  assert.equal(resolveNextStep('NEXT_LESSON', withNav).to, '/lesson/41')
+  assert.equal(resolveNextStep('SKIP_TO_ADVANCED_TOPIC', withNav).to, '/lesson/57')
+  const end = resolveNextStep('NEXT_LESSON', { ...ctx, navigation: { next: null, skip: null } })
+  assert.equal(end.to, '/subjects')
+  assert.match(end.label, /Subject complete/)
 })

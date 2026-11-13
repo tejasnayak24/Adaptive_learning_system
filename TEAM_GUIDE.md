@@ -162,18 +162,32 @@ Roles are changed only with `python backend/scripts/set_role.py <email> <role>`.
 
 | Method | Path | Notes |
 |---|---|---|
-| GET | `/lessons` | All lessons |
-| GET | `/lesson/{id}` | Lesson content + its quizzes |
+| GET | `/lessons` 🔒 | Lessons of the student's grade in curriculum order (all grades for teachers/admins; empty until a grade is chosen) |
+| GET | `/lesson/{id}` 🔒 | Lesson, its quizzes, structured `material` (objectives, sections, definitions, examples, worked examples, diagram, real world, takeaways, practice), `grade`, `subject`, `unit`, `curriculum_topic` and `navigation` (previous/next/skip within the grade and subject). 403 for another grade, 409 `grade_required` if the student has no grade |
 | POST | `/lesson` 🔒🎓 | Create a lesson |
 | PUT | `/lesson/{id}` 🔒🎓 | Partial update (only sent fields change) |
 | DELETE | `/lesson/{id}` 🔒🎓 | Delete a lesson |
+
+## Curriculum (Phase 5)
+
+Hierarchy: Grade (6–10) → Subject (Mathematics, Science, Social Science,
+English) → Unit → Topic → Lesson → Material → Quizzes (EASY/MEDIUM/HARD).
+Content is imported from `backend/curriculum/content/*.json` with
+`python backend/scripts/import_curriculum.py` (idempotent).
+
+| Method | Path | Notes |
+|---|---|---|
+| PUT | `/profile/grade` 🔒 | `{grade: 6..10}` — choose or change the student's grade (progress kept). `GET /profile` and `POST /register` include `grade` |
+| GET | `/curriculum` 🔒 | `?subject=` optional. The student's grade: subjects → units → topics → lessons (quizzes, attempts, best score). Teachers/admins may pass `?grade=` |
+| GET | `/curriculum/grades` 🔒 | Lesson counts per grade and subject |
+| GET | `/curriculum/lessons/{id}/navigation` 🔒 | Previous / next / skip / next topic within the grade and subject |
 
 ## Quiz
 
 | Method | Path | Notes |
 |---|---|---|
 | GET | `/quiz/lesson/{lesson_id}` 🔒 | Quizzes of a lesson |
-| GET | `/quiz/{id}` 🔒 | Quiz + questions. **Never includes correct answers.** |
+| GET | `/quiz/{id}` 🔒 | Quiz + questions with a topic-specific `hint` each. **Never includes correct answers or explanations.** |
 | POST | `/quiz/start` 🔒 | `{quiz_id}` → same payload as `GET /quiz/{id}` |
 | POST | `/quiz/submit` 🔒 | See below |
 

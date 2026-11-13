@@ -24,6 +24,7 @@ from app.services.recommendation_service import (
     has_camera_telemetry,
     recommendation_to_dict,
 )
+from app.services import curriculum_service as cs
 from app.services.rl_service import get_rl_service
 
 router = APIRouter(tags=["Reinforcement Learning"])
@@ -165,6 +166,9 @@ def latest_recommendation(
         "data": {
             "status": status,
             "recommendation": recommendation_to_dict(row),
+            "next_step": cs.recommendation_next_step(
+                db, latest_attempt.lesson, latest_attempt.quiz, row.action if row else None
+            ),
             "attempt": _attempt_summary(latest_attempt),
         },
     }

@@ -19,6 +19,7 @@ export default function Recommendations() {
   const [error, setError] = useState('')
   const [unavailableNote, setUnavailableNote] = useState('')
   const [lessons, setLessons] = useState([])
+  const [currentLesson, setCurrentLesson] = useState(null)
 
   useEffect(() => {
     async function loadRecommendation() {
@@ -46,10 +47,17 @@ export default function Recommendations() {
           setUnavailableNote('The coach could not generate a recommendation for your latest attempt.')
         }
         try {
-          const lessonRes = await lessonService.getLessons()
-          if (lessonRes?.success) setLessons(lessonRes.data || [])
+          if (attempt?.lesson_id) {
+            // Lesson detail carries its quizzes and its place in the
+            // student's grade/subject sequence (navigation).
+            const lessonRes = await lessonService.getLesson(attempt.lesson_id)
+            if (lessonRes?.success) setCurrentLesson(lessonRes.data)
+          } else {
+            const lessonRes = await lessonService.getLessons()
+            if (lessonRes?.success) setLessons(lessonRes.data || [])
+          }
         } catch {
-          // Lesson list only refines the next-step link.
+          // The lesson only refines the next-step link.
         }
       } catch (err) {
         setError(err.message || 'Failed to load your recommendation')
@@ -72,13 +80,13 @@ export default function Recommendations() {
 
   const rlStrategies = ALL_ACTIONS.map((name) => ({ name, ...ACTION_CATALOGUE[name] }))
 
-  const currentLesson = lessons.find((l) => l.id === recommendation?.lessonId)
   const nextStep = recommendation
     ? resolveNextStep(recommendation.action, {
         lessonId: recommendation.lessonId,
         quizId: recommendation.quizId,
         difficulty: recommendation.lastDifficulty,
         lessonQuizzes: currentLesson?.quizzes,
+        navigation: currentLesson?.navigation,
         lessons
       })
     : null

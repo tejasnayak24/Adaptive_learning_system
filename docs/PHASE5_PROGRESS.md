@@ -8,9 +8,9 @@ Branch: `final/project-completion` (never `main`).
 |---|---|---|
 | A. Curriculum architecture and grade support | Done | `ccc0a01` |
 | B. Curriculum content (20 grade-subject files) | Done; imported into live DB | 571827c |
-| C. Quiz and practice integration (hints, explanations, modes) | Backend partly done in A; UI pending | — |
-| D. Frontend curriculum experience | Pending | — |
-| E. Curriculum and RL integration | Pending | — |
+| C. Quiz and practice integration (hints, explanations, modes) | Done | b90f3ae |
+| D. Frontend curriculum experience | Done | 19f7c07 |
+| E. Curriculum and RL integration | Done | see git log |
 
 ## Content files (`backend/curriculum/content/`)
 
@@ -44,16 +44,6 @@ Each file: ≥ 3 topics × 2 lessons, full material, Easy/Medium/Hard quizzes
 - G10 Social Science: Nationalism in India; Federalism; Development and Sectors of the Economy.
 - G10 English: Conditionals and Clauses; Analytical Reading; Persuasive Writing.
 
-## Exact next task
+## Status
 
-Milestone B is complete: 20 files, 122 lessons (117 new + 5 original Science),
-1,404 new questions plus hints/explanations for the 75 original ones. Imported into
-the live DB on 2026-11-13 after backup `backups/aegis_pre_phase5_import_*.dump`
-(rehearsed on aegis_test; second run created nothing; progress and original
-questions byte-identical).
-
-Next: milestone C (quiz UI: hints from the database, explanations in the answer
-review, practice/hints/challenge modes recorded via `mode`, challenge timer),
-then D (curriculum browser by grade/subject/unit/topic, lesson material pages with
-diagrams, worked examples, practice and navigation), then E (RL next-step resolver
-using `navigation`, simulator curriculum aligned with content files).
+Phase 5 is complete (milestones A–E). Next phase: Phase 6 (dashboard and analytics).

@@ -195,3 +195,58 @@ def topic_count(db: Session, grade: int, subject: str) -> int:
         .filter(CurriculumUnit.grade == grade, CurriculumUnit.subject == subject)
         .count()
     )
+
+
+_LEVELS = ("EASY", "MEDIUM", "HARD")
+
+
+def recommendation_next_step(db: Session, lesson: Lesson | None, quiz, action: str | None) -> dict[str, Any] | None:
+    """Concrete curriculum target for an RL action, within the lesson's grade and subject.
+
+    Returns e.g. {"kind": "lesson", "lesson_id": 12, "title": ...},
+    {"kind": "quiz", "quiz_id": 40, "difficulty": "HARD", "mode": "challenge"},
+    {"kind": "break"}, or {"kind": "subject_complete"} when there is no further lesson.
+    """
+    if lesson is None or not action:
+        return None
+    nav = navigation(db, lesson) or {}
+
+    def lesson_step(target, section=None):
+        if target is None:
+            return {"kind": "subject_complete", "grade": lesson.grade, "subject": lesson.subject}
+        step = {"kind": "lesson", "lesson_id": target["id"], "title": target["title"]}
+        if section:
+            step["section"] = section
+        return step
+
+    def quiz_step(difficulty, mode=None):
+        target = next((q for q in lesson.quizzes if q.difficulty == difficulty), None)
+        if target is None:
+            return None
+        step = {"kind": "quiz", "quiz_id": target.id, "difficulty": target.difficulty}
+        if mode:
+            step["mode"] = mode
+        return step
+
+    current = getattr(quiz, "difficulty", None)
+    if action == "NEXT_LESSON":
+        return lesson_step(nav.get("next"))
+    if action == "SKIP_TO_ADVANCED_TOPIC":
+        return lesson_step(nav.get("skip"))
+    if action == "REPEAT_LESSON":
+        return lesson_step(_lesson_ref(lesson))
+    if action == "SHOW_WORKED_EXAMPLE":
+        return lesson_step(_lesson_ref(lesson), "worked-examples")
+    if action == "SHOW_REAL_WORLD_APPLICATION":
+        return lesson_step(_lesson_ref(lesson), "real-world")
+    if action == "FOCUS_RECOVERY":
+        return {"kind": "break", "seconds": 60}
+    if action in ("INCREASE_DIFFICULTY", "DECREASE_DIFFICULTY") and current in _LEVELS:
+        index = _LEVELS.index(current) + (1 if action == "INCREASE_DIFFICULTY" else -1)
+        if 0 <= index < len(_LEVELS):
+            return quiz_step(_LEVELS[index]) or quiz_step(current, "practice")
+        return quiz_step(current, "practice")
+    modes = {"PRACTICE_QUIZ": "practice", "PROVIDE_HINT": "hints", "QUICK_CHALLENGE": "challenge"}
+    if action in modes and current:
+        return quiz_step(current, modes[action])
+    return None
