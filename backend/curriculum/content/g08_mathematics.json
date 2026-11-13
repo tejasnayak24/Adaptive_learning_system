@@ -1,0 +1,623 @@
+{
+  "grade": 8,
+  "subject": "Mathematics",
+  "units": [
+    {
+      "slug": "g8-math-u-numbers",
+      "title": "Number System",
+      "topics": [
+        {
+          "slug": "g8-math-t-powers-roots",
+          "title": "Exponents, Squares and Square Roots",
+          "description": "Laws of exponents, standard form, perfect squares and square roots.",
+          "lessons": [
+            {
+              "slug": "g8-math-laws-of-exponents",
+              "title": "Laws of Exponents",
+              "objectives": [
+                "Write repeated multiplication using exponents",
+                "Apply the laws of exponents including zero and negative exponents",
+                "Simplify expressions with powers",
+                "Write very large and very small numbers in standard form"
+              ],
+              "intro": "The mass of the Earth is about 5,970,000,000,000,000,000,000,000 kg, and the size of a bacterium is about 0.000002 m. Writing such numbers in full is slow and error-prone. Exponents give a short way to write repeated multiplication: 2 × 2 × 2 × 2 × 2 = 2⁵, read as '2 raised to the power 5'. Here 2 is the base and 5 is the exponent. A few simple laws let us multiply and divide powers quickly.",
+              "sections": [
+                [
+                  "The laws of exponents",
+                  "For any non-zero base a and integers m and n: (1) aᵐ × aⁿ = aᵐ⁺ⁿ — when multiplying powers of the same base, add the exponents: 3⁴ × 3² = 3⁶. (2) aᵐ ÷ aⁿ = aᵐ⁻ⁿ — when dividing, subtract: 5⁷ ÷ 5³ = 5⁴. (3) (aᵐ)ⁿ = aᵐⁿ — a power of a power, multiply: (2³)² = 2⁶. (4) aᵐ × bᵐ = (ab)ᵐ: 2³ × 5³ = 10³. (5) aᵐ ÷ bᵐ = (a/b)ᵐ. These laws apply only when the bases (or exponents, for laws 4 and 5) are the same."
+                ],
+                [
+                  "Zero and negative exponents",
+                  "Using the division law, aⁿ ÷ aⁿ = a⁰. But any non-zero number divided by itself is 1, so a⁰ = 1 for every non-zero a: 7⁰ = 1 and (−3)⁰ = 1. Similarly, a⁰ ÷ aⁿ = a⁻ⁿ, which gives a⁻ⁿ = 1/aⁿ. A negative exponent means 'reciprocal', not a negative number: 2⁻³ = 1/2³ = 1/8. Also (a/b)⁻ⁿ = (b/a)ⁿ, so (2/3)⁻² = (3/2)² = 9/4. Be careful with signs: (−2)⁴ = 16 but −2⁴ = −16, because the exponent applies only to 2 unless brackets are used."
+                ],
+                [
+                  "Standard form",
+                  "A number is in standard form (scientific notation) when it is written as k × 10ⁿ, where 1 ≤ k < 10 and n is an integer. To write 3,84,000 (the distance to the Moon in km) in standard form, move the decimal point 5 places left: 3.84 × 10⁵. For small numbers the exponent is negative: 0.00047 = 4.7 × 10⁻⁴, because the decimal point moves 4 places right. Standard form makes comparison easy: a number with a bigger power of ten is larger. To multiply numbers in standard form, multiply the k parts and add the exponents."
+                ]
+              ],
+              "definitions": [
+                ["Exponent (power)", "The number showing how many times the base is multiplied by itself."],
+                ["Base", "The number that is repeatedly multiplied."],
+                ["Reciprocal", "1 divided by a number; the reciprocal of a is 1/a."],
+                ["Standard form", "A number written as k × 10ⁿ with 1 ≤ k < 10."]
+              ],
+              "examples": [
+                "10⁶ = 1,000,000 (one million).",
+                "The diameter of a red blood cell is about 7 × 10⁻⁶ m."
+              ],
+              "worked": [
+                {
+                  "problem": "Simplify (2⁵ × 2⁻²) ÷ 2⁴ and write the answer as a fraction.",
+                  "steps": [
+                    "Multiply: 2⁵ × 2⁻² = 2⁵⁺⁽⁻²⁾ = 2³.",
+                    "Divide: 2³ ÷ 2⁴ = 2³⁻⁴ = 2⁻¹.",
+                    "2⁻¹ = 1/2."
+                  ],
+                  "answer": "1/2"
+                },
+                {
+                  "problem": "Find (3 × 10⁴) × (2.5 × 10³) in standard form.",
+                  "steps": [
+                    "Multiply the numbers: 3 × 2.5 = 7.5.",
+                    "Add the exponents: 10⁴ × 10³ = 10⁷.",
+                    "7.5 is between 1 and 10, so the answer is already in standard form."
+                  ],
+                  "answer": "7.5 × 10⁷"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Laws of exponents",
+                "columns": ["Law", "Example"],
+                "rows": [
+                  ["aᵐ × aⁿ = aᵐ⁺ⁿ", "3² × 3⁴ = 3⁶"],
+                  ["aᵐ ÷ aⁿ = aᵐ⁻ⁿ", "5⁶ ÷ 5² = 5⁴"],
+                  ["(aᵐ)ⁿ = aᵐⁿ", "(2³)² = 2⁶"],
+                  ["a⁰ = 1", "9⁰ = 1"],
+                  ["a⁻ⁿ = 1/aⁿ", "4⁻² = 1/16"]
+                ]
+              },
+              "real_world": "Scientists use standard form to write astronomical distances, sizes of atoms and the speed of light (3 × 10⁸ m/s). Computer storage is measured in powers of two and ten: a gigabyte is about 10⁹ bytes. Bacteria that double every 20 minutes grow as powers of 2, which is why infections can spread so quickly.",
+              "takeaways": [
+                "Multiply powers of the same base by adding exponents; divide by subtracting.",
+                "A power of a power multiplies the exponents.",
+                "a⁰ = 1 and a⁻ⁿ = 1/aⁿ.",
+                "Standard form is k × 10ⁿ with 1 ≤ k < 10."
+              ],
+              "practice": [
+                ["Simplify 7³ × 7⁻⁵.", "7⁻² = 1/49"],
+                ["Find (−1)¹⁰¹ and (−5)⁰.", "−1 and 1"],
+                ["Write 0.000062 in standard form.", "6.2 × 10⁻⁵"],
+                ["Simplify (3²)³ ÷ 3⁴.", "3² = 9"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What is 2⁴?", ["8", "16", "6", "24"], "B", "Multiply 2 by itself four times.", "2 × 2 × 2 × 2 = 16."],
+                  ["What is 5⁰?", ["0", "5", "1", "50"], "C", "Any non-zero number to the power 0.", "a⁰ = 1, so 5⁰ = 1."],
+                  ["Simplify 3² × 3⁵.", ["3⁷", "3¹⁰", "9⁷", "3³"], "A", "Add the exponents.", "3² × 3⁵ = 3²⁺⁵ = 3⁷."],
+                  ["Which is 4⁻¹?", ["−4", "4", "−1/4", "1/4"], "D", "A negative exponent means reciprocal.", "4⁻¹ = 1/4."]
+                ],
+                "MEDIUM": [
+                  ["Simplify (2³)⁴.", ["2⁷", "2¹²", "8⁷", "2⁸¹"], "B", "Power of a power: multiply.", "(2³)⁴ = 2³ˣ⁴ = 2¹²."],
+                  ["Write 45,00,000 in standard form.", ["45 × 10⁵", "4.5 × 10⁵", "4.5 × 10⁶", "0.45 × 10⁷"], "C", "Move the decimal until 1 ≤ k < 10.", "4,500,000 = 4.5 × 10⁶."],
+                  ["What is (2/3)⁻²?", ["9/4", "4/9", "−4/9", "−9/4"], "A", "Flip the fraction and make the exponent positive.", "(2/3)⁻² = (3/2)² = 9/4."],
+                  ["Simplify 10⁻³ × 10⁵.", ["10⁻¹⁵", "10⁸", "10⁻²", "10²"], "D", "Add the exponents.", "−3 + 5 = 2, so 10²."]
+                ],
+                "HARD": [
+                  ["Find x if 3ˣ × 3² = 3⁻⁴.", ["−2", "−6", "6", "2"], "B", "Add exponents on the left.", "x + 2 = −4, so x = −6."],
+                  ["What is −3² + (−3)²?", ["18", "−18", "0", "9"], "C", "The first square applies only to 3.", "−3² = −9 and (−3)² = 9, so the sum is 0."],
+                  ["Write 0.0000308 in standard form.", ["3.08 × 10⁻⁵", "3.08 × 10⁻⁶", "30.8 × 10⁻⁶", "3.08 × 10⁵"], "A", "Count how far the decimal point moves to the right.", "Moving 5 places right gives 3.08 × 10⁻⁵."],
+                  ["Simplify (2⁵ × 5³) ÷ (2³ × 5).", ["40", "200", "50", "100"], "D", "Divide each base separately.", "2⁵⁻³ × 5³⁻¹ = 2² × 5² = 4 × 25 = 100."]
+                ]
+              }
+            },
+            {
+              "slug": "g8-math-squares-roots",
+              "title": "Squares and Square Roots",
+              "objectives": [
+                "Identify perfect squares and their properties",
+                "Find square roots by prime factorisation",
+                "Find square roots by the long division method",
+                "Estimate square roots of non-perfect squares"
+              ],
+              "intro": "A square floor tile with side 30 cm covers 30 × 30 = 900 cm². If we know a square's area is 900 cm², finding the side means finding the number which, multiplied by itself, gives 900. That number is the square root. Squares and square roots appear in area problems, in the Pythagoras theorem and in many formulas in science.",
+              "sections": [
+                [
+                  "Perfect squares",
+                  "The square of a number n is n² = n × n. Numbers such as 1, 4, 9, 16, 25, 36, 49, 64, 81 and 100 are perfect squares because they are squares of whole numbers. Perfect squares have useful properties. A perfect square never ends in 2, 3, 7 or 8. If a number ends in an odd number of zeros, it is not a perfect square. The square of an even number is even, and the square of an odd number is odd. The sum of the first n odd numbers is n²: 1 + 3 + 5 + 7 = 16 = 4². Between n² and (n + 1)² there are 2n non-square numbers."
+                ],
+                [
+                  "Square roots by prime factorisation",
+                  "The square root of a number x, written √x, is the positive number whose square is x: √49 = 7. To find the square root of a perfect square, write its prime factorisation and pair equal factors. For 1,764: 1,764 = 2 × 2 × 3 × 3 × 7 × 7. Taking one factor from each pair gives 2 × 3 × 7 = 42, so √1,764 = 42. If any factor is left unpaired, the number is not a perfect square; we can make it one by multiplying or dividing by the unpaired factor. For example, 180 = 2 × 2 × 3 × 3 × 5, so 180 × 5 = 900 = 30²."
+                ],
+                [
+                  "Long division and estimation",
+                  "For large numbers, the long division method is faster. Group digits in pairs from the right, find the largest square not exceeding the first group, subtract, bring down the next pair, and double the root found so far to form a new divisor with a blank units digit. Repeat until all pairs are used. For non-perfect squares we can estimate: since 7² = 49 and 8² = 64, √55 lies between 7 and 8, and since 55 is closer to 49, √55 ≈ 7.4. Checking: 7.4² = 54.76, which is close."
+                ]
+              ],
+              "definitions": [
+                ["Perfect square", "A number that is the square of a whole number."],
+                ["Square root", "A number which, multiplied by itself, gives the original number."],
+                ["Prime factorisation", "Writing a number as a product of prime numbers."],
+                ["Estimate", "An approximate value found by reasoning."]
+              ],
+              "examples": [
+                "√625 = 25 because 25 × 25 = 625.",
+                "2,352 is not a perfect square because 2,352 = 2⁴ × 3 × 7²; the factor 3 is unpaired."
+              ],
+              "worked": [
+                {
+                  "problem": "Find √5,184 by prime factorisation.",
+                  "steps": [
+                    "5,184 = 2 × 2 × 2 × 2 × 2 × 2 × 3 × 3 × 3 × 3.",
+                    "Pair the factors: (2 × 2)(2 × 2)(2 × 2)(3 × 3)(3 × 3).",
+                    "Take one from each pair: 2 × 2 × 2 × 3 × 3 = 72."
+                  ],
+                  "answer": "72"
+                },
+                {
+                  "problem": "Find the smallest number by which 252 must be multiplied to get a perfect square.",
+                  "steps": [
+                    "252 = 2 × 2 × 3 × 3 × 7.",
+                    "The factor 7 is unpaired.",
+                    "252 × 7 = 1,764 = 42²."
+                  ],
+                  "answer": "7"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Squares 11 to 20",
+                "columns": ["n", "n²", "n", "n²"],
+                "rows": [["11", "121", "16", "256"], ["12", "144", "17", "289"], ["13", "169", "18", "324"], ["14", "196", "19", "361"], ["15", "225", "20", "400"]]
+              },
+              "real_world": "Architects use square roots to find the side of a square plot from its area, and the Pythagoras theorem, which needs square roots, is used to check that walls meet at right angles. Screen sizes of televisions are measured along the diagonal, which is found with a square root.",
+              "takeaways": [
+                "Perfect squares never end in 2, 3, 7 or 8.",
+                "Find square roots by pairing prime factors.",
+                "Unpaired factors show a number is not a perfect square.",
+                "Use nearby perfect squares to estimate square roots."
+              ],
+              "practice": [
+                ["Is 1,058 a perfect square? Why?", "No; it ends in 8."],
+                ["Find √2,025.", "45"],
+                ["Find the smallest number to divide 2,028 by to get a perfect square.", "2,028 = 2² × 3 × 13²; divide by 3 → 676 = 26²."],
+                ["Estimate √90.", "About 9.5 (between 9 and 10)."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What is 13²?", ["26", "169", "139", "196"], "B", "Multiply 13 by 13.", "13 × 13 = 169."],
+                  ["What is √81?", ["8", "18", "9", "40.5"], "C", "Which number times itself is 81?", "9 × 9 = 81."],
+                  ["Which can NOT be a perfect square?", ["1,447", "1,444", "1,521", "1,600"], "A", "Look at the last digit.", "Perfect squares never end in 7."],
+                  ["The sum of the first 5 odd numbers is:", ["15", "20", "30", "25"], "D", "The sum of the first n odd numbers is n².", "1 + 3 + 5 + 7 + 9 = 25 = 5²."]
+                ],
+                "MEDIUM": [
+                  ["Find √1,296.", ["34", "36", "38", "46"], "B", "1,296 = 2⁴ × 3⁴.", "√1,296 = 2² × 3² = 36."],
+                  ["Between which two numbers does √70 lie?", ["7 and 8", "9 and 10", "8 and 9", "6 and 7"], "C", "8² = 64 and 9² = 81.", "64 < 70 < 81, so √70 is between 8 and 9."],
+                  ["The smallest number to multiply 72 by to get a perfect square is:", ["2", "3", "6", "4"], "A", "72 = 2³ × 3².", "One 2 is unpaired, so multiply by 2: 144 = 12²."],
+                  ["How many non-square numbers lie between 15² and 16²?", ["15", "31", "16", "30"], "D", "There are 2n numbers between n² and (n + 1)².", "2 × 15 = 30."]
+                ],
+                "HARD": [
+                  ["A square garden has area 2,025 m². What length of fence surrounds it?", ["45 m", "180 m", "90 m", "405 m"], "B", "Find the side first.", "Side = √2,025 = 45 m; perimeter = 4 × 45 = 180 m."],
+                  ["Find the smallest number by which 3,675 must be divided to get a perfect square.", ["5", "7", "3", "15"], "C", "3,675 = 3 × 5² × 7².", "Dividing by 3 gives 1,225 = 35²."],
+                  ["Which is the best estimate of √150?", ["12.2", "11.5", "13.1", "15.0"], "A", "12² = 144 and 13² = 169.", "150 is close to 144, so √150 ≈ 12.2 (12.2² = 148.84)."],
+                  ["If n² = 1,764, what is (n + 1)²?", ["1,765", "1,806", "1,808", "1,849"], "D", "n = 42.", "43² = 1,849 (or 1,764 + 2 × 42 + 1)."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g8-math-u-algebra",
+      "title": "Algebra",
+      "topics": [
+        {
+          "slug": "g8-math-t-algebraic-identities",
+          "title": "Algebraic Expressions and Identities",
+          "description": "Operations on algebraic expressions and the standard identities.",
+          "lessons": [
+            {
+              "slug": "g8-math-algebraic-expressions",
+              "title": "Operations on Algebraic Expressions",
+              "objectives": [
+                "Identify terms, coefficients and like terms",
+                "Add and subtract algebraic expressions",
+                "Multiply monomials, binomials and polynomials",
+                "Evaluate expressions for given values"
+              ],
+              "intro": "In earlier grades we used letters to represent unknown numbers. Now we learn to calculate with whole algebraic expressions, just as we calculate with numbers. If the length of a room is (x + 3) m and the breadth is (x − 1) m, its area is (x + 3)(x − 1) m². Multiplying out this product gives a simpler expression that is easier to use. These skills are the foundation for all later algebra.",
+              "sections": [
+                [
+                  "Terms and like terms",
+                  "An expression is made of terms separated by + or − signs. In 5x² − 3xy + 7, the terms are 5x², −3xy and 7. The numerical factor of a term is its coefficient: 5 is the coefficient of x². Terms with exactly the same variables raised to the same powers are like terms: 4ab and −9ab are like terms, but 4a²b and 4ab² are not. Expressions with one term are monomials, two terms binomials and three terms trinomials; in general, they are polynomials."
+                ],
+                [
+                  "Addition and subtraction",
+                  "To add expressions, collect and combine like terms: (3x² + 5x − 2) + (x² − 7x + 6) = 4x² − 2x + 4. To subtract, change the sign of every term in the expression being subtracted, then add: (5a − 3b) − (2a − 6b) = 5a − 3b − 2a + 6b = 3a + 3b. The most common error is forgetting to change the sign of the second and later terms inside the bracket. Writing like terms in columns helps avoid mistakes."
+                ],
+                [
+                  "Multiplication",
+                  "To multiply monomials, multiply the coefficients and use the laws of exponents for the variables: 3x²y × (−4xy³) = −12x³y⁴. To multiply a polynomial by a monomial, use the distributive property: 2a(3a − 5b + 1) = 6a² − 10ab + 2a. To multiply two binomials, multiply each term of the first by each term of the second and then combine like terms: (x + 3)(x − 1) = x² − x + 3x − 3 = x² + 2x − 3. To evaluate an expression, substitute the values carefully, using brackets for negative numbers: if x = −2, then 3x² = 3 × (−2)² = 12."
+                ]
+              ],
+              "definitions": [
+                ["Term", "A part of an expression separated by + or − signs."],
+                ["Coefficient", "The numerical factor of a term."],
+                ["Like terms", "Terms with the same variables raised to the same powers."],
+                ["Binomial", "An algebraic expression with two terms."],
+                ["Polynomial", "An expression with one or more terms whose variables have whole-number exponents."]
+              ],
+              "examples": [
+                "(2x + 5) + (3x − 1) = 5x + 4.",
+                "(a + 2)(a + 5) = a² + 7a + 10."
+              ],
+              "worked": [
+                {
+                  "problem": "Subtract 4p² − 3pq + q² from 7p² + 2pq − 5q².",
+                  "steps": [
+                    "Write: (7p² + 2pq − 5q²) − (4p² − 3pq + q²).",
+                    "Change signs of the second expression: 7p² + 2pq − 5q² − 4p² + 3pq − q².",
+                    "Combine: (7 − 4)p² + (2 + 3)pq + (−5 − 1)q²."
+                  ],
+                  "answer": "3p² + 5pq − 6q²"
+                },
+                {
+                  "problem": "Multiply (2x − 3)(x² + 4x − 1).",
+                  "steps": [
+                    "2x × (x² + 4x − 1) = 2x³ + 8x² − 2x.",
+                    "−3 × (x² + 4x − 1) = −3x² − 12x + 3.",
+                    "Add: 2x³ + 5x² − 14x + 3."
+                  ],
+                  "answer": "2x³ + 5x² − 14x + 3"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Area model for (x + 3)(x − 1)",
+                "columns": ["×", "x", "−1"],
+                "rows": [["x", "x²", "−x"], ["+3", "3x", "−3"]]
+              },
+              "real_world": "Engineers and economists write formulas as algebraic expressions: a company's profit might be expressed as 50n − (2,000 + 30n) for n items sold. Simplifying to 20n − 2,000 shows immediately that 100 items must be sold to break even.",
+              "takeaways": [
+                "Only like terms can be added or subtracted.",
+                "When subtracting, change the sign of every term in the bracket.",
+                "Multiply coefficients and add exponents of the same variables.",
+                "Multiply every term of one expression by every term of the other."
+              ],
+              "practice": [
+                ["Add 3m − 4n and −m + 7n.", "2m + 3n"],
+                ["Multiply −5ab and 3a²b.", "−15a³b²"],
+                ["Expand (y − 4)(y + 6).", "y² + 2y − 24"],
+                ["Evaluate 2x² − 3x for x = −1.", "5"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What is the coefficient of x in 7x² − 5x + 2?", ["7", "−5", "2", "5x"], "B", "Look at the number multiplying x.", "The term is −5x, so the coefficient is −5."],
+                  ["Which pair are like terms?", ["3ab and 3a²b", "4x and 4y", "−2pq and 5pq", "x² and x³"], "C", "Same variables, same powers.", "−2pq and 5pq have the same variables to the same powers."],
+                  ["Simplify 6a + 4a − 3a.", ["7a", "13a", "3a", "7a²"], "A", "Combine like terms.", "6 + 4 − 3 = 7, so 7a."],
+                  ["How many terms does 4x² − 3x + 9 have?", ["1", "2", "4", "3"], "D", "Count parts separated by + or −.", "4x², −3x and 9 make three terms."]
+                ],
+                "MEDIUM": [
+                  ["Subtract (2x − 5) from (7x + 3).", ["5x − 2", "5x + 8", "9x − 2", "5x − 8"], "B", "Change both signs in the bracket.", "7x + 3 − 2x + 5 = 5x + 8."],
+                  ["Multiply 4x²y and −3xy².", ["x³y³", "−7x³y³", "−12x³y³", "12x²y²"], "C", "Multiply coefficients; add exponents.", "4 × (−3) = −12 and x²⁺¹y¹⁺² = x³y³."],
+                  ["Expand (x + 4)(x − 2).", ["x² + 2x − 8", "x² − 2x − 8", "x² + 6x − 8", "x² − 8"], "A", "Multiply each term and combine.", "x² − 2x + 4x − 8 = x² + 2x − 8."],
+                  ["Evaluate 3a² − 2a when a = −2.", ["8", "−16", "−8", "16"], "D", "Use brackets for negatives.", "3(4) − 2(−2) = 12 + 4 = 16."]
+                ],
+                "HARD": [
+                  ["Simplify 2x(3x − 1) − 3(x² − 2x).", ["3x² − 8x", "3x² + 4x", "9x² − 8x", "3x² − 4x"], "B", "Expand both brackets, then combine.", "6x² − 2x − 3x² + 6x = 3x² + 4x."],
+                  ["Multiply (a − 2)(a² + 2a + 4).", ["a³ + 8", "a³ − 4a − 8", "a³ − 8", "a³ + 4a² − 8"], "C", "Most terms cancel.", "a³ + 2a² + 4a − 2a² − 4a − 8 = a³ − 8."],
+                  ["The length of a rectangle is (3x + 2) and the breadth is (x − 1). What is its area?", ["3x² − x − 2", "3x² + x − 2", "4x + 1", "3x² − 2"], "A", "Multiply length by breadth.", "3x² − 3x + 2x − 2 = 3x² − x − 2."],
+                  ["What must be added to 5x² − 3x + 2 to get 2x² + x − 4?", ["7x² − 2x − 2", "3x² − 4x + 6", "−3x² − 2x − 2", "−3x² + 4x − 6"], "D", "Subtract the first expression from the target.", "(2x² + x − 4) − (5x² − 3x + 2) = −3x² + 4x − 6."]
+                ]
+              }
+            },
+            {
+              "slug": "g8-math-identities",
+              "title": "Standard Algebraic Identities",
+              "objectives": [
+                "State and verify the standard identities",
+                "Expand expressions using identities",
+                "Use identities for quick mental calculation",
+                "Factorise simple expressions using identities"
+              ],
+              "intro": "An equation such as 2x + 3 = 11 is true only for one value of x. An identity is true for every value of its variables. (a + b)² = a² + 2ab + b² holds whether a and b are 2 and 3, or −7 and 100. Remembering a few standard identities saves time in expanding products, makes mental arithmetic easy and is the key to factorisation in later grades.",
+              "sections": [
+                [
+                  "The standard identities",
+                  "Four identities are used constantly. (I) (a + b)² = a² + 2ab + b². (II) (a − b)² = a² − 2ab + b². (III) (a + b)(a − b) = a² − b². (IV) (x + a)(x + b) = x² + (a + b)x + ab. Each can be proved by multiplying out: (a + b)² = (a + b)(a + b) = a² + ab + ab + b² = a² + 2ab + b². A geometric picture helps: a square of side (a + b) is made of a square a², a square b² and two rectangles each ab. A very common mistake is writing (a + b)² = a² + b², forgetting the middle term 2ab."
+                ],
+                [
+                  "Using identities to expand",
+                  "Identify a and b carefully, including coefficients and signs. (3x + 4y)² = (3x)² + 2(3x)(4y) + (4y)² = 9x² + 24xy + 16y². (2m − 5)² = 4m² − 20m + 25. (5p + 2q)(5p − 2q) = 25p² − 4q². (y + 7)(y − 3) uses identity IV with a = 7, b = −3: y² + 4y − 21. Squaring the whole term is essential: (3x)² = 9x², not 3x²."
+                ],
+                [
+                  "Mental arithmetic and factorising",
+                  "Identities turn hard calculations into easy ones. 103² = (100 + 3)² = 10,000 + 600 + 9 = 10,609. 98² = (100 − 2)² = 10,000 − 400 + 4 = 9,604. 47 × 53 = (50 − 3)(50 + 3) = 2,500 − 9 = 2,491. 105 × 107 = (100 + 5)(100 + 7) = 10,000 + 1,200 + 35 = 11,235. Read backwards, identities factorise: x² − 49 = (x + 7)(x − 7), and 4a² + 12a + 9 = (2a + 3)². Recognising a² − b² and perfect-square patterns is a powerful skill."
+                ]
+              ],
+              "definitions": [
+                ["Identity", "An equality that is true for all values of its variables."],
+                ["Expand", "Remove brackets by multiplying out."],
+                ["Factorise", "Write an expression as a product of factors."],
+                ["Difference of squares", "An expression of the form a² − b² = (a + b)(a − b)."]
+              ],
+              "examples": [
+                "(x + 6)² = x² + 12x + 36.",
+                "99 × 101 = (100 − 1)(100 + 1) = 9,999."
+              ],
+              "worked": [
+                {
+                  "problem": "Expand (4a − 3b)² and verify for a = 1, b = 1.",
+                  "steps": [
+                    "Use (a − b)² = a² − 2ab + b² with first term 4a and second 3b.",
+                    "(4a)² − 2(4a)(3b) + (3b)² = 16a² − 24ab + 9b².",
+                    "Check with a = b = 1: left (4 − 3)² = 1; right 16 − 24 + 9 = 1 ✓."
+                  ],
+                  "answer": "16a² − 24ab + 9b²"
+                },
+                {
+                  "problem": "Evaluate 1.02 × 0.98 using an identity.",
+                  "steps": [
+                    "1.02 × 0.98 = (1 + 0.02)(1 − 0.02).",
+                    "= 1² − 0.02² = 1 − 0.0004."
+                  ],
+                  "answer": "0.9996"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Area model of (a + b)²",
+                "columns": ["×", "a", "b"],
+                "rows": [["a", "a²", "ab"], ["b", "ab", "b²"]]
+              },
+              "real_world": "Engineers and computer programmers use identities to simplify formulas so calculations run faster. Mental-maths competitions and quick estimation at the shop rely on tricks like 49 × 51 = 50² − 1 = 2,499.",
+              "takeaways": [
+                "(a ± b)² = a² ± 2ab + b²; never forget the middle term.",
+                "(a + b)(a − b) = a² − b².",
+                "(x + a)(x + b) = x² + (a + b)x + ab.",
+                "Identities speed up arithmetic and help factorise."
+              ],
+              "practice": [
+                ["Expand (2x + 5)².", "4x² + 20x + 25"],
+                ["Find 996² using an identity.", "(1,000 − 4)² = 9,92,016"],
+                ["Factorise 9y² − 16.", "(3y + 4)(3y − 4)"],
+                ["Expand (p − 4)(p + 9).", "p² + 5p − 36"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["(a + b)² equals:", ["a² + b²", "a² + 2ab + b²", "a² − 2ab + b²", "2a + 2b"], "B", "Do not forget the middle term.", "(a + b)² = a² + 2ab + b²."],
+                  ["(x + 3)(x − 3) equals:", ["x² + 9", "x² − 6x + 9", "x² − 9", "x² + 6x − 9"], "C", "Difference of squares.", "(a + b)(a − b) = a² − b², so x² − 9."],
+                  ["Expand (y − 5)².", ["y² − 10y + 25", "y² − 25", "y² + 25", "y² − 5y + 25"], "A", "Use (a − b)² = a² − 2ab + b².", "y² − 2(5)y + 25 = y² − 10y + 25."],
+                  ["Factorise a² − 36.", ["(a − 6)²", "(a + 6)²", "(a − 36)(a + 1)", "(a + 6)(a − 6)"], "D", "36 = 6².", "a² − 6² = (a + 6)(a − 6)."]
+                ],
+                "MEDIUM": [
+                  ["Expand (3m + 2n)².", ["9m² + 4n²", "9m² + 12mn + 4n²", "3m² + 12mn + 2n²", "9m² + 6mn + 4n²"], "B", "Square each term including its coefficient.", "(3m)² + 2(3m)(2n) + (2n)² = 9m² + 12mn + 4n²."],
+                  ["Find 102² using an identity.", ["10,204", "10,404", "10,200", "10,044"], "B", "(100 + 2)² = 10,000 + 400 + 4.", "102² = 10,404."],
+                  ["Expand (x + 5)(x − 2).", ["x² + 3x − 10", "x² − 3x − 10", "x² + 7x − 10", "x² + 3x + 10"], "A", "Use (x + a)(x + b) with a = 5, b = −2.", "x² + (5 − 2)x + (5)(−2) = x² + 3x − 10."],
+                  ["Evaluate 48 × 52 using an identity.", ["2,500", "2,404", "2,600", "2,496"], "D", "(50 − 2)(50 + 2).", "50² − 2² = 2,500 − 4 = 2,496."]
+                ],
+                "HARD": [
+                  ["Find 997² using an identity.", ["9,94,009", "9,94,019", "9,40,009", "9,90,009"], "A", "(1,000 − 3)².", "1,000,000 − 6,000 + 9 = 994,009."],
+                  ["Factorise 4x² + 20x + 25.", ["(4x + 5)²", "(2x + 5)(2x − 5)", "(2x + 5)²", "(x + 5)(4x + 5)"], "C", "Check for a perfect square: 4x² = (2x)², 25 = 5².", "Middle term 2(2x)(5) = 20x, so it is (2x + 5)²."],
+                  ["If a + b = 10 and ab = 21, what is a² + b²?", ["79", "58", "121", "100"], "B", "Use (a + b)² = a² + 2ab + b².", "100 = a² + b² + 42, so a² + b² = 58."],
+                  ["Simplify (2x + 3)² − (2x − 3)².", ["18", "8x² + 18", "0", "24x"], "D", "Expand both and subtract.", "(4x² + 12x + 9) − (4x² − 12x + 9) = 24x."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g8-math-u-mensuration",
+      "title": "Mensuration",
+      "topics": [
+        {
+          "slug": "g8-math-t-mensuration",
+          "title": "Area, Surface Area and Volume",
+          "description": "Areas of trapeziums and polygons, and surface area and volume of solids.",
+          "lessons": [
+            {
+              "slug": "g8-math-area-trapezium-polygon",
+              "title": "Area of Trapeziums and Polygons",
+              "objectives": [
+                "Find the area of a trapezium",
+                "Find the area of a rhombus and a general quadrilateral",
+                "Find areas of polygons by splitting them into simpler shapes",
+                "Solve practical area problems"
+              ],
+              "intro": "Many real plots of land and floor plans are not neat rectangles. A field may have two parallel sides of different lengths, forming a trapezium, or it may be an irregular polygon. Instead of learning a new formula for every shape, we can split complex shapes into triangles, rectangles and trapeziums whose areas we know, and add them up.",
+              "sections": [
+                [
+                  "Trapezium",
+                  "A trapezium is a quadrilateral with one pair of parallel sides. If the parallel sides have lengths a and b and the perpendicular distance between them (the height) is h, then its area is ½ × (a + b) × h. This formula comes from splitting the trapezium into two triangles with the same height, or from joining two copies of it to form a parallelogram with base (a + b) and height h. For a trapezium with parallel sides 12 m and 8 m, 5 m apart, the area is ½ × 20 × 5 = 50 m². Make sure h is the perpendicular height, not a slanting side."
+                ],
+                [
+                  "Rhombus and general quadrilateral",
+                  "The diagonals of a rhombus bisect each other at right angles, so a rhombus can be split into four right triangles. Its area is ½ × d₁ × d₂, where d₁ and d₂ are the diagonals. A rhombus with diagonals 16 cm and 12 cm has area 96 cm². For a general quadrilateral ABCD, draw one diagonal AC to split it into two triangles. If the perpendiculars from B and D to AC are h₁ and h₂, then the area is ½ × AC × (h₁ + h₂)."
+                ],
+                [
+                  "Polygons",
+                  "To find the area of any polygon, split it into triangles, rectangles and trapeziums, find each area and add. Surveyors often draw a long diagonal across a field and measure perpendicular offsets from it to each corner, creating right triangles and trapeziums. A regular hexagon can be divided into six equal equilateral triangles, or into two trapeziums and a rectangle. Always draw a clear sketch, label every measurement and check that the parts do not overlap or leave gaps."
+                ]
+              ],
+              "definitions": [
+                ["Trapezium", "A quadrilateral with exactly one pair of parallel sides."],
+                ["Height (altitude)", "The perpendicular distance between parallel sides or from a vertex to a base."],
+                ["Rhombus", "A quadrilateral with all sides equal; its diagonals bisect each other at right angles."],
+                ["Polygon", "A closed figure made of straight line segments."]
+              ],
+              "examples": [
+                "A trapezium-shaped table top with parallel sides 1.2 m and 0.8 m and height 0.5 m has area 0.5 m².",
+                "A kite-shaped design with diagonals 30 cm and 20 cm has area 300 cm²."
+              ],
+              "worked": [
+                {
+                  "problem": "A field is a trapezium with parallel sides 45 m and 30 m and area 1,500 m². Find the distance between the parallel sides.",
+                  "steps": [
+                    "Area = ½ × (a + b) × h.",
+                    "1,500 = ½ × (45 + 30) × h = 37.5 × h.",
+                    "h = 1,500 ÷ 37.5 = 40 m."
+                  ],
+                  "answer": "40 m"
+                },
+                {
+                  "problem": "A polygon is made of a rectangle 10 m × 6 m with a triangle of base 6 m and height 4 m on one shorter side. Find its area.",
+                  "steps": [
+                    "Rectangle: 10 × 6 = 60 m².",
+                    "Triangle: ½ × 6 × 4 = 12 m².",
+                    "Total = 60 + 12 = 72 m²."
+                  ],
+                  "answer": "72 m²"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Area formulas",
+                "columns": ["Shape", "Area"],
+                "rows": [
+                  ["Triangle", "½ × base × height"],
+                  ["Parallelogram", "base × height"],
+                  ["Trapezium", "½ × (sum of parallel sides) × height"],
+                  ["Rhombus", "½ × d₁ × d₂"],
+                  ["Quadrilateral (diagonal d)", "½ × d × (h₁ + h₂)"]
+                ]
+              },
+              "real_world": "Land records in India often describe plots by their sides and diagonals, and surveyors calculate areas by splitting fields into triangles and trapeziums. Architects compute floor areas of irregular rooms the same way to estimate tiles, paint and cost.",
+              "takeaways": [
+                "Trapezium area = ½(a + b)h, using the perpendicular height.",
+                "Rhombus area = ½ × product of diagonals.",
+                "Split a quadrilateral into two triangles along a diagonal.",
+                "Find any polygon's area by splitting it into known shapes."
+              ],
+              "practice": [
+                ["Find the area of a trapezium with parallel sides 9 cm and 15 cm and height 6 cm.", "72 cm²"],
+                ["A rhombus has area 120 cm² and one diagonal 20 cm. Find the other.", "12 cm"],
+                ["A quadrilateral has diagonal 18 cm and offsets 7 cm and 5 cm. Find its area.", "108 cm²"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A trapezium has how many pairs of parallel sides?", ["None", "One", "Two", "Three"], "B", "It is not a parallelogram.", "A trapezium has exactly one pair of parallel sides."],
+                  ["Area of a trapezium with parallel sides 6 cm and 10 cm and height 4 cm is:", ["64 cm²", "40 cm²", "32 cm²", "20 cm²"], "C", "½ × (a + b) × h.", "½ × 16 × 4 = 32 cm²."],
+                  ["The area of a rhombus with diagonals 8 cm and 6 cm is:", ["24 cm²", "48 cm²", "14 cm²", "28 cm²"], "A", "½ × d₁ × d₂.", "½ × 8 × 6 = 24 cm²."],
+                  ["To find the area of a quadrilateral, we can split it into two:", ["Circles", "Squares only", "Trapeziums only", "Triangles"], "D", "Draw a diagonal.", "A diagonal divides a quadrilateral into two triangles."]
+                ],
+                "MEDIUM": [
+                  ["A trapezium has area 90 cm², height 6 cm and one parallel side 18 cm. Find the other parallel side.", ["15 cm", "12 cm", "30 cm", "6 cm"], "B", "90 = ½ × (18 + b) × 6.", "90 = 3(18 + b), so 18 + b = 30 and b = 12 cm."],
+                  ["A rhombus has area 150 m² and one diagonal 15 m. The other diagonal is:", ["10 m", "10.5 m", "20 m", "30 m"], "C", "150 = ½ × 15 × d₂.", "d₂ = 300 ÷ 15 = 20 m."],
+                  ["A quadrilateral has diagonal 24 cm and offsets 8 cm and 6 cm. Its area is:", ["168 cm²", "336 cm²", "144 cm²", "192 cm²"], "A", "½ × d × (h₁ + h₂).", "½ × 24 × 14 = 168 cm²."],
+                  ["In the trapezium formula, h must be:", ["The longer slanting side", "The shorter parallel side", "The diagonal", "The perpendicular distance between the parallel sides"], "D", "Height is always perpendicular.", "Only the perpendicular height gives the correct area."]
+                ],
+                "HARD": [
+                  ["The parallel sides of a trapezium are in the ratio 2 : 3, its height is 8 cm and its area is 120 cm². The longer parallel side is:", ["12 cm", "18 cm", "15 cm", "20 cm"], "B", "Let the sides be 2k and 3k.", "½ × 5k × 8 = 120 gives k = 6, so the longer side is 18 cm."],
+                  ["A regular hexagon of side 6 cm is split into 6 equilateral triangles, each of area about 15.6 cm². What is the hexagon's area?", ["62.4 cm²", "36 cm²", "93.6 cm²", "108 cm²"], "C", "Add the six triangles.", "6 × 15.6 = 93.6 cm²."],
+                  ["A floor shaped as a trapezium with parallel sides 9 m and 7 m and height 5 m is tiled at ₹60 per m². What is the cost?", ["₹2,400", "₹4,800", "₹1,200", "₹2,100"], "A", "Find the area first.", "Area = ½ × 16 × 5 = 40 m²; cost = 40 × 60 = ₹2,400."],
+                  ["A rhombus has side 10 cm and one diagonal 12 cm. Its area is:", ["120 cm²", "60 cm²", "48 cm²", "96 cm²"], "D", "Half-diagonals and side form a right triangle: 6, ?, 10.", "Other half-diagonal = 8, so d₂ = 16; area = ½ × 12 × 16 = 96 cm²."]
+                ]
+              }
+            },
+            {
+              "slug": "g8-math-surface-area-volume",
+              "title": "Surface Area and Volume of Cuboids and Cylinders",
+              "objectives": [
+                "Find the surface area of cubes, cuboids and cylinders",
+                "Distinguish total and lateral (curved) surface area",
+                "Find the volume of cubes, cuboids and cylinders",
+                "Convert between units of volume and capacity"
+              ],
+              "intro": "How much cardboard is needed to make a box, and how much will the box hold? The first question is about surface area, the total area of all the faces. The second is about volume, the amount of space inside. These two ideas are used in packaging, construction, storage tanks and even cooking. In this lesson we study cuboids, cubes and cylinders, the most common shapes of containers.",
+              "sections": [
+                [
+                  "Surface area",
+                  "A cuboid of length l, breadth b and height h has six rectangular faces in three pairs. Its total surface area is 2(lb + bh + hl). The area of the four walls only, called the lateral surface area, is 2h(l + b); this is what we paint when we paint the walls of a room. A cube of side a has six equal square faces, so its total surface area is 6a² and its lateral surface area is 4a². A cylinder of radius r and height h has a curved surface which, when unrolled, is a rectangle of length 2πr and width h, so the curved surface area is 2πrh. Adding the two circular ends gives total surface area 2πr(r + h)."
+                ],
+                [
+                  "Volume",
+                  "Volume is measured in cubic units such as cm³ or m³. The volume of a cuboid is l × b × h, and the volume of a cube is a³. For any solid with a uniform cross-section, volume = area of base × height. A cylinder's base is a circle of area πr², so its volume is πr²h. Take π = 22/7 or 3.14 unless told otherwise. For example, a cylindrical tank of radius 7 m and height 10 m holds 22/7 × 7 × 7 × 10 = 1,540 m³."
+                ],
+                [
+                  "Units of capacity",
+                  "The capacity of a container is the volume of liquid it can hold. 1 litre (L) = 1,000 cm³, and 1 m³ = 1,000 L. So 1 cm³ = 1 mL. A tank of 1,540 m³ holds 15,40,000 litres. When solving problems, check whether the question asks for the area of material needed (surface area, square units) or the amount it holds (volume, cubic units), and convert all lengths to the same unit first. If a box is open at the top, subtract the area of the missing face."
+                ]
+              ],
+              "definitions": [
+                ["Surface area", "The total area of all the faces or surfaces of a solid."],
+                ["Lateral surface area", "The area of the side faces only, excluding top and bottom."],
+                ["Volume", "The amount of space occupied by a solid."],
+                ["Capacity", "The amount a container can hold, often measured in litres."]
+              ],
+              "examples": [
+                "A cube of side 4 cm has surface area 96 cm² and volume 64 cm³.",
+                "A water bottle with radius 3.5 cm and height 20 cm holds about 770 mL."
+              ],
+              "worked": [
+                {
+                  "problem": "A room is 6 m long, 4 m wide and 3 m high. Find the cost of painting its four walls at ₹25 per m², ignoring doors and windows.",
+                  "steps": [
+                    "Lateral surface area = 2h(l + b) = 2 × 3 × (6 + 4) = 60 m².",
+                    "Cost = 60 × 25 = ₹1,500."
+                  ],
+                  "answer": "₹1,500"
+                },
+                {
+                  "problem": "A cylindrical drum has radius 35 cm and height 1 m. How many litres can it hold? (π = 22/7)",
+                  "steps": [
+                    "Convert height: 1 m = 100 cm.",
+                    "Volume = πr²h = 22/7 × 35 × 35 × 100 = 3,85,000 cm³.",
+                    "1 L = 1,000 cm³, so capacity = 385 L."
+                  ],
+                  "answer": "385 litres"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Formulas for solids",
+                "columns": ["Solid", "Lateral/curved SA", "Total SA", "Volume"],
+                "rows": [
+                  ["Cuboid", "2h(l + b)", "2(lb + bh + hl)", "lbh"],
+                  ["Cube", "4a²", "6a²", "a³"],
+                  ["Cylinder", "2πrh", "2πr(r + h)", "πr²h"]
+                ]
+              },
+              "real_world": "Packaging designers minimise surface area to save material while keeping the volume needed for the product. Civil engineers calculate the volume of concrete for pillars and water tanks, and households check tank capacity in litres to plan water use.",
+              "takeaways": [
+                "Surface area is in square units; volume is in cubic units.",
+                "Cuboid: TSA = 2(lb + bh + hl), V = lbh; cube: 6a² and a³.",
+                "Cylinder: CSA = 2πrh, TSA = 2πr(r + h), V = πr²h.",
+                "1 L = 1,000 cm³ and 1 m³ = 1,000 L."
+              ],
+              "practice": [
+                ["Find the volume of a cuboid 12 cm × 5 cm × 4 cm.", "240 cm³"],
+                ["Find the total surface area of a cube of side 7 cm.", "294 cm²"],
+                ["Find the curved surface area of a cylinder with r = 7 cm, h = 10 cm (π = 22/7).", "440 cm²"],
+                ["How many litres is 2.5 m³?", "2,500 L"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The volume of a cube with side 5 cm is:", ["25 cm³", "125 cm³", "150 cm³", "15 cm³"], "B", "a × a × a.", "5³ = 125 cm³."],
+                  ["Volume is measured in:", ["Square units", "Linear units", "Cubic units", "Degrees"], "C", "It is three-dimensional.", "Volume is measured in cubic units like cm³."],
+                  ["1 litre equals:", ["1,000 cm³", "100 cm³", "10 cm³", "1 m³"], "A", "1 mL = 1 cm³.", "1 L = 1,000 mL = 1,000 cm³."],
+                  ["The total surface area of a cube of side 3 cm is:", ["9 cm²", "27 cm²", "36 cm²", "54 cm²"], "D", "6a².", "6 × 3² = 54 cm²."]
+                ],
+                "MEDIUM": [
+                  ["Find the volume of a cuboid 10 m × 4 m × 2.5 m.", ["16.5 m³", "100 m³", "80 m³", "40 m³"], "B", "l × b × h.", "10 × 4 × 2.5 = 100 m³."],
+                  ["The volume of a cylinder with r = 7 cm and h = 5 cm (π = 22/7) is:", ["220 cm³", "154 cm³", "770 cm³", "1,540 cm³"], "C", "πr²h.", "22/7 × 49 × 5 = 770 cm³."],
+                  ["The lateral surface area of a room 5 m × 4 m × 3 m is:", ["54 m²", "60 m²", "94 m²", "27 m²"], "A", "2h(l + b).", "2 × 3 × 9 = 54 m²."],
+                  ["How many litres does a tank of 3 m³ hold?", ["30 L", "300 L", "30,000 L", "3,000 L"], "D", "1 m³ = 1,000 L.", "3 × 1,000 = 3,000 L."]
+                ],
+                "HARD": [
+                  ["An open box (no lid) measures 20 cm × 10 cm × 8 cm. What area of cardboard is needed?", ["880 cm²", "680 cm²", "1,080 cm²", "1,600 cm²"], "B", "Total surface area minus the top face.", "TSA = 2(200 + 80 + 160) = 880; minus the top 200 gives 680 cm²."],
+                  ["If the radius of a cylinder is doubled and the height kept the same, its volume becomes:", ["Double", "Half", "Four times", "Eight times"], "C", "Volume depends on r².", "(2r)² = 4r², so the volume is four times larger."],
+                  ["A cuboidal tank 2 m × 1.5 m × 1 m is filled by a pipe at 50 litres per minute. How long does it take to fill?", ["60 minutes", "30 minutes", "120 minutes", "6 minutes"], "A", "Find the volume in litres.", "Volume = 3 m³ = 3,000 L; 3,000 ÷ 50 = 60 minutes."],
+                  ["A cylinder has curved surface area 880 cm² and height 20 cm. What is its radius (π = 22/7)?", ["14 cm", "3.5 cm", "10 cm", "7 cm"], "D", "2πrh = 880.", "2 × 22/7 × r × 20 = 880 gives r = 7 cm."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
