@@ -1,0 +1,606 @@
+{
+  "grade": 10,
+  "subject": "Mathematics",
+  "units": [
+    {
+      "slug": "g10-math-u-algebra",
+      "title": "Algebra",
+      "topics": [
+        {
+          "slug": "g10-math-t-quadratics",
+          "title": "Quadratic Equations",
+          "description": "Solving quadratic equations by factorisation and the quadratic formula, and the nature of roots.",
+          "lessons": [
+            {
+              "slug": "g10-math-quadratic-factorisation",
+              "title": "Solving Quadratic Equations by Factorisation",
+              "objectives": [
+                "Recognise a quadratic equation in standard form",
+                "Form quadratic equations from word problems",
+                "Solve quadratic equations by splitting the middle term",
+                "Check roots by substitution"
+              ],
+              "intro": "A rectangular prayer hall has an area of 300 m², and its length is 5 m more than its breadth. What are its dimensions? If the breadth is x m, then x(x + 5) = 300, or x² + 5x − 300 = 0. This is a quadratic equation, an equation of the form ax² + bx + c = 0 with a ≠ 0. Quadratic equations appear in problems about area, motion, profit and many other situations, and they can have up to two solutions.",
+              "sections": [
+                [
+                  "Standard form",
+                  "A quadratic equation in the variable x has the standard form ax² + bx + c = 0, where a, b and c are real numbers and a ≠ 0. To check whether an equation is quadratic, simplify it and bring all terms to one side: (x + 2)² = 2x² − 3 becomes x² + 4x + 4 − 2x² + 3 = 0, or −x² + 4x + 7 = 0, which is quadratic. But (x + 1)² = x² + 5 simplifies to 2x − 4 = 0, which is linear, not quadratic. A value α is a root (solution) of the equation if aα² + bα + c = 0."
+                ],
+                [
+                  "Factorisation method",
+                  "If the quadratic expression can be factorised into two linear factors, we use the zero-product rule: if a product is zero, at least one factor is zero. To solve 2x² − 5x + 3 = 0, split the middle term using two numbers whose product is ac = 6 and whose sum is b = −5: these are −2 and −3. So 2x² − 2x − 3x + 3 = 0 → 2x(x − 1) − 3(x − 1) = 0 → (2x − 3)(x − 1) = 0. Therefore x = 3/2 or x = 1. Always check the roots by substituting them into the original equation."
+                ],
+                [
+                  "Word problems",
+                  "To solve a word problem: let the unknown be x, translate the conditions into an equation, simplify to standard form, solve, and reject any root that does not make sense in context, such as a negative length or a fractional number of people. For the prayer hall: x² + 5x − 300 = 0 factorises as (x + 20)(x − 15) = 0, so x = −20 or x = 15. A breadth cannot be negative, so the breadth is 15 m and the length is 20 m. Check: 15 × 20 = 300 ✓."
+                ]
+              ],
+              "definitions": [
+                ["Quadratic equation", "An equation of the form ax² + bx + c = 0 with a ≠ 0."],
+                ["Root", "A value of the variable that satisfies the equation."],
+                ["Zero-product rule", "If ab = 0, then a = 0 or b = 0."],
+                ["Splitting the middle term", "Writing bx as the sum of two terms whose coefficients multiply to ac."]
+              ],
+              "examples": [
+                "x² − 9 = 0 gives (x − 3)(x + 3) = 0, so x = ±3.",
+                "x² − 7x = 0 gives x(x − 7) = 0, so x = 0 or 7."
+              ],
+              "worked": [
+                {
+                  "problem": "Solve 6x² − x − 2 = 0.",
+                  "steps": [
+                    "ac = 6 × (−2) = −12; find two numbers with product −12 and sum −1: −4 and 3.",
+                    "6x² − 4x + 3x − 2 = 0 → 2x(3x − 2) + 1(3x − 2) = 0.",
+                    "(2x + 1)(3x − 2) = 0, so x = −1/2 or x = 2/3."
+                  ],
+                  "answer": "x = −1/2 or x = 2/3"
+                },
+                {
+                  "problem": "The product of two consecutive positive integers is 306. Find them.",
+                  "steps": [
+                    "Let the integers be x and x + 1: x(x + 1) = 306.",
+                    "x² + x − 306 = 0 → (x + 18)(x − 17) = 0.",
+                    "x = 17 (reject −18 because the integers are positive)."
+                  ],
+                  "answer": "17 and 18"
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Solving by factorisation",
+                "items": ["Write in standard form ax² + bx + c = 0", "Find two numbers: product ac, sum b", "Split the middle term and group", "Factorise into two brackets", "Set each bracket to zero and solve", "Check and reject impossible roots"]
+              },
+              "real_world": "Architects use quadratic equations to find dimensions from areas, physicists to find when a thrown object reaches a given height, and businesses to find the price at which revenue reaches a target.",
+              "takeaways": [
+                "Standard form: ax² + bx + c = 0, a ≠ 0.",
+                "Split the middle term using two numbers with product ac and sum b.",
+                "Use the zero-product rule to find roots.",
+                "In word problems, reject roots that do not fit the context."
+              ],
+              "practice": [
+                ["Solve x² − 5x + 6 = 0.", "x = 2 or 3"],
+                ["Solve 2x² + x − 6 = 0.", "x = 3/2 or −2"],
+                ["Is (x − 2)² + 1 = 2x − 3 quadratic?", "Yes: x² − 6x + 8 = 0."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which is a quadratic equation?", ["2x + 3 = 0", "x² − 4x + 3 = 0", "x³ + 1 = 0", "1/x = 2"], "B", "Highest power 2.", "x² − 4x + 3 = 0 has degree 2."],
+                  ["The roots of (x − 4)(x + 1) = 0 are:", ["4 and 1", "−4 and 1", "4 and −1", "−4 and −1"], "C", "Set each factor to zero.", "x − 4 = 0 gives 4; x + 1 = 0 gives −1."],
+                  ["Solve x² − 16 = 0.", ["x = ±4", "x = 4 only", "x = 16", "x = ±8"], "A", "Difference of squares.", "(x − 4)(x + 4) = 0 gives x = ±4."],
+                  ["In ax² + bx + c = 0, which must be true?", ["b ≠ 0", "c ≠ 0", "a = 1", "a ≠ 0"], "D", "Otherwise it is not quadratic.", "If a = 0, the equation becomes linear."]
+                ],
+                "MEDIUM": [
+                  ["Solve x² + 7x + 12 = 0.", ["3 and 4", "−3 and −4", "−3 and 4", "3 and −4"], "B", "Product 12, sum 7.", "(x + 3)(x + 4) = 0 gives −3 and −4."],
+                  ["Solve 2x² − 7x + 3 = 0.", ["x = 3 or −1/2", "x = −3 or 1/2", "x = 3 or 1/2", "x = 1 or 3/2"], "C", "ac = 6, sum −7: −6 and −1.", "(2x − 1)(x − 3) = 0 gives 1/2 and 3."],
+                  ["Which equation simplifies to a LINEAR equation?", ["(x + 1)² = x² + 3", "x(x + 2) = 5", "x² = 9", "(x − 1)(x + 2) = 0"], "A", "Expand and see if x² cancels.", "x² + 2x + 1 = x² + 3 gives 2x − 2 = 0."],
+                  ["Solve 3x² = 12x.", ["x = 4 only", "x = 0 only", "x = −4 or 0", "x = 0 or 4"], "D", "Do not divide by x; factorise.", "3x(x − 4) = 0 gives 0 or 4."]
+                ],
+                "HARD": [
+                  ["A rectangle's length is 3 m more than its breadth and its area is 40 m². Its breadth is:", ["8 m", "5 m", "4 m", "10 m"], "B", "x(x + 3) = 40.", "x² + 3x − 40 = 0 → (x + 8)(x − 5) = 0, so x = 5."],
+                  ["If one root of x² − kx + 6 = 0 is 2, what is k?", ["3", "4", "5", "6"], "C", "Substitute x = 2.", "4 − 2k + 6 = 0 gives k = 5."],
+                  ["The sum of a number and its reciprocal is 10/3. The number could be:", ["3", "2", "10", "1/2"], "A", "x + 1/x = 10/3 → 3x² − 10x + 3 = 0.", "(3x − 1)(x − 3) = 0 gives 3 or 1/3."],
+                  ["A train travels 360 km at a uniform speed. If the speed were 5 km/h more, it would take 1 hour less. What is its speed?", ["45 km/h", "60 km/h", "50 km/h", "40 km/h"], "D", "360/x − 360/(x + 5) = 1.", "x² + 5x − 1,800 = 0 → (x + 45)(x − 40) = 0, so 40 km/h."]
+                ]
+              }
+            },
+            {
+              "slug": "g10-math-quadratic-formula",
+              "title": "The Quadratic Formula and Nature of Roots",
+              "objectives": [
+                "Derive and apply the quadratic formula",
+                "Calculate the discriminant",
+                "Determine the nature of roots from the discriminant",
+                "Find unknown coefficients for given types of roots"
+              ],
+              "intro": "Not every quadratic expression factorises neatly. Try factorising x² + 4x − 1: no pair of integers works. For such equations we need a method that always works. By completing the square on the general equation ax² + bx + c = 0, mathematicians found a formula that gives the roots of any quadratic equation directly. The formula also tells us, before solving, whether the roots are real or not, and whether they are equal.",
+              "sections": [
+                [
+                  "Completing the square and the formula",
+                  "Completing the square rewrites an expression as a perfect square plus a constant. For x² + 4x − 1 = 0: x² + 4x = 1, then add (4/2)² = 4 to both sides: x² + 4x + 4 = 5, so (x + 2)² = 5 and x = −2 ± √5. Applying the same steps to ax² + bx + c = 0 gives the quadratic formula: x = [−b ± √(b² − 4ac)] ÷ 2a. To use it, write the equation in standard form, identify a, b and c with their signs, and substitute carefully."
+                ],
+                [
+                  "The discriminant",
+                  "The expression D = b² − 4ac under the square root is called the discriminant, because it discriminates between kinds of roots. If D > 0, there are two distinct real roots. If D = 0, there are two equal real roots, both equal to −b/2a; the quadratic is then a perfect square. If D < 0, there are no real roots, because the square root of a negative number is not a real number. For 2x² − 4x + 3 = 0, D = 16 − 24 = −8 < 0, so there are no real roots."
+                ],
+                [
+                  "Using the discriminant",
+                  "The discriminant can be used to find unknown coefficients. For example, for kx² + 6x + 1 = 0 to have equal roots, D = 36 − 4k = 0, so k = 9. It also answers practical questions: 'Is it possible to design a rectangular park of perimeter 80 m and area 400 m²?' If the length is x, then x(40 − x) = 400, giving x² − 40x + 400 = 0, with D = 1,600 − 1,600 = 0. So yes, exactly one way: a square of side 20 m. If the area asked for were 500 m², D would be negative and the design impossible."
+                ]
+              ],
+              "definitions": [
+                ["Quadratic formula", "x = [−b ± √(b² − 4ac)]/2a."],
+                ["Discriminant", "D = b² − 4ac, which determines the nature of the roots."],
+                ["Completing the square", "Rewriting a quadratic as a perfect square plus a constant."],
+                ["Real roots", "Roots that are real numbers."]
+              ],
+              "examples": [
+                "x² − 6x + 9 = 0 has D = 0 and equal roots x = 3, 3.",
+                "x² + x + 1 = 0 has D = −3 and no real roots."
+              ],
+              "worked": [
+                {
+                  "problem": "Solve 3x² − 5x + 1 = 0 using the quadratic formula.",
+                  "steps": [
+                    "a = 3, b = −5, c = 1.",
+                    "D = (−5)² − 4(3)(1) = 25 − 12 = 13.",
+                    "x = [5 ± √13]/6."
+                  ],
+                  "answer": "x = (5 + √13)/6 or (5 − √13)/6"
+                },
+                {
+                  "problem": "Find k if x² + kx + 16 = 0 has equal roots.",
+                  "steps": [
+                    "For equal roots, D = 0: k² − 4(1)(16) = 0.",
+                    "k² = 64, so k = ±8."
+                  ],
+                  "answer": "k = 8 or k = −8"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Nature of roots",
+                "columns": ["Discriminant D = b² − 4ac", "Nature of roots"],
+                "rows": [
+                  ["D > 0", "Two distinct real roots"],
+                  ["D = 0", "Two equal real roots (−b/2a)"],
+                  ["D < 0", "No real roots"]
+                ]
+              },
+              "real_world": "Engineers check the discriminant to see whether a design is possible before building, for example whether a projectile can reach a certain height. Computer programs that solve equations use the quadratic formula because it works every time.",
+              "takeaways": [
+                "x = [−b ± √(b² − 4ac)]/2a solves every quadratic equation.",
+                "D > 0: two distinct real roots; D = 0: equal roots; D < 0: no real roots.",
+                "Set D = 0 to find coefficients for equal roots.",
+                "The discriminant tells whether a real-life situation is possible."
+              ],
+              "practice": [
+                ["Find the discriminant of 2x² + 3x − 2 = 0.", "25"],
+                ["Find the nature of roots of x² + 2x + 5 = 0.", "D = −16, no real roots."],
+                ["Solve x² − 4x − 1 = 0.", "x = 2 ± √5"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The discriminant of ax² + bx + c = 0 is:", ["b² + 4ac", "b² − 4ac", "4ac − b²", "b − 4ac"], "B", "It appears under the square root.", "D = b² − 4ac."],
+                  ["If D = 0, the roots are:", ["No real roots", "Two distinct", "Two equal real roots", "Three roots"], "C", "The ± part becomes zero.", "D = 0 gives equal roots."],
+                  ["If D < 0, the equation has:", ["No real roots", "Two equal roots", "Two distinct real roots", "Infinitely many roots"], "A", "Square root of a negative.", "There are no real roots when D < 0."],
+                  ["In 2x² − 3x + 5 = 0, the value of b is:", ["2", "3", "5", "−3"], "D", "Include the sign.", "b is the coefficient of x, which is −3."]
+                ],
+                "MEDIUM": [
+                  ["The discriminant of x² − 4x + 4 = 0 is:", ["32", "0", "8", "−8"], "B", "16 − 16.", "D = 16 − 4(1)(4) = 0."],
+                  ["The roots of x² + 3x + 5 = 0 are:", ["Real and distinct", "Real and equal", "Not real", "Zero"], "C", "Find D.", "D = 9 − 20 = −11 < 0, so no real roots."],
+                  ["Solve x² − 2x − 2 = 0.", ["1 ± √3", "2 ± √3", "−1 ± √3", "1 ± √2"], "A", "Use the formula.", "x = [2 ± √(4 + 8)]/2 = 1 ± √3."],
+                  ["For what k does x² − kx + 9 = 0 have equal roots?", ["±3", "9", "±9", "±6"], "D", "k² − 36 = 0.", "k² = 36, so k = ±6."]
+                ],
+                "HARD": [
+                  ["For what values of k does 2x² + kx + 2 = 0 have real roots?", ["−4 < k < 4", "k ≤ −4 or k ≥ 4", "k = 0", "Only k = 4"], "B", "D ≥ 0.", "k² − 16 ≥ 0 gives k ≤ −4 or k ≥ 4."],
+                  ["Can a rectangular garden have perimeter 40 m and area 120 m²?", ["Yes, two ways", "Yes, as a square", "No, because the resulting equation has D < 0", "Yes, any shape"], "C", "x(20 − x) = 120 → x² − 20x + 120 = 0.", "D = 400 − 480 = −80 < 0, so it is impossible."],
+                  ["If the roots of x² + px + q = 0 are 3 and −5, then p and q are:", ["p = 2, q = −15", "p = −2, q = 15", "p = 8, q = 15", "p = −8, q = −15"], "A", "(x − 3)(x + 5) = x² + 2x − 15.", "Expanding gives p = 2 and q = −15."],
+                  ["What number must be added to x² + 8x to complete the square?", ["4", "8", "64", "16"], "D", "Add (b/2)².", "(8/2)² = 16 gives (x + 4)²."]
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "slug": "g10-math-t-ap",
+          "title": "Arithmetic Progressions",
+          "description": "Sequences with a common difference: the nth term and the sum of n terms.",
+          "lessons": [
+            {
+              "slug": "g10-math-ap-nth-term",
+              "title": "Arithmetic Progressions and the nth Term",
+              "objectives": [
+                "Recognise an arithmetic progression",
+                "Find the common difference",
+                "Use aₙ = a + (n − 1)d to find any term",
+                "Find the number of terms and solve related problems"
+              ],
+              "intro": "Reena saves ₹100 in January and increases her monthly saving by ₹50 every month: ₹100, ₹150, ₹200, ₹250, … Each amount is obtained by adding a fixed number to the previous one. Such a list of numbers is called an arithmetic progression (AP). APs appear in savings plans, the seating in a stadium, taxi fares and the rungs of a ladder that shorten steadily.",
+              "sections": [
+                [
+                  "What is an AP?",
+                  "An arithmetic progression is a list of numbers in which each term after the first is obtained by adding a fixed number, called the common difference d, to the previous term. If the first term is a, the AP is a, a + d, a + 2d, a + 3d, … The common difference is found by subtracting any term from the next: d = a₂ − a₁. It can be positive (2, 5, 8, …), negative (20, 16, 12, …) or zero (7, 7, 7, …). To test whether a list is an AP, check that every difference between consecutive terms is the same."
+                ],
+                [
+                  "The nth term",
+                  "The terms are a₁ = a, a₂ = a + d, a₃ = a + 2d, and so on. Notice that the nth term contains (n − 1) common differences: aₙ = a + (n − 1)d. This formula lets us find any term without listing all the terms before it. For the AP 3, 7, 11, …, a = 3 and d = 4, so the 20th term is 3 + 19 × 4 = 79. If the AP is finite, the last term is often written as l = a + (n − 1)d."
+                ],
+                [
+                  "Using the formula",
+                  "The formula aₙ = a + (n − 1)d connects four quantities; if three are known, the fourth can be found. To find which term of 5, 11, 17, … is 125: 5 + (n − 1)6 = 125 gives n − 1 = 20, so it is the 21st term. To check whether 200 is a term: 5 + (n − 1)6 = 200 gives n − 1 = 32.5, which is not a whole number, so 200 is not a term. Problems often give two terms; for example, if a₃ = 12 and a₇ = 28, then 4d = 16, so d = 4 and a = 4."
+                ]
+              ],
+              "definitions": [
+                ["Arithmetic progression (AP)", "A sequence in which each term differs from the previous one by a constant."],
+                ["Common difference", "The constant d added to each term to get the next."],
+                ["nth term", "aₙ = a + (n − 1)d."],
+                ["Finite AP", "An AP with a last term."]
+              ],
+              "examples": [
+                "The odd numbers 1, 3, 5, 7, … form an AP with d = 2.",
+                "The 10th term of 50, 45, 40, … is 50 + 9(−5) = 5."
+              ],
+              "worked": [
+                {
+                  "problem": "How many two-digit numbers are divisible by 7?",
+                  "steps": [
+                    "The two-digit multiples of 7 are 14, 21, …, 98: an AP with a = 14, d = 7, l = 98.",
+                    "98 = 14 + (n − 1)7 → (n − 1)7 = 84 → n − 1 = 12.",
+                    "n = 13."
+                  ],
+                  "answer": "13 numbers"
+                },
+                {
+                  "problem": "The 4th term of an AP is 11 and the 10th term is 29. Find the AP.",
+                  "steps": [
+                    "a + 3d = 11 and a + 9d = 29.",
+                    "Subtract: 6d = 18, so d = 3.",
+                    "a = 11 − 9 = 2. AP: 2, 5, 8, 11, …"
+                  ],
+                  "answer": "2, 5, 8, 11, …"
+                }
+              ],
+              "diagram": {
+                "type": "number_line",
+                "title": "AP 3, 7, 11, 15 (d = 4)",
+                "min": 0,
+                "max": 16,
+                "points": [[3, "a₁"], [7, "a₂"], [11, "a₃"], [15, "a₄"]]
+              },
+              "real_world": "Salary increments by a fixed amount each year, instalment payments that reduce steadily, and seats in rows of an auditorium that increase by the same number each row all form APs. Planners use the nth-term formula to predict values far into the future.",
+              "takeaways": [
+                "An AP adds a constant d each time.",
+                "d = any term − previous term.",
+                "aₙ = a + (n − 1)d.",
+                "A number is a term only if n comes out as a positive whole number."
+              ],
+              "practice": [
+                ["Is 2, 4, 8, 16 an AP?", "No; the differences are not equal."],
+                ["Find the 15th term of 7, 12, 17, …", "77"],
+                ["Which term of 21, 18, 15, … is −81?", "35th term"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The common difference of 5, 9, 13, 17 is:", ["5", "4", "9", "−4"], "B", "Subtract consecutive terms.", "9 − 5 = 4."],
+                  ["Which is an AP?", ["1, 2, 4, 8", "1, 4, 9, 16", "10, 7, 4, 1", "2, 3, 5, 7"], "C", "Check equal differences.", "10, 7, 4, 1 has a constant difference of −3."],
+                  ["The nth term of an AP is:", ["a + (n − 1)d", "a + nd", "a × d", "n(a + d)"], "A", "The 1st term has no d added.", "aₙ = a + (n − 1)d."],
+                  ["The next term of 12, 9, 6, … is:", ["0", "−6", "9", "3"], "D", "d = −3.", "6 − 3 = 3."]
+                ],
+                "MEDIUM": [
+                  ["The 20th term of 2, 5, 8, … is:", ["62", "59", "60", "57"], "B", "a = 2, d = 3.", "2 + 19 × 3 = 59."],
+                  ["Which term of 3, 8, 13, … is 78?", ["15th", "17th", "16th", "14th"], "C", "3 + (n − 1)5 = 78.", "(n − 1)5 = 75, so n = 16."],
+                  ["If a = −4 and d = 3, the 10th term is:", ["23", "26", "−31", "27"], "A", "−4 + 9 × 3.", "−4 + 27 = 23."],
+                  ["How many terms are in 7, 11, 15, …, 95?", ["21", "22", "24", "23"], "D", "95 = 7 + (n − 1)4.", "(n − 1)4 = 88, so n = 23."]
+                ],
+                "HARD": [
+                  ["The 3rd term of an AP is 16 and the 7th term exceeds the 5th term by 12. The first term is:", ["6", "4", "10", "8"], "B", "2d = 12.", "d = 6, so a = 16 − 12 = 4."],
+                  ["Is 301 a term of the AP 5, 11, 17, …?", ["Yes, the 50th term", "Yes, the 51st term", "No, because n is not a whole number", "Yes, the 49th term"], "C", "Solve 5 + (n − 1)6 = 301.", "(n − 1)6 = 296 gives n − 1 = 49.33…, not whole."],
+                  ["How many three-digit numbers are divisible by 6?", ["150", "149", "166", "151"], "A", "102, 108, …, 996.", "996 = 102 + (n − 1)6 gives n = 150."],
+                  ["For what value of n are the nth terms of 63, 65, 67, … and 3, 10, 17, … equal?", ["11", "12", "14", "13"], "D", "63 + 2(n − 1) = 3 + 7(n − 1).", "60 = 5(n − 1), so n = 13."]
+                ]
+              }
+            },
+            {
+              "slug": "g10-math-ap-sum",
+              "title": "Sum of the First n Terms of an AP",
+              "objectives": [
+                "Derive the formula for the sum of n terms",
+                "Use Sₙ = n/2[2a + (n − 1)d] and Sₙ = n/2(a + l)",
+                "Find a term from sums of terms",
+                "Solve practical problems on sums"
+              ],
+              "intro": "A famous story tells that young Carl Friedrich Gauss, asked to add the numbers from 1 to 100, answered almost instantly: 5,050. He noticed that pairing the first and last numbers, 1 + 100, 2 + 99, 3 + 98 and so on, always gives 101, and there are 50 such pairs. The same idea gives a formula for the sum of any arithmetic progression.",
+              "sections": [
+                [
+                  "Deriving the formula",
+                  "Let Sₙ = a + (a + d) + (a + 2d) + … + [a + (n − 1)d]. Write the sum in reverse order: Sₙ = [a + (n − 1)d] + … + (a + d) + a. Adding the two lines term by term, each pair gives 2a + (n − 1)d, and there are n pairs, so 2Sₙ = n[2a + (n − 1)d]. Therefore Sₙ = n/2 [2a + (n − 1)d]. Since the last term is l = a + (n − 1)d, this can also be written Sₙ = n/2 (a + l), which is useful when the last term is known."
+                ],
+                [
+                  "Using the formulas",
+                  "For 1 + 2 + … + 100, a = 1, l = 100, n = 100: S = 50 × 101 = 5,050. The sum of the first n natural numbers is n(n + 1)/2. For the AP 5, 9, 13, … to 20 terms: S₂₀ = 10[10 + 19 × 4] = 10 × 86 = 860. Sums can also give terms: the nth term is the difference between consecutive sums, aₙ = Sₙ − Sₙ₋₁. If Sₙ = 3n² + 2n, then a₁ = S₁ = 5 and a₂ = S₂ − S₁ = 16 − 5 = 11, so d = 6."
+                ],
+                [
+                  "Practical problems",
+                  "A person saves ₹200 in the first month, ₹250 in the second, ₹300 in the third and so on. In two years (24 months), the total saving is S₂₄ = 12[400 + 23 × 50] = 12 × 1,550 = ₹18,600. In a school, prizes in an AP worth a total of ₹700 can be distributed among 7 students with each prize ₹20 less than the previous: 7/2[2a + 6(−20)] = 700 gives 2a − 120 = 200, so a = ₹160, and the prizes are ₹160, 140, 120, 100, 80, 60, 40. Always identify a, d and n carefully, and check the answer makes sense."
+                ]
+              ],
+              "definitions": [
+                ["Sum of n terms", "Sₙ = n/2[2a + (n − 1)d] = n/2(a + l)."],
+                ["Natural numbers sum", "1 + 2 + … + n = n(n + 1)/2."],
+                ["Last term (l)", "The final term of a finite AP, l = a + (n − 1)d."],
+                ["Series", "The sum of the terms of a sequence."]
+              ],
+              "examples": [
+                "The sum of the first 10 odd numbers is 10/2(1 + 19) = 100.",
+                "The sum of the first 50 natural numbers is 50 × 51/2 = 1,275."
+              ],
+              "worked": [
+                {
+                  "problem": "Find the sum of all multiples of 3 between 1 and 100.",
+                  "steps": [
+                    "Multiples: 3, 6, …, 99: a = 3, d = 3, l = 99.",
+                    "n: 99 = 3 + (n − 1)3 → n = 33.",
+                    "S = 33/2 (3 + 99) = 33 × 51 = 1,683."
+                  ],
+                  "answer": "1,683"
+                },
+                {
+                  "problem": "How many terms of 24, 21, 18, … must be taken so that their sum is 78?",
+                  "steps": [
+                    "n/2[48 + (n − 1)(−3)] = 78 → n(51 − 3n) = 156.",
+                    "3n² − 51n + 156 = 0 → n² − 17n + 52 = 0 → (n − 4)(n − 13) = 0.",
+                    "n = 4 or 13; both work, because terms after the 8th are negative and cancel some earlier positive terms."
+                  ],
+                  "answer": "4 terms or 13 terms"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Pairing 1 to 10 (Gauss's idea)",
+                "columns": ["Pair", "1+10", "2+9", "3+8", "4+7", "5+6"],
+                "rows": [["Sum", "11", "11", "11", "11", "11"]]
+              },
+              "real_world": "Banks calculate recurring deposit totals and loan repayments with AP sums. Builders count bricks in stepped walls, and event planners count seats in auditoriums with rows increasing by a fixed number.",
+              "takeaways": [
+                "Sₙ = n/2[2a + (n − 1)d] = n/2(a + l).",
+                "1 + 2 + … + n = n(n + 1)/2.",
+                "aₙ = Sₙ − Sₙ₋₁.",
+                "Some sum problems lead to quadratic equations; interpret both roots."
+              ],
+              "practice": [
+                ["Find 1 + 2 + … + 40.", "820"],
+                ["Find the sum of the first 15 terms of 2, 7, 12, …", "555"],
+                ["If Sₙ = n², find the 5th term.", "25 − 16 = 9"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The sum of the first 100 natural numbers is:", ["5,000", "5,050", "10,100", "5,100"], "B", "n(n + 1)/2.", "100 × 101/2 = 5,050."],
+                  ["Sₙ = n/2(a + l), where l is the:", ["Common difference", "Number of terms", "Last term", "First term"], "C", "The final term.", "l is the last term."],
+                  ["The sum of the first 10 natural numbers is:", ["55", "50", "45", "100"], "A", "10 × 11/2.", "10 × 11/2 = 55."],
+                  ["The sum of 2 + 4 + 6 + 8 + 10 is:", ["20", "24", "28", "30"], "D", "Add or use n/2(a + l).", "5/2 × 12 = 30."]
+                ],
+                "MEDIUM": [
+                  ["Find the sum of the first 20 terms of 3, 7, 11, …", ["800", "820", "840", "780"], "B", "a = 3, d = 4.", "10[6 + 19 × 4] = 10 × 82 = 820."],
+                  ["The sum of the first n odd numbers is:", ["n(n + 1)", "2n", "n²", "n(n − 1)"], "C", "Try n = 3: 1 + 3 + 5.", "1 + 3 + … + (2n − 1) = n²."],
+                  ["If Sₙ = 2n² + 3n, the first term is:", ["5", "2", "3", "7"], "A", "a₁ = S₁.", "S₁ = 2 + 3 = 5."],
+                  ["Find the sum 10 + 15 + 20 + … + 100.", ["1,045", "1,100", "1,000", "1,090"], "A", "n = 19.", "19/2 × 110 = 1,045."]
+                ],
+                "HARD": [
+                  ["If Sₙ = 3n² + 5n, what is the common difference?", ["3", "6", "5", "8"], "B", "a₂ − a₁ = (S₂ − S₁) − S₁.", "S₁ = 8, S₂ = 22, a₂ = 14, d = 6."],
+                  ["A man saves ₹100 in month 1 and increases savings by ₹20 every month. His total savings in 12 months are:", ["₹1,200", "₹2,640", "₹2,520", "₹2,400"], "C", "S₁₂ = 6[200 + 11 × 20].", "6 × 420 = ₹2,520."],
+                  ["How many terms of 9, 17, 25, … give a sum of 636?", ["12", "10", "13", "11"], "A", "n/2[18 + 8(n − 1)] = 636.", "4n² + 5n − 636 = 0 gives n = 12."],
+                  ["The sum of all two-digit odd numbers is:", ["2,500", "2,375", "2,450", "2,475"], "D", "11, 13, …, 99.", "n = 45; 45/2 × 110 = 2,475."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g10-math-u-trigonometry",
+      "title": "Trigonometry",
+      "topics": [
+        {
+          "slug": "g10-math-t-trigonometry",
+          "title": "Introduction to Trigonometry",
+          "description": "Trigonometric ratios of an acute angle and their use in heights and distances.",
+          "lessons": [
+            {
+              "slug": "g10-math-trig-ratios",
+              "title": "Trigonometric Ratios",
+              "objectives": [
+                "Define sine, cosine and tangent in a right triangle",
+                "Find the other ratios given one ratio",
+                "Recall the values for 0°, 30°, 45°, 60° and 90°",
+                "Use the identity sin²θ + cos²θ = 1"
+              ],
+              "intro": "Trigonometry means 'measurement of triangles'. Ancient astronomers in India and Greece used it to calculate distances to the Moon and planets. In a right-angled triangle, the ratios between the sides depend only on the size of an acute angle, not on how big the triangle is. These ratios, called trigonometric ratios, let us find unknown sides and angles without measuring them directly.",
+              "sections": [
+                [
+                  "Defining the ratios",
+                  "In a right triangle ABC with the right angle at B, take the acute angle A. The side opposite A is BC (the perpendicular), the side next to it is AB (the base), and AC is the hypotenuse. The ratios are: sin A = opposite/hypotenuse = BC/AC; cos A = adjacent/hypotenuse = AB/AC; tan A = opposite/adjacent = BC/AB. Their reciprocals are cosec A = 1/sin A, sec A = 1/cos A and cot A = 1/tan A. Also tan A = sin A/cos A. Because similar triangles have equal side ratios, the value of sin A depends only on A."
+                ],
+                [
+                  "Standard angles",
+                  "Some values are used so often that they should be remembered. sin 0° = 0, sin 30° = 1/2, sin 45° = 1/√2, sin 60° = √3/2, sin 90° = 1. The cosine values are the same in reverse order: cos 0° = 1, cos 30° = √3/2, cos 45° = 1/√2, cos 60° = 1/2, cos 90° = 0. Tangent: tan 0° = 0, tan 30° = 1/√3, tan 45° = 1, tan 60° = √3, and tan 90° is not defined. These come from an equilateral triangle of side 2 cut in half and from a right isosceles triangle. As A increases from 0° to 90°, sin A increases from 0 to 1 and cos A decreases from 1 to 0."
+                ],
+                [
+                  "Identities and complementary angles",
+                  "Using Pythagoras' theorem (AB² + BC² = AC²) and dividing by AC² gives the fundamental identity sin²A + cos²A = 1. Dividing by AB² gives 1 + tan²A = sec²A, and dividing by BC² gives 1 + cot²A = cosec²A. These identities let us find all ratios from one: if sin A = 3/5, then cos A = √(1 − 9/25) = 4/5 and tan A = 3/4. For complementary angles, sin(90° − A) = cos A, cos(90° − A) = sin A and tan(90° − A) = cot A, so sin 35° = cos 55°."
+                ]
+              ],
+              "definitions": [
+                ["Sine", "Opposite side ÷ hypotenuse."],
+                ["Cosine", "Adjacent side ÷ hypotenuse."],
+                ["Tangent", "Opposite side ÷ adjacent side."],
+                ["Trigonometric identity", "An equation involving trigonometric ratios true for all angles, such as sin²A + cos²A = 1."],
+                ["Complementary angles", "Two angles that add up to 90°."]
+              ],
+              "examples": [
+                "In a 3-4-5 triangle, for the angle opposite 3: sin = 3/5, cos = 4/5, tan = 3/4.",
+                "sin 60° × cos 30° = (√3/2)(√3/2) = 3/4."
+              ],
+              "worked": [
+                {
+                  "problem": "If tan A = 5/12, find sin A and cos A.",
+                  "steps": [
+                    "Take opposite = 5k and adjacent = 12k.",
+                    "Hypotenuse = √(25k² + 144k²) = 13k.",
+                    "sin A = 5/13 and cos A = 12/13."
+                  ],
+                  "answer": "sin A = 5/13, cos A = 12/13"
+                },
+                {
+                  "problem": "Evaluate 2 sin²30° + 3 cos²60° − tan²45°.",
+                  "steps": [
+                    "sin 30° = 1/2, so sin²30° = 1/4; cos 60° = 1/2, cos²60° = 1/4; tan 45° = 1.",
+                    "2(1/4) + 3(1/4) − 1 = 1/2 + 3/4 − 1.",
+                    "= 1/4."
+                  ],
+                  "answer": "1/4"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Standard values",
+                "columns": ["Angle", "sin", "cos", "tan"],
+                "rows": [
+                  ["0°", "0", "1", "0"],
+                  ["30°", "1/2", "√3/2", "1/√3"],
+                  ["45°", "1/√2", "1/√2", "1"],
+                  ["60°", "√3/2", "1/2", "√3"],
+                  ["90°", "1", "0", "not defined"]
+                ]
+              },
+              "real_world": "Trigonometry is used in navigation, surveying, architecture, video-game graphics, sound engineering and GPS. Aryabhata and other Indian mathematicians computed tables of sine values centuries ago for astronomy.",
+              "takeaways": [
+                "sin = opp/hyp, cos = adj/hyp, tan = opp/adj; the other three are reciprocals.",
+                "Memorise the values for 0°, 30°, 45°, 60°, 90°.",
+                "sin²A + cos²A = 1; 1 + tan²A = sec²A; 1 + cot²A = cosec²A.",
+                "sin(90° − A) = cos A."
+              ],
+              "practice": [
+                ["If cos A = 4/5, find tan A.", "3/4"],
+                ["Evaluate sin 30° + cos 60°.", "1"],
+                ["Write sin 70° in terms of cosine.", "cos 20°"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["sin A equals:", ["adjacent/hypotenuse", "opposite/hypotenuse", "opposite/adjacent", "hypotenuse/opposite"], "B", "SOH.", "sin = opposite ÷ hypotenuse."],
+                  ["The value of sin 30° is:", ["√3/2", "1", "1/2", "0"], "C", "Half of the hypotenuse.", "sin 30° = 1/2."],
+                  ["tan 45° equals:", ["1", "0", "√3", "1/√3"], "A", "Opposite = adjacent.", "In a right isosceles triangle, tan 45° = 1."],
+                  ["Which identity is correct?", ["sin A + cos A = 1", "tan²A − sec²A = 1", "sin²A − cos²A = 1", "sin²A + cos²A = 1"], "D", "Comes from Pythagoras.", "sin²A + cos²A = 1."]
+                ],
+                "MEDIUM": [
+                  ["If sin A = 3/5, then cos A is:", ["3/4", "4/5", "5/3", "5/4"], "B", "Use sin² + cos² = 1.", "cos A = √(1 − 9/25) = 4/5."],
+                  ["The value of cos 60° + sin 30° is:", ["√3", "1/2", "1", "2"], "C", "Both equal 1/2.", "1/2 + 1/2 = 1."],
+                  ["sin 50° is equal to:", ["cos 40°", "cos 50°", "tan 40°", "sin 40°"], "A", "Complementary angles.", "sin(90° − 40°) = cos 40°."],
+                  ["If tan A = 1/√3, then A is:", ["60°", "45°", "90°", "30°"], "D", "Standard value.", "tan 30° = 1/√3."]
+                ],
+                "HARD": [
+                  ["Evaluate (sin 60° × cos 30°) − (cos 60° × sin 30°).", ["0", "1/2", "1", "√3/2"], "B", "3/4 − 1/4.", "(√3/2)(√3/2) − (1/2)(1/2) = 1/2."],
+                  ["If sec A = 13/12, then tan A is:", ["12/5", "13/5", "5/12", "12/13"], "C", "1 + tan²A = sec²A.", "tan²A = 169/144 − 1 = 25/144, so tan A = 5/12."],
+                  ["Simplify (1 − sin²A) × sec²A.", ["1", "sin²A", "tan²A", "0"], "A", "1 − sin²A = cos²A.", "cos²A × 1/cos²A = 1."],
+                  ["As angle A increases from 0° to 90°, cos A:", ["Increases from 0 to 1", "Stays constant", "Is undefined", "Decreases from 1 to 0"], "D", "Look at the table.", "cos A goes from 1 at 0° to 0 at 90°."]
+                ]
+              }
+            },
+            {
+              "slug": "g10-math-heights-distances",
+              "title": "Heights and Distances",
+              "objectives": [
+                "Define line of sight, angle of elevation and angle of depression",
+                "Draw clear diagrams for height and distance problems",
+                "Use trigonometric ratios to find heights and distances",
+                "Solve problems involving two angles"
+              ],
+              "intro": "How tall is the Qutb Minar? How far is a ship from a lighthouse? Climbing or stretching a measuring tape is often impossible, but measuring an angle with a simple instrument called a clinometer and one distance on the ground is easy. Trigonometry then turns these measurements into heights and distances. This is how surveyors, engineers and navigators have worked for centuries.",
+              "sections": [
+                [
+                  "Elevation and depression",
+                  "The line of sight is the line from the observer's eye to the object. When the object is above the horizontal level of the eye, the angle between the horizontal and the line of sight is the angle of elevation; we raise our head to look at it. When the object is below, the angle between the horizontal and the line of sight is the angle of depression; we lower our head. Because the horizontal lines at the observer and at the object are parallel, the angle of depression from A to B equals the angle of elevation from B to A (alternate angles)."
+                ],
+                [
+                  "Method",
+                  "Draw a neat diagram with a right triangle: the vertical height, the horizontal distance and the line of sight as hypotenuse. Mark the known angle and sides and the unknown. Choose the ratio connecting the known side and the unknown: tan θ = height/distance is used most often, because the line of sight is rarely measured. Substitute standard values and solve. If the observer's eye is above the ground, add the eye height to the calculated height. Use √3 ≈ 1.732 when a numerical answer is needed."
+                ],
+                [
+                  "Problems with two angles",
+                  "Some problems give two angles. For example, from a point on the ground the angle of elevation of a tower's top is 30°; after walking 20 m towards the tower it becomes 60°. Let the height be h and the remaining distance x. Then tan 60° = h/x gives h = x√3, and tan 30° = h/(x + 20) gives x + 20 = h√3 = 3x, so x = 10 m and h = 10√3 ≈ 17.32 m. Setting up two equations from two right triangles and solving them together is the standard approach."
+                ]
+              ],
+              "definitions": [
+                ["Line of sight", "The line from the observer's eye to the object viewed."],
+                ["Angle of elevation", "The angle above the horizontal at which an object is seen."],
+                ["Angle of depression", "The angle below the horizontal at which an object is seen."],
+                ["Clinometer", "An instrument for measuring angles of elevation and depression."]
+              ],
+              "examples": [
+                "A kite string 60 m long makes 60° with the ground: the kite's height is 60 sin 60° = 30√3 m.",
+                "From the top of a 50 m cliff, a boat is seen at a 45° depression: it is 50 m from the cliff's foot."
+              ],
+              "worked": [
+                {
+                  "problem": "The angle of elevation of the top of a tower from a point 30 m from its foot is 60°. Find the height of the tower.",
+                  "steps": [
+                    "tan 60° = height/30.",
+                    "√3 = h/30, so h = 30√3.",
+                    "h ≈ 30 × 1.732 = 51.96 m."
+                  ],
+                  "answer": "30√3 m ≈ 51.96 m"
+                },
+                {
+                  "problem": "From the top of a 75 m lighthouse, the angle of depression of a ship is 30°. How far is the ship from the lighthouse?",
+                  "steps": [
+                    "Angle of depression 30° equals the angle of elevation of the lighthouse top from the ship.",
+                    "tan 30° = 75/d, so 1/√3 = 75/d.",
+                    "d = 75√3 ≈ 129.9 m."
+                  ],
+                  "answer": "75√3 m ≈ 129.9 m"
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Solving height and distance problems",
+                "items": ["Draw the diagram with a right triangle", "Mark the angle, known side and unknown", "Choose sin, cos or tan linking them", "Substitute standard values", "Solve; add eye height if needed"]
+              },
+              "real_world": "Surveyors use theodolites to measure angles for maps and roads, engineers check the heights of towers and bridges, pilots use angles of descent when landing, and navigators estimate distances to lighthouses and coastlines.",
+              "takeaways": [
+                "Angle of elevation: looking up; angle of depression: looking down.",
+                "The angle of depression from A to B equals the angle of elevation from B to A.",
+                "tan θ = height ÷ horizontal distance is the most used relation.",
+                "Problems with two angles need two equations."
+              ],
+              "practice": [
+                ["A 10 m ladder makes 60° with the ground. How high up the wall does it reach?", "10 sin 60° = 5√3 ≈ 8.66 m"],
+                ["The shadow of a pole equals its height. What is the Sun's elevation?", "45°"],
+                ["Why are angles of elevation and depression equal between two points?", "They are alternate angles between parallel horizontal lines."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["When you look up at the top of a building, the angle formed with the horizontal is the angle of:", ["Depression", "Elevation", "Reflection", "Incidence"], "B", "Looking up.", "Looking up gives an angle of elevation."],
+                  ["Which ratio connects height and horizontal distance?", ["sin", "cos", "tan", "sec"], "C", "Opposite/adjacent.", "tan θ = height/distance."],
+                  ["The shadow of a tower equals its height. The Sun's angle of elevation is:", ["45°", "30°", "60°", "90°"], "A", "tan θ = 1.", "Equal height and shadow give tan θ = 1, so 45°."],
+                  ["An instrument used to measure angles of elevation is a:", ["Thermometer", "Barometer", "Odometer", "Clinometer"], "D", "Clino = slope.", "A clinometer measures angles of elevation and depression."]
+                ],
+                "MEDIUM": [
+                  ["From a point 20 m from a tree, the elevation of its top is 45°. The tree's height is:", ["10 m", "20 m", "20√3 m", "40 m"], "B", "tan 45° = 1.", "h = 20 × 1 = 20 m."],
+                  ["A 12 m ladder leans against a wall at 60° to the ground. How far is its foot from the wall?", ["12 m", "6√3 m", "6 m", "24 m"], "C", "Use cos 60°.", "Distance = 12 cos 60° = 6 m."],
+                  ["A kite flies at height 60 m with its string making 60° with the ground. The string length is:", ["40√3 m", "120 m", "30√3 m", "60√3 m"], "A", "sin 60° = 60/L.", "L = 60/(√3/2) = 120/√3 = 40√3 m."],
+                  ["The angle of depression from A to B is 35°. The angle of elevation from B to A is:", ["55°", "145°", "70°", "35°"], "D", "Alternate angles.", "They are equal: 35°."]
+                ],
+                "HARD": [
+                  ["The elevation of a tower's top changes from 30° to 60° as an observer walks 40 m towards it. The height is:", ["40√3 m", "20√3 m", "20 m", "40 m"], "B", "h = x√3 and x + 40 = h√3.", "3x = x + 40 gives x = 20, so h = 20√3 m."],
+                  ["A 1.5 m tall girl sees a tower's top at 60° from 30√3 m away. The tower's height is:", ["90 m", "30 m", "91.5 m", "31.5 m"], "C", "Add her eye height.", "30√3 × √3 = 90; 90 + 1.5 = 91.5 m."],
+                  ["From a 60 m tall building, the angles of depression of the top and bottom of a pole are 30° and 60°. The pole's height is:", ["40 m", "20 m", "30 m", "60√3 m"], "A", "Horizontal distance = 60/√3 = 20√3.", "Drop to the pole top = 20√3 × (1/√3) = 20 m, so pole = 60 − 20 = 40 m."],
+                  ["Why is tan used more often than sin in height problems?", ["tan is always larger", "sin is undefined", "Heights are always hypotenuses", "The horizontal distance is usually measured, not the line of sight"], "D", "Which sides are known?", "We usually know the ground distance and want the height: opposite/adjacent."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
