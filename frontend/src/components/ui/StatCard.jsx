@@ -16,8 +16,8 @@ export function StatCard({ label, value, sub, icon: Icon, tone = 'brand', help, 
   return (
     <Card className={cx('flex flex-col', className)}>
       <div className="flex items-start justify-between gap-3">
-        <div className="flex min-w-0 items-center gap-1.5">
-          <p className="truncate text-[13px] font-medium text-ink-2">{label}</p>
+        <div className="flex min-w-0 items-start gap-1.5">
+          <p className="text-[13px] font-medium leading-snug text-ink-2">{label}</p>
           {help && <InfoTip text={help} label={`About ${label}`} />}
         </div>
         {Icon && (

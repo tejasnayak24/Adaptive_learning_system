@@ -38,7 +38,7 @@ export function SectionHeader({ title, description, action, icon: Icon, as: Tag 
         </Tag>
         {description && <p className="mt-1 max-w-3xl text-[13px] leading-relaxed text-ink-2">{description}</p>}
       </div>
-      {action && <div className="flex shrink-0 flex-wrap items-center gap-2">{action}</div>}
+      {action && <div className="flex min-w-0 max-w-full flex-wrap items-center gap-2">{action}</div>}
     </div>
   )
 }

@@ -1,5 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import {
+  ArrowRight,
+  Bot,
+  BrainCircuit,
+  CalendarClock,
+  ChevronRight,
+  ClipboardList,
+  Clock,
+  Funnel,
+  Minus,
+  ShieldCheck,
+  Sparkles,
+  TrendingDown,
+  TrendingUp
+} from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { rlService } from '../services/rlService'
 import { lessonService } from '../services/lessonService'
@@ -12,12 +26,55 @@ import {
   resolveNextStep
 } from '../utils/recommendationActions'
 import { formatDate, formatPercent, outcomeText } from '../utils/analytics'
-import { EmptyState, ErrorState, LoadingSkeleton, Panel, ProgressBar } from '../components/AnalyticsPanels'
+import { Panel } from '../components/AnalyticsPanels'
+import { ActionIcon, DifficultyBadge, SubjectChip } from '../components/learning'
+import { TONE_SOFT } from '../components/visuals'
+import {
+  Badge,
+  Button,
+  Callout,
+  Card,
+  EmptyState,
+  ErrorState,
+  PageHeader,
+  PageSkeleton,
+  ProgressBar,
+  SectionHeader,
+  Tooltip,
+  cx
+} from '../components/ui'
 
-const OUTCOME_TONE = {
-  emerald: 'text-emerald-300',
-  rose: 'text-rose-300',
-  slate: 'text-slate-400'
+const OUTCOME_VISUAL = {
+  emerald: { icon: TrendingUp, tone: 'success', text: 'text-success' },
+  rose: { icon: TrendingDown, tone: 'danger', text: 'text-danger' },
+  slate: { icon: Minus, tone: 'neutral', text: 'text-ink-2' }
+}
+
+const HOW_IT_WORKS = [
+  {
+    icon: ClipboardList,
+    title: 'Reads your quiz',
+    text: 'Score, quiz level, hints, how many tries you needed and what the camera noticed.'
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Removes unsuitable steps',
+    text: 'Safety rules come first, for example no moving on before you pass.'
+  },
+  {
+    icon: BrainCircuit,
+    title: 'Picks the highest-value step',
+    text: 'A Q-learning table trained offline on simulated students scores the remaining steps.'
+  }
+]
+
+function DetailRow({ label, children }) {
+  return (
+    <div className="flex items-center justify-between gap-4 py-2.5 text-[13px]">
+      <dt className="shrink-0 text-ink-2">{label}</dt>
+      <dd className="min-w-0 truncate text-right font-medium text-ink">{children || '—'}</dd>
+    </div>
+  )
 }
 
 export default function Recommendations() {
@@ -64,7 +121,7 @@ export default function Recommendations() {
     load()
   }, [load, user?.id])
 
-  if (loading) return <LoadingSkeleton blocks={0} />
+  if (loading) return <PageSkeleton label="Loading your AI coach" />
   if (error) return <ErrorState message={error} onRetry={load} />
 
   const attempt = latest?.attempt
@@ -93,22 +150,29 @@ export default function Recommendations() {
       : nextStep?.kind === 'break'
         ? 'Take a 2–5 minute break, then reopen the lesson →'
         : `${info?.label}: open the lesson →`
+  const strength = recommendation ? Math.round(recommendation.confidence * 100) : 0
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
-      <div className="space-y-1.5">
-        <h1 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">AI Coach</h1>
-        <p className="text-slate-400 text-sm leading-relaxed max-w-3xl">
-          After every quiz, your coach looks at your score, the quiz level, hints, how many tries you needed and what the camera noticed, then
-          picks one of 11 next steps. It learned which steps help most by practising on thousands of simulated students.
-        </p>
-      </div>
+    <div className="space-y-8">
+      <PageHeader
+        eyebrow="Insights"
+        title="AI Coach"
+        description="After every quiz, your coach looks at your score, the quiz level, hints, how many tries you needed and what the camera noticed, then picks one of 11 next steps. It learned which steps help most by practising on thousands of simulated students."
+        meta={
+          <>
+            <Badge tone="brand" icon={BrainCircuit}>
+              Q-learning policy · trained offline
+            </Badge>
+            <Badge icon={ShieldCheck}>Safety rules applied first</Badge>
+          </>
+        }
+      />
 
-      {/* Latest recommendation */}
+      {/* Current recommendation */}
       {!recommendation ? (
-        <Panel>
+        <Card>
           <EmptyState
-            icon="🤖"
+            icon={Bot}
             title={
               latest?.status === 'telemetry_unavailable'
                 ? 'No advice for your last quiz — camera data was unavailable'
@@ -124,99 +188,161 @@ export default function Recommendations() {
                   : 'Finish a lesson quiz with the camera agent running and your first piece of advice will appear here.'
             }
             action={
-              <Link to="/subjects" className="mt-2 inline-flex px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold text-xs">
+              <Button to="/subjects" iconRight={ArrowRight}>
                 Browse subjects
-              </Link>
+              </Button>
             }
           />
-        </Panel>
+        </Card>
       ) : (
-        <section className="glass-panel rounded-3xl p-5 sm:p-8 border border-slate-900 shadow-xl space-y-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 h-48 w-48 bg-indigo-500/5 blur-3xl pointer-events-none" />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            <div className="md:col-span-2 space-y-5">
-              <div className="space-y-1">
-                <span className="text-[10px] text-teal-300 font-bold uppercase tracking-wider">Your next step</span>
-                <p className="text-2xl font-extrabold text-white">
-                  {info.icon} {info.label}
-                </p>
-                <p className="text-sm text-slate-300">{info.description}</p>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <Card as="section" padding="lg" aria-labelledby="current-advice" className="relative space-y-6 overflow-hidden lg:col-span-2">
+            <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-brand-500/[0.12] blur-3xl" aria-hidden="true" />
+            <div className="relative flex flex-wrap items-center justify-between gap-3">
+              <Badge tone="mint" icon={Sparkles}>
+                Your next step
+              </Badge>
+              {attempt?.created_at && <span className="text-xs text-ink-2">After your quiz on {formatDate(attempt.created_at, { withTime: true })}</span>}
+            </div>
+            <div className="relative flex items-start gap-4">
+              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand-500/[0.14] text-brand-200 ring-1 ring-inset ring-brand-500/30">
+                <ActionIcon action={recommendation.action} size={26} />
+              </span>
+              <div className="min-w-0 space-y-1.5">
+                <h2 id="current-advice" className="font-display text-[26px] font-semibold leading-tight tracking-tight text-ink">
+                  {info.label}
+                </h2>
+                <p className="text-[15px] leading-relaxed text-ink-2">{info.description}</p>
               </div>
-
-              <div className="space-y-2">
-                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Why the coach chose this</span>
-                <p className="text-sm text-slate-300 bg-slate-900/40 border border-slate-800 p-4 rounded-2xl leading-relaxed">
-                  {recommendation.explanation}
-                </p>
-              </div>
-
-              {nextStepLink && (
-                <Link
-                  to={nextStepLink.to}
-                  state={nextStepLink.state}
-                  className="inline-flex justify-center px-5 py-3 rounded-xl bg-indigo-500 text-white font-bold text-sm shadow hover:bg-indigo-600 transition-colors"
-                >
+            </div>
+            <figure className="relative space-y-2">
+              <figcaption className="text-xs font-medium text-ink-2">Why the coach chose this</figcaption>
+              <blockquote className="rounded-xl border border-line bg-deep/70 px-4 py-3.5 text-sm leading-relaxed text-ink">
+                {recommendation.explanation}
+              </blockquote>
+            </figure>
+            {nextStepLink && (
+              <div className="relative">
+                <Button to={nextStepLink.to} state={nextStepLink.state} size="lg" wrap icon={ArrowRight}>
                   {nextStepLabel}
-                </Link>
+                </Button>
+              </div>
+            )}
+          </Card>
+
+          <Card as="aside" aria-label="Based on your quiz" className="space-y-5">
+            <SectionHeader as="h3" title="Based on your quiz" icon={ClipboardList} />
+            <dl className="divide-y divide-line/70">
+              <DetailRow label="Subject">{attempt?.subject && <SubjectChip subject={attempt.subject} className="justify-end" />}</DetailRow>
+              <DetailRow label="Topic">{attempt?.curriculum_topic || attempt?.topic}</DetailRow>
+              <DetailRow label="Lesson">{attempt?.lesson_title}</DetailRow>
+              <DetailRow label="Score">
+                <span className="inline-flex items-center gap-2">
+                  {formatPercent(attempt?.quiz_score)}
+                  {attempt?.difficulty && <DifficultyBadge difficulty={attempt.difficulty} size="sm" />}
+                </span>
+              </DetailRow>
+              <DetailRow label="Attention">
+                {formatPercent(attempt?.attention_score === null || attempt?.attention_score === undefined ? null : attempt.attention_score * 100)}
+              </DetailRow>
+              <DetailRow label="When">{formatDate(attempt?.created_at, { withTime: true })}</DetailRow>
+            </dl>
+            <div className="space-y-2 rounded-xl border border-line bg-deep/70 p-4">
+              <div className="flex items-center justify-between text-xs">
+                <Tooltip content={CONFIDENCE_NOTE} align="start">
+                  <span tabIndex={0} className="cursor-help rounded font-medium text-ink-2 underline decoration-line-strong decoration-dotted underline-offset-4">
+                    Decision strength
+                  </span>
+                </Tooltip>
+                <span className="font-semibold text-mint-300">{strength}%</span>
+              </div>
+              <ProgressBar value={strength} tone="mint" size="sm" label="Decision strength" />
+              <p className="text-[11px] leading-relaxed text-ink-2">
+                How clearly this step beat the others. It is not a probability.
+                {runnerUp && ACTION_CATALOGUE[runnerUp] ? ` Second choice: ${ACTION_CATALOGUE[runnerUp].label}.` : ''}
+              </p>
+              {recommendation.policy && (
+                <p className="flex items-center gap-1.5 pt-1 text-[11px] text-ink-2">
+                  <BrainCircuit size={13} aria-hidden="true" />
+                  Decided by: {POLICY_LABELS[recommendation.policy] || recommendation.policy}
+                </p>
               )}
             </div>
-
-            <div className="space-y-4 rounded-2xl bg-slate-925 border border-slate-800 p-5 h-fit">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400">Based on your quiz</h2>
-              <dl className="space-y-2.5 text-xs">
-                <Row label="Subject" value={attempt?.subject} />
-                <Row label="Topic" value={attempt?.curriculum_topic || attempt?.topic} />
-                <Row label="Lesson" value={attempt?.lesson_title} />
-                <Row label="Score" value={`${formatPercent(attempt?.quiz_score)} (${String(attempt?.difficulty || '').toLowerCase()})`} />
-                <Row label="Attention" value={formatPercent(attempt?.attention_score === null || attempt?.attention_score === undefined ? null : attempt.attention_score * 100)} />
-                <Row label="When" value={formatDate(attempt?.created_at, { withTime: true })} />
-              </dl>
-              <div className="pt-2 space-y-1.5" title={CONFIDENCE_NOTE}>
-                <div className="flex justify-between text-[10px] uppercase tracking-wider">
-                  <span className="text-slate-500 font-semibold">Decision strength</span>
-                  <span className="text-teal-300 font-bold">{Math.round(recommendation.confidence * 100)}%</span>
-                </div>
-                <ProgressBar percent={recommendation.confidence * 100} color="#0d9488" label="Decision strength" />
-                <p className="text-[10px] text-slate-500 leading-relaxed">
-                  How clearly this step beat the others. It is not a probability.
-                  {runnerUp && ACTION_CATALOGUE[runnerUp] ? ` Second choice: ${ACTION_CATALOGUE[runnerUp].label}.` : ''}
-                </p>
-                {recommendation.policy && (
-                  <p className="text-[10px] text-slate-500">Decided by: {POLICY_LABELS[recommendation.policy] || recommendation.policy}</p>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
+          </Card>
+        </div>
       )}
+
+      {/* How the coach decides */}
+      <Card as="section" aria-labelledby="how-it-works" className="space-y-5">
+        <SectionHeader id="how-it-works" title="How your coach decides" icon={Funnel} />
+        <ol className="grid grid-cols-1 gap-3 md:grid-cols-3">
+          {HOW_IT_WORKS.map(({ icon: Icon, title, text }, index) => (
+            <li key={title} className="relative flex gap-3 rounded-xl border border-line bg-deep/60 p-4">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-500/[0.12] text-brand-300 ring-1 ring-inset ring-brand-500/25">
+                <Icon size={17} aria-hidden="true" />
+              </span>
+              <div className="min-w-0 space-y-1">
+                <p className="text-sm font-semibold text-ink">
+                  <span className="mr-1.5 tabular-nums text-ink-3">{index + 1}.</span>
+                  {title}
+                </p>
+                <p className="text-[13px] leading-relaxed text-ink-2">{text}</p>
+              </div>
+              {index < HOW_IT_WORKS.length - 1 && (
+                <ChevronRight size={16} className="absolute -right-3 top-1/2 hidden -translate-y-1/2 text-ink-3 md:block" aria-hidden="true" />
+              )}
+            </li>
+          ))}
+        </ol>
+        <p className="text-xs leading-relaxed text-ink-2">
+          The coach is not a chatbot or a live language model. Its Q-table was trained offline and is only read, never updated, while it advises
+          you.
+        </p>
+      </Card>
 
       {/* History */}
       <Panel
         title="Earlier advice and what happened next"
         subtitle="Each piece of advice is checked against your next quiz. “Followed” is worked out from that quiz (for example, whether you moved to a harder level); some steps, like taking a break, cannot be checked."
+        icon={CalendarClock}
       >
-        {historyError && <p className="text-xs text-amber-300">{historyError}</p>}
+        {historyError && (
+          <Callout tone="warning" role="status">
+            {historyError}
+          </Callout>
+        )}
         {history.length === 0 ? (
-          <EmptyState icon="🕘" title="No earlier advice yet" text="Advice from your quizzes will be listed here." />
+          <EmptyState icon={Clock} title="No earlier advice yet" text="Advice from your quizzes will be listed here." compact />
         ) : (
-          <ol className="space-y-2">
-            {history.map((item) => {
+          <ol className="relative space-y-3">
+            {history.map((item, index) => {
               const itemInfo = actionInfo(item.action)
               const outcome = outcomeText(item.outcome)
+              const visual = OUTCOME_VISUAL[outcome.tone] || OUTCOME_VISUAL.slate
+              const OutcomeIcon = item.outcome?.status === 'recorded' ? visual.icon : Clock
               return (
-                <li key={item.id} className="rounded-2xl bg-slate-900/40 border border-slate-800 px-4 py-3 space-y-1">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <p className="text-sm font-semibold text-white">
-                      <span aria-hidden="true">{itemInfo.icon}</span> {itemInfo.label}
+                <li key={item.id} className="relative flex gap-4">
+                  {index < history.length - 1 && <span className="absolute bottom-[-14px] left-[19px] top-11 w-px bg-line" aria-hidden="true" />}
+                  <span className="relative grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-raised text-ink-2 ring-1 ring-inset ring-line-strong">
+                    <ActionIcon action={item.action} size={18} />
+                  </span>
+                  <div className="min-w-0 flex-1 rounded-xl border border-line bg-deep/60 px-4 py-3">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <p className="text-sm font-semibold text-ink">{itemInfo.label}</p>
+                      <span className="text-[11px] text-ink-2">{formatDate(item.created_at, { withTime: true })}</span>
+                    </div>
+                    <p className="mt-1 text-xs text-ink-2">
+                      After {formatPercent(item.context?.score)} on “{item.context?.lesson_title || 'a lesson'}”
+                      {item.context?.subject ? ` · ${item.context.subject}` : ''}
+                      {item.context?.topic ? ` · ${item.context.topic}` : ''}
                     </p>
-                    <span className="text-[10px] text-slate-500">{formatDate(item.created_at, { withTime: true })}</span>
+                    <p className={cx('mt-2 flex items-start gap-2 text-xs', item.outcome?.status === 'recorded' ? visual.text : 'text-ink-2')}>
+                      <span className={cx('grid h-5 w-5 shrink-0 place-items-center rounded-md ring-1 ring-inset', TONE_SOFT[item.outcome?.status === 'recorded' ? visual.tone : 'neutral'])}>
+                        <OutcomeIcon size={12} aria-hidden="true" />
+                      </span>
+                      <span className="pt-0.5">{outcome.text}</span>
+                    </p>
                   </div>
-                  <p className="text-[11px] text-slate-400">
-                    After {formatPercent(item.context?.score)} on “{item.context?.lesson_title || 'a lesson'}”
-                    {item.context?.subject ? ` · ${item.context.subject}` : ''}
-                    {item.context?.topic ? ` · ${item.context.topic}` : ''}
-                  </p>
-                  <p className={`text-[11px] ${OUTCOME_TONE[outcome.tone]}`}>{outcome.text}</p>
                 </li>
               )
             })}
@@ -228,40 +354,44 @@ export default function Recommendations() {
       <Panel
         title="The 11 steps your coach can suggest"
         subtitle="A Q-learning table, trained offline on simulated students, gives every step a score for your situation. Safety rules first remove unsuitable steps (for example, moving on before you pass), then the highest-scoring step is chosen."
+        icon={Sparkles}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
           {ALL_ACTIONS.map((name) => {
             const strategy = ACTION_CATALOGUE[name]
             const active = recommendation?.action === name
             return (
               <div
                 key={name}
-                className={`flex gap-3 p-4 rounded-2xl border ${active ? 'bg-indigo-500/10 border-indigo-500/30' : 'bg-slate-900/30 border-slate-800'}`}
+                className={cx(
+                  'flex gap-3 rounded-xl border p-4 transition-colors',
+                  active ? 'border-brand-500/45 bg-brand-500/[0.08]' : 'border-line bg-deep/60 hover:border-line-strong'
+                )}
               >
-                <span className="text-2xl select-none" aria-hidden="true">
-                  {strategy.icon}
+                <span
+                  className={cx(
+                    'grid h-9 w-9 shrink-0 place-items-center rounded-lg ring-1 ring-inset',
+                    active ? 'bg-brand-500/[0.16] text-brand-200 ring-brand-500/35' : 'bg-raised text-ink-2 ring-line-strong'
+                  )}
+                >
+                  <ActionIcon action={name} size={17} />
                 </span>
-                <div className="space-y-1">
-                  <h3 className="text-xs font-extrabold text-white tracking-wide">
+                <div className="min-w-0 space-y-1">
+                  <h3 className="flex flex-wrap items-center gap-2 text-sm font-semibold text-ink">
                     {strategy.label}
-                    {active && <span className="ml-2 text-[10px] font-bold text-teal-300">Current advice</span>}
+                    {active && (
+                      <Badge tone="mint" size="sm">
+                        Current advice
+                      </Badge>
+                    )}
                   </h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">{strategy.description}</p>
+                  <p className="text-[13px] leading-relaxed text-ink-2">{strategy.description}</p>
                 </div>
               </div>
             )
           })}
         </div>
       </Panel>
-    </div>
-  )
-}
-
-function Row({ label, value }) {
-  return (
-    <div className="flex justify-between gap-3">
-      <dt className="text-slate-500 shrink-0">{label}</dt>
-      <dd className="font-semibold text-slate-200 text-right truncate">{value || '—'}</dd>
     </div>
   )
 }
