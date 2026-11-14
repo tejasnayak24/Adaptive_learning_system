@@ -177,6 +177,9 @@ export default function Register() {
                   name="password"
                   type={showPassword ? 'text' : 'password'}
                   required
+                  minLength={8}
+                  maxLength={72}
+                  title="At least 8 characters"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="block w-full rounded-xl bg-slate-900/50 border border-slate-700 pl-10 pr-10 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"

@@ -10,21 +10,19 @@ import {
   trendRows,
   weeklyActivity
 } from '../utils/analytics'
+import { AttentionPanel, ScoreTrendChart, WeeklyActivityChart } from '../components/AnalyticsCharts'
 import {
   ActivityFeed,
-  AttentionPanel,
   EmptyState,
   ErrorState,
   LoadingSkeleton,
   Milestones,
   Panel,
   ProgressBar,
-  ScoreTrendChart,
   StatTile,
   SubjectPerformance,
   TelemetryBadge,
-  TopicPerformance,
-  WeeklyActivityChart
+  TopicPerformance
 } from '../components/AnalyticsPanels'
 
 const DIFFICULTY_TONE = {

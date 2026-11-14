@@ -24,3 +24,13 @@ logs/
 
 # RL training candidate (only promoted after validation)
 rl_engine/q_table.candidate.json
+
+# Secrets (also ignored per folder; this is a safety net)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Test / tool caches
+.pytest_cache/

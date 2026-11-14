@@ -9,12 +9,16 @@ export default defineConfig({
   ],
 
   server: {
-    port: 5173,
-    host: true,
+    port: Number(process.env.AEGIS_FRONTEND_PORT) || 5173,
+    // Local machine only by default: the dev server proxies the API, and
+    // the camera agent pairs on 127.0.0.1 anyway. Set AEGIS_DEV_HOST=0.0.0.0
+    // to deliberately expose it on the local network.
+    host: process.env.AEGIS_DEV_HOST || '127.0.0.1',
+    strictPort: true,
 
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:8000',
+        target: process.env.AEGIS_API_URL || 'http://127.0.0.1:8000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },

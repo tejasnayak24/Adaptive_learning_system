@@ -147,6 +147,10 @@ All responses use `{ "success", "message", "data" }` unless noted.
 can only access their own records; others get **403**).
 🎓 = teacher or admin role only.
 
+## Health
+
+`GET /` — returns `{success: true}` when the API is running (used by `start-all.ps1`).
+
 ## Authentication
 
 | Method | Path | Notes |
@@ -288,7 +292,7 @@ when not live, measurements are `null`. The old unauthenticated
 |---|---|---|
 | GET | `/progress/{student_id}` 🔒👤 | All attempts, oldest first |
 | GET | `/progress/{student_id}/{lesson_id}` 🔒👤 | Latest attempt for a lesson |
-| PUT | `/progress/{progress_id}` 🔒👤 | Update an attempt |
+| PUT | `/progress/{progress_id}` 🔒🎓 | Teachers/admins only: correct an attempt. Students cannot edit attempts (scores are graded by the server, camera values come from the agent) |
 
 ## Learning analytics (Phase 6)
 

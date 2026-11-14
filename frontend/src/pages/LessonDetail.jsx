@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useParams, useLocation } from 'react-router-dom'
 import { actionInfo } from '../utils/recommendationActions'
 import LessonMaterial from '../components/LessonMaterial'
 import { useAuth } from '../context/AuthContext'
@@ -9,7 +9,6 @@ import { progressService } from '../services/progressService'
 export default function LessonDetail() {
   const { id } = useParams()
   const { user } = useAuth()
-  const navigate = useNavigate()
   const location = useLocation()
   const [lesson, setLesson] = useState(null)
   const [lessonProgress, setLessonProgress] = useState([])

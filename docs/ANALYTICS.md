@@ -92,8 +92,11 @@ from the token.
 
 ## Browser acceptance checklist
 
-These checks have **not** been performed in a browser yet. The API and the
-unit-tested helper functions are verified (see the Phase 6 commit).
+Phase 7 ran these checks in a real (headless) Chrome against an isolated
+database copy, with screenshots inspected at laptop and phone widths. See
+[BROWSER_ACCEPTANCE.md](BROWSER_ACCEPTANCE.md) for the results and the
+remaining manual steps. The list below stays useful as a manual
+walkthrough.
 
 Start PostgreSQL, the backend (`README.md` §2) and the frontend
 (`npm run dev`). Then:

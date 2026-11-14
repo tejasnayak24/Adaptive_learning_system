@@ -22,6 +22,14 @@ for var in required_env_vars:
             f"Required environment variable '{var}' is not set."
         )
 
+# Refuse to sign tokens with the placeholder from .env.example or a key
+# that is trivially guessable.
+if os.getenv("SECRET_KEY") in ("your-secret-key-here", "changeme", "secret") or len(os.getenv("SECRET_KEY", "")) < 16:
+    raise RuntimeError(
+        "SECRET_KEY is a placeholder or too short. Generate one with: "
+        "python -c \"import secrets; print(secrets.token_urlsafe(48))\""
+    )
+
 # Import all models so SQLAlchemy registers them. The schema itself is
 # managed by Alembic migrations (backend/migrations); run
 # `alembic upgrade head` from backend/ before starting the API.

@@ -49,3 +49,12 @@ def test_two_students_get_distinct_ids(client):
     _, first = register_and_login(client, email="one@example.com")
     _, second = register_and_login(client, email="two@example.com")
     assert first["id"] != second["id"]
+
+
+def test_registration_rejects_weak_or_invalid_input(client):
+    base = {"name": "Val Test", "email": "val@example.com", "password": "LongEnough1", "age": 14}
+    assert client.post("/register", json={**base, "password": "short"}).status_code == 422
+    assert client.post("/register", json={**base, "password": "x" * 73}).status_code == 422
+    assert client.post("/register", json={**base, "name": ""}).status_code == 422
+    assert client.post("/register", json={**base, "age": 0}).status_code == 422
+    assert client.post("/register", json=base).status_code == 200

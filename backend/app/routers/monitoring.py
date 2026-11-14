@@ -25,7 +25,9 @@ from sqlalchemy.orm import Session
 
 from app.auth.dependencies import get_current_student
 from app.database.connection import get_db
+from app.models.lesson import Lesson
 from app.models.student import Student
+from app.services import curriculum_service as cs
 from app.services import monitoring_service as ms
 
 router = APIRouter(tags=["Camera Monitoring"])
@@ -143,6 +145,12 @@ def create_session(
     db: Session = Depends(get_db),
     student: Student = Depends(get_current_student),
 ):
+    if request.lesson_id is not None:
+        # The session is for a lesson the student may actually open.
+        lesson = db.get(Lesson, request.lesson_id)
+        if lesson is None:
+            raise HTTPException(status_code=404, detail="Lesson not found")
+        cs.check_lesson_access(student, lesson)
     try:
         session, token = ms.create_session(db, student, request.lesson_id)
     except ms.MonitoringError as exc:

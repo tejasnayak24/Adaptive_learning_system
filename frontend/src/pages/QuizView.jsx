@@ -146,6 +146,10 @@ export default function QuizView() {
     }
 
     loadQuizData()
+    // Runs once per quiz and student. draftKey is derived from them, and
+    // resetQuizTelemetry is recreated every render; listing it would restart
+    // the quiz (and its camera window) on every re-render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, studentId])
 
   // The quiz timer only runs while camera monitoring is verified; any
@@ -424,30 +428,6 @@ export default function QuizView() {
     }
   }
 
-  const getQuizOfDifficulty = (
-    difficulty
-  ) => {
-    /*
-     * lesson.quizzes may not exist depending on
-     * the backend response, so never call .find()
-     * directly on it.
-     */
-    const lessonQuizzes =
-      Array.isArray(lesson.quizzes)
-        ? lesson.quizzes
-        : []
-
-    const target =
-      lessonQuizzes.find(
-        (quizItem) =>
-          String(
-            quizItem.difficulty || ''
-          ).toLowerCase() ===
-          difficulty.toLowerCase()
-      )
-
-    return target || null
-  }
 
   // Every one of the RL engine's 11 actions maps to a concrete next step
   // (utils/recommendationActions.js); nothing falls back to a generic button.
@@ -609,7 +589,7 @@ export default function QuizView() {
                 </span>
 
                 <span className="font-semibold text-white">
-                  {hintsCount} hints
+                  {hintsCount} {hintsCount === 1 ? 'hint' : 'hints'}
                 </span>
               </div>
 
@@ -750,7 +730,7 @@ export default function QuizView() {
                 </span>
 
                 <span className="font-semibold text-emerald-400">
-                  PostgreSQL saved
+                  Saved by the server
                 </span>
               </div>
             </div>

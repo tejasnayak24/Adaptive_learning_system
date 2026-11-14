@@ -77,6 +77,14 @@ def update_progress(
     db: Session = Depends(get_db),
     student: Student = Depends(get_current_student),
 ) -> dict[str, Any]:
+    # Scores are graded by the server and camera values come from the
+    # agent, so students may not edit attempts (not even their own).
+    # Teachers/admins can correct a record.
+    if not student.can_manage_curriculum:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Quiz attempts are graded by the server and cannot be edited by students",
+        )
 
     existing = ProgressService.get_progress_by_id(db, progress_id)
 
@@ -85,8 +93,6 @@ def update_progress(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Progress not found",
         )
-
-    _require_self(existing.student_id, student)
 
     updated = ProgressService.update_progress(
         db,

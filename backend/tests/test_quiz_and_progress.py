@@ -203,7 +203,7 @@ def test_submission_is_always_recorded_for_token_owner(client, auth, lesson_with
     assert same.status_code == 200
 
 
-def test_progress_is_owner_only(client, auth, lesson_with_quiz):
+def test_progress_is_owner_only(client, auth, lesson_with_quiz, db_session):
     headers, profile = auth
     _submit(client, headers, lesson_with_quiz["quiz_id"], camera=[{"attention_score": 0.7}])
 
@@ -226,7 +226,16 @@ def test_progress_is_owner_only(client, auth, lesson_with_quiz):
         "completed": True,
     }
     assert client.put(f"/progress/{progress_id}", json=update, headers=other_headers).status_code == 403
-    updated = client.put(f"/progress/{progress_id}", json=update, headers=headers)
+    # Not even the owner may rewrite a server-graded attempt.
+    assert client.put(f"/progress/{progress_id}", json=update, headers=headers).status_code == 403
+    assert client.get(f"/progress/{profile['id']}", headers=headers).json()["data"][0]["attention_score"] == 0.7
+
+    from app.models.student import Student
+
+    teacher_headers, teacher = register_and_login(client, email="teacher@example.com")
+    db_session.get(Student, teacher["id"]).role = "teacher"
+    db_session.commit()
+    updated = client.put(f"/progress/{progress_id}", json=update, headers=teacher_headers)
     assert updated.status_code == 200
     assert updated.json()["data"]["difficulty"] == "HARD"
 

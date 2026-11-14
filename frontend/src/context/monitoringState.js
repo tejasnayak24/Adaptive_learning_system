@@ -14,6 +14,19 @@ export function combineState({ consent, agent, backend, pairingError }) {
   // While the agent is still opening the webcam, its "not ready yet"
   // heartbeat must not be shown as a camera failure.
   if (agent.state === 'starting') return 'pairing'
+  // The backend may still hold the agent's first heartbeat, sent while the
+  // camera was opening (camera_error "starting") or before the first frame
+  // was analysed (no error code), even though the agent now reports a
+  // working camera. That is warm-up, not a failure; real failures carry a
+  // camera error such as stale_measurement or camera_unavailable.
+  if (
+    backend?.state === 'camera_unavailable' &&
+    (!backend.camera_error || backend.camera_error === 'starting') &&
+    agent.state === 'running' &&
+    agent.camera?.state === 'ok'
+  ) {
+    return 'verifying'
+  }
   if (agent.state === 'camera_unavailable' || backend?.state === 'camera_unavailable') return 'camera_unavailable'
   if (agent.backend && agent.backend.connected === false) return 'backend_disconnected'
   if (!backend) return 'loading'

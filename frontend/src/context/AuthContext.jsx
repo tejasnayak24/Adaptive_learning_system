@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
         setUser(null)
         authService.logout()
       }
-    } catch (err) {
+    } catch {
       setUser(null)
       authService.logout()
     } finally {

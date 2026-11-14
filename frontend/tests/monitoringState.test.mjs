@@ -55,3 +55,19 @@ test('ended session and pairing errors', () => {
   assert.equal(combineState({ consent, agent: agentRunning(), backend: backendView('ended') }), 'ended')
   assert.equal(combineState({ consent, agent: agentRunning({ state: 'idle' }), backend: backendView('awaiting_agent'), pairingError: 'rejected' }), 'error')
 })
+
+test('camera open but first frame not analysed yet is warm-up, not a failure', () => {
+  assert.equal(combineState({ consent, agent: agentRunning(), backend: backendView('camera_unavailable', { camera_error: null }) }), 'verifying')
+  // Observed in the browser test: the backend still holds the "starting" heartbeat
+  // while the agent already reports a running camera.
+  assert.equal(combineState({ consent, agent: agentRunning(), backend: backendView('camera_unavailable', { camera_error: 'starting' }) }), 'verifying')
+  // A real failure carries an error code and is still reported.
+  assert.equal(
+    combineState({ consent, agent: agentRunning(), backend: backendView('camera_unavailable', { camera_error: 'stale_measurement' }) }),
+    'camera_unavailable'
+  )
+  assert.equal(
+    combineState({ consent, agent: agentRunning({ camera: { state: 'error' } }), backend: backendView('camera_unavailable', { camera_error: null }) }),
+    'camera_unavailable'
+  )
+})
