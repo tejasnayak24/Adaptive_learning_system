@@ -6,9 +6,15 @@ from sqlalchemy.orm import Session
 from app.auth.dependencies import get_current_student
 from app.database.connection import get_db
 from app.models.student import Student
-from app.schemas.quiz import QuizStartRequest, QuizSubmitRequest
+from app.schemas.quiz import (
+    AttemptAnswersRequest,
+    AttemptEventsRequest,
+    QuizStartRequest,
+    QuizSubmitRequest,
+)
 from app.services import curriculum_service as cs
 from app.services import monitoring_service as ms
+from app.services import quiz_attempt_service as qa
 from app.services import telemetry_service
 from app.services.grading_service import GradingError
 from app.services.quiz_service import QuizService, quiz_to_dict
@@ -35,17 +41,118 @@ def _quiz_payload_or_404(db: Session, quiz_id: int, student: Student) -> dict[st
     return QuizService.start_quiz(db, quiz_id)
 
 
+def _attempt_error(db: Session, exc: qa.AttemptError) -> HTTPException:
+    # Keep any state change made before the error (e.g. an expired grace
+    # period becoming "unverified").
+    db.commit()
+    headers = {"Retry-After": str(exc.retry_after)} if exc.retry_after else None
+    return HTTPException(status_code=exc.status_code, detail=exc.detail, headers=headers)
+
+
 @router.post("/quiz/start")
 def start_quiz(
     request: QuizStartRequest,
     db: Session = Depends(get_db),
     student: Student = Depends(get_current_student),
 ) -> dict[str, Any]:
+    """Start a server-side attempt, or resume the open one (e.g. after a reload).
+
+    Returns the questions (never the correct answers) and the attempt,
+    including any answers saved so far. 429 while the 5-minute cooldown
+    after a terminated or abandoned attempt applies.
+    """
+    payload = _quiz_payload_or_404(db, request.quiz_id, student)
+    quiz = QuizService.get_quiz_by_id(db, request.quiz_id)
+
+    if request.monitoring_session_id is not None:
+        try:
+            ms.owned_session(db, student, request.monitoring_session_id)
+        except ms.MonitoringError as exc:
+            raise HTTPException(status_code=exc.status_code, detail=exc.detail) from exc
+
+    try:
+        attempt, created = qa.start_or_resume(
+            db, student, quiz, request.mode, request.monitoring_session_id
+        )
+    except qa.AttemptError as exc:
+        raise _attempt_error(db, exc) from exc
+    db.commit()
+    db.refresh(attempt)
+
     return {
         "success": True,
-        "message": "Quiz started successfully",
-        "data": _quiz_payload_or_404(db, request.quiz_id, student),
+        "message": "Quiz started successfully" if created else "Quiz attempt resumed",
+        "data": {**payload, "attempt": qa.view(attempt), "resumed": not created},
     }
+
+
+def _owned_attempt_or_error(db: Session, student: Student, attempt_id: int):
+    try:
+        return qa.owned_attempt(db, student, attempt_id)
+    except qa.AttemptError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.detail) from exc
+
+
+@router.get("/quiz/attempts/{attempt_id}")
+def get_attempt(
+    attempt_id: int,
+    db: Session = Depends(get_db),
+    student: Student = Depends(get_current_student),
+) -> dict[str, Any]:
+    """Current state of the student's own attempt (decided by the server)."""
+    attempt = _owned_attempt_or_error(db, student, attempt_id)
+    qa.refresh(db, attempt)
+    db.commit()
+    return {"success": True, "message": "Quiz attempt", "data": qa.view(attempt)}
+
+
+@router.put("/quiz/attempts/{attempt_id}/answers")
+def save_attempt_answers(
+    attempt_id: int,
+    request: AttemptAnswersRequest,
+    db: Session = Depends(get_db),
+    student: Student = Depends(get_current_student),
+) -> dict[str, Any]:
+    """Save in-progress answers. 409 once the attempt has ended (answers frozen)."""
+    attempt = _owned_attempt_or_error(db, student, attempt_id)
+    try:
+        qa.save_answers(db, attempt, request.answers, request.draft_state)
+    except qa.AttemptError as exc:
+        raise _attempt_error(db, exc) from exc
+    db.commit()
+    return {"success": True, "message": "Answers saved", "data": qa.view(attempt)}
+
+
+@router.post("/quiz/attempts/{attempt_id}/events")
+def report_attempt_events(
+    attempt_id: int,
+    request: AttemptEventsRequest,
+    db: Session = Depends(get_db),
+    student: Student = Depends(get_current_student),
+) -> dict[str, Any]:
+    """Page visibility/focus events observed by the browser.
+
+    The server applies the two-strike rule and returns its decision.
+    Duplicate or replayed events (same page id and sequence) are ignored.
+    """
+    attempt = _owned_attempt_or_error(db, student, attempt_id)
+    events = [qa.ReportedEvent(**e.model_dump()) for e in request.events]
+    qa.report_events(db, attempt, request.page_id, events)
+    db.commit()
+    return {"success": True, "message": "Events recorded", "data": qa.view(attempt)}
+
+
+@router.post("/quiz/attempts/{attempt_id}/abandon")
+def abandon_attempt(
+    attempt_id: int,
+    db: Session = Depends(get_db),
+    student: Student = Depends(get_current_student),
+) -> dict[str, Any]:
+    """The student confirmed leaving the quiz: answers kept, not graded, no violation."""
+    attempt = _owned_attempt_or_error(db, student, attempt_id)
+    qa.abandon(db, attempt)
+    db.commit()
+    return {"success": True, "message": "Quiz attempt abandoned", "data": qa.view(attempt)}
 
 
 @router.get("/quiz/lesson/{lesson_id}")
@@ -122,6 +229,13 @@ def submit_quiz(
             detail="The monitoring session has ended; restart camera monitoring and retake the quiz",
         )
 
+    # The server-side attempt: only an open attempt that is not away or
+    # locked can be graded (the tab-switch rule is enforced here).
+    try:
+        attempt = qa.attempt_for_submit(db, student, quiz, request.attempt_id)
+    except qa.AttemptError as exc:
+        raise _attempt_error(db, exc) from exc
+
     # Measured by the paired camera agent during this attempt (None when
     # nothing was measured). Never taken from the browser.
     camera = telemetry_service.attempt_metrics(student.id, monitoring.id)
@@ -147,6 +261,8 @@ def submit_quiz(
             status_code=422,
             detail=str(exc),
         ) from exc
+
+    qa.mark_submitted(attempt, progress.id, request.answers)
 
     # This attempt is the observed outcome of the previous recommendation.
     record_outcome_of_previous(db, progress)
@@ -191,5 +307,6 @@ def submit_quiz(
             "recommendation_status": (
                 "available" if recommendation is not None else "telemetry_unavailable"
             ),
+            "attempt": qa.view(attempt),
         },
     }

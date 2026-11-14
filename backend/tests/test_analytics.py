@@ -285,7 +285,7 @@ def test_stale_camera_readings_are_stored_as_unavailable_not_low(client, curricu
     old = time.time() - 600
     heartbeat(client, monitoring, captured_at=old, attention_score=0.1)
     quiz_id = lesson.quizzes[0].id
-    questions = client.get(f"/quiz/{quiz_id}", headers=headers).json()["data"]["questions"]
+    questions = client.post("/quiz/start", json={"quiz_id": quiz_id}, headers=headers).json()["data"]["questions"]
     sub = client.post(
         "/quiz/submit",
         headers=headers,
@@ -348,7 +348,7 @@ def test_streak_helper_handles_gaps():
 
 def _submit(client, headers, monitoring, quiz_id, letter="A"):
     heartbeat(client, monitoring, attention_score=0.85)
-    questions = client.get(f"/quiz/{quiz_id}", headers=headers).json()["data"]["questions"]
+    questions = client.post("/quiz/start", json={"quiz_id": quiz_id}, headers=headers).json()["data"]["questions"]
     return client.post(
         "/quiz/submit",
         headers=headers,

@@ -174,13 +174,13 @@ def test_full_monitored_learning_session(backend_url):
     assert backend_state() == "verified"
 
     # 2. A monitored quiz: camera values come from the server's telemetry.
-    quiz = http.get(f"{backend_url}/quiz/1", headers=auth).json()["data"]
+    quiz = http.post(f"{backend_url}/quiz/start", json={"quiz_id": 1, "monitoring_session_id": sid}, headers=auth).json()["data"]
     http.post(f"{backend_url}/attention/{me['id']}/reset", headers=auth).raise_for_status()
     time.sleep(2.5)
     answers = {str(q["id"]): "A" for q in quiz["questions"]}
     submitted = http.post(
         f"{backend_url}/quiz/submit",
-        json={"quiz_id": 1, "monitoring_session_id": sid, "answers": answers, "response_time": 30, "attention_score": 0.01},
+        json={"quiz_id": 1, "attempt_id": quiz["attempt"]["id"], "monitoring_session_id": sid, "answers": answers, "response_time": 30, "attention_score": 0.01},
         headers=auth,
     )
     assert submitted.status_code == 200, submitted.text

@@ -31,6 +31,7 @@ from app.models import (  # noqa: E402,F401
     progress,
     question,
     quiz,
+    quiz_attempt,
     recommendation,
     reward,
     session,

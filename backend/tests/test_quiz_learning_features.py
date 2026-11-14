@@ -17,7 +17,7 @@ def _setup(client, db_session):
 
 def _submit(client, headers, monitoring, quiz_id, letters, **extra):
     heartbeat(client, monitoring, attention_score=0.8)
-    questions = client.get(f"/quiz/{quiz_id}", headers=headers).json()["data"]["questions"]
+    questions = client.post("/quiz/start", json={"quiz_id": quiz_id}, headers=headers).json()["data"]["questions"]
     answers = {str(q["id"]): letter for q, letter in zip(questions, letters)}
     body = {
         "quiz_id": quiz_id,
