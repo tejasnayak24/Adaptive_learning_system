@@ -60,6 +60,24 @@ Say during Part B:
 - The agent never stores or sends images or video, only numbers and yes/no
   signals.
 
+## Part C — protected quiz and session activity (about 4 minutes)
+
+1. Open a quiz. Point to the "Protected quiz" banner.
+2. Press Ctrl+T, wait about 5 s, go back. Show the "You left the quiz" dialog
+   and the warning banner. Answers are still there.
+3. Press F5 and accept the prompt. Show that the same attempt, answers and
+   warning come back. A reload is not a second switch.
+4. Ask a teammate to sit beside you for about 5 s. Show the "More than one
+   face" banner: it only informs, and the quiz keeps going. It clears when they leave.
+5. Switch tabs once more. The quiz ends without grading; show the retake
+   countdown.
+6. Open **Session Activity**. Show the times, the measured time away, the face
+   episode and the "not graded" quiz. Point out that there is no score or
+   verdict, only what was measured.
+
+Use a quiz you do not need for Part A: a terminated quiz needs a 5-minute
+wait before a new attempt.
+
 ## After the demonstration
 
 - Run `.\stop-all.ps1`: it stops the three services and closes their

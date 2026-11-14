@@ -52,6 +52,7 @@ from app.routers import (  # noqa: E402
     progress,
     quiz,
     integration,
+    integrity,
     monitoring,
     rl,
 )
@@ -83,3 +84,4 @@ app.include_router(rl.router)
 app.include_router(monitoring.router)
 app.include_router(curriculum.router)
 app.include_router(analytics.router)
+app.include_router(integrity.router)

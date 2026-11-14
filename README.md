@@ -8,6 +8,13 @@ possible drowsiness; it can speak a short alert. After each quiz, the server
 grades the answers and an offline-trained **Q-learning** policy recommends
 one of 11 next steps. Dashboards show each student's own progress.
 
+Quizzes are **protected**:
+- **Tab switching:** leaving the quiz page gives one warning if the student is back within 10 seconds. A second time, or a longer absence, ends the quiz without grading.
+- **Multiple faces:** the camera agent shows a warning while more than one face is visible.
+- **Session Activity:** this page shows the student exactly what was recorded, with no score.
+
+See [docs/SESSION_INTEGRITY.md](docs/SESSION_INTEGRITY.md).
+
 | Service | Folder | Address |
 |---|---|---|
 | Backend API (FastAPI + PostgreSQL) | `backend/` | http://127.0.0.1:8000 (docs at `/docs`) |
@@ -135,10 +142,10 @@ authorisation. Lessons and quizzes unlock only while monitoring is verified.
 
 | Suite | Command | Database |
 |---|---|---|
-| Backend (147) | `cd backend; pip install -r requirements-dev.txt; python -m pytest` | throwaway SQLite |
+| Backend (192) | `cd backend; pip install -r requirements-dev.txt; python -m pytest` | throwaway SQLite |
 | Recommendation engine (68) | `python -m pytest rl_engine` | — |
-| Camera agent (37) | `$env:AEGIS_BACKEND_PYTHON = (Get-Command python).Source; python -m pytest facial_analysis` | throwaway SQLite (the integration test starts its own backend) |
-| Frontend unit tests (32) | `cd frontend; npm test` | — |
+| Camera agent (51) | `$env:AEGIS_BACKEND_PYTHON = (Get-Command python).Source; python -m pytest facial_analysis` | throwaway SQLite (the integration test starts its own backend) |
+| Frontend unit tests (44) | `cd frontend; npm test` | — |
 | Frontend lint / build | `npm run lint`, `npm run build` | — |
 | Curriculum content | `python backend\scripts\import_curriculum.py --check` | — |
 | Migrations vs models | `cd backend; python -m alembic check` | the configured database (read only) |
@@ -174,6 +181,8 @@ design is described in [docs/RL_ENGINE.md](docs/RL_ENGINE.md).
 | [docs/BROWSER_ACCEPTANCE.md](docs/BROWSER_ACCEPTANCE.md) | What was tested in the browser, and the manual checklist |
 | [docs/WEBCAM_ACCEPTANCE_CHECKLIST.md](docs/WEBCAM_ACCEPTANCE_CHECKLIST.md) | Real-webcam test plan |
 | [docs/ANALYTICS.md](docs/ANALYTICS.md) | How every dashboard metric is calculated |
+| [docs/SESSION_INTEGRITY.md](docs/SESSION_INTEGRITY.md) | Tab-switch rule, multiple-face detection, activity report, privacy, limits |
+| [docs/SESSION_INTEGRITY_CHECKLIST.md](docs/SESSION_INTEGRITY_CHECKLIST.md) | Real-Chrome and real-webcam acceptance checks |
 | [docs/RL_ENGINE.md](docs/RL_ENGINE.md) | Q-learning state, actions, rewards, training and evaluation |
 | [facial_analysis/README.md](facial_analysis/README.md) | Camera agent details |
 
@@ -184,6 +193,9 @@ design is described in [docs/RL_ENGINE.md](docs/RL_ENGINE.md).
     and yes/no signals.
   - A quiz with no valid camera reading is stored as "unknown", never as
     low attention.
+  - Multiple-face detection records only how many faces and when, never
+    who; tab checks record when the quiz page was hidden, never which tab,
+    site or app.
 - **Accounts and access:**
   - Passwords are bcrypt-hashed.
   - Each student can only read their own records.

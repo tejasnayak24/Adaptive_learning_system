@@ -18,6 +18,7 @@ const LessonDetail = lazy(() => import('./pages/LessonDetail'))
 const QuizView = lazy(() => import('./pages/QuizView'))
 const Progress = lazy(() => import('./pages/Progress'))
 const Recommendations = lazy(() => import('./pages/Recommendations'))
+const SessionActivity = lazy(() => import('./pages/SessionActivity'))
 
 function PageLoading() {
   return <div className="m-8 h-40 rounded-3xl bg-slate-800/60 animate-pulse" aria-busy="true" aria-label="Loading" />
@@ -106,6 +107,7 @@ export default function App() {
             <Route path="quiz/:id" element={<MonitoredQuiz />} />
             <Route path="progress" element={<Progress />} />
             <Route path="recommendations" element={<Recommendations />} />
+            <Route path="activity" element={<SessionActivity />} />
           </Route>
 
           {/* Fallback Route */}

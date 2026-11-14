@@ -36,7 +36,9 @@ from app.models.session_event import MULTIPLE_FACES, SessionEvent
 from app.models.student import Student
 from app.services import telemetry_service
 
-CONSENT_VERSION = "2026-11-v1"
+# v2 (session integrity): adds tab-visibility checks during protected
+# quizzes and multiple-face detection. Students consent again to v2.
+CONSENT_VERSION = "2026-11-v2"
 ADULT_AGE = 18
 
 PAIRING_TTL_SECONDS = 120

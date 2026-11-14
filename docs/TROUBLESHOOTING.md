@@ -88,6 +88,26 @@ student also deletes their attempts, recommendations and monitoring records.
 - **Streaks use UTC days.** For students in India (UTC+5:30), a quiz taken
   just after midnight local time counts on the previous day.
 
+### Session integrity
+
+- **The tab-switch rule relies on the student's browser.** A student who
+  blocks the page's scripts, or uses a second device, is not detected.
+  Gaps are shown as "unverified" or "not recorded", never as zero.
+- **Assistive tools can hide the page** (on-screen keyboard, screen
+  reader, Snipping Tool). There is no teacher reinstatement yet; the
+  student can retake after the 5-minute cooldown.
+- **Multiple-face detection is approximate.** It misses faces in profile,
+  half out of frame, far away or in poor light, and is designed for faces
+  within about 2 m. It is a notice, never proof of misconduct.
+- **Episode times are server receive times.** The agent waits about 3 s
+  before reporting, so an episode really began about 3 s earlier.
+- **Real-Chrome tab hiding was not automated.** Neither headless nor
+  automation-launched Chrome hid background tabs on the development
+  laptop, so browser tests simulated the visibility change. See
+  [SESSION_INTEGRITY_CHECKLIST.md](SESSION_INTEGRITY_CHECKLIST.md).
+- **Not implemented in this phase:** phone detection, a teacher
+  dashboard and teacher-student relationships.
+
 ### Reinforcement learning
 
 - **Offline training only.** The Q-table was trained offline on simulated

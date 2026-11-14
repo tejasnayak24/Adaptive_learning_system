@@ -192,7 +192,11 @@ Content is imported from `backend/curriculum/content/*.json` with
 |---|---|---|
 | GET | `/quiz/lesson/{lesson_id}` 🔒 | Quizzes of a lesson |
 | GET | `/quiz/{id}` 🔒 | Quiz + questions with a topic-specific `hint` each. **Never includes correct answers or explanations.** |
-| POST | `/quiz/start` 🔒 | `{quiz_id}` → same payload as `GET /quiz/{id}` |
+| POST | `/quiz/start` 🔒 | `{quiz_id, mode?, monitoring_session_id?}` → the questions plus `attempt` (server-side attempt, see below) and `resumed`. Resumes the open attempt after a reload. **429** + `Retry-After` during the 5-minute cooldown after a terminated/abandoned attempt |
+| GET | `/quiz/attempts/{id}` 🔒 | The student's own attempt as the server sees it (`status`, `strikes`, `warning`, `end_reason`, `retry_after_seconds`, saved `answers`) |
+| PUT | `/quiz/attempts/{id}/answers` 🔒 | Save in-progress answers (partial allowed) and `draft_state`. **409** once the attempt has ended (answers frozen) |
+| POST | `/quiz/attempts/{id}/events` 🔒 | Page events for the tab-switch rule: `{page_id, events:[{seq, kind, client_ms, hidden_ms?, delivery_failures?, queued_ms?, reload?}]}`; `kind` = `hidden` \| `visible` \| `pagehide` \| `resume` \| `hidden_tick` \| `blur` \| `focus` \| `online` \| `offline`. Duplicate `(page_id, seq)` ignored. Returns the attempt |
+| POST | `/quiz/attempts/{id}/abandon` 🔒 | Confirmed departure: attempt `abandoned` (answers kept, not graded, not a violation) |
 | POST | `/quiz/submit` 🔒 | See below |
 
 `POST /quiz/submit` body:
@@ -200,6 +204,7 @@ Content is imported from `backend/curriculum/content/*.json` with
 ```json
 {
   "quiz_id": 3,
+  "attempt_id": 41,
   "answers": { "11": "B", "12": "A" },
   "response_time": 42.0,
   "hints_used": 1,
@@ -209,6 +214,10 @@ Content is imported from `backend/curriculum/content/*.json` with
 
 * The **server grades** the answers; a client-sent score is ignored.
 * Every question of the quiz must be answered once (else **422**).
+* An open attempt from `/quiz/start` is required (`attempt_id`, or the
+  student's open attempt at that quiz). **409** if the attempt has ended,
+  is waiting for a return to be confirmed (`away`), or is `unverified`;
+  `detail.attempt` then holds the server's view.
 * `monitoring_session_id` (the student's own, not ended) is required.
   Camera measurements are taken by the server from that session's agent
   telemetry; any camera values sent by the browser are ignored. They are
@@ -217,7 +226,18 @@ Content is imported from `backend/curriculum/content/*.json` with
   (`score`, `correct_count`, `total_questions`, per-question `results`
   including the correct answer — revealed only after submission),
   `recommendation` (or `null`) and `recommendation_status`
-  (`available` | `telemetry_unavailable`).
+  (`available` | `telemetry_unavailable`), and `attempt` (now `submitted`).
+
+**Tab-switch rule (protected attempts).** The server decides everything; see
+[docs/SESSION_INTEGRITY.md](docs/SESSION_INTEGRITY.md). Attempt `status`:
+`in_progress` → `away` (quiz page hidden, 10 s grace) → back to
+`in_progress` with `strikes: 1` (warning), or `terminated`
+(`end_reason` `grace_expired` | `second_tab_switch`). `unverified` = no
+report arrived after the grace period (locked, not a violation).
+`abandoned` (`left_quiz`, `no_contact`, `unverified_no_measurement`,
+`reload_not_verified`). Terminated and abandoned attempts never create a
+`progress` row, so they count nowhere (completion, averages, analytics,
+recommendations, rewards).
 
 ## Adaptive recommendations (RL)
 
@@ -262,7 +282,7 @@ Lessons and quizzes require a verified monitored session. The camera agent
 | GET | `/monitoring/sessions/{id}` 🔒👤 | browser | `{state, verified, camera_error, lighting_ok, …}`; also keeps the session alive |
 | POST | `/monitoring/sessions/{id}/end` 🔒👤 | browser | End the session (agent releases the camera) |
 | POST | `/monitoring/sessions/{id}/claim` | agent | `{pairing_token}` → `{agent_token, heartbeat_interval}`; single use, 2-minute TTL |
-| POST | `/monitoring/heartbeat` | agent (Bearer agent token) | Once per second: `{sequence, captured_at, camera_ok, face_detected, face_stable, attention_score, yawning, looking_away, possible_drowsiness, …}` |
+| POST | `/monitoring/heartbeat` | agent (Bearer agent token) | Once per second: `{sequence, captured_at, camera_ok, face_detected, face_stable, attention_score, yawning, looking_away, possible_drowsiness, face_count, multiple_faces, …}`. `multiple_faces` (sustained 2+ faces) opens/closes a `session_events` episode |
 | POST | `/monitoring/agent/end` | agent (Bearer agent token) | Agent shutting down; session waits for reconnection |
 
 `state` is `awaiting_agent`, `stale` (no heartbeat within 5 s),
@@ -299,6 +319,16 @@ when not live, measurements are `null`. The old unauthenticated
 | Method | Path | Notes |
 |---|---|---|
 | GET | `/analytics/summary` 🔒 | The signed-in student's own analytics (no student id parameter, so no cross-student access): `student`, `overview`, `subjects`, `topics`, `topic_status_counts`, `trend`, `attention`, `activity`, `milestones`, `definitions`. See [docs/ANALYTICS.md](docs/ANALYTICS.md) for every calculation |
+
+## Session integrity
+
+| Method | Path | Notes |
+|---|---|---|
+| GET | `/integrity/report?limit=20` 🔒 | The signed-in student's own factual activity summary: `totals`, per-attempt `incidents` (time away measured by the browser, outcome), `unverified_periods`, `multiple_face_episodes`, `notes`. No score or probability. See [docs/SESSION_INTEGRITY.md](docs/SESSION_INTEGRITY.md) |
+
+The monitoring status (`GET /monitoring/sessions/{id}`) also returns
+`multiple_faces` (live, `null` = not measured). Consent version is
+`2026-11-v2`; students who consented to v1 are asked again.
 
 ## Database changes
 

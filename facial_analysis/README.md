@@ -98,6 +98,24 @@ in 5 minutes. Speech runs on its own thread with a small queue, so it never
 blocks the camera loop. **This is an attention aid, not a medical sleep
 assessment.**
 
+## Multiple-face detection
+
+`face_counter.py` counts faces with MediaPipe **Face Detection** (BlazeFace,
+already installed).
+- **When and where:** on a 320-px copy of a frame, about twice a second, in its own thread.
+- **Unchanged:** Face Mesh and all attention, gaze, yawning and drowsiness measurements.
+
+The rules for counting and warning:
+- **What counts as a face:** a score of at least 0.6, and at least 40% as wide as the largest face (posters and TVs are ignored).
+- **When the warning starts:** "multiple faces" is raised after 2+ faces in 5 of 6 samples (about 3 s).
+- **When it clears:** about 2 s after the extra face leaves.
+
+Only `face_count` and `multiple_faces` go in the heartbeat; frames are never
+stored or sent. Overhead on the development laptop is about 2.5 ms per count,
+about 4% of one core, +9 MB, and the camera loop stays at 30 fps. Turn it off with
+`MULTI_FACE_DETECTION_ENABLED = False` in `config.py`. See
+[docs/SESSION_INTEGRITY.md](../docs/SESSION_INTEGRITY.md).
+
 ## Tests
 
 ```powershell
