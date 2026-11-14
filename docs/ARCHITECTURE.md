@@ -5,52 +5,81 @@ student's own computer. The webcam is used only by the local camera agent,
 and only numbers and yes/no signals leave the agent; images and video are
 never stored or sent.
 
+| Service | Folder | Address |
+|---|---|---|
+| Frontend (React + Vite dev server) | `frontend/` | http://localhost:5173 |
+| Backend API (FastAPI) | `backend/` | http://127.0.0.1:8000 (documentation at `/docs`) |
+| Camera agent (OpenCV + MediaPipe) | `facial_analysis/` | http://127.0.0.1:8765, local requests only |
+| Recommendation engine (Q-learning) | `rl_engine/` | imported by the backend |
+| Database | PostgreSQL | as configured in `backend/.env` |
+
 ```mermaid
-flowchart LR
-    subgraph Browser["Browser: React + Vite (localhost:5173)"]
-        UI["Pages: Dashboard, My Learning, Lesson, Quiz,<br/>Progress, AI Coach, Session Activity"]
-        GATE["Monitoring gate<br/>(lessons and quizzes need a verified camera)"]
-        TRACK["Quiz-integrity tracker<br/>(page visibility events, autosave)"]
+flowchart TB
+    student(["Student"])
+    ui["React frontend<br/>Dashboard, My Learning, Lesson, Quiz,<br/>Progress, AI Coach, Session Activity"]
+
+    subgraph agent["Camera agent"]
+        cam["Webcam<br/>(off until a lesson starts)"] --> cv["OpenCV + MediaPipe:<br/>attention, yawning, gaze,<br/>drowsiness, face count"]
+        cv --> alerts["Voice and<br/>beep alerts"]
     end
 
-    subgraph Agent["Camera agent: facial_analysis (127.0.0.1:8765)"]
-        CAM["Webcam<br/>(off until a lesson starts)"]
-        FP["OpenCV + MediaPipe Face Mesh:<br/>attention, face present, yawning,<br/>looking away, possible drowsiness"]
-        FC["MediaPipe Face Detection:<br/>face count"]
-        VOICE["Voice and beep alerts (local)"]
-        CAM --> FP
-        CAM --> FC
-        FP --> VOICE
+    subgraph be["FastAPI backend"]
+        api["REST API: auth, curriculum,<br/>lessons, analytics, reports"]
+        quiz["Quiz attempts, tab-switch<br/>rule, server-side grading"]
+        mon["Monitoring sessions<br/>and telemetry"]
+        rl["Q-learning recommender<br/>(read-only)"]
     end
 
-    subgraph API["Backend: FastAPI (127.0.0.1:8000)"]
-        AUTH["Auth (JWT, bcrypt)"]
-        CUR["Curriculum and lessons<br/>(grade-filtered)"]
-        QUIZ["Quiz delivery and<br/>server-side grading"]
-        ATT["Quiz attempts:<br/>two-strike tab-switch rule"]
-        MON["Monitoring sessions:<br/>consent, pairing, heartbeats"]
-        TEL["Telemetry window per attempt<br/>(in memory, stale after 5 s)"]
-        RL["RL service: offline-trained Q-table<br/>+ safety constraints"]
-        AN["Analytics and<br/>Session Activity report"]
-    end
+    db[("PostgreSQL")]
+    qt[["rl_engine/q_table.json<br/>(trained offline)"]]
 
-    DB[("PostgreSQL<br/>students, curriculum, lessons, quizzes,<br/>questions, progress, quiz attempts,<br/>monitoring, session events,<br/>recommendations, rewards")]
-    QT[["rl_engine/q_table.json<br/>(trained offline on simulated students)"]]
-
-    UI -- "/api/* through the Vite proxy, Bearer JWT" --> API
-    TRACK -- "attempt events and answers" --> ATT
-    GATE -- "pairing token (POST body)" --> Agent
-    FP -- "heartbeats: numbers and yes/no only" --> MON
-    FC -- "face_count, multiple_faces" --> MON
-    MON --> TEL
-    QUIZ -- "camera values for the attempt" --> TEL
-    QUIZ --> ATT
-    QUIZ -- "after grading" --> RL
-    RL --> QT
-    API --> DB
+    student --> ui
+    ui -- "REST + JWT" --> api
+    ui -- "answers, events" --> quiz
+    ui -- "pairing token" --> cam
+    cv -- "heartbeats:<br/>numbers only" --> mon
+    mon -- "camera averages" --> quiz
+    quiz -- "after grading" --> rl
+    rl --> qt
+    be --> db
 ```
 
 ## Request flow for one monitored quiz
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor S as Student
+    participant B as Browser
+    participant A as Camera agent
+    participant API as Backend
+    participant DB as PostgreSQL
+
+    S->>B: Open a lesson
+    B->>API: Consent (first time) and<br/>create a monitoring session
+    API-->>B: Session id and<br/>single-use pairing token
+    B->>A: Pairing token<br/>(127.0.0.1 only)
+    A->>API: Claim the session
+    API-->>A: Agent token<br/>(heartbeats only)
+    loop About once per second
+        A->>API: Heartbeat: numbers<br/>and yes/no only
+    end
+    B->>API: Poll the session state
+    API-->>B: verified: the lesson unlocks
+    S->>B: Start a quiz
+    B->>API: Start a protected attempt
+    API->>DB: Store the attempt
+    loop While answering
+        B->>API: Autosave answers,<br/>report page events
+    end
+    S->>B: Review and submit
+    B->>API: Submit answers
+    API->>API: Grade, average camera<br/>values, choose next step
+    API->>DB: Graded attempt,<br/>recommendation, reward
+    API-->>B: Score, answer review,<br/>next step
+```
+
+Step by step:
 
 1. **Consent.** The student gives camera consent. Students under 18 also
    confirm parent/guardian and school authorisation (`monitoring_consents`).

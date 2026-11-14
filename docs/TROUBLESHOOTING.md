@@ -46,7 +46,9 @@ SELECT id, email, grade, created_at FROM students WHERE email LIKE '%@example.co
 ```
 
 Remove them only if you need to. Back up first (`pg_dump`). Deleting a
-student also deletes their attempts, recommendations and monitoring records.
+student affects many related tables (graded attempts, quiz attempts,
+recommendations, monitoring records), and the database refuses to delete a
+student who still has graded attempts, so check carefully first.
 
 ## Known limitations
 
