@@ -4,18 +4,22 @@
 
 export const SUBJECT_ORDER = ['Mathematics', 'Science', 'Social Science', 'English']
 
-// Categorical subject colours, validated for colour-vision deficiency and
-// contrast against the dark surface (dataviz validator). Colour follows the
+// Categorical subject colours (violet, teal, amber, rose in this fixed order),
+// validated with the dataviz palette validator against the card surface
+// #151C2D: all inside the dark lightness band, chroma above the floor, >= 3:1
+// contrast, adjacent colour-vision separation >= 8 and normal-vision >= 15.
+// Rose and teal are close under deuteranopia when not adjacent, so a
+// subject's name is always shown next to its colour. Colour follows the
 // subject, never its rank, so a filter never repaints a subject.
 export const SUBJECT_COLORS = {
-  Mathematics: '#6366f1',
-  Science: '#0d9488',
-  'Social Science': '#c97a06',
-  English: '#db2777'
+  Mathematics: '#8875ff',
+  Science: '#26a68b',
+  'Social Science': '#c98500',
+  English: '#d55181'
 }
 
-export const SCORE_COLOR = '#6366f1'
-export const ATTENTION_COLOR = '#0d9488'
+export const SCORE_COLOR = '#8875ff'
+export const ATTENTION_COLOR = '#43cdb0'
 
 export const TOPIC_STATUS = {
   strong: {

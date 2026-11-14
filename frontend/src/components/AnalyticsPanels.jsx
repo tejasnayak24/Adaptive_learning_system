@@ -1,191 +1,122 @@
-import React from 'react'
+import React, { useId } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  SCORE_COLOR,
-  TELEMETRY_HELP,
-  TELEMETRY_LABELS,
-  TOPIC_STATUS_ORDER,
-  activityText,
-  formatDate,
-  formatPercent,
-  relativeDay,
-  subjectColor,
-  topicStatusInfo
-} from '../utils/analytics'
+import { BookOpen, CalendarClock, ChevronRight, Compass, Medal, Trophy } from 'lucide-react'
+import { Badge, Button, Card, EmptyState, ProgressBar, SectionHeader, cx } from './ui'
+import { SubjectChip, SubjectIcon, TopicStatusBadge, TrendBadge } from './learning'
+import { TOPIC_STATUS_ORDER, activityText, formatDate, formatPercent, relativeDay, topicStatusInfo } from '../utils/analytics'
+import { TONE_SOFT, activityVisual, subjectVisual } from './visuals'
 
-const TONES = {
-  emerald: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/25',
-  amber: 'bg-amber-500/10 text-amber-300 border-amber-500/25',
-  rose: 'bg-rose-500/10 text-rose-300 border-rose-500/25',
-  slate: 'bg-slate-800/60 text-slate-300 border-slate-700'
-}
+export { DifficultyBadge, SubjectChip, SubjectIcon, TelemetryBadge, TopicStatusBadge, TrendBadge } from './learning'
 
-export function Panel({ title, subtitle, action, children, className = '' }) {
+/** A titled card section. */
+export function Panel({ title, subtitle, action, icon, id, padding = 'md', className, children }) {
+  const headingId = useId()
   return (
-    <section className={`glass-panel rounded-3xl p-5 sm:p-6 border border-slate-900 shadow-lg space-y-4 ${className}`}>
-      {(title || action) && (
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div className="min-w-0">
-            {title && <h2 className="text-base font-bold text-white">{title}</h2>}
-            {subtitle && <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{subtitle}</p>}
-          </div>
-          {action}
-        </div>
-      )}
+    <Card
+      as="section"
+      padding={padding}
+      id={id}
+      aria-labelledby={title ? headingId : undefined}
+      className={cx('scroll-mt-24 space-y-5', className)}
+    >
+      {(title || action) && <SectionHeader id={headingId} title={title} description={subtitle} action={action} icon={icon} />}
       {children}
-    </section>
-  )
-}
-
-export function StatTile({ label, value, sub, icon, help }) {
-  return (
-    <div className="glass-panel rounded-3xl p-5 border border-slate-900 shadow-md relative" title={help}>
-      <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 pr-8">{label}</p>
-      <p className="mt-3 text-3xl font-extrabold text-white tabular-nums">{value}</p>
-      {sub && <p className="mt-1 text-xs text-slate-400">{sub}</p>}
-      {icon && (
-        <span className="absolute right-5 top-5 text-xl select-none" aria-hidden="true">
-          {icon}
-        </span>
-      )}
-    </div>
-  )
-}
-
-export function ProgressBar({ percent, color = SCORE_COLOR, label }) {
-  const width = Math.max(0, Math.min(100, Number(percent) || 0))
-  return (
-    <div
-      className="w-full bg-slate-900 rounded-full h-2 overflow-hidden"
-      role="progressbar"
-      aria-valuenow={Math.round(width)}
-      aria-valuemin={0}
-      aria-valuemax={100}
-      aria-label={label}
-    >
-      <div className="h-2 rounded-full" style={{ width: `${width}%`, background: color }} />
-    </div>
-  )
-}
-
-export function LoadingSkeleton({ blocks = 4 }) {
-  return (
-    <div className="space-y-6 animate-pulse" aria-busy="true" aria-label="Loading">
-      <div className="h-24 bg-slate-800/70 rounded-3xl" />
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {[...Array(blocks)].map((_, i) => (
-          <div key={i} className="h-28 bg-slate-800/70 rounded-3xl" />
-        ))}
-      </div>
-      <div className="h-72 bg-slate-800/70 rounded-3xl" />
-    </div>
-  )
-}
-
-export function ErrorState({ message, onRetry }) {
-  return (
-    <div className="rounded-3xl border border-rose-500/25 bg-rose-500/10 p-6 text-center space-y-3" role="alert">
-      <p className="text-sm font-semibold text-rose-200">We could not load your learning data.</p>
-      <p className="text-xs text-rose-300/80">{message}</p>
-      {onRetry && (
-        <button
-          type="button"
-          onClick={onRetry}
-          className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs font-semibold text-slate-200 hover:bg-slate-800"
-        >
-          Try again
-        </button>
-      )}
-    </div>
-  )
-}
-
-export function EmptyState({ icon = '📊', title, text, action }) {
-  return (
-    <div className="flex flex-col items-center justify-center text-center py-10 px-4 space-y-2">
-      <div className="text-3xl" aria-hidden="true">
-        {icon}
-      </div>
-      <p className="text-sm font-semibold text-slate-300">{title}</p>
-      {text && <p className="text-xs text-slate-500 max-w-sm leading-relaxed">{text}</p>}
-      {action}
-    </div>
-  )
-}
-
-export function StatusBadge({ status }) {
-  const info = topicStatusInfo(status)
-  return (
-    <span
-      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[10px] font-bold ${TONES[info.tone]}`}
-      title={info.help}
-    >
-      <span aria-hidden="true">{info.icon}</span>
-      {info.label}
-    </span>
-  )
-}
-
-export function TelemetryBadge({ telemetry }) {
-  const tone = telemetry === 'measured' ? 'emerald' : telemetry === 'unavailable' ? 'amber' : 'slate'
-  return (
-    <span
-      className={`inline-flex px-2 py-0.5 rounded-full border text-[10px] font-semibold ${TONES[tone]}`}
-      title={TELEMETRY_HELP[telemetry]}
-    >
-      {TELEMETRY_LABELS[telemetry] || telemetry}
-    </span>
+    </Card>
   )
 }
 
 // ---------------------------------------------------------------- subjects
 
-export function SubjectPerformance({ subjects, compact = false }) {
+export function SubjectPerformance({ subjects, compact = false, trends }) {
   if (!subjects?.length) {
-    return <EmptyState icon="📚" title="No subjects yet" text="Choose your grade to see your subjects." />
+    return <EmptyState icon={BookOpen} title="No subjects yet" text="Choose your grade to see your subjects." compact />
   }
+
+  if (compact) {
+    return (
+      <ul className="-mx-2 divide-y divide-line/70">
+        {subjects.map((s) => (
+          <li key={s.subject}>
+            <Link
+              to="/subjects"
+              state={{ subject: s.subject }}
+              className="group flex items-center gap-3.5 rounded-xl px-2 py-3 transition-colors hover:bg-white/[0.025]"
+            >
+              <SubjectIcon subject={s.subject} size="sm" />
+              <div className="min-w-0 flex-1 space-y-2">
+                <div className="flex items-baseline justify-between gap-3">
+                  <p className="truncate text-sm font-medium text-ink">{s.subject}</p>
+                  <p className="shrink-0 text-xs text-ink-2">
+                    {s.completed ? (
+                      <span className="font-semibold text-success">Complete</span>
+                    ) : (
+                      <span className="font-semibold text-ink">{formatPercent(s.progress_percent, '0%')}</span>
+                    )}{' '}
+                    · {s.lessons_completed}/{s.lessons_total} lessons
+                  </p>
+                </div>
+                <ProgressBar value={s.progress_percent} color={subjectVisual(s.subject).color} size="sm" label={`${s.subject} progress`} />
+              </div>
+              <ChevronRight
+                size={16}
+                className="shrink-0 text-ink-3 transition-transform duration-200 group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
   return (
-    <div className={`grid grid-cols-1 ${compact ? 'sm:grid-cols-2' : 'md:grid-cols-2 xl:grid-cols-4'} gap-4`}>
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
       {subjects.map((s) => (
         <Link
           key={s.subject}
           to="/subjects"
           state={{ subject: s.subject }}
-          className="block rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-slate-600 p-4 space-y-3 transition-colors"
+          className="group flex flex-col rounded-card border border-line bg-deep/60 p-4 transition-[border-color,background-color] duration-200 hover:border-line-strong hover:bg-deep"
         >
-          <div className="flex items-center justify-between gap-2">
-            <span className="flex items-center gap-2 text-sm font-bold text-white">
-              <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: subjectColor(s.subject) }} aria-hidden="true" />
-              {s.subject}
-            </span>
-            {s.completed ? (
-              <span className="text-[10px] font-bold text-emerald-300">🏆 Complete</span>
-            ) : (
-              <span className="text-xs font-bold text-slate-300 tabular-nums">{formatPercent(s.progress_percent)}</span>
-            )}
+          <div className="flex items-start gap-2.5">
+            <SubjectIcon subject={s.subject} size="sm" />
+            <div className="min-w-0 space-y-1.5">
+              <p className="text-sm font-semibold leading-tight text-ink">{s.subject}</p>
+              {s.completed ? (
+                <Badge tone="success" icon={Trophy} size="sm">
+                  Complete
+                </Badge>
+              ) : (
+                <TrendBadge trend={trends?.[s.subject]} />
+              )}
+            </div>
           </div>
-          <ProgressBar percent={s.progress_percent} color={subjectColor(s.subject)} label={`${s.subject} progress`} />
-          <dl className="grid grid-cols-3 gap-2 text-[11px]">
+          <div className="mt-4 flex items-baseline justify-between gap-2">
+            <p className="text-2xl font-semibold text-ink">{formatPercent(s.progress_percent, '0%')}</p>
+            <p className="text-xs text-ink-2">
+              {s.lessons_completed}/{s.lessons_total} lessons passed
+            </p>
+          </div>
+          <ProgressBar
+            className="mt-2"
+            value={s.progress_percent}
+            color={subjectVisual(s.subject).color}
+            size="sm"
+            label={`${s.subject} progress`}
+          />
+          <dl className="mt-4 grid grid-cols-2 gap-3 text-xs">
             <div>
-              <dt className="text-slate-500">Lessons</dt>
-              <dd className="font-semibold text-slate-200 tabular-nums">
-                {s.lessons_completed}/{s.lessons_total}
-              </dd>
+              <dt className="text-ink-2">Quizzes</dt>
+              <dd className="mt-0.5 font-semibold text-ink tabular-nums">{s.quiz_attempts}</dd>
             </div>
             <div>
-              <dt className="text-slate-500">Quizzes</dt>
-              <dd className="font-semibold text-slate-200 tabular-nums">{s.quiz_attempts}</dd>
-            </div>
-            <div>
-              <dt className="text-slate-500">Avg score</dt>
-              <dd className="font-semibold text-slate-200 tabular-nums">{formatPercent(s.average_score, 'No quizzes')}</dd>
+              <dt className="text-ink-2">Average score</dt>
+              <dd className="mt-0.5 font-semibold text-ink">{formatPercent(s.average_score, 'No quizzes')}</dd>
             </div>
           </dl>
-          {!compact && (
-            <p className="text-[10px] text-slate-500">
-              {s.last_activity_at ? `Last studied ${relativeDay(s.last_activity_at)}` : 'Not started yet'}
-            </p>
-          )}
+          <p className="mt-auto pt-3 text-[11px] text-ink-2">
+            {s.last_activity_at ? `Last studied ${relativeDay(s.last_activity_at)}` : 'Not started yet'}
+          </p>
         </Link>
       ))}
     </div>
@@ -194,60 +125,68 @@ export function SubjectPerformance({ subjects, compact = false }) {
 
 // ------------------------------------------------------------------ topics
 
+function topicAction(topic) {
+  const revise = topic.status === 'weak' || topic.status === 'needs_revision'
+  const target = revise ? topic.revise_lesson : topic.next_lesson
+  const lessonId = target?.lesson_id || topic.first_lesson_id
+  const label = revise ? 'Revise' : topic.status === 'not_started' ? 'Start' : topic.next_lesson ? 'Continue' : 'Review'
+  return { lessonId, label, revise }
+}
+
 export function TopicPerformance({ topics, subject = 'all' }) {
   const visible = (topics || []).filter((t) => subject === 'all' || t.subject === subject)
   if (!visible.length) {
-    return <EmptyState icon="🧭" title="No topics to show" text="Topics appear once your grade is chosen." />
+    return <EmptyState icon={Compass} title="No topics to show" text="Topics appear once your grade is chosen." compact />
   }
   const groups = TOPIC_STATUS_ORDER.map((status) => ({
     status,
     items: visible.filter((t) => t.status === status)
-  })).filter((g) => g.items.length)
+  })).filter((group) => group.items.length)
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {groups.map(({ status, items }) => (
-        <div key={status} className="space-y-2">
-          <div className="flex items-center gap-2">
-            <StatusBadge status={status} />
-            <span className="text-[11px] text-slate-500">
+        <div key={status} className="space-y-3">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <TopicStatusBadge status={status} />
+            <span className="text-xs text-ink-2">
               {items.length} topic{items.length === 1 ? '' : 's'} · {topicStatusInfo(status).help}
             </span>
           </div>
-          <ul className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+          <ul className="grid grid-cols-1 gap-2.5 lg:grid-cols-2">
             {items.map((t) => {
-              const target = t.status === 'weak' || t.status === 'needs_revision' ? t.revise_lesson : t.next_lesson
-              const lessonId = target?.lesson_id || t.first_lesson_id
+              const action = topicAction(t)
               return (
                 <li
                   key={t.topic_id}
-                  className="flex items-center justify-between gap-3 rounded-2xl bg-slate-900/40 border border-slate-800 px-4 py-3"
+                  className="flex items-center justify-between gap-3 rounded-xl border border-line bg-deep/60 px-4 py-3 transition-colors hover:border-line-strong"
                 >
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-slate-100 truncate">{t.topic}</p>
-                    <p className="text-[11px] text-slate-500 truncate">
-                      <span style={{ color: subjectColor(t.subject) }} aria-hidden="true">
-                        ●{' '}
+                  <div className="min-w-0 space-y-1">
+                    <p className="truncate text-sm font-medium text-ink">{t.topic}</p>
+                    <p className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-ink-2">
+                      <SubjectChip subject={t.subject} />
+                      <span aria-hidden="true">·</span>
+                      <span>
+                        {t.lessons_completed}/{t.lessons_total} lessons
                       </span>
-                      {t.subject} · {t.lessons_completed}/{t.lessons_total} lessons ·{' '}
-                      {t.quiz_attempts === 0
-                        ? 'no quizzes yet'
-                        : `${t.quiz_attempts} quiz${t.quiz_attempts === 1 ? '' : 'zes'}, recent avg ${formatPercent(t.recent_average)}`}
+                      <span aria-hidden="true">·</span>
+                      <span>
+                        {t.quiz_attempts === 0
+                          ? 'no quizzes yet'
+                          : `${t.quiz_attempts} quiz${t.quiz_attempts === 1 ? '' : 'zes'}, recent avg ${formatPercent(t.recent_average)}`}
+                      </span>
                     </p>
                   </div>
-                  {lessonId && (
-                    <Link
-                      to={`/lesson/${lessonId}`}
-                      className="shrink-0 px-3 py-1.5 text-[11px] font-semibold rounded-lg bg-slate-900 border border-slate-700 text-slate-200 hover:bg-indigo-600 hover:border-indigo-600"
+                  {action.lessonId && (
+                    <Button
+                      to={`/lesson/${action.lessonId}`}
+                      size="xs"
+                      variant={action.revise ? 'secondary' : 'ghost'}
+                      iconRight={ChevronRight}
                     >
-                      {t.status === 'weak' || t.status === 'needs_revision'
-                        ? 'Revise'
-                        : t.status === 'not_started'
-                          ? 'Start'
-                          : t.next_lesson
-                            ? 'Continue'
-                            : 'Review'}
-                    </Link>
+                      {action.label}
+                      <span className="sr-only"> {t.topic}</span>
+                    </Button>
                   )}
                 </li>
               )
@@ -264,27 +203,30 @@ export function TopicPerformance({ topics, subject = 'all' }) {
 export function ActivityFeed({ events, limit = 10 }) {
   const items = (events || []).slice(0, limit)
   if (!items.length) {
-    return <EmptyState icon="🗓️" title="No activity yet" text="Your quizzes and completed lessons will appear here." />
+    return (
+      <EmptyState icon={CalendarClock} title="No activity yet" text="Your quizzes and completed lessons will appear here." compact />
+    )
   }
   return (
-    <ol className="space-y-2">
+    <ol className="relative space-y-1">
       {items.map((event, index) => {
         const text = activityText(event)
+        const visual = activityVisual(event)
+        const Icon = visual.icon
         const to = event.lesson_id ? `/lesson/${event.lesson_id}` : '/subjects'
+        const last = index === items.length - 1
         return (
-          <li key={`${event.type}-${event.progress_id}-${index}`}>
-            <Link
-              to={to}
-              className="flex items-start gap-3 rounded-2xl px-3 py-2.5 hover:bg-slate-900/50 transition-colors"
-            >
-              <span className="text-lg leading-none mt-0.5" aria-hidden="true">
-                {text.icon}
+          <li key={`${event.type}-${event.progress_id}-${index}`} className="relative">
+            {!last && <span className="absolute bottom-[-6px] left-[21.5px] top-11 w-px bg-line" aria-hidden="true" />}
+            <Link to={to} className="group flex items-start gap-3 rounded-xl p-1.5 pr-2 transition-colors hover:bg-white/[0.025]">
+              <span className={cx('relative grid h-8 w-8 shrink-0 place-items-center rounded-lg ring-1 ring-inset', TONE_SOFT[visual.tone])}>
+                <Icon size={16} aria-hidden="true" />
               </span>
-              <span className="min-w-0 flex-1">
-                <span className="block text-sm text-slate-100 truncate">{text.title}</span>
-                <span className="block text-[11px] text-slate-500 truncate">{text.detail}</span>
+              <span className="min-w-0 flex-1 pt-0.5">
+                <span className="block truncate text-sm text-ink">{text.title}</span>
+                <span className="block truncate text-xs text-ink-2">{text.detail}</span>
               </span>
-              <span className="shrink-0 text-[10px] text-slate-500 mt-1">{relativeDay(event.at)}</span>
+              <span className="shrink-0 pt-1 text-[11px] text-ink-2">{relativeDay(event.at)}</span>
             </Link>
           </li>
         )
@@ -296,24 +238,27 @@ export function ActivityFeed({ events, limit = 10 }) {
 export function Milestones({ milestones }) {
   if (!milestones?.length) {
     return (
-      <p className="text-xs text-slate-500">
-        Milestones are earned from your real results — your first quiz, completed lessons and finished subjects.
-      </p>
+      <EmptyState
+        icon={Medal}
+        title="No milestones yet"
+        text="Milestones are earned from your real results: your first quiz, completed lessons and finished subjects."
+        compact
+      />
     )
   }
   return (
-    <ul className="flex flex-wrap gap-2">
+    <ol className="grid grid-cols-1 gap-3 sm:grid-cols-2">
       {milestones.map((m) => (
-        <li
-          key={m.key}
-          className="inline-flex items-center gap-2 rounded-full border border-indigo-500/25 bg-indigo-500/10 px-3 py-1.5 text-xs text-indigo-200"
-          title={formatDate(m.at)}
-        >
-          <span aria-hidden="true">🏅</span>
-          {m.title}
-          <span className="text-[10px] text-indigo-300/70">{formatDate(m.at)}</span>
+        <li key={m.key} className="flex items-center gap-3 rounded-xl border border-line bg-deep/60 px-3.5 py-3">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-500/[0.12] text-brand-300 ring-1 ring-inset ring-brand-500/25">
+            <Medal size={17} aria-hidden="true" />
+          </span>
+          <span className="min-w-0">
+            <span className="block truncate text-sm font-medium text-ink">{m.title}</span>
+            <span className="block text-xs text-ink-2">{formatDate(m.at)}</span>
+          </span>
         </li>
       ))}
-    </ul>
+    </ol>
   )
 }

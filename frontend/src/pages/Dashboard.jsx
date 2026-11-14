@@ -1,26 +1,51 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import {
+  ArrowRight,
+  BookCheck,
+  BookOpen,
+  Bot,
+  CalendarClock,
+  CalendarDays,
+  ChartLine,
+  CircleCheck,
+  CircleDot,
+  ClipboardList,
+  Compass,
+  Flame,
+  GraduationCap,
+  Sparkles,
+  Target
+} from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { analyticsService } from '../services/analyticsService'
 import { rlService } from '../services/rlService'
 import { CONFIDENCE_NOTE, POLICY_LABELS, actionInfo } from '../utils/recommendationActions'
 import { continueTarget, formatPercent, relativeDay } from '../utils/analytics'
+import { ActivityFeed, Panel, SubjectPerformance } from '../components/AnalyticsPanels'
+import { ActionIcon, DifficultyBadge, SubjectIcon, TelemetryBadge } from '../components/learning'
 import {
-  ActivityFeed,
+  Badge,
+  Button,
+  Callout,
+  Card,
   ErrorState,
-  LoadingSkeleton,
-  Panel,
+  PageSkeleton,
   ProgressBar,
-  StatTile,
-  SubjectPerformance,
-  TelemetryBadge
-} from '../components/AnalyticsPanels'
+  ProgressRing,
+  SectionHeader,
+  StatCard,
+  Tooltip
+} from '../components/ui'
 
 function greeting() {
   const hour = new Date().getHours()
   if (hour < 12) return 'Good morning'
   if (hour < 17) return 'Good afternoon'
   return 'Good evening'
+}
+
+function firstName(name) {
+  return String(name || '').trim().split(/\s+/)[0] || 'there'
 }
 
 export default function Dashboard() {
@@ -57,7 +82,7 @@ export default function Dashboard() {
     return () => window.removeEventListener('focus', onFocus)
   }, [load])
 
-  if (loading) return <LoadingSkeleton blocks={5} />
+  if (loading) return <PageSkeleton label="Loading your dashboard" />
   if (error && !summary) return <ErrorState message={error} onRetry={load} />
 
   const o = summary.overview
@@ -65,149 +90,201 @@ export default function Dashboard() {
   const next = continueTarget(summary)
   const recommendation = coach?.status === 'available' ? coach.recommendation : null
   const coachAttempt = coach?.attempt
+  const grade = summary.student.grade
+  const today = new Date().toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' })
 
   return (
-    <div className="space-y-6 sm:space-y-8">
-      {/* Greeting */}
-      <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-r from-indigo-950/40 via-slate-900/40 to-slate-950 p-6 sm:p-8 shadow-2xl">
-        <div className="absolute top-0 right-0 h-40 w-40 bg-indigo-500/10 blur-3xl pointer-events-none" />
-        <div className="relative z-10 space-y-2">
-          <div className="flex flex-wrap items-center gap-2">
-            {summary.student.grade && (
-              <span className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 rounded-lg">
-                Grade {summary.student.grade}
-              </span>
-            )}
-            {o.current_streak_days > 1 && (
-              <span
-                className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 text-amber-300 border border-amber-500/20 rounded-lg"
-                title="Consecutive days (UTC) with at least one quiz submitted"
-              >
-                🔥 {o.current_streak_days}-day streak
-              </span>
-            )}
-          </div>
-          <h1 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-white">
-            {greeting()},{' '}
-            <span className="bg-gradient-to-r from-indigo-400 to-teal-300 bg-clip-text text-transparent">
-              {summary.student.name}
-            </span>
-            !
-          </h1>
-          <p className="text-slate-400 max-w-2xl text-sm leading-relaxed">
-            {o.quiz_attempts === 0
-              ? 'Welcome to Aegis! Open a lesson, read it, then take its quiz. Your progress and your AI coach start working after your first quiz.'
-              : `You have completed ${o.lessons_completed} of ${o.lessons_total} lessons in your grade. A lesson counts as completed when you pass one of its quizzes (${summary.definitions.pass_score}% or more).`}
-          </p>
-        </div>
-      </div>
-
+    <div className="space-y-6">
       {error && (
-        <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 px-4 py-3 text-xs text-amber-200">
+        <Callout tone="warning" role="status">
           Showing your last loaded data — refresh failed: {error}
-        </div>
+        </Callout>
       )}
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
-        <div className="col-span-2 lg:col-span-1 glass-panel rounded-3xl p-5 border border-slate-900 shadow-md space-y-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Curriculum completion</p>
-          <p className="text-3xl font-extrabold text-white tabular-nums">{formatPercent(o.completion_percent, '0%')}</p>
-          <ProgressBar percent={o.completion_percent} label="Curriculum completion" />
+      {/* Greeting and completion */}
+      <Card padding="none" className="relative overflow-hidden">
+        <div
+          className="bg-dot-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_top_left,black_10%,transparent_65%)]"
+          aria-hidden="true"
+        />
+        <div className="pointer-events-none absolute -left-24 -top-32 h-80 w-80 rounded-full bg-brand-500/[0.13] blur-3xl" aria-hidden="true" />
+        <div className="pointer-events-none absolute -bottom-32 right-10 h-72 w-72 rounded-full bg-mint-500/[0.07] blur-3xl" aria-hidden="true" />
+        <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-12">
+          <div className="space-y-5">
+            <div className="flex flex-wrap items-center gap-2">
+              {grade && (
+                <Badge tone="brand" icon={GraduationCap}>
+                  Grade {grade}
+                </Badge>
+              )}
+              {o.current_streak_days >= 1 && (
+                <Tooltip content="Consecutive days (UTC) with at least one quiz submitted">
+                  <Badge tone="warning" icon={Flame} tabIndex={0}>
+                    {o.current_streak_days}-day streak
+                  </Badge>
+                </Tooltip>
+              )}
+              <Badge icon={CalendarDays}>{today}</Badge>
+            </div>
+            <div className="space-y-2.5">
+              <h1 className="font-display text-[30px] font-semibold leading-tight tracking-tight text-ink sm:text-[38px]">
+                {greeting()}, {firstName(summary.student.name)}
+              </h1>
+              <p className="max-w-xl text-[15px] leading-relaxed text-ink-2">
+                {o.quiz_attempts === 0
+                  ? 'Welcome to Aegis! Open a lesson, read it, then take its quiz. Your progress and your AI coach start working after your first quiz.'
+                  : `You have completed ${o.lessons_completed} of ${o.lessons_total} lessons in your grade. A lesson counts as completed when you pass one of its quizzes (${summary.definitions.pass_score}% or more).`}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button to={next ? `/lesson/${next.lesson_id}` : '/subjects'} size="lg" iconRight={ArrowRight}>
+                {next ? 'Continue learning' : 'Browse subjects'}
+              </Button>
+              <Button to="/progress" variant="secondary" size="lg" icon={ChartLine}>
+                View progress
+              </Button>
+            </div>
+          </div>
+          <div className="flex items-center gap-5 lg:flex-col lg:gap-3">
+            <ProgressRing value={o.completion_percent} size={164} stroke={12} label={`Curriculum completion ${formatPercent(o.completion_percent, '0%')}`}>
+              <span>
+                <span className="block text-[36px] font-semibold leading-none tracking-tight text-ink">
+                  {formatPercent(o.completion_percent, '0%')}
+                </span>
+                <span className="mt-1.5 block text-xs font-medium text-ink-2">curriculum</span>
+              </span>
+            </ProgressRing>
+            <p className="max-w-[10rem] text-sm leading-snug text-ink-2 lg:text-center">
+              <span className="font-semibold text-ink">{o.lessons_completed}</span> of {o.lessons_total} lessons passed
+            </p>
+          </div>
         </div>
-        <StatTile label="Lessons completed" value={`${o.lessons_completed}/${o.lessons_total}`} sub={`${o.lessons_attempted} started`} icon="📚" />
-        <StatTile label="Quiz attempts" value={o.quiz_attempts} sub={o.days_active ? `on ${o.days_active} day${o.days_active === 1 ? '' : 's'}` : 'none yet'} icon="📝" />
-        <StatTile
+      </Card>
+
+      {/* Key figures */}
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+        <StatCard
+          label="Lessons completed"
+          value={`${o.lessons_completed}/${o.lessons_total}`}
+          sub={`${o.lessons_attempted} started`}
+          icon={BookCheck}
+          tone="mint"
+        />
+        <StatCard
+          label="Quiz attempts"
+          value={o.quiz_attempts}
+          sub={o.days_active ? `on ${o.days_active} day${o.days_active === 1 ? '' : 's'}` : 'none yet'}
+          icon={ClipboardList}
+          tone="brand"
+        />
+        <StatCard
           label="Average score"
           value={formatPercent(o.average_score)}
           sub={o.average_score === null ? 'take a quiz to see it' : `best ${formatPercent(o.best_score)}`}
-          icon="🎯"
+          icon={Target}
+          tone="info"
         />
-        <StatTile label="Subjects" value={o.subjects_available} sub={summary.student.grade ? `in Grade ${summary.student.grade}` : 'choose a grade'} icon="🧭" />
+        <StatCard label="Subjects" value={o.subjects_available} sub={grade ? `in Grade ${grade}` : 'choose a grade'} icon={Compass} tone="neutral" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6">
-          {/* Continue + latest activity */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="glass-panel rounded-3xl p-5 border border-slate-900 shadow-lg flex flex-col justify-between gap-4">
-              <div className="space-y-1.5">
-                <span className="inline-flex px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 rounded-lg">
-                  Continue learning
-                </span>
-                {next ? (
-                  <>
-                    <h3 className="text-lg font-bold text-white">{next.lesson_title}</h3>
-                    <p className="text-xs text-slate-400">
-                      {next.subject} · {next.topic}
-                    </p>
-                  </>
-                ) : (
-                  <p className="text-sm text-slate-300">
-                    {o.lessons_total > 0 ? '🏆 Every lesson in your grade is completed!' : 'Choose your grade to start.'}
-                  </p>
-                )}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="space-y-6 lg:col-span-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {/* Continue learning */}
+            <Card className="flex flex-col">
+              <div className="flex items-start justify-between gap-3">
+                <p className="text-[13px] font-medium text-ink-2">Continue learning</p>
+                {next && <SubjectIcon subject={next.subject} size="sm" />}
               </div>
-              <Link
-                to={next ? `/lesson/${next.lesson_id}` : '/subjects'}
-                className="inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-indigo-500 text-white font-semibold text-sm hover:bg-indigo-600 transition-colors"
-              >
-                {next ? 'Open lesson →' : 'Browse subjects →'}
-              </Link>
-            </div>
+              {next ? (
+                <div className="mt-3 space-y-1">
+                  <h2 className="font-display text-lg font-semibold leading-snug text-ink">{next.lesson_title}</h2>
+                  <p className="text-[13px] text-ink-2">
+                    {next.subject} · {next.topic}
+                  </p>
+                </div>
+              ) : (
+                <p className="mt-3 text-sm leading-relaxed text-ink">
+                  {o.lessons_total > 0 ? 'Every lesson in your grade is completed!' : 'Choose your grade to start.'}
+                </p>
+              )}
+              <div className="mt-auto pt-5">
+                <Button to={next ? `/lesson/${next.lesson_id}` : '/subjects'} fullWidth iconRight={ArrowRight} icon={next ? BookOpen : undefined}>
+                  {next ? 'Open lesson' : 'Browse subjects'}
+                </Button>
+              </div>
+            </Card>
 
-            <div className="glass-panel rounded-3xl p-5 border border-slate-900 shadow-lg space-y-2">
-              <span className="inline-flex px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider bg-slate-800 text-slate-300 border border-slate-700 rounded-lg">
-                Latest activity
-              </span>
+            {/* Latest activity */}
+            <Card className="flex flex-col">
+              <div className="flex items-start justify-between gap-3">
+                <p className="text-[13px] font-medium text-ink-2">Latest activity</p>
+                {latest && <span className="text-xs text-ink-2">{relativeDay(latest.at)}</span>}
+              </div>
               {latest ? (
                 <>
-                  <h3 className="text-base font-bold text-white">{latest.lesson_title}</h3>
-                  <p className="text-xs text-slate-400">
-                    {latest.subject} · {String(latest.difficulty).toLowerCase()} quiz · {relativeDay(latest.at)}
-                  </p>
-                  <p className="text-2xl font-extrabold text-white tabular-nums">
-                    {formatPercent(latest.score)}{' '}
-                    <span className={`text-xs font-semibold ${latest.passed ? 'text-emerald-300' : 'text-amber-300'}`}>
-                      {latest.passed ? '✓ passed' : '✗ not passed yet'}
-                    </span>
-                  </p>
-                  <TelemetryBadge telemetry={latest.telemetry} />
+                  <div className="mt-3 space-y-1">
+                    <h2 className="font-display text-lg font-semibold leading-snug text-ink">{latest.lesson_title}</h2>
+                    <div className="flex flex-wrap items-center gap-2 text-[13px] text-ink-2">
+                      <span>{latest.subject}</span>
+                      <DifficultyBadge difficulty={latest.difficulty} size="sm" />
+                    </div>
+                  </div>
+                  <div className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-5">
+                    <div className="flex items-baseline gap-2.5">
+                      <p className="text-[28px] font-semibold leading-none text-ink">{formatPercent(latest.score)}</p>
+                      <Badge tone={latest.passed ? 'success' : 'warning'} icon={latest.passed ? CircleCheck : CircleDot} size="sm">
+                        {latest.passed ? 'Passed' : 'Not passed yet'}
+                      </Badge>
+                    </div>
+                    <TelemetryBadge telemetry={latest.telemetry} />
+                  </div>
                 </>
               ) : (
-                <p className="text-sm text-slate-400">No quizzes yet.</p>
+                <p className="mt-3 text-sm text-ink-2">No quizzes yet.</p>
               )}
-            </div>
+            </Card>
           </div>
 
           <Panel
             title="Your subjects"
-            subtitle={summary.student.grade ? `Grade ${summary.student.grade} — progress counts passed lessons` : undefined}
+            subtitle={grade ? `Grade ${grade} · progress counts passed lessons` : undefined}
+            icon={BookOpen}
             action={
-              <Link to="/progress" className="text-xs font-bold text-indigo-300 hover:text-indigo-200">
-                Full analytics →
-              </Link>
+              <Button to="/progress" variant="ghost" size="sm" iconRight={ArrowRight}>
+                Full analytics
+              </Button>
             }
           >
             <SubjectPerformance subjects={summary.subjects} compact />
           </Panel>
+
+          <Panel
+            title="Recent activity"
+            icon={CalendarClock}
+            action={
+              <Button to="/progress#activity" variant="ghost" size="sm" iconRight={ArrowRight}>
+                All activity
+              </Button>
+            }
+          >
+            <ActivityFeed events={summary.activity} limit={5} />
+          </Panel>
         </div>
 
-        {/* AI Coach */}
-        <div className="glass-panel rounded-3xl p-5 sm:p-6 border border-slate-900 shadow-lg flex flex-col justify-between gap-6">
-          <div className="space-y-4">
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <span className="text-teal-400">✦</span> AI Learning Coach
-            </h3>
+        <div className="space-y-6">
+          {/* AI coach */}
+          <Card className="flex flex-col gap-5">
+            <SectionHeader icon={Sparkles} title="AI Learning Coach" description="Offline-trained Q-learning policy" />
             {!recommendation ? (
-              <div className="space-y-3 py-4 text-center">
-                <div className="text-4xl" aria-hidden="true">
-                  🤖
-                </div>
-                <p className="text-sm font-semibold text-slate-300">
+              <div className="space-y-2 rounded-xl border border-line bg-deep/60 px-4 py-6 text-center">
+                <span className="mx-auto grid h-11 w-11 place-items-center rounded-xl bg-white/[0.05] text-ink-2 ring-1 ring-inset ring-white/10">
+                  <Bot size={21} aria-hidden="true" />
+                </span>
+                <p className="text-sm font-semibold text-ink">
                   {coach?.status === 'telemetry_unavailable' ? 'Camera data unavailable' : 'No advice yet'}
                 </p>
-                <p className="text-xs text-slate-500 leading-relaxed">
+                <p className="text-[13px] leading-relaxed text-ink-2">
                   {coach?.status === 'telemetry_unavailable'
                     ? 'Your latest quiz had no valid camera reading, so the coach did not guess. Keep the camera agent running during your next quiz.'
                     : 'Take a quiz with the camera agent running. The coach then suggests your next step.'}
@@ -215,52 +292,73 @@ export default function Dashboard() {
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="rounded-2xl bg-indigo-500/10 border border-indigo-500/20 p-4 space-y-1">
-                  <p className="text-[10px] font-semibold text-indigo-300 uppercase tracking-wider">Suggested next step</p>
-                  <p className="text-lg font-extrabold text-white">
-                    {actionInfo(recommendation.action).icon} {actionInfo(recommendation.action).label}
+                <div className="space-y-2 rounded-xl border border-brand-500/25 bg-brand-500/[0.07] p-4">
+                  <p className="text-xs font-medium text-brand-300">Suggested next step</p>
+                  <p className="flex items-center gap-2.5 font-display text-lg font-semibold text-ink">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-brand-500/[0.16] text-brand-200">
+                      <ActionIcon action={recommendation.action} size={17} />
+                    </span>
+                    {actionInfo(recommendation.action).label}
                   </p>
-                  <p className="text-xs text-slate-400">{actionInfo(recommendation.action).description}</p>
+                  <p className="text-[13px] leading-relaxed text-ink-2">{actionInfo(recommendation.action).description}</p>
                   {coachAttempt && (
-                    <p className="text-[11px] text-slate-500">
+                    <p className="text-xs text-ink-2">
                       After: {coachAttempt.lesson_title} ({coachAttempt.subject}
                       {coachAttempt.curriculum_topic ? ` · ${coachAttempt.curriculum_topic}` : ''})
                     </p>
                   )}
                 </div>
-                <p className="text-sm text-slate-300 leading-relaxed">“{recommendation.explanation}”</p>
-                <div className="space-y-1.5" title={CONFIDENCE_NOTE}>
-                  <div className="flex items-center justify-between text-[10px] uppercase tracking-wider">
-                    <span className="font-semibold text-slate-500">Decision strength (not a probability)</span>
-                    <span className="font-bold text-teal-300">{Math.round(recommendation.confidence * 100)}%</span>
+                <p className="text-sm italic leading-relaxed text-ink">“{recommendation.explanation}”</p>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <Tooltip content={CONFIDENCE_NOTE} align="start">
+                      <span tabIndex={0} className="cursor-help rounded text-ink-2 underline decoration-line-strong decoration-dotted underline-offset-4">
+                        Decision strength (not a probability)
+                      </span>
+                    </Tooltip>
+                    <span className="font-semibold text-mint-300">{Math.round(recommendation.confidence * 100)}%</span>
                   </div>
-                  <ProgressBar percent={recommendation.confidence * 100} color="#0d9488" label="Decision strength" />
+                  <ProgressBar value={recommendation.confidence * 100} tone="mint" size="sm" label="Decision strength" />
                   {recommendation.policy && (
-                    <p className="text-[10px] text-slate-500">Decided by: {POLICY_LABELS[recommendation.policy] || recommendation.policy}</p>
+                    <p className="text-[11px] text-ink-2">Decided by: {POLICY_LABELS[recommendation.policy] || recommendation.policy}</p>
                   )}
                 </div>
               </div>
             )}
-          </div>
-          <Link
-            to="/recommendations"
-            className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-xs font-semibold text-slate-300 hover:text-white transition-colors"
-          >
-            Open the AI Coach →
-          </Link>
+            <Button to="/recommendations" variant="secondary" fullWidth iconRight={ArrowRight}>
+              Open the AI Coach
+            </Button>
+          </Card>
+
+          {/* Streak */}
+          <Card>
+            <div className="flex items-center gap-3.5">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-warning/[0.12] text-warning ring-1 ring-inset ring-warning/25">
+                <Flame size={21} aria-hidden="true" />
+              </span>
+              <div>
+                <p className="text-[13px] font-medium text-ink-2">Learning streak</p>
+                <p className="text-2xl font-semibold text-ink">
+                  {o.current_streak_days} day{o.current_streak_days === 1 ? '' : 's'}
+                </p>
+              </div>
+            </div>
+            <dl className="mt-5 grid grid-cols-2 gap-3">
+              <div className="rounded-lg bg-deep/70 p-3 ring-1 ring-inset ring-line">
+                <dt className="text-[11px] text-ink-2">Longest streak</dt>
+                <dd className="mt-1 text-sm font-semibold text-ink">
+                  {o.longest_streak_days} day{o.longest_streak_days === 1 ? '' : 's'}
+                </dd>
+              </div>
+              <div className="rounded-lg bg-deep/70 p-3 ring-1 ring-inset ring-line">
+                <dt className="text-[11px] text-ink-2">Active days</dt>
+                <dd className="mt-1 text-sm font-semibold text-ink">{o.days_active}</dd>
+              </div>
+            </dl>
+            <p className="mt-3 text-[11px] leading-relaxed text-ink-2">Days with at least one quiz submitted (UTC).</p>
+          </Card>
         </div>
       </div>
-
-      <Panel
-        title="Recent activity"
-        action={
-          <Link to="/progress#activity" className="text-xs font-bold text-indigo-300 hover:text-indigo-200">
-            All activity →
-          </Link>
-        }
-      >
-        <ActivityFeed events={summary.activity} limit={5} />
-      </Panel>
     </div>
   )
 }

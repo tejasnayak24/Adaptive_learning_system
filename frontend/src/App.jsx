@@ -1,9 +1,11 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route, Navigate, Link, useLocation, useParams } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom'
+import { BookOpen, Lock } from 'lucide-react'
 import { AuthProvider } from './context/AuthContext'
 import { MonitoringProvider } from './context/MonitoringContext'
 import MonitoringGate from './components/MonitoringGate'
 import ProtectedRoute from './components/ProtectedRoute'
+import { Button, Card, PageSkeleton } from './components/ui'
 import { curriculumService } from './services/curriculumService'
 import AppLayout from './layouts/AppLayout'
 
@@ -21,7 +23,11 @@ const Recommendations = lazy(() => import('./pages/Recommendations'))
 const SessionActivity = lazy(() => import('./pages/SessionActivity'))
 
 function PageLoading() {
-  return <div className="m-8 h-40 rounded-3xl bg-slate-800/60 animate-pulse" aria-busy="true" aria-label="Loading" />
+  return (
+    <div className="min-h-screen bg-canvas p-6 sm:p-10">
+      <PageSkeleton />
+    </div>
+  )
 }
 
 // Learning pages require verified camera monitoring. A lesson the student
@@ -48,18 +54,20 @@ function MonitoredLesson() {
   }, [id])
 
   if (access.id !== id) {
-    return <div className="h-64 rounded-3xl bg-slate-800/60 animate-pulse" aria-busy="true" aria-label="Loading lesson" />
+    return <PageSkeleton variant="reading" label="Loading lesson" />
   }
   if (access.refusal) {
     return (
-      <div className="max-w-xl mx-auto glass-panel rounded-3xl border border-slate-800 p-8 text-center space-y-4" role="alert">
-        <div className="text-4xl" aria-hidden="true">🔒</div>
-        <h1 className="text-xl font-bold text-white">This lesson is not available to you</h1>
-        <p className="text-sm text-slate-400">{access.refusal}</p>
-        <Link to="/subjects" className="inline-flex px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold text-sm">
+      <Card padding="lg" className="mx-auto max-w-xl space-y-4 text-center" role="alert">
+        <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-warning/[0.12] text-warning ring-1 ring-inset ring-warning/25">
+          <Lock size={22} aria-hidden="true" />
+        </span>
+        <h1 className="font-display text-xl font-semibold text-ink">This lesson is not available to you</h1>
+        <p className="text-sm leading-relaxed text-ink-2">{access.refusal}</p>
+        <Button to="/subjects" icon={BookOpen}>
           Go to my lessons
-        </Link>
-      </div>
+        </Button>
+      </Card>
     )
   }
   return (

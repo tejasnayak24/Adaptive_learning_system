@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { GraduationCap, LoaderCircle } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import { Callout, Card, cx } from './ui'
 
 export const GRADES = [6, 7, 8, 9, 10]
 
@@ -24,33 +26,48 @@ export function GradePicker({ current, onPicked, title, subtitle }) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto glass-panel rounded-3xl p-8 border border-slate-900 shadow-xl space-y-6 text-center">
-      <div className="space-y-2">
-        <h1 className="font-display text-2xl font-extrabold text-white">{title || 'Which grade are you in?'}</h1>
-        <p className="text-sm text-slate-400">
+    <Card padding="lg" className="mx-auto max-w-2xl space-y-7 text-center">
+      <div className="space-y-3">
+        <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-brand-500/[0.12] text-brand-300 ring-1 ring-inset ring-brand-500/25">
+          <GraduationCap size={24} aria-hidden="true" />
+        </span>
+        <h1 className="font-display text-2xl font-semibold tracking-tight text-ink">{title || 'Which grade are you in?'}</h1>
+        <p className="mx-auto max-w-md text-sm leading-relaxed text-ink-2">
           {subtitle ||
             'Aegis shows the Mathematics, Science, Social Science and English lessons for your grade. You can change this later.'}
         </p>
       </div>
-      <div className="grid grid-cols-5 gap-3">
-        {GRADES.map((grade) => (
-          <button
-            key={grade}
-            onClick={() => choose(grade)}
-            disabled={saving !== null}
-            className={`rounded-2xl border py-5 font-display text-2xl font-extrabold transition-all ${
-              current === grade
-                ? 'border-indigo-500 bg-indigo-500/20 text-white'
-                : 'border-slate-800 bg-slate-900/50 text-slate-300 hover:border-indigo-500/60 hover:text-white'
-            } disabled:opacity-50`}
-          >
-            {saving === grade ? '…' : grade}
-            <span className="block text-[10px] font-semibold uppercase tracking-wider text-slate-500">Grade</span>
-          </button>
-        ))}
+      <div className="grid grid-cols-5 gap-2 sm:gap-3" role="group" aria-label="Grades">
+        {GRADES.map((grade) => {
+          const selected = current === grade
+          return (
+            <button
+              key={grade}
+              type="button"
+              onClick={() => choose(grade)}
+              disabled={saving !== null}
+              aria-pressed={selected}
+              className={cx(
+                'group flex flex-col items-center justify-center gap-1 rounded-xl border py-4 transition-[border-color,background-color,transform] duration-200 active:scale-[0.97] disabled:opacity-60 sm:py-5',
+                selected
+                  ? 'border-brand-500/60 bg-brand-500/[0.12] text-ink'
+                  : 'border-line-strong bg-deep text-ink-2 hover:border-brand-500/40 hover:bg-brand-500/[0.05] hover:text-ink'
+              )}
+            >
+              <span className="font-display text-2xl font-semibold sm:text-3xl">
+                {saving === grade ? <LoaderCircle size={24} className="animate-spin" aria-label="Saving" /> : grade}
+              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-2">Grade</span>
+            </button>
+          )
+        })}
       </div>
-      {error && <p className="text-xs text-rose-400">{error}</p>}
-    </div>
+      {error && (
+        <Callout tone="danger" role="alert" className="text-left">
+          {error}
+        </Callout>
+      )}
+    </Card>
   )
 }
 

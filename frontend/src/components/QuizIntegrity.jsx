@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { ArrowLeft, Check, CirclePause, CloudOff, Hourglass, LoaderCircle, LogOut, OctagonX, RotateCcw, ShieldCheck, TriangleAlert } from 'lucide-react'
+import { Button, Callout, Card, Modal, cx } from './ui'
 
 /*
  * What the student sees of the quiz tab-switch rule. Wording is factual:
@@ -36,41 +37,43 @@ export function formatClock(totalSeconds) {
 export function IntegrityRulesBanner({ strikes }) {
   if (strikes >= 1) {
     return (
-      <div role="status" className="rounded-2xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-xs font-semibold text-amber-200">
-        ⚠️ Warning given: you left this quiz once. If the quiz page is hidden or reloaded again, the quiz will end and will not be graded.
-      </div>
+      <Callout tone="warning" role="status">
+        <span className="font-semibold text-warning">
+          Warning given: you left this quiz once. If the quiz page is hidden or reloaded again, the quiz will end and will not be graded.
+        </span>
+      </Callout>
     )
   }
   return (
-    <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 px-4 py-3 text-xs text-slate-300 leading-relaxed">
-      <span className="font-bold text-slate-200">Protected quiz.</span> Stay on this page until you submit. If the quiz page is hidden (another tab, minimising the browser) or
-      reloaded, you have 10 seconds to come back and you will get one warning. A second time ends the quiz without grading.
-      Hints are still available.
-    </div>
+    <Callout tone="neutral" icon={ShieldCheck}>
+      <span className="font-semibold text-ink">Protected quiz.</span> Stay on this page until you submit. If the quiz page is hidden (another tab,
+      minimising the browser) or reloaded, you have 10 seconds to come back and you will get one warning. A second time ends the quiz without
+      grading. Hints are still available.
+    </Callout>
   )
 }
 
 export function StrikeWarningModal({ open, onClose }) {
-  if (!open) return null
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4" role="alertdialog" aria-modal="true" aria-labelledby="strike-warning-title">
-      <div className="max-w-md w-full rounded-3xl border border-amber-500/40 bg-slate-900 p-6 space-y-4 shadow-2xl">
-        <h2 id="strike-warning-title" className="text-lg font-bold text-amber-300">You left the quiz</h2>
-        <p className="text-sm text-slate-300 leading-relaxed">
-          The quiz page was hidden or reloaded. You came back in time, so your quiz continues and your answers are saved.
-        </p>
-        <p className="text-sm font-semibold text-amber-200 leading-relaxed">
-          If you switch tabs, reload or hide this page again, the quiz will end immediately and will not be graded.
-        </p>
-        <button
-          autoFocus
-          onClick={onClose}
-          className="w-full px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm"
-        >
+    <Modal
+      open={open}
+      onClose={onClose}
+      role="alertdialog"
+      tone="warning"
+      icon={TriangleAlert}
+      title="You left the quiz"
+      dismissible={false}
+      description="The quiz page was hidden or reloaded. You came back in time, so your quiz continues and your answers are saved."
+      footer={
+        <Button variant="warning" onClick={onClose} autoFocus fullWidth>
           I understand, continue the quiz
-        </button>
-      </div>
-    </div>
+        </Button>
+      }
+    >
+      <p className="rounded-lg bg-warning/[0.08] px-3.5 py-3 text-sm font-semibold leading-relaxed text-warning ring-1 ring-inset ring-warning/25">
+        If you switch tabs, reload or hide this page again, the quiz will end immediately and will not be graded.
+      </p>
+    </Modal>
   )
 }
 
@@ -78,13 +81,17 @@ export function CheckingOverlay({ connection, status }) {
   const offline = connection === 'offline'
   const locked = status === 'unverified'
   return (
-    <div className="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-slate-950/85 backdrop-blur-sm p-6 text-center" role="status" aria-live="polite">
-      <div className="space-y-2 max-w-sm">
-        <div className="mx-auto h-8 w-8 animate-spin rounded-full border-4 border-indigo-500/20 border-t-indigo-500" />
-        <p className="text-sm font-bold text-white">
-          {offline ? 'Reconnecting…' : 'Checking your quiz…'}
-        </p>
-        <p className="text-xs text-slate-400 leading-relaxed">
+    <div
+      className="absolute inset-0 z-20 flex items-center justify-center rounded-[inherit] bg-canvas/85 p-6 text-center backdrop-blur-sm"
+      role="status"
+      aria-live="polite"
+    >
+      <div className="max-w-sm space-y-3">
+        <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-raised text-brand-300 ring-1 ring-inset ring-line-strong">
+          {offline ? <CloudOff size={22} aria-hidden="true" /> : <LoaderCircle size={22} className="animate-spin" aria-hidden="true" />}
+        </span>
+        <p className="font-display text-base font-semibold text-ink">{offline ? 'Reconnecting…' : 'Checking your quiz…'}</p>
+        <p className="text-[13px] leading-relaxed text-ink-2">
           {offline
             ? 'The connection to Aegis was lost. Your answers are kept on this device and the quiz continues once the server confirms your return. A network problem is never counted as a tab switch.'
             : locked
@@ -97,37 +104,53 @@ export function CheckingOverlay({ connection, status }) {
 }
 
 export function LeaveQuizModal({ pending, onConfirm, onCancel }) {
-  if (!pending) return null
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="leave-quiz-title">
-      <div className="max-w-md w-full rounded-3xl border border-slate-700 bg-slate-900 p-6 space-y-4 shadow-2xl">
-        <h2 id="leave-quiz-title" className="text-lg font-bold text-white">Leave this quiz?</h2>
-        <p className="text-sm text-slate-300 leading-relaxed">
-          If you leave now, this attempt ends without grading. Your answers so far are saved, it is not recorded as a tab switch,
-          and you can start the quiz again after 5 minutes.
-        </p>
-        <div className="flex gap-3">
-          <button autoFocus onClick={onCancel} className="flex-1 px-4 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-sm">
-            Stay on the quiz
-          </button>
-          <button onClick={onConfirm} className="flex-1 px-4 py-2.5 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-800 font-semibold text-sm">
+    <Modal
+      open={Boolean(pending)}
+      onClose={onCancel}
+      tone="neutral"
+      icon={LogOut}
+      title="Leave this quiz?"
+      description="If you leave now, this attempt ends without grading. Your answers so far are saved, it is not recorded as a tab switch, and you can start the quiz again after 5 minutes."
+      footer={
+        <>
+          <Button variant="secondary" onClick={onConfirm}>
             Leave quiz
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+          <Button onClick={onCancel} autoFocus>
+            Stay on the quiz
+          </Button>
+        </>
+      }
+    />
   )
 }
 
 function RetakeButton({ secondsLeft, onRetake }) {
   return (
-    <button
-      onClick={onRetake}
-      disabled={secondsLeft > 0}
-      className="px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-    >
+    <Button onClick={onRetake} disabled={secondsLeft > 0} icon={secondsLeft > 0 ? Hourglass : RotateCcw}>
       {secondsLeft > 0 ? `Retake available in ${formatClock(secondsLeft)}` : 'Start a new attempt'}
-    </button>
+    </Button>
+  )
+}
+
+function EndedLayout({ icon: Icon, tone, title, children, actions, role }) {
+  const tones = {
+    danger: 'bg-danger/[0.12] text-danger ring-danger/25',
+    neutral: 'bg-white/[0.06] text-ink-2 ring-white/10',
+    warning: 'bg-warning/[0.12] text-warning ring-warning/25',
+  }
+  return (
+    <Card padding="lg" className="mx-auto max-w-xl space-y-6 text-center" role={role}>
+      <span className={cx('mx-auto grid h-14 w-14 place-items-center rounded-2xl ring-1 ring-inset', tones[tone])}>
+        <Icon size={26} aria-hidden="true" />
+      </span>
+      <div className="space-y-2.5">
+        <h2 className="font-display text-xl font-semibold text-ink">{title}</h2>
+        {children}
+      </div>
+      <div className="flex flex-wrap justify-center gap-3">{actions}</div>
+    </Card>
   )
 }
 
@@ -136,45 +159,55 @@ export function AttemptEndedPanel({ attempt, lessonId, onRetake }) {
   const terminated = attempt?.status === 'terminated'
   const answered = Object.keys(attempt?.answers || {}).length
   return (
-    <div className="max-w-xl mx-auto py-10 space-y-6 text-center" role="alert">
-      <div className="text-5xl" aria-hidden="true">{terminated ? '⛔' : '⏸️'}</div>
-      <h2 className="text-xl font-bold text-white">{terminated ? 'This quiz has ended' : 'This attempt was closed'}</h2>
-      <p className="text-sm text-slate-300 leading-relaxed">{END_REASONS[attempt?.end_reason] || 'This attempt can no longer be continued.'}</p>
-      <p className="text-xs text-slate-400 leading-relaxed">
+    <EndedLayout
+      role="alert"
+      icon={terminated ? OctagonX : CirclePause}
+      tone={terminated ? 'danger' : 'neutral'}
+      title={terminated ? 'This quiz has ended' : 'This attempt was closed'}
+      actions={
+        <>
+          <RetakeButton secondsLeft={secondsLeft} onRetake={onRetake} />
+          {lessonId && (
+            <Button to={`/lesson/${lessonId}`} variant="secondary" icon={ArrowLeft}>
+              Back to the lesson
+            </Button>
+          )}
+        </>
+      }
+    >
+      <p className="text-sm leading-relaxed text-ink">{END_REASONS[attempt?.end_reason] || 'This attempt can no longer be continued.'}</p>
+      <p className="text-[13px] leading-relaxed text-ink-2">
         Your {answered} saved answer{answered === 1 ? ' was' : 's were'} kept. This attempt was not graded and does not count towards your
         progress, averages or recommendations.
       </p>
-      <div className="flex flex-wrap justify-center gap-3">
-        <RetakeButton secondsLeft={secondsLeft} onRetake={onRetake} />
-        {lessonId && (
-          <Link to={`/lesson/${lessonId}`} className="px-5 py-2.5 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-800 font-semibold text-sm">
-            Back to the lesson
-          </Link>
-        )}
-      </div>
-    </div>
+    </EndedLayout>
   )
 }
 
 export function CooldownPanel({ retryAfterSeconds, lessonId, onRetake, endReason }) {
   const secondsLeft = useCountdown(retryAfterSeconds)
   return (
-    <div className="max-w-xl mx-auto py-10 space-y-6 text-center" role="status">
-      <div className="text-5xl" aria-hidden="true">⏳</div>
-      <h2 className="text-xl font-bold text-white">Please wait before retaking this quiz</h2>
-      <p className="text-sm text-slate-300 leading-relaxed">
+    <EndedLayout
+      role="status"
+      icon={Hourglass}
+      tone="warning"
+      title="Please wait before retaking this quiz"
+      actions={
+        <>
+          <RetakeButton secondsLeft={secondsLeft} onRetake={onRetake} />
+          {lessonId && (
+            <Button to={`/lesson/${lessonId}`} variant="secondary" icon={ArrowLeft}>
+              Back to the lesson
+            </Button>
+          )}
+        </>
+      }
+    >
+      <p className="text-sm leading-relaxed text-ink">
         Your previous attempt at this quiz ended without grading. A new attempt can start when the 5-minute wait is over.
       </p>
-      {END_REASONS[endReason] && <p className="text-xs text-slate-400 leading-relaxed">{END_REASONS[endReason]}</p>}
-      <div className="flex flex-wrap justify-center gap-3">
-        <RetakeButton secondsLeft={secondsLeft} onRetake={onRetake} />
-        {lessonId && (
-          <Link to={`/lesson/${lessonId}`} className="px-5 py-2.5 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-800 font-semibold text-sm">
-            Back to the lesson
-          </Link>
-        )}
-      </div>
-    </div>
+      {END_REASONS[endReason] && <p className="text-[13px] leading-relaxed text-ink-2">{END_REASONS[endReason]}</p>}
+    </EndedLayout>
   )
 }
 
@@ -185,8 +218,13 @@ export function SaveStatus({ state }) {
     offline: 'Offline: answers kept on this device',
   }[state]
   if (!text) return null
+  const Icon = state === 'offline' ? CloudOff : state === 'saving' ? LoaderCircle : Check
   return (
-    <span className={`text-[11px] font-semibold ${state === 'offline' ? 'text-amber-400' : 'text-slate-500'}`} aria-live="polite">
+    <span
+      className={cx('inline-flex items-center gap-1.5 text-xs font-medium', state === 'offline' ? 'text-warning' : 'text-ink-2')}
+      aria-live="polite"
+    >
+      <Icon size={14} className={cx('shrink-0', state === 'saving' && 'animate-spin', state === 'saved' && 'text-success')} aria-hidden="true" />
       {text}
     </span>
   )

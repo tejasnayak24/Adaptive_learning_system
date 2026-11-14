@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useId, useState } from 'react'
 import {
+  Area,
+  AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
+  LabelList,
   Line,
   LineChart,
   ReferenceLine,
@@ -11,84 +15,189 @@ import {
   XAxis,
   YAxis
 } from 'recharts'
-import {
-  ATTENTION_COLOR,
-  SCORE_COLOR,
-  TELEMETRY_HELP,
-  attentionSummary,
-  formatDate,
-  formatPercent,
-  observationText
-} from '../utils/analytics'
-import { Panel, TelemetryBadge } from './AnalyticsPanels'
+import { ChartColumn, Table2 } from 'lucide-react'
+import { ATTENTION_COLOR, SCORE_COLOR, SUBJECT_ORDER, formatDate, formatPercent, topicStatusInfo } from '../utils/analytics'
+import { TOPIC_STATUS_COLORS, TOPIC_STATUS_VISUALS, subjectVisual } from './visuals'
+import { useReducedMotion } from '../hooks/useReducedMotion'
+import { Button, Card, DataTable, SectionHeader, cx, svgId } from './ui'
 
-// Chart components live in their own module so that only pages that draw
+// Chart components live in their own module so only the pages that draw
 // charts (Progress & Analytics) load the charting library.
+//
+// Marks follow one spec: 2px lines, markers r=4 with a 2px surface ring,
+// bars at most 24px thick with 4px rounded data ends, a solid hairline grid,
+// and text in ink colours (never the data colour).
 
-const AXIS = { stroke: '#475569', fontSize: 11, tickLine: false }
-const GRID = { strokeDasharray: '3 3', stroke: '#1e293b', vertical: false }
+const SURFACE = '#151c2d'
+const GRID_STROKE = '#222b40'
+const TICK = { fill: '#a0abc0', fontSize: 11 }
+const AXIS = { stroke: GRID_STROKE, tickLine: false, axisLine: false, tick: TICK }
+const MOTION = { animationDuration: 700, animationEasing: 'ease-out' }
 
-const TONES = {
-  emerald: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/25',
-  amber: 'bg-amber-500/10 text-amber-300 border-amber-500/25',
-  slate: 'bg-slate-800/60 text-slate-300 border-slate-700'
-}
-
-// ------------------------------------------------------------------ charts
-
-function ChartTooltip({ active, payload, kind }) {
-  if (!active || !payload?.length) return null
-  const row = payload[0].payload
+/** Card with a chart and a "table" twin, so no value depends on hovering. */
+export function ChartCard({ title, description, action, legend, table, className, children }) {
+  const [asTable, setAsTable] = useState(false)
+  const headingId = useId()
   return (
-    <div className="rounded-xl border border-slate-700 bg-slate-950/95 px-3 py-2 text-xs shadow-xl space-y-0.5 max-w-[240px]">
-      {kind === 'week' ? (
-        <>
-          <p className="font-semibold text-white">Week of {formatDate(row.week)}</p>
-          <p className="text-slate-300">
-            {row.attempts} quiz attempt{row.attempts === 1 ? '' : 's'}
-          </p>
-        </>
+    <Card as="section" aria-labelledby={headingId} className={cx('space-y-4', className)}>
+      <SectionHeader
+        id={headingId}
+        title={title}
+        description={description}
+        action={
+          <>
+            {action}
+            {table && (
+              <Button
+                variant="ghost"
+                size="xs"
+                icon={asTable ? ChartColumn : Table2}
+                onClick={() => setAsTable((value) => !value)}
+                aria-pressed={asTable}
+              >
+                {asTable ? 'Chart' : 'Table'}
+              </Button>
+            )}
+          </>
+        }
+      />
+      {legend && !asTable && <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-ink-2">{legend}</div>}
+      {asTable && table ? (
+        <DataTable caption={`${title} (table view)`} columns={table.columns} rows={table.rows} rowKey={table.rowKey} minWidth={360} />
       ) : (
-        <>
-          <p className="font-semibold text-white">
-            Attempt {row.label} · {kind === 'attention' ? `${formatPercent(row.attention)} attention` : formatPercent(row.score)}
-          </p>
-          <p className="text-slate-300 truncate">{row.lesson}</p>
-          <p className="text-slate-500">
-            {row.subject} · {String(row.difficulty || '').toLowerCase()}
-            {row.mode && row.mode !== 'standard' ? ` · ${row.mode}` : ''}
-          </p>
-          <p className="text-slate-500">{formatDate(row.at, { withTime: true })}</p>
-        </>
+        children
       )}
-    </div>
+    </Card>
   )
 }
 
-export function ScoreTrendChart({ rows, passScore = 50, height = 260 }) {
+export function LegendItem({ color, label, shape = 'square', icon: Icon }) {
   return (
-    <div style={{ height }} role="img" aria-label="Line chart of quiz scores by attempt">
+    <span className="inline-flex items-center gap-1.5">
+      {shape === 'line' ? (
+        <span className="h-[2px] w-3.5 rounded-full" style={{ background: color }} aria-hidden="true" />
+      ) : (
+        <span className="h-2.5 w-2.5 rounded-[3px]" style={{ background: color }} aria-hidden="true" />
+      )}
+      {Icon && <Icon size={13} className="text-ink-2" aria-hidden="true" />}
+      {label}
+    </span>
+  )
+}
+
+function TooltipCard({ children }) {
+  return <div className="max-w-[260px] rounded-xl border border-line-strong bg-[#1e2740]/95 px-3 py-2.5 text-xs shadow-raised">{children}</div>
+}
+
+function KeyLine({ color }) {
+  return <span className="mt-1.5 inline-block h-[2px] w-3 shrink-0 rounded-full" style={{ background: color }} aria-hidden="true" />
+}
+
+function AttemptTooltip({ active, payload, kind }) {
+  if (!active || !payload?.length) return null
+  const row = payload[0].payload
+  const value = kind === 'attention' ? row.attention : row.score
+  return (
+    <TooltipCard>
+      <div className="flex items-start gap-2">
+        <KeyLine color={kind === 'attention' ? ATTENTION_COLOR : SCORE_COLOR} />
+        <div className="min-w-0 space-y-0.5">
+          <p className="text-sm font-semibold text-ink">
+            {formatPercent(value)} <span className="text-xs font-normal text-ink-2">{kind === 'attention' ? 'attention' : 'score'}</span>
+          </p>
+          <p className="truncate text-ink">{row.lesson}</p>
+          <p className="text-ink-2">
+            Attempt {row.label} · {row.subject} · {String(row.difficulty || '').toLowerCase()}
+            {row.mode && row.mode !== 'standard' ? ` · ${row.mode}` : ''}
+          </p>
+          <p className="text-ink-2">{formatDate(row.at, { withTime: true })}</p>
+        </div>
+      </div>
+    </TooltipCard>
+  )
+}
+
+function weekLabel(week, long = false) {
+  const date = new Date(`${week}T00:00:00`)
+  return date.toLocaleDateString(undefined, long ? { day: 'numeric', month: 'short', year: 'numeric' } : { day: 'numeric', month: 'short' })
+}
+
+function WeekTooltip({ active, payload }) {
+  if (!active || !payload?.length) return null
+  const row = payload[0].payload
+  return (
+    <TooltipCard>
+      <p className="text-sm font-semibold text-ink">
+        {row.attempts} <span className="text-xs font-normal text-ink-2">quiz attempt{row.attempts === 1 ? '' : 's'}</span>
+      </p>
+      <p className="text-ink-2">Week of {weekLabel(row.week, true)}</p>
+    </TooltipCard>
+  )
+}
+
+/** Quiz score per attempt with the pass mark. One series: the title names it. */
+export function ScoreTrendChart({ rows, passScore = 50, height = 280 }) {
+  const reduced = useReducedMotion()
+  const fillId = svgId(useId())
+  return (
+    <div style={{ height }} role="img" aria-label={`Area chart of ${rows.length} quiz scores in order, with the ${passScore}% pass mark`}>
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={rows} margin={{ top: 8, right: 12, left: -18, bottom: 0 }}>
-          <CartesianGrid {...GRID} />
-          <XAxis dataKey="label" {...AXIS} minTickGap={16} />
-          <YAxis {...AXIS} domain={[0, 100]} ticks={[0, 25, 50, 75, 100]} unit="%" />
+        <AreaChart data={rows} margin={{ top: 12, right: 14, left: 0, bottom: 0 }}>
+          <defs>
+            <linearGradient id={fillId} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor={SCORE_COLOR} stopOpacity={0.22} />
+              <stop offset="100%" stopColor={SCORE_COLOR} stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid stroke={GRID_STROKE} vertical={false} />
+          <XAxis dataKey="label" {...AXIS} minTickGap={18} tickMargin={8} />
+          <YAxis {...AXIS} domain={[0, 100]} ticks={[0, 25, 50, 75, 100]} tickFormatter={(v) => `${v}%`} width={42} />
           <ReferenceLine
             y={passScore}
-            stroke="#64748b"
+            stroke="#69758c"
             strokeDasharray="4 4"
-            label={{ value: `Pass ${passScore}%`, position: 'insideTopRight', fill: '#94a3b8', fontSize: 10 }}
+            label={{ value: `Pass ${passScore}%`, position: 'insideTopRight', fill: '#a0abc0', fontSize: 11 }}
           />
-          <Tooltip content={<ChartTooltip kind="score" />} cursor={{ stroke: '#334155' }} />
-          <Line
+          <Tooltip content={<AttemptTooltip kind="score" />} cursor={{ stroke: '#3a4664', strokeWidth: 1 }} />
+          <Area
             type="monotone"
             dataKey="score"
             name="Quiz score"
             stroke={SCORE_COLOR}
             strokeWidth={2}
-            dot={{ r: 4, strokeWidth: 2, stroke: '#07090e', fill: SCORE_COLOR }}
-            activeDot={{ r: 6 }}
-            isAnimationActive={false}
+            fill={`url(#${fillId})`}
+            dot={{ r: 4, strokeWidth: 2, stroke: SURFACE, fill: SCORE_COLOR }}
+            activeDot={{ r: 6, strokeWidth: 2, stroke: SURFACE, fill: SCORE_COLOR }}
+            isAnimationActive={!reduced}
+            {...MOTION}
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}
+
+/** Attention per measured quiz (camera). One series. */
+export function AttentionTrendChart({ rows, height = 220 }) {
+  const reduced = useReducedMotion()
+  return (
+    <div style={{ height }} role="img" aria-label={`Line chart of attention in ${rows.length} measured quizzes`}>
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={rows} margin={{ top: 12, right: 14, left: 0, bottom: 0 }}>
+          <CartesianGrid stroke={GRID_STROKE} vertical={false} />
+          <XAxis dataKey="label" {...AXIS} minTickGap={18} tickMargin={8} />
+          <YAxis {...AXIS} domain={[0, 100]} ticks={[0, 50, 100]} tickFormatter={(v) => `${v}%`} width={42} />
+          <Tooltip content={<AttemptTooltip kind="attention" />} cursor={{ stroke: '#3a4664', strokeWidth: 1 }} />
+          <Line
+            type="monotone"
+            dataKey="attention"
+            name="Attention"
+            stroke={ATTENTION_COLOR}
+            strokeWidth={2}
+            dot={{ r: 4, strokeWidth: 2, stroke: SURFACE, fill: ATTENTION_COLOR }}
+            activeDot={{ r: 6, strokeWidth: 2, stroke: SURFACE, fill: ATTENTION_COLOR }}
+            isAnimationActive={!reduced}
+            {...MOTION}
           />
         </LineChart>
       </ResponsiveContainer>
@@ -96,130 +205,158 @@ export function ScoreTrendChart({ rows, passScore = 50, height = 260 }) {
   )
 }
 
-export function WeeklyActivityChart({ weeks, height = 200 }) {
+/** Quiz attempts per week. One series. */
+export function WeeklyActivityChart({ weeks, height = 220 }) {
+  const reduced = useReducedMotion()
   return (
-    <div style={{ height }} role="img" aria-label="Bar chart of quiz attempts per week">
+    <div style={{ height }} role="img" aria-label={`Column chart of quiz attempts per week over ${weeks.length} weeks`}>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={weeks} margin={{ top: 8, right: 12, left: -24, bottom: 0 }}>
-          <CartesianGrid {...GRID} />
-          <XAxis
-            dataKey="week"
-            {...AXIS}
-            minTickGap={12}
-            tickFormatter={(w) => new Date(`${w}T00:00:00`).toLocaleDateString(undefined, { day: 'numeric', month: 'short' })}
+        <BarChart data={weeks} margin={{ top: 12, right: 14, left: 0, bottom: 0 }}>
+          <CartesianGrid stroke={GRID_STROKE} vertical={false} />
+          <XAxis dataKey="week" {...AXIS} minTickGap={14} tickMargin={8} tickFormatter={(w) => weekLabel(w)} />
+          <YAxis {...AXIS} allowDecimals={false} width={30} />
+          <Tooltip content={<WeekTooltip />} cursor={{ fill: 'rgb(255 255 255 / 0.03)' }} />
+          <Bar
+            dataKey="attempts"
+            name="Quiz attempts"
+            fill={SCORE_COLOR}
+            radius={[4, 4, 0, 0]}
+            maxBarSize={24}
+            isAnimationActive={!reduced}
+            {...MOTION}
           />
-          <YAxis {...AXIS} allowDecimals={false} />
-          <Tooltip content={<ChartTooltip kind="week" />} cursor={{ fill: '#1e293b55' }} />
-          <Bar dataKey="attempts" name="Quiz attempts" fill={SCORE_COLOR} radius={[4, 4, 0, 0]} maxBarSize={36} isAnimationActive={false} />
         </BarChart>
       </ResponsiveContainer>
     </div>
   )
 }
 
-// --------------------------------------------------------------- attention
-
-export function AttentionPanel({ attention, trendRows }) {
-  const summary = attentionSummary(attention)
-  const measuredRows = (trendRows || []).filter((r) => r.attention !== null && r.attention !== undefined)
-
+function SubjectTooltip({ active, payload }) {
+  if (!active || !payload?.length) return null
+  const row = payload[0].payload
   return (
-    <Panel
-      title="Focus during quizzes (camera)"
-      subtitle="The camera agent measures attention while you take a quiz. Aegis stores one average per quiz, not a continuous recording, so these figures describe your quizzes only."
-    >
-      <p
-        className={`rounded-2xl border px-4 py-3 text-xs leading-relaxed ${
-          summary.level === 'ok' ? TONES.emerald : summary.level === 'limited' ? TONES.amber : TONES.slate
-        }`}
-      >
-        {summary.message}
-      </p>
-
-      {attention && attention.attempts_total > 0 && (
-        <>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            <MiniStat
-              label="Average attention"
-              value={formatPercent(attention.average_attention)}
-              note={attention.measured_attempts ? `${attention.measured_attempts} measured quizzes` : 'no measurements'}
-            />
-            <MiniStat label="Yawning seen in" value={observationText(attention.yawning)} />
-            <MiniStat label="Looking away seen in" value={observationText(attention.looking_away)} />
-            <MiniStat label="Drowsiness seen in" value={observationText(attention.drowsiness)} />
-          </div>
-
-          <div className="flex flex-wrap gap-2 text-[11px]">
-            <span className="inline-flex items-center gap-1.5">
-              <TelemetryBadge telemetry="measured" />
-              <span className="text-slate-400 tabular-nums">{attention.measured_attempts}</span>
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <TelemetryBadge telemetry="unavailable" />
-              <span className="text-slate-400 tabular-nums">{attention.unavailable_attempts}</span>
-            </span>
-            {attention.not_monitored_attempts > 0 && (
-              <span className="inline-flex items-center gap-1.5">
-                <TelemetryBadge telemetry="not_monitored" />
-                <span className="text-slate-400 tabular-nums">{attention.not_monitored_attempts}</span>
-              </span>
-            )}
-          </div>
-          {attention.unavailable_attempts > 0 && (
-            <p className="text-[11px] text-slate-500 leading-relaxed">{TELEMETRY_HELP.unavailable}</p>
-          )}
-
-          {measuredRows.length >= 2 ? (
-            <div style={{ height: 200 }} role="img" aria-label="Line chart of attention per measured quiz">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={measuredRows} margin={{ top: 8, right: 12, left: -18, bottom: 0 }}>
-                  <CartesianGrid {...GRID} />
-                  <XAxis dataKey="label" {...AXIS} minTickGap={16} />
-                  <YAxis {...AXIS} domain={[0, 100]} ticks={[0, 50, 100]} unit="%" />
-                  <Tooltip content={<ChartTooltip kind="attention" />} cursor={{ stroke: '#334155' }} />
-                  <Line
-                    type="monotone"
-                    dataKey="attention"
-                    name="Attention"
-                    stroke={ATTENTION_COLOR}
-                    strokeWidth={2}
-                    dot={{ r: 4, strokeWidth: 2, stroke: '#07090e', fill: ATTENTION_COLOR }}
-                    isAnimationActive={false}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          ) : (
-            <p className="text-xs text-slate-500">
-              The attention trend appears once at least two quizzes have a camera measurement. Quiz numbers match the score trend above.
-            </p>
-          )}
-
-          {attention.by_subject?.length > 1 && (
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-              {attention.by_subject.map((s) => (
-                <li key={s.subject} className="flex justify-between rounded-xl bg-slate-900/40 border border-slate-800 px-3 py-2">
-                  <span className="text-slate-300">{s.subject}</span>
-                  <span className="text-slate-200 font-semibold tabular-nums">
-                    {formatPercent(s.average_attention)}{' '}
-                    <span className="text-slate-500 font-normal">({s.measured_attempts})</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </>
-      )}
-    </Panel>
+    <TooltipCard>
+      <div className="flex items-start gap-2">
+        <KeyLine color={subjectVisual(row.subject).color} />
+        <div className="space-y-0.5">
+          <p className="text-sm font-semibold text-ink">
+            {formatPercent(row.score)} <span className="text-xs font-normal text-ink-2">average score</span>
+          </p>
+          <p className="text-ink">{row.subject}</p>
+          <p className="text-ink-2">
+            {row.attempts} quiz{row.attempts === 1 ? '' : 'zes'} · {row.completed}/{row.total} lessons passed
+          </p>
+        </div>
+      </div>
+    </TooltipCard>
   )
 }
 
-function MiniStat({ label, value, note }) {
+/** Average score by subject (subjects with at least one quiz), named on the axis. */
+export function SubjectScoreChart({ subjects, passScore = 50 }) {
+  const reduced = useReducedMotion()
+  const rows = SUBJECT_ORDER.map((name) => subjects.find((s) => s.subject === name))
+    .filter((s) => s && s.quiz_attempts > 0 && s.average_score !== null && s.average_score !== undefined)
+    .map((s) => ({
+      subject: s.subject,
+      score: Math.round(s.average_score),
+      attempts: s.quiz_attempts,
+      completed: s.lessons_completed,
+      total: s.lessons_total
+    }))
+  if (!rows.length) return null
+  const height = rows.length * 44 + 36
   return (
-    <div className="rounded-2xl bg-slate-900/40 border border-slate-800 p-3">
-      <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">{label}</p>
-      <p className="mt-1 text-sm font-bold text-white">{value}</p>
-      {note && <p className="text-[10px] text-slate-500">{note}</p>}
+    <div style={{ height }} role="img" aria-label="Bar chart of average quiz score by subject">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={rows} layout="vertical" margin={{ top: 4, right: 44, left: 0, bottom: 0 }} barCategoryGap={10}>
+          <CartesianGrid stroke={GRID_STROKE} horizontal={false} />
+          <XAxis type="number" domain={[0, 100]} ticks={[0, 25, 50, 75, 100]} tickFormatter={(v) => `${v}%`} {...AXIS} />
+          <YAxis type="category" dataKey="subject" {...AXIS} width={112} tick={{ ...TICK, fill: '#f4f6ff', fontSize: 12 }} />
+          <ReferenceLine x={passScore} stroke="#69758c" strokeDasharray="4 4" />
+          <Tooltip content={<SubjectTooltip />} cursor={{ fill: 'rgb(255 255 255 / 0.03)' }} />
+          <Bar dataKey="score" name="Average score" barSize={20} radius={[0, 4, 4, 0]} isAnimationActive={!reduced} {...MOTION}>
+            {rows.map((row) => (
+              <Cell key={row.subject} fill={subjectVisual(row.subject).color} />
+            ))}
+            <LabelList dataKey="score" position="right" formatter={(v) => `${v}%`} fill="#f4f6ff" fontSize={12} />
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   )
+}
+
+export const TOPIC_STATUS_KEYS = ['strong', 'needs_revision', 'weak', 'insufficient_data', 'not_started']
+
+/** Topic counts by status for each subject. */
+export function topicStatusRows(topics) {
+  return SUBJECT_ORDER.map((subject) => {
+    const own = (topics || []).filter((t) => t.subject === subject)
+    if (!own.length) return null
+    const row = { subject, total: own.length }
+    for (const key of TOPIC_STATUS_KEYS) row[key] = own.filter((t) => t.status === key).length
+    return row
+  }).filter(Boolean)
+}
+
+function TopicStatusTooltip({ active, payload }) {
+  if (!active || !payload?.length) return null
+  const row = payload[0].payload
+  return (
+    <TooltipCard>
+      <p className="mb-1.5 text-sm font-semibold text-ink">{row.subject}</p>
+      <ul className="space-y-1">
+        {TOPIC_STATUS_KEYS.filter((key) => row[key] > 0).map((key) => (
+          <li key={key} className="flex items-center justify-between gap-4">
+            <span className="flex items-center gap-1.5 text-ink-2">
+              <KeyLine color={TOPIC_STATUS_COLORS[key]} />
+              {topicStatusInfo(key).label}
+            </span>
+            <span className="font-semibold text-ink tabular-nums">{row[key]}</span>
+          </li>
+        ))}
+      </ul>
+    </TooltipCard>
+  )
+}
+
+/** Each subject's topics split by status: one bar per subject, parts in status order. */
+export function TopicStatusChart({ topics }) {
+  const reduced = useReducedMotion()
+  const rows = topicStatusRows(topics)
+  if (!rows.length) return null
+  const height = rows.length * 44 + 8
+  return (
+    <div style={{ height }} role="img" aria-label="Stacked bar chart of topic status counts for each subject">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={rows} layout="vertical" margin={{ top: 4, right: 8, left: 0, bottom: 4 }} barCategoryGap={12}>
+          <XAxis type="number" hide domain={[0, 'dataMax']} />
+          <YAxis type="category" dataKey="subject" {...AXIS} width={112} tick={{ ...TICK, fill: '#f4f6ff', fontSize: 12 }} />
+          <Tooltip content={<TopicStatusTooltip />} cursor={{ fill: 'rgb(255 255 255 / 0.03)' }} />
+          {TOPIC_STATUS_KEYS.map((key) => (
+            <Bar
+              key={key}
+              dataKey={key}
+              stackId="topics"
+              name={topicStatusInfo(key).label}
+              fill={TOPIC_STATUS_COLORS[key]}
+              stroke={SURFACE}
+              strokeWidth={2}
+              barSize={22}
+              radius={3}
+              isAnimationActive={!reduced}
+              {...MOTION}
+            />
+          ))}
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}
+
+export function TopicStatusLegend() {
+  return TOPIC_STATUS_KEYS.map((key) => (
+    <LegendItem key={key} color={TOPIC_STATUS_COLORS[key]} icon={TOPIC_STATUS_VISUALS[key].icon} label={topicStatusInfo(key).label} />
+  ))
 }

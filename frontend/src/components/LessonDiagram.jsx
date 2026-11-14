@@ -1,21 +1,21 @@
 import React from 'react'
+import { ArrowRight, RotateCcw } from 'lucide-react'
 
 // Renders the data-driven lesson diagrams stored in lesson material.
 // Supported types: flow, cycle, table, labelled, number_line, bar.
 
 function Flow({ items, cycle }) {
   return (
-    <ol className="flex flex-wrap items-stretch gap-2">
+    <ol className="flex flex-wrap items-center gap-2">
       {items.map((item, index) => (
         <li key={index} className="flex items-center gap-2">
-          <span className="rounded-xl border border-indigo-500/30 bg-indigo-500/10 px-3 py-2 text-xs font-semibold text-indigo-100">
-            {item}
-          </span>
-          {(index < items.length - 1 || cycle) && (
-            <span aria-hidden="true" className="text-indigo-400">
-              {index === items.length - 1 ? '↺' : '→'}
-            </span>
-          )}
+          <span className="rounded-lg border border-brand-500/30 bg-brand-500/[0.08] px-3 py-2 text-[13px] font-medium text-ink">{item}</span>
+          {(index < items.length - 1 || cycle) &&
+            (index === items.length - 1 ? (
+              <RotateCcw size={16} className="text-brand-300" aria-label="back to the start" />
+            ) : (
+              <ArrowRight size={16} className="text-brand-300" aria-hidden="true" />
+            ))}
         </li>
       ))}
     </ol>
@@ -24,22 +24,22 @@ function Flow({ items, cycle }) {
 
 function Table({ columns, rows }) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-left text-xs">
+    <div className="overflow-x-auto rounded-xl border border-line">
+      <table className="w-full min-w-[420px] border-collapse text-left text-[13px]">
         <thead>
-          <tr>
+          <tr className="bg-white/[0.03]">
             {columns.map((column) => (
-              <th key={column} className="border-b border-slate-700 px-3 py-2 font-bold text-slate-300">
+              <th key={column} scope="col" className="border-b border-line px-3.5 py-2.5 font-semibold text-ink">
                 {column}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="divide-y divide-line/70">
           {rows.map((row, r) => (
-            <tr key={r} className="odd:bg-slate-900/40">
+            <tr key={r}>
               {row.map((cell, c) => (
-                <td key={c} className="border-b border-slate-800 px-3 py-2 text-slate-300">
+                <td key={c} className="formula px-3.5 py-2.5 text-[#c9d1e2]">
                   {cell}
                 </td>
               ))}
@@ -53,11 +53,11 @@ function Table({ columns, rows }) {
 
 function Labelled({ items }) {
   return (
-    <dl className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+    <dl className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
       {items.map(([label, detail]) => (
-        <div key={label} className="rounded-xl border border-slate-800 bg-slate-900/40 px-3 py-2">
-          <dt className="text-xs font-bold text-teal-300">{label}</dt>
-          <dd className="text-xs text-slate-300">{detail}</dd>
+        <div key={label} className="rounded-xl border border-line bg-deep/60 px-3.5 py-2.5">
+          <dt className="text-[13px] font-semibold text-mint-300">{label}</dt>
+          <dd className="mt-0.5 text-[13px] leading-relaxed text-ink-2">{detail}</dd>
         </div>
       ))}
     </dl>
@@ -74,19 +74,19 @@ function NumberLine({ min, max, points }) {
   for (let v = min; v <= max + 1e-9; v += step) ticks.push(Math.round(v * 100) / 100)
   return (
     <svg viewBox={`0 0 ${width} 90`} className="w-full" role="img" aria-label="Number line">
-      <line x1={pad} y1="50" x2={width - pad} y2="50" stroke="currentColor" className="text-slate-500" strokeWidth="2" />
+      <line x1={pad} y1="50" x2={width - pad} y2="50" stroke="#3a4664" strokeWidth="2" strokeLinecap="round" />
       {ticks.map((t) => (
         <g key={t}>
-          <line x1={x(t)} y1="45" x2={x(t)} y2="55" stroke="currentColor" className="text-slate-500" />
-          <text x={x(t)} y="72" textAnchor="middle" className="fill-slate-400" fontSize="11">
+          <line x1={x(t)} y1="45" x2={x(t)} y2="55" stroke="#4f5b75" />
+          <text x={x(t)} y="72" textAnchor="middle" fill="#a0abc0" fontSize="11">
             {t}
           </text>
         </g>
       ))}
       {points.map(([value, label], i) => (
         <g key={i}>
-          <circle cx={x(value)} cy="50" r="5" className="fill-indigo-400" />
-          <text x={x(value)} y={i % 2 ? 20 : 32} textAnchor="middle" className="fill-indigo-200" fontSize="11">
+          <circle cx={x(value)} cy="50" r="5" fill="#8875ff" stroke="#090d18" strokeWidth="2" />
+          <text x={x(value)} y={i % 2 ? 20 : 32} textAnchor="middle" fill="#f4f6ff" fontSize="11">
             {label}
           </text>
         </g>
@@ -98,14 +98,14 @@ function NumberLine({ min, max, points }) {
 function Bar({ items, unit }) {
   const max = Math.max(...items.map(([, v]) => v), 1)
   return (
-    <div className="space-y-2">
+    <div className="space-y-2.5">
       {items.map(([label, value]) => (
-        <div key={label} className="flex items-center gap-3 text-xs">
-          <span className="w-36 shrink-0 text-slate-300">{label}</span>
-          <div className="h-4 flex-1 rounded bg-slate-900">
-            <div className="h-4 rounded bg-teal-500/70" style={{ width: `${(value / max) * 100}%` }} />
+        <div key={label} className="flex items-center gap-3 text-[13px]">
+          <span className="w-28 shrink-0 text-ink-2 sm:w-36">{label}</span>
+          <div className="h-3 flex-1 rounded-full bg-white/[0.06]">
+            <div className="h-3 rounded-full bg-mint-500" style={{ width: `${(value / max) * 100}%` }} />
           </div>
-          <span className="w-16 text-right font-semibold text-slate-200">
+          <span className="w-16 text-right font-semibold tabular-nums text-ink">
             {unit === '₹' ? `₹${value}` : `${value}${unit ? ` ${unit}` : ''}`}
           </span>
         </div>
@@ -126,8 +126,8 @@ export default function LessonDiagram({ diagram }) {
   if (!body) return null
 
   return (
-    <figure className="rounded-2xl border border-slate-800 bg-slate-950/40 p-4 space-y-3">
-      {title && <figcaption className="text-xs font-bold uppercase tracking-wider text-slate-400">{title}</figcaption>}
+    <figure className="space-y-4 rounded-card border border-line bg-surface p-5 shadow-card">
+      {title && <figcaption className="text-sm font-semibold text-ink">{title}</figcaption>}
       {body}
     </figure>
   )

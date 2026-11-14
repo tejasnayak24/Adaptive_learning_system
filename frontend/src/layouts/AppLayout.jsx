@@ -1,197 +1,322 @@
-import React, { Suspense, useState } from 'react'
-import { Outlet, NavLink, useNavigate } from 'react-router-dom'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import {
+  BookOpen,
+  Camera,
+  CameraOff,
+  ChartLine,
+  GraduationCap,
+  LayoutDashboard,
+  LoaderCircle,
+  LogOut,
+  Menu,
+  ShieldCheck,
+  Sparkles,
+  X
+} from 'lucide-react'
 import GradeGate from '../components/GradeGate'
 import { useAuth } from '../context/AuthContext'
+import { useMonitoring } from '../context/MonitoringContext'
+import { Badge, Breadcrumbs, Button, IconButton, Modal, PageSkeleton, Tooltip, Wordmark, cx } from '../components/ui'
+
+const NAV_SECTIONS = [
+  {
+    label: 'Learn',
+    items: [
+      { name: 'Dashboard', to: '/', icon: LayoutDashboard, match: (path) => path === '/' },
+      {
+        name: 'My Learning',
+        to: '/subjects',
+        icon: BookOpen,
+        match: (path) => path.startsWith('/subjects') || path.startsWith('/lesson/') || path.startsWith('/quiz/')
+      }
+    ]
+  },
+  {
+    label: 'Insights',
+    items: [
+      { name: 'Progress', to: '/progress', icon: ChartLine, match: (path) => path.startsWith('/progress') },
+      { name: 'AI Coach', to: '/recommendations', icon: Sparkles, match: (path) => path.startsWith('/recommendations') },
+      { name: 'Session Activity', to: '/activity', icon: ShieldCheck, match: (path) => path.startsWith('/activity') }
+    ]
+  }
+]
+
+function routeTrail(path) {
+  if (path.startsWith('/lesson/')) return [{ label: 'My Learning', to: '/subjects' }, { label: 'Lesson' }]
+  if (path.startsWith('/quiz/')) return [{ label: 'My Learning', to: '/subjects' }, { label: 'Quiz' }]
+  for (const section of NAV_SECTIONS) {
+    const item = section.items.find((entry) => entry.match(path))
+    if (item) return [{ label: section.label }, { label: item.name }]
+  }
+  return [{ label: 'Aegis' }]
+}
+
+const isLearningRoute = (path) => path.startsWith('/lesson/') || path.startsWith('/quiz/')
+
+// Camera state shown in the top bar while a lesson or quiz is open. Display
+// only: MonitoringGate decides what the student can do.
+const MONITORING_PILL = {
+  verified: { tone: 'success', icon: Camera, label: 'Camera verified' },
+  consent_required: { tone: 'warning', icon: CameraOff, label: 'Consent needed' },
+  agent_not_running: { tone: 'warning', icon: CameraOff, label: 'Camera agent not running' },
+  camera_unavailable: { tone: 'warning', icon: CameraOff, label: 'Webcam unavailable' },
+  no_face: { tone: 'warning', icon: CameraOff, label: 'No face detected' },
+  backend_disconnected: { tone: 'warning', icon: CameraOff, label: 'Camera data delayed' },
+  ended: { tone: 'neutral', icon: CameraOff, label: 'Monitoring ended' },
+  error: { tone: 'danger', icon: CameraOff, label: 'Camera error' }
+}
+
+function MonitoringPill() {
+  const { state, sessionId } = useMonitoring()
+  const starting = !sessionId && state !== 'consent_required'
+  const pill = (!starting && MONITORING_PILL[state]) || { tone: 'info', icon: LoaderCircle, label: 'Checking camera…', spin: true }
+  return (
+    <Badge tone={pill.tone} icon={pill.icon} className={cx(pill.spin && '[&_svg]:animate-spin')} role="status" aria-live="polite">
+      {pill.label}
+    </Badge>
+  )
+}
+
+function initials(name) {
+  const parts = String(name || '').trim().split(/\s+/).filter(Boolean)
+  if (!parts.length) return 'ST'
+  return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase()
+}
+
+function NavItem({ item, path, onNavigate }) {
+  const Icon = item.icon
+  const active = item.match(path)
+  const exact = path === item.to
+  return (
+    <Link
+      to={item.to}
+      onClick={onNavigate}
+      aria-current={active ? (exact ? 'page' : 'true') : undefined}
+      className={cx(
+        'group relative flex h-10 items-center gap-3 rounded-[10px] px-3 text-sm font-medium transition-[background-color,color] duration-200',
+        active ? 'bg-white/[0.06] text-ink' : 'text-ink-2 hover:bg-white/[0.035] hover:text-ink'
+      )}
+    >
+      <span
+        className={cx(
+          'absolute left-0 top-2 bottom-2 w-[3px] rounded-r-full bg-brand-400 transition-[opacity,transform] duration-200 ease-out',
+          active ? 'scale-y-100 opacity-100' : 'scale-y-50 opacity-0'
+        )}
+        aria-hidden="true"
+      />
+      <Icon
+        size={18}
+        className={cx('shrink-0 transition-colors duration-200', active ? 'text-brand-300' : 'text-ink-3 group-hover:text-ink-2')}
+        aria-hidden="true"
+      />
+      <span className="truncate">{item.name}</span>
+    </Link>
+  )
+}
+
+function Navigation({ path, onNavigate }) {
+  return (
+    <nav aria-label="Main" className="space-y-7">
+      {NAV_SECTIONS.map((section) => (
+        <div key={section.label} className="space-y-1.5">
+          <p className="px-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-2/80">{section.label}</p>
+          <div className="space-y-0.5">
+            {section.items.map((item) => (
+              <NavItem key={item.to} item={item} path={path} onNavigate={onNavigate} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </nav>
+  )
+}
+
+function ProfileBlock({ user, onSignOut }) {
+  if (!user) return null
+  const role = (user.role || 'student').toLowerCase()
+  const roleLabel = role === 'student' ? (user.grade ? `Grade ${user.grade} student` : 'Student') : role.charAt(0).toUpperCase() + role.slice(1)
+  return (
+    <div className="border-t border-line p-3">
+      <div className="flex items-center gap-3 rounded-xl px-2 py-2">
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand-500/35 to-mint-500/25 text-[13px] font-semibold text-ink ring-1 ring-inset ring-white/10">
+          {initials(user.name)}
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-sm font-medium text-ink">{user.name}</p>
+          <p className="truncate text-xs text-ink-2">{roleLabel}</p>
+        </div>
+        <Tooltip content="Sign out" side="top" align="end">
+          <IconButton icon={LogOut} label="Sign out" size="sm" onClick={onSignOut} />
+        </Tooltip>
+      </div>
+    </div>
+  )
+}
 
 export default function AppLayout() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const location = useLocation()
+  const path = location.pathname
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [confirmSignOut, setConfirmSignOut] = useState(false)
+  const drawerCloseRef = useRef(null)
+  const menuButtonRef = useRef(null)
+
+  // Close the drawer whenever the route changes.
+  useEffect(() => {
+    setDrawerOpen(false)
+  }, [path])
+
+  useEffect(() => {
+    if (!drawerOpen) return undefined
+    drawerCloseRef.current?.focus()
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setDrawerOpen(false)
+    }
+    document.addEventListener('keydown', onKeyDown)
+    const menuButton = menuButtonRef.current
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      menuButton?.focus()
+    }
+  }, [drawerOpen])
 
   const handleLogout = () => {
+    setConfirmSignOut(false)
     logout()
     navigate('/login')
   }
 
-  const navItems = [
-    {
-      name: 'Dashboard',
-      path: '/',
-      icon: (
-        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
-        </svg>
-      ),
-    },
-    {
-      name: 'My Learning',
-      path: '/subjects',
-      icon: (
-        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Progress Log',
-      path: '/progress',
-      icon: (
-        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-        </svg>
-      ),
-    },
-    {
-      name: 'AI Coach',
-      path: '/recommendations',
-      icon: (
-        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Session Activity',
-      path: '/activity',
-      icon: (
-        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-        </svg>
-      ),
-    },
-  ]
+  const skipToContent = (event) => {
+    // Focus the content without a URL fragment (a fragment change would look
+    // like a Back press to the quiz's leave-guard).
+    event.preventDefault()
+    document.getElementById('main-content')?.focus()
+  }
 
-  // A render function, not a component: defining a component inside render
-  // would remount the whole sidebar on every render.
-  const renderSidebar = () => (
-    <div className="flex h-full flex-col justify-between p-6">
-      <div className="space-y-8">
-        {/* Brand Header */}
-        <div className="flex items-center gap-3 px-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500 text-lg shadow-md shadow-indigo-500/30">
-            🎓
-          </span>
-          <span className="font-display text-xl font-extrabold tracking-wide text-white">
-            Aegis<span className="text-teal-400">.</span>
-          </span>
-        </div>
-
-        {/* Navigation List */}
-        <nav className="space-y-1.5">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.path}
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold tracking-wide transition-all duration-200 group ${
-                  isActive
-                    ? 'bg-gradient-to-r from-indigo-500/15 to-indigo-500/5 text-indigo-400 border-l-2 border-indigo-500 shadow-sm shadow-indigo-500/5'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 border-l-2 border-transparent'
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  <span className={isActive ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-400 transition-colors'}>
-                    {item.icon}
-                  </span>
-                  {item.name}
-                </>
-              )}
-            </NavLink>
-          ))}
-        </nav>
-      </div>
-
-      {/* User Section at Bottom */}
-      <div className="border-t border-slate-800/80 pt-6 space-y-4">
-        {user && (
-          <div className="flex items-center gap-3 px-2">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-teal-400 text-sm font-bold text-white shadow-md">
-              {user.name ? user.name.split(' ').map(n => n[0]).join('').toUpperCase() : 'ST'}
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-bold text-slate-200">{user.name}</p>
-              <p className="truncate text-xs text-slate-500">{user.email}</p>
-            </div>
-          </div>
-        )}
-        <button
-          onClick={handleLogout}
-          className="flex w-full items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all"
-        >
-          <svg className="h-5 w-5 text-rose-400/80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-          </svg>
-          Logout
-        </button>
-      </div>
-    </div>
-  )
+  // Remount (and fade in) per section, not per lesson: moving between
+  // lessons keeps the monitored session's components mounted. The quiz gets
+  // no entrance animation at all: nothing animated may sit above its
+  // fixed-position integrity dialogs.
+  const transitionKey = path.split('/')[1] || 'home'
+  const animatePage = !path.startsWith('/quiz/')
 
   return (
-    <div className="flex h-screen bg-slate-950 text-slate-100 overflow-hidden">
-      {/* Desktop Sidebar (Fixed Left) */}
-      <aside className="hidden md:block w-64 shrink-0 border-r border-slate-900 bg-slate-925/80 backdrop-blur-md">
-        {renderSidebar()}
+    <div className="min-h-full bg-canvas">
+      <a
+        href="#main-content"
+        onClick={skipToContent}
+        className="sr-only z-[70] rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+      >
+        Skip to content
+      </a>
+
+      {/* Desktop sidebar */}
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[260px] flex-col border-r border-line bg-deep lg:flex">
+        <div className="flex h-16 shrink-0 items-center px-5">
+          <Link to="/" aria-label="Aegis dashboard" className="rounded-lg">
+            <Wordmark />
+          </Link>
+        </div>
+        <div className="flex-1 overflow-y-auto px-3 pb-4 pt-3">
+          <Navigation path={path} />
+        </div>
+        <ProfileBlock user={user} onSignOut={() => setConfirmSignOut(true)} />
       </aside>
 
-      {/* Main Workspace Frame */}
-      <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Mobile Topbar */}
-        <header className="md:hidden flex h-16 items-center justify-between border-b border-slate-900 bg-slate-925/80 backdrop-blur-md px-6 z-30">
-          <div className="flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500 text-sm">
-              🎓
-            </span>
-            <span className="font-display font-extrabold tracking-wide text-white">
-              Aegis
-            </span>
-          </div>
-          <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="rounded-lg p-2 text-slate-400 hover:bg-slate-900/60 hover:text-slate-200"
-          >
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </header>
-
-        {/* Mobile Sidebar Slide-Out Drawer */}
-        {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 flex md:hidden">
-            {/* Backdrop */}
-            <div
-              className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm"
-              onClick={() => setMobileMenuOpen(false)}
+      {/* Mobile drawer */}
+      {drawerOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Navigation">
+          <div className="absolute inset-0 animate-fade-in bg-[#05070d]/75" onClick={() => setDrawerOpen(false)} aria-hidden="true" />
+          <div className="relative flex h-full w-[min(300px,86vw)] animate-drawer-in flex-col border-r border-line bg-deep shadow-raised">
+            <div className="flex h-16 shrink-0 items-center justify-between pl-5 pr-3">
+              <Wordmark />
+              <IconButton ref={drawerCloseRef} icon={X} label="Close navigation" onClick={() => setDrawerOpen(false)} />
+            </div>
+            <div className="flex-1 overflow-y-auto px-3 pb-4 pt-3">
+              <Navigation path={path} onNavigate={() => setDrawerOpen(false)} />
+            </div>
+            <ProfileBlock
+              user={user}
+              onSignOut={() => {
+                setDrawerOpen(false)
+                setConfirmSignOut(true)
+              }}
             />
-            {/* Slide-out Menu Panel */}
-            <div className="relative flex w-64 max-w-xs flex-col bg-slate-925 border-r border-slate-800 animate-slide-in h-full">
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="absolute top-4 right-4 rounded-lg p-2 text-slate-400 hover:bg-slate-900/60"
-              >
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-              {renderSidebar()}
+          </div>
+        </div>
+      )}
+
+      <div className="flex min-h-full flex-col lg:pl-[260px]">
+        <header className="sticky top-0 z-20 border-b border-line/80 bg-canvas/85 backdrop-blur-md">
+          <div className="mx-auto flex h-16 max-w-[1240px] items-center gap-3 px-4 sm:px-6 lg:px-10">
+            <IconButton
+              ref={menuButtonRef}
+              icon={Menu}
+              label="Open navigation"
+              className="-ml-2 lg:hidden"
+              onClick={() => setDrawerOpen(true)}
+              aria-expanded={drawerOpen}
+            />
+            <Link to="/" aria-label="Aegis dashboard" className="rounded-lg lg:hidden">
+              <Wordmark compact size={26} />
+            </Link>
+            <Breadcrumbs items={routeTrail(path)} className="hidden lg:block" />
+            <div className="ml-auto flex min-w-0 items-center gap-2">
+              {isLearningRoute(path) && <MonitoringPill />}
+              {user?.grade && (
+                <Badge tone="neutral" icon={GraduationCap} className="hidden sm:inline-flex">
+                  Grade {user.grade}
+                </Badge>
+              )}
             </div>
           </div>
-        )}
+        </header>
 
-        {/* Central Router Output */}
-        <main className="flex-1 overflow-y-auto px-4 py-6 md:px-8 md:py-8 relative">
-          <GradeGate>
-            {/* Pages are lazy-loaded; keep the sidebar while one loads. */}
-            <Suspense fallback={<div className="h-40 rounded-3xl bg-slate-800/60 animate-pulse" aria-busy="true" aria-label="Loading" />}>
-              <Outlet />
-            </Suspense>
-          </GradeGate>
+        <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
+          <div className="mx-auto w-full max-w-[1240px] px-4 pb-16 pt-6 sm:px-6 lg:px-10 lg:pt-8">
+            <GradeGate>
+              {/* Pages are lazy-loaded; the shell stays while one loads. */}
+              <Suspense fallback={<PageSkeleton />}>
+                <div key={transitionKey} className={animatePage ? 'animate-page-in' : undefined}>
+                  <Outlet />
+                </div>
+              </Suspense>
+            </GradeGate>
+          </div>
         </main>
       </div>
+
+      <Modal
+        open={confirmSignOut}
+        onClose={() => setConfirmSignOut(false)}
+        title="Sign out of Aegis?"
+        icon={LogOut}
+        tone="neutral"
+        size="sm"
+        description={
+          <>
+            {user?.email && (
+              <>
+                You are signed in as <span className="font-medium text-ink">{user.email}</span>.{' '}
+              </>
+            )}
+            Camera monitoring stops when you sign out, and a quiz that is still open is closed without grading.
+          </>
+        }
+        footer={
+          <>
+            <Button variant="secondary" onClick={() => setConfirmSignOut(false)} data-autofocus>
+              Stay signed in
+            </Button>
+            <Button variant="danger" icon={LogOut} onClick={handleLogout}>
+              Sign out
+            </Button>
+          </>
+        }
+      />
     </div>
   )
 }

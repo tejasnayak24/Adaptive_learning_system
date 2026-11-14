@@ -1,10 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams, useLocation } from 'react-router-dom'
+import { ArrowLeft, ArrowRight, BookOpen, CircleCheck, CircleDot, ClipboardCheck, ShieldCheck, Timer, Trophy } from 'lucide-react'
 import { actionInfo } from '../utils/recommendationActions'
-import LessonMaterial from '../components/LessonMaterial'
+import LessonMaterial, { materialOutline } from '../components/LessonMaterial'
+import { DifficultyBadge, SubjectIcon } from '../components/learning'
+import { actionIcon, subjectVisual } from '../components/visuals'
+import { Badge, Breadcrumbs, Button, Callout, Card, ErrorState, PageSkeleton, ProgressBar, SectionHeader, Tooltip } from '../components/ui'
+import { scrollBehavior } from '../hooks/useReducedMotion'
 import { useAuth } from '../context/AuthContext'
+import { curriculumService } from '../services/curriculumService'
 import { lessonService } from '../services/lessonService'
 import { progressService } from '../services/progressService'
+
+function findLessonStanding(curriculum, lessonId) {
+  for (const subject of curriculum?.subjects || []) {
+    for (const unit of subject.units) {
+      for (const topic of unit.topics) {
+        const match = topic.lessons.find((l) => l.id === lessonId)
+        if (match) return { completed: match.completed, best_score: match.best_score, attempts: match.attempts }
+      }
+    }
+  }
+  return null
+}
 
 export default function LessonDetail() {
   const { id } = useParams()
@@ -12,45 +30,60 @@ export default function LessonDetail() {
   const location = useLocation()
   const [lesson, setLesson] = useState(null)
   const [lessonProgress, setLessonProgress] = useState([])
+  const [standing, setStanding] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
   useEffect(() => {
-  async function loadLessonData() {
-    try {
-      const lessonRes = await lessonService.getLesson(id)
+    async function loadLessonData() {
+      try {
+        const lessonRes = await lessonService.getLesson(id)
 
-      if (lessonRes.success) {
-        setLesson(lessonRes.data)
-      }
-    } catch (err) {
-      setError(err.message || 'Failed to load lesson content')
-      setLoading(false)
-      return
-    }
-
-    try {
-      const studentId = user?.id
-
-      if (studentId) {
-        const progressRes = await progressService.getStudentProgress(studentId)
-
-        if (progressRes.success) {
-          const filtered = progressRes.data.filter(
-            p => p.lesson_id === parseInt(id, 10)
-          )
-          setLessonProgress(filtered)
+        if (lessonRes.success) {
+          setLesson(lessonRes.data)
         }
+      } catch (err) {
+        setError(err.message || 'Failed to load lesson content')
+        setLoading(false)
+        return
       }
-    } catch (err) {
-      console.warn('Progress could not be loaded:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
 
-  loadLessonData()
-}, [id, user?.id])
+      try {
+        const studentId = user?.id
+
+        if (studentId) {
+          const progressRes = await progressService.getStudentProgress(studentId)
+
+          if (progressRes.success) {
+            const filtered = progressRes.data.filter((p) => p.lesson_id === parseInt(id, 10))
+            setLessonProgress(filtered)
+          }
+        }
+      } catch (err) {
+        console.warn('Progress could not be loaded:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadLessonData()
+  }, [id, user?.id])
+
+  // Completion as the server defines it (one of the lesson's quizzes
+  // passed), read from the curriculum tree. Optional: only adds a badge.
+  useEffect(() => {
+    if (!lesson?.id || !lesson.subject) return undefined
+    let cancelled = false
+    curriculumService
+      .getCurriculum(lesson.subject)
+      .then((res) => {
+        if (!cancelled) setStanding(findLessonStanding(res.data, lesson.id))
+      })
+      .catch(() => {})
+    return () => {
+      cancelled = true
+    }
+  }, [lesson?.id, lesson?.subject])
 
   const focusSection = {
     SHOW_WORKED_EXAMPLE: 'worked-examples',
@@ -60,50 +93,37 @@ export default function LessonDetail() {
   useEffect(() => {
     if (!lesson || !focusSection) return
     const timer = setTimeout(() => {
-      document.getElementById(focusSection)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      document.getElementById(focusSection)?.scrollIntoView({ behavior: scrollBehavior(), block: 'start' })
     }, 300)
     return () => clearTimeout(timer)
   }, [lesson, focusSection])
 
   if (loading) {
-    return (
-      <div className="space-y-6 animate-pulse">
-        <div className="h-4 w-20 bg-slate-800 rounded"></div>
-        <div className="h-10 w-2/3 bg-slate-800 rounded-xl"></div>
-        <div className="h-6 w-1/4 bg-slate-800 rounded-lg"></div>
-        <div className="space-y-3 pt-6">
-          <div className="h-4 w-full bg-slate-800 rounded"></div>
-          <div className="h-4 w-full bg-slate-800 rounded"></div>
-          <div className="h-4 w-3/4 bg-slate-800 rounded"></div>
-        </div>
-        <div className="h-40 bg-slate-800 rounded-3xl mt-8"></div>
-      </div>
-    )
+    return <PageSkeleton variant="reading" label="Loading lesson" />
   }
 
   if (error || !lesson) {
     return (
       <div className="space-y-6">
-        <Link to="/subjects" className="text-sm font-semibold text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
-          &larr; Back to Curriculum
-        </Link>
-        <div className="rounded-2xl bg-rose-500/10 border border-rose-500/20 p-6 text-center text-rose-400">
-          <p className="font-bold">Error loading lesson</p>
-          <p className="text-xs mt-1 text-rose-300/80">{error || 'Lesson not found'}</p>
-        </div>
+        <Button to="/subjects" variant="ghost" size="sm" icon={ArrowLeft}>
+          Back to My Learning
+        </Button>
+        <ErrorState title="Error loading lesson" message={error || 'Lesson not found'} />
       </div>
     )
   }
 
   // Extract quizzes associated with this lesson
   const quizzes = lesson.quizzes || []
-  
+
   const getQuizByDifficulty = (diff) => {
-    return quizzes.find(q => q.difficulty.toLowerCase() === diff.toLowerCase())
+    return quizzes.find((q) => q.difficulty.toLowerCase() === diff.toLowerCase())
   }
 
   const subject = lesson.subject || location.state?.subject || ''
   const navigation = lesson.navigation
+  const topicTitle = lesson.curriculum_topic?.title || lesson.topic
+  const outline = materialOutline(lesson.material)
 
   // Guidance when the student arrives here because of a recommendation.
   const recommendedAction = location.state?.recommendedAction
@@ -121,55 +141,81 @@ export default function LessonDetail() {
     FOCUS_RECOVERY: 'Take a short break before continuing.'
   }[recommendedAction]
 
-  return (
-    <div className="max-w-4xl mx-auto space-y-8">
-      {/* Navigation Breadcrumb */}
-      <div>
-        <Link 
-          to="/subjects" 
-          className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-indigo-400 hover:text-indigo-300 transition-colors"
-        >
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
-          </svg>
-          Curriculum Browser
-        </Link>
-      </div>
+  const attempted = standing ? standing.attempts > 0 : lessonProgress.length > 0
+  const scrollToPart = (partId) => document.getElementById(partId)?.scrollIntoView({ behavior: scrollBehavior(), block: 'start' })
 
-      {/* Header Info */}
-      <div className="space-y-3 border-b border-slate-900 pb-6">
-        <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400">
-          {lesson.grade && (
-            <span className="px-2.5 py-0.5 text-[10px] font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 rounded">
-              Grade {lesson.grade}
-            </span>
-          )}
+  return (
+    <div className="mx-auto max-w-[860px] space-y-10">
+      {/* Lesson header */}
+      <header className="space-y-5">
+        <Breadcrumbs
+          items={[
+            { label: 'My Learning', to: '/subjects', state: { subject } },
+            ...(subject ? [{ label: subject, to: '/subjects', state: { subject } }] : []),
+            ...(lesson.unit ? [{ label: lesson.unit.title }] : []),
+            ...(topicTitle ? [{ label: topicTitle }] : [])
+          ]}
+        />
+
+        <div className="flex flex-wrap items-center gap-2">
           {subject && (
-            <span className="px-2.5 py-0.5 text-[10px] font-semibold bg-slate-900 text-slate-400 border border-slate-800 rounded">
+            <span className="inline-flex items-center gap-2 rounded-lg border border-line-strong bg-white/[0.03] py-1 pl-1 pr-2.5 text-xs font-medium text-ink">
+              <SubjectIcon subject={subject} size="xs" />
               {subject}
             </span>
           )}
-          {lesson.unit && <span>{lesson.unit.title}</span>}
-          {lesson.unit && <span className="text-slate-600">&rsaquo;</span>}
-          <span className="font-medium">{lesson.curriculum_topic?.title || lesson.topic}</span>
-          {navigation && (
-            <span className="text-slate-500">
-              · Lesson {navigation.index + 1} of {navigation.total}
-            </span>
-          )}
+          {lesson.grade && <Badge>Grade {lesson.grade}</Badge>}
+          {standing?.completed ? (
+            <Badge tone="success" icon={CircleCheck}>
+              Completed · best {Math.round(standing.best_score)}%
+            </Badge>
+          ) : attempted ? (
+            <Badge tone="warning" icon={CircleDot}>
+              In progress
+            </Badge>
+          ) : null}
         </div>
-        <h1 className="font-display text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-          {lesson.title}
-        </h1>
-      </div>
+
+        <h1 className="font-display text-[30px] font-semibold leading-[1.12] tracking-tight text-ink sm:text-[38px]">{lesson.title}</h1>
+        {lesson.curriculum_topic?.description && (
+          <p className="max-w-2xl text-[15px] leading-relaxed text-ink-2">{lesson.curriculum_topic.description}</p>
+        )}
+
+        {navigation && (
+          <div className="flex max-w-md items-center gap-3">
+            <ProgressBar
+              value={((navigation.index + 1) / navigation.total) * 100}
+              color={subjectVisual(subject).color}
+              size="xs"
+              label={`Lesson ${navigation.index + 1} of ${navigation.total}`}
+            />
+            <span className="shrink-0 text-xs text-ink-2">
+              Lesson {navigation.index + 1} of {navigation.total}
+            </span>
+          </div>
+        )}
+
+        {outline.length > 0 && (
+          <nav aria-label="In this lesson" className="flex flex-wrap gap-2 border-t border-line pt-5">
+            {outline.map((part) => (
+              <button
+                key={part.id}
+                type="button"
+                onClick={() => scrollToPart(part.id)}
+                className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-line bg-surface px-3 text-xs font-medium text-ink-2 transition-colors hover:border-line-strong hover:text-ink"
+              >
+                {part.label}
+                {part.count !== undefined && <span className="tabular-nums text-ink-3">{part.count}</span>}
+              </button>
+            ))}
+          </nav>
+        )}
+      </header>
 
       {recommendationGuide && (
-        <div className="rounded-2xl border border-teal-500/30 bg-teal-500/5 px-5 py-4 space-y-1">
-          <p className="text-xs font-bold uppercase tracking-wider text-teal-300">
-            {actionInfo(recommendedAction).icon} Coach recommendation: {actionInfo(recommendedAction).label}
-          </p>
-          <p className="text-sm text-slate-300">{recommendationGuide}</p>
-        </div>
+        <Callout tone="mint" icon={actionIcon(recommendedAction)} title={`Coach recommendation: ${actionInfo(recommendedAction).label}`}>
+          {recommendationGuide}
+        </Callout>
       )}
 
       {/* Reading pane */}
@@ -178,117 +224,108 @@ export default function LessonDetail() {
           <LessonMaterial material={lesson.material} highlight={focusSection} />
         </article>
       ) : (
-        <article className="prose prose-invert max-w-none text-slate-300 leading-relaxed text-sm md:text-base space-y-6">
+        <article className="reading space-y-4">
           {lesson.content.split('\n\n').map((paragraph, index) => (
-            <p key={index} className="indent-0">
-              {paragraph}
-            </p>
+            <p key={index}>{paragraph}</p>
           ))}
         </article>
       )}
 
-      {/* Assessments Section */}
-      <div className="glass-panel rounded-3xl p-6 md:p-8 border border-slate-900 shadow-xl space-y-6 mt-12 relative overflow-hidden">
-        <div className="absolute top-0 right-0 h-32 w-32 bg-indigo-500/5 blur-2xl pointer-events-none"></div>
-        
-        <div>
-          <h3 className="text-lg font-bold text-white flex items-center gap-2">
-            <span>📝</span> Assessments
-          </h3>
-          <p className="text-xs text-slate-500 mt-1">
-            Choose a quiz difficulty below. Aegis will dynamically adapt the curriculum based on your performance.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* Assessments */}
+      <Card as="section" padding="lg" aria-labelledby="lesson-quizzes" className="space-y-6">
+        <SectionHeader
+          id="lesson-quizzes"
+          icon={ClipboardCheck}
+          title="Check your understanding"
+          description="Choose a quiz level. Your result updates your progress, and your AI coach suggests the next step."
+        />
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
           {['Easy', 'Medium', 'Hard'].map((diff) => {
             const quiz = getQuizByDifficulty(diff)
-            const attemptsCount = lessonProgress.filter(p => p.difficulty.toLowerCase() === diff.toLowerCase()).length
-            const bestAttempt = lessonProgress
-              .filter(p => p.difficulty.toLowerCase() === diff.toLowerCase())
-              .sort((a, b) => b.quiz_score - a.quiz_score)[0]
+            const levelRows = lessonProgress.filter((p) => p.difficulty.toLowerCase() === diff.toLowerCase())
+            const attemptsCount = levelRows.length
+            const bestAttempt = [...levelRows].sort((a, b) => b.quiz_score - a.quiz_score)[0]
 
             return (
-              <div 
-                key={diff}
-                className="rounded-2xl p-5 border bg-slate-900/30 border-slate-800/80 hover:border-slate-700/60 flex flex-col justify-between h-44 transition-all duration-300"
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className={`px-2 py-0.5 text-[9px] font-bold rounded ${
-                      diff === 'Easy' 
-                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
-                        : diff === 'Medium' 
-                        ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' 
-                        : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
-                    }`}>
-                      {diff} Quiz
-                    </span>
-                  </div>
-
-                  <p className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider mt-4">
-                    Performance
-                  </p>
-                  <p className="text-xs text-slate-400 mt-1">
-                    {attemptsCount === 0 
-                      ? 'No attempts yet' 
-                      : `Best: ${Math.round(bestAttempt.quiz_score)}% (${attemptsCount} attempts)`}
-                  </p>
-                </div>
-
+              <div key={diff} className="flex flex-col rounded-xl border border-line bg-deep/60 p-4 transition-colors hover:border-line-strong">
+                <DifficultyBadge difficulty={diff} className="self-start" />
+                <p className="mt-4 text-2xl font-semibold text-ink">{attemptsCount === 0 ? '—' : `${Math.round(bestAttempt.quiz_score)}%`}</p>
+                <p className="mt-0.5 text-xs text-ink-2">
+                  {attemptsCount === 0 ? 'No attempts yet' : `Best of ${attemptsCount} attempt${attemptsCount === 1 ? '' : 's'}`}
+                </p>
                 {quiz ? (
-                  <div className="mt-4 flex gap-2">
-                    <Link
-                      to={`/quiz/${quiz.id}`}
-                      state={{ subject, attempt: Date.now() }}
-                      className="flex-1 inline-flex items-center justify-center py-2 rounded-xl text-xs font-semibold border bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-350 hover:text-white transition-all"
-                    >
+                  <div className="mt-5 flex gap-2">
+                    <Button to={`/quiz/${quiz.id}`} state={{ subject, attempt: Date.now() }} size="sm" iconRight={ArrowRight} className="flex-1">
                       Take quiz
-                    </Link>
-                    <Link
-                      to={`/quiz/${quiz.id}`}
-                      state={{ subject, attempt: Date.now(), mode: 'challenge' }}
-                      title="Timed challenge: 30 seconds per question"
-                      className="inline-flex items-center justify-center px-3 py-2 rounded-xl text-xs font-semibold border border-slate-800 text-slate-400 hover:text-white transition-all"
-                    >
-                      ⏱️
-                    </Link>
+                    </Button>
+                    <Tooltip content="Timed challenge: 30 seconds per question" align="end">
+                      <Button
+                        to={`/quiz/${quiz.id}`}
+                        state={{ subject, attempt: Date.now(), mode: 'challenge' }}
+                        size="sm"
+                        variant="secondary"
+                        icon={Timer}
+                        aria-label={`${diff} quiz as a timed challenge, 30 seconds per question`}
+                      >
+                        Challenge
+                      </Button>
+                    </Tooltip>
                   </div>
                 ) : (
-                  <button 
-                    disabled 
-                    className="mt-4 w-full py-2 rounded-xl text-xs font-semibold bg-slate-950 border border-slate-900 text-slate-700 cursor-not-allowed"
-                  >
+                  <Button size="sm" variant="secondary" disabled className="mt-5 w-full">
                     Unavailable
-                  </button>
+                  </Button>
                 )}
               </div>
             )
           })}
         </div>
-      </div>
+        <p className="flex items-start gap-2 text-xs leading-relaxed text-ink-2">
+          <ShieldCheck size={15} className="mt-px shrink-0 text-ink-3" aria-hidden="true" />
+          Quizzes are protected: keep the quiz page open until you submit. Hints stay available, and camera monitoring must be on.
+        </p>
+      </Card>
+
       {navigation && (
-        <nav className="flex items-center justify-between gap-3 border-t border-slate-900 pt-6">
+        <nav aria-label="Lesson navigation" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {navigation.previous ? (
             <Link
               to={`/lesson/${navigation.previous.id}`}
-              className="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white"
+              className="group rounded-card border border-line bg-surface p-4 shadow-card transition-colors hover:border-line-strong"
             >
-              &larr; {navigation.previous.title}
+              <span className="flex items-center gap-1.5 text-xs font-medium text-ink-2">
+                <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-0.5" aria-hidden="true" />
+                Previous lesson
+              </span>
+              <span className="mt-1.5 block truncate text-sm font-medium text-ink">{navigation.previous.title}</span>
             </Link>
           ) : (
-            <span />
+            <span className="hidden sm:block" />
           )}
           {navigation.next ? (
             <Link
               to={`/lesson/${navigation.next.id}`}
-              className="rounded-xl bg-indigo-500 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-600"
+              className="group rounded-card border border-brand-500/30 bg-brand-500/[0.06] p-4 text-right shadow-card transition-colors hover:border-brand-500/50 hover:bg-brand-500/[0.09]"
             >
-              {navigation.next.title} &rarr;
+              <span className="flex items-center justify-end gap-1.5 text-xs font-medium text-brand-300">
+                Next lesson
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+              </span>
+              <span className="mt-1.5 block truncate text-sm font-medium text-ink">{navigation.next.title}</span>
             </Link>
           ) : (
-            <Link to="/subjects" className="rounded-xl bg-emerald-500 px-4 py-2 text-xs font-semibold text-white">
-              Subject complete — back to curriculum &rarr;
+            <Link
+              to="/subjects"
+              className="group flex items-center justify-end gap-3 rounded-card border border-success/30 bg-success/[0.06] p-4 text-right shadow-card transition-colors hover:border-success/50"
+            >
+              <span>
+                <span className="flex items-center justify-end gap-1.5 text-xs font-medium text-success">
+                  <Trophy size={14} aria-hidden="true" />
+                  Last lesson in this subject
+                </span>
+                <span className="mt-1.5 block text-sm font-medium text-ink">Back to My Learning</span>
+              </span>
+              <BookOpen size={18} className="shrink-0 text-ink-2" aria-hidden="true" />
             </Link>
           )}
         </nav>
@@ -296,5 +333,3 @@ export default function LessonDetail() {
     </div>
   )
 }
-
-
