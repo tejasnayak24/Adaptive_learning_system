@@ -150,9 +150,7 @@ authorisation. Lessons and quizzes unlock only while monitoring is verified.
 | Curriculum content | `python backend\scripts\import_curriculum.py --check` | — |
 | Migrations vs models | `cd backend; python -m alembic check` | the configured database (read only) |
 
-Results for the final release are in
-[docs/PHASE7_PROGRESS.md](docs/PHASE7_PROGRESS.md) and
-[docs/BROWSER_ACCEPTANCE.md](docs/BROWSER_ACCEPTANCE.md).
+Results and acceptance evidence are in [docs/TESTING.md](docs/TESTING.md).
 
 ## Recommendation engine
 
@@ -175,10 +173,10 @@ design is described in [docs/RL_ENGINE.md](docs/RL_ENGINE.md).
 | Document | Contents |
 |---|---|
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Diagram, request flow, trust boundaries, code map |
-| [TEAM_GUIDE.md](TEAM_GUIDE.md#-api-contracts) | API reference (every endpoint), team workflow |
+| [docs/API_REFERENCE.md](docs/API_REFERENCE.md) | API reference (every endpoint) |
 | [docs/DEMO.md](docs/DEMO.md) | Demonstration checklist and script, including drowsiness and voice alerts |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Fixes for common problems; **known limitations** |
-| [docs/BROWSER_ACCEPTANCE.md](docs/BROWSER_ACCEPTANCE.md) | What was tested in the browser, and the manual checklist |
+| [docs/TESTING.md](docs/TESTING.md) | Every test suite, results and acceptance evidence |
 | [docs/WEBCAM_ACCEPTANCE_CHECKLIST.md](docs/WEBCAM_ACCEPTANCE_CHECKLIST.md) | Real-webcam test plan |
 | [docs/ANALYTICS.md](docs/ANALYTICS.md) | How every dashboard metric is calculated |
 | [docs/SESSION_INTEGRITY.md](docs/SESSION_INTEGRITY.md) | Tab-switch rule, multiple-face detection, activity report, privacy, limits |

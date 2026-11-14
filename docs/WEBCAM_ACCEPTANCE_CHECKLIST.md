@@ -1,4 +1,4 @@
-# Phase 3 — real-webcam acceptance checklist
+# Real-webcam acceptance checklist
 
 Run on the Windows laptop with a real webcam. Automated tests cover the
 protocol with synthetic landmarks; **these checks are the only proof the real
@@ -6,13 +6,11 @@ camera works.** Mark each line ✅ / ❌ and note anything odd.
 
 ## Setup
 
-1. Backend: `uvicorn backend.app.main:app --port 8000` (from the repo root,
-   `$env:PYTHONPATH = "$PWD\backend"`).
-2. Frontend: `npm run dev` in `frontend/`, open http://localhost:5173.
-3. Camera agent: in `facial_analysis/`, `.\venv\Scripts\Activate.ps1`, then
-   `python main.py`. Confirm it prints *"ready on http://127.0.0.1:8765"* and the
-   webcam light is **off**.
-4. Log in with a student account.
+1. Start Aegis with `.\start-all.ps1`, or start the three services one by
+   one ([DEVELOPMENT.md](DEVELOPMENT.md#running-the-services-one-by-one)).
+2. In the camera agent's window, confirm it prints *"Aegis camera agent
+   ready on http://127.0.0.1:8765"* and that the webcam light is **off**.
+3. Open http://localhost:5173 and sign in with a student account.
 
 ## A. Consent and pairing
 
@@ -69,19 +67,17 @@ camera works.** Mark each line ✅ / ❌ and note anything odd.
 | E1 | `facial_analysis/` and `logs/` after testing | No image or video files created |
 | E2 | Backend terminal output | No tokens or passwords printed |
 
-Report results (✅/❌ with notes) back so failures can be fixed before Phase 4.
+Report results (✅/❌ with notes) so that failures can be fixed.
 
 ## Results
 
 **2026-11-12: real-webcam acceptance run on the team lead's Windows laptop.**
 
 Reported outcome: the facial-analysis system, the voice alerts and camera
-recovery worked correctly on the real webcam, and Phase 4 was approved to
-start. Results for the individual check IDs above were not reported one by
+recovery worked correctly on the real webcam. Results for the individual check IDs above were not reported one by
 one, so no single line is marked ✅ here. The overall outcome covers the
 detection (B), voice-alert (B4–B8) and recovery (C) areas as reported.
 
-The database contains two quiz attempts from a student account during the
-testing window (progress rows 62–63, 2026-11-12 09:01 UTC) with camera
-attention values and a monitoring session. This is consistent with real
-camera telemetry reaching the backend during the run.
+Two quiz attempts recorded during the testing window (2026-11-12, about
+09:01 UTC) have camera attention values and a monitoring session, which is
+consistent with real camera telemetry reaching the backend during the run.

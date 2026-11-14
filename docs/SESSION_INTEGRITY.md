@@ -129,8 +129,7 @@ the signed-in student's own records only:
 - **Window focus changes,** marked as diagnostic.
 - **Measurement notes.**
 
-There is no teacher view in this phase; teacher-student relationships do not
-exist yet.
+There is no teacher view; teacher-student relationships do not exist yet.
 
 ## 4. Consent and privacy
 
@@ -169,4 +168,4 @@ exist yet.
 - Some assistive tools (on-screen keyboards, screen readers, the Snipping Tool) can hide or cover the page. There is no teacher reinstatement yet; a retake after the cooldown is the remedy.
 - Multiple-face detection is approximate: see the table at the top. It needs reasonable lighting, and BlazeFace's short-range model is designed for faces within about 2 m.
 - Episode times are server receive times. The agent requires about 3 s of detection before reporting, so an episode really began about 3 s earlier.
-- Phone detection, a teacher dashboard and teacher-student relationships are not part of this phase.
+- Phone detection, a teacher dashboard and teacher-student relationships are not implemented.

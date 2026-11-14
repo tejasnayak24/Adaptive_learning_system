@@ -1,9 +1,8 @@
 # Aegis reinforcement-learning engine
 
-This document describes the recommendation engine as implemented on branch
-`final/project-completion` (Phase 4). Every number below is taken from the
-code or from the metadata of the shipped Q-table
-(`rl_engine/q_table.json`, trained 2026-11-12, seed 2026).
+This document describes the recommendation engine as implemented. Every
+number below is taken from the code or from the metadata of the shipped
+Q-table (`rl_engine/q_table.json`, trained 2026-11-12, seed 2026).
 
 | Item | Where |
 |---|---|
@@ -329,7 +328,8 @@ confidence = (1 − e^(−margin / 1.0)) × min(1, N(s, a*) / 30)
 
 * `margin` is the Q-value gap to the next-best eligible action.
 * If only one action is eligible, the first factor is 0.5.
-* The UI labels it "decision strength (not a probability)".
+* The UI labels it "Decision strength" and states that it is not a
+  probability.
 
 The explanation states the facts used and the next-best action, e.g. *"You
 scored 20%, and possible drowsiness was observed; a short focus-recovery
@@ -432,6 +432,8 @@ Same-state comparison on the shipped table (`decide` vs `legacy_rule_policy`):
 
 | Suite | Command | Covers |
 |---|---|---|
-| RL engine (68) | `cd rl_engine; python -m pytest` | state encoding incl. drowsiness, rewards (positive and negative), constraints, update equation, exploration and exploitation, greedy read-only runtime, **Q-values change the decision**, all 11 actions selectable, unseen states, confidence, save/load, version refusal, simulator realism, training reproducibility, shipped policy beats legacy and random |
-| Backend (64) | `cd backend; python -m pytest` | API decision driven by the loaded table (swapping tables changes the answer), blocked actions never returned, fallback, drowsiness in the state, `/rl/model`, stored decision detail, reward v2 and `followed` |
-| Frontend (17) | `cd frontend; npm test` | every action maps to a specific next step, plus the monitoring state tests |
+| RL engine (68 tests) | `cd rl_engine; python -m pytest` | state encoding incl. drowsiness, rewards (positive and negative), constraints, update equation, exploration and exploitation, greedy read-only runtime, **Q-values change the decision**, all 11 actions selectable, unseen states, confidence, save/load, version refusal, simulator realism, training reproducibility, shipped policy beats legacy and random |
+| Backend (`test_rl_phase4.py`, `test_rl_and_telemetry.py`, `test_curriculum_rl.py`) | `cd backend; python -m pytest` | API decision driven by the loaded table (swapping tables changes the answer), blocked actions never returned, fallback, drowsiness in the state, `/rl/model`, stored decision detail, reward v2 and `followed`, recommendations staying within the grade and subject |
+| Frontend (`recommendationActions.test.mjs`) | `cd frontend; npm test` | every action maps to a specific next step |
+
+How to run every suite: [TESTING.md](TESTING.md).

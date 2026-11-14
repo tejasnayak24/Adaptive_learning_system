@@ -8,10 +8,10 @@ transmitted.
 
 ## Run
 
+From `facial_analysis/`, after the first-time setup below:
+
 ```powershell
-cd C:\Users\tejas\Adaptive_learning_system\facial_analysis
-.\venv\Scripts\Activate.ps1
-python main.py
+.\venv\Scripts\python.exe main.py
 ```
 
 The webcam stays **off** until you start a lesson on the Aegis website. The
@@ -19,7 +19,8 @@ website pairs with the agent automatically through `http://127.0.0.1:8765`.
 An "Aegis Camera Agent" window shows what the camera sees, the attention
 score and alerts (`H` = compact view, `Q` = stop monitoring).
 
-Other modes:
+Other modes (use the virtual environment's Python, or activate it first
+with `.env\Scripts\Activate.ps1`):
 
 | Command | Purpose |
 |---|---|
@@ -31,9 +32,11 @@ First-time setup:
 
 ```powershell
 python -m venv venv
-.\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+.\venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
+
+Use Python 3.10, 3.11 or 3.12: the pinned mediapipe and numpy have no wheels
+for Python 3.13 or newer. The agent is tested with Python 3.10 on Windows.
 
 Pinned, known-working versions: `mediapipe==0.10.21`, `numpy==1.26.4`,
 `opencv-contrib-python==4.11.0.86`. Voice alerts use `pyttsx3` (Windows SAPI5).
@@ -91,7 +94,7 @@ other apps that use it (Teams, Zoom, Camera app, browser tabs).
 
 ## Possible drowsiness and voice alerts
 
-Ported from PR #10. Eyes closed for 2 s → beep and spoken "Hey, wake up!"
+Eyes closed for 2 s → beep and spoken "Hey, wake up!"
 (repeats every 5 s, firmer after 3); no face for 10 s → "Are you still there?";
 yawns → gentle spoken reminder (15 s gap) and a break suggestion after 3 yawns
 in 5 minutes. Speech runs on its own thread with a small queue, so it never
@@ -119,14 +122,16 @@ about 4% of one core, +9 MB, and the camera loop stays at 30 fps. Turn it off wi
 ## Tests
 
 ```powershell
-pip install -r requirements-dev.txt
-python -m pytest
+.\venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\venv\Scripts\python.exe -m pytest
 ```
 
 Synthetic-landmark, protocol and lifecycle tests run without a webcam. The
-cross-process test also starts the real backend:
+cross-process test also starts the real backend on a throwaway SQLite
+database. It runs only when `AEGIS_BACKEND_PYTHON` names a Python that has
+the backend requirements installed; otherwise it is skipped:
 
 ```powershell
-$env:AEGIS_BACKEND_PYTHON = "C:\Users\tejas\AppData\Local\Programs\Python\Python310\python.exe"
-python -m pytest tests\test_integration_backend.py
+$env:AEGIS_BACKEND_PYTHON = (Get-Command python).Source
+.\venv\Scripts\python.exe -m pytest tests\test_integration_backend.py
 ```

@@ -6,20 +6,14 @@ covered the rules, but they could not hide a real tab or show real faces
 
 ## Before you start
 
-1. Back up the live database:
-   ```powershell
-   & "C:\Program Files\PostgreSQL\18\bin\pg_dump.exe" -U postgres -Fc -f backups\before_0008.dump adaptive_learning_db1
-   ```
-2. Apply the migrations:
-   ```powershell
-   cd backend
-   python -m alembic upgrade head
-   ```
-   Check that `python -m alembic current` shows `0008_session_events`.
-3. Start everything with `.\start-all.ps1`. Sign in as a test student (not a
+1. Make sure the database is up to date: in `backend/`,
+   `python -m alembic current` must show `0008_session_events (head)`. If it
+   does not, back up the database first (`pg_dump -Fc`), then run
+   `python -m alembic upgrade head`.
+2. Start everything with `.\start-all.ps1`. Sign in as a test student (not a
    real one).
-4. The first lesson asks for consent again (version 2). Check the new
-   wording, then accept.
+3. If the account accepted an older consent version, the first lesson asks
+   for consent again (version `2026-11-v2`). Check the wording, then accept.
 
 Record each result as **Pass / Fail / Note**.
 
@@ -51,7 +45,7 @@ Use a different quiz for each group. A terminated or closed quiz needs a
 |---|---|---|---|
 | B1 | During a quiz, stop the backend window ("Aegis backend"), answer a question | "Answers saved" changes to an offline note; no termination | |
 | B2 | With the backend still stopped, switch tabs for about 3 s and come back | Quiz locks: "Reconnecting…" | |
-| B3 | Start the backend again in a new PowerShell window from the project root (README, "Starting services by hand": `$env:PYTHONPATH = "$PWD\backend"; python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000`) | Within a few seconds: warning dialog (one strike), quiz continues, answers intact. The camera gate may also pause briefly while the backend is down; that is expected | |
+| B3 | Start the backend again in a new PowerShell window from the project root ([DEVELOPMENT.md](DEVELOPMENT.md#running-the-services-one-by-one): `$env:PYTHONPATH = "$PWD\backend"; python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000`) | Within a few seconds: warning dialog (one strike), quiz continues, answers intact. The camera gate may also pause briefly while the backend is down; that is expected | |
 | B4 | Turn Wi-Fi off and on during a quiz (no tab switch) | No warning, no termination | |
 
 ## C. Multiple-face detection with the real webcam
@@ -79,3 +73,9 @@ an information banner only.
 | D2 | Dashboard and Progress show only graded quizzes (terminated/closed ones are not counted) | |
 | D3 | Yawning, looking away and the drowsiness voice alert still work as in [DEMO.md](DEMO.md) Part B | |
 | D4 | Agent CPU: open Task Manager during a lesson; the agent's CPU use is similar to before | |
+
+## Results
+
+**2026-11-14:** the project team reported that all of the manual
+session-integrity acceptance checks above passed. The result was reported
+for the checklist as a whole, so no single line is ticked here.
