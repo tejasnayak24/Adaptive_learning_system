@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { ArrowRight, CalendarDays, CircleAlert, KeyRound, Mail, UserRound } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import AuthLayout from '../components/AuthLayout'
+import { GRADES } from '../components/GradeGate'
+import { Button, Callout, PasswordField, TextField, cx } from '../components/ui'
 
 export default function Register() {
   const { register } = useAuth()
@@ -10,19 +14,49 @@ export default function Register() {
   const [password, setPassword] = useState('')
   const [age, setAge] = useState('')
   const [grade, setGradeChoice] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
+  const [fieldErrors, setFieldErrors] = useState({})
   const [loading, setLoading] = useState(false)
+
+  // Field messages mirror the inputs' own constraints (required, email
+  // format, age >= 1 in whole years, password 8-72 characters).
+  const validate = (form) => {
+    const errors = {}
+    const fields = form.elements
+    if (!name) errors.name = 'Enter your full name'
+    if (!email) errors.email = 'Enter your email address'
+    else if (!fields.email.validity.valid) errors.email = 'Enter a valid email address'
+    if (!age) errors.age = 'Enter your age'
+    else if (!fields.age.validity.valid || parseInt(age, 10) <= 0) errors.age = 'Enter a valid age (a whole number of 1 or more)'
+    if (!grade) errors.grade = 'Choose your grade'
+    if (!password) errors.password = 'Choose a password'
+    else if (!fields.password.validity.valid) errors.password = 'Use at least 8 characters'
+    return errors
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const form = e.currentTarget
+    const errors = validate(form)
+    setFieldErrors(errors)
+    const first = ['name', 'email', 'age', 'grade', 'password'].find((key) => errors[key])
+
     if (!name || !email || !password || !age || !grade) {
       setError('Please fill in all fields')
+      if (first === 'grade') form.querySelector('input[name="grade"]')?.focus()
+      else if (first) form.elements[first]?.focus()
       return
     }
 
     if (parseInt(age, 10) <= 0) {
       setError('Please enter a valid age')
+      form.elements.age.focus()
+      return
+    }
+
+    if (first) {
+      setError('Please check the highlighted fields')
+      form.elements[first]?.focus()
       return
     }
 
@@ -40,195 +74,123 @@ export default function Register() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-950 px-4 py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Decorative Glows */}
-      <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-teal-500/5 blur-3xl pointer-events-none"></div>
+    <AuthLayout
+      title="Create your account"
+      subtitle="Set up your profile and Aegis shows the lessons for your grade."
+      footer={
+        <>
+          Already have an account?{' '}
+          <Link to="/login" className="font-semibold text-brand-300 underline-offset-4 transition-colors hover:text-brand-200 hover:underline">
+            Sign in
+          </Link>
+        </>
+      }
+    >
+      <div className="space-y-5">
+        {error && (
+          <Callout tone="danger" role="alert">
+            {error}
+          </Callout>
+        )}
 
-      <div className="w-full max-w-md space-y-8 z-10">
-        <div className="text-center">
-          <span className="inline-flex items-center justify-center rounded-2xl bg-indigo-500/10 p-4 border border-indigo-500/20 text-4xl shadow-inner animate-pulse">
-            ✨
-          </span>
-          <h2 className="mt-6 text-center font-display text-4xl font-extrabold tracking-tight text-white">
-            Create an <span className="bg-gradient-to-r from-indigo-400 to-teal-300 bg-clip-text text-transparent">Account</span>
-          </h2>
-          <p className="mt-2 text-sm text-slate-400">
-            Sign up to personalize your learning analytics
-          </p>
-        </div>
+        <form onSubmit={handleSubmit} noValidate className="space-y-5">
+          <TextField
+            id="name"
+            name="name"
+            label="Full name"
+            icon={UserRound}
+            autoComplete="name"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your name"
+            error={fieldErrors.name}
+          />
+          <TextField
+            id="email"
+            name="email"
+            type="email"
+            label="Email address"
+            icon={Mail}
+            autoComplete="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="name@school.com"
+            error={fieldErrors.email}
+          />
+          <TextField
+            id="age"
+            name="age"
+            type="number"
+            label="Age"
+            icon={CalendarDays}
+            inputMode="numeric"
+            required
+            min="1"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            placeholder="14"
+            error={fieldErrors.age}
+          />
 
-        <div className="glass-panel rounded-3xl p-8 shadow-2xl relative border border-slate-800">
-          {error && (
-            <div className="mb-6 rounded-xl bg-rose-500/10 border border-rose-500/20 p-4 text-sm text-rose-400 flex items-start gap-2">
-              <svg className="h-5 w-5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-              </svg>
-              <span>{error}</span>
+          <fieldset aria-describedby={fieldErrors.grade ? 'grade-error' : undefined}>
+            <legend className="text-[13px] font-medium text-ink-2">Grade</legend>
+            <div className="mt-1.5 grid grid-cols-5 gap-2">
+              {GRADES.map((g) => (
+                <label key={g} className="relative">
+                  <input
+                    type="radio"
+                    name="grade"
+                    value={g}
+                    required
+                    checked={grade === String(g)}
+                    onChange={(e) => setGradeChoice(e.target.value)}
+                    className="peer sr-only"
+                  />
+                  <span
+                    className={cx(
+                      'flex h-11 cursor-pointer items-center justify-center rounded-control border bg-deep text-sm font-semibold text-ink-2 transition-[border-color,background-color,color] duration-150 hover:border-[#3a4664] hover:text-ink',
+                      'peer-checked:border-brand-500 peer-checked:bg-brand-500/[0.12] peer-checked:text-ink',
+                      'peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand-400',
+                      fieldErrors.grade ? 'border-danger/60' : 'border-line-strong'
+                    )}
+                  >
+                    <span className="sr-only">Grade </span>
+                    {g}
+                  </span>
+                </label>
+              ))}
             </div>
-          )}
+            {fieldErrors.grade && (
+              <p id="grade-error" className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-danger">
+                <CircleAlert size={13} aria-hidden="true" />
+                {fieldErrors.grade}
+              </p>
+            )}
+          </fieldset>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
-                Full Name
-              </label>
-              <div className="mt-1.5 relative">
-                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 pointer-events-none">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </span>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="block w-full rounded-xl bg-slate-900/50 border border-slate-700 pl-10 pr-3 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"
-                  placeholder="John Doe"
-                />
-              </div>
-            </div>
+          <PasswordField
+            id="password"
+            name="password"
+            label="Password"
+            icon={KeyRound}
+            autoComplete="new-password"
+            required
+            minLength={8}
+            maxLength={72}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="At least 8 characters"
+            hint="8 to 72 characters."
+            error={fieldErrors.password}
+          />
 
-            <div>
-              <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
-                Email Address
-              </label>
-              <div className="mt-1.5 relative">
-                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 pointer-events-none">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-                  </svg>
-                </span>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full rounded-xl bg-slate-900/50 border border-slate-700 pl-10 pr-3 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"
-                  placeholder="name@domain.com"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="age" className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
-                Age
-              </label>
-              <div className="mt-1.5 relative">
-                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 pointer-events-none">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </span>
-                <input
-                  id="age"
-                  name="age"
-                  type="number"
-                  required
-                  min="1"
-                  value={age}
-                  onChange={(e) => setAge(e.target.value)}
-                  className="block w-full rounded-xl bg-slate-900/50 border border-slate-700 pl-10 pr-3 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"
-                  placeholder="18"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="grade" className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
-                Grade
-              </label>
-              <div className="mt-1.5">
-                <select
-                  id="grade"
-                  name="grade"
-                  required
-                  value={grade}
-                  onChange={(e) => setGradeChoice(e.target.value)}
-                  className="block w-full rounded-xl bg-slate-900/50 border border-slate-700 px-3 py-3 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"
-                >
-                  <option value="">Select your grade</option>
-                  {[6, 7, 8, 9, 10].map((g) => (
-                    <option key={g} value={g}>
-                      Grade {g}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
-                Password
-              </label>
-              <div className="mt-1.5 relative">
-                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 pointer-events-none">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                  </svg>
-                </span>
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                  minLength={8}
-                  maxLength={72}
-                  title="At least 8 characters"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full rounded-xl bg-slate-900/50 border border-slate-700 pl-10 pr-10 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-200 focus:outline-none"
-                >
-                  {showPassword ? (
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                    </svg>
-                  ) : (
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <div className="pt-2">
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full flex justify-center py-3 px-4 rounded-xl border border-transparent text-sm font-semibold text-white bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-teal-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-teal-500/20 hover:shadow-teal-500/30 transition-all transform active:scale-[0.98]"
-              >
-                {loading ? (
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                ) : null}
-                {loading ? 'Creating Account...' : 'Register'}
-              </button>
-            </div>
-          </form>
-
-          <div className="mt-8 text-center border-t border-slate-800/80 pt-6 text-sm text-slate-400">
-            Already have an account?{' '}
-            <Link to="/login" className="font-semibold text-indigo-400 hover:text-indigo-300 transition-colors">
-              Sign In
-            </Link>
-          </div>
-        </div>
+          <Button type="submit" size="lg" fullWidth loading={loading} iconRight={loading ? undefined : ArrowRight}>
+            {loading ? 'Creating account…' : 'Create account'}
+          </Button>
+        </form>
       </div>
-    </div>
+    </AuthLayout>
   )
 }
