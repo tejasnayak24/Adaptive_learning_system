@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { Camera, CameraOff, Circle, CircleCheck, CirclePause, LoaderCircle, RefreshCw, ScanFace, ShieldCheck, SunDim, Terminal, Users } from 'lucide-react'
 import { useMonitoring } from '../context/MonitoringContext'
+import { Badge, Button, Callout, Card, Checkbox, cx } from './ui'
 
 /**
  * Wraps a learning page. Content is only usable while camera monitoring is
@@ -53,6 +55,16 @@ const MESSAGES = {
   error: ['The camera agent could not start monitoring', null],
 }
 
+const STATE_ICON = {
+  agent_not_running: Terminal,
+  camera_unavailable: CameraOff,
+  no_face: ScanFace,
+  verifying: ScanFace,
+  backend_disconnected: CameraOff,
+  ended: CameraOff,
+  error: CameraOff,
+}
+
 export function ConsentPanel() {
   const { consent, giveConsent } = useMonitoring()
   const [understood, setUnderstood] = useState(false)
@@ -77,68 +89,83 @@ export function ConsentPanel() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto glass-panel rounded-3xl border border-slate-800 p-8 space-y-5">
-      <div className="space-y-1">
-        <span className="px-2.5 py-0.5 text-[10px] font-bold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 rounded">
-          Camera monitoring consent
+    <Card padding="lg" className="mx-auto max-w-2xl space-y-6">
+      <div className="flex items-start gap-4">
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand-500/[0.12] text-brand-300 ring-1 ring-inset ring-brand-500/25">
+          <ShieldCheck size={23} aria-hidden="true" />
         </span>
-        <h2 className="text-2xl font-display font-extrabold text-white">Before your first lesson</h2>
+        <div className="space-y-1.5">
+          <Badge tone="brand" size="sm">
+            Camera monitoring consent
+          </Badge>
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">Before your first lesson</h2>
+        </div>
       </div>
 
-      <div className="space-y-3 text-sm text-slate-300 leading-relaxed">
-        <p>
+      <div className="space-y-4 text-sm leading-relaxed text-ink-2">
+        <p className="text-ink">
           Aegis uses your webcam during lessons and quizzes to estimate attention and adapt your learning.
           This is required for every learning session.
         </p>
-        <ul className="list-disc pl-5 space-y-1 text-slate-400">
-          <li>Video is analysed <strong className="text-slate-200">only on this computer</strong> by the Aegis camera agent. No images or video are recorded, stored or sent.</li>
-          <li>Only numbers and yes/no signals are sent to Aegis: attention level, face present, yawning, looking away and <em>possible</em> drowsiness (eyes closed for a while).</li>
-          <li>The camera agent may also notice when <strong className="text-slate-200">more than one face</strong> is visible. Only how many faces and when are recorded &mdash; never who.</li>
-          <li>During <strong className="text-slate-200">protected quizzes</strong>, Aegis records when the quiz page is hidden (another tab, a minimised window) and for how long. It never records which tab, website or app you used. Leaving twice, or for more than 10 seconds, ends the quiz without grading.</li>
-          <li>Only event times and numbers are stored. <strong className="text-slate-200">Raw webcam images and video are never stored or transmitted.</strong> You can see everything recorded about you on the Session Activity page.</li>
-          <li>These signals are estimates for learning support. They are not a medical or sleep assessment.</li>
-          <li>You can withdraw consent at any time; lessons then cannot start.</li>
+        <ul className="space-y-2.5 [&_strong]:font-semibold [&_strong]:text-ink">
+          {[
+            <>Video is analysed <strong>only on this computer</strong> by the Aegis camera agent. No images or video are recorded, stored or sent.</>,
+            <>Only numbers and yes/no signals are sent to Aegis: attention level, face present, yawning, looking away and <em>possible</em> drowsiness (eyes closed for a while).</>,
+            <>The camera agent may also notice when <strong>more than one face</strong> is visible. Only how many faces and when are recorded &mdash; never who.</>,
+            <>During <strong>protected quizzes</strong>, Aegis records when the quiz page is hidden (another tab, a minimised window) and for how long. It never records which tab, website or app you used. Leaving twice, or for more than 10 seconds, ends the quiz without grading.</>,
+            <>Only event times and numbers are stored. <strong>Raw webcam images and video are never stored or transmitted.</strong> You can see everything recorded about you on the Session Activity page.</>,
+            <>These signals are estimates for learning support. They are not a medical or sleep assessment.</>,
+            <>You can withdraw consent at any time; lessons then cannot start.</>,
+          ].map((item, index) => (
+            <li key={index} className="flex gap-3">
+              <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true" />
+              <span>{item}</span>
+            </li>
+          ))}
         </ul>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs">
           This consent is separate from Windows camera permission. Windows may also ask whether desktop apps can use the camera.
         </p>
       </div>
 
-      <div className="space-y-3 text-sm">
-        <label className="flex gap-3 items-start text-slate-200">
-          <input type="checkbox" className="mt-1" checked={understood} onChange={(e) => setUnderstood(e.target.checked)} />
-          <span>I have read and understand how Aegis uses my webcam and monitors protected quizzes, and I agree.</span>
-        </label>
+      <div className="space-y-2.5">
+        <Checkbox checked={understood} onChange={(e) => setUnderstood(e.target.checked)}>
+          I have read and understand how Aegis uses my webcam and monitors protected quizzes, and I agree.
+        </Checkbox>
 
         {minor && (
           <>
-            <label className="flex gap-3 items-start text-slate-200">
-              <input type="checkbox" className="mt-1" checked={guardian} onChange={(e) => setGuardian(e.target.checked)} />
-              <span>My parent or guardian has authorised camera-based monitoring for my lessons, including multiple-face detection and tab-visibility checks during quizzes.</span>
-            </label>
-            <label className="flex gap-3 items-start text-slate-200">
-              <input type="checkbox" className="mt-1" checked={school} onChange={(e) => setSchool(e.target.checked)} />
-              <span>My school or teacher has approved using Aegis with camera monitoring and protected quizzes.</span>
-            </label>
-            <p className="text-xs text-amber-300/80">
+            <Checkbox checked={guardian} onChange={(e) => setGuardian(e.target.checked)}>
+              My parent or guardian has authorised camera-based monitoring for my lessons, including multiple-face detection and tab-visibility checks during quizzes.
+            </Checkbox>
+            <Checkbox checked={school} onChange={(e) => setSchool(e.target.checked)}>
+              My school or teacher has approved using Aegis with camera monitoring and protected quizzes.
+            </Checkbox>
+            <Callout tone="warning">
               Because you are under 18, both confirmations are required. Schools should collect written
               parent/guardian consent before students use camera monitoring.
-            </p>
+            </Callout>
           </>
         )}
       </div>
 
-      {error && <p className="text-sm text-rose-400">{error}</p>}
+      {error && (
+        <Callout tone="danger" role="alert">
+          {error}
+        </Callout>
+      )}
 
-      <button
-        onClick={submit}
-        disabled={!canSubmit || saving}
-        className="px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 disabled:bg-slate-800 disabled:text-slate-500 text-white font-bold text-sm"
-      >
+      <Button onClick={submit} disabled={!canSubmit || saving} loading={saving} size="lg" icon={saving ? undefined : ShieldCheck}>
         {saving ? 'Saving…' : 'Give consent and continue'}
-      </button>
-    </div>
+      </Button>
+    </Card>
   )
+}
+
+function StepIcon({ status }) {
+  if (status === 'done') return <CircleCheck size={18} className="shrink-0 text-success" aria-hidden="true" />
+  if (status === 'current') return <LoaderCircle size={18} className="shrink-0 animate-spin text-warning" aria-hidden="true" />
+  return <Circle size={18} className="shrink-0 text-ink-3" aria-hidden="true" />
 }
 
 function StatusPanel({ hasVerifiedBefore }) {
@@ -146,6 +173,7 @@ function StatusPanel({ hasVerifiedBefore }) {
   const [retrying, setRetrying] = useState(false)
   const steps = stepStatus(state)
   const [title, defaultHelp] = MESSAGES[state] || MESSAGES.loading
+  const Icon = STATE_ICON[state] || Camera
 
   let help = defaultHelp
   if (state === 'camera_unavailable') {
@@ -167,46 +195,47 @@ function StatusPanel({ hasVerifiedBefore }) {
   }
 
   return (
-    <div className="glass-panel rounded-3xl border border-slate-800 p-6 space-y-4 max-w-lg w-full shadow-2xl bg-slate-950/90">
+    <Card padding="lg" className="w-full max-w-lg space-y-5 bg-raised shadow-raised" role="status" aria-live="polite">
       {hasVerifiedBefore && (
-        <p className="text-xs font-bold uppercase tracking-wider text-amber-300">
+        <Badge tone="warning" icon={CirclePause}>
           Learning paused — your place and answers are saved
-        </p>
+        </Badge>
       )}
-      <h3 className="text-lg font-bold text-white">{title}</h3>
-      {help && <p className="text-sm text-slate-400 leading-relaxed">{help}</p>}
+      <div className="flex items-start gap-4">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/[0.06] text-ink-2 ring-1 ring-inset ring-white/10">
+          <Icon size={21} aria-hidden="true" />
+        </span>
+        <div className="min-w-0 space-y-1.5">
+          <h3 className="font-display text-lg font-semibold leading-snug text-ink">{title}</h3>
+          {help && <p className="text-sm leading-relaxed text-ink-2">{help}</p>}
+        </div>
+      </div>
 
-      <ul className="space-y-2">
+      {state === 'agent_not_running' && (
+        <pre className="overflow-x-auto rounded-lg border border-line bg-canvas px-4 py-3 font-mono text-[12.5px] leading-relaxed text-ink">
+          <code>{'cd facial_analysis\n.\\venv\\Scripts\\Activate.ps1\npython main.py'}</code>
+        </pre>
+      )}
+
+      <ul className="space-y-2.5 rounded-xl border border-line bg-deep/70 p-4">
         {STEP_LABELS.map(([key, label]) => (
           <li key={key} className="flex items-center gap-3 text-sm">
-            <span
-              className={`h-5 w-5 rounded-full flex items-center justify-center text-[10px] font-bold ${
-                steps[key] === 'done'
-                  ? 'bg-emerald-500/20 text-emerald-300'
-                  : steps[key] === 'current'
-                    ? 'bg-amber-500/20 text-amber-300 animate-pulse'
-                    : 'bg-slate-800 text-slate-500'
-              }`}
-            >
-              {steps[key] === 'done' ? '✓' : steps[key] === 'current' ? '•' : ''}
-            </span>
-            <span className={steps[key] === 'pending' ? 'text-slate-500' : 'text-slate-200'}>{label}</span>
+            <StepIcon status={steps[key]} />
+            <span className={steps[key] === 'pending' ? 'text-ink-3' : 'text-ink'}>{label}</span>
           </li>
         ))}
       </ul>
 
       {lightingLow && (
-        <p className="text-xs text-amber-300">The room looks dark. More light helps face detection.</p>
+        <Callout tone="warning" icon={SunDim}>
+          The room looks dark. More light helps face detection.
+        </Callout>
       )}
 
-      <button
-        onClick={onRetry}
-        disabled={retrying}
-        className="px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 disabled:bg-slate-800 text-white font-semibold text-xs"
-      >
+      <Button onClick={onRetry} disabled={retrying} loading={retrying} icon={retrying ? undefined : RefreshCw}>
         {retrying ? 'Retrying…' : 'Retry'}
-      </button>
-    </div>
+      </Button>
+    </Card>
   )
 }
 
@@ -236,31 +265,29 @@ export default function MonitoringGate({ lessonId = null, children }) {
   const multipleFaces = verified && monitoring.backend?.multiple_faces === true
 
   return (
-    <div className="relative">
+    <div className={cx('relative', !verified && 'min-h-[560px]')}>
       {multipleFaces && (
-        <div
-          role="status"
-          aria-live="polite"
-          className="mb-4 rounded-2xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-xs font-semibold text-amber-200"
-        >
-          👥 More than one face is visible to your camera. If you are studying alone, make sure only you are in view.
-          This is noted in your session activity; it does not stop your lesson or quiz.
-        </div>
+        <Callout tone="warning" icon={Users} role="status" aria-live="polite" className="mb-5">
+          <span className="font-medium text-ink">
+            More than one face is visible to your camera. If you are studying alone, make sure only you are in view.
+            This is noted in your session activity; it does not stop your lesson or quiz.
+          </span>
+        </Callout>
       )}
       <div
         aria-hidden={!verified}
         inert={!verified}
-        className={verified ? '' : 'pointer-events-none select-none blur-md opacity-40 transition'}
+        className={verified ? '' : 'pointer-events-none select-none opacity-40 blur-md transition'}
       >
         {children}
       </div>
 
       {!verified && (
-        <div className="absolute inset-0 z-40 flex items-start justify-center pt-16 px-4">
+        <div className="absolute inset-0 z-10 flex items-start justify-center px-1 pt-8 sm:px-4 sm:pt-14">
           {startError ? (
-            <div className="glass-panel rounded-3xl border border-rose-500/30 p-6 max-w-lg text-sm text-rose-300">
+            <Callout tone="danger" role="alert" className="max-w-lg">
               {startError}
-            </div>
+            </Callout>
           ) : (
             <StatusPanel hasVerifiedBefore={hasVerifiedBefore} />
           )}

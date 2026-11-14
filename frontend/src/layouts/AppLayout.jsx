@@ -197,8 +197,11 @@ export default function AppLayout() {
   }
 
   // Remount (and fade in) per section, not per lesson: moving between
-  // lessons keeps the monitored session's components mounted.
+  // lessons keeps the monitored session's components mounted. The quiz gets
+  // no entrance animation at all: nothing animated may sit above its
+  // fixed-position integrity dialogs.
   const transitionKey = path.split('/')[1] || 'home'
+  const animatePage = !path.startsWith('/quiz/')
 
   return (
     <div className="min-h-full bg-canvas">
@@ -277,7 +280,7 @@ export default function AppLayout() {
             <GradeGate>
               {/* Pages are lazy-loaded; the shell stays while one loads. */}
               <Suspense fallback={<PageSkeleton />}>
-                <div key={transitionKey} className="animate-page-in">
+                <div key={transitionKey} className={animatePage ? 'animate-page-in' : undefined}>
                   <Outlet />
                 </div>
               </Suspense>

@@ -78,7 +78,9 @@ export function Modal({
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-end justify-center p-4 sm:items-center">
+    // m-0: a dialog placed inside a `space-y-*` stack must not inherit its
+    // margin (Tailwind 4 adds margin-bottom to every child but the last).
+    <div className="fixed inset-0 z-[60] m-0 flex items-end justify-center p-4 sm:items-center">
       <div
         className="absolute inset-0 animate-fade-in bg-[#05070d]/80 backdrop-blur-[3px]"
         onClick={dismissible ? () => closeRef.current?.() : undefined}

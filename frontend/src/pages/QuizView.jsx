@@ -1,11 +1,29 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
+import {
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  Camera,
+  CircleCheck,
+  CircleX,
+  ClipboardCheck,
+  Clock,
+  Coffee,
+  Lightbulb,
+  ListChecks,
+  Send,
+  Sparkles,
+  Timer,
+  TriangleAlert
+} from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useMonitoring } from '../context/MonitoringContext'
 import { quizService } from '../services/quizService'
 import { lessonService } from '../services/lessonService'
 import { telemetryService } from '../services/telemetryService'
 import { useLeaveGuard, useQuizIntegrity } from '../hooks/useQuizIntegrity'
+import { scrollBehavior } from '../hooks/useReducedMotion'
 import {
   AttemptEndedPanel,
   CheckingOverlay,
@@ -13,8 +31,12 @@ import {
   IntegrityRulesBanner,
   LeaveQuizModal,
   SaveStatus,
-  StrikeWarningModal
+  StrikeWarningModal,
+  formatClock
 } from '../components/QuizIntegrity'
+import { ActionIcon, DifficultyBadge, SubjectChip } from '../components/learning'
+import { actionIcon } from '../components/visuals'
+import { Badge, Button, Callout, Card, EmptyState, ErrorState, Modal, ProgressBar, ProgressRing, SectionHeader, Spinner, Tooltip, cx } from '../components/ui'
 
 const OPEN_STATUSES = ['in_progress', 'away', 'unverified']
 import {
@@ -23,6 +45,16 @@ import {
   actionInfo,
   resolveNextStep
 } from '../utils/recommendationActions'
+
+/** A labelled value row on the results screen. */
+function ResultRow({ label, children, tone }) {
+  return (
+    <div className="flex items-center justify-between gap-3 py-2.5 text-sm">
+      <dt className="text-ink-2">{label}</dt>
+      <dd className={cx('text-right font-medium', tone || 'text-ink')}>{children}</dd>
+    </div>
+  )
+}
 
 export default function QuizView() {
   const { id } = useParams()
@@ -56,6 +88,11 @@ export default function QuizView() {
   const [warningOpen, setWarningOpen] = useState(false)
   const [saveState, setSaveState] = useState(null)
   const strikesSeen = useRef(0)
+
+  // Presentation only: the submit confirmation and inline messages that
+  // replace browser alert() pop-ups (same checks, same wording).
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  const [notice, setNotice] = useState('')
 
   const studentId = user?.id
   // How this attempt is taken: standard, practice, hints or challenge
@@ -351,13 +388,15 @@ export default function QuizView() {
 
   if (loading) {
     return (
-      <div className="flex h-[70vh] items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-teal-500/20 border-t-teal-500" />
-
-          <p className="text-sm font-semibold tracking-wider text-slate-400 animate-pulse font-display uppercase">
-            Downloading Assessment Questions...
-          </p>
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="flex flex-col items-center gap-4 text-center">
+          <span className="grid h-14 w-14 place-items-center rounded-2xl border border-line-strong bg-raised shadow-card">
+            <Spinner size={24} label="Preparing your quiz" />
+          </span>
+          <div className="space-y-1">
+            <p className="font-display text-base font-semibold text-ink">Preparing your quiz…</p>
+            <p className="text-[13px] text-ink-2">Loading the questions and your saved answers.</p>
+          </div>
         </div>
       </div>
     )
@@ -373,48 +412,31 @@ export default function QuizView() {
 
   if (error || !quiz || !lesson) {
     return (
-      <div className="max-w-md mx-auto space-y-6 text-center py-12">
-        <div className="text-5xl">⚠️</div>
-
-        <h3 className="text-xl font-bold text-white">
-          Assessment Error
-        </h3>
-
-        <p className="text-sm text-slate-400">
-          {error ||
-            'Failed to load quiz metadata.'}
-        </p>
-
-        <Link
-          to="/subjects"
-          className="inline-flex px-5 py-2.5 rounded-xl bg-indigo-500 text-white font-semibold text-xs"
-        >
-          Return to Curriculum
-        </Link>
+      <div className="space-y-4 py-8">
+        <ErrorState title="This quiz could not be loaded" message={error || 'Failed to load quiz metadata.'} />
+        <div className="text-center">
+          <Button to="/subjects" variant="secondary" icon={BookOpen}>
+            Return to My Learning
+          </Button>
+        </div>
       </div>
     )
   }
 
   if (!questions.length) {
     return (
-      <div className="max-w-md mx-auto space-y-6 text-center py-12">
-        <div className="text-5xl">⚠️</div>
-
-        <h3 className="text-xl font-bold text-white">
-          No Questions Found
-        </h3>
-
-        <p className="text-sm text-slate-400">
-          This quiz does not contain any questions.
-        </p>
-
-        <Link
-          to={`/lesson/${lesson.id}`}
-          className="inline-flex px-5 py-2.5 rounded-xl bg-indigo-500 text-white font-semibold text-xs"
-        >
-          Return to Lesson
-        </Link>
-      </div>
+      <Card className="mx-auto max-w-lg">
+        <EmptyState
+          icon={TriangleAlert}
+          title="No questions found"
+          text="This quiz does not contain any questions."
+          action={
+            <Button to={`/lesson/${lesson.id}`} variant="secondary" icon={ArrowLeft}>
+              Return to lesson
+            </Button>
+          }
+        />
+      </Card>
     )
   }
 
@@ -477,10 +499,20 @@ export default function QuizView() {
     }
   }
 
+  // Jump straight to a question from the navigator (same as pressing
+  // Previous/Next repeatedly; answers and grading are unaffected).
+  const handleJump = (index) => {
+    if (index >= 0 && index < questions.length) {
+      setCurrentQuestionIdx(index)
+    }
+  }
+
   const handleSubmitQuiz = async () => {
     if (submitLoading) {
       return
     }
+
+    setNotice('')
 
     const unansweredQuestions =
       questions.filter(
@@ -490,7 +522,7 @@ export default function QuizView() {
       )
 
     if (unansweredQuestions.length > 0) {
-      alert(
+      setNotice(
         'Please answer all questions before submitting the quiz.'
       )
 
@@ -498,7 +530,7 @@ export default function QuizView() {
     }
 
     if (!studentId) {
-      alert(
+      setNotice(
         'Student session could not be identified. Please log in again.'
       )
 
@@ -506,12 +538,12 @@ export default function QuizView() {
     }
 
     if (!monitoringVerified || !monitoring.sessionId) {
-      alert('Camera monitoring must be active to submit the quiz.')
+      setNotice('Camera monitoring must be active to submit the quiz.')
       return
     }
 
     if (!attempt?.id || locked) {
-      alert('Your quiz is being checked. Please wait a moment and try again.')
+      setNotice('Your quiz is being checked. Please wait a moment and try again.')
       return
     }
 
@@ -596,7 +628,7 @@ export default function QuizView() {
         integrity.flush()
       }
 
-      alert(
+      setNotice(
         err.message ||
           'Error occurred during grading submission'
       )
@@ -635,7 +667,7 @@ export default function QuizView() {
         }
       })
     } else if (step.kind === 'review') {
-      document.getElementById('answer-review')?.scrollIntoView({ behavior: 'smooth' })
+      document.getElementById('answer-review')?.scrollIntoView({ behavior: scrollBehavior() })
     } else if (step.kind === 'break') {
       setBreakSecondsLeft(60)
     }
@@ -648,30 +680,24 @@ export default function QuizView() {
 
     if (rlRecommendation.error) {
       return (
-        <Link
-          to="/subjects"
-          className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 hover:bg-slate-800 text-slate-200 font-bold text-sm"
-        >
-          Back to Subjects
-        </Link>
+        <Button to="/subjects" variant="secondary" icon={BookOpen}>
+          Back to My Learning
+        </Button>
       )
     }
 
     if (!nextStep || nextStep.kind === 'unknown') {
       return (
-        <span className="text-xs font-semibold text-amber-400">
+        <Badge tone="warning" icon={TriangleAlert}>
           {actionInfo(rlRecommendation.action).label}
-        </span>
+        </Badge>
       )
     }
 
     return (
-      <button
-        onClick={() => performNextStep(nextStep)}
-        className="px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-sm shadow-md shadow-indigo-500/20 transition-all"
-      >
+      <Button onClick={() => performNextStep(nextStep)} size="lg" wrap icon={actionIcon(rlRecommendation.action)}>
         {nextStep.label}
-      </button>
+      </Button>
     )
   }
 
@@ -679,28 +705,29 @@ export default function QuizView() {
     if (breakSecondsLeft === null) return null
     const done = breakSecondsLeft <= 0
     return (
-      <div className="rounded-2xl border border-sky-500/30 bg-sky-500/5 p-5 space-y-3">
-        <p className="text-sm font-bold text-sky-300">
-          {done ? 'Break complete. Welcome back.' : `Focus-recovery break: ${breakSecondsLeft}s`}
-        </p>
-        <p className="text-xs text-slate-300 leading-relaxed">
-          Look away from the screen at something far away, blink slowly, and take a few deep
-          breaths. Stretch your shoulders. Continue when you feel alert.
-        </p>
-        <div className="flex gap-3">
-          <Link
-            to={`/lesson/${lesson.id}`}
-            className="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs"
-          >
-            Continue learning →
-          </Link>
+      <div className="space-y-4 rounded-card border border-info/30 bg-info/[0.06] p-5" role="status" aria-live="polite">
+        <div className="flex items-center gap-4">
+          <ProgressRing value={done ? 100 : ((60 - breakSecondsLeft) / 60) * 100} size={56} stroke={5} color="#6cb4f8" label="Break progress">
+            {done ? <CircleCheck size={20} className="text-info" aria-hidden="true" /> : <Coffee size={20} className="text-info" aria-hidden="true" />}
+          </ProgressRing>
+          <div className="space-y-1">
+            <p className="text-sm font-semibold text-ink">
+              {done ? 'Break complete. Welcome back.' : `Focus-recovery break: ${breakSecondsLeft}s`}
+            </p>
+            <p className="text-[13px] leading-relaxed text-ink-2">
+              Look away from the screen at something far away, blink slowly, and take a few deep breaths. Stretch your shoulders. Continue when
+              you feel alert.
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-2.5">
+          <Button to={`/lesson/${lesson.id}`} size="sm" iconRight={ArrowRight}>
+            Continue learning
+          </Button>
           {!done && (
-            <button
-              onClick={() => setBreakSecondsLeft(null)}
-              className="px-4 py-2 rounded-xl border border-slate-700 text-slate-300 text-xs font-semibold"
-            >
+            <Button onClick={() => setBreakSecondsLeft(null)} size="sm" variant="secondary">
               Skip break
-            </button>
+            </Button>
           )}
         </div>
       </div>
@@ -711,384 +738,258 @@ export default function QuizView() {
    * RESULTS SCREEN
    */
   if (isFinished && results) {
+    const tempo =
+      results.timeTaken < questions.length * 15
+        ? 'Fast'
+        : results.timeTaken < questions.length * 35
+          ? 'Moderate'
+          : 'Steady'
+    const observed = (value, yes, no) => (value === null || value === undefined ? 'Unknown' : value ? yes : no)
+    const recommendationInfo = rlRecommendation && !rlRecommendation.error ? actionInfo(rlRecommendation.action) : null
+    const strength = Math.round(Number(rlRecommendation?.confidence ?? 0) * 100)
+
     return (
-      <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
-        <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-br from-indigo-950/30 via-slate-900/40 to-slate-950 p-8 shadow-xl text-center">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 h-36 w-36 bg-indigo-500/10 blur-3xl pointer-events-none" />
-
-          <div className="space-y-4">
-            <span className="inline-flex px-3 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-bold uppercase tracking-wider">
-              Assessment Results
-            </span>
-
-            <h1 className="text-4xl font-display font-extrabold text-white">
-              Quiz score:{' '}
-              <span className="bg-gradient-to-r from-indigo-400 to-teal-300 bg-clip-text text-transparent">
-                {results.score}%
+      <div className="mx-auto max-w-[960px] space-y-6">
+        {/* Score */}
+        <Card padding="lg" className="relative overflow-hidden">
+          <div className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full bg-brand-500/[0.12] blur-3xl" aria-hidden="true" />
+          <div className="pointer-events-none absolute -bottom-24 right-0 h-56 w-56 rounded-full bg-mint-500/[0.08] blur-3xl" aria-hidden="true" />
+          <div className="relative flex flex-col items-center gap-8 text-center md:flex-row md:text-left">
+            <ProgressRing value={results.score} size={172} stroke={12} label={`Quiz score ${results.score}%`}>
+              <span>
+                <span className="block text-[42px] font-semibold leading-none tracking-tight text-ink">{results.score}%</span>
+                <span className="mt-1.5 block text-xs font-medium text-ink-2">quiz score</span>
               </span>
-            </h1>
-
-            <p className="text-sm text-slate-400 max-w-md mx-auto">
-              You correctly answered{' '}
-              {results.correctCount}{' '}
-              out of{' '}
-              {results.totalQuestions}{' '}
-              questions at{' '}
-              <span className="text-white font-semibold">
-                {quiz.difficulty}
-              </span>{' '}
-              difficulty level.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-md space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
-              Speed & Hints
-            </h3>
-
-            <div className="space-y-3">
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">
-                  Response time
-                </span>
-
-                <span className="font-semibold text-white">
-                  {results.timeTaken}{' '}
-                  seconds
-                </span>
-              </div>
-
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">
-                  Hints used
-                </span>
-
-                <span className="font-semibold text-white">
+            </ProgressRing>
+            <div className="min-w-0 flex-1 space-y-4">
+              <Badge tone="brand" icon={ClipboardCheck}>
+                Assessment results
+              </Badge>
+              <h1 className="font-display text-[28px] font-semibold leading-tight tracking-tight text-ink sm:text-[32px]">
+                {results.correctCount} of {results.totalQuestions} correct
+              </h1>
+              <p className="text-sm leading-relaxed text-ink-2">
+                You correctly answered {results.correctCount} out of {results.totalQuestions} questions at{' '}
+                <span className="font-semibold text-ink">{quiz.difficulty}</span> difficulty level.
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 md:justify-start">
+                <DifficultyBadge difficulty={quiz.difficulty} />
+                <Badge icon={Clock}>{formatClock(results.timeTaken)}</Badge>
+                <Badge icon={Lightbulb}>
                   {hintsCount} {hintsCount === 1 ? 'hint' : 'hints'}
-                </span>
-              </div>
-
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">
-                  Tempo score
-                </span>
-
-                <span className="font-semibold text-teal-400">
-                  {results.timeTaken <
-                  questions.length *
-                    15
-                    ? 'Fast'
-                    : results.timeTaken <
-                        questions.length *
-                          35
-                      ? 'Moderate'
-                      : 'Steady'}
-                </span>
+                </Badge>
+                <Badge>
+                  <SubjectChip subject={resolvedSubject} />
+                </Badge>
               </div>
             </div>
           </div>
-
-          <div className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-md space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
-              Attention Telemetry
-            </h3>
-
-            <div className="space-y-3">
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">
-                  Average attention
-                </span>
-
-                <span className="font-semibold text-white">
-                  {results.attentionUsed !== null &&
-                  results.attentionUsed !== undefined
-                    ? `${Math.round(
-                        results.attentionUsed *
-                          100
-                      )}%`
-                    : 'Unavailable (no camera data)'}
-                </span>
-              </div>
-
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">
-                  Yawning observed
-                </span>
-
-                <span
-                  className={`font-semibold ${
-                    results.yawned
-                      ? 'text-amber-400'
-                      : 'text-slate-400'
-                  }`}
-                >
-                  {results.yawned === null ||
-                  results.yawned === undefined
-                    ? 'Unknown'
-                    : results.yawned
-                      ? 'Yes'
-                      : 'No'}
-                </span>
-              </div>
-
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">
-                  Gaze stability
-                </span>
-
-                <span
-                  className={`font-semibold ${
-                    results.lookedAway
-                      ? 'text-amber-400'
-                      : 'text-slate-400'
-                  }`}
-                >
-                  {results.lookedAway === null ||
-                  results.lookedAway === undefined
-                    ? 'Unknown'
-                    : results.lookedAway
-                      ? 'Looking away'
-                      : 'Stable'}
-                </span>
-              </div>
-
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">
-                  Possible drowsiness
-                </span>
-
-                <span
-                  className={`font-semibold ${
-                    results.drowsy ? 'text-amber-400' : 'text-slate-400'
-                  }`}
-                >
-                  {results.drowsy === null || results.drowsy === undefined
-                    ? 'Unknown'
-                    : results.drowsy
-                      ? 'Observed'
-                      : 'Not observed'}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-md space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
-              Grading Log
-            </h3>
-
-            <div className="space-y-3">
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">
-                  Subject
-                </span>
-
-                <span className="font-semibold text-white">
-                  {resolvedSubject}
-                </span>
-              </div>
-
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">
-                  Topic
-                </span>
-
-                <span className="font-semibold text-white truncate max-w-[120px] inline-block">
-                  {lesson.topic ||
-                    lesson.title}
-                </span>
-              </div>
-
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">
-                  Sync status
-                </span>
-
-                <span className="font-semibold text-emerald-400">
-                  Saved by the server
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+        </Card>
 
         {results.mode && results.mode !== 'standard' && (
-          <div className="rounded-2xl border border-indigo-500/30 bg-indigo-500/5 px-4 py-3 text-xs font-semibold text-indigo-300">
-            {results.mode === 'challenge'
-              ? results.timeTaken <= results.challengeTarget
-                ? `Quick challenge complete: ${results.timeTaken}s, within the ${results.challengeTarget}s target.`
-                : `Quick challenge: ${results.timeTaken}s, ${results.timeTaken - results.challengeTarget}s over the ${results.challengeTarget}s target. Try again to beat it.`
-              : results.mode === 'hints'
-                ? `Retry with hints: you used ${hintsCount} hint(s).`
-                : 'Practice attempt recorded.'}
-          </div>
+          <Callout tone="brand" icon={results.mode === 'challenge' ? Timer : results.mode === 'hints' ? Lightbulb : ListChecks}>
+            <span className="font-medium text-ink">
+              {results.mode === 'challenge'
+                ? results.timeTaken <= results.challengeTarget
+                  ? `Quick challenge complete: ${results.timeTaken}s, within the ${results.challengeTarget}s target.`
+                  : `Quick challenge: ${results.timeTaken}s, ${results.timeTaken - results.challengeTarget}s over the ${results.challengeTarget}s target. Try again to beat it.`
+                : results.mode === 'hints'
+                  ? `Retry with hints: you used ${hintsCount} hint(s).`
+                  : 'Practice attempt recorded.'}
+            </span>
+          </Callout>
         )}
 
-        {Array.isArray(results.review) && results.review.length > 0 && (
-          <div id="answer-review" className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-md space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
-              Answer Review
-            </h3>
-
-            <ol className="space-y-3">
-              {results.review.map((item, index) => {
-                const question = questions.find((q) => q.id === item.question_id)
-                const optionText = (letter) =>
-                  question ? question[`option_${String(letter).toLowerCase()}`] : ''
-
-                return (
-                  <li
-                    key={item.question_id}
-                    className={`rounded-2xl border p-4 text-sm ${
-                      item.is_correct
-                        ? 'border-emerald-500/20 bg-emerald-500/5'
-                        : 'border-rose-500/20 bg-rose-500/5'
-                    }`}
-                  >
-                    <p className="font-semibold text-slate-200">
-                      {index + 1}. {question?.question}
-                    </p>
-                    <p className={`mt-1 text-xs ${item.is_correct ? 'text-emerald-400' : 'text-rose-400'}`}>
-                      {item.is_correct ? '✓ Correct' : '✗ Incorrect'} — your answer: {item.selected_answer}. {optionText(item.selected_answer)}
-                    </p>
-                    {!item.is_correct && (
-                      <p className="mt-1 text-xs text-slate-400">
-                        Correct answer: {item.correct_answer}. {optionText(item.correct_answer)}
-                      </p>
-                    )}
-                    {item.explanation && (
-                      <p className="mt-2 text-xs text-slate-300 leading-relaxed">
-                        <span className="font-semibold text-indigo-300">Why: </span>
-                        {item.explanation}
-                      </p>
-                    )}
-                  </li>
-                )
-              })}
-            </ol>
-          </div>
-        )}
-
+        {/* AI coach decision */}
         {rlRecommendation?.error ? (
-          <div className="glass-panel rounded-3xl p-8 border border-slate-900 shadow-xl space-y-6 text-center">
-            <p className="text-sm font-semibold text-rose-400">
-              {rlRecommendation.error}
-            </p>
-
-            <p className="text-xs text-slate-500">
+          <Card padding="lg" className="space-y-4 text-center">
+            <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-warning/[0.12] text-warning ring-1 ring-inset ring-warning/25">
+              <Camera size={22} aria-hidden="true" />
+            </span>
+            <p className="mx-auto max-w-md font-display text-base font-semibold text-ink">{rlRecommendation.error}</p>
+            <p className="mx-auto max-w-md text-[13px] leading-relaxed text-ink-2">
               {rlRecommendation.telemetryUnavailable
                 ? 'Your quiz result was saved. Start the Aegis camera agent before your next attempt to receive adaptive recommendations.'
                 : 'The recommendation engine could not resolve a recommendation.'}
             </p>
-
-            <Link
-              to="/subjects"
-              className="inline-flex px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 hover:bg-slate-800 text-slate-200 font-bold text-sm"
-            >
-              Back to Subjects
-            </Link>
-          </div>
+            <div className="flex justify-center">{renderNextStepsButton()}</div>
+          </Card>
         ) : (
           rlRecommendation && (
-            <div className="glass-panel rounded-3xl p-8 border border-slate-900 shadow-xl space-y-6 relative overflow-hidden">
-              <div className="absolute top-0 right-0 h-40 w-40 bg-teal-500/5 blur-3xl pointer-events-none" />
-
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800/80 pb-4">
-                <div>
-                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                    <span className="text-teal-400">
-                      ✦
-                    </span>
-
-                    Reinforcement Learning Policy Decision
-                  </h3>
-
-                  <p className="text-xs text-slate-500 mt-1">
-                    Generated by the Aegis adaptive policy from your quiz performance and camera engagement metrics
-                  </p>
-                </div>
-
-                <div
-                  className="shrink-0 flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-2xl px-4 py-2"
-                  title={CONFIDENCE_NOTE}
-                >
-                  <span className="text-slate-500 text-[10px] uppercase font-bold tracking-wide">
-                    DECISION STRENGTH
-                  </span>
-
-                  <span className="text-teal-400 font-extrabold text-sm">
-                    {Math.round(
-                      Number(
-                        rlRecommendation.confidence ??
-                          0
-                      ) * 100
-                    )}
-                    %
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-[10px] font-semibold text-indigo-400 uppercase tracking-wider">
-                    Suggested Pedagogical Action
-                  </span>
-
-                  <span className="text-2xl font-extrabold text-white">
-                    {actionInfo(rlRecommendation.action).icon}{' '}
-                    {actionInfo(rlRecommendation.action).label}
-                  </span>
-
-                  <span className="text-xs text-slate-400">
-                    {actionInfo(rlRecommendation.action).description}
-                  </span>
-
+            <Card as="section" padding="lg" aria-labelledby="coach-decision" className="relative space-y-6 overflow-hidden">
+              <div className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-brand-500/[0.08] blur-3xl" aria-hidden="true" />
+              <SectionHeader
+                id="coach-decision"
+                icon={Sparkles}
+                title="Your AI coach's next step"
+                description="Generated by the Aegis adaptive policy from your quiz performance and camera engagement metrics."
+              />
+              <div className="relative flex flex-col gap-4 rounded-xl border border-brand-500/25 bg-brand-500/[0.06] p-5 sm:flex-row sm:items-start">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-500/[0.15] text-brand-200 ring-1 ring-inset ring-brand-500/30">
+                  <ActionIcon action={rlRecommendation.action} size={22} />
+                </span>
+                <div className="min-w-0 space-y-1.5">
+                  <p className="text-xs font-medium text-brand-300">Suggested pedagogical action</p>
+                  <p className="font-display text-xl font-semibold text-ink">{recommendationInfo.label}</p>
+                  <p className="text-sm leading-relaxed text-ink-2">{recommendationInfo.description}</p>
                   {rlRecommendation.policy && (
-                    <span className="text-[10px] text-slate-500">
-                      Decided by: {POLICY_LABELS[rlRecommendation.policy] || rlRecommendation.policy}
-                    </span>
+                    <p className="text-xs text-ink-2">Decided by: {POLICY_LABELS[rlRecommendation.policy] || rlRecommendation.policy}</p>
                   )}
                 </div>
-
-                <div className="flex flex-col gap-1">
-                  <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
-                    Coach Justification
-                  </span>
-
-                  <p className="text-sm text-slate-300 italic leading-relaxed">
-                    "
-                    {rlRecommendation.explanation ||
-                      'Adaptive recommendation generated from your learning activity.'}
-                    "
-                  </p>
-                </div>
               </div>
 
-              <div className="border-t border-slate-800/80 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <span className="text-xs text-slate-400">
-                  Your recommended next step:
-                </span>
+              <figure className="relative space-y-2">
+                <figcaption className="text-xs font-medium text-ink-2">Why the coach chose this</figcaption>
+                <blockquote className="rounded-xl border border-line bg-deep/60 px-4 py-3.5 text-sm italic leading-relaxed text-ink">
+                  “{rlRecommendation.explanation || 'Adaptive recommendation generated from your learning activity.'}”
+                </blockquote>
+              </figure>
 
-                <div className="flex items-center gap-3">
-                  {renderNextStepsButton()}
+              <div className="relative space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <Tooltip content={CONFIDENCE_NOTE} align="start">
+                    <span tabIndex={0} className="cursor-help rounded text-ink-2 underline decoration-line-strong decoration-dotted underline-offset-4">
+                      Decision strength
+                    </span>
+                  </Tooltip>
+                  <span className="font-semibold text-mint-300">{strength}%</span>
                 </div>
+                <ProgressBar value={strength} tone="mint" size="sm" label="Decision strength" />
+                <p className="text-[11px] text-ink-2">How clearly this step beat the others. It is not a probability.</p>
+              </div>
+
+              <div className="relative flex flex-col gap-3 border-t border-line pt-5 sm:flex-row sm:items-center sm:justify-between">
+                <span className="text-sm text-ink-2">Your recommended next step:</span>
+                <div className="flex items-center gap-3">{renderNextStepsButton()}</div>
               </div>
 
               {renderBreakPanel()}
-            </div>
+            </Card>
           )
+        )}
+
+        {/* Details */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <Card>
+            <h3 className="font-display text-[15px] font-semibold text-ink">Speed &amp; hints</h3>
+            <dl className="mt-2 divide-y divide-line/70">
+              <ResultRow label="Response time">{results.timeTaken} seconds</ResultRow>
+              <ResultRow label="Hints used">
+                {hintsCount} {hintsCount === 1 ? 'hint' : 'hints'}
+              </ResultRow>
+              <ResultRow label="Tempo score" tone="text-mint-300">
+                {tempo}
+              </ResultRow>
+            </dl>
+          </Card>
+          <Card>
+            <h3 className="font-display text-[15px] font-semibold text-ink">Attention telemetry</h3>
+            <dl className="mt-2 divide-y divide-line/70">
+              <ResultRow label="Average attention">
+                {results.attentionUsed !== null && results.attentionUsed !== undefined
+                  ? `${Math.round(results.attentionUsed * 100)}%`
+                  : 'Unavailable (no camera data)'}
+              </ResultRow>
+              <ResultRow label="Yawning observed" tone={results.yawned ? 'text-warning' : 'text-ink-2'}>
+                {observed(results.yawned, 'Yes', 'No')}
+              </ResultRow>
+              <ResultRow label="Gaze stability" tone={results.lookedAway ? 'text-warning' : 'text-ink-2'}>
+                {observed(results.lookedAway, 'Looking away', 'Stable')}
+              </ResultRow>
+              <ResultRow label="Possible drowsiness" tone={results.drowsy ? 'text-warning' : 'text-ink-2'}>
+                {observed(results.drowsy, 'Observed', 'Not observed')}
+              </ResultRow>
+            </dl>
+          </Card>
+          <Card>
+            <h3 className="font-display text-[15px] font-semibold text-ink">Grading log</h3>
+            <dl className="mt-2 divide-y divide-line/70">
+              <ResultRow label="Subject">{resolvedSubject}</ResultRow>
+              <ResultRow label="Topic">
+                <span className="inline-block max-w-[150px] truncate align-bottom">{lesson.topic || lesson.title}</span>
+              </ResultRow>
+              <ResultRow label="Sync status" tone="text-success">
+                <span className="inline-flex items-center gap-1.5">
+                  <CircleCheck size={14} aria-hidden="true" />
+                  Saved by the server
+                </span>
+              </ResultRow>
+            </dl>
+          </Card>
+        </div>
+
+        {/* Answer review (correct answers are shown only after grading) */}
+        {Array.isArray(results.review) && results.review.length > 0 && (
+          <Card as="section" id="answer-review" aria-labelledby="answer-review-title" className="scroll-mt-24 space-y-5">
+            <SectionHeader
+              id="answer-review-title"
+              icon={ListChecks}
+              title="Answer review"
+              description={`${results.correctCount} correct · ${results.totalQuestions - results.correctCount} to review`}
+            />
+            <ol className="space-y-3">
+              {results.review.map((item, index) => {
+                const question = questions.find((q) => q.id === item.question_id)
+                const optionText = (letter) => (question ? question[`option_${String(letter).toLowerCase()}`] : '')
+
+                return (
+                  <li
+                    key={item.question_id}
+                    className={cx(
+                      'flex gap-3 rounded-xl border p-4',
+                      item.is_correct ? 'border-success/25 bg-success/[0.04]' : 'border-danger/25 bg-danger/[0.04]'
+                    )}
+                  >
+                    {item.is_correct ? (
+                      <CircleCheck size={19} className="mt-0.5 shrink-0 text-success" aria-hidden="true" />
+                    ) : (
+                      <CircleX size={19} className="mt-0.5 shrink-0 text-danger" aria-hidden="true" />
+                    )}
+                    <div className="min-w-0 space-y-1.5">
+                      <p className="text-sm font-medium leading-relaxed text-ink">
+                        {index + 1}. {question?.question}
+                      </p>
+                      <p className={cx('text-[13px]', item.is_correct ? 'text-success' : 'text-danger')}>
+                        {item.is_correct ? 'Correct' : 'Incorrect'} — your answer: {item.selected_answer}. {optionText(item.selected_answer)}
+                      </p>
+                      {!item.is_correct && (
+                        <p className="text-[13px] text-ink-2">
+                          Correct answer: {item.correct_answer}. {optionText(item.correct_answer)}
+                        </p>
+                      )}
+                      {item.explanation && (
+                        <p className="text-[13px] leading-relaxed text-ink-2">
+                          <span className="font-semibold text-brand-300">Why: </span>
+                          {item.explanation}
+                        </p>
+                      )}
+                    </div>
+                  </li>
+                )
+              })}
+            </ol>
+          </Card>
         )}
       </div>
     )
   }
 
-  const progressPercent = Math.round(
-    ((currentQuestionIdx + 1) /
-      questions.length) *
-      100
-  )
+  const answeredCount = questions.filter((question) => selectedAnswers[question.id] !== undefined).length
+  const isLastQuestion = currentQuestionIdx === questions.length - 1
+  const challengeTarget = questions.length * CHALLENGE_SECONDS_PER_QUESTION
+  const overTarget = attemptMode === 'challenge' && secondsElapsed > challengeTarget
+  // The same conditions that always disabled the submit button.
+  const submitDisabled =
+    submitLoading || locked || !monitoringVerified || Object.keys(selectedAnswers).length < questions.length
+
+  const openSubmitConfirm = () => {
+    setNotice('')
+    setConfirmOpen(true)
+  }
+  const confirmSubmit = () => {
+    setConfirmOpen(false)
+    handleSubmitQuiz()
+  }
 
   const modeBanner = {
     practice: 'Practice attempt recommended by your coach: focus on the questions you missed last time.',
@@ -1096,205 +997,259 @@ export default function QuizView() {
     challenge: `Quick challenge: answer all ${questions.length} questions within ${questions.length * CHALLENGE_SECONDS_PER_QUESTION} seconds.`
   }[attemptMode]
 
+  const timer = (
+    <span className="inline-flex items-center gap-1.5 text-sm font-medium tabular-nums text-ink">
+      <Clock size={15} className="text-ink-2" aria-hidden="true" />
+      <span>{formatClock(secondsElapsed)}</span>
+      {attemptMode === 'challenge' && (
+        <span className={cx('text-xs font-medium', overTarget ? 'text-danger' : 'text-mint-300')}>/ target {formatClock(challengeTarget)}</span>
+      )}
+    </span>
+  )
+
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="mx-auto max-w-[1080px] space-y-5">
       <StrikeWarningModal open={warningOpen && attemptOpen} onClose={() => setWarningOpen(false)} />
       <LeaveQuizModal pending={leaveGuard.pending} onConfirm={leaveGuard.confirm} onCancel={leaveGuard.cancel} />
+      <Modal
+        open={confirmOpen && attemptOpen}
+        onClose={() => setConfirmOpen(false)}
+        icon={Send}
+        title="Submit your answers?"
+        description="Your quiz is graded straight away, and the answers cannot be changed afterwards."
+        footer={
+          <>
+            <Button variant="secondary" onClick={() => setConfirmOpen(false)}>
+              Keep reviewing
+            </Button>
+            <Button onClick={confirmSubmit} disabled={submitDisabled} icon={Send} autoFocus>
+              Submit answers
+            </Button>
+          </>
+        }
+      >
+        <dl className="grid grid-cols-3 gap-2 rounded-xl border border-line bg-deep/60 p-3 text-center">
+          <div>
+            <dt className="text-[11px] text-ink-2">Answered</dt>
+            <dd className="mt-0.5 text-sm font-semibold text-ink">
+              {answeredCount}/{questions.length}
+            </dd>
+          </div>
+          <div>
+            <dt className="text-[11px] text-ink-2">Hints used</dt>
+            <dd className="mt-0.5 text-sm font-semibold text-ink">{hintsCount}</dd>
+          </div>
+          <div>
+            <dt className="text-[11px] text-ink-2">Time</dt>
+            <dd className="mt-0.5 text-sm font-semibold text-ink">{formatClock(secondsElapsed)}</dd>
+          </div>
+        </dl>
+        {locked && <p className="mt-3 text-xs text-warning">Your quiz is being checked. Please wait a moment.</p>}
+      </Modal>
+
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <Button to={`/lesson/${lesson.id}`} variant="ghost" size="sm" icon={ArrowLeft} className="-ml-2">
+          Abort to Lesson
+        </Button>
+        <SaveStatus state={saveState} />
+      </div>
 
       {attempt?.protected && <IntegrityRulesBanner strikes={attempt.strikes} />}
 
       {modeBanner && (
-        <div className="rounded-2xl border border-indigo-500/30 bg-indigo-500/5 px-4 py-3 text-xs font-semibold text-indigo-300">
-          {modeBanner}
-        </div>
+        <Callout tone="brand" icon={attemptMode === 'challenge' ? Timer : attemptMode === 'hints' ? Lightbulb : ListChecks}>
+          <span className="font-medium text-ink">{modeBanner}</span>
+        </Callout>
       )}
 
-      <div>
-        <Link
-          to={`/lesson/${lesson.id}`}
-          className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-slate-500 hover:text-slate-300 transition-colors"
-        >
-          ← Abort to Lesson
-        </Link>
-        <span className="float-right">
-          <SaveStatus state={saveState} />
-        </span>
-      </div>
+      <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_288px]">
+        <div className="min-w-0 space-y-4">
+          <Card padding="none" className="relative">
+            {locked && <CheckingOverlay connection={integrity.connection} status={attempt?.status} />}
 
-      <div className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-md space-y-4">
-        <div className="flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 text-[9px] font-extrabold uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded">
-              {quiz.difficulty} Level
-            </span>
-
-            <span className="text-slate-600">
-              •
-            </span>
-
-            <span className="font-semibold text-slate-300 truncate max-w-[150px] inline-block">
-              {quiz.title}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-4 text-slate-400 font-medium">
-            <span>
-              Question{' '}
-              {currentQuestionIdx +
-                1}{' '}
-              of {questions.length}
-            </span>
-
-            <span>
-              Time:{' '}
-              <span className="text-white font-semibold font-mono">
-                {secondsElapsed}s
-                {attemptMode === 'challenge' && (
-                  <span
-                    className={`ml-2 ${
-                      secondsElapsed > questions.length * CHALLENGE_SECONDS_PER_QUESTION
-                        ? 'text-rose-400'
-                        : 'text-teal-400'
-                    }`}
-                  >
-                    / target {questions.length * CHALLENGE_SECONDS_PER_QUESTION}s
-                  </span>
-                )}
-              </span>
-            </span>
-          </div>
-        </div>
-
-        <div className="w-full bg-slate-950 rounded-full h-2 overflow-hidden">
-          <div
-            className="bg-gradient-to-r from-indigo-500 to-teal-400 h-2 rounded-full transition-all duration-300"
-            style={{
-              width: `${progressPercent}%`
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="relative glass-panel rounded-3xl p-8 border border-slate-900 shadow-lg space-y-8 min-h-[300px] flex flex-col justify-between">
-        {locked && <CheckingOverlay connection={integrity.connection} status={attempt?.status} />}
-        <div className="space-y-6">
-          <h2 className="text-lg md:text-xl font-bold text-white leading-relaxed">
-            {currentQuestion.question}
-          </h2>
-
-          <div className="grid grid-cols-1 gap-4">
-            {['A', 'B', 'C', 'D'].map(
-              (letter) => {
-                const optionText =
-                  currentQuestion[
-                    `option_${letter.toLowerCase()}`
-                  ]
-
-                const isSelected =
-                  selectedAnswers[
-                    currentQuestion.id
-                  ] === letter
-
-                return (
-                  <button
-                    key={letter}
-                    disabled={locked}
-                    onClick={() =>
-                      handleSelectOption(
-                        letter
-                      )
-                    }
-                    className={`w-full flex items-center gap-4 text-left p-4 rounded-2xl border transition-all duration-200 ${
-                      isSelected
-                        ? 'bg-indigo-500/10 border-indigo-500 text-white shadow-inner font-medium'
-                        : 'bg-slate-900/30 border-slate-800/80 hover:border-slate-700/60 text-slate-300'
-                    }`}
-                  >
-                    <span
-                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-xl text-xs font-bold border transition-colors ${
-                        isSelected
-                          ? 'bg-indigo-500 border-indigo-500 text-white'
-                          : 'bg-slate-950 border-slate-800 text-slate-500'
-                      }`}
-                    >
-                      {letter}
-                    </span>
-
-                    <span className="text-sm">
-                      {optionText}
-                    </span>
-                  </button>
-                )
-              }
-            )}
-          </div>
-        </div>
-
-        <div className="border-t border-slate-800/80 pt-6 flex items-center justify-between gap-4">
-          <div>
-            {hintsRevealed[
-              currentQuestion.id
-            ] ? (
-              <div className="text-xs text-indigo-400 leading-relaxed font-medium">
-                💡 Hint:{' '}
-                {currentQuestion.hint ||
-                  `Review the lesson section on ${lesson.topic}.`}
+            <div className="border-b border-line px-5 pb-4 pt-5 sm:px-7">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <p className="text-sm text-ink-2">
+                  Question <span className="font-semibold text-ink">{currentQuestionIdx + 1}</span> of {questions.length}
+                </p>
+                <div className="flex items-center gap-3">
+                  <span className="lg:hidden">{timer}</span>
+                  <DifficultyBadge difficulty={quiz.difficulty} size="sm" />
+                </div>
               </div>
-            ) : (
-              <button
-                onClick={
-                  handleRevealHint
-                }
-                disabled={locked}
-                className="text-xs font-semibold text-slate-500 hover:text-slate-300 transition-colors flex items-center gap-1"
-              >
-                💡 Need a hint?
-              </button>
-            )}
-          </div>
+              <ProgressBar
+                value={(answeredCount / questions.length) * 100}
+                tone="gradient"
+                size="xs"
+                className="mt-3.5"
+                label={`${answeredCount} of ${questions.length} questions answered`}
+              />
+            </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              onClick={handlePrev}
-              disabled={
-                currentQuestionIdx === 0
-              }
-              className="px-4 py-2 rounded-xl bg-slate-950 hover:bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-400 hover:text-slate-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-            >
-              Previous
-            </button>
+            <div className="space-y-6 px-5 py-6 sm:px-7 sm:py-8">
+              <h2 id="quiz-question" className="font-display text-[20px] font-semibold leading-snug text-ink sm:text-[22px]">
+                {currentQuestion.question}
+              </h2>
 
-            {currentQuestionIdx <
-            questions.length - 1 ? (
-              <button
-                onClick={handleNext}
-                className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs font-semibold text-slate-200 hover:text-white transition-all"
-              >
-                Next
-              </button>
-            ) : (
-              <button
-                onClick={
-                  handleSubmitQuiz
-                }
-                disabled={
-                  submitLoading ||
-                  locked ||
-                  !monitoringVerified ||
-                  Object.keys(
-                    selectedAnswers
-                  ).length <
-                    questions.length
-                }
-                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-xs font-bold text-white shadow-md shadow-indigo-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-              >
-                {submitLoading
-                  ? 'Grading...'
-                  : 'Submit quiz'}
-              </button>
-            )}
-          </div>
+              <div role="radiogroup" aria-labelledby="quiz-question" className="grid gap-3">
+                {['A', 'B', 'C', 'D'].map((letter) => {
+                  const optionText = currentQuestion[`option_${letter.toLowerCase()}`]
+                  const isSelected = selectedAnswers[currentQuestion.id] === letter
+
+                  return (
+                    <button
+                      key={letter}
+                      type="button"
+                      role="radio"
+                      aria-checked={isSelected}
+                      disabled={locked}
+                      onClick={() => handleSelectOption(letter)}
+                      className={cx(
+                        'group flex w-full items-center gap-4 rounded-xl border p-3.5 text-left transition-[border-color,background-color,box-shadow] duration-150 disabled:cursor-not-allowed sm:p-4',
+                        isSelected
+                          ? 'border-brand-500/70 bg-brand-500/[0.1] shadow-[0_0_0_1px_rgb(136_117_255/0.45)]'
+                          : 'border-line-strong bg-deep/60 hover:border-[#3a4664] hover:bg-white/[0.025]'
+                      )}
+                    >
+                      <span
+                        className={cx(
+                          'grid h-8 w-8 shrink-0 place-items-center rounded-lg text-[13px] font-semibold transition-colors duration-150',
+                          isSelected ? 'bg-brand-600 text-white shadow-button' : 'bg-raised text-ink-2 ring-1 ring-inset ring-line-strong group-hover:text-ink'
+                        )}
+                      >
+                        {letter}
+                      </span>
+                      <span className="formula flex-1 text-[15px] leading-relaxed text-ink">{optionText}</span>
+                      <CircleCheck
+                        size={19}
+                        className={cx('shrink-0 text-brand-300 transition-opacity duration-150', isSelected ? 'opacity-100' : 'opacity-0')}
+                        aria-hidden="true"
+                      />
+                    </button>
+                  )
+                })}
+              </div>
+
+              <div>
+                {hintsRevealed[currentQuestion.id] ? (
+                  <Callout tone="brand" icon={Lightbulb} title="Hint">
+                    {currentQuestion.hint || `Review the lesson section on ${lesson.topic}.`}
+                  </Callout>
+                ) : (
+                  <Button variant="ghost" size="sm" icon={Lightbulb} onClick={handleRevealHint} disabled={locked} className="-ml-2">
+                    Need a hint?
+                  </Button>
+                )}
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-4 sm:px-7">
+              <Button variant="secondary" icon={ArrowLeft} onClick={handlePrev} disabled={currentQuestionIdx === 0}>
+                Previous
+              </Button>
+              {!isLastQuestion ? (
+                <Button onClick={handleNext} iconRight={ArrowRight}>
+                  Next
+                </Button>
+              ) : (
+                <Button onClick={openSubmitConfirm} disabled={submitDisabled} loading={submitLoading} icon={submitLoading ? undefined : Send}>
+                  {submitLoading ? 'Grading...' : 'Submit quiz'}
+                </Button>
+              )}
+            </div>
+          </Card>
+
+          {notice && (
+            <Callout tone="warning" role="alert">
+              {notice}
+            </Callout>
+          )}
         </div>
+
+        <aside aria-label="Quiz overview" className="space-y-4 lg:sticky lg:top-24">
+          <Card padding="sm" className="space-y-4 sm:p-5">
+            <div className="space-y-1">
+              <p className="line-clamp-2 text-xs text-ink-2">
+                {resolvedSubject} · {lesson.title}
+              </p>
+              <p className="font-display text-[15px] font-semibold leading-snug text-ink">{quiz.title}</p>
+            </div>
+            <dl className="grid grid-cols-2 gap-2.5">
+              <div className="rounded-lg bg-deep/70 p-3 ring-1 ring-inset ring-line">
+                <dt className="text-[11px] text-ink-2">Time</dt>
+                <dd className="mt-1 text-sm font-semibold tabular-nums text-ink">{formatClock(secondsElapsed)}</dd>
+              </div>
+              <div className="rounded-lg bg-deep/70 p-3 ring-1 ring-inset ring-line">
+                <dt className="text-[11px] text-ink-2">Answered</dt>
+                <dd className="mt-1 text-sm font-semibold tabular-nums text-ink">
+                  {answeredCount}/{questions.length}
+                </dd>
+              </div>
+              <div className="rounded-lg bg-deep/70 p-3 ring-1 ring-inset ring-line">
+                <dt className="text-[11px] text-ink-2">Hints used</dt>
+                <dd className="mt-1 text-sm font-semibold tabular-nums text-ink">{hintsCount}</dd>
+              </div>
+              <div className="rounded-lg bg-deep/70 p-3 ring-1 ring-inset ring-line">
+                <dt className="text-[11px] text-ink-2">{attemptMode === 'challenge' ? 'Target' : 'Camera'}</dt>
+                <dd className={cx('mt-1 text-sm font-semibold tabular-nums', attemptMode === 'challenge' ? (overTarget ? 'text-danger' : 'text-mint-300') : monitoringVerified ? 'text-success' : 'text-warning')}>
+                  {attemptMode === 'challenge' ? formatClock(challengeTarget) : monitoringVerified ? 'Verified' : 'Paused'}
+                </dd>
+              </div>
+            </dl>
+            {!monitoringVerified && <p className="text-xs leading-relaxed text-warning">The timer pauses while camera monitoring is interrupted.</p>}
+          </Card>
+
+          <Card padding="sm" className="space-y-3.5 sm:p-5">
+            <p className="text-sm font-semibold text-ink">Questions</p>
+            <ol className="grid grid-cols-5 gap-2">
+              {questions.map((question, index) => {
+                const answered = selectedAnswers[question.id] !== undefined
+                const current = index === currentQuestionIdx
+                return (
+                  <li key={question.id}>
+                    <button
+                      type="button"
+                      onClick={() => handleJump(index)}
+                      disabled={locked}
+                      aria-current={current ? 'step' : undefined}
+                      aria-label={`Question ${index + 1}, ${answered ? 'answered' : 'not answered'}${hintsRevealed[question.id] ? ', hint used' : ''}`}
+                      className={cx(
+                        'relative grid h-10 w-full place-items-center rounded-lg text-[13px] font-semibold tabular-nums transition-[background-color,color,box-shadow] duration-150 disabled:cursor-not-allowed disabled:opacity-60',
+                        current
+                          ? 'bg-brand-600 text-white shadow-button'
+                          : answered
+                            ? 'bg-brand-500/[0.14] text-brand-200 ring-1 ring-inset ring-brand-500/30 hover:bg-brand-500/20'
+                            : 'bg-deep text-ink-2 ring-1 ring-inset ring-line-strong hover:text-ink'
+                      )}
+                    >
+                      {index + 1}
+                      {hintsRevealed[question.id] && (
+                        <span className="absolute right-1 top-1 h-1.5 w-1.5 rounded-full bg-warning" aria-hidden="true" />
+                      )}
+                    </button>
+                  </li>
+                )
+              })}
+            </ol>
+            <ul className="flex flex-wrap gap-x-3 gap-y-1.5 text-[11px] text-ink-2">
+              <li className="flex items-center gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-[3px] bg-brand-500/40 ring-1 ring-inset ring-brand-500/40" aria-hidden="true" />
+                Answered
+              </li>
+              <li className="flex items-center gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-[3px] bg-deep ring-1 ring-inset ring-line-strong" aria-hidden="true" />
+                Not answered
+              </li>
+              <li className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-warning" aria-hidden="true" />
+                Hint used
+              </li>
+            </ul>
+            <Button variant="secondary" size="sm" fullWidth icon={Send} onClick={openSubmitConfirm} disabled={submitDisabled}>
+              Review and submit
+            </Button>
+          </Card>
+        </aside>
       </div>
     </div>
   )

@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { createElement } from 'react'
 import { Minus, TrendingDown, TrendingUp } from 'lucide-react'
 import { Badge, ColorDot, LevelBars, Tooltip, cx } from './ui'
 import { TELEMETRY_HELP, TELEMETRY_LABELS, topicStatusInfo } from '../utils/analytics'
-import { DIFFICULTY_LEVEL, TELEMETRY_VISUALS, TOPIC_STATUS_VISUALS, difficultyName, subjectVisual } from './visuals'
+import { DIFFICULTY_LEVEL, TELEMETRY_VISUALS, TOPIC_STATUS_VISUALS, actionIcon, difficultyName, subjectVisual } from './visuals'
+
+/** The icon for one of the AI coach's actions (decorative; the label carries the meaning). */
+export function ActionIcon({ action, size = 18, className }) {
+  return createElement(actionIcon(action), { size, className, 'aria-hidden': true })
+}
 
 /*
  * Small domain atoms shared by the learning and insight pages: subject
@@ -13,8 +18,8 @@ import { DIFFICULTY_LEVEL, TELEMETRY_VISUALS, TOPIC_STATUS_VISUALS, difficultyNa
 export function SubjectIcon({ subject, size = 'md', className }) {
   const visual = subjectVisual(subject)
   const Icon = visual.icon
-  const dims = { sm: 'h-8 w-8 rounded-lg', md: 'h-10 w-10 rounded-xl', lg: 'h-12 w-12 rounded-[14px]' }
-  const iconSize = { sm: 16, md: 19, lg: 23 }
+  const dims = { xs: 'h-6 w-6 rounded-md', sm: 'h-8 w-8 rounded-lg', md: 'h-10 w-10 rounded-xl', lg: 'h-12 w-12 rounded-[14px]' }
+  const iconSize = { xs: 14, sm: 16, md: 19, lg: 23 }
   return (
     <span
       className={cx('grid shrink-0 place-items-center ring-1 ring-inset', dims[size], className)}

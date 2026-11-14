@@ -75,14 +75,16 @@
 
   /* Motion: fast feedback 120ms, standard 200ms, entrances 280ms */
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
-  --animate-page-in: page-in 280ms var(--ease-out-quint) both;
-  --animate-fade-in: fade-in 200ms ease-out both;
-  --animate-pop-in: pop-in 220ms var(--ease-out-quint) both;
-  --animate-drawer-in: drawer-in 260ms var(--ease-out-quint) both;
+  --animate-page-in: page-in 280ms var(--ease-out-quint) backwards;
+  --animate-fade-in: fade-in 200ms ease-out backwards;
+  --animate-pop-in: pop-in 220ms var(--ease-out-quint) backwards;
+  --animate-drawer-in: drawer-in 260ms var(--ease-out-quint) backwards;
   --animate-shimmer: shimmer 1.6s ease-in-out infinite;
 
-  /* Entrances end on `transform: none`, so a finished animation never turns an
-     ancestor into the containing block of the quiz's fixed-position dialogs. */
+  /* Entrances use `backwards` fill: once finished they leave no transform or
+     opacity behind. A held (forwards/both) transform animation makes Chrome
+     treat the element as the frame of its fixed-position descendants, which
+     would trap the quiz's integrity dialogs inside the page column. */
   @keyframes page-in {
     from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: none; }
