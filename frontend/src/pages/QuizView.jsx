@@ -386,6 +386,12 @@ export default function QuizView() {
     return () => clearTimeout(timer)
   }, [breakSecondsLeft])
 
+  // When the results replace the quiz, start at the top so the score is
+  // the first thing the student sees (presentation only).
+  useEffect(() => {
+    if (isFinished) window.scrollTo({ top: 0, behavior: scrollBehavior() })
+  }, [isFinished])
+
   if (loading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
