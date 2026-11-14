@@ -9,11 +9,11 @@
 | `start-all.ps1` "cannot be loaded because running scripts is disabled" | Run it as `powershell -ExecutionPolicy Bypass -File .\start-all.ps1` |
 | `[FAIL] backend\.env exists` | Copy `backend\.env.example` to `backend\.env`, then set `DATABASE_URL` and a new `SECRET_KEY` |
 | Backend window: `SECRET_KEY is a placeholder or too short` | Generate a key: `python -c "import secrets; print(secrets.token_urlsafe(48))"` and put it in `backend\.env` |
-| `[FAIL] PostgreSQL reachable` | Start the PostgreSQL service (Services → postgresql-x64-18). Check the user, password, port and database name in `DATABASE_URL`. Create the database if needed (README §2) |
-| `[FAIL] Database schema up to date` | Back up, then `cd backend; python -m alembic upgrade head` (README §2) |
+| `[FAIL] PostgreSQL reachable` | Start the PostgreSQL service (Services → postgresql-x64-18). Check the user, password, port and database name in `DATABASE_URL`. Create the database if needed (README, Step 2) |
+| `[FAIL] Database schema up to date` | Back up, then `cd backend; python -m alembic upgrade head` (README, Step 3) |
 | `[FAIL] Port 8000/5173/8765 free` | An old copy is still running. Run `.\stop-all.ps1`. If another program uses the port, close it |
 | Frontend window: `Port 5173 is in use` | Same as above. The camera agent only accepts the website from port 5173, so the port cannot change |
-| Lessons show no content / empty curriculum | Import the curriculum: `python backend\scripts\import_curriculum.py` (README §2). It is safe to re-run |
+| Lessons show no content / empty curriculum | Import the curriculum: `python backend\scripts\import_curriculum.py` (README, Step 3). It is safe to re-run |
 | Want to open the site from another device on the LAN | Not needed for normal use, because the camera agent only pairs on the same computer. To do it anyway: `$env:AEGIS_DEV_HOST = "0.0.0.0"` before `npm run dev` |
 
 ### Camera
@@ -31,25 +31,24 @@
 
 | Problem | Fix |
 |---|---|
-| `test_integration_backend.py` is skipped | Set `$env:AEGIS_BACKEND_PYTHON = (Get-Command python).Source` before running the facial-analysis tests |
+| `test_integration_backend.py` is skipped | Set `$env:AEGIS_BACKEND_PYTHON` to a Python that has the backend requirements installed (for example `(Get-Command python).Source`) before running the camera-agent tests |
 | Backend tests touch my database? | They never do; they use a throwaway SQLite database |
 
 ## Test accounts
 
-Testing created student accounts in the live database. They were **not**
-deleted automatically:
-- `phase1.e2e.*@example.com` (id 12, Grade 9);
-- `phase6.e2e.*@example.com` (id 14, Grade 7).
-
-Later browser and regression runs used an isolated copy of the database
-(`aegis_phase7`), not the live one. To list test accounts:
+The automated test suites never touch PostgreSQL (see
+[TESTING.md](TESTING.md)). Accounts you create by hand while trying Aegis
+stay in your database until you remove them. To list accounts that use
+example addresses:
 
 ```sql
-SELECT id, email, grade, created_at FROM students WHERE email LIKE '%e2e%@example.com' ORDER BY id;
+SELECT id, email, grade, created_at FROM students WHERE email LIKE '%@example.com' ORDER BY id;
 ```
 
-Remove them only if you decide to. Back up first (`pg_dump`). Deleting a
-student also deletes their attempts, recommendations and monitoring records.
+Remove them only if you need to. Back up first (`pg_dump`). Deleting a
+student affects many related tables (graded attempts, quiz attempts,
+recommendations, monitoring records), and the database refuses to delete a
+student who still has graded attempts, so check carefully first.
 
 ## Known limitations
 
@@ -105,8 +104,8 @@ student also deletes their attempts, recommendations and monitoring records.
   automation-launched Chrome hid background tabs on the development
   laptop, so browser tests simulated the visibility change. See
   [SESSION_INTEGRITY_CHECKLIST.md](SESSION_INTEGRITY_CHECKLIST.md).
-- **Not implemented in this phase:** phone detection, a teacher
-  dashboard and teacher-student relationships.
+- **Not implemented:** phone detection, a teacher dashboard and
+  teacher-student relationships.
 
 ### Reinforcement learning
 
@@ -138,6 +137,7 @@ student also deletes their attempts, recommendations and monitoring records.
   Node.js 24 and PostgreSQL 18. The start/stop scripts are PowerShell.
   The camera agent uses DirectShow and the Windows camera-privacy checks on
   Windows; other systems would need their own testing.
-- **Lint warning exception.** `npm run lint` is clean with one documented
-  exception in `QuizView.jsx`, plus the React-Compiler advisory rules turned
-  off (see `frontend/eslint.config.js`).
+- **Lint exceptions.** `npm run lint` is clean. Three effects disable
+  `react-hooks/exhaustive-deps` with an inline comment (two in
+  `QuizView.jsx`, one in `useQuizIntegrity.js`), and two React-Compiler
+  advisory rules are turned off in `frontend/eslint.config.js`.

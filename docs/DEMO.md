@@ -31,13 +31,13 @@ If something fails, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
 | A5 | **Consent.** Tick the three boxes (under 18: guardian and school too) → *Give consent and continue* | The webcam light turns on only now. The checklist runs: agent → webcam → face → live data |
 | A6 | **Study the lesson** once it unlocks. Scroll through objectives, explanation, worked examples, diagram, real-world use and practice | Content is generated for each grade and subject |
 | A7 | **Camera pause (optional).** Lean out of view for 5 s, then come back | Learning pauses and resumes automatically. The camera cannot be skipped |
-| A8 | **Take the quiz.** *Take quiz* (Easy). Use **💡 Need a hint?** on one question, answer the rest, **Submit quiz** | Answers were never sent to the browser before submitting |
+| A8 | **Take the quiz.** *Take quiz* (Easy). Use **Need a hint?** on one question, answer the rest, **Submit quiz** | Answers were never sent to the browser before submitting |
 | A9 | **Results.** Score, then *Answer review* with the correct answer and a "Why:" explanation for each question. Then the camera summary (average attention, yawning, gaze, drowsiness) | The server graded the quiz and took the camera values from the agent's measurements |
-| A10 | **Reinforcement Learning Policy Decision** panel | The action, the reason in plain words, and "Decided by: Learned Q-table". Decision strength is not a probability |
+| A10 | **Your AI coach's next step** panel | The action, the reason in plain words, and "Decided by: Learned Q-table". Decision strength is not a probability |
 | A11 | **Follow the recommendation** (the button under it). It may be a lesson section, an easier or harder quiz, a retry with hints, a timed challenge or a short break | All 11 actions lead to a real next step, always within the student's grade and subject |
 | A12 | **Second quiz.** Complete the quiz the recommendation leads to, or the lesson's quiz | This attempt becomes the recorded *outcome* of the first recommendation, and its reward is stored |
 | A13 | **AI Coach.** Shows the new advice, "Based on your quiz", and *Earlier advice and what happened next* with the score change | Advice comes from the Q-learning service. The page has no recommendation rules of its own |
-| A14 | **Progress Log.** Tiles, score trend with the pass line (filter by subject or date), subject and topic performance, camera section, weekly activity, milestones and the attempt log | Untried topics are never "weak". Missing camera data is never counted as low attention |
+| A14 | **Progress.** Overview cards; one filter row (subject and dates) for the score trend with its pass line, weekly activity, attention and the quiz history; *Where you stand* with subject and topic performance; milestones and recent activity | Untried topics are never "weak". Missing camera data is never counted as low attention |
 | A15 | **Dashboard again.** Updated counts, latest activity, the coach card and recent activity | All figures come from this student's saved records |
 
 ## Part B — drowsiness detection and voice alerts

@@ -8,7 +8,7 @@ Every figure is computed from the signed-in student's own stored records:
 * ``recommendation_history`` / ``reward_history`` -- the Q-learning
   recommendations and their recorded outcomes.
 
-Definitions (documented in TEAM_GUIDE.md):
+Definitions (documented in docs/ANALYTICS.md):
 
 * A lesson is **completed** when at least one of its quizzes was passed
   (score >= ``PASS_SCORE``, the same pass mark the RL safety rules use

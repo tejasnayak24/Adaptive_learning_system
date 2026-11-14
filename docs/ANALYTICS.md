@@ -1,4 +1,4 @@
-# Dashboard and analytics (Phase 6)
+# Dashboard and analytics
 
 The Dashboard, Progress & Analytics and AI Coach pages show only the
 signed-in student's own saved records. Nothing is hard-coded, sampled or
@@ -68,7 +68,7 @@ from the token.
 ## AI Coach integration
 
 - **Where advice comes from.** Recommendations are produced on the server
-  by the Phase 4 Q-learning policy when a quiz is graded. The Q-table was
+  by the Q-learning policy when a quiz is graded. The Q-table was
   trained offline on simulated students and is not updated online. The
   frontend only displays the stored recommendation and turns its action
   into a link. It has no recommendation rules of its own.
@@ -90,16 +90,14 @@ from the token.
 - **No camera, no advice.** When the latest quiz had no valid camera
   reading, no recommendation is generated and the page explains why.
 
-## Browser acceptance checklist
+## Manual walkthrough
 
-Phase 7 ran these checks in a real (headless) Chrome against an isolated
-database copy, with screenshots inspected at laptop and phone widths. See
-[BROWSER_ACCEPTANCE.md](BROWSER_ACCEPTANCE.md) for the results and the
-remaining manual steps. The list below stays useful as a manual
-walkthrough.
+These checks were also run automatically in headless Chrome against an
+isolated database copy, with screenshots inspected at laptop and phone
+widths (results in [TESTING.md](TESTING.md#acceptance-evidence)). The list
+stays useful as a manual walkthrough.
 
-Start PostgreSQL, the backend (`README.md` §2) and the frontend
-(`npm run dev`). Then:
+Start Aegis (see the [README](../README.md#step-6-start-aegis)). Then:
 
 1. **New account.** Register without a grade.
    - The grade picker appears. Choose Grade 7.
@@ -129,7 +127,7 @@ Start PostgreSQL, the backend (`README.md` §2) and the frontend
    - The *Revise* / *Continue* buttons open the right lesson.
 5. **Camera section.**
    - Close the camera agent mid-quiz (or block the camera) and submit.
-   - The attempt log shows *Camera data unavailable*, and the attention
+   - The quiz history shows *Camera data unavailable*, and the attention
      average does not drop.
    - The section warns about limited history while fewer than 3 quizzes
      were measured.
@@ -144,12 +142,12 @@ Start PostgreSQL, the backend (`README.md` §2) and the frontend
    - Stop the backend and reload the Dashboard and Progress pages. A clear
      error with *Try again* appears, not a blank page.
 8. **Layouts.**
-   - At about 1366×768, tiles sit in rows of 4–5 and the charts are
-     readable.
-   - At about 375 px wide, everything stacks into one column, the attempt
-     table scrolls sideways inside its card, and the page itself has no
+   - At about 1366×768, the overview cards sit side by side and the
+     charts are readable.
+   - At about 375 px wide, everything stacks into one column, the quiz
+     history becomes a list of cards, and the page itself has no
      horizontal scroll.
 9. **Navigation.**
-   - Dashboard *Full analytics →* opens Progress.
-   - *All activity →* scrolls to Recent activity.
+   - Dashboard *Full analytics* opens Progress.
+   - *All activity* opens the activity section of Progress.
    - Activity items open their lesson.
