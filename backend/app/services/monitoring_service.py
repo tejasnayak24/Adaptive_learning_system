@@ -32,6 +32,7 @@ from typing import Any
 from sqlalchemy.orm import Session
 
 from app.models.monitoring import MonitoringConsent, MonitoringSession
+from app.models.session_event import MULTIPLE_FACES, SessionEvent
 from app.models.student import Student
 from app.services import telemetry_service
 
@@ -298,11 +299,13 @@ def heartbeat(db: Session, session: MonitoringSession, sample: dict[str, Any]) -
             measurement["camera_error"] = "stale_measurement"
         measurement["camera_ok"] = False
 
+    previous_heartbeat_at = session.last_heartbeat_at
     session.last_sequence = sequence
     session.heartbeat_count += 1
     session.last_heartbeat_at = _utcnow()
 
     telemetry_service.record_heartbeat(session.student_id, session.id, measurement)
+    _track_multiple_faces(db, session, measurement, previous_heartbeat_at, session.last_heartbeat_at)
     view = status_view(session)
     if view["state"] == "verified" and session.first_verified_at is None:
         session.first_verified_at = _utcnow()
@@ -310,8 +313,75 @@ def heartbeat(db: Session, session: MonitoringSession, sample: dict[str, Any]) -
     return view
 
 
+def _open_episode(db: Session, session: MonitoringSession) -> SessionEvent | None:
+    return (
+        db.query(SessionEvent)
+        .filter(
+            SessionEvent.monitoring_session_id == session.id,
+            SessionEvent.kind == MULTIPLE_FACES,
+            SessionEvent.ended_at.is_(None),
+        )
+        .order_by(SessionEvent.id.desc())
+        .first()
+    )
+
+
+def _close_episodes(db: Session, session: MonitoringSession, at: datetime, reason: str) -> None:
+    episode = _open_episode(db, session)
+    if episode is not None:
+        episode.ended_at = max(at, episode.started_at)
+        episode.end_reason = reason
+
+
+def _track_multiple_faces(
+    db: Session,
+    session: MonitoringSession,
+    measurement: dict[str, Any],
+    previous_heartbeat_at: datetime | None,
+    now: datetime,
+) -> None:
+    """Open / close a ``multiple_faces`` episode from the agent's sustained signal.
+
+    The agent only raises the signal after ~3 s of two or more faces, so a
+    brief detection never becomes an episode. Missing or stale measurements
+    close an open episode (its end is then "not measured") rather than
+    stretching it.
+    """
+    episode = _open_episode(db, session)
+    if (
+        episode is not None
+        and previous_heartbeat_at is not None
+        and (now - previous_heartbeat_at).total_seconds() > telemetry_service.STALE_AFTER_SECONDS
+    ):
+        # Heartbeats stopped for a while: the episode ended at the last one we saw.
+        episode.ended_at = max(previous_heartbeat_at, episode.started_at)
+        episode.end_reason = "heartbeats_stopped"
+        episode = None
+
+    signal = measurement.get("multiple_faces") if measurement.get("camera_ok") else None
+    count = measurement.get("face_count") if measurement.get("camera_ok") else None
+
+    if signal is True:
+        if episode is None:
+            db.add(
+                SessionEvent(
+                    monitoring_session_id=session.id,
+                    student_id=session.student_id,
+                    kind=MULTIPLE_FACES,
+                    started_at=now,
+                    peak_count=count,
+                )
+            )
+        elif count is not None:
+            episode.peak_count = max(episode.peak_count or 0, count)
+    elif episode is not None:
+        episode.ended_at = now
+        episode.end_reason = "cleared" if signal is False else "not_measured"
+
+
 def agent_stopped(db: Session, session: MonitoringSession, reason: str) -> None:
     """The agent shut down: the session waits for a (re)connection."""
+    _close_episodes(db, session, session.last_heartbeat_at or _utcnow(), "heartbeats_stopped")
     session.agent_token_hash = None
     session.agent_token_expires_at = None
     if session.status == ACTIVE:
@@ -327,6 +397,7 @@ def touch_client(db: Session, session: MonitoringSession) -> None:
 
 
 def end_session(db: Session, session: MonitoringSession, reason: str = "ended_by_student") -> None:
+    _close_episodes(db, session, session.last_heartbeat_at or _utcnow(), "session_ended")
     _end(session, reason)
     db.commit()
 
@@ -368,5 +439,7 @@ def status_view(session: MonitoringSession) -> dict[str, Any]:
         "lighting_ok": telemetry["lighting_ok"] if same_session else None,
         "possible_drowsiness": telemetry["possible_drowsiness"] if same_session else None,
         "attention_score": telemetry["attention_score"] if same_session else None,
+        # More than one face seen for a sustained period (None = not measured).
+        "multiple_faces": telemetry["multiple_faces"] if same_session else None,
         "stale_after_seconds": telemetry_service.STALE_AFTER_SECONDS,
     }

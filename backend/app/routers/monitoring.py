@@ -67,6 +67,10 @@ class HeartbeatRequest(BaseModel):
     eyes_closed_seconds: float | None = Field(default=None, ge=0)
     head_direction: str | None = Field(default=None, max_length=16)
     gaze: str | None = Field(default=None, max_length=16)
+    # Multiple-face detection (separate from the attention measurements):
+    # qualifying faces in the latest sample, and the agent's sustained signal.
+    face_count: int | None = Field(default=None, ge=0, le=20)
+    multiple_faces: bool | None = None
 
 
 class AgentEndRequest(BaseModel):

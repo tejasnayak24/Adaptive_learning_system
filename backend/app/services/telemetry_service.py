@@ -57,6 +57,8 @@ def _empty_record(session_id: str | None = None) -> dict[str, Any]:
         "yawning": None,
         "looking_away": None,
         "possible_drowsiness": None,
+        "face_count": None,
+        "multiple_faces": None,
         **_empty_aggregates(),
     }
 
@@ -85,6 +87,9 @@ def record_heartbeat(student_id: int, session_id: str, sample: dict[str, Any], n
         yawning=bool(sample.get("yawning")) if face else None,
         looking_away=bool(sample.get("looking_away")) if face else None,
         possible_drowsiness=bool(sample.get("possible_drowsiness")) if face else None,
+        # Independent of the student's own face: only needs a working camera.
+        face_count=sample.get("face_count") if camera_ok else None,
+        multiple_faces=sample.get("multiple_faces") if camera_ok else None,
     )
 
     if not camera_ok:
@@ -177,6 +182,8 @@ def get_telemetry(student_id: int, now: float | None = None) -> dict[str, Any]:
         "yawning": live("yawning"),
         "looking_away": live("looking_away"),
         "possible_drowsiness": live("possible_drowsiness"),
+        "face_count": live("face_count"),
+        "multiple_faces": live("multiple_faces"),
         "session_samples": samples,
         "face_absent_samples": record["face_absent_samples"],
         "session_average_attention": (

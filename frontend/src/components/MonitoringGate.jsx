@@ -228,8 +228,22 @@ export default function MonitoringGate({ lessonId = null, children }) {
     return <ConsentPanel />
   }
 
+  // Sustained multiple-face signal from the camera agent: an informational
+  // banner while it lasts (no popup, no lock, nothing recorded as misconduct).
+  const multipleFaces = verified && monitoring.backend?.multiple_faces === true
+
   return (
     <div className="relative">
+      {multipleFaces && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="mb-4 rounded-2xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-xs font-semibold text-amber-200"
+        >
+          👥 More than one face is visible to your camera. If you are studying alone, make sure only you are in view.
+          This is noted in your session activity; it does not stop your lesson or quiz.
+        </div>
+      )}
       <div
         aria-hidden={!verified}
         inert={!verified}

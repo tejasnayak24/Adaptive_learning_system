@@ -35,6 +35,7 @@ from app.models import (  # noqa: E402,F401
     recommendation,
     reward,
     session,
+    session_event,
     student,
 )
 
