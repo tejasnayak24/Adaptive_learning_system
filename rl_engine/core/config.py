@@ -92,21 +92,50 @@ class RLConfig:
             above which a student is discretized as having made "many"
             attempts, rather than "few", in the Q-table state key. Must
             be greater than 0.
+        trend_threshold: Score change (percentage points) between the
+            previous and current attempt at or beyond which the trend is
+            "improving" or "declining"; smaller changes are "steady".
+        min_action_visits: At runtime, an action is only eligible for
+            selection in a state if it was tried at least this many times
+            during training. Untested actions are never tried on real
+            students.
+        full_support_visits: Training visits of the chosen state-action
+            pair needed for full "support" in the confidence indicator.
+        confidence_scale: Q-value margin (in reward units) at which the
+            margin part of the confidence indicator reaches ~63%.
+
+    ``discount_factor`` is 0.95 (it was 0.9 before Phase 4): one step is
+    one recommendation-plus-quiz and a lesson takes roughly 5-15 steps, so
+    an effective horizon of ~20 steps (1 / (1 - 0.95)) lets the agent value
+    finishing a lesson properly over short-term gains.
+
+    The defaults for ``epsilon_decay`` (0.9997), ``min_epsilon`` (0.05),
+    ``training_episodes`` (20000) and ``max_steps_per_episode`` (60) were
+    chosen for the version-3 state space (1944 states): epsilon falls
+    from 1.0 to about 0.05 after ~10000 episodes, so roughly the first
+    half of training explores broadly and the second half refines the
+    greedy policy.
     """
 
     learning_rate: float = 0.1
-    discount_factor: float = 0.9
+    discount_factor: float = 0.95
     epsilon: float = 1.0
-    epsilon_decay: float = 0.995
-    min_epsilon: float = 0.01
-    training_episodes: int = 10000
-    max_steps_per_episode: int = 100
+    epsilon_decay: float = 0.9997
+    min_epsilon: float = 0.05
+    training_episodes: int = 20000
+    max_steps_per_episode: int = 60
     score_low_threshold: int = 50
     score_high_threshold: int = 80
     attention_low_threshold: float = 0.4
     attention_high_threshold: float = 0.6
     many_hints_threshold: int = 2
     many_attempts_threshold: int = 3
+    # -- State version 3 additions --
+    trend_threshold: int = 5
+    # -- Runtime (inference) settings --
+    min_action_visits: int = 5
+    full_support_visits: int = 30
+    confidence_scale: float = 1.0
 
     def __post_init__(self) -> None:
         """Validate that all hyperparameters hold sensible values.
@@ -164,3 +193,11 @@ class RLConfig:
             raise ValueError("many_hints_threshold must be greater than 0.")
         if self.many_attempts_threshold <= 0:
             raise ValueError("many_attempts_threshold must be greater than 0.")
+        if not 0 < self.trend_threshold <= 100:
+            raise ValueError("trend_threshold must be between 1 and 100.")
+        if self.min_action_visits < 1:
+            raise ValueError("min_action_visits must be at least 1.")
+        if self.full_support_visits < 1:
+            raise ValueError("full_support_visits must be at least 1.")
+        if self.confidence_scale <= 0:
+            raise ValueError("confidence_scale must be greater than 0.")

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
+import GradeGate from '../components/GradeGate'
 import { useAuth } from '../context/AuthContext'
 
 export default function AppLayout() {
@@ -51,7 +52,9 @@ export default function AppLayout() {
     },
   ]
 
-  const SidebarContent = () => (
+  // A render function, not a component: defining a component inside render
+  // would remount the whole sidebar on every render.
+  const renderSidebar = () => (
     <div className="flex h-full flex-col justify-between p-6">
       <div className="space-y-8">
         {/* Brand Header */}
@@ -122,7 +125,7 @@ export default function AppLayout() {
     <div className="flex h-screen bg-slate-950 text-slate-100 overflow-hidden">
       {/* Desktop Sidebar (Fixed Left) */}
       <aside className="hidden md:block w-64 shrink-0 border-r border-slate-900 bg-slate-925/80 backdrop-blur-md">
-        <SidebarContent />
+        {renderSidebar()}
       </aside>
 
       {/* Main Workspace Frame */}
@@ -165,14 +168,19 @@ export default function AppLayout() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              <SidebarContent />
+              {renderSidebar()}
             </div>
           </div>
         )}
 
         {/* Central Router Output */}
         <main className="flex-1 overflow-y-auto px-4 py-6 md:px-8 md:py-8 relative">
-          <Outlet />
+          <GradeGate>
+            {/* Pages are lazy-loaded; keep the sidebar while one loads. */}
+            <Suspense fallback={<div className="h-40 rounded-3xl bg-slate-800/60 animate-pulse" aria-busy="true" aria-label="Loading" />}>
+              <Outlet />
+            </Suspense>
+          </GradeGate>
         </main>
       </div>
     </div>

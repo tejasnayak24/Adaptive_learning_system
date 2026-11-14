@@ -32,10 +32,12 @@ class RecommendationRequest(BaseModel):
             quiz attempt.
         current_quiz_score: Score (0-100) from the student's most recent
             quiz attempt.
-        attention_score: Normalized engagement score in [0.0, 1.0].
-        yawning: Whether the student was observed yawning.
+        attention_score: Normalized engagement score in [0.0, 1.0], or
+            ``None`` when valid camera telemetry is unavailable.
+        yawning: Whether the student was observed yawning (``None`` if
+            unknown).
         looking_away: Whether the student was observed looking away
-            from the screen.
+            from the screen (``None`` if unknown).
         difficulty: The difficulty level of the content currently being
             presented to the student.
         response_time: Time in seconds the student took to respond to
@@ -90,16 +92,32 @@ class RecommendationRequest(BaseModel):
         le=100,
         description="Score (0-100) from the student's most recent quiz attempt.",
     )
-    attention_score: float = Field(
+    attention_score: float | None = Field(
+        default=None,
         ge=0.0,
         le=1.0,
-        description="Normalized engagement score in the range [0.0, 1.0].",
+        description=(
+            "Normalized engagement score in the range [0.0, 1.0], measured by "
+            "the camera. null means valid camera telemetry is unavailable."
+        ),
     )
-    yawning: bool = Field(
-        description="Whether the student was observed yawning.",
+    yawning: bool | None = Field(
+        default=None,
+        description="Whether the student was observed yawning (null = unknown).",
     )
-    looking_away: bool = Field(
-        description="Whether the student was observed looking away from the screen.",
+    looking_away: bool | None = Field(
+        default=None,
+        description=(
+            "Whether the student was observed looking away from the screen "
+            "(null = unknown)."
+        ),
+    )
+    drowsy: bool | None = Field(
+        default=None,
+        description=(
+            "Whether possible drowsiness (sustained eye closure) was observed "
+            "(null = unknown). An attention signal, not a medical assessment."
+        ),
     )
     difficulty: str = Field(
         min_length=1,
@@ -142,6 +160,15 @@ class RecommendationRequest(BaseModel):
         if not stripped:
             raise ValueError(f"{info.field_name} must not be blank.")
         return stripped
+
+    @property
+    def telemetry_available(self) -> bool:
+        """True only when every camera-derived field has a real value."""
+        return (
+            self.attention_score is not None
+            and self.yawning is not None
+            and self.looking_away is not None
+        )
 
     @field_validator("difficulty")
     @classmethod

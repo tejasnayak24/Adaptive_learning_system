@@ -47,6 +47,7 @@ class StudentService:
             email=student.email,
             password_hash=hash_password(student.password),
             age=student.age,
+            grade=student.grade,
         )
 
         db.add(new_student)

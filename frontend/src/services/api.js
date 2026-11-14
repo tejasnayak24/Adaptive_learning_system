@@ -54,7 +54,11 @@ api.interceptors.response.use(
       message = error.message || 'An error occurred'
     }
 
-    return Promise.reject(new Error(message))
+    const failure = new Error(message)
+    // Keep the HTTP status so pages can tell a refusal (403/404) from a
+    // network problem.
+    failure.status = error.response?.status ?? null
+    return Promise.reject(failure)
   }
 )
 

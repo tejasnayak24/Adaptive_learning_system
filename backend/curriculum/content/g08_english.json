@@ -1,0 +1,579 @@
+{
+  "grade": 8,
+  "subject": "English",
+  "units": [
+    {
+      "slug": "g8-eng-u-grammar",
+      "title": "Grammar",
+      "topics": [
+        {
+          "slug": "g8-eng-t-voice-modals",
+          "title": "Voice and Modals",
+          "description": "Active and passive voice, and modal verbs for ability, permission, obligation and possibility.",
+          "lessons": [
+            {
+              "slug": "g8-eng-active-passive",
+              "title": "Active and Passive Voice",
+              "objectives": [
+                "Identify active and passive sentences",
+                "Change sentences from active to passive voice in common tenses",
+                "Decide when the passive voice is appropriate",
+                "Use the agent 'by …' correctly"
+              ],
+              "intro": "Compare 'The chef cooked the biryani' with 'The biryani was cooked by the chef.' Both describe the same event, but the focus changes. In the first sentence the doer, the chef, comes first; this is the active voice. In the second, the thing affected, the biryani, comes first; this is the passive voice. Both are correct, and good writers choose between them depending on what they want to emphasise.",
+              "sections": [
+                [
+                  "Active and passive",
+                  "In the active voice, the subject performs the action: 'Ravi broke the window.' In the passive voice, the subject receives the action: 'The window was broken by Ravi.' Only verbs that take an object (transitive verbs) can be made passive; 'She sleeps' has no object and cannot be passive. The passive is formed with a form of 'be' plus the past participle of the main verb: is written, was built, has been painted, will be announced. The person or thing that does the action, the agent, is introduced by 'by', but it is often left out."
+                ],
+                [
+                  "Changing active to passive",
+                  "To change active to passive: (1) make the object of the active sentence the subject; (2) use the correct form of 'be' in the same tense as the active verb; (3) add the past participle; (4) add 'by + agent' if needed, changing pronouns to the object form. Examples by tense: Simple present: 'She writes letters' → 'Letters are written by her.' Simple past: 'They built a bridge' → 'A bridge was built by them.' Present continuous: 'He is repairing the car' → 'The car is being repaired by him.' Present perfect: 'Someone has stolen my pen' → 'My pen has been stolen.' Future: 'The principal will announce the results' → 'The results will be announced by the principal.' Modal: 'You must finish the work' → 'The work must be finished.'"
+                ],
+                [
+                  "When to use the passive",
+                  "Use the passive when the doer is unknown ('My bicycle was stolen'), unimportant or obvious ('Rice is grown in Punjab'), or when you want to focus on the action or result, as in scientific reports and news: 'The solution was heated to 60 °C.' 'Three people were injured in the accident.' Notices and formal writing often use the passive: 'Students are requested to keep the campus clean.' However, too many passive sentences make writing heavy and unclear, so prefer the active voice in stories and everyday writing."
+                ]
+              ],
+              "definitions": [
+                ["Active voice", "The subject performs the action of the verb."],
+                ["Passive voice", "The subject receives the action of the verb."],
+                ["Agent", "The doer of the action in a passive sentence, introduced by 'by'."],
+                ["Transitive verb", "A verb that takes an object."],
+                ["Past participle", "The verb form used in passive and perfect tenses, e.g. written, built."]
+              ],
+              "examples": [
+                "Active: The committee approved the plan. Passive: The plan was approved by the committee.",
+                "Passive without agent: English is spoken in many countries."
+              ],
+              "worked": [
+                {
+                  "problem": "Change to the passive: 'The students are planting trees in the school garden.'",
+                  "steps": [
+                    "Object 'trees' becomes the subject.",
+                    "Tense is present continuous → 'are being' + past participle.",
+                    "Past participle of plant: planted.",
+                    "Agent: by the students (may be kept)."
+                  ],
+                  "answer": "Trees are being planted in the school garden by the students."
+                },
+                {
+                  "problem": "Change to the active: 'The match was won by our team.'",
+                  "steps": [
+                    "The agent 'our team' becomes the subject.",
+                    "Tense: simple past → 'won'.",
+                    "'The match' becomes the object."
+                  ],
+                  "answer": "Our team won the match."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Passive forms of 'write'",
+                "columns": ["Tense", "Active", "Passive"],
+                "rows": [
+                  ["Simple present", "writes", "is/are written"],
+                  ["Simple past", "wrote", "was/were written"],
+                  ["Present continuous", "is writing", "is being written"],
+                  ["Present perfect", "has written", "has been written"],
+                  ["Future", "will write", "will be written"]
+                ]
+              },
+              "real_world": "Scientific papers, laboratory reports and news articles use the passive to focus on processes and events ('The vaccine was tested on 30,000 volunteers'). Official notices use it to sound formal and impersonal ('Visitors are requested to switch off their phones').",
+              "takeaways": [
+                "Active: the subject does the action; passive: the subject receives it.",
+                "Passive = form of 'be' + past participle, in the same tense as the active verb.",
+                "The agent ('by …') is often omitted.",
+                "Use the passive when the doer is unknown, unimportant or when focusing on the result."
+              ],
+              "practice": [
+                ["Change to passive: 'The dog chased the cat.'", "The cat was chased by the dog."],
+                ["Change to passive: 'They will open the new library tomorrow.'", "The new library will be opened tomorrow."],
+                ["Why can't 'The baby cried' be made passive?", "'Cried' has no object (intransitive)."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which sentence is in the passive voice?", ["Meena painted the wall.", "The wall was painted by Meena.", "Meena is painting.", "Meena paints well."], "B", "The subject receives the action.", "'The wall' receives the action of painting."],
+                  ["The passive is formed with 'be' + the:", ["Base form", "-ing form", "Past participle", "Infinitive"], "C", "e.g. was built.", "Passive uses be + past participle."],
+                  ["In 'The cake was baked by Ravi', the agent is:", ["Ravi", "The cake", "baked", "was"], "A", "The doer of the action.", "Ravi did the baking, so he is the agent."],
+                  ["Which verb CANNOT be used in the passive?", ["write", "build", "eat", "sleep"], "D", "It does not take an object.", "Sleep is intransitive, so it has no passive."]
+                ],
+                "MEDIUM": [
+                  ["Passive of 'They make toys in this factory':", ["Toys made in this factory.", "Toys are made in this factory.", "Toys were making in this factory.", "Toys have make in this factory."], "B", "Simple present → is/are + past participle.", "Toys are made in this factory."],
+                  ["Passive of 'She is cleaning the room':", ["The room is cleaned by her.", "The room was cleaning by her.", "The room is being cleaned by her.", "The room has cleaned by her."], "C", "Present continuous → is being + past participle.", "The room is being cleaned by her."],
+                  ["Which sentence best uses the passive for an unknown doer?", ["My wallet has been stolen.", "I stole my wallet.", "The thief is stealing.", "Steal my wallet."], "A", "We do not know who did it.", "The passive focuses on what happened when the doer is unknown."],
+                  ["Active of 'The letter will be posted by me':", ["The letter will post me.", "I posted the letter.", "I am posting the letter.", "I will post the letter."], "D", "Same tense, agent becomes subject.", "Future passive → future active: I will post the letter."]
+                ],
+                "HARD": [
+                  ["Passive of 'Someone has switched off the lights':", ["The lights have switched off.", "The lights have been switched off.", "The lights had been switch off.", "The lights are switched off by someone has."], "B", "Present perfect → has/have been + past participle.", "The lights have been switched off (agent omitted)."],
+                  ["Passive of 'You must submit the form by Friday':", ["The form must submitted by Friday.", "The form must be submit by Friday.", "The form must be submitted by Friday.", "The form must being submitted by Friday."], "C", "Modal + be + past participle.", "The form must be submitted by Friday."],
+                  ["Which sentence is the most natural for a science report?", ["The mixture was heated for ten minutes.", "I heated the mixture, and it was fun.", "Heat the mixture, my friend!", "The mixture heating ten minutes."], "A", "Reports focus on the process.", "The passive suits formal scientific description."],
+                  ["Passive of 'Did the teacher check the copies?'", ["Did the copies checked by the teacher?", "Were the copies check by the teacher?", "Was the copies checked by the teacher?", "Were the copies checked by the teacher?"], "D", "Plural subject, simple past question.", "Were + plural subject + past participle."]
+                ]
+              }
+            },
+            {
+              "slug": "g8-eng-modals",
+              "title": "Modal Verbs",
+              "objectives": [
+                "Identify modal verbs and their meanings",
+                "Use modals for ability, permission, request, obligation, advice and possibility",
+                "Form negatives and questions with modals",
+                "Choose the most appropriate modal for the context"
+              ],
+              "intro": "Modal verbs are small helping verbs that add meaning to the main verb: can, could, may, might, must, shall, should, will, would and ought to. Compare 'You go', 'You may go', 'You must go' and 'You should go'. The main verb is the same, but the modal changes the meaning from a statement to permission, obligation or advice. Modals are essential for polite requests, giving advice and talking about possibilities.",
+              "sections": [
+                [
+                  "Form",
+                  "Modal verbs are followed by the base form of the main verb without 'to' (except 'ought to'): 'She can swim', not 'She can swims' or 'She can to swim'. Modals do not change for the subject: I can, she can, they can. Negatives add 'not': cannot (can't), must not (mustn't), should not (shouldn't). Questions put the modal before the subject: 'Can you help me?' 'Should I call her?' Modals have no -ing or past participle forms, so we use other expressions such as 'be able to' and 'have to' when we need them: 'I will be able to come.'"
+                ],
+                [
+                  "Ability, permission and requests",
+                  "Can expresses present ability ('She can speak three languages'), and could expresses past ability ('I could swim when I was six'). Can, could and may ask for or give permission: 'May I come in?' is more formal and polite than 'Can I come in?' Could and would make requests polite: 'Could you please open the window?' 'Would you mind waiting a moment?' Will is used for offers and promises: 'I will help you with your project.' Shall is used in questions for offers and suggestions: 'Shall I carry your bag?' 'Shall we start?'"
+                ],
+                [
+                  "Obligation, advice and possibility",
+                  "Must expresses strong obligation or necessity, often from the speaker: 'You must wear a helmet.' Must not (mustn't) means something is forbidden: 'You must not use phones in the exam hall.' Have to expresses obligation from outside rules, and don't have to means it is not necessary: 'You don't have to bring lunch tomorrow.' Should and ought to give advice: 'You should drink more water.' May, might and could express possibility, with might showing less certainty: 'It may rain later'; 'She might be late.' Must can also show strong certainty from evidence: 'The lights are off; they must be asleep.'"
+                ]
+              ],
+              "definitions": [
+                ["Modal verb", "A helping verb that adds meaning such as ability, permission or obligation."],
+                ["Obligation", "Something one is required to do."],
+                ["Permission", "Being allowed to do something."],
+                ["Possibility", "The chance that something may happen."]
+              ],
+              "examples": [
+                "You should revise every day. (advice)",
+                "Visitors must not feed the animals. (prohibition)"
+              ],
+              "worked": [
+                {
+                  "problem": "Choose suitable modals: (a) ___ I borrow your pen? (polite) (b) You ___ cross the road when the signal is red. (forbidden) (c) She ___ win the race; she has trained hard. (possibility)",
+                  "steps": [
+                    "(a) A polite request for permission → May.",
+                    "(b) Something forbidden → must not.",
+                    "(c) A likely possibility → may / might / could."
+                  ],
+                  "answer": "(a) May (b) must not (c) may / might / could"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Modals and their uses",
+                "columns": ["Use", "Modals", "Example"],
+                "rows": [
+                  ["Ability", "can, could", "I can solve it."],
+                  ["Permission", "may, can, could", "May I sit here?"],
+                  ["Request", "could, would", "Could you help me?"],
+                  ["Obligation", "must, have to", "We must obey traffic rules."],
+                  ["Advice", "should, ought to", "You ought to rest."],
+                  ["Possibility", "may, might, could", "It might snow."]
+                ]
+              },
+              "real_world": "Signs and rules use modals: 'Passengers must wear seat belts.' Doctors give advice with should: 'You should take this medicine twice a day.' Polite modals like could and would are important in emails and customer service: 'Could you please confirm the delivery date?'",
+              "takeaways": [
+                "Modals are followed by the base form of the verb.",
+                "Can/could: ability; may/can/could: permission; could/would: polite requests.",
+                "Must: strong obligation; must not: prohibition; don't have to: not necessary.",
+                "Should/ought to: advice; may/might/could: possibility."
+              ],
+              "practice": [
+                ["Correct: 'He can sings well.'", "He can sing well."],
+                ["Give advice using 'should' to a friend who is tired.", "You should get some sleep."],
+                ["What is the difference between 'mustn't' and 'don't have to'?", "Mustn't = forbidden; don't have to = not necessary."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which is a modal verb?", ["run", "should", "happy", "quickly"], "B", "It adds meaning to another verb.", "Should is a modal verb."],
+                  ["Choose the correct sentence.", ["She can to dance.", "She cans dance.", "She can dance.", "She can dances."], "C", "Modal + base form.", "She can dance."],
+                  ["'May I come in?' asks for:", ["Permission", "Ability", "Advice", "Obligation"], "A", "Asking whether you are allowed.", "May is used to ask permission."],
+                  ["Which modal gives advice?", ["can", "must not", "may", "should"], "D", "Doctors use it often.", "Should gives advice."]
+                ],
+                "MEDIUM": [
+                  ["'You ___ not use mobile phones in the exam hall.' (forbidden)", ["should", "must", "could", "may"], "B", "Strong prohibition.", "Must not shows something is forbidden."],
+                  ["'When I was five, I ___ ride a bicycle.' (past ability)", ["can", "may", "could", "must"], "C", "Past form of can.", "Could expresses past ability."],
+                  ["Which is the most polite request?", ["Could you please pass the salt?", "Pass the salt.", "You must pass the salt.", "Give salt now."], "A", "Could + please.", "Could you please… is polite."],
+                  ["'It ___ rain this evening; the sky is getting cloudy.' (possibility)", ["must not", "should not", "can't", "might"], "D", "It is uncertain.", "Might shows possibility."]
+                ],
+                "HARD": [
+                  ["Which sentence means 'It is not necessary to bring a calculator'?", ["You mustn't bring a calculator.", "You don't have to bring a calculator.", "You can't bring a calculator.", "You shouldn't bring a calculator."], "B", "Not necessary ≠ forbidden.", "Don't have to shows lack of necessity."],
+                  ["'The ground is wet. It ___ have rained last night.' (logical certainty)", ["should", "may not", "must", "can"], "C", "A strong conclusion from evidence.", "Must have rained shows certainty based on evidence."],
+                  ["Which sentence uses 'shall' correctly?", ["Shall I open the window for you?", "He shall to come tomorrow.", "Shall you swimming?", "They shalls go."], "A", "Offers and suggestions with I/we.", "Shall I…? makes an offer."],
+                  ["Choose the best modal: 'You ___ see a doctor about that cough; it has lasted two weeks.'", ["might", "can", "would", "ought to"], "D", "This is advice.", "Ought to (like should) gives advice."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g8-eng-u-reading",
+      "title": "Reading Skills",
+      "topics": [
+        {
+          "slug": "g8-eng-t-comprehension",
+          "title": "Comprehension Skills",
+          "description": "Making inferences and distinguishing fact from opinion.",
+          "lessons": [
+            {
+              "slug": "g8-eng-inference",
+              "title": "Making Inferences",
+              "objectives": [
+                "Explain what an inference is",
+                "Combine text clues with background knowledge to infer",
+                "Infer characters' feelings and motives",
+                "Support inferences with evidence from the text"
+              ],
+              "intro": "Writers do not tell readers everything directly. If a story says, 'Riya slammed the door, threw her bag on the floor and refused to come down for dinner', the writer has not said that Riya is angry, but you know it. Working out what is not stated, using clues in the text and what you already know, is called making an inference. It is often described as 'reading between the lines', and it is one of the most important comprehension skills.",
+              "sections": [
+                [
+                  "Clues plus knowledge",
+                  "An inference = text clues + background knowledge. The text clue might be an action, a description, dialogue or a detail of setting. Your background knowledge is what you know from experience. In 'Arjun's hands trembled as he waited outside the principal's office', the clue is trembling hands and the setting; your knowledge tells you that people tremble when nervous. So you infer that Arjun is nervous or worried. An inference is a reasoned conclusion, not a wild guess, and it must fit all the evidence."
+                ],
+                [
+                  "Inferring characters and settings",
+                  "Writers reveal characters through what they say, do and think, and how others react to them. If a character always shares her lunch and helps others with homework, we infer she is kind and generous. Settings can also be inferred: 'The streets were empty, shops were shuttered and lamps glowed in windows' suggests a late evening or night. Inferences about time, place, mood and relationships help us understand a story more deeply and predict what might happen next."
+                ],
+                [
+                  "Supporting inferences with evidence",
+                  "In examinations, you are often asked questions such as 'How did the narrator feel?' or 'What can you infer about the old man?' A good answer states the inference and supports it with evidence from the text: 'The narrator was relieved, because she “finally let out the breath she had been holding”.' Check that your inference is consistent with the whole passage, not just one sentence. If more than one inference is possible, choose the one with the strongest evidence. Avoid adding ideas that the text does not support."
+                ]
+              ],
+              "definitions": [
+                ["Inference", "A conclusion reached from evidence and reasoning rather than direct statement."],
+                ["Text clue", "A detail in the text that supports an inference."],
+                ["Background knowledge", "What a reader already knows from experience and learning."],
+                ["Evidence", "Words or details from the text that support an answer."]
+              ],
+              "examples": [
+                "'Grandpa put on his raincoat and took his umbrella before leaving.' Inference: rain was expected.",
+                "'The audience rose to its feet and clapped for five minutes.' Inference: the performance was excellent."
+              ],
+              "worked": [
+                {
+                  "problem": "Read: 'Mohan checked his watch for the tenth time, tapped his foot and kept glancing at the gate. The bus was already twenty minutes late.' What can you infer about Mohan?",
+                  "steps": [
+                    "Clues: checking his watch repeatedly, tapping his foot, glancing at the gate, the bus is late.",
+                    "Background knowledge: people do these things when impatient or worried about time.",
+                    "Inference: Mohan is impatient and anxious, probably worried about being late."
+                  ],
+                  "answer": "Mohan is impatient and anxious about the delay, shown by repeatedly checking his watch and tapping his foot."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Making an inference",
+                "items": ["Read the text closely", "Notice clues (actions, words, details)", "Add what you already know", "Draw a reasoned conclusion", "Check it against the whole text"]
+              },
+              "real_world": "Detectives, doctors and scientists all make inferences from evidence. In daily life, we infer a friend's mood from their tone in a message or decide that a road is wet because people are carrying umbrellas. Advertisements often rely on readers inferring messages rather than stating them directly.",
+              "takeaways": [
+                "An inference combines text clues with background knowledge.",
+                "Characters' feelings and traits are often shown, not told.",
+                "Support every inference with evidence from the text.",
+                "Check that the inference fits the whole passage."
+              ],
+              "practice": [
+                ["'The plants in the garden had drooped and the soil had cracked.' What can you infer?", "There has been no rain or watering for some time."],
+                ["What is the formula for an inference?", "Text clues + background knowledge."],
+                ["Why must you give evidence for an inference?", "To show it is reasoned, not a guess."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["An inference is:", ["A sentence copied from the text", "A conclusion based on clues and reasoning", "The title of a story", "A dictionary meaning"], "B", "Reading between the lines.", "Inferences are reasoned conclusions from evidence."],
+                  ["'She wiped her tears and smiled as she hugged her medal.' She probably felt:", ["Angry", "Bored", "Happy and emotional", "Afraid"], "C", "Tears plus a smile and a medal.", "These are tears of joy at winning."],
+                  ["An inference should be supported by:", ["Evidence from the text", "Random guesses", "The author's address", "The number of pages"], "A", "Prove it.", "Evidence makes an inference reliable."],
+                  ["'Everyone was wearing sweaters and their breath formed little clouds.' The weather was:", ["Hot", "Humid", "Rainy", "Cold"], "D", "Visible breath is a clue.", "Visible breath and sweaters show cold weather."]
+                ],
+                "MEDIUM": [
+                  ["'The classroom fell silent the moment Mrs Rao walked in.' What can you infer?", ["The students disliked silence", "The students respected or were a little afraid of Mrs Rao", "Mrs Rao was new", "The bell was broken"], "B", "Why would a class go quiet?", "Immediate silence suggests respect or strictness."],
+                  ["'Kabir kept the puppy fed, brushed and safe, even giving it his own blanket.' Kabir is:", ["Careless", "Selfish", "Caring and responsible", "Lazy"], "C", "Look at his actions.", "His actions show care and responsibility."],
+                  ["Which is the best supported inference? 'The shop's shelves were empty and a sign read “Closing Sale”.'", ["The shop is going out of business", "The shop is very new", "The owner loves shopping", "Prices have gone up"], "A", "Two clues together.", "Empty shelves and a closing sale suggest it is closing."],
+                  ["When two inferences are possible, you should choose the one that:", ["Is the most exciting", "Is the longest", "Uses the most difficult words", "Has the strongest evidence in the text"], "D", "Evidence decides.", "The best inference is best supported by the text."]
+                ],
+                "HARD": [
+                  ["'The old man smiled politely but kept his hand on his wallet as the stranger talked.' What can you infer?", ["The man trusted the stranger completely", "The man was polite but suspicious of the stranger", "The man was asleep", "The stranger was his son"], "B", "Contrast his smile with his hand.", "He was outwardly polite but guarded."],
+                  ["Which answer best supports the inference that the narrator was nervous?", ["'The narrator was nervous.'", "'It was a sunny day.'", "'Her voice shook and she gripped the edge of the table.'", "'She wore a blue dress.'"], "C", "Find physical evidence of nerves.", "A shaking voice and gripping the table show nervousness."],
+                  ["'By the time we reached the station, the platform was empty and the board showed the train had departed.' What happened?", ["They missed the train", "The train was cancelled", "They arrived early", "The station was closed for good"], "A", "The board shows departure.", "They arrived after the train left."],
+                  ["Why is 'The writer hates all animals' a weak inference from 'The writer did not want a pet cat'?", ["It is too short", "Cats are not animals", "It is a fact", "It goes beyond the evidence; one example does not show hatred of all animals"], "D", "Does the evidence support so much?", "The conclusion is far broader than the evidence."]
+                ]
+              }
+            },
+            {
+              "slug": "g8-eng-fact-opinion",
+              "title": "Fact and Opinion",
+              "objectives": [
+                "Distinguish facts from opinions",
+                "Recognise signal words for opinions",
+                "Identify how writers mix facts and opinions to persuade",
+                "Evaluate the reliability of sources"
+              ],
+              "intro": "'The Taj Mahal is in Agra' is a fact; anyone can check it. 'The Taj Mahal is the most beautiful building in the world' is an opinion; people may agree or disagree. In newspapers, advertisements, social media and textbooks, facts and opinions are often mixed together. Telling them apart helps you think clearly, avoid being misled and form your own well-reasoned views.",
+              "sections": [
+                [
+                  "Facts and opinions",
+                  "A fact is a statement that can be proved true or false by evidence, observation, measurement or reliable records: 'Water boils at 100 °C at sea level', 'India has 28 states'. An opinion expresses a belief, feeling or judgement that cannot be proved: 'Summer is the best season', 'Mathematics is boring'. A statement that sounds like a fact can still be false; 'The Sun goes round the Earth' is a factual claim that is wrong. Facts are checked against evidence, while opinions are judged by how well they are supported by reasons."
+                ],
+                [
+                  "Signal words",
+                  "Opinions often contain judging words such as best, worst, beautiful, terrible, should, must, amazing and boring, and phrases such as I think, I believe, in my view, it seems and probably. Facts often contain numbers, dates, names, measurements and verifiable details. But signal words are only a guide; read the whole statement. 'Most experts believe the dam is unsafe' reports an opinion held by experts, and the report itself may be a fact if it is accurate."
+                ],
+                [
+                  "Facts, opinions and persuasion",
+                  "Writers often support opinions with facts to persuade readers. An advertisement might say, 'Our phone has a 5,000 mAh battery (fact), so it is the best choice for students (opinion).' A good argument uses relevant, accurate facts and sound reasoning. Be alert to opinions disguised as facts, statistics without sources, and emotional language. Ask: Who wrote this, and why? What is the evidence? Is the source reliable, such as an official website, a reputed newspaper or an encyclopaedia? Can the claim be checked elsewhere? These habits are vital in an age of fake news."
+                ]
+              ],
+              "definitions": [
+                ["Fact", "A statement that can be proved true or false using evidence."],
+                ["Opinion", "A statement of belief, feeling or judgement that cannot be proved."],
+                ["Bias", "A one-sided view that favours one side unfairly."],
+                ["Source", "Where information comes from, such as a book, website or person."]
+              ],
+              "examples": [
+                "Fact: The Ganga is about 2,525 km long.",
+                "Opinion: Goa is the most enjoyable holiday destination."
+              ],
+              "worked": [
+                {
+                  "problem": "Label each part: 'Our school library has 12,000 books, and it is the most wonderful place in the building. It opens at 8 a.m. Everyone should visit it daily.'",
+                  "steps": [
+                    "'has 12,000 books' — can be counted → fact.",
+                    "'the most wonderful place' — a judgement → opinion.",
+                    "'opens at 8 a.m.' — can be checked → fact.",
+                    "'Everyone should visit it daily' — 'should' gives a view → opinion."
+                  ],
+                  "answer": "Facts: 12,000 books; opens at 8 a.m. Opinions: most wonderful place; everyone should visit daily."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Fact or opinion?",
+                "columns": ["Statement", "Type", "Why"],
+                "rows": [
+                  ["Mount Everest is 8,849 m high.", "Fact", "Measured"],
+                  ["Mountains are more beautiful than beaches.", "Opinion", "Judgement"],
+                  ["The Constitution came into force in 1950.", "Fact", "Recorded date"],
+                  ["Homework should be banned.", "Opinion", "'should' expresses a view"]
+                ]
+              },
+              "real_world": "Fact-checking websites and journalists verify viral claims before they spread further. Smart consumers separate an advertisement's measurable claims from its boasts, and voters judge politicians' promises by checking the facts behind them.",
+              "takeaways": [
+                "Facts can be proved; opinions express beliefs or judgements.",
+                "Judging words often signal opinions; numbers and dates often signal facts.",
+                "Writers use facts to support opinions when persuading.",
+                "Check sources and evidence before accepting a claim."
+              ],
+              "practice": [
+                ["Is 'Delhi is the capital of India' a fact or opinion?", "Fact."],
+                ["Is 'Cricket is the most exciting sport' a fact or opinion?", "Opinion."],
+                ["Give two questions to ask about a source.", "Who wrote it and why? What evidence supports it?"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which is a fact?", ["Chocolate is the best flavour.", "The Earth revolves around the Sun.", "Monday is a boring day.", "Dogs are better than cats."], "B", "Can it be proved?", "This is a scientifically proven fact."],
+                  ["Which is an opinion?", ["Water freezes at 0 °C.", "Mumbai is on the west coast.", "Science fiction films are exciting.", "A week has seven days."], "C", "Look for a judgement.", "'Exciting' is a personal judgement."],
+                  ["Which word often signals an opinion?", ["best", "1947", "kilometre", "Delhi"], "A", "It judges.", "'Best' expresses a judgement."],
+                  ["A fact is a statement that:", ["Everyone likes", "Is long", "Uses big words", "Can be proved true or false"], "D", "Evidence can check it.", "Facts can be verified."]
+                ],
+                "MEDIUM": [
+                  ["'This phone weighs 180 g and is the coolest phone ever.' Which part is a fact?", ["is the coolest phone ever", "weighs 180 g", "Both parts", "Neither part"], "B", "Which part can be measured?", "Weight can be measured; 'coolest' is opinion."],
+                  ["Why is 'The Sun goes round the Earth' still a factual statement (claim)?", ["Because it is true", "Because it is an opinion", "Because it can be tested and proved false", "Because it has a number"], "C", "Facts are checkable claims.", "It is a checkable claim, which evidence shows to be false."],
+                  ["Which source is MOST reliable for India's population figures?", ["The official Census website", "An anonymous social media post", "A friend's guess", "A cartoon"], "A", "Official and verifiable.", "Official census data is the most reliable source."],
+                  ["'In my view, uniforms build discipline.' The phrase 'In my view' shows:", ["A scientific fact", "A date", "A measurement", "An opinion"], "D", "Personal stance.", "'In my view' introduces an opinion."]
+                ],
+                "HARD": [
+                  ["Which statement mixes fact and opinion?", ["The Ganga flows into the Bay of Bengal.", "The Ganga, which flows into the Bay of Bengal, is India's most sacred and lovely river.", "Rivers are lovely.", "The Ganga is 2,525 km long."], "B", "Look for both a checkable detail and a judgement.", "The flow is a fact; 'most sacred and lovely' is opinion."],
+                  ["An advertisement says '9 out of 10 users love our soap!' The best question to ask is:", ["What colour is the soap?", "Is the soap cheap?", "How were the users chosen and who did the survey?", "Is 9 a big number?"], "C", "Question the evidence.", "Statistics need reliable methods and sources."],
+                  ["Which is a well-supported opinion?", ["Cycling to school is a good habit because it is free, reduces pollution and builds fitness.", "Cycling is good. Period.", "Cycling is good because I said so.", "Everyone hates cars."], "A", "Reasons and facts support it.", "It gives relevant reasons to support the view."],
+                  ["Why is identifying bias important when reading news?", ["Bias makes news shorter", "Biased news is always false", "Only opinions can be biased", "A one-sided report may present only facts that support one view"], "D", "Selection of facts matters.", "Bias can mislead even when the facts given are true."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g8-eng-u-writing",
+      "title": "Writing Skills",
+      "topics": [
+        {
+          "slug": "g8-eng-t-formal-writing",
+          "title": "Formal Writing",
+          "description": "Writing formal letters and reports in the correct format and tone.",
+          "lessons": [
+            {
+              "slug": "g8-eng-formal-letter",
+              "title": "Writing a Formal Letter",
+              "objectives": [
+                "Identify types and purposes of formal letters",
+                "Use the correct format of a formal letter",
+                "Write in a polite, concise and formal tone",
+                "Write letters of complaint, request and enquiry"
+              ],
+              "intro": "Formal letters are written to people we do not know personally or to people in official positions: a school principal, a newspaper editor, a company or a government office. They are used to make requests, complaints, enquiries or applications. Because formal letters may be filed and acted upon, they must be clear, polite and correctly formatted. A well-written formal letter is far more likely to get a positive response.",
+              "sections": [
+                [
+                  "Format",
+                  "A formal letter includes: (1) the sender's address; (2) the date; (3) the receiver's designation and address, for example 'The Principal, Sunrise Public School, Jaipur'; (4) the subject line, a short phrase stating the purpose, such as 'Subject: Request for a school library card'; (5) the salutation: 'Sir/Madam,' or 'Respected Sir,'; (6) the body, usually three paragraphs; (7) the complimentary close, 'Yours faithfully,' (when the receiver is not known by name) or 'Yours sincerely,' (when addressed by name); and (8) the sender's signature, name and, if relevant, class or designation."
+                ],
+                [
+                  "Body and tone",
+                  "The first paragraph states the purpose clearly: 'I am writing to bring to your notice the poor condition of the road near our school.' The second gives details, facts and examples: how long the problem has lasted, its effects, and any earlier complaints. The third states the action requested and closes politely: 'I request you to take necessary action at the earliest. I hope for a prompt response.' Use a formal tone: no contractions, slang or emotional outbursts. Be concise, precise and respectful, even when complaining."
+                ],
+                [
+                  "Kinds of formal letters",
+                  "Letters of complaint report a problem and request a solution, for example to the municipal commissioner about irregular garbage collection. Letters of request ask for something, such as leave, permission or a certificate. Letters of enquiry ask for information, such as course details or prices. Letters to the editor express views on public issues for publication. Each has the same format; only the purpose and details change. Always include specific information such as dates, places, order numbers or names so the receiver can act."
+                ]
+              ],
+              "definitions": [
+                ["Formal letter", "A letter written for official or business purposes in a formal tone."],
+                ["Subject line", "A brief statement of the purpose of the letter."],
+                ["Yours faithfully", "Close used when the receiver is addressed as Sir/Madam."],
+                ["Yours sincerely", "Close used when the receiver is addressed by name."]
+              ],
+              "examples": [
+                "Subject: Complaint regarding frequent power cuts in Sector 12",
+                "Subject: Enquiry about summer coding courses"
+              ],
+              "worked": [
+                {
+                  "problem": "Plan a letter to the Municipal Commissioner complaining about stray garbage near your colony park.",
+                  "steps": [
+                    "Sender's address, date; receiver: The Municipal Commissioner, (City) Municipal Corporation, address.",
+                    "Subject: Complaint regarding uncollected garbage near Green Park, Sector 7.",
+                    "Para 1: purpose — garbage has not been cleared for two weeks.",
+                    "Para 2: details — foul smell, stray animals, mosquitoes, children unable to use the park; earlier phone complaint (number) ignored.",
+                    "Para 3: request daily collection and a covered bin; thank them. Close: Yours faithfully, signature, name."
+                  ],
+                  "answer": "A correctly formatted complaint letter with a clear subject, factual details and a polite specific request."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Formal letter layout",
+                "items": ["Sender's address", "Date", "Receiver's designation and address", "Subject", "Salutation", "Body: purpose → details → request", "Yours faithfully, signature, name"]
+              },
+              "real_world": "Students write formal letters to apply for leave, scholarships and certificates; adults write them to banks, employers and government offices. The same structure is used in formal emails, where the subject line is especially important.",
+              "takeaways": [
+                "Formal letters go to officials and people we do not know personally.",
+                "Include addresses, date, subject, salutation, body, close and signature.",
+                "State the purpose, give specific details, and request clear action.",
+                "Keep the tone polite, concise and free of slang."
+              ],
+              "practice": [
+                ["Which close is used with 'Sir/Madam'?", "Yours faithfully."],
+                ["Write a subject line for a leave application due to illness.", "Subject: Application for sick leave for two days"],
+                ["Name three kinds of formal letters.", "Complaint, request, enquiry (also letter to the editor, application)."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A formal letter is usually written to:", ["A best friend", "An official such as a principal", "A sibling", "A pet"], "B", "Official purposes.", "Formal letters are for officials and organisations."],
+                  ["Which part states the purpose briefly?", ["Salutation", "Signature", "Subject line", "Date"], "C", "It comes before the salutation.", "The subject line states the purpose."],
+                  ["Which is a suitable salutation?", ["Respected Sir,", "Hey buddy,", "Dear Mom,", "Hi there!"], "A", "It should be formal.", "'Respected Sir,' is formal."],
+                  ["Which should be avoided in a formal letter?", ["Polite requests", "Specific details", "A subject line", "Slang and contractions"], "D", "Formal tone.", "Slang and contractions are informal."]
+                ],
+                "MEDIUM": [
+                  ["If you begin with 'Sir/Madam,', you should close with:", ["Yours lovingly,", "Yours faithfully,", "Your friend,", "Cheers,"], "B", "Receiver not known by name.", "'Yours faithfully' is used with Sir/Madam."],
+                  ["The first paragraph of a complaint letter should:", ["Describe your hobbies", "List the receiver's mistakes rudely", "Clearly state the problem and purpose", "End the letter"], "C", "Get to the point.", "The opening states the purpose."],
+                  ["Which sentence suits a formal letter?", ["I request you to look into this matter at the earliest.", "Fix it, okay?", "You guys never do anything!", "Whatever, just do it."], "A", "Polite and formal.", "It is polite and requests action."],
+                  ["A letter asking a college for course details is a letter of:", ["Complaint", "Apology", "Congratulation", "Enquiry"], "D", "Asking for information.", "Enquiries ask for information."]
+                ],
+                "HARD": [
+                  ["Why should a complaint letter include specific details such as dates and earlier complaint numbers?", ["To make it longer", "So the receiver can identify and act on the problem", "Because it is required for friendly letters", "To show off"], "B", "Think about the receiver's next step.", "Specific details make action possible."],
+                  ["Which subject line is best?", ["Subject: Problem", "Subject: Please read urgently!!!", "Subject: Request for repair of broken streetlights on MG Road", "Subject: Hello"], "C", "It should be clear and specific.", "It names the problem and place precisely."],
+                  ["Which sentence keeps a polite tone while complaining?", ["Despite two reminders, the issue remains unresolved; I request prompt action.", "Your department is useless.", "I am furious and will shout at you.", "Nobody there knows how to work."], "A", "Firm but respectful.", "It states facts firmly without rudeness."],
+                  ["When is 'Yours sincerely' used?", ["Always in formal letters", "Only to friends", "In notices", "When the receiver is addressed by name"], "D", "For named receivers.", "'Yours sincerely' follows a named salutation, e.g. 'Dear Mr Sharma'."]
+                ]
+              }
+            },
+            {
+              "slug": "g8-eng-report-writing",
+              "title": "Report Writing",
+              "objectives": [
+                "Explain the purpose of a report",
+                "Use the correct format: heading, byline and body",
+                "Write in the past tense and an objective tone",
+                "Write reports on school events and incidents"
+              ],
+              "intro": "A report is a factual account of an event that has taken place, such as a school function, a sports meet, an exhibition or an incident. Reports appear in school magazines, newspapers and official records. Unlike a story or an opinion piece, a report presents information clearly and objectively so that readers who were not present know exactly what happened, when, where and who was involved.",
+              "sections": [
+                [
+                  "Format",
+                  "A school or newspaper report has three parts. The heading (title) is short and catchy, and states the event: 'Science Exhibition Sparks Young Minds'. The byline gives the reporter's name, sometimes with class or designation: 'By Anjali Rao, Class VIII B'. For newspaper reports, a place and date line follows: 'Pune, 14 February'. The body, usually three or four paragraphs, gives the details. School examinations often expect around 120 to 150 words."
+                ],
+                [
+                  "Content of the body",
+                  "The first paragraph answers the key questions briefly: what happened, when, where, who organised or took part and why. The middle paragraph or paragraphs give details in order: the chief guest, main activities, highlights, results, prizes or effects of an incident. The final paragraph gives a conclusion: the response of participants, a quotation, the vote of thanks, or follow-up action. Quotations from participants, used sparingly, make a report lively: 'Such exhibitions build scientific temper,' said the principal."
+                ],
+                [
+                  "Style",
+                  "Reports are written in the past tense because they describe events that have already happened. They often use the passive voice to focus on events: 'Prizes were distributed by the chief guest.' The tone is objective and factual: avoid personal opinions such as 'I think it was the best event ever' and avoid exaggeration. Use specific details such as numbers, names and times instead of vague words. Organise information logically, and check spelling of names and facts carefully, because reports are records."
+                ]
+              ],
+              "definitions": [
+                ["Report", "A factual, objective account of an event."],
+                ["Byline", "The line giving the reporter's name."],
+                ["Objective", "Based on facts, not personal feelings or opinions."],
+                ["Dateline", "The place and date at the start of a newspaper report."]
+              ],
+              "examples": [
+                "Heading: Annual Sports Day Celebrated with Enthusiasm",
+                "Byline: By Rahul Mehta, Sports Captain"
+              ],
+              "worked": [
+                {
+                  "problem": "Plan a report on a tree-plantation drive at your school.",
+                  "steps": [
+                    "Heading: 'Students Plant 300 Saplings to Green the Campus'; byline: 'By Neha Singh, Secretary, Eco Club'.",
+                    "Para 1: The Eco Club organised a drive on 5 June (World Environment Day) in the school grounds; 120 students and staff took part.",
+                    "Para 2: The chief guest, a forest officer, explained the importance of native trees; 300 saplings of neem, peepal and jamun were planted; students pledged to water them.",
+                    "Para 3: The principal praised the effort; the club will monitor the saplings monthly; vote of thanks."
+                  ],
+                  "answer": "A report with heading, byline and three factual paragraphs in the past tense."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Report structure",
+                "items": ["Heading", "Byline (and dateline)", "Introduction: what, when, where, who, why", "Details in order", "Conclusion: response, quotation, thanks"]
+              },
+              "real_world": "Journalists write news reports daily, organisations prepare reports of meetings and events, and police write incident reports. School magazines publish reports of annual days and competitions, preserving a record for the future.",
+              "takeaways": [
+                "A report is a factual, objective account of an event.",
+                "Format: heading, byline, (dateline), body of three or four paragraphs.",
+                "Answer what, when, where, who and why first, then give details.",
+                "Use the past tense, often the passive, and avoid personal opinions."
+              ],
+              "practice": [
+                ["Which tense is used in reports?", "Past tense."],
+                ["What is a byline?", "The line with the reporter's name."],
+                ["Rewrite objectively: 'It was the most amazing quiz ever!'", "The inter-house quiz was attended by over 200 students."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A report is mainly:", ["A personal story", "A factual account of an event", "A poem", "An advertisement"], "B", "It records what happened.", "Reports give factual accounts."],
+                  ["Reports are usually written in the:", ["Future tense", "Present continuous tense", "Past tense", "Imperative mood"], "C", "The event has already happened.", "Reports describe past events."],
+                  ["The line with the reporter's name is the:", ["Byline", "Headline", "Subject", "Salutation"], "A", "'By …'.", "The byline names the writer."],
+                  ["Which should be avoided in a report?", ["Dates", "Names", "Facts", "Personal opinions and exaggeration"], "D", "Reports are objective.", "Opinions and exaggeration make reports unreliable."]
+                ],
+                "MEDIUM": [
+                  ["The first paragraph of a report should answer:", ["The writer's favourite colour", "What, when, where, who and why", "Only who won", "The reporter's opinion"], "B", "The key facts.", "The introduction gives the essential facts."],
+                  ["Which sentence suits a report?", ["I loved every second of it!", "The event was super awesome.", "The exhibition was inaugurated by the principal at 10 a.m.", "Come and see next year!"], "C", "Factual, past tense.", "It is objective and specific."],
+                  ["Why is the passive voice common in reports?", ["It focuses on the events and actions", "It makes reports longer", "It is used for advice", "It hides all information"], "A", "Focus on what happened.", "The passive emphasises actions and events."],
+                  ["Which heading is best for a report?", ["A Day", "Things Happened", "Hello Readers", "Inter-School Debate Won by Greenfield Academy"], "D", "Short, catchy and informative.", "It states the event and result."]
+                ],
+                "HARD": [
+                  ["Which detail is most appropriate for the body of a report on a blood donation camp?", ["I felt scared of needles.", "Over 150 units of blood were collected with the help of the city hospital.", "Blood is red.", "Next year it may rain."], "B", "Specific, factual and relevant.", "It gives a precise, relevant fact."],
+                  ["Why should names and figures be checked carefully in a report?", ["To make it colourful", "Readers prefer mistakes", "Reports serve as records, so errors spread misinformation", "Reports are never read"], "C", "Think about reports as records.", "Accuracy matters because reports are relied upon."],
+                  ["Which concluding sentence best fits a report?", ["The event concluded with a vote of thanks by the head girl.", "Bye everyone!", "I think it was boring.", "Please buy our magazine."], "A", "Objective closure.", "It closes the account factually."],
+                  ["How does a report differ from a formal letter?", ["Reports have a salutation", "Reports request action from an official", "Reports always use the future tense", "Reports give an objective account of an event without a salutation or complimentary close"], "D", "Compare formats and purposes.", "Reports record events; letters address a receiver."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

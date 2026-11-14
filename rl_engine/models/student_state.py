@@ -66,6 +66,10 @@ class StudentState:
             current lesson.
         completed_lessons: Total number of lessons the student has
             completed so far, used as a broader progress indicator.
+        drowsy: Whether possible drowsiness (sustained eye closure) was
+            observed by the facial-analysis module. This is an attention
+            signal, not a medical assessment. Defaults to ``False`` so
+            existing callers keep working.
     """
 
     # -- Academic Information --
@@ -88,6 +92,9 @@ class StudentState:
     hints_used: int
     lesson_attempts: int
     completed_lessons: int
+
+    # -- Engagement (added in state version 3 work) --
+    drowsy: bool = False
 
     def __post_init__(self) -> None:
         """Perform lightweight sanity checks on the student state.

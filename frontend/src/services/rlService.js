@@ -1,34 +1,52 @@
 import api from './api'
 
+const toNullableNumber = (value) =>
+  value === undefined || value === null || Number.isNaN(Number(value)) ? null : Number(value)
+
+const toNullableBool = (value) => (value === true || value === false ? value : null)
+
 export const rlService = {
+  /**
+   * Request an adaptive recommendation.
+   *
+   * Camera-derived fields (attention_score, yawning, looking_away) are sent
+   * as null when unknown. The backend then answers with
+   * `telemetry_available: false` and no action instead of guessing.
+   */
   async getRecommendation(data) {
-    // Ensures numerical fields are integers/floats as enforced by Pydantic schemas
     const payload = {
       subject: data.subject,
       topic: data.topic,
       lesson: data.lesson,
-      previous_quiz_score: data.previous_quiz_score !== undefined ? Math.round(data.previous_quiz_score) : undefined,
-      current_quiz_score: data.current_quiz_score !== undefined ? Math.round(data.current_quiz_score) : undefined,
-      difficulty: data.difficulty ? data.difficulty.toUpperCase() : undefined, // Norm to EASY/MEDIUM/HARD
-      response_time: data.response_time !== undefined ? parseFloat(data.response_time) : undefined,
-      hints_used: data.hints_used !== undefined ? parseInt(data.hints_used, 10) : undefined,
-      lesson_attempts: data.lesson_attempts !== undefined ? parseInt(data.lesson_attempts, 10) : undefined,
-      completed_lessons: data.completed_lessons !== undefined ? parseInt(data.completed_lessons, 10) : undefined
-    }
-
-    if (data.attention_score !== undefined && data.attention_score !== null) {
-      payload.attention_score = parseFloat(data.attention_score)
-    }
-
-    if (data.yawning !== undefined && data.yawning !== null) {
-      payload.yawning = data.yawning
-    }
-
-    if (data.looking_away !== undefined && data.looking_away !== null) {
-      payload.looking_away = data.looking_away
+      previous_quiz_score: Math.round(Number(data.previous_quiz_score) || 0),
+      current_quiz_score: Math.round(Number(data.current_quiz_score) || 0),
+      difficulty: String(data.difficulty || '').toUpperCase(),
+      response_time: Number(data.response_time) || 0,
+      hints_used: parseInt(data.hints_used ?? 0, 10) || 0,
+      lesson_attempts: parseInt(data.lesson_attempts ?? 0, 10) || 0,
+      completed_lessons: parseInt(data.completed_lessons ?? 0, 10) || 0,
+      attention_score: toNullableNumber(data.attention_score),
+      yawning: toNullableBool(data.yawning),
+      looking_away: toNullableBool(data.looking_away),
     }
 
     return await api.post('/rl/recommend', payload)
-  }
-}
+  },
 
+  /**
+   * The signed-in student's most recent stored recommendation.
+   * Resolves to { status, recommendation, attempt } where status is
+   * "available", "telemetry_unavailable", "not_generated" or "no_attempts".
+   */
+  async getLatest() {
+    const response = await api.get('/recommendations/latest')
+    return response?.data ?? { status: 'no_attempts', recommendation: null, attempt: null }
+  },
+
+  /** Recommendations, newest first, each with `context` (the attempt
+   *  that produced it) and `outcome` (pending, or the next attempt's result). */
+  async getHistory(limit = 20) {
+    const response = await api.get('/recommendations', { params: { limit } })
+    return response?.data ?? []
+  },
+}

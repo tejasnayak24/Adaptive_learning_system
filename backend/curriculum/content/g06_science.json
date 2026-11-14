@@ -1,0 +1,583 @@
+{
+  "grade": 6,
+  "subject": "Science",
+  "units": [
+    {
+      "slug": "g6-sci-u-biology",
+      "title": "Biology: The Living World",
+      "topics": [
+        {
+          "slug": "g6-sci-t-living-things",
+          "title": "Living Things and Their Surroundings",
+          "description": "What makes something alive, and how living things are suited to where they live.",
+          "lessons": [
+            {
+              "slug": "g6-sci-characteristics-of-life",
+              "title": "Characteristics of Living Things",
+              "objectives": [
+                "List the characteristics shared by all living things",
+                "Distinguish living things from non-living things",
+                "Explain respiration, growth, reproduction and response to stimuli",
+                "Understand that all living things are made of cells"
+              ],
+              "intro": "A dog, a mango tree and a mushroom look very different, yet scientists group them together as living things. A stone, a bicycle and a cloud are non-living. What do living things have in common that non-living things lack? Biologists have identified a set of characteristics. No single feature is enough on its own, because a car moves and a crystal grows, but living things show all of these features during their lives.",
+              "sections": [
+                [
+                  "Nutrition, respiration and excretion",
+                  "All living things need food, which gives them energy and materials for growth. Green plants make their own food from carbon dioxide and water using sunlight, while animals eat plants or other animals. To release the energy stored in food, living things carry out respiration, a process that usually uses oxygen and gives out carbon dioxide. Life processes also produce wastes. Getting rid of these wastes is called excretion: humans excrete through the kidneys as urine, and through the lungs when we breathe out carbon dioxide. Plants remove some wastes through their leaves."
+                ],
+                [
+                  "Growth, movement and response",
+                  "Living things grow by producing new material from within, not just by adding things on the outside. A puppy grows into a dog and a seed grows into a plant. Living things also move: animals move from place to place, while plants move parts of themselves, such as leaves turning towards light or the petals of some flowers closing at night. Living things respond to changes around them, called stimuli. We pull our hand away from a hot pan, and the leaves of the touch-me-not plant fold when touched."
+                ],
+                [
+                  "Reproduction and cells",
+                  "Every kind of living thing produces more of its own kind. Animals may lay eggs or give birth to young; plants produce seeds, and some grow from stems or leaves. Reproduction allows a species to continue after individuals die, and every living thing has a life span. All living things are made of one or more tiny units called cells. Some organisms, such as bacteria and amoeba, are a single cell, while a human body contains trillions of cells. A seed may seem lifeless, but it is alive: given water and warmth it germinates and grows."
+                ]
+              ],
+              "definitions": [
+                ["Organism", "Any individual living thing, such as a plant, animal or microorganism."],
+                ["Respiration", "The process in which food is broken down to release energy."],
+                ["Stimulus", "A change in the surroundings that causes a living thing to respond."],
+                ["Excretion", "The removal of waste products made by the body."],
+                ["Cell", "The basic unit that makes up all living things."]
+              ],
+              "examples": [
+                "A sunflower turning to face the Sun is a response to the stimulus of light.",
+                "A cow eats grass (nutrition), breathes (respiration), grows, and gives birth to a calf (reproduction)."
+              ],
+              "worked": [
+                {
+                  "problem": "A car moves, uses fuel and gives out exhaust gases. Is it a living thing? Explain using the characteristics of life.",
+                  "steps": [
+                    "Check each characteristic: the car moves and uses fuel, which seems like nutrition and respiration.",
+                    "But it does not grow from within, cannot reproduce, has no cells and does not respond to stimuli by itself.",
+                    "A living thing must show all the characteristics, so the car is non-living."
+                  ],
+                  "answer": "No. It lacks growth, reproduction, cells and response to stimuli."
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Seven signs of life",
+                "items": [
+                  ["Movement", "Changing position or moving parts"],
+                  ["Respiration", "Releasing energy from food"],
+                  ["Sensitivity", "Responding to stimuli"],
+                  ["Growth", "Increasing in size from within"],
+                  ["Reproduction", "Producing young"],
+                  ["Excretion", "Removing wastes"],
+                  ["Nutrition", "Taking in or making food"]
+                ]
+              },
+              "real_world": "Doctors use the signs of life to check a patient: breathing, pulse and response to touch or light. Farmers watch seeds for germination to know whether they are still alive and worth planting, and astronauts look for chemical signs of respiration when searching for life on other planets.",
+              "takeaways": [
+                "Living things show nutrition, respiration, excretion, growth, movement, response and reproduction.",
+                "One characteristic alone does not prove something is alive.",
+                "All living things are made of cells.",
+                "Seeds are alive even when they look dormant."
+              ],
+              "practice": [
+                ["Give one example of a plant responding to a stimulus.", "Leaves of touch-me-not folding when touched; stems bending towards light."],
+                ["Why is a seed considered living?", "It respires slowly and grows into a plant when conditions are right."],
+                ["Name two ways humans excrete wastes.", "Urine through kidneys; carbon dioxide through lungs (also sweat)."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which of these is a living thing?", ["Rock", "Mushroom", "Cloud", "Bicycle"], "B", "Which one grows and reproduces?", "A mushroom is a fungus: it grows, respires and reproduces using spores."],
+                  ["What do living things release energy from during respiration?", ["Water", "Sunlight", "Food", "Soil"], "C", "Energy is stored in what we eat.", "Respiration breaks down food to release the energy stored in it."],
+                  ["Pulling your hand away from a hot object is an example of:", ["Response to a stimulus", "Reproduction", "Excretion", "Growth"], "A", "Heat is a change in the surroundings.", "The heat is a stimulus and pulling away is the response."],
+                  ["What is the basic unit of all living things?", ["Atom", "Organ", "Tissue", "Cell"], "D", "Bacteria are made of just one of these.", "All living things are made of one or more cells."]
+                ],
+                "MEDIUM": [
+                  ["Why is a crystal that gets bigger in a salt solution NOT living?", ["It cannot move", "It grows only by adding material on the outside and cannot reproduce or respire", "It is too small", "It is transparent"], "B", "How do living things grow?", "Living things grow from within and also respire and reproduce; a crystal only adds material on its surface."],
+                  ["Which process removes waste products made by the body?", ["Excretion", "Nutrition", "Reproduction", "Respiration"], "A", "Think about urine and sweat.", "Excretion is the removal of wastes made by life processes."],
+                  ["How do plants usually show movement?", ["They walk to water", "They move only when the wind blows", "Parts such as leaves and stems move towards light", "They do not move at all"], "C", "Watch a plant kept near a window for a week.", "Plants move parts of themselves, for example stems bending towards light."],
+                  ["Why do living things reproduce?", ["To grow taller", "To get energy", "To remove waste", "So that their kind continues after they die"], "D", "Every individual has a limited life span.", "Reproduction produces new individuals so the species survives."]
+                ],
+                "HARD": [
+                  ["A seed kept in a dry jar for a year shows no change. Which test best shows it is alive?", ["Weigh it", "Give it water and warmth and see if it germinates", "Check its colour", "Break it open and look for movement"], "B", "What does a living seed do in the right conditions?", "A living seed germinates and grows when given water, air and warmth."],
+                  ["Which statement about respiration is correct?", ["It happens only in animals", "It happens only during the day", "It happens in all living things to release energy", "It is the same as breathing in plants only"], "C", "Plants and animals both need energy all the time.", "Every living cell respires, day and night, to release energy from food."],
+                  ["An amoeba is a single cell. Which characteristic of life does it NOT show?", ["It shows all of them", "Reproduction", "Nutrition", "Response to stimuli"], "A", "Single-celled organisms are still complete living things.", "An amoeba feeds, respires, excretes, moves, responds, grows and divides to reproduce."],
+                  ["A fire grows, moves, uses oxygen and produces carbon dioxide. Why is it still non-living?", ["It is too hot", "It has no colour", "It is not made of cells and does not reproduce its own kind from within", "It needs fuel"], "C", "Check the cell characteristic.", "Fire shows some features of life but has no cells and no true reproduction or growth from within."]
+                ]
+              }
+            },
+            {
+              "slug": "g6-sci-habitats-adaptation",
+              "title": "Habitats and Adaptation",
+              "objectives": [
+                "Define habitat and distinguish terrestrial from aquatic habitats",
+                "Identify biotic and abiotic components of a habitat",
+                "Explain adaptations of plants and animals to deserts, mountains and water",
+                "Distinguish adaptation from acclimatisation"
+              ],
+              "intro": "A camel would struggle in the sea and a fish would die in the desert. Every living thing is suited to the place where it lives. The surroundings in which an organism lives and finds food, water, shelter and mates are called its habitat. Over many generations, living things develop special features that help them survive in their habitats. These features are called adaptations.",
+              "sections": [
+                [
+                  "Components of a habitat",
+                  "A habitat includes living and non-living parts. The living parts, called biotic components, include plants, animals and microorganisms. The non-living parts, called abiotic components, include air, water, soil, sunlight and temperature. Habitats on land, such as forests, grasslands, deserts and mountains, are terrestrial habitats. Ponds, lakes, rivers and oceans are aquatic habitats. Abiotic factors strongly affect which organisms can live in a place: few plants grow where there is little water, and only some animals can survive extreme cold."
+                ],
+                [
+                  "Life in deserts and mountains",
+                  "Deserts are hot by day, cold at night and very dry. A camel has long legs that keep its body away from hot sand, can go many days without drinking, and passes very little urine. Desert rats stay in burrows during the hot day. Cactus plants have leaves reduced to spines to lose less water, a thick waxy stem that stores water and carries out photosynthesis, and deep or widespread roots. Mountains are cold and windy, and may have snow. Trees there are often cone-shaped with sloping branches so snow slides off. Yaks and snow leopards have thick fur, and mountain goats have strong hooves for climbing rocky slopes."
+                ],
+                [
+                  "Life in water, and adaptation versus acclimatisation",
+                  "Fish have streamlined bodies that move easily through water, fins and a tail for swimming, and gills that take in oxygen dissolved in water. Dolphins and whales live in water but breathe air through blowholes. Lotus plants have hollow stems and leaves with air spaces that help them float. Adaptations develop over thousands of years and are passed on to offspring. In contrast, acclimatisation is a short-term change in one individual, such as a mountaineer whose body slowly adjusts to thin air at high altitude over a few weeks."
+                ]
+              ],
+              "definitions": [
+                ["Habitat", "The natural home of an organism, providing food, water, shelter and other needs."],
+                ["Biotic components", "The living parts of a habitat."],
+                ["Abiotic components", "The non-living parts of a habitat, such as air, water, light and temperature."],
+                ["Adaptation", "A feature that helps an organism survive in its habitat, developed over many generations."],
+                ["Acclimatisation", "Short-term adjustment of an individual to a change in its surroundings."]
+              ],
+              "examples": [
+                "Polar bears have white fur for camouflage and a thick layer of fat to keep warm.",
+                "Water hyacinth has spongy, air-filled stalks that keep it floating on ponds."
+              ],
+              "worked": [
+                {
+                  "problem": "A plant has thick fleshy stems, spines instead of leaves and long roots. Which habitat does it suit? Explain each feature.",
+                  "steps": [
+                    "Spines instead of leaves reduce water loss through evaporation.",
+                    "Fleshy stems store water and make food, since there are few leaves.",
+                    "Long roots reach water deep underground.",
+                    "All three features help save or find water, which is scarce in deserts."
+                  ],
+                  "answer": "A desert; every feature helps it survive with very little water."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Adaptations in different habitats",
+                "columns": ["Habitat", "Challenge", "Example adaptation"],
+                "rows": [
+                  ["Desert", "Little water, heat", "Cactus spines; camel stores fat in hump"],
+                  ["Mountain", "Cold, snow", "Cone-shaped trees; thick fur of yak"],
+                  ["Ocean", "Breathing and moving in water", "Gills and streamlined body of fish"],
+                  ["Pond", "Floating and getting air", "Hollow stems of lotus"]
+                ]
+              },
+              "real_world": "Wildlife conservationists study habitats and adaptations to protect endangered animals; a snow leopard cannot simply be moved to a warm zoo enclosure. Farmers choose crops adapted to their local rainfall, such as millets in dry regions and rice where water is plentiful.",
+              "takeaways": [
+                "A habitat has biotic (living) and abiotic (non-living) components.",
+                "Adaptations are inherited features developed over many generations.",
+                "Desert organisms save water; mountain organisms resist cold; aquatic organisms are built for water.",
+                "Acclimatisation is a short-term change in an individual, not an adaptation."
+              ],
+              "practice": [
+                ["Name two abiotic components of a pond.", "Water and sunlight (also temperature, dissolved oxygen, mud)."],
+                ["How do gills help a fish?", "They absorb oxygen dissolved in water."],
+                ["Why are many mountain trees cone-shaped?", "Snow slides off the sloping branches."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What is a habitat?", ["The food an animal eats", "The place where an organism lives and gets what it needs", "A type of plant", "The weather of a country"], "B", "Think of it as an organism's home.", "A habitat is the natural home of an organism, giving food, water and shelter."],
+                  ["Which is an abiotic component?", ["Grass", "Fungi", "Sunlight", "Frog"], "C", "Abiotic means non-living.", "Sunlight is non-living, so it is abiotic."],
+                  ["Fish breathe using:", ["Lungs", "Skin only", "Blowholes", "Gills"], "D", "Fish take oxygen from water.", "Gills absorb oxygen dissolved in water."],
+                  ["Why does a cactus have spines?", ["To reduce water loss", "To catch insects", "To make seeds", "To float"], "A", "What is scarce in a desert?", "Spines have very little surface, so less water evaporates."]
+                ],
+                "MEDIUM": [
+                  ["Which feature helps a camel survive in the desert?", ["Webbed feet", "Long legs that keep its body away from hot sand", "Thin fur for swimming", "Gills"], "B", "Desert sand is very hot by day.", "Long legs raise the camel's body above the hot sand."],
+                  ["A dolphin lives in water but comes to the surface often. Why?", ["To find food", "To sleep", "To breathe air through its blowhole", "To lay eggs"], "C", "Dolphins are mammals.", "Dolphins have lungs, so they surface to breathe air through a blowhole."],
+                  ["Which pair is correctly matched?", ["Lotus — hollow stems for floating", "Cactus — broad leaves", "Yak — thin skin", "Fish — lungs"], "A", "Which feature suits the habitat?", "Lotus stems have air spaces that help it float in ponds."],
+                  ["Mountain trees are often cone-shaped because:", ["They get more rain", "It attracts birds", "Their roots are short", "Snow slides off sloping branches"], "D", "Heavy snow could break branches.", "The sloping shape lets snow slide off instead of piling up."]
+                ],
+                "HARD": [
+                  ["A climber feels breathless at 5,000 m but feels better after two weeks there. This is:", ["An adaptation", "Acclimatisation", "Reproduction", "Excretion"], "B", "Did it happen over generations or within one person?", "A short-term adjustment within one person is acclimatisation."],
+                  ["Why do desert animals like rats stay in burrows during the day?", ["To avoid the heat and lose less water", "To catch more prey", "Because they are blind", "To find sunlight"], "A", "Compare the temperature in a burrow and on the sand surface.", "Burrows are cooler and more humid, so the animals avoid heat and water loss."],
+                  ["If a pond dries up, which organism is LEAST likely to survive there?", ["A cactus planted nearby", "A camel", "A desert lizard", "A fish"], "D", "Which one depends completely on water?", "Fish breathe with gills and need water; they cannot survive on dry land."],
+                  ["Which statement about adaptations is TRUE?", ["An animal can develop an adaptation in a week if it tries", "Adaptations are features passed on through generations", "Only animals have adaptations", "Adaptations are the same in all habitats"], "B", "Think of the cactus and the camel's ancestors.", "Adaptations develop over many generations and are inherited by offspring."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g6-sci-u-chemistry",
+      "title": "Chemistry: Materials",
+      "topics": [
+        {
+          "slug": "g6-sci-t-materials",
+          "title": "Materials Around Us",
+          "description": "Grouping materials by their properties and separating mixtures.",
+          "lessons": [
+            {
+              "slug": "g6-sci-sorting-materials",
+              "title": "Sorting Materials by Their Properties",
+              "objectives": [
+                "Identify common materials used to make objects",
+                "Describe properties such as lustre, hardness, solubility, transparency and density",
+                "Group materials using their properties",
+                "Explain why particular materials are chosen for particular uses"
+              ],
+              "intro": "A tumbler can be made of glass, steel or plastic, but never of paper. A chair can be wooden or plastic but is not made of cloth. The substance an object is made of is called its material. Materials have properties: some are shiny, some are hard, some let light through, some dissolve in water. Grouping materials by their properties makes them easier to study and helps us choose the right material for each job.",
+              "sections": [
+                [
+                  "Appearance and hardness",
+                  "Some materials, such as metals like iron, copper and aluminium, have a shine called lustre when they are freshly cut or polished. Materials like wood, cotton and paper have no lustre. Some metals lose their shine over time when they react with air and water, which is why old iron looks dull and rusty. Hardness describes how difficult a material is to scratch or compress. Iron and stone are hard; a sponge and cotton wool are soft because they can be compressed easily. Hard materials are chosen for tools, while soft materials are used for cushions and pillows."
+                ],
+                [
+                  "Solubility and floating",
+                  "When salt or sugar is stirred into water it disappears; these substances are soluble in water. Sand, chalk powder and sawdust do not dissolve and settle down or float, so they are insoluble. Some liquids, such as vinegar and lemon juice, mix completely with water, while others, such as oil and kerosene, do not and form a separate layer. Gases like oxygen dissolve slightly in water, which is important for fish. Whether an object floats or sinks depends on its material: a wooden block floats, while an iron nail sinks."
+                ],
+                [
+                  "Transparency",
+                  "Materials that let light pass through completely, so we can see clearly through them, are transparent, such as clear glass, water and air. Materials that let some light through but blur what is behind them, such as butter paper and frosted glass, are translucent. Materials that do not let light through at all, such as wood, cardboard and metal, are opaque. Window panes are transparent so we can see out, bathroom windows are often translucent for privacy, and doors are opaque."
+                ]
+              ],
+              "definitions": [
+                ["Material", "The substance or substances an object is made of."],
+                ["Lustre", "The shine on the surface of some materials, especially metals."],
+                ["Soluble", "Able to dissolve completely in a liquid such as water."],
+                ["Transparent", "Allowing light to pass through so that objects behind can be seen clearly."],
+                ["Opaque", "Not allowing any light to pass through."]
+              ],
+              "examples": [
+                "Cooking pans are made of metals because they are hard and let heat pass through.",
+                "Raincoats are made of plastic because it does not let water through."
+              ],
+              "worked": [
+                {
+                  "problem": "Group these into transparent, translucent and opaque: clear glass, butter paper, notebook cover, air, oiled paper, steel plate.",
+                  "steps": [
+                    "Ask for each: can I see clearly through it, partly through it, or not at all?",
+                    "Clearly: clear glass, air → transparent.",
+                    "Partly: butter paper, oiled paper → translucent.",
+                    "Not at all: notebook cover, steel plate → opaque."
+                  ],
+                  "answer": "Transparent: glass, air. Translucent: butter paper, oiled paper. Opaque: notebook cover, steel plate."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Properties of some materials",
+                "columns": ["Material", "Lustre", "Hard/Soft", "Soluble in water", "Light"],
+                "rows": [
+                  ["Iron", "Yes", "Hard", "No", "Opaque"],
+                  ["Sugar", "No", "Hard crystals", "Yes", "Translucent crystals"],
+                  ["Glass", "Shiny", "Hard", "No", "Transparent"],
+                  ["Sponge", "No", "Soft", "No", "Opaque"]
+                ]
+              },
+              "real_world": "Engineers choose materials by their properties every day: aluminium for aircraft because it is light and strong, glass for spectacles because it is transparent, and rubber for tyres because it is flexible and grips the road. Recycling plants also sort waste using properties, for example using magnets to pull out iron.",
+              "takeaways": [
+                "Objects are made of materials, and the same object can be made of different materials.",
+                "Useful properties include lustre, hardness, solubility, floating and transparency.",
+                "Transparent, translucent and opaque describe how much light passes through.",
+                "We choose materials according to the properties a job needs."
+              ],
+              "practice": [
+                ["Name two soluble and two insoluble substances.", "Soluble: salt, sugar. Insoluble: sand, chalk."],
+                ["Why is a frying pan handle often made of plastic or wood?", "These materials do not let heat through easily, so the handle stays cool."],
+                ["Is frosted glass transparent, translucent or opaque?", "Translucent."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which material has lustre?", ["Wood", "Copper", "Cotton", "Paper"], "B", "Metals are shiny.", "Copper is a metal and has a shiny lustre."],
+                  ["Which substance dissolves in water?", ["Sand", "Sawdust", "Sugar", "Chalk powder"], "C", "Which one disappears when stirred into tea?", "Sugar is soluble and dissolves completely in water."],
+                  ["A material you can see clearly through is:", ["Transparent", "Opaque", "Translucent", "Lustrous"], "A", "Think of a window pane.", "Transparent materials let light pass completely, so we see clearly through them."],
+                  ["Which of these is opaque?", ["Clear water", "Air", "Glass", "A wooden board"], "D", "Which one blocks all light?", "Wood does not let any light through, so it is opaque."]
+                ],
+                "MEDIUM": [
+                  ["Oil and water are mixed and left to stand. What happens?", ["They mix completely", "Oil forms a separate layer on top", "Water turns into oil", "Both evaporate"], "B", "Do oil and water mix?", "Oil does not mix with water and floats as a separate layer."],
+                  ["Why is butter paper described as translucent?", ["It lets no light through", "It shines like metal", "It lets some light through but objects look blurred", "It dissolves in water"], "C", "Hold butter paper up to a lamp.", "Some light passes, but you cannot see clearly through it."],
+                  ["Which property makes iron suitable for making nails?", ["Hardness", "Solubility", "Transparency", "Softness"], "A", "A nail must not bend or break when hammered.", "Iron is hard, so nails keep their shape."],
+                  ["An old iron gate has lost its shine. Why?", ["Iron is not a metal", "It was painted", "It became transparent", "It reacted with air and moisture"], "D", "What happens to iron left in the rain?", "Iron reacts with air and water (rusts), forming a dull coating."]
+                ],
+                "HARD": [
+                  ["Which choice of material for the object is POOR?", ["Glass for spectacles", "Cardboard for a cooking pot", "Rubber for tyres", "Plastic for a raincoat"], "B", "What would happen to cardboard on a hot stove?", "Cardboard burns and absorbs water, so it cannot be used for a cooking pot."],
+                  ["Why can fish survive in water although they do not come up to breathe?", ["Water contains no gases", "Fish do not need oxygen", "Oxygen gas dissolves slightly in water", "Fish breathe through their fins"], "C", "Gases can dissolve in water a little.", "A small amount of oxygen dissolves in water and fish absorb it with gills."],
+                  ["A sample is hard, shiny, opaque and does not dissolve in water. It is most likely:", ["A metal", "Sugar", "Cotton", "Glass"], "A", "Glass is transparent; sugar dissolves.", "Hard, lustrous, opaque and insoluble describes a metal."],
+                  ["To make a bathroom window that gives privacy but lets light in, you would use:", ["Clear glass", "Steel", "Wood", "Frosted (translucent) glass"], "D", "You want some light, but no clear view.", "Translucent frosted glass lets light in but blurs the view."]
+                ]
+              }
+            },
+            {
+              "slug": "g6-sci-separation",
+              "title": "Separation of Substances",
+              "objectives": [
+                "Explain why we need to separate the components of mixtures",
+                "Describe handpicking, winnowing, sieving and threshing",
+                "Describe sedimentation, decantation, filtration and evaporation",
+                "Choose a suitable method to separate a given mixture"
+              ],
+              "intro": "Tea leaves are strained out of tea, stones are picked out of rice, and husk is blown away from grain. Most things around us are mixtures, made of two or more substances that are not chemically joined. We separate mixtures to remove unwanted or harmful parts, to obtain useful parts, or to get a pure substance. The method we choose depends on the properties of the components, such as size, weight and whether they dissolve.",
+              "sections": [
+                [
+                  "Methods for solid mixtures",
+                  "Handpicking is used when the unwanted particles are few, large and easy to see, such as stones in rice or pulses. Threshing separates grain from the stalks by beating them, either by hand, with bullocks or using a machine. Winnowing separates heavier grain from lighter husk: the mixture is dropped from a height in a breeze, the wind carries the light husk away and the heavy grain falls in a heap. Sieving separates particles of different sizes, as when flour is sieved to remove bran, or sand is sieved at a building site to remove pebbles. A magnet can pull iron filings out of a mixture with sand."
+                ],
+                [
+                  "Methods for insoluble solids in liquids",
+                  "When muddy water is left to stand, the heavier soil particles settle at the bottom. This settling is called sedimentation, and the settled layer is the sediment. Pouring off the clear liquid without disturbing the sediment is called decantation; it is how we wash rice or pulses. To remove fine particles that do not settle quickly, we use filtration. The mixture is poured through a filter, such as filter paper in a funnel or a piece of cloth. The solid stays on the filter and the clear liquid, the filtrate, passes through. Tea is filtered through a strainer."
+                ],
+                [
+                  "Separating dissolved solids",
+                  "Salt dissolved in water cannot be removed by filtering because it passes through the filter with the water. Instead, we use evaporation: the water is heated or left in the Sun until it changes into water vapour, leaving the salt behind. Salt is obtained from sea water in this way in shallow pans along the coast. If we want to keep the water too, the vapour can be cooled so it turns back into liquid; this is condensation. Often several methods are used one after another, for example sedimentation, decantation and filtration to clean water, then evaporation to recover a dissolved solid."
+                ]
+              ],
+              "definitions": [
+                ["Mixture", "Two or more substances mixed together without forming a new substance."],
+                ["Winnowing", "Separating lighter husk from heavier grain using wind."],
+                ["Sedimentation", "Settling of heavier insoluble particles at the bottom of a liquid."],
+                ["Filtration", "Separating insoluble solids from a liquid by passing it through a filter."],
+                ["Evaporation", "Changing a liquid into vapour, which can leave a dissolved solid behind."]
+              ],
+              "examples": [
+                "Sugarcane juice is filtered through cloth to remove fibres before it is boiled to make jaggery.",
+                "Salt pans on the Gujarat coast use the Sun's heat to evaporate sea water."
+              ],
+              "worked": [
+                {
+                  "problem": "How would you obtain clean, dry salt from a mixture of salt and sand?",
+                  "steps": [
+                    "Add water and stir: the salt dissolves, the sand does not.",
+                    "Filter the mixture: sand stays on the filter paper, salty water passes through.",
+                    "Heat the filtrate until all the water evaporates.",
+                    "Salt crystals are left in the container."
+                  ],
+                  "answer": "Dissolve, filter, then evaporate the filtrate."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Cleaning muddy water",
+                "items": ["Leave to stand (sedimentation)", "Pour off clear water (decantation)", "Pass through filter paper (filtration)", "Boil to kill germs before drinking"]
+              },
+              "real_world": "Water treatment plants use these same steps on a large scale: big settling tanks for sedimentation, sand-bed filters for filtration, and chemicals to kill germs. Gold miners pan for gold by swirling river gravel in water so the heavy gold settles. Dairies separate cream from milk in machines called centrifuges.",
+              "takeaways": [
+                "We separate mixtures to remove unwanted parts or obtain useful ones.",
+                "Choose a method using the properties of the parts: size, weight, magnetism, solubility.",
+                "Sedimentation, decantation and filtration remove insoluble solids from liquids.",
+                "Evaporation recovers a dissolved solid; often several methods are combined."
+              ],
+              "practice": [
+                ["How would you separate iron filings from sand?", "Use a magnet."],
+                ["Which method removes tea leaves from tea?", "Filtration with a strainer."],
+                ["Why can't salt be separated from salt water by filtration?", "Dissolved salt passes through the filter with the water."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Stones are removed from rice by:", ["Evaporation", "Handpicking", "Filtration", "Condensation"], "B", "The stones are few and easy to see.", "Large, visible impurities can simply be picked out by hand."],
+                  ["Which method uses wind to separate husk from grain?", ["Winnowing", "Sieving", "Decantation", "Threshing"], "A", "The husk is lighter than the grain.", "Winnowing lets wind carry away the light husk."],
+                  ["Flour is separated from bran using a:", ["Magnet", "Filter paper", "Sieve", "Burner"], "C", "The particles are of different sizes.", "A sieve lets fine flour through and holds back larger bran."],
+                  ["Salt is obtained from sea water by:", ["Sieving", "Handpicking", "Winnowing", "Evaporation"], "D", "The salt is dissolved.", "Water evaporates in the Sun and salt is left behind."]
+                ],
+                "MEDIUM": [
+                  ["Pouring off clear water after mud has settled is called:", ["Filtration", "Decantation", "Evaporation", "Threshing"], "B", "The mud stays at the bottom of the container.", "Carefully pouring off the liquid above a sediment is decantation."],
+                  ["What is the liquid that passes through filter paper called?", ["Sediment", "Residue", "Filtrate", "Solvent only"], "C", "It is the part that gets filtered through.", "The clear liquid that passes through a filter is the filtrate."],
+                  ["Which mixture can be separated with a magnet?", ["Iron filings and sulphur powder", "Salt and water", "Sand and sawdust", "Oil and water"], "A", "Which substance is attracted by a magnet?", "Iron is magnetic; sulphur is not."],
+                  ["Why is grain dropped from a height during winnowing?", ["To break the grain", "To heat it", "To make it wet", "So the wind has time to blow the husk away"], "D", "Think about what the wind does while it falls.", "Falling through moving air lets the wind carry the light husk sideways."]
+                ],
+                "HARD": [
+                  ["Which sequence best obtains sugar from a mixture of sugar and sand?", ["Evaporate, then filter", "Add water, filter, evaporate the filtrate", "Handpick, then sieve", "Use a magnet, then decant"], "B", "Which part dissolves?", "Sugar dissolves; filtering removes sand; evaporation leaves sugar."],
+                  ["Chalk powder is mixed with water. Which method separates it fastest and most completely?", ["Evaporation", "Winnowing", "Filtration", "Handpicking"], "C", "The chalk does not dissolve but is very fine.", "Filtration traps fine insoluble chalk while water passes through."],
+                  ["During evaporation of salt water, the water vapour is cooled on a cold plate and collected. This extra step is:", ["Condensation", "Sedimentation", "Threshing", "Sieving"], "A", "Vapour turning back into liquid.", "Cooling vapour into liquid is condensation, which recovers the water."],
+                  ["A mixture contains sand, iron filings and salt. What is the best first step?", ["Evaporate everything", "Filter it dry", "Winnow it", "Remove the iron filings with a magnet"], "D", "Remove the component with a special property first.", "A magnet removes iron filings; then dissolve, filter and evaporate to separate salt from sand."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g6-sci-u-physics",
+      "title": "Physics: Motion and Measurement",
+      "topics": [
+        {
+          "slug": "g6-sci-t-motion-measurement",
+          "title": "Motion and Measurement",
+          "description": "Measuring length correctly with standard units and describing different kinds of motion.",
+          "lessons": [
+            {
+              "slug": "g6-sci-measurement",
+              "title": "Measuring Length",
+              "objectives": [
+                "Explain why standard units of measurement are needed",
+                "Use SI units of length and convert between them",
+                "Measure length correctly using a scale",
+                "Measure the length of a curved line"
+              ],
+              "intro": "Long ago people measured length using parts of the body: a handspan, a cubit (elbow to fingertip) or a foot. The problem was that hands and feet are different sizes, so two people measuring the same table got different answers. Trade and building need measurements that everyone agrees on. Today scientists all over the world use a common system of standard units called the International System of Units, or SI units.",
+              "sections": [
+                [
+                  "Standard units of length",
+                  "The SI unit of length is the metre (m). One metre is divided into 100 centimetres (cm), and each centimetre into 10 millimetres (mm). For long distances we use the kilometre (km), which is 1,000 metres. So 1 km = 1,000 m, 1 m = 100 cm and 1 cm = 10 mm. A measurement always has two parts: a number and a unit. Saying a table is '2' long means nothing; saying it is 2 m long is clear. Choose a unit that suits the object: millimetres for the thickness of a coin, metres for a room and kilometres for the distance between towns."
+                ],
+                [
+                  "Measuring correctly",
+                  "To measure with a ruler or a measuring tape, place it along the length to be measured, touching the object. Put the zero mark at one end of the object. If the zero mark is broken or worn, start from another full mark, such as 1 cm, and subtract it from the final reading. Keep your eye directly above the point you are reading; looking from the side gives a wrong reading, an error called parallax. Measure several times and take the average for a more reliable value."
+                ],
+                [
+                  "Measuring curved lines",
+                  "A ruler cannot follow a curve, so we use a thread. Place a knot at the start of the curve, then lay the thread carefully along the curve, holding it in place with your fingers as you go. Mark the thread where the curve ends, straighten it and measure the length of the thread with a ruler. Tailors use a flexible measuring tape for the same reason, to measure around a waist or a neck. A trundle wheel, which counts the turns of a wheel of known size, can measure long curved paths such as a running track."
+                ]
+              ],
+              "definitions": [
+                ["Measurement", "Comparing an unknown quantity with a known fixed quantity called a unit."],
+                ["Standard unit", "A unit that has the same value everywhere and is agreed by all."],
+                ["SI unit", "A unit of the International System of Units; the SI unit of length is the metre."],
+                ["Parallax error", "A wrong reading caused by not looking straight at the scale."]
+              ],
+              "examples": [
+                "A pencil 15 cm long is 150 mm or 0.15 m long.",
+                "The distance from Delhi to Agra is about 230 km, which is 2,30,000 m."
+              ],
+              "worked": [
+                {
+                  "problem": "A ruler's zero mark is broken. One end of a pencil is at 2.0 cm and the other at 13.5 cm. How long is the pencil in mm?",
+                  "steps": [
+                    "Length = final reading − initial reading = 13.5 − 2.0 = 11.5 cm.",
+                    "Convert to millimetres: 1 cm = 10 mm, so 11.5 cm = 115 mm."
+                  ],
+                  "answer": "115 mm"
+                },
+                {
+                  "problem": "Convert 3 km 250 m into metres and into centimetres.",
+                  "steps": [
+                    "3 km = 3 × 1,000 = 3,000 m, so 3 km 250 m = 3,250 m.",
+                    "1 m = 100 cm, so 3,250 m = 3,25,000 cm."
+                  ],
+                  "answer": "3,250 m = 3,25,000 cm"
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Units of length",
+                "items": ["1 km = 1,000 m", "1 m = 100 cm", "1 cm = 10 mm"]
+              },
+              "real_world": "Doctors measure a child's height to check healthy growth, carpenters measure wood to the millimetre so furniture fits together, and engineers building metro lines measure distances in kilometres. Spare parts made in one country fit machines in another only because everyone uses the same standard units.",
+              "takeaways": [
+                "Body parts are not reliable units; standard SI units are used worldwide.",
+                "The SI unit of length is the metre: 1 km = 1,000 m, 1 m = 100 cm, 1 cm = 10 mm.",
+                "Read a scale with your eye directly above the mark to avoid parallax error.",
+                "Use a thread or flexible tape to measure curved lines."
+              ],
+              "practice": [
+                ["Convert 4.5 m into centimetres.", "450 cm"],
+                ["How many millimetres are in 7.2 cm?", "72 mm"],
+                ["Why should your eye be directly above the scale?", "To avoid parallax error and get the correct reading."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What is the SI unit of length?", ["Centimetre", "Kilometre", "Metre", "Foot"], "C", "It is the base unit, between cm and km.", "The metre is the SI unit of length."],
+                  ["How many centimetres make one metre?", ["10", "100", "1,000", "60"], "B", "Think of 'centi' meaning hundredth.", "1 m = 100 cm."],
+                  ["Why are handspans not good units?", ["They differ from person to person", "They are too long", "They are SI units", "They cannot be counted"], "A", "Compare your handspan with a friend's.", "Different people have different handspans, so results disagree."],
+                  ["Which unit suits the distance between two cities?", ["Millimetre", "Centimetre", "Metre", "Kilometre"], "D", "The distance is very large.", "Long distances are measured in kilometres."]
+                ],
+                "MEDIUM": [
+                  ["How many metres are there in 2.5 km?", ["25", "250", "2,500", "25,000"], "C", "1 km = 1,000 m.", "2.5 × 1,000 = 2,500 m."],
+                  ["A ruler reading starts at 3 cm and ends at 10.4 cm. What is the length?", ["10.4 cm", "7.4 cm", "13.4 cm", "3 cm"], "B", "Subtract the starting reading.", "10.4 − 3 = 7.4 cm."],
+                  ["Which is the best way to measure the length of a curved line?", ["Use a thread and then a ruler", "Use a stopwatch", "Use a balance", "Estimate it by eye"], "A", "A ruler cannot bend.", "A thread follows the curve; its straightened length is measured with a ruler."],
+                  ["Looking at a scale from the side gives a wrong reading. This is called:", ["Zero error", "Rounding", "Estimation", "Parallax error"], "D", "It is caused by the angle of viewing.", "Viewing at an angle shifts the apparent position — parallax error."]
+                ],
+                "HARD": [
+                  ["Arrange in increasing order: 1.2 m, 115 cm, 1,250 mm.", ["1.2 m, 115 cm, 1,250 mm", "115 cm, 1.2 m, 1,250 mm", "1,250 mm, 1.2 m, 115 cm", "115 cm, 1,250 mm, 1.2 m"], "B", "Convert all to centimetres.", "1.2 m = 120 cm and 1,250 mm = 125 cm, so 115 < 120 < 125 cm."],
+                  ["A student measures a book five times: 24.1, 24.3, 24.2, 24.2, 24.2 cm. What is the best value?", ["24.1 cm", "24.3 cm", "24.2 cm", "121 cm"], "C", "Find the average.", "The total is 121.0 cm; 121.0 ÷ 5 = 24.2 cm."],
+                  ["A trundle wheel has a circumference of 1 m. It turns 340 times along a path. How long is the path?", ["340 m", "34 m", "3.4 km", "0.34 m"], "A", "Each turn covers the circumference.", "340 turns × 1 m = 340 m."],
+                  ["Which length is the same as 0.05 km?", ["5 m", "500 cm", "5,000 mm", "50 m"], "D", "Multiply by 1,000 to get metres.", "0.05 × 1,000 = 50 m."]
+                ]
+              }
+            },
+            {
+              "slug": "g6-sci-types-of-motion",
+              "title": "Types of Motion",
+              "objectives": [
+                "Explain motion as a change in position with time",
+                "Identify rectilinear, circular and periodic motion",
+                "Recognise objects showing more than one type of motion",
+                "Understand that rest and motion depend on the observer"
+              ],
+              "intro": "A bus moving down the road, the blades of a fan, a child on a swing and the Earth going round the Sun are all in motion, but they move in different ways. An object is in motion when its position changes with time compared with something around it, called a reference point. A tree at the roadside is at rest because its position does not change. Studying how things move is the start of physics.",
+              "sections": [
+                [
+                  "Motion along a straight line",
+                  "When an object moves along a straight path, its motion is called rectilinear or linear motion. A sprinter running a 100 m race on a straight track, a stone dropped from a height, a train on a straight section of track and soldiers marching in a parade all show rectilinear motion. The object may speed up or slow down, but its path is a straight line. In everyday life, few motions are perfectly straight, but many are close enough to treat as straight-line motion."
+                ],
+                [
+                  "Circular and periodic motion",
+                  "In circular motion an object moves along a circular path, staying the same distance from a centre. The tip of a clock's hand, a stone whirled on a string and a point on a rotating fan blade all move in circles. Periodic motion is motion that repeats itself after a fixed interval of time. A swinging pendulum, a vibrating guitar string, the beating heart and the hands of a clock are examples. Circular motion at a steady speed is also periodic, because the object returns to the same position after each round. A pendulum's swing is periodic but not circular."
+                ],
+                [
+                  "Combined motion and the observer",
+                  "Many objects show more than one type of motion at once. The wheel of a moving bicycle spins in a circle and also moves forward in a straight line. The Earth spins on its axis and also moves around the Sun. Whether something is at rest or in motion depends on the reference point. A passenger sitting in a moving train is at rest compared with the seat but in motion compared with a tree outside. This is why scientists always state the reference point when describing motion."
+                ]
+              ],
+              "definitions": [
+                ["Motion", "A change in the position of an object with time."],
+                ["Reference point", "A fixed object used to decide whether something has moved."],
+                ["Rectilinear motion", "Motion along a straight line."],
+                ["Circular motion", "Motion along a circular path around a centre."],
+                ["Periodic motion", "Motion that repeats itself at regular intervals of time."]
+              ],
+              "examples": [
+                "A ball rolling down a straight slide shows rectilinear motion.",
+                "The needle of a sewing machine moves up and down periodically."
+              ],
+              "worked": [
+                {
+                  "problem": "Classify the motion of (a) a bicycle wheel's centre on a straight road, (b) a point on its rim, (c) a swing.",
+                  "steps": [
+                    "(a) The centre moves forward along the road: rectilinear motion.",
+                    "(b) A rim point spins around the centre while also moving forward: circular plus rectilinear motion.",
+                    "(c) The swing moves to and fro, repeating at equal intervals: periodic motion."
+                  ],
+                  "answer": "(a) rectilinear; (b) circular and rectilinear combined; (c) periodic."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Types of motion",
+                "columns": ["Type", "Path", "Examples"],
+                "rows": [
+                  ["Rectilinear", "Straight line", "Falling stone, marching soldiers"],
+                  ["Circular", "Circle", "Fan blade tip, merry-go-round"],
+                  ["Periodic", "Repeats at equal intervals", "Pendulum, heartbeat, clock hands"]
+                ]
+              },
+              "real_world": "Clocks rely on periodic motion: the regular swing of a pendulum or the vibration of a tiny quartz crystal keeps time. Satellites move in near-circular orbits, and engineers design roller-coasters and car engines by combining straight-line, circular and periodic motions.",
+              "takeaways": [
+                "An object moves if its position changes compared with a reference point.",
+                "Rectilinear motion follows a straight line; circular motion follows a circle.",
+                "Periodic motion repeats at regular intervals.",
+                "Objects can show several kinds of motion at once, and rest or motion depends on the observer."
+              ],
+              "practice": [
+                ["Give one example each of rectilinear, circular and periodic motion.", "Falling apple; merry-go-round; pendulum."],
+                ["Is a person sitting in a moving car at rest or in motion?", "At rest relative to the car, in motion relative to the road."],
+                ["What two motions does the Earth show?", "Rotation on its axis and revolution around the Sun."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A stone dropped from a building shows:", ["Circular motion", "Rectilinear motion", "Periodic motion", "No motion"], "B", "What is the shape of its path?", "It falls along a straight line: rectilinear motion."],
+                  ["The blades of a ceiling fan show:", ["Circular motion", "Rectilinear motion", "No motion", "Random motion"], "A", "The blades turn around the centre.", "Every point on a blade moves in a circle."],
+                  ["Which is an example of periodic motion?", ["A car on a straight road", "A falling leaf", "A swinging pendulum", "A sprinter in a race"], "C", "Which repeats at regular intervals?", "A pendulum swings to and fro, repeating at equal time intervals."],
+                  ["To decide if an object moved, we compare its position with a:", ["Stopwatch", "Ruler", "Speed", "Reference point"], "D", "We need something fixed to compare with.", "Motion is judged relative to a fixed reference point."]
+                ],
+                "MEDIUM": [
+                  ["The wheel of a moving bicycle shows:", ["Only circular motion", "Both circular and rectilinear motion", "Only periodic motion", "No motion"], "B", "The wheel spins and the bicycle moves forward.", "It rotates (circular) while moving along the road (rectilinear)."],
+                  ["A passenger in a moving train is at rest relative to:", ["The trees outside", "The railway station", "The seat she is sitting on", "The Sun"], "C", "What does not change position compared with her?", "Her position does not change compared with the seat."],
+                  ["Which motion is periodic but NOT circular?", ["A vibrating guitar string", "The tip of a clock hand", "A merry-go-round", "A spinning top's edge"], "A", "Which one moves to and fro instead of round?", "A string vibrates back and forth regularly, which is periodic but not circular."],
+                  ["The Earth's motion around the Sun is:", ["Rectilinear only", "Random", "Not a motion", "Nearly circular and periodic"], "D", "It takes one year each time.", "The Earth moves in a nearly circular orbit, repeating every year."]
+                ],
+                "HARD": [
+                  ["A child sits on a merry-go-round. Relative to the child next to her on the ride, she is:", ["In motion", "At rest", "In rectilinear motion", "In periodic motion"], "B", "Do they move apart or stay together?", "Both turn together, so their positions relative to each other do not change."],
+                  ["Which statement is correct?", ["All circular motion at steady speed is also periodic", "All periodic motion is circular", "Rectilinear motion must have constant speed", "An object can show only one type of motion"], "A", "Does a fan blade return to the same place at equal intervals?", "Steady circular motion repeats each turn, so it is periodic."],
+                  ["The needle of a sewing machine moves up and down while the cloth moves forward. The needle's motion is:", ["Circular", "Rectilinear only", "Periodic", "Random"], "C", "It repeats the same up-and-down movement.", "The needle repeats the same movement at regular intervals: periodic motion."],
+                  ["Why must the reference point be stated when describing motion?", ["Because objects never move", "Because units change", "Because speed is always zero", "Because the same object can be at rest for one observer and moving for another"], "D", "Think of the passenger in the train.", "Rest and motion are relative, so the reference point must be stated."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

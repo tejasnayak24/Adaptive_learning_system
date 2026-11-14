@@ -49,6 +49,11 @@ class Question(Base):
         nullable=False
     )
 
+    # Topic-specific hint (may be shown during the quiz; never the answer)
+    # and the explanation of the correct answer (only after submission).
+    hint: Mapped[str | None] = mapped_column(Text, nullable=True)
+    explanation: Mapped[str | None] = mapped_column(Text, nullable=True)
+
     quiz = relationship(
         "Quiz",
         back_populates="questions"

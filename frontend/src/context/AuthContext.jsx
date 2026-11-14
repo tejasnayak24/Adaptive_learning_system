@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
         setUser(null)
         authService.logout()
       }
-    } catch (err) {
+    } catch {
       setUser(null)
       authService.logout()
     } finally {
@@ -57,16 +57,23 @@ export function AuthProvider({ children }) {
     }
   }
 
-  const register = async (name, email, password, age) => {
+  const register = async (name, email, password, age, grade) => {
     setLoading(true)
     try {
-      const res = await authService.register(name, email, password, age)
+      const res = await authService.register(name, email, password, age, grade)
       setLoading(false)
       return res
     } catch (err) {
       setLoading(false)
       throw err
     }
+  }
+
+  // Choose or change the student's grade; the curriculum follows it.
+  const setGrade = async (grade) => {
+    const res = await authService.setGrade(grade)
+    setUser((current) => (current ? { ...current, grade: res.data?.grade ?? grade } : current))
+    return res
   }
 
   const logout = () => {
@@ -80,7 +87,8 @@ export function AuthProvider({ children }) {
     login,
     register,
     logout,
-    refreshUser: fetchProfile
+    refreshUser: fetchProfile,
+    setGrade
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

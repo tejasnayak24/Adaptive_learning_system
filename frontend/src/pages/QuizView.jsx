@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useMonitoring } from '../context/MonitoringContext'
 import { quizService } from '../services/quizService'
 import { lessonService } from '../services/lessonService'
-import { progressService } from '../services/progressService'
-import { rlService } from '../services/rlService'
+import { telemetryService } from '../services/telemetryService'
+import {
+  CONFIDENCE_NOTE,
+  POLICY_LABELS,
+  actionInfo,
+  resolveNextStep
+} from '../utils/recommendationActions'
 
 export default function QuizView() {
   const { id } = useParams()
@@ -19,7 +25,6 @@ export default function QuizView() {
   const [quiz, setQuiz] = useState(null)
   const [lesson, setLesson] = useState(null)
   const [questions, setQuestions] = useState([])
-  const [progressHistory, setProgressHistory] = useState([])
   const [allLessons, setAllLessons] = useState([])
 
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0)
@@ -31,24 +36,31 @@ export default function QuizView() {
   const [isFinished, setIsFinished] = useState(false)
   const [results, setResults] = useState(null)
   const [rlRecommendation, setRlRecommendation] = useState(null)
+  const [breakSecondsLeft, setBreakSecondsLeft] = useState(null)
+
+  const studentId = user?.id
+  // How this attempt is taken: standard, practice, hints or challenge
+  // (set by a recommended next step). Recorded with the attempt.
+  const attemptMode = ['practice', 'hints', 'challenge'].includes(location.state?.mode)
+    ? location.state.mode
+    : 'standard'
+  const CHALLENGE_SECONDS_PER_QUESTION = 30
+  const monitoring = useMonitoring()
+  const monitoringVerified = monitoring.verified
+
+  // In-progress answers survive a reload or a camera interruption. Only
+  // answers, position, elapsed time and hints are stored -- never tokens.
+  const draftKey = studentId ? `aegis.quizDraft.${studentId}.${id}` : null
+  const [draftLoaded, setDraftLoaded] = useState(false)
 
   const resetQuizTelemetry = async () => {
     try {
-      const studentId = user?.id ?? user?.sub
-
       if (!studentId) {
-        console.warn(
-          'No student ID available for telemetry reset.'
-        )
         return
       }
 
-      await fetch(
-        `/api/attention/${studentId}/reset`,
-        {
-          method: 'POST',
-        }
-      )
+      // Start a fresh aggregation window for this attempt.
+      await telemetryService.resetSession(studentId)
     } catch (err) {
       console.error(
         'Failed to reset quiz telemetry:',
@@ -62,7 +74,24 @@ export default function QuizView() {
       try {
         setError('')
 
-        await resetQuizTelemetry()
+        let restored = null
+        try {
+          restored = draftKey ? JSON.parse(sessionStorage.getItem(draftKey) || 'null') : null
+        } catch {
+          restored = null
+        }
+
+        if (restored) {
+          setSelectedAnswers(restored.answers || {})
+          setCurrentQuestionIdx(restored.index || 0)
+          setSecondsElapsed(restored.seconds || 0)
+          setHintsRevealed(restored.hintsRevealed || {})
+          setHintsCount(restored.hints || 0)
+        } else {
+          // New attempt: start a fresh camera-measurement window.
+          await resetQuizTelemetry()
+        }
+        setDraftLoaded(true)
 
         const quizRes = await quizService.getQuiz(id)
 
@@ -101,29 +130,6 @@ export default function QuizView() {
           setAllLessons([])
         }
 
-        try {
-          const studentId = user?.id ?? user?.sub
-
-          if (studentId) {
-            const progressRes =
-              await progressService.getStudentProgress(
-                studentId
-              )
-
-            if (progressRes.success) {
-              setProgressHistory(
-                progressRes.data || []
-              )
-            }
-          }
-        } catch (progressError) {
-          console.warn(
-            'Progress could not be loaded:',
-            progressError
-          )
-
-          setProgressHistory([])
-        }
       } catch (err) {
         console.error(
           'Quiz initialization error:',
@@ -140,10 +146,16 @@ export default function QuizView() {
     }
 
     loadQuizData()
-  }, [id, user?.id, user?.sub])
+    // Runs once per quiz and student. draftKey is derived from them, and
+    // resetQuizTelemetry is recreated every render; listing it would restart
+    // the quiz (and its camera window) on every re-render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, studentId])
 
+  // The quiz timer only runs while camera monitoring is verified; any
+  // interruption pauses it.
   useEffect(() => {
-    if (loading || isFinished) {
+    if (loading || isFinished || !monitoringVerified) {
       return
     }
 
@@ -152,7 +164,32 @@ export default function QuizView() {
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [loading, isFinished])
+  }, [loading, isFinished, monitoringVerified])
+
+  useEffect(() => {
+    if (!draftKey || !draftLoaded || isFinished) return
+    try {
+      sessionStorage.setItem(
+        draftKey,
+        JSON.stringify({
+          answers: selectedAnswers,
+          index: currentQuestionIdx,
+          seconds: secondsElapsed,
+          hintsRevealed,
+          hints: hintsCount,
+        })
+      )
+    } catch {
+      // Storage unavailable: answers still live in memory.
+    }
+  }, [draftKey, draftLoaded, isFinished, selectedAnswers, currentQuestionIdx, secondsElapsed, hintsRevealed, hintsCount])
+
+  // Focus-recovery break countdown (recommended by the RL engine).
+  useEffect(() => {
+    if (breakSecondsLeft === null || breakSecondsLeft <= 0) return
+    const timer = setTimeout(() => setBreakSecondsLeft((left) => left - 1), 1000)
+    return () => clearTimeout(timer)
+  }, [breakSecondsLeft])
 
   if (loading) {
     return (
@@ -274,58 +311,6 @@ export default function QuizView() {
     }
   }
 
-  const getLatestTelemetry = async () => {
-    try {
-      const studentId = user?.id ?? user?.sub
-
-      if (!studentId) {
-        console.warn(
-          'No student ID available for telemetry.'
-        )
-
-        return null
-      }
-
-      console.log(
-        'Fetching facial telemetry for student:',
-        studentId
-      )
-
-      const response = await fetch(
-        `/api/attention/${studentId}`
-      )
-
-      if (!response.ok) {
-        console.warn(
-          'Telemetry request failed:',
-          response.status
-        )
-
-        return null
-      }
-
-      const data = await response.json()
-
-      console.log(
-        'Facial telemetry response:',
-        data
-      )
-
-      if (!data.success) {
-        return null
-      }
-
-      return data.data
-    } catch (err) {
-      console.error(
-        'Failed to fetch facial telemetry:',
-        err
-      )
-
-      return null
-    }
-  }
-
   const handleSubmitQuiz = async () => {
     if (submitLoading) {
       return
@@ -346,8 +331,6 @@ export default function QuizView() {
       return
     }
 
-    const studentId = user?.id ?? user?.sub
-
     if (!studentId) {
       alert(
         'Student session could not be identified. Please log in again.'
@@ -356,81 +339,27 @@ export default function QuizView() {
       return
     }
 
-    let correctCount = 0
-
-    questions.forEach((question) => {
-      if (
-        selectedAnswers[question.id] ===
-        question.correct_answer
-      ) {
-        correctCount += 1
-      }
-    })
-
-    const finalScore = Math.round(
-      (correctCount / questions.length) * 100
-    )
+    if (!monitoringVerified || !monitoring.sessionId) {
+      alert('Camera monitoring must be active to submit the quiz.')
+      return
+    }
 
     setSubmitLoading(true)
 
     try {
       /*
-       * Read telemetry at submission.
-       *
-       * The backend should return:
-       *
-       * attention_score
-       * yawning
-       * yawning_observed
-       * looking_away
-       * looking_away_observed
-       *
-       * We prefer the "_observed" values because they
-       * remember whether the event happened at ANY
-       * point during the quiz.
+       * The server grades the selected answers, takes the camera
+       * measurements its paired agent reported for this monitored session,
+       * stores the attempt and generates the adaptive recommendation.
        */
-      const telemetry =
-        await getLatestTelemetry()
-
-      console.log(
-        'FINAL TELEMETRY USED FOR QUIZ:',
-        telemetry
-      )
-
-      const currentAttention = telemetry?.attention_score
-
-      const currentYawning =
-        telemetry?.yawning_observed ??
-        telemetry?.yawning ??
-        false
-
-      const currentLookingAway =
-        telemetry?.looking_away_observed ??
-        telemetry?.looking_away ??
-        false
-
-      console.log(
-        'FINAL YAWNING STATE:',
-        currentYawning
-      )
-
-      console.log(
-        'FINAL LOOKING AWAY STATE:',
-        currentLookingAway
-      )
-
-      /*
-       * 1. Save quiz result to PostgreSQL.
-       */
-      const submitRes =
-        await quizService.submitQuiz({
-          studentId,
-          lessonId: lesson.id,
-          quizScore: finalScore,
-          responseTime: secondsElapsed,
-          attentionScore: currentAttention,
-          difficulty: quiz.difficulty
-        })
+      const submitRes = await quizService.submitQuiz({
+        quizId: quiz.id,
+        monitoringSessionId: monitoring.sessionId,
+        answers: selectedAnswers,
+        responseTime: secondsElapsed,
+        hintsUsed: hintsCount,
+        mode: attemptMode
+      })
 
       if (!submitRes?.success) {
         throw new Error(
@@ -438,159 +367,48 @@ export default function QuizView() {
         )
       }
 
-      /*
-       * 2. Build updated progress history.
-       */
-      const updatedProgressHistory = [
-        ...progressHistory,
+      const { grading, progress, recommendation, recommendation_status: recommendationStatus } =
         submitRes.data
-      ]
-
-      const sortedHistory = [
-        ...updatedProgressHistory
-      ].sort(
-        (a, b) =>
-          (b.id ?? 0) - (a.id ?? 0)
-      )
-
-      const previousAttempt =
-        sortedHistory[1] || {
-          quiz_score: 0
-        }
-
-      const completedLessonsCount =
-        new Set(
-          updatedProgressHistory
-            .filter(
-              (progress) =>
-                progress.completed
-            )
-            .map(
-              (progress) =>
-                progress.lesson_id
-            )
-        ).size
-
-      const attemptsCount =
-        updatedProgressHistory.filter(
-          (progress) =>
-            progress.lesson_id ===
-            lesson.id
-        ).length
-
-      /*
-       * 3. Ask the RL engine for a recommendation.
-       */
-      let rlRes = null
 
       try {
-        const payload = {
-          subject: resolvedSubject,
-          topic:
-            lesson.topic ||
-            lesson.title ||
-            quiz.title,
-          lesson:
-            lesson.title ||
-            quiz.title,
+        if (draftKey) sessionStorage.removeItem(draftKey)
+      } catch {
+        // ignore
+      }
 
-          previous_quiz_score:
-            Math.round(
-              Number(
-                previousAttempt.quiz_score || 0
-              )
-            ),
-
-          current_quiz_score:
-            finalScore,
-
-          difficulty:
-            quiz.difficulty,
-
-          response_time:
-            Number(secondsElapsed),
-
-          hints_used:
-            Number(hintsCount),
-
-          lesson_attempts:
-            Number(attemptsCount),
-
-          completed_lessons:
-            Number(
-              completedLessonsCount
-            ),
-
-          /*
-           * Persistent telemetry.
-           */
-          yawning:
-            Boolean(currentYawning),
-
-          looking_away:
-            Boolean(currentLookingAway)
-        }
-
-        if (
-          currentAttention !== null
-        ) {
-          payload.attention_score =
-            Number(currentAttention)
-        }
-
-        console.log(
-          'RL recommendation payload:',
-          payload
-        )
-
-        rlRes =
-          await rlService.getRecommendation(
-            payload
-          )
-
-        console.log(
-          'RL recommendation response:',
-          rlRes
-        )
-      } catch (rlError) {
-        console.error(
-          'RL recommendation failed:',
-          rlError
-        )
-
-        /*
-         * Do NOT crash the results page if RL fails.
-         */
+      let rlRes
+      if (recommendation) {
+        rlRes = recommendation
+      } else if (recommendationStatus === 'telemetry_unavailable') {
         rlRes = {
           error:
-            'Unable to get an adaptive recommendation: Telemetry is offline.'
+            'Camera telemetry was unavailable for this attempt, so no adaptive recommendation was generated.',
+          telemetryUnavailable: true
+        }
+      } else {
+        rlRes = {
+          error: 'The recommendation engine could not produce a recommendation for this attempt.'
         }
       }
 
-      /*
-       * 4. Store result state.
-       */
       setResults({
-        score: finalScore,
-        correctCount,
-        totalQuestions:
-          questions.length,
+        score: Math.round(grading.score),
+        correctCount: grading.correct_count,
+        totalQuestions: grading.total_questions,
+        review: grading.results,
+        mode: attemptMode,
+        challengeTarget:
+          attemptMode === 'challenge' ? questions.length * CHALLENGE_SECONDS_PER_QUESTION : null,
         timeTaken:
           secondsElapsed,
 
-        attentionUsed:
-          currentAttention,
+        // Measured by the camera agent; null = no measurement (not zero attention)
+        attentionUsed: progress.attention_score,
 
-        /*
-         * IMPORTANT:
-         * This is the persistent observed value,
-         * not just the latest frame.
-         */
-        yawned:
-          Boolean(currentYawning),
-
-        lookedAway:
-          Boolean(currentLookingAway)
+        // Observed at any point during the attempt; null = unknown.
+        yawned: progress.yawning,
+        lookedAway: progress.looking_away,
+        drowsy: progress.drowsy
       })
 
       setRlRecommendation(rlRes)
@@ -610,29 +428,40 @@ export default function QuizView() {
     }
   }
 
-  const getQuizOfDifficulty = (
-    difficulty
-  ) => {
-    /*
-     * lesson.quizzes may not exist depending on
-     * the backend response, so never call .find()
-     * directly on it.
-     */
-    const lessonQuizzes =
-      Array.isArray(lesson.quizzes)
-        ? lesson.quizzes
-        : []
 
-    const target =
-      lessonQuizzes.find(
-        (quizItem) =>
-          String(
-            quizItem.difficulty || ''
-          ).toLowerCase() ===
-          difficulty.toLowerCase()
-      )
+  // Every one of the RL engine's 11 actions maps to a concrete next step
+  // (utils/recommendationActions.js); nothing falls back to a generic button.
+  const nextStep =
+    rlRecommendation && !rlRecommendation.error
+      ? resolveNextStep(rlRecommendation.action, {
+          lessonId: lesson.id,
+          quizId: quiz.id,
+          difficulty: quiz.difficulty,
+          lessonQuizzes: Array.isArray(lesson.quizzes) ? lesson.quizzes : [],
+          navigation: lesson.navigation,
+          lessons: allLessons,
+          onResults: true
+        })
+      : null
 
-    return target || null
+  const performNextStep = (step) => {
+    if (step.kind === 'navigate') {
+      navigate(step.to, { state: { ...(step.state || {}), subject: resolvedSubject } })
+    } else if (step.kind === 'retry') {
+      // A new `attempt` remounts the quiz page with a fresh attempt.
+      navigate(step.to, {
+        state: {
+          subject: resolvedSubject,
+          attempt: Date.now(),
+          mode: step.mode,
+          recommendedAction: rlRecommendation?.action
+        }
+      })
+    } else if (step.kind === 'review') {
+      document.getElementById('answer-review')?.scrollIntoView({ behavior: 'smooth' })
+    } else if (step.kind === 'break') {
+      setBreakSecondsLeft(60)
+    }
   }
 
   const renderNextStepsButton = () => {
@@ -651,217 +480,53 @@ export default function QuizView() {
       )
     }
 
-    const action =
-      rlRecommendation.action
-
-    if (
-      action ===
-      'INCREASE_DIFFICULTY'
-    ) {
-      const currentDifficulty =
-        String(
-          quiz.difficulty
-        ).toUpperCase()
-
-      const nextDifficulty =
-        currentDifficulty === 'EASY'
-          ? 'Medium'
-          : currentDifficulty ===
-              'MEDIUM'
-            ? 'Hard'
-            : null
-
-      if (!nextDifficulty) {
-        return (
-          <Link
-            to="/subjects"
-            className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm"
-          >
-            Continue Learning →
-          </Link>
-        )
-      }
-
-      const targetQuiz =
-        getQuizOfDifficulty(
-          nextDifficulty
-        )
-
+    if (!nextStep || nextStep.kind === 'unknown') {
       return (
-        <button
-          onClick={() => {
-            if (targetQuiz?.id) {
-              navigate(
-                `/quiz/${targetQuiz.id}`
-              )
-            } else {
-              alert(
-                `No ${nextDifficulty} quiz is available for this lesson yet.`
-              )
-            }
-          }}
-          className="px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-sm shadow-md shadow-indigo-500/20 transition-all"
-        >
-          Calibrate to{' '}
-          {nextDifficulty} Quiz →
-        </button>
-      )
-    }
-
-    if (
-      action ===
-      'DECREASE_DIFFICULTY'
-    ) {
-      const currentDifficulty =
-        String(
-          quiz.difficulty
-        ).toUpperCase()
-
-      const previousDifficulty =
-        currentDifficulty === 'HARD'
-          ? 'Medium'
-          : currentDifficulty ===
-              'MEDIUM'
-            ? 'Easy'
-            : null
-
-      if (!previousDifficulty) {
-        return (
-          <Link
-            to={`/lesson/${lesson.id}`}
-            className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 font-bold text-sm"
-          >
-            Review Lesson
-          </Link>
-        )
-      }
-
-      const targetQuiz =
-        getQuizOfDifficulty(
-          previousDifficulty
-        )
-
-      return (
-        <button
-          onClick={() => {
-            if (targetQuiz?.id) {
-              navigate(
-                `/quiz/${targetQuiz.id}`
-              )
-            } else {
-              alert(
-                `No ${previousDifficulty} quiz is available for this lesson yet.`
-              )
-            }
-          }}
-          className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow-md shadow-amber-500/20 transition-all"
-        >
-          Return to{' '}
-          {previousDifficulty} Quiz →
-        </button>
-      )
-    }
-
-    /*
-     * For low scores, the recommendation is now
-     * REPEAT_LESSON, which is the preferred behavior.
-     */
-    if (
-      action ===
-      'REPEAT_LESSON'
-    ) {
-      return (
-        <button
-          onClick={() =>
-            navigate(
-              `/lesson/${lesson.id}`
-            )
-          }
-          className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 hover:bg-slate-800 text-slate-200 font-bold text-sm transition-all"
-        >
-          Review Lesson Material →
-        </button>
-      )
-    }
-
-    if (
-      action ===
-      'NEXT_LESSON'
-    ) {
-      const sortedLessons =
-        [...allLessons].sort(
-          (a, b) =>
-            (a.id ?? 0) -
-            (b.id ?? 0)
-        )
-
-      const currentIndex =
-        sortedLessons.findIndex(
-          (item) =>
-            item.id === lesson.id
-        )
-
-      const nextLesson =
-        currentIndex !== -1 &&
-        currentIndex <
-          sortedLessons.length - 1
-          ? sortedLessons[
-              currentIndex + 1
-            ]
-          : null
-
-      if (!nextLesson) {
-        return (
-          <Link
-            to="/subjects"
-            className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm"
-          >
-            Back to Subjects →
-          </Link>
-        )
-      }
-
-      return (
-        <button
-          onClick={() =>
-            navigate(
-              `/lesson/${nextLesson.id}`
-            )
-          }
-          className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-md shadow-emerald-500/20 transition-all"
-        >
-          Advance to Next Lesson →
-        </button>
-      )
-    }
-
-    if (
-      action ===
-      'FOCUS_RECOVERY'
-    ) {
-      return (
-        <button
-          onClick={() => {
-            alert(
-              'Aegis Coach Break:\n\nTake a 30-second breathing break. Look away from the screen, take a deep breath in, and slowly breathe out. When ready, continue learning.'
-            )
-
-            navigate('/subjects')
-          }}
-          className="px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm shadow-md shadow-sky-500/20 transition-all"
-        >
-          Start Focus Recovery →
-        </button>
+        <span className="text-xs font-semibold text-amber-400">
+          {actionInfo(rlRecommendation.action).label}
+        </span>
       )
     }
 
     return (
-      <Link
-        to="/subjects"
-        className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 hover:bg-slate-800 text-slate-200 font-bold text-sm"
+      <button
+        onClick={() => performNextStep(nextStep)}
+        className="px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-sm shadow-md shadow-indigo-500/20 transition-all"
       >
-        Back to Subjects
-      </Link>
+        {nextStep.label}
+      </button>
+    )
+  }
+
+  const renderBreakPanel = () => {
+    if (breakSecondsLeft === null) return null
+    const done = breakSecondsLeft <= 0
+    return (
+      <div className="rounded-2xl border border-sky-500/30 bg-sky-500/5 p-5 space-y-3">
+        <p className="text-sm font-bold text-sky-300">
+          {done ? 'Break complete. Welcome back.' : `Focus-recovery break: ${breakSecondsLeft}s`}
+        </p>
+        <p className="text-xs text-slate-300 leading-relaxed">
+          Look away from the screen at something far away, blink slowly, and take a few deep
+          breaths. Stretch your shoulders. Continue when you feel alert.
+        </p>
+        <div className="flex gap-3">
+          <Link
+            to={`/lesson/${lesson.id}`}
+            className="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs"
+          >
+            Continue learning →
+          </Link>
+          {!done && (
+            <button
+              onClick={() => setBreakSecondsLeft(null)}
+              className="px-4 py-2 rounded-xl border border-slate-700 text-slate-300 text-xs font-semibold"
+            >
+              Skip break
+            </button>
+          )}
+        </div>
+      </div>
     )
   }
 
@@ -924,7 +589,7 @@ export default function QuizView() {
                 </span>
 
                 <span className="font-semibold text-white">
-                  {hintsCount} hints
+                  {hintsCount} {hintsCount === 1 ? 'hint' : 'hints'}
                 </span>
               </div>
 
@@ -960,13 +625,13 @@ export default function QuizView() {
                 </span>
 
                 <span className="font-semibold text-white">
-                  {results.attentionUsed !==
-                  null
+                  {results.attentionUsed !== null &&
+                  results.attentionUsed !== undefined
                     ? `${Math.round(
                         results.attentionUsed *
                           100
                       )}%`
-                    : 'Unavailable'}
+                    : 'Unavailable (no camera data)'}
                 </span>
               </div>
 
@@ -982,9 +647,12 @@ export default function QuizView() {
                       : 'text-slate-400'
                   }`}
                 >
-                  {results.yawned
-                    ? 'Yes'
-                    : 'No'}
+                  {results.yawned === null ||
+                  results.yawned === undefined
+                    ? 'Unknown'
+                    : results.yawned
+                      ? 'Yes'
+                      : 'No'}
                 </span>
               </div>
 
@@ -1000,9 +668,30 @@ export default function QuizView() {
                       : 'text-slate-400'
                   }`}
                 >
-                  {results.lookedAway
-                    ? 'Looking away'
-                    : 'Stable'}
+                  {results.lookedAway === null ||
+                  results.lookedAway === undefined
+                    ? 'Unknown'
+                    : results.lookedAway
+                      ? 'Looking away'
+                      : 'Stable'}
+                </span>
+              </div>
+
+              <div className="flex justify-between text-sm">
+                <span className="text-slate-400">
+                  Possible drowsiness
+                </span>
+
+                <span
+                  className={`font-semibold ${
+                    results.drowsy ? 'text-amber-400' : 'text-slate-400'
+                  }`}
+                >
+                  {results.drowsy === null || results.drowsy === undefined
+                    ? 'Unknown'
+                    : results.drowsy
+                      ? 'Observed'
+                      : 'Not observed'}
                 </span>
               </div>
             </div>
@@ -1041,12 +730,69 @@ export default function QuizView() {
                 </span>
 
                 <span className="font-semibold text-emerald-400">
-                  PostgreSQL saved
+                  Saved by the server
                 </span>
               </div>
             </div>
           </div>
         </div>
+
+        {results.mode && results.mode !== 'standard' && (
+          <div className="rounded-2xl border border-indigo-500/30 bg-indigo-500/5 px-4 py-3 text-xs font-semibold text-indigo-300">
+            {results.mode === 'challenge'
+              ? results.timeTaken <= results.challengeTarget
+                ? `Quick challenge complete: ${results.timeTaken}s, within the ${results.challengeTarget}s target.`
+                : `Quick challenge: ${results.timeTaken}s, ${results.timeTaken - results.challengeTarget}s over the ${results.challengeTarget}s target. Try again to beat it.`
+              : results.mode === 'hints'
+                ? `Retry with hints: you used ${hintsCount} hint(s).`
+                : 'Practice attempt recorded.'}
+          </div>
+        )}
+
+        {Array.isArray(results.review) && results.review.length > 0 && (
+          <div id="answer-review" className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-md space-y-4">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
+              Answer Review
+            </h3>
+
+            <ol className="space-y-3">
+              {results.review.map((item, index) => {
+                const question = questions.find((q) => q.id === item.question_id)
+                const optionText = (letter) =>
+                  question ? question[`option_${String(letter).toLowerCase()}`] : ''
+
+                return (
+                  <li
+                    key={item.question_id}
+                    className={`rounded-2xl border p-4 text-sm ${
+                      item.is_correct
+                        ? 'border-emerald-500/20 bg-emerald-500/5'
+                        : 'border-rose-500/20 bg-rose-500/5'
+                    }`}
+                  >
+                    <p className="font-semibold text-slate-200">
+                      {index + 1}. {question?.question}
+                    </p>
+                    <p className={`mt-1 text-xs ${item.is_correct ? 'text-emerald-400' : 'text-rose-400'}`}>
+                      {item.is_correct ? '✓ Correct' : '✗ Incorrect'} — your answer: {item.selected_answer}. {optionText(item.selected_answer)}
+                    </p>
+                    {!item.is_correct && (
+                      <p className="mt-1 text-xs text-slate-400">
+                        Correct answer: {item.correct_answer}. {optionText(item.correct_answer)}
+                      </p>
+                    )}
+                    {item.explanation && (
+                      <p className="mt-2 text-xs text-slate-300 leading-relaxed">
+                        <span className="font-semibold text-indigo-300">Why: </span>
+                        {item.explanation}
+                      </p>
+                    )}
+                  </li>
+                )
+              })}
+            </ol>
+          </div>
+        )}
 
         {rlRecommendation?.error ? (
           <div className="glass-panel rounded-3xl p-8 border border-slate-900 shadow-xl space-y-6 text-center">
@@ -1055,7 +801,9 @@ export default function QuizView() {
             </p>
 
             <p className="text-xs text-slate-500">
-              The reinforcement learning engine could not resolve a recommendation.
+              {rlRecommendation.telemetryUnavailable
+                ? 'Your quiz result was saved. Start the Aegis camera agent before your next attempt to receive adaptive recommendations.'
+                : 'The recommendation engine could not resolve a recommendation.'}
             </p>
 
             <Link
@@ -1081,13 +829,16 @@ export default function QuizView() {
                   </h3>
 
                   <p className="text-xs text-slate-500 mt-1">
-                    Generated by our Q-Learning Agent mapping student engagement metrics to target content difficulty
+                    Generated by the Aegis adaptive policy from your quiz performance and camera engagement metrics
                   </p>
                 </div>
 
-                <div className="shrink-0 flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-2xl px-4 py-2">
+                <div
+                  className="shrink-0 flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-2xl px-4 py-2"
+                  title={CONFIDENCE_NOTE}
+                >
                   <span className="text-slate-500 text-[10px] uppercase font-bold tracking-wide">
-                    CONFIDENCE
+                    DECISION STRENGTH
                   </span>
 
                   <span className="text-teal-400 font-extrabold text-sm">
@@ -1109,14 +860,19 @@ export default function QuizView() {
                   </span>
 
                   <span className="text-2xl font-extrabold text-white">
-                    {String(
-                      rlRecommendation.action ||
-                        'CONTINUE'
-                    ).replace(
-                      /_/g,
-                      ' '
-                    )}
+                    {actionInfo(rlRecommendation.action).icon}{' '}
+                    {actionInfo(rlRecommendation.action).label}
                   </span>
+
+                  <span className="text-xs text-slate-400">
+                    {actionInfo(rlRecommendation.action).description}
+                  </span>
+
+                  {rlRecommendation.policy && (
+                    <span className="text-[10px] text-slate-500">
+                      Decided by: {POLICY_LABELS[rlRecommendation.policy] || rlRecommendation.policy}
+                    </span>
+                  )}
                 </div>
 
                 <div className="flex flex-col gap-1">
@@ -1135,13 +891,15 @@ export default function QuizView() {
 
               <div className="border-t border-slate-800/80 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <span className="text-xs text-slate-400">
-                  Aegis adapted the curriculum sequence. Click the button to advance:
+                  Your recommended next step:
                 </span>
 
                 <div className="flex items-center gap-3">
                   {renderNextStepsButton()}
                 </div>
               </div>
+
+              {renderBreakPanel()}
             </div>
           )
         )}
@@ -1155,8 +913,20 @@ export default function QuizView() {
       100
   )
 
+  const modeBanner = {
+    practice: 'Practice attempt recommended by your coach: focus on the questions you missed last time.',
+    hints: 'Retry with hints: press the hint button on any question you are unsure about.',
+    challenge: `Quick challenge: answer all ${questions.length} questions within ${questions.length * CHALLENGE_SECONDS_PER_QUESTION} seconds.`
+  }[attemptMode]
+
   return (
     <div className="max-w-3xl mx-auto space-y-6">
+      {modeBanner && (
+        <div className="rounded-2xl border border-indigo-500/30 bg-indigo-500/5 px-4 py-3 text-xs font-semibold text-indigo-300">
+          {modeBanner}
+        </div>
+      )}
+
       <div>
         <Link
           to={`/lesson/${lesson.id}`}
@@ -1194,6 +964,17 @@ export default function QuizView() {
               Time:{' '}
               <span className="text-white font-semibold font-mono">
                 {secondsElapsed}s
+                {attemptMode === 'challenge' && (
+                  <span
+                    className={`ml-2 ${
+                      secondsElapsed > questions.length * CHALLENGE_SECONDS_PER_QUESTION
+                        ? 'text-rose-400'
+                        : 'text-teal-400'
+                    }`}
+                  >
+                    / target {questions.length * CHALLENGE_SECONDS_PER_QUESTION}s
+                  </span>
+                )}
               </span>
             </span>
           </div>
@@ -1268,8 +1049,9 @@ export default function QuizView() {
               currentQuestion.id
             ] ? (
               <div className="text-xs text-indigo-400 leading-relaxed font-medium">
-                💡 Hint: Review the core reading sections matching the topic of{' '}
-                {lesson.topic}.
+                💡 Hint:{' '}
+                {currentQuestion.hint ||
+                  `Review the lesson section on ${lesson.topic}.`}
               </div>
             ) : (
               <button
@@ -1309,6 +1091,7 @@ export default function QuizView() {
                 }
                 disabled={
                   submitLoading ||
+                  !monitoringVerified ||
                   Object.keys(
                     selectedAnswers
                   ).length <

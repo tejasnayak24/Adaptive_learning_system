@@ -9,13 +9,14 @@ export default function Register() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [age, setAge] = useState('')
+  const [grade, setGradeChoice] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!name || !email || !password || !age) {
+    if (!name || !email || !password || !age || !grade) {
       setError('Please fill in all fields')
       return
     }
@@ -28,7 +29,7 @@ export default function Register() {
     setError('')
     setLoading(true)
     try {
-      await register(name, email, password, age)
+      await register(name, email, password, age, grade)
       // Redirect to login after successful registration
       navigate('/login', { state: { info: 'Registration successful! Please sign in.' } })
     } catch (err) {
@@ -139,6 +140,29 @@ export default function Register() {
             </div>
 
             <div>
+              <label htmlFor="grade" className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                Grade
+              </label>
+              <div className="mt-1.5">
+                <select
+                  id="grade"
+                  name="grade"
+                  required
+                  value={grade}
+                  onChange={(e) => setGradeChoice(e.target.value)}
+                  className="block w-full rounded-xl bg-slate-900/50 border border-slate-700 px-3 py-3 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"
+                >
+                  <option value="">Select your grade</option>
+                  {[6, 7, 8, 9, 10].map((g) => (
+                    <option key={g} value={g}>
+                      Grade {g}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div>
               <label htmlFor="password" className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
                 Password
               </label>
@@ -153,6 +177,9 @@ export default function Register() {
                   name="password"
                   type={showPassword ? 'text' : 'password'}
                   required
+                  minLength={8}
+                  maxLength={72}
+                  title="At least 8 characters"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="block w-full rounded-xl bg-slate-900/50 border border-slate-700 pl-10 pr-10 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"

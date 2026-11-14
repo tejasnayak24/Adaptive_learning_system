@@ -1,0 +1,617 @@
+{
+  "grade": 6,
+  "subject": "Mathematics",
+  "units": [
+    {
+      "slug": "g6-math-u-numbers",
+      "title": "Number System",
+      "topics": [
+        {
+          "slug": "g6-math-t-whole-numbers",
+          "title": "Whole Numbers and Place Value",
+          "description": "Reading, writing and comparing large numbers, and the properties that make calculation easier.",
+          "lessons": [
+            {
+              "slug": "g6-math-place-value",
+              "title": "Place Value and Large Numbers",
+              "objectives": [
+                "Read and write numbers up to crores using the Indian and international systems",
+                "Identify the place value and face value of a digit",
+                "Compare and order large numbers",
+                "Round numbers to the nearest ten, hundred or thousand"
+              ],
+              "intro": "Every number we write is built from just ten digits, 0 to 9. What gives a digit its meaning is its position, or place, in the number. In 4,52,316 the digit 5 does not mean five; it means five ten-thousands, which is 50,000. Understanding place value lets us read the population of a city, the distance to the Moon or the price of a house without getting lost in the digits.",
+              "sections": [
+                [
+                  "Places and periods",
+                  "Starting from the right, the places are ones, tens, hundreds, thousands, ten-thousands, lakhs, ten-lakhs, crores and so on. Each place is worth ten times the place to its right. To make long numbers easy to read, we group digits into periods. In the Indian system we place commas after the first three digits from the right and then after every two digits: 3,45,67,890 is read as three crore forty-five lakh sixty-seven thousand eight hundred ninety. In the international system commas come after every three digits: 34,567,890 is read as thirty-four million five hundred sixty-seven thousand eight hundred ninety. One lakh equals one hundred thousand, and one crore equals ten million."
+                ],
+                [
+                  "Place value and face value",
+                  "The face value of a digit is the digit itself. The place value is the digit multiplied by the value of its place. In 7,08,429 the face value of 8 is 8, but its place value is 8 × 1,000 = 8,000. A zero holds a place even though its value is zero; without it, 7,08,429 would collapse into 78,429, a completely different number. Writing a number in expanded form shows every place value: 7,08,429 = 7,00,000 + 8,000 + 400 + 20 + 9."
+                ],
+                [
+                  "Comparing and rounding",
+                  "To compare two whole numbers, first count the digits: the number with more digits is greater. If they have the same number of digits, compare from the left, place by place, until the digits differ. For example, 4,58,210 is greater than 4,56,999 because at the thousands place 8 is greater than 6. Rounding gives a convenient estimate. To round to the nearest thousand, look at the hundreds digit: if it is 5 or more, round up; otherwise round down. So 36,742 rounds to 37,000 and 36,421 rounds to 36,000. Estimates help us check whether an exact answer is sensible."
+                ]
+              ],
+              "definitions": [
+                ["Place value", "The value of a digit determined by its position in a number."],
+                ["Face value", "The value of the digit itself, regardless of its position."],
+                ["Period", "A group of places separated by commas to make a number easier to read."],
+                ["Expanded form", "A number written as the sum of the place values of its digits."]
+              ],
+              "examples": [
+                "In 9,30,15,204 the digit 3 is in the ten-lakhs place, so its place value is 30,00,000.",
+                "A stadium holding 1,32,000 people holds about 1,30,000 people when rounded to the nearest ten thousand."
+              ],
+              "worked": [
+                {
+                  "problem": "Write 6,04,07,350 in words and in the international system.",
+                  "steps": [
+                    "Split into Indian periods: 6 | 04 | 07 | 350 → crores | lakhs | thousands | ones.",
+                    "Read each period: six crore, four lakh, seven thousand, three hundred fifty.",
+                    "Regroup in threes from the right for the international system: 60,407,350.",
+                    "Read it: sixty million four hundred seven thousand three hundred fifty."
+                  ],
+                  "answer": "Six crore four lakh seven thousand three hundred fifty; 60,407,350 (sixty million four hundred seven thousand three hundred fifty)."
+                },
+                {
+                  "problem": "Arrange 5,08,900; 5,80,090; 5,08,090 in ascending order.",
+                  "steps": [
+                    "All have six digits and start with 5 in the lakhs place.",
+                    "Ten-thousands place: 0, 8, 0. So 5,80,090 is the largest.",
+                    "Compare 5,08,900 and 5,08,090 at the hundreds place: 9 > 0, so 5,08,900 is larger."
+                  ],
+                  "answer": "5,08,090 < 5,08,900 < 5,80,090"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Indian place-value chart for 3,45,67,890",
+                "columns": ["Crores", "Ten lakhs", "Lakhs", "Ten thousands", "Thousands", "Hundreds", "Tens", "Ones"],
+                "rows": [["3", "4", "5", "6", "7", "8", "9", "0"]]
+              },
+              "real_world": "Newspapers report populations, budgets and distances in lakhs and crores, while international websites use millions and billions. Being able to switch between the two systems helps you understand a news report about India's population (about 140 crore, or 1.4 billion) or compare the budgets of two cities.",
+              "takeaways": [
+                "Each place is worth ten times the place to its right.",
+                "Indian commas: 3 digits, then every 2; international commas: every 3 digits.",
+                "Place value = face value × value of the place.",
+                "Compare numbers by number of digits first, then digit by digit from the left."
+              ],
+              "practice": [
+                ["Write the place value of 7 in 2,74,15,006.", "70,00,000 (seventy lakh)."],
+                ["Write 8,05,060 in expanded form.", "8,00,000 + 5,000 + 60"],
+                ["Round 74,689 to the nearest thousand.", "75,000"],
+                ["How many lakhs make one crore?", "100 lakhs."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What is the place value of 6 in 4,62,915?", ["6", "6,000", "60,000", "6,00,000"], "C", "Count the places from the right: ones, tens, hundreds, thousands, ten-thousands.", "The 6 is in the ten-thousands place, so its value is 6 × 10,000 = 60,000."],
+                  ["How many lakhs make one crore?", ["10", "100", "1,000", "10,000"], "B", "One crore has two more zeros than one lakh.", "1 crore = 1,00,00,000 and 1 lakh = 1,00,000, so 1 crore = 100 lakhs."],
+                  ["Which is the face value of 9 in 3,90,208?", ["9", "90", "90,000", "9,00,000"], "A", "Face value does not depend on position.", "The face value of a digit is the digit itself, so it is 9."],
+                  ["Which number is greater: 87,654 or 1,02,345?", ["87,654", "They are equal", "Cannot be compared", "1,02,345"], "D", "Count the digits in each number first.", "1,02,345 has six digits and 87,654 has five, so 1,02,345 is greater."]
+                ],
+                "MEDIUM": [
+                  ["How is 52,08,316 written in the international system?", ["52,08,316", "5,208,316", "520,831,6", "5,20,8316"], "B", "Group the digits in threes from the right.", "Grouping in threes from the right gives 5,208,316 (five million two hundred eight thousand three hundred sixteen)."],
+                  ["Round 6,47,500 to the nearest thousand.", ["6,47,000", "6,50,000", "6,48,000", "6,40,000"], "C", "Look at the hundreds digit.", "The hundreds digit is 5, so we round up: 6,47,500 becomes 6,48,000."],
+                  ["Which is the expanded form of 3,06,040?", ["3,00,000 + 6,000 + 40", "3,00,000 + 60,000 + 40", "30,000 + 6,000 + 40", "3,00,000 + 6,000 + 400"], "A", "Zeros hold the ten-thousands, hundreds and ones places.", "3,06,040 has 3 lakhs, 6 thousands and 4 tens, so it is 3,00,000 + 6,000 + 40."],
+                  ["What is the difference between the place value and face value of 4 in 2,45,610?", ["4", "39,996", "40,000", "0"], "B", "Find the place value first, then subtract the digit.", "Place value is 40,000 and face value is 4, so the difference is 40,000 − 4 = 39,996."]
+                ],
+                "HARD": [
+                  ["Using the digits 0, 3, 5, 8, 9 once each, what is the smallest five-digit number?", ["03,589", "30,589", "35,089", "30,859"], "B", "A number cannot start with 0; put the smallest non-zero digit first.", "The smallest non-zero digit 3 goes first, then 0, 5, 8, 9 in increasing order: 30,589."],
+                  ["A number rounded to the nearest thousand is 45,000. Which could it be?", ["44,499", "45,500", "44,500", "45,501"], "C", "Find the range of numbers that round to 45,000.", "Numbers from 44,500 to 45,499 round to 45,000. Only 44,500 lies in that range."],
+                  ["How many ten-thousands are there in 3 crore?", ["300", "3,000", "30,000", "30"], "B", "Write 3 crore with all its zeros and divide by 10,000.", "3 crore = 3,00,00,000; dividing by 10,000 gives 3,000 ten-thousands."],
+                  ["Which is the correct ascending order of 9,08,765; 9,87,605; 9,08,756?", ["9,08,765 < 9,08,756 < 9,87,605", "9,87,605 < 9,08,765 < 9,08,756", "9,08,756 < 9,87,605 < 9,08,765", "9,08,756 < 9,08,765 < 9,87,605"], "D", "Compare the ten-thousands digit first, then the tens digit.", "9,87,605 is largest (8 ten-thousands). Between the others, the tens digits are 5 and 6, so 9,08,756 < 9,08,765."]
+                ]
+              }
+            },
+            {
+              "slug": "g6-math-whole-number-operations",
+              "title": "Operations and Properties of Whole Numbers",
+              "objectives": [
+                "Use the commutative, associative and distributive properties to simplify calculations",
+                "Understand the roles of 0 and 1 in addition and multiplication",
+                "Find patterns in whole numbers",
+                "Solve word problems using the four operations"
+              ],
+              "intro": "Whole numbers are 0, 1, 2, 3 and so on without end. We add, subtract, multiply and divide them every day: totalling a bill, sharing sweets or working out how many buses a school trip needs. Whole numbers follow a few simple rules, called properties. Knowing these rules lets you rearrange a calculation so that it can be done quickly in your head, and helps you check your answers.",
+              "sections": [
+                [
+                  "Commutative and associative properties",
+                  "Addition and multiplication are commutative: changing the order does not change the result, so 18 + 27 = 27 + 18 and 6 × 9 = 9 × 6. They are also associative: when adding or multiplying three numbers, the grouping does not matter, so (25 + 38) + 75 = 25 + (38 + 75). This lets us pair numbers that make friendly totals. For example, 4 × 37 × 25 is easier as (4 × 25) × 37 = 100 × 37 = 3,700. Subtraction and division are not commutative: 10 − 4 is not the same as 4 − 10, and 12 ÷ 3 is not the same as 3 ÷ 12."
+                ],
+                [
+                  "The distributive property",
+                  "Multiplication distributes over addition and subtraction: a × (b + c) = a × b + a × c. This is the idea behind mental multiplication. To find 8 × 103, think of 103 as 100 + 3: 8 × 100 + 8 × 3 = 800 + 24 = 824. To find 15 × 98, use 98 = 100 − 2: 15 × 100 − 15 × 2 = 1,500 − 30 = 1,470. The distributive property also works backwards, which helps when a common number appears: 47 × 12 + 47 × 8 = 47 × (12 + 8) = 47 × 20 = 940."
+                ],
+                [
+                  "Identities and the special number zero",
+                  "Zero is the additive identity: adding 0 leaves a number unchanged, so 563 + 0 = 563. One is the multiplicative identity: 563 × 1 = 563. Any whole number multiplied by 0 is 0. Division by zero is not defined, because no number multiplied by 0 can give a non-zero result. Whole numbers are closed under addition and multiplication (the answer is always a whole number) but not under subtraction or division: 3 − 5 and 7 ÷ 2 are not whole numbers. On the number line, adding means moving right and subtracting means moving left."
+                ]
+              ],
+              "definitions": [
+                ["Whole numbers", "The numbers 0, 1, 2, 3, … with no fractions or negatives."],
+                ["Commutative property", "Changing the order of numbers does not change a sum or product."],
+                ["Associative property", "Changing the grouping of three numbers does not change a sum or product."],
+                ["Distributive property", "a × (b + c) = a × b + a × c."],
+                ["Identity", "A number that leaves others unchanged: 0 for addition, 1 for multiplication."]
+              ],
+              "examples": [
+                "125 × 46 × 8 = (125 × 8) × 46 = 1,000 × 46 = 46,000.",
+                "A shop sells 99 pens at ₹12 each: 12 × 99 = 12 × 100 − 12 = ₹1,188."
+              ],
+              "worked": [
+                {
+                  "problem": "Find 237 + 459 + 163 + 41 using suitable rearrangement.",
+                  "steps": [
+                    "Look for pairs that make round numbers: 237 + 163 = 400 and 459 + 41 = 500.",
+                    "By the commutative and associative properties we may add these pairs first.",
+                    "400 + 500 = 900."
+                  ],
+                  "answer": "900"
+                },
+                {
+                  "problem": "A school buys 36 notebooks at ₹45 and 36 pencil boxes at ₹55. Find the total cost.",
+                  "steps": [
+                    "Total = 36 × 45 + 36 × 55.",
+                    "Use the distributive property: 36 × (45 + 55) = 36 × 100.",
+                    "36 × 100 = 3,600."
+                  ],
+                  "answer": "₹3,600"
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Which operations have which property?",
+                "items": [
+                  ["Commutative", "Addition ✓, Multiplication ✓, Subtraction ✗, Division ✗"],
+                  ["Associative", "Addition ✓, Multiplication ✓, Subtraction ✗, Division ✗"],
+                  ["Distributive", "Multiplication over addition and subtraction ✓"],
+                  ["Identity", "0 for addition, 1 for multiplication"]
+                ]
+              },
+              "real_world": "Shopkeepers and cashiers use these properties without naming them. When a bill has items costing ₹199, ₹301 and ₹50, they add 199 and 301 first to get 500. When buying 4 items at ₹25, they know the total is ₹100 straight away. Mental shortcuts like these save time and reduce mistakes.",
+              "takeaways": [
+                "Order and grouping do not matter for addition and multiplication.",
+                "Use the distributive property to break a hard product into easy parts.",
+                "0 is the additive identity, 1 is the multiplicative identity, and division by 0 is undefined.",
+                "Subtraction and division are not commutative or associative."
+              ],
+              "practice": [
+                ["Find 25 × 7 × 4 mentally.", "(25 × 4) × 7 = 700"],
+                ["Find 17 × 102 using the distributive property.", "17 × 100 + 17 × 2 = 1,734"],
+                ["Is (20 − 8) − 4 equal to 20 − (8 − 4)?", "No: 8 ≠ 16, so subtraction is not associative."],
+                ["What is 0 ÷ 9? What is 9 ÷ 0?", "0 ÷ 9 = 0; 9 ÷ 0 is not defined."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which number is the additive identity?", ["1", "10", "0", "−1"], "C", "Which number can you add without changing anything?", "Adding 0 leaves any number unchanged, so 0 is the additive identity."],
+                  ["Which equation shows the commutative property of multiplication?", ["7 × 8 = 8 × 7", "7 × 1 = 7", "7 × 0 = 0", "7 × (8 + 1) = 56 + 7"], "A", "Commutative means changing the order.", "Swapping the order of 7 and 8 gives the same product, which is the commutative property."],
+                  ["What is 5,678 × 1?", ["1", "5,679", "0", "5,678"], "D", "1 is the multiplicative identity.", "Multiplying by 1 leaves a number unchanged, so the answer is 5,678."],
+                  ["What is the smallest whole number?", ["1", "0", "−1", "There is none"], "B", "Whole numbers start from a special number.", "Whole numbers are 0, 1, 2, …, so the smallest is 0."]
+                ],
+                "MEDIUM": [
+                  ["What is 4 × 59 × 25?", ["5,900", "590", "2,360", "59,000"], "A", "Multiply 4 and 25 first.", "4 × 25 = 100, and 100 × 59 = 5,900."],
+                  ["Using the distributive property, 13 × 105 equals:", ["1,315", "1,350", "1,365", "1,305"], "C", "Split 105 into 100 + 5.", "13 × 100 + 13 × 5 = 1,300 + 65 = 1,365."],
+                  ["Which operation is NOT commutative?", ["Addition", "Subtraction", "Multiplication", "None of these"], "B", "Try swapping the numbers in 9 − 2.", "9 − 2 = 7 but 2 − 9 is not 7, so subtraction is not commutative."],
+                  ["What is 56 × 23 + 56 × 77?", ["5,600", "560", "4,312", "5,656"], "A", "Find the common number and use the distributive property backwards.", "56 × (23 + 77) = 56 × 100 = 5,600."]
+                ],
+                "HARD": [
+                  ["Which expression is equal to 999 × 47?", ["47,000 − 1", "47 × 1,000 + 47", "47,000 − 47", "46,953 − 47"], "C", "Write 999 as 1,000 − 1.", "47 × (1,000 − 1) = 47,000 − 47 = 46,953, which is the expression 47,000 − 47."],
+                  ["Whole numbers are closed under which operations?", ["Addition and subtraction", "Multiplication and division", "Subtraction and division", "Addition and multiplication"], "D", "Test with 3 − 5 and 7 ÷ 2.", "Sums and products of whole numbers are always whole numbers; differences and quotients may not be."],
+                  ["A bus seats 52 children. How many buses are needed for 1,000 children?", ["19", "20", "18", "21"], "B", "Divide and think about what to do with the remainder.", "1,000 ÷ 52 = 19 remainder 12. The 12 extra children need one more bus, so 20 buses."],
+                  ["The product of a number and 0 is added to 35. What is the result?", ["35", "0", "The number itself", "Undefined"], "A", "Anything multiplied by 0 is 0.", "The product is 0, and 0 + 35 = 35."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g6-math-u-fractions",
+      "title": "Fractions",
+      "topics": [
+        {
+          "slug": "g6-math-t-fractions",
+          "title": "Understanding Fractions",
+          "description": "What fractions mean, equivalent fractions, and adding and subtracting them.",
+          "lessons": [
+            {
+              "slug": "g6-math-fraction-basics",
+              "title": "Fractions and Equivalent Fractions",
+              "objectives": [
+                "Explain a fraction as part of a whole and as a point on the number line",
+                "Identify proper, improper and mixed fractions",
+                "Find equivalent fractions and simplify fractions to lowest terms",
+                "Compare fractions"
+              ],
+              "intro": "When a pizza is cut into 8 equal slices and you eat 3, you have eaten three-eighths of it, written 3/8. A fraction describes a part of a whole that has been divided into equal parts. The bottom number, the denominator, tells how many equal parts the whole is divided into. The top number, the numerator, tells how many of those parts we are talking about. Fractions appear in recipes, measurements, time and money.",
+              "sections": [
+                [
+                  "Kinds of fractions",
+                  "A proper fraction has a numerator smaller than its denominator, such as 3/5, so it is less than one whole. An improper fraction has a numerator greater than or equal to its denominator, such as 7/4, so it is at least one whole. An improper fraction can be written as a mixed fraction: 7/4 means 7 quarters, which is one whole (4 quarters) and 3 more quarters, so 7/4 = 1 3/4. To convert a mixed fraction back, multiply the whole number by the denominator and add the numerator: 2 1/3 = (2 × 3 + 1)/3 = 7/3. Fractions can be shown on a number line by dividing each unit into equal parts."
+                ],
+                [
+                  "Equivalent fractions",
+                  "Fractions that name the same amount are called equivalent. Half of a chocolate bar is the same amount whether it is cut into 2, 4 or 10 equal pieces: 1/2 = 2/4 = 5/10. We get an equivalent fraction by multiplying or dividing the numerator and the denominator by the same non-zero number. A fraction is in its simplest form, or lowest terms, when the numerator and denominator have no common factor other than 1. To simplify 18/24, divide both by their highest common factor 6 to get 3/4."
+                ],
+                [
+                  "Comparing fractions",
+                  "If two fractions have the same denominator, the one with the larger numerator is greater: 5/8 > 3/8. If they have the same numerator, the one with the smaller denominator is greater, because each part is bigger: 2/5 > 2/7. Otherwise, convert them to equivalent fractions with a common denominator. To compare 3/4 and 5/6, use 12 as the common denominator: 3/4 = 9/12 and 5/6 = 10/12, so 5/6 is greater. A quick check is cross-multiplication: compare 3 × 6 = 18 with 5 × 4 = 20."
+                ]
+              ],
+              "definitions": [
+                ["Numerator", "The top number of a fraction: how many equal parts are taken."],
+                ["Denominator", "The bottom number: how many equal parts make the whole."],
+                ["Equivalent fractions", "Fractions that represent the same value, such as 2/3 and 4/6."],
+                ["Simplest form", "A fraction whose numerator and denominator have no common factor except 1."]
+              ],
+              "examples": [
+                "15 minutes is 15/60 = 1/4 of an hour.",
+                "In a class of 30 students, 12 are girls: the fraction of girls is 12/30 = 2/5."
+              ],
+              "worked": [
+                {
+                  "problem": "Write 3/5 as an equivalent fraction with denominator 20, and simplify 28/42.",
+                  "steps": [
+                    "To change 5 into 20 we multiply by 4, so multiply the numerator by 4 too: 3/5 = 12/20.",
+                    "Factors of 28: 1, 2, 4, 7, 14, 28. Factors of 42: 1, 2, 3, 6, 7, 14, 21, 42. HCF = 14.",
+                    "28 ÷ 14 = 2 and 42 ÷ 14 = 3, so 28/42 = 2/3."
+                  ],
+                  "answer": "3/5 = 12/20; 28/42 = 2/3"
+                }
+              ],
+              "diagram": {
+                "type": "number_line",
+                "title": "Equivalent fractions on a number line",
+                "min": 0,
+                "max": 1,
+                "points": [[0.25, "1/4 = 2/8"], [0.5, "1/2 = 2/4 = 4/8"], [0.75, "3/4 = 6/8"]]
+              },
+              "real_world": "Recipes are full of fractions: half a cup of milk, three-quarters of a teaspoon of salt. If you double a recipe that needs 3/4 cup of sugar, you need 6/4 = 1 1/2 cups. Measuring tapes in inches are divided into halves, quarters and eighths, and carpenters constantly compare fractions such as 5/8 and 3/4.",
+              "takeaways": [
+                "A fraction is equal parts of a whole: numerator over denominator.",
+                "Multiply or divide top and bottom by the same number to get equivalent fractions.",
+                "Simplify by dividing by the HCF of numerator and denominator.",
+                "Compare fractions by converting to a common denominator."
+              ],
+              "practice": [
+                ["Convert 17/5 to a mixed fraction.", "3 2/5"],
+                ["Simplify 36/48.", "3/4 (divide by 12)"],
+                ["Which is greater, 4/7 or 5/9?", "4/7 (36/63 vs 35/63)"],
+                ["Write two fractions equivalent to 2/3.", "For example 4/6 and 10/15"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["In the fraction 5/8, what is the denominator?", ["5", "8", "13", "3"], "B", "The denominator is the bottom number.", "The denominator 8 tells us the whole is divided into 8 equal parts."],
+                  ["Which is a proper fraction?", ["9/4", "6/6", "3/7", "5/2"], "C", "In a proper fraction the numerator is smaller.", "3 is less than 7, so 3/7 is a proper fraction."],
+                  ["Which fraction is equivalent to 1/2?", ["2/3", "3/6", "1/4", "2/5"], "B", "Multiply top and bottom of 1/2 by the same number.", "1/2 × 3/3 = 3/6."],
+                  ["What fraction of an hour is 30 minutes?", ["1/2", "1/3", "1/4", "3/10"], "A", "An hour has 60 minutes.", "30/60 simplifies to 1/2."]
+                ],
+                "MEDIUM": [
+                  ["Write 2 3/4 as an improper fraction.", ["5/4", "9/4", "11/4", "23/4"], "C", "Multiply the whole number by the denominator, then add the numerator.", "2 × 4 + 3 = 11, so 2 3/4 = 11/4."],
+                  ["What is 24/36 in simplest form?", ["2/3", "4/6", "12/18", "3/4"], "A", "The HCF of 24 and 36 is 12.", "24 ÷ 12 = 2 and 36 ÷ 12 = 3, giving 2/3."],
+                  ["Which is greater: 3/5 or 4/7?", ["4/7", "They are equal", "3/5", "Cannot tell"], "C", "Use a common denominator of 35.", "3/5 = 21/35 and 4/7 = 20/35, so 3/5 is greater."],
+                  ["Find the missing number: 4/9 = ?/27", ["8", "16", "12", "13"], "C", "What was 9 multiplied by to get 27?", "9 × 3 = 27, so the numerator is 4 × 3 = 12."]
+                ],
+                "HARD": [
+                  ["Which list is in ascending order?", ["1/2, 2/5, 3/4", "2/5, 1/2, 3/4", "3/4, 1/2, 2/5", "1/2, 3/4, 2/5"], "B", "Convert all to twentieths.", "2/5 = 8/20, 1/2 = 10/20, 3/4 = 15/20, so 2/5 < 1/2 < 3/4."],
+                  ["A ribbon is cut into 12 equal pieces and 8 are used. What fraction is left, in simplest form?", ["2/3", "1/4", "1/2", "1/3"], "D", "First find how many pieces remain.", "12 − 8 = 4 pieces remain: 4/12 = 1/3."],
+                  ["Which fraction lies between 1/3 and 1/2?", ["1/4", "3/5", "2/5", "2/3"], "C", "Write the fractions as decimals or use denominator 30.", "1/3 = 10/30, 2/5 = 12/30 and 1/2 = 15/30, so 2/5 lies between them."],
+                  ["Which pair of fractions is NOT equivalent?", ["4/6 and 6/9", "3/8 and 9/24", "5/7 and 15/21", "2/5 and 5/2"], "D", "Cross-multiply each pair.", "2 × 2 = 4 but 5 × 5 = 25, so 2/5 and 5/2 are not equivalent (one is less than 1, the other more)."]
+                ]
+              }
+            },
+            {
+              "slug": "g6-math-fraction-operations",
+              "title": "Adding and Subtracting Fractions",
+              "objectives": [
+                "Add and subtract fractions with like denominators",
+                "Use the LCM to add and subtract fractions with unlike denominators",
+                "Add and subtract mixed fractions",
+                "Solve everyday problems involving fractions"
+              ],
+              "intro": "If you read 1/4 of a book on Monday and 2/4 on Tuesday, you have read 3/4 of it. Adding fractions with the same denominator is simply counting equal parts. The challenge comes when the parts are different sizes, such as adding 1/3 of a cake to 1/4 of the same cake. Before we can add, we must cut both into pieces of the same size. That common size comes from the least common multiple of the denominators.",
+              "sections": [
+                [
+                  "Like fractions",
+                  "Fractions with the same denominator are called like fractions. To add or subtract them, add or subtract the numerators and keep the denominator: 3/10 + 4/10 = 7/10 and 7/9 − 2/9 = 5/9. The denominator does not change because the size of each part does not change; only the number of parts changes. Always simplify the answer if possible: 5/12 + 1/12 = 6/12 = 1/2. If the answer is an improper fraction, you may also write it as a mixed fraction."
+                ],
+                [
+                  "Unlike fractions",
+                  "To add or subtract fractions with different denominators, first convert them into equivalent like fractions. The best common denominator is the least common multiple (LCM) of the denominators, because it keeps the numbers small. For 2/3 + 1/4, the LCM of 3 and 4 is 12. Then 2/3 = 8/12 and 1/4 = 3/12, so the sum is 11/12. For 5/6 − 3/8, the LCM of 6 and 8 is 24: 20/24 − 9/24 = 11/24. A common mistake is to add the denominators; 1/2 + 1/2 is 1, not 2/4."
+                ],
+                [
+                  "Mixed fractions",
+                  "To add mixed fractions, you can add the whole numbers and the fractions separately: 2 1/4 + 1 2/4 = 3 3/4. If the fraction parts add to more than one whole, carry it over: 1 3/5 + 2 4/5 = 3 7/5 = 4 2/5. Another reliable method is to convert both to improper fractions first: 1 1/2 − 3/4 = 3/2 − 3/4 = 6/4 − 3/4 = 3/4. Converting avoids the problem of subtracting a bigger fraction part from a smaller one."
+                ]
+              ],
+              "definitions": [
+                ["Like fractions", "Fractions with the same denominator."],
+                ["Unlike fractions", "Fractions with different denominators."],
+                ["LCM", "Least common multiple: the smallest number that is a multiple of each given number."],
+                ["Mixed fraction", "A whole number together with a proper fraction, such as 3 1/2."]
+              ],
+              "examples": [
+                "Riya walked 3/4 km to school and 1/2 km to the library: 3/4 + 2/4 = 5/4 = 1 1/4 km.",
+                "A tank is 5/6 full; after using some water it is 1/3 full. Water used = 5/6 − 2/6 = 3/6 = 1/2 of the tank."
+              ],
+              "worked": [
+                {
+                  "problem": "Find 3/4 + 5/6 − 1/3.",
+                  "steps": [
+                    "LCM of 4, 6 and 3 is 12.",
+                    "Convert: 3/4 = 9/12, 5/6 = 10/12, 1/3 = 4/12.",
+                    "Compute: 9/12 + 10/12 − 4/12 = 15/12.",
+                    "Simplify: 15/12 = 5/4 = 1 1/4."
+                  ],
+                  "answer": "1 1/4"
+                },
+                {
+                  "problem": "Subtract: 4 1/3 − 2 3/4.",
+                  "steps": [
+                    "Convert to improper fractions: 13/3 and 11/4.",
+                    "LCM of 3 and 4 is 12: 52/12 − 33/12.",
+                    "52 − 33 = 19, giving 19/12 = 1 7/12."
+                  ],
+                  "answer": "1 7/12"
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Adding unlike fractions",
+                "items": ["Find the LCM of the denominators", "Convert each fraction to that denominator", "Add or subtract the numerators", "Keep the common denominator", "Simplify the result"]
+              },
+              "real_world": "Carpenters and tailors add fractional measurements all the time. A tailor who needs 2 1/4 m of cloth for a shirt and 1 3/4 m for trousers buys 4 m in total. Cooks combine 1/2 cup and 1/3 cup of flour and need to know the total is 5/6 cup.",
+              "takeaways": [
+                "Add or subtract like fractions by working with the numerators only.",
+                "For unlike fractions, convert to a common denominator using the LCM.",
+                "Never add the denominators.",
+                "Convert mixed fractions to improper fractions when subtracting."
+              ],
+              "practice": [
+                ["Find 2/9 + 5/9.", "7/9"],
+                ["Find 3/5 + 1/4.", "17/20"],
+                ["Find 2 1/2 − 1 2/3.", "5/6"],
+                ["Sohan ate 1/3 of a pizza and Mira ate 1/4. What fraction is left?", "1 − 7/12 = 5/12"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What is 2/7 + 3/7?", ["5/14", "5/7", "6/7", "1/7"], "B", "Keep the denominator; add the numerators.", "2 + 3 = 5 sevenths, so the answer is 5/7."],
+                  ["What is 8/11 − 3/11?", ["5/11", "5/0", "11/11", "5/22"], "A", "The parts are the same size, so subtract the numerators.", "8 − 3 = 5, giving 5/11."],
+                  ["What is the LCM of 4 and 6?", ["24", "2", "12", "10"], "C", "List multiples of 6 and find the first that 4 divides.", "Multiples of 6 are 6, 12, …; 12 is the first divisible by 4."],
+                  ["What is 1/2 + 1/2?", ["2/4", "1/4", "2", "1"], "D", "Two halves make what?", "1/2 + 1/2 = 2/2 = 1 whole."]
+                ],
+                "MEDIUM": [
+                  ["What is 1/3 + 1/4?", ["2/7", "7/12", "1/7", "5/12"], "B", "Use 12 as the common denominator.", "1/3 = 4/12 and 1/4 = 3/12, so the sum is 7/12."],
+                  ["What is 5/6 − 1/4?", ["7/12", "4/2", "1/2", "11/12"], "A", "LCM of 6 and 4 is 12.", "10/12 − 3/12 = 7/12."],
+                  ["What is 1 2/5 + 2 4/5?", ["3 6/5", "3 1/5", "4 1/5", "4 2/5"], "C", "Add wholes and fractions; 6/5 is more than one whole.", "1 + 2 = 3 and 2/5 + 4/5 = 6/5 = 1 1/5, so 4 1/5."],
+                  ["A bottle holds 3/4 L. 2/5 L is poured out. How much is left?", ["1/20 L", "7/20 L", "1/4 L", "5/9 L"], "B", "Use 20 as the common denominator.", "3/4 = 15/20 and 2/5 = 8/20; 15/20 − 8/20 = 7/20 L."]
+                ],
+                "HARD": [
+                  ["What is 2/3 + 3/4 − 5/6?", ["7/12", "1/2", "5/12", "11/12"], "A", "LCM of 3, 4 and 6 is 12.", "8/12 + 9/12 − 10/12 = 7/12."],
+                  ["What is 5 1/4 − 2 2/3?", ["3 1/12", "2 7/12", "3 7/12", "2 5/12"], "B", "Convert to improper fractions with denominator 12.", "21/4 = 63/12 and 8/3 = 32/12; 63 − 32 = 31, and 31/12 = 2 7/12."],
+                  ["Asha completed 2/5 of a project and Ben completed 1/3. What fraction remains?", ["11/15", "3/8", "1/15", "4/15"], "D", "Add the parts done, then subtract from 1.", "2/5 + 1/3 = 6/15 + 5/15 = 11/15, so 15/15 − 11/15 = 4/15 remains."],
+                  ["Which sum is greater than 1?", ["1/2 + 1/3", "2/5 + 1/2", "3/4 + 1/3", "1/4 + 2/3"], "C", "Compare each sum with 1 using a common denominator.", "3/4 + 1/3 = 9/12 + 4/12 = 13/12, which is greater than 1."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g6-math-u-geometry",
+      "title": "Geometry and Measurement",
+      "topics": [
+        {
+          "slug": "g6-math-t-basic-geometry",
+          "title": "Lines, Angles and Measurement",
+          "description": "Basic geometrical ideas, angles, and perimeter and area of simple shapes.",
+          "lessons": [
+            {
+              "slug": "g6-math-lines-angles",
+              "title": "Points, Lines and Angles",
+              "objectives": [
+                "Distinguish between points, line segments, rays and lines",
+                "Name and measure angles",
+                "Classify angles as acute, right, obtuse, straight and reflex",
+                "Identify parallel, intersecting and perpendicular lines"
+              ],
+              "intro": "Look around the classroom: the corner of a book, the edge of the board and the hands of the clock all show geometrical ideas. Geometry begins with a few simple objects. A point marks an exact position and has no size. Joining points gives lines and line segments. When two rays meet at a point they form an angle. These building blocks describe every shape, from a triangle to the design of a bridge.",
+              "sections": [
+                [
+                  "Points, segments, rays and lines",
+                  "A point is shown by a dot and named with a capital letter, such as P. A line segment is the straight path between two points, A and B, and has a definite length; we write it as AB with a bar. A ray starts at one point and goes on forever in one direction, like a beam of light from a torch. A line goes on forever in both directions, so it has no length that can be measured. Two lines in a plane either meet at one point (intersecting lines) or never meet (parallel lines). Railway tracks are a good picture of parallel lines."
+                ],
+                [
+                  "Angles and their measure",
+                  "An angle is formed by two rays with a common starting point called the vertex. The rays are the arms of the angle. Angles are measured in degrees (°) with a protractor. A full turn is 360°, a half turn is 180° and a quarter turn is 90°. To measure, place the centre of the protractor on the vertex, line up the zero line with one arm, and read where the other arm crosses the scale, taking care to use the scale that starts at zero on that arm."
+                ],
+                [
+                  "Types of angles",
+                  "An acute angle is less than 90°, like the angle made by an open pair of scissors. A right angle is exactly 90°, like the corner of a page. An obtuse angle is between 90° and 180°. A straight angle is exactly 180°; its arms form a straight line. A reflex angle is between 180° and 360°. Two lines that meet at a right angle are perpendicular. Angles that add up to 90° are complementary, and angles that add up to 180° are supplementary."
+                ]
+              ],
+              "definitions": [
+                ["Ray", "Part of a line that starts at a point and extends forever in one direction."],
+                ["Vertex", "The common endpoint of the two arms of an angle."],
+                ["Right angle", "An angle of exactly 90°."],
+                ["Perpendicular lines", "Lines that intersect at a right angle."],
+                ["Supplementary angles", "Two angles whose measures add up to 180°."]
+              ],
+              "examples": [
+                "At 3 o'clock the hands of a clock make a right angle (90°).",
+                "The angle between the hands at 4 o'clock is 120°, an obtuse angle."
+              ],
+              "worked": [
+                {
+                  "problem": "Two angles are supplementary. One measures 65°. Find the other and classify both.",
+                  "steps": [
+                    "Supplementary angles add to 180°.",
+                    "Other angle = 180° − 65° = 115°.",
+                    "65° is less than 90°, so it is acute; 115° is between 90° and 180°, so it is obtuse."
+                  ],
+                  "answer": "115°; 65° is acute and 115° is obtuse."
+                },
+                {
+                  "problem": "Through how many degrees does the minute hand turn in 20 minutes?",
+                  "steps": [
+                    "In 60 minutes it makes a full turn of 360°.",
+                    "In 1 minute it turns 360° ÷ 60 = 6°.",
+                    "In 20 minutes it turns 20 × 6° = 120°."
+                  ],
+                  "answer": "120°"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Classifying angles",
+                "columns": ["Type", "Measure", "Everyday example"],
+                "rows": [
+                  ["Acute", "0° to 90°", "Open scissors"],
+                  ["Right", "90°", "Corner of a page"],
+                  ["Obtuse", "90° to 180°", "A reclining chair"],
+                  ["Straight", "180°", "A flat ruler edge"],
+                  ["Reflex", "180° to 360°", "The outside of a pizza slice cut"]
+                ]
+              },
+              "real_world": "Architects and engineers use angles to make buildings safe: walls must be perpendicular to the floor, and ramps for wheelchairs must have a gentle angle. Footballers and cricketers instinctively judge angles when they aim a pass or a shot.",
+              "takeaways": [
+                "A segment has two endpoints, a ray has one, a line has none.",
+                "Angles are measured in degrees; a full turn is 360°.",
+                "Acute < 90° = right < obtuse < 180° = straight < reflex.",
+                "Complementary angles add to 90°, supplementary angles add to 180°."
+              ],
+              "practice": [
+                ["Find the complement of 38°.", "52°"],
+                ["Classify an angle of 210°.", "Reflex"],
+                ["How many right angles make a straight angle?", "Two"],
+                ["Name an object in your room showing parallel lines.", "For example, the opposite edges of a door."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["How many endpoints does a ray have?", ["None", "One", "Two", "Three"], "B", "A ray starts somewhere and never stops.", "A ray has one endpoint and extends forever in one direction."],
+                  ["What is the measure of a right angle?", ["45°", "180°", "360°", "90°"], "D", "Think of the corner of a book.", "A right angle measures exactly 90°."],
+                  ["An angle of 35° is:", ["Acute", "Right", "Obtuse", "Reflex"], "A", "Compare it with 90°.", "35° is less than 90°, so it is acute."],
+                  ["Lines that never meet are called:", ["Perpendicular", "Intersecting", "Parallel", "Curved"], "C", "Think of railway tracks.", "Parallel lines stay the same distance apart and never meet."]
+                ],
+                "MEDIUM": [
+                  ["What is the supplement of 72°?", ["18°", "108°", "288°", "118°"], "B", "Supplementary angles add to 180°.", "180° − 72° = 108°."],
+                  ["What angle do clock hands make at 6 o'clock?", ["90°", "360°", "180°", "120°"], "C", "The hands point in opposite directions.", "Opposite directions form a straight angle of 180°."],
+                  ["Two angles are complementary and equal. What is each?", ["45°", "90°", "30°", "60°"], "A", "Complementary angles add to 90°.", "90° ÷ 2 = 45° each."],
+                  ["Which angle is obtuse?", ["89°", "90°", "180°", "135°"], "D", "Obtuse lies strictly between 90° and 180°.", "Only 135° lies between 90° and 180°."]
+                ],
+                "HARD": [
+                  ["Through how many degrees does the hour hand turn from 2 o'clock to 5 o'clock?", ["30°", "90°", "120°", "150°"], "B", "Each hour mark is 360° ÷ 12 apart.", "Each hour is 30°; 3 hours give 3 × 30° = 90°."],
+                  ["An angle is 4 times its complement. What is the angle?", ["72°", "18°", "36°", "60°"], "A", "Let the complement be x; then x + 4x = 90°.", "5x = 90° gives x = 18°, so the angle is 4 × 18° = 72°."],
+                  ["A reflex angle and an acute angle together make a full turn. If the acute angle is 40°, the reflex angle is:", ["140°", "220°", "320°", "50°"], "C", "A full turn is 360°.", "360° − 40° = 320°, which is between 180° and 360°."],
+                  ["Which statement is TRUE?", ["A line segment has no length", "A line has two endpoints", "Two perpendicular lines are parallel", "A ray cannot be measured in length"], "D", "Think about which objects go on forever.", "A ray goes on forever in one direction, so its length cannot be measured."]
+                ]
+              }
+            },
+            {
+              "slug": "g6-math-perimeter-area",
+              "title": "Perimeter and Area",
+              "objectives": [
+                "Find the perimeter of polygons, rectangles and squares",
+                "Understand area as the number of unit squares covering a surface",
+                "Use formulas for the area of rectangles and squares",
+                "Choose correct units for perimeter and area"
+              ],
+              "intro": "Imagine putting a fence around a garden and then planting grass inside it. The length of fencing you need is the perimeter, the distance around the shape. The amount of grass you need depends on the area, the amount of surface inside. Perimeter is measured in units of length such as metres, while area is measured in square units such as square metres. Mixing them up is one of the most common mistakes in mathematics.",
+              "sections": [
+                [
+                  "Perimeter",
+                  "The perimeter of any closed figure made of straight sides is the sum of the lengths of its sides. For a triangle with sides 5 cm, 7 cm and 9 cm, the perimeter is 21 cm. A rectangle has two pairs of equal sides, so its perimeter is 2 × (length + breadth). A square has four equal sides, so its perimeter is 4 × side. A regular polygon has all sides equal, so the perimeter of a regular hexagon with side 6 cm is 6 × 6 = 36 cm. Always make sure all lengths are in the same unit before adding."
+                ],
+                [
+                  "Area",
+                  "Area is the amount of surface a shape covers. We measure it by counting how many unit squares fit inside. A square with side 1 cm has an area of 1 square centimetre (1 cm²). A rectangle 5 cm long and 3 cm wide can be covered by 3 rows of 5 squares, so its area is 5 × 3 = 15 cm². In general, the area of a rectangle is length × breadth, and the area of a square is side × side. For irregular shapes drawn on squared paper, count the full squares, and count squares that are more than half covered as one."
+                ],
+                [
+                  "Same area, different perimeter",
+                  "Shapes with the same area can have different perimeters. A 6 cm × 1 cm rectangle and a 3 cm × 2 cm rectangle both have area 6 cm², but their perimeters are 14 cm and 10 cm. For a fixed area, the shape closest to a square has the smallest perimeter. This is why many farmers prefer square fields when fencing is expensive. When solving problems, ask yourself: is the question about the boundary (perimeter) or the surface (area)?"
+                ]
+              ],
+              "definitions": [
+                ["Perimeter", "The total length of the boundary of a closed figure."],
+                ["Area", "The amount of surface enclosed by a figure, measured in square units."],
+                ["Square unit", "The area of a square whose side is one unit, such as 1 cm² or 1 m²."],
+                ["Regular polygon", "A polygon whose sides are all equal and whose angles are all equal."]
+              ],
+              "examples": [
+                "A square playground of side 40 m needs 4 × 40 = 160 m of fencing.",
+                "A floor 5 m by 4 m has area 20 m², so it needs 20 tiles of size 1 m × 1 m."
+              ],
+              "worked": [
+                {
+                  "problem": "A rectangular garden is 24 m long and 15 m wide. Find the cost of fencing it at ₹30 per metre, and its area.",
+                  "steps": [
+                    "Perimeter = 2 × (24 + 15) = 2 × 39 = 78 m.",
+                    "Cost of fencing = 78 × ₹30 = ₹2,340.",
+                    "Area = 24 × 15 = 360 m²."
+                  ],
+                  "answer": "Fencing costs ₹2,340; area is 360 m²."
+                },
+                {
+                  "problem": "The perimeter of a square is 52 cm. Find its area.",
+                  "steps": [
+                    "Side = perimeter ÷ 4 = 52 ÷ 4 = 13 cm.",
+                    "Area = 13 × 13 = 169 cm²."
+                  ],
+                  "answer": "169 cm²"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Formulas to remember",
+                "columns": ["Shape", "Perimeter", "Area"],
+                "rows": [
+                  ["Rectangle (l, b)", "2(l + b)", "l × b"],
+                  ["Square (side s)", "4s", "s × s"],
+                  ["Regular polygon (n sides of s)", "n × s", "—"]
+                ]
+              },
+              "real_world": "Painters calculate the area of walls to know how much paint to buy, while electricians measure the perimeter of a room to buy enough cable to run along the walls. Before buying tiles or a carpet you need the area of the floor; before buying a border or skirting you need its perimeter.",
+              "takeaways": [
+                "Perimeter is the distance around; area is the surface inside.",
+                "Rectangle: P = 2(l + b), A = l × b. Square: P = 4s, A = s².",
+                "Perimeter uses units like m; area uses square units like m².",
+                "The same area can have different perimeters."
+              ],
+              "practice": [
+                ["Find the perimeter of a rectangle 12 cm by 7 cm.", "38 cm"],
+                ["A square has area 81 m². Find its side and perimeter.", "Side 9 m, perimeter 36 m"],
+                ["How many 2 cm × 2 cm tiles cover a 10 cm × 8 cm board?", "80 ÷ 4 = 20 tiles"],
+                ["Find the perimeter of a regular pentagon of side 7 cm.", "35 cm"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What is the perimeter of a square with side 9 cm?", ["18 cm", "36 cm", "81 cm", "27 cm"], "B", "A square has four equal sides.", "Perimeter = 4 × 9 = 36 cm."],
+                  ["What is the area of a rectangle 8 m long and 5 m wide?", ["13 m²", "26 m²", "40 m²", "40 m"], "C", "Multiply length by breadth.", "Area = 8 × 5 = 40 m², measured in square metres."],
+                  ["Which unit is suitable for measuring the area of a classroom floor?", ["m²", "m", "kg", "L"], "A", "Area needs square units.", "Area is measured in square units such as square metres (m²)."],
+                  ["The perimeter of a triangle with sides 4 cm, 5 cm and 6 cm is:", ["120 cm", "20 cm", "9 cm", "15 cm"], "D", "Add all three sides.", "4 + 5 + 6 = 15 cm."]
+                ],
+                "MEDIUM": [
+                  ["A rectangle has perimeter 30 cm and length 9 cm. What is its breadth?", ["21 cm", "6 cm", "12 cm", "3 cm"], "B", "Half the perimeter is length + breadth.", "30 ÷ 2 = 15 = 9 + breadth, so breadth = 6 cm."],
+                  ["The area of a square is 144 cm². What is its perimeter?", ["12 cm", "36 cm", "48 cm", "72 cm"], "C", "First find the side.", "Side = 12 cm because 12 × 12 = 144, so perimeter = 4 × 12 = 48 cm."],
+                  ["How many 1 m² tiles are needed for a floor 7 m by 6 m?", ["42", "26", "13", "36"], "A", "Find the area of the floor.", "7 × 6 = 42 m², so 42 tiles are needed."],
+                  ["A regular hexagon has perimeter 54 cm. What is its side?", ["6 cm", "8 cm", "18 cm", "9 cm"], "D", "A hexagon has six equal sides.", "54 ÷ 6 = 9 cm."]
+                ],
+                "HARD": [
+                  ["Which rectangle with area 36 cm² has the smallest perimeter?", ["36 cm × 1 cm", "12 cm × 3 cm", "6 cm × 6 cm", "9 cm × 4 cm"], "C", "For a fixed area, the shape closest to a square has the least perimeter.", "Perimeters are 74, 30, 24 and 26 cm, so the 6 × 6 square has the smallest."],
+                  ["A path 1 m wide runs inside the boundary of a 10 m × 8 m garden. What is the area of the path?", ["80 m²", "32 m²", "48 m²", "36 m²"], "B", "Subtract the inner rectangle's area from the whole garden.", "Inner rectangle is 8 m × 6 m = 48 m²; path = 80 − 48 = 32 m²."],
+                  ["If each side of a square is doubled, its area becomes:", ["Two times", "Four times", "Half", "Unchanged"], "B", "Try a square of side 1 and side 2.", "Area goes from s² to (2s)² = 4s², so it becomes four times larger."],
+                  ["Fencing a square field costs ₹4,800 at ₹20 per metre. What is the area of the field?", ["240 m²", "3,600 m²", "60 m²", "2,400 m²"], "B", "Find the perimeter, then the side.", "Perimeter = 4,800 ÷ 20 = 240 m; side = 60 m; area = 3,600 m²."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

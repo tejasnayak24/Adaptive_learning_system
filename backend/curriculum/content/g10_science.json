@@ -1,0 +1,783 @@
+{
+  "grade": 10,
+  "subject": "Science",
+  "units": [
+    {
+      "slug": "g10-sci-u-biology",
+      "title": "Biology: Life Processes and Control",
+      "topics": [
+        {
+          "slug": "g10-sci-t-life-processes",
+          "title": "Life Processes",
+          "description": "How the body's organ systems keep us alive, and how nerves and hormones coordinate them.",
+          "lessons": [
+            {
+              "slug": "g10-sci-human-body-systems",
+              "title": "Human Body Systems",
+              "legacy_title": "Human Body Systems",
+              "objectives": [
+                "Describe the main organ systems and their functions",
+                "Explain how the respiratory and circulatory systems work together",
+                "Explain the role of the kidneys in excretion and water balance",
+                "Explain homeostasis with examples"
+              ],
+              "intro": "Your body carries out thousands of activities every second without your noticing: breathing, digesting, pumping blood, filtering waste and keeping your temperature steady. These are life processes, and they are performed by organ systems, groups of organs working together. No system works alone. The respiratory, circulatory, digestive, excretory, nervous and endocrine systems cooperate to keep the internal environment stable, a condition called homeostasis.",
+              "sections": [
+                [
+                  "Nutrition, respiration and transport",
+                  "The digestive system breaks food into small molecules such as glucose, amino acids and fatty acids, which are absorbed through the villi of the small intestine into the blood. The respiratory system takes in oxygen and removes carbon dioxide: air passes through the nose, trachea and bronchi into millions of tiny air sacs called alveoli in the lungs, where oxygen diffuses into the blood and carbon dioxide diffuses out. The circulatory system, made of the heart, blood vessels and blood, transports oxygen, nutrients, hormones and wastes. The human heart has four chambers, keeping oxygen-rich and oxygen-poor blood separate, which allows efficient oxygen supply. Red blood cells carry oxygen using haemoglobin."
+                ],
+                [
+                  "Excretion",
+                  "Cells produce wastes such as carbon dioxide and nitrogenous waste (urea). The excretory system removes them. Each kidney contains about a million filtering units called nephrons. Blood is filtered in the nephron; useful substances such as glucose, amino acids, salts and much of the water are reabsorbed, and the remaining waste forms urine, which passes through the ureters to the urinary bladder and out through the urethra. By adjusting how much water and salt are reabsorbed, the kidneys also regulate the body's water and ion balance. If the kidneys fail, a dialysis machine can filter the blood artificially."
+                ],
+                [
+                  "Coordination and homeostasis",
+                  "The nervous system detects changes and coordinates rapid responses using electrical signals, while the endocrine system uses hormones carried in the blood for slower, longer-lasting regulation. Homeostasis means maintaining stable internal conditions despite outside changes. During exercise, muscles need more oxygen and produce more carbon dioxide, so breathing rate and heart rate both rise. When blood glucose rises after a meal, the pancreas releases insulin, which helps cells take up glucose; reduced insulin causes diabetes. When we are hot, we sweat to cool down. Damage to one system, such as a blocked artery, quickly affects others."
+                ]
+              ],
+              "definitions": [
+                ["Organ system", "A group of organs working together to perform a function."],
+                ["Alveoli", "Tiny air sacs in the lungs where gas exchange takes place."],
+                ["Nephron", "The filtering unit of the kidney."],
+                ["Homeostasis", "Maintenance of stable internal conditions in the body."],
+                ["Hormone", "A chemical messenger secreted into the blood by an endocrine gland."]
+              ],
+              "examples": [
+                "During a race, breathing and heart rate increase to supply muscles with more oxygen.",
+                "Insulin injections help people with diabetes control their blood sugar."
+              ],
+              "worked": [
+                {
+                  "problem": "Trace how oxygen from the air reaches a muscle cell in the leg.",
+                  "steps": [
+                    "Air enters through the nose and travels down the trachea and bronchi to the alveoli.",
+                    "Oxygen diffuses from the alveoli into blood capillaries and binds to haemoglobin in red blood cells.",
+                    "Blood goes to the heart, which pumps it through arteries to the leg.",
+                    "In capillaries of the muscle, oxygen diffuses into the muscle cells for respiration."
+                  ],
+                  "answer": "Lungs (alveoli) → blood (haemoglobin) → heart → arteries → capillaries → muscle cells."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Major organ systems",
+                "columns": ["System", "Main organs", "Function"],
+                "rows": [
+                  ["Digestive", "Stomach, intestines, liver", "Break down and absorb food"],
+                  ["Respiratory", "Lungs, trachea", "Exchange O₂ and CO₂"],
+                  ["Circulatory", "Heart, blood vessels", "Transport materials"],
+                  ["Excretory", "Kidneys, bladder", "Remove wastes, balance water"],
+                  ["Nervous", "Brain, spinal cord, nerves", "Rapid coordination"],
+                  ["Endocrine", "Glands such as pancreas", "Hormonal regulation"]
+                ]
+              },
+              "real_world": "Doctors measure blood pressure, blood sugar and kidney function to check how well these systems are working. Regular exercise strengthens the heart and lungs, and drinking enough water helps the kidneys maintain balance.",
+              "takeaways": [
+                "Organ systems work together; none works alone.",
+                "Gas exchange happens in the alveoli; the four-chambered heart pumps blood efficiently.",
+                "Nephrons filter blood, reabsorb useful substances and form urine.",
+                "Nerves give fast responses; hormones give slower, longer ones; together they maintain homeostasis."
+              ],
+              "practice": [
+                ["What is the filtering unit of the kidney?", "The nephron."],
+                ["Which hormone lowers blood glucose?", "Insulin."],
+                ["Why does breathing rate increase during exercise?", "To supply more oxygen and remove more carbon dioxide."]
+              ],
+              "legacy_notes": {
+                "Which system is mainly responsible for exchanging oxygen and carbon dioxide?": ["Think of the lungs.", "The respiratory system exchanges gases in the alveoli of the lungs."],
+                "Which organ pumps blood around the body?": ["It has four chambers.", "The heart pumps blood through the blood vessels."],
+                "Which system breaks food into smaller molecules for absorption?": ["It includes the stomach and intestines.", "The digestive system breaks food down so it can be absorbed."],
+                "Which organs filter wastes from the blood and help regulate water balance?": ["They contain nephrons.", "The kidneys filter blood and form urine, regulating water and salts."],
+                "Which system coordinates rapid responses to stimuli?": ["It uses electrical signals.", "The nervous system produces fast responses to stimuli."],
+                "What is the main role of red blood cells?": ["They contain haemoglobin.", "Red blood cells carry oxygen bound to haemoglobin."],
+                "Why does the small intestine have many folds and villi?": ["More surface means more…", "Folds and villi greatly increase the surface area for absorbing nutrients."],
+                "Which two systems work together most directly to deliver oxygen from the lungs to body cells?": ["One takes in oxygen, the other carries it.", "The respiratory system takes in oxygen and the circulatory system transports it."],
+                "What is homeostasis?": ["Keeping things steady inside the body.", "Homeostasis is maintaining stable internal conditions."],
+                "What is one major difference between nervous and endocrine regulation?": ["Compare speed of signals.", "Nervous signals are fast; hormones in the blood act more slowly but last longer."],
+                "During exercise, breathing and heart rate increase together. What is the main advantage of this response?": ["Muscles need more of one gas and produce more of another.", "It increases oxygen delivery to muscles and removes more carbon dioxide."],
+                "If the kidneys fail to regulate water and ions effectively, which homeostatic function is most directly affected?": ["What do kidneys balance?", "Kidneys control fluid and electrolyte balance."],
+                "A person has reduced insulin production. Which process is most directly disrupted?": ["Insulin is released by the pancreas after meals.", "Insulin regulates blood glucose; too little causes diabetes."],
+                "Why can damage to the nervous system affect many body functions at once?": ["It connects to almost every organ.", "The nervous system coordinates and controls many organs."],
+                "A blockage prevents blood from reaching a muscle. Why can the muscle lose function?": ["What does blood bring and take away?", "Without blood flow the muscle gets too little oxygen and nutrients and wastes build up."]
+              }
+            },
+            {
+              "slug": "g10-sci-control-coordination",
+              "title": "Control and Coordination",
+              "objectives": [
+                "Describe the structure of a neuron and how impulses travel",
+                "Explain reflex actions and the reflex arc",
+                "Describe the main parts of the brain and their functions",
+                "Explain hormonal control in animals and plants"
+              ],
+              "intro": "Touch a hot pan and your hand jerks back before you even feel pain. See a ball coming and you raise your hands to catch it. Every movement and response in the body is controlled and coordinated so that organs work in harmony. Animals use two systems for this: the nervous system for fast responses and the endocrine (hormonal) system for slower, longer-lasting control. Plants, which have no nerves, coordinate using chemical substances.",
+              "sections": [
+                [
+                  "Neurons and reflexes",
+                  "The nervous system is made of nerve cells called neurons. Information is picked up by receptors in sense organs and travels as electrical impulses: from the dendrites, through the cell body and along the axon. At the end of the axon, the impulse releases chemicals that cross a tiny gap, the synapse, to the next neuron. A reflex action is a rapid, automatic response to a stimulus, such as withdrawing your hand from a flame or blinking when something approaches your eye. The pathway of a reflex, called a reflex arc, runs: receptor → sensory neuron → spinal cord (relay neuron) → motor neuron → effector (muscle). Because the spinal cord responds before the brain processes the signal, reflexes are very fast and protect us from harm."
+                ],
+                [
+                  "The brain",
+                  "The brain and spinal cord form the central nervous system. The forebrain, mainly the cerebrum, is the thinking part: it handles thinking, learning, memory, voluntary actions, and has regions for sight, hearing, smell and touch. The midbrain and hindbrain control involuntary actions. The medulla in the hindbrain controls blood pressure, breathing, salivation and vomiting. The cerebellum maintains posture and balance and makes voluntary movements precise, such as walking in a straight line or picking up a pencil. The brain is protected by the skull and a fluid-filled membrane, and the spinal cord by the vertebral column."
+                ],
+                [
+                  "Hormones in animals and plants",
+                  "Endocrine glands release hormones directly into the blood. The pituitary gland releases growth hormone, and too little causes dwarfism. The thyroid gland makes thyroxin, which needs iodine; iodine deficiency causes goitre, which is why iodised salt is used. Adrenaline from the adrenal glands prepares the body for emergencies, increasing heart rate and breathing. Insulin from the pancreas regulates blood sugar. Feedback mechanisms control hormone levels: when blood sugar rises, more insulin is released. Plants respond with plant hormones: auxin makes stems bend towards light (phototropism) by causing faster growth on the shaded side; gibberellins promote stem growth; cytokinins promote cell division; and abscisic acid inhibits growth and causes leaves to wilt."
+                ]
+              ],
+              "definitions": [
+                ["Neuron", "A nerve cell that carries electrical impulses."],
+                ["Synapse", "The gap between two neurons where signals pass chemically."],
+                ["Reflex action", "A rapid, automatic response to a stimulus."],
+                ["Endocrine gland", "A gland that secretes hormones directly into the blood."],
+                ["Phototropism", "Growth of a plant part in response to light."]
+              ],
+              "examples": [
+                "Sneezing and coughing are reflex actions that clear the airways.",
+                "A plant on a windowsill bends towards the light because of auxin."
+              ],
+              "worked": [
+                {
+                  "problem": "Describe the reflex arc when you accidentally step on a sharp pin.",
+                  "steps": [
+                    "Pain receptors in the skin of the foot detect the stimulus.",
+                    "A sensory neuron carries the impulse to the spinal cord.",
+                    "A relay neuron in the spinal cord passes it to a motor neuron.",
+                    "The motor neuron carries the impulse to leg muscles (effector), which contract to lift the foot.",
+                    "The message also reaches the brain, and you feel pain slightly later."
+                  ],
+                  "answer": "Receptor → sensory neuron → spinal cord → motor neuron → leg muscle; the foot lifts before the brain registers pain."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Reflex arc",
+                "items": ["Stimulus", "Receptor", "Sensory neuron", "Spinal cord (relay neuron)", "Motor neuron", "Effector muscle", "Response"]
+              },
+              "real_world": "Doctors test the knee-jerk reflex to check the nervous system. Helmets protect the brain in accidents, iodised salt prevents goitre, and farmers use plant hormones to ripen fruit and increase crop growth.",
+              "takeaways": [
+                "Neurons carry impulses; synapses pass them on chemically.",
+                "Reflex arcs pass through the spinal cord for rapid protective responses.",
+                "The cerebrum controls thinking; the cerebellum balance; the medulla involuntary actions.",
+                "Hormones such as insulin, thyroxin and adrenaline, and plant hormones such as auxin, regulate slower responses."
+              ],
+              "practice": [
+                ["Which part of the brain maintains balance?", "Cerebellum."],
+                ["Which hormone is released in an emergency?", "Adrenaline."],
+                ["Why is iodine added to salt?", "To allow the thyroid to make thyroxin and prevent goitre."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The basic unit of the nervous system is the:", ["Nephron", "Neuron", "Alveolus", "Villus"], "B", "A nerve cell.", "The neuron is the nerve cell."],
+                  ["Which part of the brain is responsible for thinking?", ["Medulla", "Cerebellum", "Cerebrum", "Spinal cord"], "C", "The largest part of the forebrain.", "The cerebrum handles thinking and memory."],
+                  ["Which hormone regulates blood sugar?", ["Insulin", "Thyroxin", "Adrenaline", "Growth hormone"], "A", "Made by the pancreas.", "Insulin lowers blood glucose."],
+                  ["Pulling your hand away from fire is a:", ["Voluntary action", "Hormonal action", "Learned action", "Reflex action"], "D", "Automatic and quick.", "It is an automatic reflex."]
+                ],
+                "MEDIUM": [
+                  ["Iodine is needed by which gland?", ["Pituitary", "Thyroid", "Adrenal", "Pancreas"], "B", "Lack causes goitre.", "The thyroid uses iodine to make thyroxin."],
+                  ["The gap between two neurons is called a:", ["Dendrite", "Axon", "Synapse", "Receptor"], "C", "Signals cross it chemically.", "It is the synapse."],
+                  ["Which plant hormone causes stems to bend towards light?", ["Auxin", "Abscisic acid", "Cytokinin", "Ethylene only"], "A", "Phototropism.", "Auxin causes faster growth on the shaded side."],
+                  ["The cerebellum is responsible for:", ["Memory", "Hunger", "Vision", "Balance and posture"], "D", "Walking straight.", "The cerebellum maintains balance and coordination."]
+                ],
+                "HARD": [
+                  ["Why are reflex actions faster than voluntary actions?", ["They use hormones", "The response is processed in the spinal cord without waiting for the brain", "They involve more neurons", "They happen only at night"], "B", "Where is the decision made?", "The spinal cord sends the response directly."],
+                  ["Which correctly lists the reflex arc in order?", ["Effector → motor neuron → spinal cord → sensory neuron → receptor", "Receptor → motor neuron → brain → effector", "Receptor → sensory neuron → spinal cord → motor neuron → effector", "Spinal cord → receptor → effector"], "C", "Start at the receptor.", "Impulses go from receptor to effector via the spinal cord."],
+                  ["A person's heart races and breathing speeds up when a dog suddenly chases them. Which hormone is responsible?", ["Adrenaline", "Insulin", "Thyroxin", "Auxin"], "A", "The emergency hormone.", "Adrenaline prepares the body for 'fight or flight'."],
+                  ["A plant's shoot bends towards a window. Which explanation is correct?", ["Light kills cells on the lit side", "Gravity pulls the shoot", "Water collects on the lit side", "Auxin accumulates on the shaded side, making it grow faster"], "D", "Uneven growth.", "More growth on the shaded side bends the shoot towards light."]
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "slug": "g10-sci-t-environment",
+          "title": "Our Environment",
+          "description": "Ecosystems, food chains, energy flow and the sustainable management of natural resources.",
+          "lessons": [
+            {
+              "slug": "g10-sci-ecosystems",
+              "title": "Ecosystems",
+              "legacy_title": "Ecosystems",
+              "objectives": [
+                "Describe the components of an ecosystem",
+                "Explain food chains, food webs and trophic levels",
+                "Explain energy flow and the 10 per cent law",
+                "Describe human impacts such as biological magnification and eutrophication"
+              ],
+              "intro": "A pond, a forest, a grassland and even a garden are ecosystems: communities of living organisms interacting with each other and with their non-living surroundings. Energy flows through an ecosystem from the Sun to plants and then to animals, while nutrients are recycled again and again. Understanding how ecosystems work explains why removing one species can affect many others and why pollution can travel up food chains.",
+              "sections": [
+                [
+                  "Components and food chains",
+                  "An ecosystem has biotic components (plants, animals and microorganisms) and abiotic components (temperature, rainfall, soil, light and water). Producers, mainly green plants and algae, make food by photosynthesis. Consumers eat other organisms: herbivores eat plants, carnivores eat animals and omnivores eat both. Decomposers such as bacteria and fungi break down dead matter and return nutrients to the soil. A food chain shows who eats whom: grass → grasshopper → frog → snake → eagle. Each step is a trophic level. In nature, organisms usually eat several kinds of food, so food chains interconnect to form food webs."
+                ],
+                [
+                  "Energy flow",
+                  "Energy enters an ecosystem when producers capture sunlight; they capture only about 1 per cent of the sunlight falling on leaves. At each trophic level, organisms use much of the energy for their own life processes, and much is lost as heat. On average, only about 10 per cent of the energy at one level is passed to the next; this is the 10 per cent law. So if plants contain 10,000 J, herbivores receive about 1,000 J and carnivores about 100 J. This is why food chains usually have only three or four levels and why there are fewer top predators than herbivores. Energy flow is unidirectional: it does not return to the Sun or to plants."
+                ],
+                [
+                  "Human impact",
+                  "Some harmful chemicals, such as pesticides, are not broken down and accumulate in organisms. Their concentration increases at each higher trophic level, a process called biological magnification, so top consumers, including humans, have the highest levels. When fertilisers wash into lakes, they cause an excessive growth of algae, an algal bloom. When the algae die, decomposers use up dissolved oxygen in breaking them down, and fish may die; this is eutrophication. Removing a top predator can let prey populations explode and overgraze plants, affecting many levels. Biodiversity makes ecosystems more stable, because many species can fill similar roles if one declines."
+                ]
+              ],
+              "definitions": [
+                ["Ecosystem", "Living organisms interacting with each other and their physical environment."],
+                ["Trophic level", "A step in a food chain."],
+                ["10 per cent law", "Only about 10% of the energy at one trophic level passes to the next."],
+                ["Biological magnification", "Increase in concentration of a harmful chemical at higher trophic levels."],
+                ["Eutrophication", "Over-enrichment of water with nutrients causing algal blooms and oxygen loss."]
+              ],
+              "examples": [
+                "In a pond: algae → small fish → large fish → kingfisher.",
+                "DDT residues were found in much higher concentrations in birds of prey than in the fish they ate."
+              ],
+              "worked": [
+                {
+                  "problem": "Producers in a grassland capture 20,000 J of energy. How much reaches the secondary consumers (carnivores eating herbivores)?",
+                  "steps": [
+                    "Producers: 20,000 J.",
+                    "Primary consumers get about 10%: 2,000 J.",
+                    "Secondary consumers get about 10% of that: 200 J."
+                  ],
+                  "answer": "About 200 J"
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Energy flow in a food chain",
+                "items": ["Sun", "Producers (grass) 10,000 J", "Herbivores (deer) ~1,000 J", "Carnivores (tiger) ~100 J"]
+              },
+              "real_world": "Bans on persistent pesticides like DDT were based on biological magnification. Treating sewage and reducing fertiliser run-off prevent algal blooms in lakes, and protecting tigers in reserves helps whole forest ecosystems stay balanced.",
+              "takeaways": [
+                "Ecosystems include producers, consumers, decomposers and abiotic factors.",
+                "Food chains link to form food webs; each step is a trophic level.",
+                "About 10% of energy passes to the next level, so chains are short.",
+                "Biological magnification and eutrophication show how human activity disrupts ecosystems."
+              ],
+              "practice": [
+                ["What do decomposers do?", "Break down dead matter and recycle nutrients."],
+                ["If herbivores receive 500 J, how much do carnivores eating them receive?", "About 50 J."],
+                ["Why do top predators have the highest pesticide levels?", "Biological magnification."]
+              ],
+              "legacy_notes": {
+                "Which organisms are usually producers in an ecosystem?": ["They make food by photosynthesis.", "Green plants and algae are producers."],
+                "What do decomposers do?": ["Think of fungi and bacteria on dead leaves.", "Decomposers break down dead organic matter and recycle nutrients."],
+                "What is a food chain?": ["Who eats whom.", "A food chain shows the sequence of feeding and energy transfer."],
+                "Which is a nonliving factor in an ecosystem?": ["Abiotic factors are not alive.", "Temperature is a non-living (abiotic) factor."],
+                "What is a consumer?": ["It cannot make its own food.", "Consumers obtain energy by eating other organisms or organic matter."],
+                "Why is less energy available at higher trophic levels?": ["Where does energy go at each level?", "Much energy is used for life processes and lost as heat; only about 10% passes on."],
+                "What is the main role of producers in most food webs?": ["They capture sunlight.", "Producers convert light energy into chemical energy that enters the food web."],
+                "If a predator population suddenly decreases, what may initially happen to its prey population?": ["Fewer animals are eating them.", "With fewer predators, prey numbers may rise at first."],
+                "Why are decomposers important for ecosystems?": ["Nutrients must be reused.", "They recycle nutrients from dead organisms and waste back into the soil."],
+                "What is a food web different from a simple food chain?": ["Many chains linked together.", "A food web shows many interconnected feeding relationships."],
+                "If a disease greatly reduces a plant population, which effect is most likely to occur first in a simple food chain?": ["Who depends directly on the plants?", "Herbivores that eat the plants are affected first."],
+                "Why can removal of a top predator cause changes across several trophic levels?": ["Predators control prey numbers.", "Without predators, prey increase and overconsume resources lower in the web."],
+                "A lake receives excessive fertilizer runoff and experiences an algal bloom. Why can fish later die?": ["Think about decomposition and oxygen.", "Decomposers use up dissolved oxygen breaking down dead algae (eutrophication)."],
+                "Why is biodiversity often associated with ecosystem stability?": ["Many species, many backups.", "Varied species can fill roles and respond differently to disturbances."],
+                "If energy transfer between trophic levels is inefficient, why must ecosystems generally support fewer organisms at higher trophic levels?": ["The 10 per cent law.", "Less usable energy remains at higher levels to support biomass."]
+              }
+            },
+            {
+              "slug": "g10-sci-natural-resources",
+              "title": "Managing Natural Resources",
+              "objectives": [
+                "Explain the need to manage natural resources sustainably",
+                "Describe the conservation of forests and wildlife with stakeholders",
+                "Explain water harvesting and the problems of large dams",
+                "Discuss sustainable use of coal and petroleum"
+              ],
+              "intro": "Forests, water, wildlife, coal and petroleum are natural resources on which our lives and economy depend. Many are being used faster than they can be replaced, and their benefits are not always shared fairly. Managing natural resources means using them in a way that meets present needs, distributes benefits equitably and keeps them available for future generations. The three Rs, reduce, reuse and recycle, are a start, but larger choices about forests, water and energy also matter.",
+              "sections": [
+                [
+                  "Forests and wildlife",
+                  "Forests are 'biodiversity hotspots' and provide timber, fuel, fodder, medicines, clean air and water. Different stakeholders have different interests: local people who depend on forests for daily needs, the Forest Department, industries that use forest products, and wildlife and nature enthusiasts. Successful conservation involves local communities. The Chipko movement in the Garhwal Himalayas in the 1970s, in which villagers hugged trees to stop felling, showed the power of local action. In West Bengal's Arabari forest, involving villagers in protecting sal forests led to their recovery. The Bishnoi community of Rajasthan has protected trees and animals for centuries; Amrita Devi Bishnoi gave her life in 1731 to save khejri trees."
+                ],
+                [
+                  "Water for all",
+                  "Rain falls unevenly, and much is lost as run-off. Traditional water-harvesting systems capture rainwater where it falls: khadins and kundis in Rajasthan, bandharas in Maharashtra, kulhs in Himachal Pradesh, and ponds and tanks in many states. Storing water underground through recharge has advantages: it does not evaporate, does not breed mosquitoes and is protected from contamination. Large dams provide irrigation, drinking water and electricity, but they can displace large numbers of people without adequate compensation, cost huge sums, and cause deforestation and loss of biodiversity; the debates over the Sardar Sarovar dam on the Narmada show these issues."
+                ],
+                [
+                  "Coal and petroleum",
+                  "Coal and petroleum formed from the remains of living things over millions of years and cannot be replaced once used. Burning them releases carbon dioxide, a greenhouse gas causing global warming, as well as oxides of sulphur and nitrogen that cause acid rain and breathing problems. Using them sustainably means using them efficiently and reducing dependence on them: switching off lights and fans when not needed, using public transport, cycling or walking for short trips, using energy-efficient appliances and shifting to renewable sources such as solar and wind energy. Sustainable management balances development with the long-term health of the environment."
+                ]
+              ],
+              "definitions": [
+                ["Sustainable management", "Using resources so they meet present needs and remain available for the future."],
+                ["Stakeholder", "A person or group with an interest in a resource."],
+                ["Water harvesting", "Collecting and storing rainwater for later use."],
+                ["Fossil fuels", "Coal, petroleum and natural gas formed from ancient living matter."],
+                ["Chipko movement", "A 1970s movement in which villagers hugged trees to prevent felling."]
+              ],
+              "examples": [
+                "Rooftop rainwater harvesting is compulsory for new buildings in several Indian cities.",
+                "The Ganga Action Plan was launched in 1985 to reduce pollution in the river."
+              ],
+              "worked": [
+                {
+                  "problem": "Why might involving local people be more effective for forest conservation than simply fencing a forest?",
+                  "steps": [
+                    "Local people depend on the forest, so excluding them creates conflict and illegal use.",
+                    "They know the forest well and can monitor and protect it.",
+                    "If they share in benefits, such as sustainable harvesting, they have reasons to protect it.",
+                    "Examples like Arabari show forests recovering when communities are involved."
+                  ],
+                  "answer": "Communities who benefit from and understand the forest become protectors rather than opponents, making conservation lasting."
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Forest stakeholders",
+                "items": [
+                  ["Local people", "Need fuel, fodder, food and livelihood"],
+                  ["Forest Department", "Owns and manages forest land"],
+                  ["Industries", "Use timber, bamboo, raw materials"],
+                  ["Nature enthusiasts", "Want to conserve biodiversity"]
+                ]
+              },
+              "real_world": "Joint Forest Management programmes involve communities in protecting forests. Many cities require rainwater harvesting, and India is rapidly expanding solar power. Simple household actions, like fixing leaks and switching off appliances, add up across millions of homes.",
+              "takeaways": [
+                "Resources must be managed for present needs, fair distribution and future generations.",
+                "Involving local stakeholders makes forest and wildlife conservation succeed.",
+                "Traditional water harvesting and groundwater recharge are effective; large dams have benefits and costs.",
+                "Coal and petroleum are finite and polluting; use them efficiently and shift to renewables."
+              ],
+              "practice": [
+                ["What was the Chipko movement?", "Villagers hugging trees to prevent their felling in the Garhwal Himalayas."],
+                ["Give one advantage of storing water underground.", "It does not evaporate (or breed mosquitoes)."],
+                ["Give two ways to reduce fossil fuel use.", "Public transport; switching off unused appliances (also renewables)."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The Chipko movement was about protecting:", ["Rivers", "Trees", "Tigers", "Coal"], "B", "Villagers hugged them.", "It aimed to stop trees being cut."],
+                  ["Which is a fossil fuel?", ["Solar energy", "Wind", "Coal", "Water"], "C", "Formed over millions of years.", "Coal is a fossil fuel."],
+                  ["Collecting rainwater for later use is called:", ["Water harvesting", "Deforestation", "Eutrophication", "Irrigation only"], "A", "Harvesting rain.", "Water harvesting stores rainwater."],
+                  ["The three Rs are reduce, reuse and:", ["Refill", "Remove", "Repeat", "Recycle"], "D", "Turning waste into new products.", "Reduce, reuse, recycle."]
+                ],
+                "MEDIUM": [
+                  ["Which community of Rajasthan is known for protecting trees and wildlife for centuries?", ["Santhals", "Bishnois", "Todas", "Bhils"], "B", "Amrita Devi.", "The Bishnoi community protects trees and animals."],
+                  ["Burning fossil fuels releases carbon dioxide, which contributes to:", ["Ozone formation", "Soil fertility", "Global warming", "Rainwater harvesting"], "C", "A greenhouse gas.", "CO₂ traps heat and causes global warming."],
+                  ["Khadins and kundis are traditional water-harvesting structures of:", ["Rajasthan", "Kerala", "Assam", "Punjab"], "A", "A dry state.", "They are traditional systems in Rajasthan."],
+                  ["Which is an advantage of storing water underground?", ["It evaporates quickly", "It breeds mosquitoes", "It becomes salty", "It does not evaporate and is protected from contamination"], "D", "Compare with open ponds.", "Groundwater storage avoids evaporation and contamination."]
+                ],
+                "HARD": [
+                  ["Which is a criticism of large dams?", ["They provide electricity", "They can displace people without adequate compensation", "They store water", "They help irrigation"], "B", "Look for a problem.", "Large dams have displaced communities and harmed ecosystems."],
+                  ["Why did forest protection succeed in Arabari, West Bengal?", ["The forest was fenced and villagers excluded", "All trees were cut and replanted", "Villagers were involved and shared in the benefits", "Industries took over"], "C", "Stakeholder participation.", "Involving local people led to forest recovery."],
+                  ["Why are coal and petroleum considered non-sustainable?", ["They are finite and take millions of years to form", "They are renewable", "They produce no pollution", "They grow back each year"], "A", "Rate of formation vs use.", "They cannot be replaced on a human timescale."],
+                  ["Which action best supports sustainable energy use?", ["Leaving fans on all day", "Using private cars for short trips", "Burning more coal", "Using public transport and solar power"], "D", "Reduce fossil fuel dependence.", "Public transport and solar power reduce fossil fuel use."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g10-sci-u-chemistry",
+      "title": "Chemistry: Chemical Reactions",
+      "topics": [
+        {
+          "slug": "g10-sci-t-chemical-reactions",
+          "title": "Chemical Reactions and Acids, Bases and Salts",
+          "description": "Writing and balancing equations, types of reactions, and the chemistry of acids, bases and salts.",
+          "lessons": [
+            {
+              "slug": "g10-sci-chemical-equations",
+              "title": "Chemical Reactions and Equations",
+              "objectives": [
+                "Identify signs of a chemical reaction",
+                "Write and balance chemical equations",
+                "Classify reactions: combination, decomposition, displacement, double displacement, redox",
+                "Explain corrosion and rancidity"
+              ],
+              "intro": "When milk turns sour, iron rusts or food is digested, new substances are formed. These are chemical reactions. We recognise them by changes such as a change in state or colour, the release of a gas, or a change in temperature. Chemists describe reactions using chemical equations, which show reactants turning into products, with the same number of atoms of each element on both sides because mass is conserved.",
+              "sections": [
+                [
+                  "Writing and balancing equations",
+                  "A word equation names the reactants and products: magnesium + oxygen → magnesium oxide. A chemical equation uses formulae: Mg + O₂ → MgO. This is unbalanced because there are two oxygen atoms on the left and one on the right. Balancing means adjusting the coefficients (numbers in front of formulae), never the subscripts: 2Mg + O₂ → 2MgO. Now there are two Mg and two O atoms on each side. States can be shown with (s), (l), (g) and (aq), and conditions such as heat or a catalyst can be written above the arrow. Balanced equations obey the law of conservation of mass."
+                ],
+                [
+                  "Types of reactions",
+                  "In a combination reaction, two or more substances form one product: CaO + H₂O → Ca(OH)₂, which also releases heat (exothermic). In a decomposition reaction, one substance breaks into two or more: CaCO₃ → CaO + CO₂ on heating (thermal decomposition); silver chloride decomposes in sunlight (photolysis); water decomposes by electricity (electrolysis). In a displacement reaction, a more reactive element displaces a less reactive one: Fe + CuSO₄ → FeSO₄ + Cu. In a double displacement reaction, ions are exchanged, often forming a precipitate: Na₂SO₄ + BaCl₂ → BaSO₄↓ + 2NaCl. Reactions that release heat are exothermic, such as respiration; those that absorb heat are endothermic."
+                ],
+                [
+                  "Oxidation, reduction and everyday effects",
+                  "Oxidation is the gain of oxygen (or loss of hydrogen) by a substance; reduction is the loss of oxygen (or gain of hydrogen). Both happen together in redox reactions: CuO + H₂ → Cu + H₂O, where copper oxide is reduced and hydrogen is oxidised. Corrosion is the slow attack of metals by air, moisture or acids: iron rusts, silver turns black and copper develops a green coating. It is prevented by painting, oiling and galvanising. Rancidity is the oxidation of fats and oils in food, giving a bad taste and smell; it is slowed by adding antioxidants, storing in airtight containers or flushing packets with nitrogen, as in chip packets."
+                ]
+              ],
+              "definitions": [
+                ["Chemical equation", "A symbolic representation of a reaction using formulae."],
+                ["Balanced equation", "An equation with equal numbers of each type of atom on both sides."],
+                ["Decomposition reaction", "A reaction in which one substance breaks into simpler substances."],
+                ["Oxidation", "Gain of oxygen or loss of hydrogen."],
+                ["Rancidity", "Oxidation of fats and oils causing unpleasant taste and smell."]
+              ],
+              "examples": [
+                "Burning natural gas: CH₄ + 2O₂ → CO₂ + 2H₂O (exothermic).",
+                "Chip packets are filled with nitrogen to prevent rancidity."
+              ],
+              "worked": [
+                {
+                  "problem": "Balance: Fe + H₂O → Fe₃O₄ + H₂.",
+                  "steps": [
+                    "Balance Fe: put 3 before Fe → 3Fe.",
+                    "Balance O: Fe₃O₄ has 4 O, so put 4 before H₂O → 4H₂O.",
+                    "Now there are 8 H on the left, so put 4 before H₂ → 4H₂.",
+                    "Check: Fe 3 = 3, O 4 = 4, H 8 = 8."
+                  ],
+                  "answer": "3Fe + 4H₂O → Fe₃O₄ + 4H₂"
+                },
+                {
+                  "problem": "Identify the type of reaction: Zn + 2HCl → ZnCl₂ + H₂.",
+                  "steps": [
+                    "Zinc replaces hydrogen in hydrochloric acid.",
+                    "One element displaces another from a compound."
+                  ],
+                  "answer": "Displacement reaction"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Types of chemical reactions",
+                "columns": ["Type", "General form", "Example"],
+                "rows": [
+                  ["Combination", "A + B → AB", "2H₂ + O₂ → 2H₂O"],
+                  ["Decomposition", "AB → A + B", "2H₂O → 2H₂ + O₂ (electrolysis)"],
+                  ["Displacement", "A + BC → AC + B", "Fe + CuSO₄ → FeSO₄ + Cu"],
+                  ["Double displacement", "AB + CD → AD + CB", "Na₂SO₄ + BaCl₂ → BaSO₄ + 2NaCl"],
+                  ["Redox", "Oxidation + reduction together", "CuO + H₂ → Cu + H₂O"]
+                ]
+              },
+              "real_world": "Industries balance equations to calculate the raw materials needed, whitewashing walls uses the combination of slaked lime with carbon dioxide, and food packaging uses nitrogen and antioxidants to prevent rancidity. Rust prevention saves crores in maintenance of bridges and vehicles.",
+              "takeaways": [
+                "Chemical reactions form new substances; equations must be balanced.",
+                "Balance by changing coefficients, never subscripts.",
+                "Main types: combination, decomposition, displacement, double displacement and redox.",
+                "Corrosion and rancidity are everyday oxidation reactions that can be prevented."
+              ],
+              "practice": [
+                ["Balance H₂ + O₂ → H₂O.", "2H₂ + O₂ → 2H₂O"],
+                ["What type of reaction is CaCO₃ → CaO + CO₂?", "Thermal decomposition."],
+                ["Why are chip packets flushed with nitrogen?", "To prevent oxidation (rancidity) of oils."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which is a sign of a chemical reaction?", ["Change in shape only", "Evolution of a gas", "Breaking into pieces", "Melting of ice"], "B", "New substance formed.", "Release of a gas indicates a chemical change."],
+                  ["When balancing an equation, we change the:", ["Subscripts", "Formulae", "Coefficients", "Symbols"], "C", "Numbers in front.", "Only coefficients are adjusted."],
+                  ["CaO + H₂O → Ca(OH)₂ is a:", ["Combination reaction", "Decomposition reaction", "Displacement reaction", "Double displacement reaction"], "A", "Two substances form one.", "It is a combination reaction."],
+                  ["Rusting of iron is an example of:", ["Rancidity", "Neutralisation", "Sublimation", "Corrosion"], "D", "Metals attacked by air and moisture.", "Rusting is corrosion of iron."]
+                ],
+                "MEDIUM": [
+                  ["Which equation is balanced?", ["H₂ + O₂ → H₂O", "2H₂ + O₂ → 2H₂O", "H₂ + 2O₂ → H₂O", "2H₂ + 2O₂ → H₂O"], "B", "Count H and O atoms.", "4 H and 2 O on both sides."],
+                  ["Fe + CuSO₄ → FeSO₄ + Cu is a:", ["Combination reaction", "Decomposition reaction", "Displacement reaction", "Double displacement reaction"], "C", "Iron replaces copper.", "A more reactive metal displaces a less reactive one."],
+                  ["In CuO + H₂ → Cu + H₂O, the substance oxidised is:", ["H₂", "CuO", "Cu", "H₂O"], "A", "Which gains oxygen?", "Hydrogen gains oxygen to form water."],
+                  ["Reactions that release heat are called:", ["Endothermic", "Photochemical", "Reversible", "Exothermic"], "D", "'Exo' means out.", "Exothermic reactions release heat."]
+                ],
+                "HARD": [
+                  ["Balance: Al + O₂ → Al₂O₃. The coefficients are:", ["2, 3, 1", "4, 3, 2", "1, 1, 1", "2, 1, 1"], "B", "Balance O first with the LCM of 2 and 3.", "4Al + 3O₂ → 2Al₂O₃."],
+                  ["Silver chloride turns grey in sunlight. This is:", ["Thermal decomposition", "Combination", "Photolytic decomposition", "Double displacement"], "C", "Light breaks it down.", "Sunlight decomposes AgCl to silver and chlorine."],
+                  ["Mixing sodium sulphate and barium chloride solutions gives a white precipitate. The reaction type is:", ["Double displacement", "Combination", "Decomposition", "Redox only"], "A", "Ions swap partners.", "Ions are exchanged forming insoluble BaSO₄."],
+                  ["Why do chips manufacturers fill packets with nitrogen?", ["To add weight", "To make chips crispier by heating", "To react with oil", "To prevent oxidation of oils and fats"], "D", "Nitrogen is unreactive.", "Removing oxygen prevents rancidity."]
+                ]
+              }
+            },
+            {
+              "slug": "g10-sci-acids-bases-salts",
+              "title": "Acids, Bases and Salts",
+              "objectives": [
+                "Describe the chemical properties of acids and bases",
+                "Use the pH scale and indicators",
+                "Explain the importance of pH in everyday life",
+                "Describe the preparation and uses of common salts"
+              ],
+              "intro": "Acids and bases are among the most important groups of chemicals. In earlier grades you learnt that acids are sour and turn blue litmus red, while bases are bitter and turn red litmus blue. Now we look more closely at how they react, how their strength is measured using the pH scale, and how important salts such as baking soda, washing soda, bleaching powder and plaster of Paris are made and used.",
+              "sections": [
+                [
+                  "Reactions of acids and bases",
+                  "Acids react with many metals to give a salt and hydrogen gas: Zn + H₂SO₄ → ZnSO₄ + H₂. Acids react with metal carbonates and hydrogencarbonates to give a salt, water and carbon dioxide, which turns lime water milky. Acids and bases neutralise each other: acid + base → salt + water, as in HCl + NaOH → NaCl + H₂O. Metal oxides are basic and react with acids; non-metal oxides are acidic and react with bases. In water, acids produce hydrogen ions, H⁺ (present as H₃O⁺), and bases soluble in water, called alkalis, produce hydroxide ions, OH⁻. Mixing concentrated acid with water releases a lot of heat, so acid must always be added slowly to water, never water to acid."
+                ],
+                [
+                  "The pH scale",
+                  "The strength of acids and bases is measured on the pH scale from 0 to 14. A pH of 7 is neutral (pure water). Values below 7 are acidic, and the lower the number, the stronger the acid; values above 7 are basic, and the higher, the stronger the base. A universal indicator shows different colours at different pH values. pH matters in daily life: our body works within a narrow pH range; tooth decay starts when the mouth's pH falls below about 5.5, which is why basic toothpaste helps; indigestion from excess stomach acid is treated with antacids; plants need soil of suitable pH; and acid rain with pH below 5.6 harms rivers and aquatic life."
+                ],
+                [
+                  "Important salts",
+                  "Common salt, sodium chloride, is the raw material for many chemicals. Electrolysis of brine (the chlor-alkali process) gives sodium hydroxide, chlorine and hydrogen. Chlorine reacts with dry slaked lime to give bleaching powder, used for disinfecting water and bleaching cloth. Baking soda (sodium hydrogencarbonate, NaHCO₃) releases carbon dioxide on heating, making cakes rise, and is used in antacids. Washing soda (sodium carbonate decahydrate, Na₂CO₃·10H₂O) removes permanent hardness of water and is used in cleaning. Plaster of Paris (CaSO₄·½H₂O), made by heating gypsum, sets into a hard mass with water and is used for plastering fractured bones and making casts."
+                ]
+              ],
+              "definitions": [
+                ["pH scale", "A scale from 0 to 14 measuring how acidic or basic a solution is."],
+                ["Alkali", "A base that dissolves in water."],
+                ["Universal indicator", "A mixture of indicators showing different colours at different pH values."],
+                ["Chlor-alkali process", "Electrolysis of brine producing NaOH, Cl₂ and H₂."],
+                ["Plaster of Paris", "Calcium sulphate hemihydrate, which sets hard when mixed with water."]
+              ],
+              "examples": [
+                "Lemon juice has a pH of about 2; soap solution about 10.",
+                "Baking powder contains baking soda and a mild acid such as tartaric acid."
+              ],
+              "worked": [
+                {
+                  "problem": "Solutions A, B and C have pH 3, 7 and 11. Identify each and say which turns red litmus blue.",
+                  "steps": [
+                    "pH 3 < 7: A is acidic.",
+                    "pH 7: B is neutral.",
+                    "pH 11 > 7: C is basic, so it turns red litmus blue."
+                  ],
+                  "answer": "A acidic, B neutral, C basic; C turns red litmus blue."
+                }
+              ],
+              "diagram": {
+                "type": "number_line",
+                "title": "pH scale",
+                "min": 0,
+                "max": 14,
+                "points": [[2, "Lemon juice"], [5.5, "Tooth decay starts"], [7, "Pure water"], [10, "Soap"], [13, "Strong alkali"]]
+              },
+              "real_world": "Soil testing guides farmers on adding lime or organic matter, toothpaste fights tooth decay by neutralising mouth acids, bleaching powder keeps drinking water safe, and plaster of Paris is used in hospitals for fractures and by artists for sculptures.",
+              "takeaways": [
+                "Acids react with metals (giving H₂), carbonates (giving CO₂) and bases (neutralisation).",
+                "pH < 7 acidic, 7 neutral, > 7 basic; lower pH means stronger acid.",
+                "pH is vital in digestion, teeth, soil and the environment.",
+                "Common salt gives NaOH, Cl₂, bleaching powder, baking soda and washing soda; gypsum gives plaster of Paris."
+              ],
+              "practice": [
+                ["What gas is released when an acid reacts with a carbonate?", "Carbon dioxide."],
+                ["Which is more acidic: pH 2 or pH 5?", "pH 2."],
+                ["Give one use of baking soda.", "Making cakes rise (or as an antacid)."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A solution with pH 7 is:", ["Acidic", "Neutral", "Basic", "Very acidic"], "B", "Pure water.", "pH 7 is neutral."],
+                  ["Acids react with metals to produce:", ["Oxygen", "Carbon dioxide", "Hydrogen", "Nitrogen"], "C", "It burns with a pop.", "Metals and acids give hydrogen gas."],
+                  ["The chemical name of baking soda is:", ["Sodium hydrogencarbonate", "Sodium chloride", "Calcium carbonate", "Sodium hydroxide"], "A", "NaHCO₃.", "Baking soda is sodium hydrogencarbonate."],
+                  ["A base that dissolves in water is called an:", ["Acid", "Salt", "Indicator", "Alkali"], "D", "Soluble base.", "Water-soluble bases are alkalis."]
+                ],
+                "MEDIUM": [
+                  ["Which solution is the strongest acid?", ["pH 6", "pH 1", "pH 7", "pH 12"], "B", "Lower pH = stronger acid.", "pH 1 is the most acidic."],
+                  ["Tooth decay starts when the pH in the mouth falls below about:", ["7", "8.5", "5.5", "10"], "C", "Slightly acidic.", "Below about pH 5.5 enamel is attacked."],
+                  ["Which salt is used for plastering fractured bones?", ["Plaster of Paris", "Washing soda", "Baking soda", "Bleaching powder"], "A", "It sets hard with water.", "Plaster of Paris sets into a hard cast."],
+                  ["When diluting an acid, you should:", ["Add water to the acid quickly", "Heat the acid first", "Mix them without care", "Add the acid slowly to water"], "D", "The reaction releases heat.", "Adding acid to water prevents dangerous splashing."]
+                ],
+                "HARD": [
+                  ["Electrolysis of brine produces:", ["Na, Cl₂ and O₂", "NaOH, Cl₂ and H₂", "NaCl and H₂O", "Na₂CO₃ and Cl₂"], "B", "The chlor-alkali process.", "It gives sodium hydroxide, chlorine and hydrogen."],
+                  ["A gas from an acid–carbonate reaction turns lime water milky. The gas is:", ["Hydrogen", "Oxygen", "Carbon dioxide", "Chlorine"], "C", "Lime water test.", "CO₂ turns lime water milky."],
+                  ["Washing soda is used to:", ["Remove permanent hardness of water", "Make cakes rise", "Plaster fractures", "Disinfect drinking water only"], "A", "Cleaning and water softening.", "Na₂CO₃ removes permanent hardness."],
+                  ["Rain with pH 4.5 falls on a lake. The most likely effect is:", ["Fish thrive", "Water becomes basic", "No change", "Aquatic life is harmed because the water becomes too acidic"], "D", "Acid rain is below 5.6.", "Acidic water harms fish and other organisms."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g10-sci-u-physics",
+      "title": "Physics: Electricity",
+      "topics": [
+        {
+          "slug": "g10-sci-t-electricity",
+          "title": "Electricity",
+          "description": "Electric current, potential difference, Ohm's law, resistance and circuits.",
+          "lessons": [
+            {
+              "slug": "g10-sci-current-ohm",
+              "title": "Electric Current and Ohm's Law",
+              "objectives": [
+                "Define electric current, charge and potential difference",
+                "State Ohm's law and use V = IR",
+                "Explain factors affecting resistance and resistivity",
+                "Calculate electrical power and energy"
+              ],
+              "intro": "Switch on a fan and it starts turning; switch on a bulb and it glows. Electricity powers almost everything in modern life. But what actually flows in a wire, what pushes it, and why do some materials let it pass easily while others do not? In this lesson we define current, potential difference and resistance, and connect them through one of the most useful laws in physics: Ohm's law.",
+              "sections": [
+                [
+                  "Current and potential difference",
+                  "Electric current is the rate of flow of electric charge: I = Q ÷ t. Its SI unit is the ampere (A); one ampere is one coulomb of charge flowing per second. In metal wires, the moving charges are electrons. By convention, current is taken to flow from the positive terminal to the negative terminal, opposite to electron flow. Charges flow only when there is a potential difference (voltage) between two points, provided for example by a cell or battery. Potential difference is the work done to move a unit charge between two points: V = W ÷ Q, measured in volts (V). An ammeter, connected in series, measures current; a voltmeter, connected in parallel, measures potential difference."
+                ],
+                [
+                  "Ohm's law and resistance",
+                  "Georg Simon Ohm found that the current through a metallic conductor is directly proportional to the potential difference across it, provided its temperature remains constant: V ∝ I, or V = IR. The constant R is the resistance of the conductor, measured in ohms (Ω). Resistance is the property of a conductor that opposes the flow of current. A graph of V against I for such a conductor is a straight line through the origin. If a 12 V battery drives a current of 2 A through a resistor, R = 12 ÷ 2 = 6 Ω."
+                ],
+                [
+                  "Factors affecting resistance, power and energy",
+                  "Resistance increases with the length of the conductor and decreases with its area of cross-section: R = ρL/A, where ρ (rho) is the resistivity, a property of the material. Metals such as copper and aluminium have low resistivity and make good conductors; alloys such as nichrome have high resistivity and are used in heaters; glass and rubber are insulators. Resistance of most metals also increases with temperature. Electric power, the rate of using electrical energy, is P = VI = I²R = V²/R, measured in watts (W). Energy consumed is power × time; electricity bills use kilowatt-hours (kWh), called 'units': 1 kWh = 3.6 × 10⁶ J."
+                ]
+              ],
+              "definitions": [
+                ["Electric current", "The rate of flow of electric charge, measured in amperes."],
+                ["Potential difference", "Work done per unit charge between two points, measured in volts."],
+                ["Ohm's law", "V = IR at constant temperature for a metallic conductor."],
+                ["Resistivity", "A property of a material that determines its resistance for given dimensions."],
+                ["Kilowatt-hour", "The commercial unit of electrical energy, 3.6 × 10⁶ J."]
+              ],
+              "examples": [
+                "A 100 W bulb used for 10 hours consumes 1 kWh (one unit).",
+                "Heating elements are made of nichrome because of its high resistivity and high melting point."
+              ],
+              "worked": [
+                {
+                  "problem": "A current of 0.5 A flows through a lamp for 10 minutes. How much charge flows? If the lamp is connected to 220 V, what is its resistance?",
+                  "steps": [
+                    "t = 10 × 60 = 600 s; Q = I × t = 0.5 × 600 = 300 C.",
+                    "R = V/I = 220/0.5 = 440 Ω."
+                  ],
+                  "answer": "300 C; 440 Ω"
+                },
+                {
+                  "problem": "A 1,500 W heater is used for 2 hours daily for 30 days. Find the energy used and the cost at ₹8 per unit.",
+                  "steps": [
+                    "Energy per day = 1.5 kW × 2 h = 3 kWh.",
+                    "For 30 days: 3 × 30 = 90 kWh.",
+                    "Cost = 90 × 8 = ₹720."
+                  ],
+                  "answer": "90 kWh; ₹720"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Electrical quantities",
+                "columns": ["Quantity", "Symbol", "Unit", "Formula"],
+                "rows": [
+                  ["Current", "I", "ampere (A)", "I = Q/t"],
+                  ["Potential difference", "V", "volt (V)", "V = W/Q"],
+                  ["Resistance", "R", "ohm (Ω)", "R = V/I"],
+                  ["Power", "P", "watt (W)", "P = VI"]
+                ]
+              },
+              "real_world": "Electricians choose wire thickness based on current to prevent overheating, appliance labels show power ratings in watts, and households read electricity bills in units (kWh). Understanding power helps families save energy by choosing efficient appliances like LED bulbs.",
+              "takeaways": [
+                "I = Q/t (amperes); V = W/Q (volts).",
+                "Ohm's law: V = IR at constant temperature.",
+                "R = ρL/A: longer, thinner wires and high-resistivity materials have more resistance.",
+                "P = VI = I²R = V²/R; energy in kWh = kW × hours."
+              ],
+              "practice": [
+                ["Find the resistance if 6 V drives 0.3 A.", "20 Ω"],
+                ["How much current does a 60 W bulb draw at 220 V?", "About 0.27 A"],
+                ["How many joules are in 1 kWh?", "3.6 × 10⁶ J"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The SI unit of electric current is the:", ["Volt", "Ampere", "Ohm", "Watt"], "B", "Named after André-Marie Ampère.", "Current is measured in amperes."],
+                  ["Ohm's law is written as:", ["P = VI", "Q = It", "V = IR", "E = mc²"], "C", "Voltage, current, resistance.", "V = IR."],
+                  ["A voltmeter is connected in:", ["Parallel", "Series", "Either way", "Neither way"], "A", "Across the component.", "Voltmeters are connected in parallel."],
+                  ["The commercial unit of electrical energy is the:", ["Joule", "Watt", "Volt", "Kilowatt-hour"], "D", "Used on electricity bills.", "Electricity bills use kWh (units)."]
+                ],
+                "MEDIUM": [
+                  ["A 12 V battery drives 3 A through a resistor. The resistance is:", ["36 Ω", "4 Ω", "15 Ω", "0.25 Ω"], "B", "R = V/I.", "12 ÷ 3 = 4 Ω."],
+                  ["If the length of a wire is doubled (same material and thickness), its resistance:", ["Halves", "Stays the same", "Doubles", "Becomes four times"], "C", "R is proportional to L.", "Resistance doubles with double length."],
+                  ["The power of a device using 2 A at 220 V is:", ["440 W", "110 W", "222 W", "880 W"], "A", "P = VI.", "220 × 2 = 440 W."],
+                  ["Which material is used in heater elements?", ["Copper", "Silver", "Aluminium", "Nichrome"], "D", "High resistivity, high melting point.", "Nichrome is used for heating elements."]
+                ],
+                "HARD": [
+                  ["How much charge flows when 2 A flows for 5 minutes?", ["10 C", "600 C", "300 C", "120 C"], "B", "Convert minutes to seconds.", "Q = 2 × 300 = 600 C."],
+                  ["A wire's area of cross-section is doubled, keeping length and material the same. Its resistance becomes:", ["Double", "Four times", "Half", "Unchanged"], "C", "R is inversely proportional to A.", "Doubling A halves R."],
+                  ["A 2 kW geyser is used for 1.5 hours a day. The energy used in 20 days is:", ["60 kWh", "30 kWh", "40 kWh", "3 kWh"], "A", "kW × hours × days.", "2 × 1.5 × 20 = 60 kWh."],
+                  ["Why is copper used for electric wiring?", ["High resistivity", "It is magnetic", "It melts easily", "Very low resistivity, so little energy is lost as heat"], "D", "Good conductor.", "Low resistivity minimises energy loss."]
+                ]
+              }
+            },
+            {
+              "slug": "g10-sci-series-parallel",
+              "title": "Resistors in Series and Parallel and the Heating Effect",
+              "objectives": [
+                "Calculate equivalent resistance in series and parallel",
+                "Explain current and voltage distribution in each arrangement",
+                "Explain why household circuits use parallel connections",
+                "Explain the heating effect of current and its applications"
+              ],
+              "intro": "In decorative light strings, if one bulb fails, sometimes all the lights go out, and sometimes only one does. The difference lies in how the bulbs are connected: in series or in parallel. The way resistors are combined changes the total resistance, the current and the voltage in a circuit. These ideas explain how our homes are wired safely and how heaters, irons and fuses work.",
+              "sections": [
+                [
+                  "Series combination",
+                  "When resistors are connected end to end, they are in series. The same current flows through each, and the total potential difference is shared: V = V₁ + V₂ + V₃. The equivalent resistance is the sum: Rₛ = R₁ + R₂ + R₃, so it is greater than any single resistance. For 2 Ω, 3 Ω and 5 Ω in series across 10 V, Rₛ = 10 Ω, the current is 1 A, and the voltages are 2 V, 3 V and 5 V. In series, if one component breaks, the whole circuit is broken and all components stop working."
+                ],
+                [
+                  "Parallel combination",
+                  "When resistors are connected between the same two points, they are in parallel. Each has the same potential difference across it, and the total current is divided among them: I = I₁ + I₂ + I₃. The equivalent resistance is found from 1/Rₚ = 1/R₁ + 1/R₂ + 1/R₃, so it is less than the smallest individual resistance. For 6 Ω and 3 Ω in parallel, 1/Rₚ = 1/6 + 1/3 = 1/2, so Rₚ = 2 Ω. Household appliances are connected in parallel so that each receives the full mains voltage (about 220 V in India), each can be switched on or off independently, and a fault in one does not stop the others."
+                ],
+                [
+                  "Heating effect of current",
+                  "When current flows through a resistor, electrical energy is converted into heat. Joule's law of heating states that the heat produced is H = I²Rt. The heat increases with the square of the current, with resistance and with time. This effect is used in electric irons, toasters, heaters, kettles and filament bulbs, where tungsten, with its very high melting point, glows white-hot. A fuse is a safety device: a short wire of low melting point connected in series with the circuit, which melts and breaks the circuit when excessive current flows due to a short circuit or overloading. Modern homes also use miniature circuit breakers (MCBs)."
+                ]
+              ],
+              "definitions": [
+                ["Series combination", "Resistors connected end to end so the same current flows through each."],
+                ["Parallel combination", "Resistors connected across the same two points so each has the same voltage."],
+                ["Equivalent resistance", "The single resistance that would have the same effect as a combination."],
+                ["Joule's law of heating", "Heat produced H = I²Rt."],
+                ["Fuse", "A safety wire that melts and breaks the circuit when current is too large."]
+              ],
+              "examples": [
+                "Two 4 Ω resistors in series give 8 Ω; in parallel they give 2 Ω.",
+                "A 10 A fuse protects a circuit by melting if the current exceeds 10 A."
+              ],
+              "worked": [
+                {
+                  "problem": "A 4 Ω resistor is connected in series with a parallel combination of 6 Ω and 12 Ω across a 12 V battery. Find the total current.",
+                  "steps": [
+                    "Parallel part: 1/Rₚ = 1/6 + 1/12 = 3/12, so Rₚ = 4 Ω.",
+                    "Total resistance = 4 + 4 = 8 Ω.",
+                    "I = V/R = 12/8 = 1.5 A."
+                  ],
+                  "answer": "1.5 A"
+                },
+                {
+                  "problem": "How much heat is produced in 2 minutes by a 50 Ω resistor carrying 2 A?",
+                  "steps": [
+                    "t = 120 s.",
+                    "H = I²Rt = 4 × 50 × 120 = 24,000 J."
+                  ],
+                  "answer": "24,000 J (24 kJ)"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Series vs parallel",
+                "columns": ["Feature", "Series", "Parallel"],
+                "rows": [
+                  ["Current", "Same through all", "Divides among branches"],
+                  ["Voltage", "Divides", "Same across all"],
+                  ["Equivalent R", "R₁ + R₂ + …", "1/R = 1/R₁ + 1/R₂ + …"],
+                  ["One component fails", "All stop", "Others keep working"]
+                ]
+              },
+              "real_world": "House wiring uses parallel circuits so each appliance works independently at full voltage, and fuses or MCBs protect against fires from overloading. Electric kettles, irons and immersion rods are practical uses of the heating effect.",
+              "takeaways": [
+                "Series: Rₛ = R₁ + R₂ + …; same current, voltage divides.",
+                "Parallel: 1/Rₚ = 1/R₁ + 1/R₂ + …; same voltage, current divides.",
+                "Homes use parallel wiring for independent operation at full voltage.",
+                "Heat H = I²Rt; fuses use this effect to protect circuits."
+              ],
+              "practice": [
+                ["Find the equivalent of 5 Ω, 10 Ω and 15 Ω in series.", "30 Ω"],
+                ["Find the equivalent of two 10 Ω resistors in parallel.", "5 Ω"],
+                ["Why are fuse wires made of low-melting-point material?", "So they melt quickly when the current is too large."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The equivalent resistance of 3 Ω and 7 Ω in series is:", ["4 Ω", "10 Ω", "21 Ω", "2.1 Ω"], "B", "Add them.", "3 + 7 = 10 Ω."],
+                  ["In a parallel circuit, the voltage across each branch is:", ["Different", "Zero", "The same", "Always halved"], "C", "Connected across the same points.", "Each parallel branch has the same voltage."],
+                  ["Household appliances are connected in:", ["Parallel", "Series", "Neither", "Only one long series loop"], "A", "So each works independently.", "Homes use parallel wiring."],
+                  ["A fuse protects a circuit by:", ["Increasing voltage", "Storing charge", "Producing light", "Melting when the current is too high"], "D", "Low melting point.", "The fuse melts and breaks the circuit."]
+                ],
+                "MEDIUM": [
+                  ["The equivalent resistance of 6 Ω and 3 Ω in parallel is:", ["9 Ω", "2 Ω", "4.5 Ω", "18 Ω"], "B", "1/R = 1/6 + 1/3.", "1/R = 1/2, so R = 2 Ω."],
+                  ["Three 2 Ω resistors are in series across 12 V. The current is:", ["6 A", "4 A", "2 A", "1 A"], "C", "Total R = 6 Ω.", "I = 12/6 = 2 A."],
+                  ["Joule's law of heating gives heat as:", ["H = I²Rt", "H = IR", "H = V/I", "H = It"], "A", "Square of the current.", "H = I²Rt."],
+                  ["In a series string of lights, one bulb fuses. What happens?", ["Only that bulb goes out", "The others glow brighter", "Nothing changes", "All the bulbs go out"], "D", "The circuit is broken.", "A break in series stops current through all."]
+                ],
+                "HARD": [
+                  ["If the current through a resistor is doubled, the heat produced in the same time becomes:", ["Double", "Four times", "Half", "Unchanged"], "B", "H ∝ I².", "(2I)² = 4I², so four times."],
+                  ["A 2 Ω resistor in series with a parallel pair of 4 Ω and 4 Ω is connected to 8 V. The current from the battery is:", ["1 A", "4 A", "2 A", "8 A"], "C", "Parallel pair = 2 Ω.", "Total 4 Ω; I = 8/4 = 2 A."],
+                  ["Why is tungsten used for bulb filaments?", ["It has a very high melting point and glows when hot", "It has a low melting point", "It is a good insulator", "It is cheap and soft"], "A", "It must survive high temperatures.", "Tungsten's high melting point lets it glow white-hot without melting."],
+                  ["The equivalent resistance of n identical resistors of R each in parallel is:", ["nR", "R/n²", "n/R", "R/n"], "D", "Each adds 1/R.", "1/Rₚ = n/R, so Rₚ = R/n."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

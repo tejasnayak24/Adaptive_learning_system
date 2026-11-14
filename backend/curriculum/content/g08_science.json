@@ -1,0 +1,580 @@
+{
+  "grade": 8,
+  "subject": "Science",
+  "units": [
+    {
+      "slug": "g8-sci-u-biology",
+      "title": "Biology: Microorganisms",
+      "topics": [
+        {
+          "slug": "g8-sci-t-microorganisms",
+          "title": "Microorganisms: Friend and Foe",
+          "description": "The tiny organisms all around us, how they help us and how they cause disease.",
+          "lessons": [
+            {
+              "slug": "g8-sci-types-of-microbes",
+              "title": "Types of Microorganisms",
+              "objectives": [
+                "Name the major groups of microorganisms",
+                "Describe where microorganisms live",
+                "Explain how microorganisms are observed",
+                "Distinguish viruses from other microorganisms"
+              ],
+              "intro": "A single drop of pond water can contain thousands of living things, yet you cannot see any of them with your eyes. Organisms too small to be seen without a microscope are called microorganisms or microbes. They were first seen in the 1670s by Antonie van Leeuwenhoek using simple microscopes he made himself. Microbes live almost everywhere: in soil, water, air, inside our bodies, in hot springs and even under ice.",
+              "sections": [
+                [
+                  "The main groups",
+                  "Microorganisms are grouped into bacteria, fungi, protozoa, algae and viruses. Bacteria are single-celled organisms without a proper nucleus; they may be rod-shaped, spherical or spiral. Fungi include microscopic moulds such as bread mould (Rhizopus) and single-celled yeasts, as well as larger mushrooms. Protozoa are single-celled animal-like organisms such as Amoeba and Paramecium, which move and feed. Algae, such as Chlamydomonas and Spirogyra, are plant-like and contain chlorophyll, so they make their own food. Microbes may live as single cells or in colonies, as in bread mould."
+                ],
+                [
+                  "Viruses",
+                  "Viruses are much smaller than bacteria and can be seen only with an electron microscope. They are not made of cells. A virus is little more than genetic material inside a protein coat. Outside a living cell, a virus is inactive, like a crystal. It reproduces only inside the cells of a host organism, taking over the cell's machinery to make copies of itself. Because of this, viruses are sometimes said to be on the border between living and non-living. Common cold, influenza, measles, chickenpox, polio and COVID-19 are caused by viruses. Antibiotics do not work against viruses."
+                ],
+                [
+                  "Where microbes live and how they survive",
+                  "Microbes can survive in extreme conditions, from icy polar regions to hot springs, deserts and deep oceans. Many live inside other organisms: bacteria in our intestines help digest food, while some protozoa cause disease in animals. Some bacteria form tough resting stages called spores that survive heat and drying for a long time. Microorganisms reproduce very quickly; under good conditions some bacteria divide every 20 minutes, so a single cell can produce millions of cells in a few hours. This is why food spoils quickly in warm, moist conditions."
+                ]
+              ],
+              "definitions": [
+                ["Microorganism", "A living organism too small to be seen without a microscope."],
+                ["Bacteria", "Single-celled microorganisms without a true nucleus."],
+                ["Protozoa", "Single-celled, animal-like microorganisms such as Amoeba."],
+                ["Virus", "A non-cellular particle that reproduces only inside host cells."],
+                ["Host", "An organism in which another organism or virus lives."]
+              ],
+              "examples": [
+                "Yeast makes bread dough rise.",
+                "Spirogyra forms green threads in ponds."
+              ],
+              "worked": [
+                {
+                  "problem": "Classify: (a) Amoeba, (b) bread mould, (c) Lactobacillus, (d) the influenza virus, (e) Chlamydomonas.",
+                  "steps": [
+                    "(a) Single-celled, animal-like → protozoan.",
+                    "(b) Grows as threads on bread → fungus.",
+                    "(c) Rod-shaped single cell found in curd → bacterium.",
+                    "(d) Non-cellular, reproduces in host cells → virus.",
+                    "(e) Green, single-celled, makes its own food → alga."
+                  ],
+                  "answer": "(a) protozoa, (b) fungi, (c) bacteria, (d) virus, (e) algae."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Groups of microorganisms",
+                "columns": ["Group", "Cells", "Example"],
+                "rows": [
+                  ["Bacteria", "Single, no nucleus", "Lactobacillus"],
+                  ["Fungi", "Single or many", "Yeast, bread mould"],
+                  ["Protozoa", "Single, animal-like", "Amoeba, Paramecium"],
+                  ["Algae", "Single or many, with chlorophyll", "Chlamydomonas, Spirogyra"],
+                  ["Viruses", "Not cells", "Influenza virus"]
+                ]
+              },
+              "real_world": "Microbiologists study microbes in hospitals to identify infections, in food factories to keep products safe, and in research labs to produce vaccines. During the COVID-19 pandemic, scientists worldwide studied the structure of the coronavirus to design tests and vaccines quickly.",
+              "takeaways": [
+                "Microorganisms include bacteria, fungi, protozoa, algae and viruses.",
+                "Microbes live almost everywhere, even in extreme conditions.",
+                "Viruses are not cells and reproduce only inside host cells.",
+                "Microbes multiply very quickly in warm, moist conditions."
+              ],
+              "practice": [
+                ["Who first observed microorganisms?", "Antonie van Leeuwenhoek."],
+                ["Why can't antibiotics treat a cold?", "Colds are caused by viruses; antibiotics act on bacteria."],
+                ["Name one alga and one protozoan.", "Spirogyra; Amoeba."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Microorganisms can be seen with a:", ["Telescope", "Microscope", "Periscope", "Magnifying mirror"], "B", "'Micro' means small.", "Microscopes magnify tiny objects."],
+                  ["Yeast belongs to which group?", ["Bacteria", "Algae", "Fungi", "Protozoa"], "C", "Bread mould is in the same group.", "Yeast is a single-celled fungus."],
+                  ["Which is caused by a virus?", ["Common cold", "Tuberculosis", "Typhoid", "Cholera"], "A", "Antibiotics do not cure it.", "The common cold is caused by viruses."],
+                  ["Amoeba is a:", ["Fungus", "Virus", "Alga", "Protozoan"], "D", "Animal-like single cell.", "Amoeba is a protozoan."]
+                ],
+                "MEDIUM": [
+                  ["Which microorganisms contain chlorophyll?", ["Viruses", "Algae", "Protozoa", "Yeasts"], "B", "They make their own food.", "Algae have chlorophyll and photosynthesise."],
+                  ["Why are viruses said to be on the border of living and non-living?", ["They are very large", "They make their own food", "They reproduce only inside host cells and are inactive outside", "They have a nucleus"], "C", "What happens outside a host?", "Outside cells viruses show no life activity."],
+                  ["Why does food spoil faster in summer?", ["Microbes multiply faster in warm, moist conditions", "Food gets colder", "Microbes die in heat", "Sunlight adds water"], "A", "Temperature affects microbe growth.", "Warmth speeds up microbial reproduction."],
+                  ["Which structure helps some bacteria survive heat and drying?", ["Nucleus", "Chlorophyll", "Flagellum", "Spores"], "D", "A tough resting stage.", "Spores resist harsh conditions."]
+                ],
+                "HARD": [
+                  ["A bacterium divides every 20 minutes. Starting from one cell, how many cells are there after 2 hours?", ["12", "64", "32", "128"], "B", "2 hours = 6 divisions.", "2⁶ = 64 cells."],
+                  ["Which statement about viruses is correct?", ["They are larger than bacteria", "They can be killed by antibiotics", "They need an electron microscope to be seen", "They contain chlorophyll"], "C", "They are extremely small.", "Viruses are seen only with electron microscopes."],
+                  ["Bread mould grows as threads on stale bread. Why does bread kept in a dry, cool place stay fresh longer?", ["Moulds grow slowly without moisture and warmth", "Bread becomes poisonous to moulds", "Light kills all moulds", "Cool air contains no spores"], "A", "What do microbes need to grow?", "Lack of moisture and warmth slows mould growth."],
+                  ["Which pair is correctly matched?", ["Paramecium – virus", "Spirogyra – bacterium", "Rhizopus – protozoan", "Lactobacillus – bacterium"], "D", "Check each organism's group.", "Lactobacillus, found in curd, is a bacterium."]
+                ]
+              }
+            },
+            {
+              "slug": "g8-sci-useful-harmful-microbes",
+              "title": "Useful and Harmful Microorganisms",
+              "objectives": [
+                "Describe uses of microorganisms in food, medicine, agriculture and the environment",
+                "Explain how vaccines and antibiotics work",
+                "Name diseases caused by microorganisms and how they spread",
+                "Describe methods of food preservation"
+              ],
+              "intro": "Microorganisms are often thought of only as germs that cause disease, but most are harmless and many are extremely useful. They make curd, bread and medicines, clean the environment and keep soil fertile. Some, however, do cause diseases in humans, animals and plants, and others spoil our food. Understanding both sides helps us use microbes wisely and protect ourselves from harmful ones.",
+              "sections": [
+                [
+                  "Useful microorganisms",
+                  "Lactobacillus bacteria turn milk into curd. Yeast produces carbon dioxide during respiration, which makes bread dough rise, and in the absence of oxygen it converts sugar into alcohol, a process called fermentation, discovered by Louis Pasteur to be caused by yeast. Antibiotics such as penicillin, discovered by Alexander Fleming in 1928 from a mould, kill or stop the growth of disease-causing bacteria. Vaccines contain dead or weakened microbes or parts of them; they train the body to produce antibodies, so that later it can fight the real disease. Bacteria such as Rhizobium in the root nodules of pulses fix nitrogen from the air into the soil, and decomposers break down dead matter, returning nutrients to the soil."
+                ],
+                [
+                  "Harmful microorganisms",
+                  "Disease-causing microbes are called pathogens. In humans, bacteria cause tuberculosis, typhoid and cholera; viruses cause measles, chickenpox, polio and influenza; protozoa cause malaria and amoebic dysentery. They spread in different ways: through air when an infected person coughs or sneezes, through contaminated water and food, through direct contact, or through carriers such as the female Anopheles mosquito, which carries the malaria parasite, and the Aedes mosquito, which spreads dengue. Plant diseases include citrus canker and rust of wheat, and animal diseases include foot-and-mouth disease of cattle. Some microbes also produce poisons in food, causing food poisoning."
+                ],
+                [
+                  "Food preservation and prevention",
+                  "We preserve food by preventing microbial growth. Methods include using salt (pickles, salted fish) and sugar (jams), which draw water out of microbes; oil and vinegar in pickles; refrigeration, which slows growth; pasteurisation, in which milk is heated to about 70 °C for 15 to 30 seconds and quickly cooled to kill harmful bacteria; drying; and airtight packing and canning. Diseases can be prevented by vaccination, drinking safe water, washing hands, covering the mouth when coughing, cooking food properly and preventing mosquitoes from breeding in stagnant water."
+                ]
+              ],
+              "definitions": [
+                ["Pathogen", "A microorganism that causes disease."],
+                ["Fermentation", "The conversion of sugar into alcohol by yeast in the absence of oxygen."],
+                ["Antibiotic", "A medicine made from microbes that kills or stops the growth of bacteria."],
+                ["Vaccine", "A preparation that trains the body to fight a specific disease."],
+                ["Pasteurisation", "Heating milk to about 70 °C briefly and cooling it quickly to kill harmful microbes."]
+              ],
+              "examples": [
+                "Idli and dosa batter rise overnight because of fermentation by microbes.",
+                "India was declared polio-free in 2014 after a massive vaccination campaign."
+              ],
+              "worked": [
+                {
+                  "problem": "A village reports many cases of malaria after the rains. Explain the cause and suggest three preventive steps.",
+                  "steps": [
+                    "Malaria is caused by a protozoan carried by the female Anopheles mosquito.",
+                    "Rainwater collected in pots, tyres and puddles provides breeding places for mosquitoes.",
+                    "Prevention: remove stagnant water, use mosquito nets and repellents, and spray larvicides in drains."
+                  ],
+                  "answer": "Mosquitoes breeding in stagnant water spread the malaria parasite; remove standing water, use nets/repellents and treat drains."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Diseases and how they spread",
+                "columns": ["Disease", "Microbe", "Spread by"],
+                "rows": [
+                  ["Tuberculosis", "Bacterium", "Air"],
+                  ["Cholera", "Bacterium", "Contaminated water"],
+                  ["Measles", "Virus", "Air"],
+                  ["Malaria", "Protozoan", "Female Anopheles mosquito"],
+                  ["Dengue", "Virus", "Aedes mosquito"]
+                ]
+              },
+              "real_world": "Dairies pasteurise milk, pharmaceutical companies grow microbes in huge tanks to produce antibiotics and insulin, and farmers grow pulses to enrich soil with nitrogen. Vaccination programmes have eliminated smallpox worldwide and polio from India.",
+              "takeaways": [
+                "Microbes make curd, bread and medicines, fix nitrogen and decompose waste.",
+                "Pathogens spread through air, water, food, contact and carriers.",
+                "Vaccines prevent diseases; antibiotics treat bacterial infections, not viral ones.",
+                "Salt, sugar, oil, cold, heat and airtight packing preserve food."
+              ],
+              "practice": [
+                ["Who discovered penicillin?", "Alexander Fleming (1928)."],
+                ["Which bacterium fixes nitrogen in root nodules of pulses?", "Rhizobium."],
+                ["Why does salting preserve food?", "Salt removes water, so microbes cannot grow."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which microbe turns milk into curd?", ["Yeast", "Lactobacillus", "Rhizobium", "Amoeba"], "B", "A bacterium.", "Lactobacillus converts milk to curd."],
+                  ["Malaria is spread by the:", ["Housefly", "Aedes mosquito", "Female Anopheles mosquito", "Cockroach"], "C", "It bites mainly at night.", "The female Anopheles mosquito carries the malaria parasite."],
+                  ["Penicillin is an example of an:", ["Antibiotic", "Vaccine", "Alga", "Insecticide"], "A", "It kills bacteria.", "Penicillin is an antibiotic from a mould."],
+                  ["Heating milk briefly to about 70 °C and cooling it is called:", ["Fermentation", "Vaccination", "Canning", "Pasteurisation"], "D", "Named after Louis Pasteur.", "Pasteurisation kills harmful microbes in milk."]
+                ],
+                "MEDIUM": [
+                  ["Bread dough rises because yeast produces:", ["Oxygen", "Carbon dioxide", "Nitrogen", "Water"], "B", "Bubbles make the dough expand.", "Yeast releases carbon dioxide during respiration."],
+                  ["How does a vaccine protect us?", ["It kills all bacteria in the body", "It replaces blood", "It trains the body to produce antibodies against a disease", "It removes viruses from the air"], "C", "Think of the immune system.", "Vaccines prime the body to fight a specific pathogen."],
+                  ["Which disease is spread through contaminated water?", ["Cholera", "Measles", "Malaria", "Chickenpox"], "A", "Linked to unsafe drinking water.", "Cholera bacteria spread through contaminated water."],
+                  ["Rhizobium is useful because it:", ["Makes curd", "Produces penicillin", "Causes rust in wheat", "Fixes atmospheric nitrogen in the soil"], "D", "It lives in root nodules of pulses.", "Rhizobium fixes nitrogen, enriching soil."]
+                ],
+                "HARD": [
+                  ["Why should antibiotics NOT be taken for viral fever?", ["They make viruses stronger only in summer", "They do not act on viruses, and misuse can make bacteria resistant", "They are vaccines", "They cause malaria"], "B", "What do antibiotics target?", "Antibiotics act on bacteria; misuse breeds resistance."],
+                  ["Jam and pickles keep for months because:", ["Microbes like sugar and salt", "They are kept in sunlight", "High sugar or salt draws water out of microbes, stopping their growth", "They contain antibiotics"], "C", "Think about water and microbes.", "Concentrated sugar or salt dehydrates microbes."],
+                  ["Dengue cases rise during the monsoon mainly because:", ["Aedes mosquitoes breed in stored and stagnant clean water", "Dengue spreads through cold air", "People drink more milk", "Sunlight increases"], "A", "Which carrier spreads dengue and where does it breed?", "Rainwater in containers gives Aedes mosquitoes breeding sites."],
+                  ["Why do farmers grow pulses in rotation with wheat?", ["Pulses repel all insects", "Pulses need no water", "Wheat fixes nitrogen", "Rhizobium in pulse roots replenishes soil nitrogen"], "D", "Which crop has nitrogen-fixing bacteria?", "Pulses with Rhizobium restore nitrogen used by wheat."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g8-sci-u-chemistry",
+      "title": "Chemistry: Materials",
+      "topics": [
+        {
+          "slug": "g8-sci-t-metals-nonmetals",
+          "title": "Metals and Non-metals",
+          "description": "Physical and chemical properties of metals and non-metals and their uses.",
+          "lessons": [
+            {
+              "slug": "g8-sci-metals-physical",
+              "title": "Physical Properties of Metals and Non-metals",
+              "objectives": [
+                "Compare lustre, hardness, malleability and ductility of metals and non-metals",
+                "Compare conduction of heat and electricity",
+                "Identify exceptions to the general properties",
+                "Relate properties to uses"
+              ],
+              "intro": "Look at a copper wire, an aluminium foil, a lump of coal and a piece of sulphur. The first two are shiny, can be bent and conduct electricity; the last two are dull and brittle. Elements can be broadly divided into metals and non-metals according to their properties. These properties decide what each material is used for, from electric cables to pencil leads.",
+              "sections": [
+                [
+                  "Properties of metals",
+                  "Metals such as iron, copper, aluminium, gold and silver are lustrous: they shine when freshly cut or polished. Most are hard and strong. They are malleable, meaning they can be beaten into thin sheets; aluminium foil and gold leaf are examples. They are ductile, meaning they can be drawn into thin wires; copper and aluminium are used for electric wires. Metals are good conductors of heat and electricity. They are sonorous: they make a ringing sound when struck, which is why school bells are made of metal. Most metals are solids at room temperature with high melting points."
+                ],
+                [
+                  "Properties of non-metals",
+                  "Non-metals such as carbon, sulphur, phosphorus, oxygen and nitrogen are generally dull, not lustrous. Solid non-metals are brittle and break into pieces when hammered, so they are neither malleable nor ductile. They are poor conductors of heat and electricity. They are not sonorous. Many non-metals are gases at room temperature, such as oxygen, nitrogen and chlorine; bromine is a liquid; and carbon, sulphur and phosphorus are solids."
+                ],
+                [
+                  "Exceptions and uses",
+                  "There are important exceptions. Mercury is a metal but is liquid at room temperature. Sodium and potassium are metals so soft that they can be cut with a knife. Graphite, a form of carbon, is a non-metal that conducts electricity, so it is used for electrodes. Diamond, another form of carbon, is the hardest natural substance and is lustrous. Iodine is a non-metal with a shine. Uses follow properties: copper for wires, aluminium for aircraft and cooking utensils, iron and steel for construction, gold and silver for jewellery, non-metals such as oxygen for breathing, nitrogen in fertilisers and chlorine in water purification."
+                ]
+              ],
+              "definitions": [
+                ["Malleability", "The property of being beaten into thin sheets."],
+                ["Ductility", "The property of being drawn into thin wires."],
+                ["Sonorous", "Producing a ringing sound when struck."],
+                ["Lustre", "The shine of a freshly cut or polished surface."],
+                ["Brittle", "Breaking easily into pieces when hammered."]
+              ],
+              "examples": [
+                "Silver foil (varq) is used to decorate sweets because silver is very malleable.",
+                "Electric plugs have plastic covers but metal pins."
+              ],
+              "worked": [
+                {
+                  "problem": "An unknown solid is dull, breaks into powder when hammered and does not let a bulb glow in a simple circuit. Is it a metal or non-metal? Justify.",
+                  "steps": [
+                    "Dull → lacks lustre (non-metal property).",
+                    "Breaks into powder → brittle, not malleable (non-metal property).",
+                    "Bulb does not glow → poor conductor (non-metal property)."
+                  ],
+                  "answer": "A non-metal, because it is dull, brittle and does not conduct electricity."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Metals vs non-metals",
+                "columns": ["Property", "Metals", "Non-metals"],
+                "rows": [
+                  ["Lustre", "Shiny", "Dull (except iodine, diamond)"],
+                  ["Malleable/ductile", "Yes", "No (brittle)"],
+                  ["Conductivity", "Good", "Poor (except graphite)"],
+                  ["Sonorous", "Yes", "No"],
+                  ["State at room temp.", "Solid (except mercury)", "Solid, liquid or gas"]
+                ]
+              },
+              "real_world": "Electricians use copper wires for conduction and plastic coverings for insulation. Aircraft bodies use aluminium alloys because they are light and strong, and graphite is used in pencils and batteries.",
+              "takeaways": [
+                "Metals are lustrous, malleable, ductile, sonorous and good conductors.",
+                "Non-metals are dull, brittle and poor conductors.",
+                "Exceptions: mercury (liquid metal), graphite (conducting non-metal), diamond (hardest).",
+                "The properties of a material decide its uses."
+              ],
+              "practice": [
+                ["Name a metal that is liquid at room temperature.", "Mercury."],
+                ["Which non-metal conducts electricity?", "Graphite."],
+                ["Why are bells made of metal?", "Metals are sonorous."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The property of being drawn into wires is:", ["Malleability", "Ductility", "Lustre", "Sonority"], "B", "Think of copper wire.", "Ductility is being drawn into wires."],
+                  ["Which is a non-metal?", ["Iron", "Copper", "Sulphur", "Aluminium"], "C", "It is yellow and brittle.", "Sulphur is a non-metal."],
+                  ["Which metal is liquid at room temperature?", ["Mercury", "Sodium", "Gold", "Zinc"], "A", "It is used in old thermometers.", "Mercury is a liquid metal."],
+                  ["Metals produce a ringing sound when struck. They are:", ["Brittle", "Ductile", "Dull", "Sonorous"], "D", "Think of a school bell.", "Sonorous materials ring when struck."]
+                ],
+                "MEDIUM": [
+                  ["Aluminium foil shows which property?", ["Ductility", "Malleability", "Brittleness", "Poor conduction"], "B", "It is a thin sheet.", "Beating into sheets is malleability."],
+                  ["Which non-metal is a good conductor of electricity?", ["Sulphur", "Phosphorus", "Graphite", "Iodine"], "C", "It is used in pencil leads and electrodes.", "Graphite conducts electricity."],
+                  ["Why are cooking pans made of metals?", ["Metals are good conductors of heat", "Metals are brittle", "Metals are dull", "Metals melt easily"], "A", "Heat must reach the food.", "Good heat conduction cooks food evenly."],
+                  ["Which metal can be cut with a knife?", ["Iron", "Copper", "Silver", "Sodium"], "D", "A very soft metal.", "Sodium is soft enough to cut with a knife."]
+                ],
+                "HARD": [
+                  ["Coal breaks into pieces when hammered. This shows that carbon (coal) is:", ["Malleable", "Brittle", "Ductile", "Sonorous"], "B", "It does not flatten.", "Breaking into pieces is brittleness, a non-metal property."],
+                  ["Diamond and graphite are both carbon. Which statement is TRUE?", ["Both conduct electricity", "Both are soft", "Diamond is very hard while graphite conducts electricity", "Both are metals"], "C", "Same element, different forms.", "Diamond is the hardest substance; graphite conducts electricity."],
+                  ["Why is copper preferred for household wiring over iron?", ["Copper is a better conductor and more ductile", "Copper is a non-metal", "Iron conducts too well", "Copper is magnetic"], "A", "Compare conductivity and ductility.", "Copper conducts electricity very well and draws into wires easily."],
+                  ["Which pair consists of exceptions to general properties?", ["Iron and copper", "Oxygen and nitrogen", "Gold and silver", "Mercury and graphite"], "D", "One is a liquid metal, the other a conducting non-metal.", "Mercury (liquid metal) and graphite (conducting non-metal) are exceptions."]
+                ]
+              }
+            },
+            {
+              "slug": "g8-sci-metals-chemical",
+              "title": "Chemical Properties of Metals and Non-metals",
+              "objectives": [
+                "Describe reactions of metals and non-metals with oxygen",
+                "Classify oxides as basic or acidic",
+                "Describe reactions of metals with water and acids",
+                "Explain displacement reactions using reactivity"
+              ],
+              "intro": "Metals and non-metals differ not only in how they look and feel but also in how they react. Burning a magnesium ribbon gives a white ash that turns red litmus blue, while burning sulphur gives a gas that turns blue litmus red. Iron dipped in copper sulphate solution becomes coated with copper. These reactions follow patterns that help us predict what will happen and explain why gold stays shiny for centuries while iron rusts.",
+              "sections": [
+                [
+                  "Reaction with oxygen",
+                  "Metals react with oxygen to form metal oxides, which are basic in nature. Magnesium burns with a dazzling white flame to form magnesium oxide; dissolved in water, it forms magnesium hydroxide, which turns red litmus blue. Iron slowly reacts with oxygen and moisture to form rust. Non-metals react with oxygen to form non-metallic oxides, which are usually acidic. Sulphur burns with a blue flame forming sulphur dioxide; dissolved in water it forms sulphurous acid, which turns blue litmus red. Carbon burns to form carbon dioxide, which forms a weak acid in water."
+                ],
+                [
+                  "Reaction with water and acids",
+                  "Some metals react with water. Sodium and potassium react so vigorously with water that they catch fire, so they are stored under kerosene. Magnesium reacts with hot water, and iron reacts slowly with water and air to rust. Copper, silver and gold do not react with water. Many metals react with dilute acids to form a salt and hydrogen gas: zinc + dilute hydrochloric acid → zinc chloride + hydrogen. The hydrogen burns with a 'pop' sound when a lit matchstick is brought near. Non-metals generally do not react with water or dilute acids, which is why phosphorus, which catches fire in air, is safely stored under water."
+                ],
+                [
+                  "Displacement and reactivity",
+                  "Metals differ in how reactive they are. A more reactive metal can displace a less reactive metal from a solution of its salt. When an iron nail is placed in blue copper sulphate solution, iron displaces copper: iron + copper sulphate → iron sulphate + copper. The nail becomes coated with reddish-brown copper, and the solution turns from blue to light green. But copper cannot displace iron from iron sulphate, because copper is less reactive. A simplified reactivity order is: potassium > sodium > magnesium > aluminium > zinc > iron > copper > silver > gold. Gold and silver, at the bottom, hardly react, which is why they are found as pure metals and used in jewellery."
+                ]
+              ],
+              "definitions": [
+                ["Basic oxide", "A metal oxide that forms a base with water and turns red litmus blue."],
+                ["Acidic oxide", "A non-metal oxide that forms an acid with water and turns blue litmus red."],
+                ["Displacement reaction", "A reaction in which a more reactive element replaces a less reactive one in a compound."],
+                ["Reactivity series", "A list of metals in order of decreasing reactivity."]
+              ],
+              "examples": [
+                "Silver jewellery tarnishes slowly but does not rust like iron.",
+                "Zinc granules in dilute sulphuric acid release bubbles of hydrogen."
+              ],
+              "worked": [
+                {
+                  "problem": "Predict whether a reaction occurs: (a) zinc in copper sulphate solution, (b) copper in zinc sulphate solution.",
+                  "steps": [
+                    "Compare positions in the reactivity series: zinc is above copper.",
+                    "(a) Zinc is more reactive, so it displaces copper: copper deposits and the blue colour fades.",
+                    "(b) Copper is less reactive than zinc, so it cannot displace zinc: no reaction."
+                  ],
+                  "answer": "(a) Reaction: zinc sulphate and copper form. (b) No reaction."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Simplified reactivity series (most → least)",
+                "items": ["Potassium", "Sodium", "Magnesium", "Aluminium", "Zinc", "Iron", "Copper", "Silver", "Gold"]
+              },
+              "real_world": "Iron is protected from rust by coating it with more reactive zinc (galvanising). Sodium is stored under kerosene in laboratories for safety, and gold is used in electronics and jewellery because it does not corrode. Acid rain forms when acidic oxides of sulphur and nitrogen from factories dissolve in rain.",
+              "takeaways": [
+                "Metal oxides are basic; non-metal oxides are usually acidic.",
+                "Reactive metals react with water; many metals react with dilute acids to give hydrogen.",
+                "A more reactive metal displaces a less reactive one from its salt solution.",
+                "Gold and silver are least reactive and resist corrosion."
+              ],
+              "practice": [
+                ["Why is sodium stored under kerosene?", "It reacts vigorously with air and water."],
+                ["What gas is produced when zinc reacts with dilute HCl?", "Hydrogen."],
+                ["Will silver displace copper from copper sulphate?", "No; silver is less reactive."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Metal oxides are generally:", ["Acidic", "Basic", "Neutral", "Explosive"], "B", "Magnesium oxide turns red litmus blue.", "Metal oxides form bases with water."],
+                  ["Which metal is stored under kerosene?", ["Gold", "Copper", "Sodium", "Iron"], "C", "It reacts violently with water.", "Sodium is kept under kerosene."],
+                  ["Which gas is released when zinc reacts with dilute hydrochloric acid?", ["Hydrogen", "Oxygen", "Carbon dioxide", "Chlorine"], "A", "It burns with a pop sound.", "Metals and dilute acids release hydrogen."],
+                  ["Sulphur dioxide dissolved in water turns blue litmus:", ["Blue", "Green", "Yellow", "Red"], "D", "Non-metal oxides are acidic.", "Acidic solutions turn blue litmus red."]
+                ],
+                "MEDIUM": [
+                  ["An iron nail is kept in copper sulphate solution. What happens?", ["Nothing", "Copper is deposited on the nail and the solution turns greenish", "The nail turns silver", "Hydrogen is released"], "B", "Iron is more reactive than copper.", "Iron displaces copper; iron sulphate is light green."],
+                  ["Why is phosphorus stored under water?", ["It dissolves in water", "It reacts with water", "It catches fire in air", "It is a metal"], "C", "Water keeps away air.", "Phosphorus ignites in air, so it is kept under water."],
+                  ["Which metal does NOT react with water?", ["Gold", "Sodium", "Potassium", "Magnesium"], "A", "It stays shiny for centuries.", "Gold is unreactive with water."],
+                  ["Which is the correct reactivity order (most first)?", ["Copper > Zinc > Iron", "Iron > Magnesium > Copper", "Gold > Silver > Copper", "Magnesium > Zinc > Copper"], "D", "Check the reactivity series.", "Magnesium is above zinc, which is above copper."]
+                ],
+                "HARD": [
+                  ["Copper is placed in iron sulphate solution. The result is:", ["Iron is deposited", "No reaction, as copper is less reactive than iron", "Hydrogen gas forms", "The solution turns blue at once"], "B", "Compare reactivity.", "A less reactive metal cannot displace a more reactive one."],
+                  ["Why does acid rain form near some factories?", ["Metal oxides from chimneys are basic", "Factories release hydrogen", "Oxides of sulphur and nitrogen dissolve in rain forming acids", "Rain contains salt"], "C", "Non-metal oxides are acidic.", "Acidic oxides dissolve in rainwater to form acids."],
+                  ["A shiny grey metal X displaces copper from copper sulphate but not zinc from zinc sulphate. X could be:", ["Iron", "Silver", "Magnesium", "Gold"], "A", "X lies between zinc and copper.", "Iron is less reactive than zinc but more reactive than copper."],
+                  ["Why are gold and silver often found as free metals in nature?", ["They are very reactive", "They are non-metals", "They are liquids", "They are among the least reactive metals"], "D", "Low reactivity means they don't combine easily.", "Unreactive metals stay uncombined."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g8-sci-u-physics",
+      "title": "Physics: Force and Pressure",
+      "topics": [
+        {
+          "slug": "g8-sci-t-force-pressure",
+          "title": "Force and Pressure",
+          "description": "Kinds of forces, their effects, and pressure in solids, liquids and gases.",
+          "lessons": [
+            {
+              "slug": "g8-sci-forces",
+              "title": "Contact and Non-contact Forces",
+              "objectives": [
+                "Define force as a push or pull",
+                "Describe the effects of force",
+                "Distinguish contact forces from non-contact forces",
+                "Explain friction and how it can be increased or reduced"
+              ],
+              "intro": "Opening a door, kicking a football, lifting a bag and stretching a rubber band all involve pushing or pulling. In science, a push or a pull on an object is called a force. Forces arise from the interaction of at least two objects. We cannot see forces, but we see their effects every moment: things start moving, stop, speed up, change direction or change shape.",
+              "sections": [
+                [
+                  "Effects of force",
+                  "A force can (1) make a stationary object move, as when you push a parked cycle; (2) stop a moving object, as when a goalkeeper catches a ball; (3) change the speed of a moving object, making it faster or slower; (4) change the direction of motion, as when a batsman hits a ball; and (5) change the shape of an object, as when you press a ball of dough or squeeze a sponge. Forces have both size (magnitude) and direction. The SI unit of force is the newton (N). If two forces act in the same direction they add up; if they act in opposite directions, the net force is their difference, and the object moves in the direction of the larger force."
+                ],
+                [
+                  "Contact forces",
+                  "Contact forces act only when objects touch. Muscular force is the force applied using muscles, as in lifting or pushing. Friction is the force that opposes motion between two surfaces in contact; it is why a ball rolling on the ground eventually stops. Friction depends on the nature of the surfaces: rough surfaces produce more friction. Friction is useful, because without it we could not walk, write or hold objects. It can also be harmful, causing wear and tear and heat in machines. Friction is reduced using lubricants such as oil and grease, ball bearings and smooth surfaces, and increased using treads on tyres and grooves on shoe soles."
+                ],
+                [
+                  "Non-contact forces",
+                  "Some forces act from a distance. Magnetic force makes a magnet attract iron objects, or attract or repel another magnet, without touching. Electrostatic force acts between charged objects: a plastic comb rubbed in dry hair attracts small bits of paper. Gravitational force is the force of attraction between all objects; the Earth's gravity pulls everything towards it, which is why objects fall and why we have weight. Gravity also keeps the Moon in orbit around the Earth and the planets around the Sun."
+                ]
+              ],
+              "definitions": [
+                ["Force", "A push or pull on an object resulting from interaction with another object."],
+                ["Newton (N)", "The SI unit of force."],
+                ["Friction", "A contact force that opposes relative motion between surfaces."],
+                ["Gravitational force", "The force of attraction between objects with mass."],
+                ["Electrostatic force", "The force between electrically charged objects."]
+              ],
+              "examples": [
+                "A tug-of-war: if one team pulls with 500 N and the other with 450 N, the rope moves towards the first team with a net force of 50 N.",
+                "Chalk powder on a carrom board reduces friction."
+              ],
+              "worked": [
+                {
+                  "problem": "Two boys push a box: one with 40 N to the right and the other with 25 N to the left. Find the net force and its direction.",
+                  "steps": [
+                    "The forces act in opposite directions, so subtract: 40 − 25 = 15 N.",
+                    "The larger force is to the right, so the net force is to the right."
+                  ],
+                  "answer": "15 N to the right"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Types of forces",
+                "columns": ["Force", "Contact?", "Example"],
+                "rows": [
+                  ["Muscular", "Yes", "Lifting a bucket"],
+                  ["Friction", "Yes", "Brakes stopping a cycle"],
+                  ["Magnetic", "No", "Magnet attracting pins"],
+                  ["Electrostatic", "No", "Comb attracting paper bits"],
+                  ["Gravitational", "No", "An apple falling"]
+                ]
+              },
+              "real_world": "Engineers design tyre treads to increase friction for safe braking and use lubricants and ball bearings to reduce friction in engines. Maglev trains use magnetic forces to float above the track with almost no friction, and satellites stay in orbit because of gravity.",
+              "takeaways": [
+                "A force is a push or pull measured in newtons.",
+                "Forces can change an object's motion, speed, direction or shape.",
+                "Muscular force and friction are contact forces.",
+                "Magnetic, electrostatic and gravitational forces act at a distance."
+              ],
+              "practice": [
+                ["Give two effects of force.", "Change of speed and change of shape (also direction, start/stop motion)."],
+                ["Name one way to reduce friction.", "Lubricants, ball bearings, polishing."],
+                ["Why does a ball rolling on grass stop?", "Friction opposes its motion."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["A force is a:", ["Type of energy only", "Push or pull", "Unit of speed", "Kind of material"], "B", "Think about opening a door.", "Force is a push or a pull."],
+                  ["The SI unit of force is:", ["Joule", "Watt", "Newton", "Metre"], "C", "Named after a famous scientist.", "Force is measured in newtons."],
+                  ["Which is a non-contact force?", ["Gravitational force", "Friction", "Muscular force", "Pushing a cart"], "A", "It acts from a distance.", "Gravity acts without contact."],
+                  ["Which force stops a rolling ball?", ["Magnetic force", "Electrostatic force", "Muscular force", "Friction"], "D", "It opposes motion between surfaces.", "Friction slows and stops the ball."]
+                ],
+                "MEDIUM": [
+                  ["Two forces of 30 N and 20 N act on a box in the same direction. The net force is:", ["10 N", "50 N", "600 N", "1.5 N"], "B", "Same direction: add.", "30 + 20 = 50 N."],
+                  ["Why do tyres have treads?", ["To reduce friction", "To look attractive", "To increase friction and grip the road", "To reduce weight"], "C", "Think about wet roads.", "Treads increase friction for better grip."],
+                  ["A comb rubbed in dry hair attracts bits of paper. This is due to:", ["Electrostatic force", "Magnetic force", "Friction", "Muscular force"], "A", "The comb becomes charged.", "Charged objects exert electrostatic force."],
+                  ["Squeezing a rubber ball shows that force can:", ["Change only speed", "Stop motion", "Change direction", "Change shape"], "D", "The ball's shape changes.", "Force can change the shape of an object."]
+                ],
+                "HARD": [
+                  ["In a tug-of-war, Team A pulls with 600 N and Team B with 600 N. What happens?", ["Team A wins", "The rope does not move", "Team B wins", "The rope breaks immediately"], "B", "Equal and opposite forces.", "Net force is zero, so the rope stays still."],
+                  ["Why are ball bearings used in cycle wheels?", ["To increase friction", "To add weight", "To replace sliding friction with smaller rolling friction", "To attract magnets"], "C", "Rolling is easier than sliding.", "Rolling friction is much smaller than sliding friction."],
+                  ["Which statement about friction is TRUE?", ["Without friction we could not walk", "Friction is always harmful", "Friction acts only on wet surfaces", "Friction helps objects speed up forever"], "A", "Think about walking on ice.", "Friction between feet and ground lets us walk."],
+                  ["Which force keeps the Moon in orbit around the Earth?", ["Friction", "Magnetic force", "Electrostatic force", "Gravitational force"], "D", "It acts between all masses.", "Gravity between Earth and Moon keeps it in orbit."]
+                ]
+              }
+            },
+            {
+              "slug": "g8-sci-pressure",
+              "title": "Pressure in Solids, Liquids and Gases",
+              "objectives": [
+                "Define pressure and state its SI unit",
+                "Explain how pressure depends on force and area",
+                "Describe pressure exerted by liquids",
+                "Explain atmospheric pressure"
+              ],
+              "intro": "Why is it easier to cut vegetables with a sharp knife than with a blunt one, and why do camels walk easily on sand while people sink? The answer is pressure. The same force can have very different effects depending on the area over which it acts. Pressure is the force acting per unit area. Liquids and gases also exert pressure, and the air around us presses on us with a surprisingly large force.",
+              "sections": [
+                [
+                  "Pressure = force ÷ area",
+                  "Pressure is calculated as force divided by the area on which it acts: P = F ÷ A. The SI unit of pressure is the pascal (Pa), equal to one newton per square metre (N/m²). For the same force, a smaller area gives a larger pressure. A sharp knife has a very thin edge, so a small force produces a large pressure that cuts easily. Nails and needles have pointed tips for the same reason. On the other hand, a larger area reduces pressure: school bags have broad straps, heavy vehicles and tractors have wide tyres, and camels have broad feet so they do not sink in sand."
+                ],
+                [
+                  "Pressure in liquids",
+                  "Liquids exert pressure on the walls and base of their containers. Make three holes at different heights in a plastic bottle filled with water: water spurts farthest from the lowest hole, showing that liquid pressure increases with depth. At the same depth, a liquid exerts equal pressure in all directions. This is why dams are built much thicker at the bottom than at the top, and why divers wear special suits for deep water. Water supply tanks are placed high above buildings so that water reaches taps with enough pressure."
+                ],
+                [
+                  "Atmospheric pressure",
+                  "The air above us has weight and presses down on everything. The pressure exerted by the air is called atmospheric pressure. At sea level it is about 1,01,325 Pa, roughly the weight of 10 tonnes on every square metre. We do not get crushed because the pressure inside our bodies balances the air pressure outside. Atmospheric pressure decreases with height, which is why mountaineers may suffer nosebleeds and why aircraft cabins are pressurised. A rubber sucker sticks to a smooth wall because pressing it pushes out air, and the atmospheric pressure outside then holds it in place. Drinking through a straw also depends on atmospheric pressure pushing the liquid up."
+                ]
+              ],
+              "definitions": [
+                ["Pressure", "Force acting per unit area, P = F/A."],
+                ["Pascal (Pa)", "The SI unit of pressure, equal to 1 N/m²."],
+                ["Atmospheric pressure", "The pressure exerted by the weight of the air."],
+                ["Thrust", "Force acting perpendicular to a surface."]
+              ],
+              "examples": [
+                "A box weighing 400 N resting on a face of 2 m² exerts 200 Pa.",
+                "Snowshoes spread a person's weight to prevent sinking in snow."
+              ],
+              "worked": [
+                {
+                  "problem": "A brick weighs 30 N and has faces of area 0.05 m², 0.02 m² and 0.01 m². Find the greatest and least pressure it can exert on the ground.",
+                  "steps": [
+                    "Pressure is greatest when the area is smallest: 30 ÷ 0.01 = 3,000 Pa.",
+                    "Pressure is least when the area is largest: 30 ÷ 0.05 = 600 Pa."
+                  ],
+                  "answer": "Greatest 3,000 Pa; least 600 Pa."
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Large or small pressure?",
+                "items": [
+                  ["Sharp knife, needle, nail tip", "Small area → large pressure"],
+                  ["Wide bag straps, tractor tyres", "Large area → small pressure"],
+                  ["Dam wall thicker at base", "Liquid pressure increases with depth"],
+                  ["Suction hook on a wall", "Atmospheric pressure holds it"]
+                ]
+              },
+              "real_world": "Engineers design dam walls, submarines and water supply systems using liquid pressure. Doctors measure blood pressure, weather stations measure air pressure to forecast weather, and pressure cookers raise the pressure inside so food cooks faster.",
+              "takeaways": [
+                "Pressure = force ÷ area, measured in pascals.",
+                "Smaller area → greater pressure for the same force.",
+                "Liquid pressure increases with depth and acts in all directions.",
+                "Atmospheric pressure is large but balanced by pressure inside our bodies."
+              ],
+              "practice": [
+                ["A force of 600 N acts on 3 m². Find the pressure.", "200 Pa"],
+                ["Why are dams thicker at the bottom?", "Water pressure increases with depth."],
+                ["Why are cutting tools sharpened?", "A thin edge reduces area and increases pressure."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Pressure is:", ["Force × area", "Force ÷ area", "Area ÷ force", "Force + area"], "B", "Force per unit area.", "P = F ÷ A."],
+                  ["The SI unit of pressure is the:", ["Newton", "Joule", "Pascal", "Watt"], "C", "1 N/m².", "Pressure is measured in pascals."],
+                  ["Why does a sharp knife cut better than a blunt one?", ["Its thin edge gives greater pressure", "It is heavier", "It is made of gold", "It has more friction"], "A", "Smaller area, same force.", "A thin edge reduces area, increasing pressure."],
+                  ["Liquid pressure increases with:", ["Width of container", "Colour of liquid", "Time", "Depth"], "D", "Remember the bottle with three holes.", "Deeper points have greater liquid pressure."]
+                ],
+                "MEDIUM": [
+                  ["A force of 500 N acts on an area of 2.5 m². The pressure is:", ["1,250 Pa", "200 Pa", "502.5 Pa", "2,000 Pa"], "B", "Divide force by area.", "500 ÷ 2.5 = 200 Pa."],
+                  ["School bags have wide straps to:", ["Increase pressure on shoulders", "Look stylish", "Reduce pressure on the shoulders", "Increase the weight"], "C", "Larger area means…", "Wider straps spread the force, reducing pressure."],
+                  ["Why do we not feel crushed by atmospheric pressure?", ["Pressure inside our body balances it", "Air has no weight", "Atmospheric pressure is zero at sea level", "Clothes protect us"], "A", "Inside and outside pressures.", "Internal body pressure balances the air pressure."],
+                  ["Water spurts farthest from which hole of a filled bottle?", ["The top hole", "The middle hole", "All equally", "The bottom hole"], "D", "Pressure increases with depth.", "The deepest hole has the highest pressure."]
+                ],
+                "HARD": [
+                  ["A 60 N box has faces of 0.3 m² and 0.1 m². Which statement is TRUE?", ["It exerts 200 Pa on the larger face and 600 Pa on the smaller face", "It exerts 600 Pa on the larger face and 200 Pa on the smaller face", "It exerts 18 Pa on both faces", "It exerts 6 Pa on the smaller face"], "B", "P = F/A for each face.", "60 ÷ 0.3 = 200 Pa; 60 ÷ 0.1 = 600 Pa."],
+                  ["Mountaineers may get nosebleeds at high altitude because:", ["Air pressure increases with height", "The Sun is closer", "Outside air pressure is lower than pressure inside the body", "Gravity becomes stronger"], "C", "How does pressure change with height?", "Lower outside pressure lets higher internal pressure push blood out of small vessels."],
+                  ["Why is an overhead water tank built high above a building?", ["To increase the water pressure at the taps", "To keep the water cold", "To prevent evaporation", "To reduce the amount of water"], "A", "Height of water column and pressure.", "A taller water column gives greater pressure at the taps."],
+                  ["A suction hook stays on a smooth wall because:", ["Glue holds it", "Gravity pulls it into the wall", "Magnetism", "Atmospheric pressure outside pushes it against the wall"], "D", "Pressing it pushes out the air behind it.", "With little air behind it, outside air pressure holds it in place."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

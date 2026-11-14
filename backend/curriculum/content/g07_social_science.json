@@ -1,0 +1,561 @@
+{
+  "grade": 7,
+  "subject": "Social Science",
+  "units": [
+    {
+      "slug": "g7-sst-u-history",
+      "title": "History: Medieval India",
+      "topics": [
+        {
+          "slug": "g7-sst-t-medieval-india",
+          "title": "Kingdoms of Medieval India",
+          "description": "The Delhi Sultanate and the Mughal Empire: how they ruled and what they left behind.",
+          "lessons": [
+            {
+              "slug": "g7-sst-delhi-sultanate",
+              "title": "The Delhi Sultanate",
+              "objectives": [
+                "Name the dynasties of the Delhi Sultanate in order",
+                "Describe how the Sultans expanded and governed their territory",
+                "Explain the iqta system and the market reforms of Alauddin Khalji",
+                "Evaluate the policies of Muhammad bin Tughluq"
+              ],
+              "intro": "From the late twelfth century, Delhi became the capital of a powerful kingdom ruled by Sultans. For over three hundred years, from 1206 to 1526, five dynasties ruled from Delhi: the Mamluks (often called the Slave dynasty), the Khaljis, the Tughluqs, the Sayyids and the Lodis. Together their rule is called the Delhi Sultanate. Historians learn about this period from coins, buildings and inscriptions, and from chronicles called tawarikh, written in Persian by scholars at the court.",
+              "sections": [
+                [
+                  "Founding and expansion",
+                  "Qutbuddin Aibak, a former slave-general, founded the dynasty in 1206 and began building the Qutb Minar, which was completed by his successor Iltutmish. Iltutmish strengthened the Sultanate and nominated his daughter Raziyya as his successor; she became Sultan in 1236, one of very few women rulers of the time, but was removed after four years by nobles who did not accept her authority. In the early years the Sultans controlled only fortified towns held by garrisons and had little control over the countryside. Later rulers such as Alauddin Khalji and Muhammad bin Tughluq sent armies far into the south and brought large areas under the Sultanate, at least for a time."
+                ],
+                [
+                  "Administration and the iqta system",
+                  "The Sultans needed loyal officers to govern distant areas. Instead of appointing powerful aristocrats, early Sultans often relied on their special slaves, called bandagan, who were trained for important posts and depended entirely on the Sultan. Territory was divided into lands called iqtas, and the officer in charge, the iqtadar or muqti, collected revenue from it, paid his soldiers from it and kept order. Iqtas were not hereditary and officers were transferred, so that they would not become too independent. Accountants were appointed to check the amounts collected."
+                ],
+                [
+                  "Alauddin Khalji and Muhammad bin Tughluq",
+                  "To defend against Mongol attacks, Alauddin Khalji (ruled 1296 to 1316) raised a large standing army. He paid soldiers in cash rather than with iqtas, and to make sure they could live on their salaries, he controlled the prices of goods in Delhi through strict market regulations and inspectors. Muhammad bin Tughluq (ruled 1324 to 1351) tried bold experiments. He shifted people from Delhi to Daulatabad in the Deccan, causing great hardship, and introduced a 'token' currency of copper coins that were easily forged, so the experiment failed. His taxes during a famine also led to rebellions. By the time of the Lodis, the Sultanate was much weaker, and in 1526 Babur defeated Ibrahim Lodi at the First Battle of Panipat."
+                ]
+              ],
+              "definitions": [
+                ["Sultan", "The title of the rulers of the Delhi Sultanate."],
+                ["Iqta", "A territory whose revenue was assigned to an officer in return for military and administrative service."],
+                ["Muqti / iqtadar", "The holder of an iqta."],
+                ["Tawarikh", "Histories written in Persian by court scholars."],
+                ["Garrison town", "A fortified town where soldiers were stationed."]
+              ],
+              "examples": [
+                "The Qutb Minar in Delhi was begun by Qutbuddin Aibak and completed by Iltutmish.",
+                "Alauddin Khalji's price controls set fixed rates for grain, cloth and horses in Delhi's markets."
+              ],
+              "worked": [
+                {
+                  "problem": "Why did the Sultans make iqtas non-hereditary and transfer iqtadars often?",
+                  "steps": [
+                    "An iqtadar collected revenue and commanded soldiers in his area.",
+                    "If he held the same land for life and passed it to his sons, he could build local power and rebel.",
+                    "Frequent transfers and checks by accountants kept iqtadars dependent on the Sultan."
+                  ],
+                  "answer": "To prevent iqtadars from becoming independent local rulers and to keep central control."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Dynasties of the Delhi Sultanate (1206–1526)",
+                "items": ["Mamluk (1206–1290)", "Khalji (1290–1320)", "Tughluq (1320–1414)", "Sayyid (1414–1451)", "Lodi (1451–1526)"]
+              },
+              "real_world": "Monuments of the Sultanate period, such as the Qutb Minar, Alai Darwaza and Tughlaqabad Fort, are visited by millions of tourists and are UNESCO or national heritage sites. Debates about controlling prices and paying government employees in cash or kind continue in modern governments too.",
+              "takeaways": [
+                "Five dynasties ruled the Delhi Sultanate from 1206 to 1526.",
+                "Sultans governed through iqtas held by transferable officers.",
+                "Alauddin Khalji paid soldiers in cash and controlled market prices.",
+                "Muhammad bin Tughluq's capital shift and token currency failed."
+              ],
+              "practice": [
+                ["Who was the only woman ruler of the Delhi Sultanate?", "Raziyya Sultan."],
+                ["Which battle ended the Delhi Sultanate?", "The First Battle of Panipat, 1526."],
+                ["Why did the token currency fail?", "The copper coins were easily forged."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Who founded the Delhi Sultanate in 1206?", ["Babur", "Qutbuddin Aibak", "Akbar", "Ibrahim Lodi"], "B", "He began building the Qutb Minar.", "Qutbuddin Aibak founded the Mamluk dynasty in 1206."],
+                  ["Which was the last dynasty of the Delhi Sultanate?", ["Khalji", "Tughluq", "Lodi", "Mamluk"], "C", "Its last ruler lost at Panipat in 1526.", "The Lodis were the last dynasty."],
+                  ["Raziyya Sultan was the daughter of:", ["Iltutmish", "Alauddin Khalji", "Babur", "Firuz Shah Tughluq"], "A", "He completed the Qutb Minar.", "Iltutmish nominated his daughter Raziyya."],
+                  ["Court histories of the Sultanate were written in:", ["Sanskrit", "Tamil", "English", "Persian"], "D", "It was the language of the court.", "Tawarikh were written in Persian."]
+                ],
+                "MEDIUM": [
+                  ["What was an iqta?", ["A tax on salt", "Land whose revenue was assigned to an officer", "A Mughal coin", "A type of mosque"], "B", "The officer paid soldiers from it.", "An iqta was a territory assigned to an iqtadar for revenue and service."],
+                  ["Why did Alauddin Khalji control market prices?", ["To please merchants", "To stop farming", "So soldiers paid in cash could afford goods", "To increase prices"], "C", "He kept a large standing army.", "Low controlled prices let soldiers live on their cash salaries."],
+                  ["Muhammad bin Tughluq shifted his capital to:", ["Daulatabad", "Agra", "Lahore", "Calcutta"], "A", "It is in the Deccan.", "He moved people from Delhi to Daulatabad."],
+                  ["Why were early Sultans' territories difficult to control beyond towns?", ["There were no towns", "They had no army", "The rivers were frozen", "The countryside was far from garrison towns and hard to reach"], "D", "Control started from fortified towns.", "Early control was limited to garrison towns; the countryside was harder to govern."]
+                ],
+                "HARD": [
+                  ["Why did Sultans prefer bandagan (special slaves) as officers?", ["They were cheaper", "They depended entirely on the Sultan and were loyal", "They were foreign kings", "They refused to fight"], "B", "Whom would they be loyal to?", "Slaves trained by the Sultan owed everything to him, ensuring loyalty."],
+                  ["Which was a result of the token currency experiment?", ["Gold coins became common", "Trade with China stopped", "Forged copper coins flooded the market", "Prices fell sharply"], "C", "Copper coins were easy to copy.", "People made fake coins, so the scheme was withdrawn."],
+                  ["Why were iqtadars transferred frequently?", ["To prevent them from building independent power", "To learn new languages", "Because iqtas were very small", "To build more mosques"], "A", "Think about rebellion.", "Transfers stopped iqtadars from becoming local rulers."],
+                  ["What is the strongest reason historians use coins and inscriptions, not only chronicles?", ["Chronicles were never written", "Coins are more beautiful", "Inscriptions are always longer", "Chronicles reflect the views of court writers, so other sources help check them"], "D", "Who wrote the chronicles and for whom?", "Court historians wrote for rulers; independent sources help verify their accounts."]
+                ]
+              }
+            },
+            {
+              "slug": "g7-sst-mughal-empire",
+              "title": "The Mughal Empire",
+              "objectives": [
+                "Identify the major Mughal rulers and their contributions",
+                "Explain the mansabdari and zabt systems",
+                "Describe Akbar's policy of sulh-i kul",
+                "Explain why the Mughal Empire declined after Aurangzeb"
+              ],
+              "intro": "In 1526 Babur, a ruler from Central Asia, defeated Ibrahim Lodi at Panipat and founded the Mughal Empire. Over the next 150 years his successors built one of the largest and richest empires in the world, covering most of the subcontinent. The Mughals created a strong administration, encouraged trade, art and architecture, and left monuments such as the Taj Mahal and the Red Fort.",
+              "sections": [
+                [
+                  "Major rulers",
+                  "Babur (1526–1530) founded the empire. His son Humayun lost it to Sher Shah Suri, an Afghan ruler who introduced efficient administration and built roads, and won it back only in 1555. Akbar (1556–1605) became emperor at thirteen and expanded the empire through conquest and alliances, including marriages with Rajput families. Jahangir (1605–1627) and Shah Jahan (1628–1658) continued his work; Shah Jahan built the Taj Mahal in Agra and the city of Shahjahanabad in Delhi. Aurangzeb (1658–1707) extended the empire to its greatest size but faced long wars in the Deccan and rebellions."
+                ],
+                [
+                  "Mansabdars and revenue",
+                  "The Mughals enrolled nobles and officers as mansabdars. Each mansabdar held a rank, or mansab, which decided his salary and military responsibilities. Rank was shown by two numbers: zat, which fixed his position and salary, and sawar, the number of cavalrymen he had to maintain. Mansabdars were paid through revenue assignments called jagirs, and like iqtas these were transferable. Akbar's finance minister Todar Mal carried out a careful survey of crop yields and prices over ten years. On this basis, taxes were fixed in cash for each crop; this was the zabt system. Provinces called subas were governed by a subadar."
+                ],
+                [
+                  "Akbar's ideas and the decline",
+                  "Akbar held discussions with scholars of many faiths in the Ibadat Khana at Fatehpur Sikri. He developed the idea of sulh-i kul, or 'universal peace', a policy of tolerance that did not discriminate between people of different religions and focused on justice and peace. His court historian Abul Fazl described his reign in the Akbar Nama. After Aurangzeb's death in 1707, the empire weakened: long wars had drained resources, mansabdars and governors became powerful in their own regions, and new powers such as the Marathas, Sikhs and later the British East India Company rose."
+                ]
+              ],
+              "definitions": [
+                ["Mansabdar", "A Mughal officer holding a rank (mansab) that fixed his salary and military duties."],
+                ["Zat", "The numerical rank determining a mansabdar's position and salary."],
+                ["Jagir", "A revenue assignment given to a mansabdar instead of cash salary."],
+                ["Zabt", "A revenue system fixing cash taxes per crop based on surveyed yields and prices."],
+                ["Sulh-i kul", "Akbar's policy of universal peace and tolerance."]
+              ],
+              "examples": [
+                "A mansabdar with a sawar rank of 5,000 had to maintain 5,000 cavalrymen.",
+                "Fatehpur Sikri, built by Akbar, includes the Buland Darwaza and the Ibadat Khana."
+              ],
+              "worked": [
+                {
+                  "problem": "Compare the Mughal mansabdari system with the Sultanate iqta system.",
+                  "steps": [
+                    "Similarity: both assigned revenue from land to officers who maintained soldiers.",
+                    "Similarity: both iqtas and jagirs were transferable, to prevent officers becoming independent.",
+                    "Difference: Mughal mansabdars had precise numerical ranks (zat and sawar) that fixed salary and cavalry.",
+                    "Difference: Mughal revenue was based on detailed surveys (zabt) under Todar Mal."
+                  ],
+                  "answer": "Both used transferable revenue assignments; the Mughals added a precise rank system and survey-based taxation."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Great Mughals",
+                "items": ["Babur (1526–30)", "Humayun (1530–40, 1555–56)", "Akbar (1556–1605)", "Jahangir (1605–27)", "Shah Jahan (1628–58)", "Aurangzeb (1658–1707)"]
+              },
+              "real_world": "The Taj Mahal, Red Fort and Fatehpur Sikri are World Heritage Sites that attract visitors from across the world. Akbar's idea of tolerance among people of different faiths is often discussed as an early example of the principles behind a secular state.",
+              "takeaways": [
+                "Babur founded the Mughal Empire in 1526 after the First Battle of Panipat.",
+                "Mansabdars held zat and sawar ranks and were paid through transferable jagirs.",
+                "Todar Mal's zabt system fixed cash taxes from surveyed crop data.",
+                "Akbar promoted sulh-i kul; the empire declined after Aurangzeb."
+              ],
+              "practice": [
+                ["Who built the Taj Mahal?", "Shah Jahan."],
+                ["What did the sawar rank indicate?", "The number of cavalrymen a mansabdar had to maintain."],
+                ["Name the book that records Akbar's reign.", "Akbar Nama by Abul Fazl."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Who founded the Mughal Empire?", ["Akbar", "Babur", "Humayun", "Shah Jahan"], "B", "He won the First Battle of Panipat.", "Babur founded the empire in 1526."],
+                  ["The Taj Mahal was built by:", ["Akbar", "Aurangzeb", "Shah Jahan", "Jahangir"], "C", "He built it in memory of his wife.", "Shah Jahan built the Taj Mahal in Agra."],
+                  ["Who defeated Humayun and ruled for some years?", ["Sher Shah Suri", "Ibrahim Lodi", "Shivaji", "Babur"], "A", "He was an Afghan ruler known for roads.", "Sher Shah Suri took power until Humayun returned in 1555."],
+                  ["Mughal officers holding ranks were called:", ["Sultans", "Iqtadars", "Zamindars only", "Mansabdars"], "D", "From the word mansab.", "Officers with a rank (mansab) were mansabdars."]
+                ],
+                "MEDIUM": [
+                  ["Akbar's policy of universal peace was called:", ["Zabt", "Sulh-i kul", "Jagir", "Iqta"], "B", "It meant tolerance for all.", "Sulh-i kul means universal peace."],
+                  ["Who organised the zabt revenue system?", ["Abul Fazl", "Birbal", "Todar Mal", "Babur"], "C", "Akbar's finance minister.", "Todar Mal surveyed crops and fixed cash taxes."],
+                  ["A jagir was:", ["A revenue assignment instead of cash salary", "A Mughal palace", "A type of army", "A religious book"], "A", "Mansabdars were paid through it.", "Jagirs assigned land revenue to mansabdars."],
+                  ["Where did Akbar hold religious discussions?", ["Red Fort", "Taj Mahal", "Qutb Minar", "Ibadat Khana at Fatehpur Sikri"], "D", "It means 'house of worship'.", "The Ibadat Khana at Fatehpur Sikri hosted these debates."]
+                ],
+                "HARD": [
+                  ["A mansabdar has zat 3,000 and sawar 2,000. What does sawar 2,000 mean?", ["His salary was ₹2,000", "He had to maintain 2,000 cavalrymen", "He governed 2,000 villages", "He was 2,000th in rank"], "B", "Sawar relates to horsemen.", "The sawar number gave the cavalry he had to keep."],
+                  ["Which was NOT a reason for Mughal decline after 1707?", ["Long wars draining resources", "Powerful regional governors", "The invention of printing in India", "Rise of Marathas and Sikhs"], "C", "Look for an unrelated cause.", "Printing was not a cause; the others weakened central control."],
+                  ["Why were jagirs made transferable?", ["To stop mansabdars from building local power bases", "To reward farmers", "To increase rainfall", "Because jagirs were in foreign countries"], "A", "The same idea as transferable iqtas.", "Transfers prevented officers from becoming independent rulers."],
+                  ["Why did Akbar form marriage alliances with Rajput families?", ["To end trade", "To start a war with them", "To change the capital", "To win their loyalty and strengthen the empire"], "D", "Alliances help rule large areas.", "Alliances brought powerful Rajput rulers into Mughal service."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g7-sst-u-geography",
+      "title": "Geography: Our Environment",
+      "topics": [
+        {
+          "slug": "g7-sst-t-environment",
+          "title": "The Environment",
+          "description": "The parts of our environment and the air and water around us.",
+          "lessons": [
+            {
+              "slug": "g7-sst-environment-components",
+              "title": "Components of the Environment",
+              "objectives": [
+                "Define environment and name its natural and human components",
+                "Describe the four domains: lithosphere, hydrosphere, atmosphere and biosphere",
+                "Explain what an ecosystem is",
+                "Explain how human activities change the environment"
+              ],
+              "intro": "Everything around us, from the air we breathe and the water we drink to the trees, animals, roads and buildings, makes up our environment. The word comes from the French 'environner', meaning to surround. The environment provides us with resources and a place to live, but it can also be harmed by the way we use it. Understanding its parts helps us live in balance with nature.",
+              "sections": [
+                [
+                  "Natural and human components",
+                  "The natural environment includes land, water, air, plants and animals. The human environment includes people and their communities, and the human-made environment includes buildings, roads, bridges, parks, factories and monuments. Natural environment has two parts. The biotic part is everything living, and the abiotic part is non-living, such as land, water and air. All of these are linked: plants need soil, water and sunlight; animals need plants; and people depend on all of them."
+                ],
+                [
+                  "The four domains",
+                  "The solid outer layer of the Earth, made of rocks and soil, is the lithosphere. It gives us land for farming, forests, minerals and space to live. The hydrosphere is all the water on Earth, in oceans, rivers, lakes, groundwater and ice. About 97 per cent of it is salty sea water, and only a small fraction is fresh water available for use. The atmosphere is the blanket of air around the Earth, mostly nitrogen (78 per cent) and oxygen (21 per cent); it protects us from harmful rays of the Sun. The biosphere is the narrow zone where land, water and air meet and support life."
+                ],
+                [
+                  "Ecosystems and human impact",
+                  "An ecosystem is a system formed by living organisms interacting with each other and with their surroundings. A pond, a forest and a desert are ecosystems. In a forest, trees provide food and shelter, deer eat plants, tigers eat deer, and fungi break down dead matter, returning nutrients to the soil. Humans change the environment more than any other species. Early people adapted to nature; with the growth of farming, industry, cities and transport, people have modified it on a large scale. This has brought comfort but also pollution, loss of forests and climate change, so careful management is necessary."
+                ]
+              ],
+              "definitions": [
+                ["Environment", "Everything that surrounds us, natural and human-made."],
+                ["Lithosphere", "The solid crust of the Earth made of rocks and soil."],
+                ["Hydrosphere", "All the water on the Earth's surface and underground."],
+                ["Atmosphere", "The layer of air surrounding the Earth."],
+                ["Ecosystem", "Living things interacting with each other and with their non-living surroundings."]
+              ],
+              "examples": [
+                "A mangrove forest in the Sundarbans is an ecosystem where tigers, crabs, fish and trees depend on each other.",
+                "A dam is a human-made feature that changes a river's natural flow."
+              ],
+              "worked": [
+                {
+                  "problem": "Identify the domain for each: (a) glacier, (b) ozone layer, (c) soil, (d) a coral reef with fish.",
+                  "steps": [
+                    "(a) A glacier is frozen water → hydrosphere.",
+                    "(b) The ozone layer is part of the air envelope → atmosphere.",
+                    "(c) Soil is part of the Earth's crust → lithosphere.",
+                    "(d) A reef with living organisms where water, land and air meet → biosphere."
+                  ],
+                  "answer": "(a) hydrosphere, (b) atmosphere, (c) lithosphere, (d) biosphere."
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "Four domains of the Earth",
+                "items": [
+                  ["Lithosphere", "Rocks, soil, landforms"],
+                  ["Hydrosphere", "Oceans, rivers, lakes, ice"],
+                  ["Atmosphere", "Air: nitrogen, oxygen, other gases"],
+                  ["Biosphere", "Zone of life where the three meet"]
+                ]
+              },
+              "real_world": "World Environment Day on 5 June reminds people worldwide of their responsibility to the environment. Decisions about building a highway or a factory now require an Environmental Impact Assessment to check how the project will affect land, water, air and living things.",
+              "takeaways": [
+                "The environment has natural, human and human-made components.",
+                "Lithosphere, hydrosphere and atmosphere meet in the biosphere, the zone of life.",
+                "An ecosystem links living and non-living things.",
+                "Human activities modify the environment and need careful management."
+              ],
+              "practice": [
+                ["Which gas makes up most of the atmosphere?", "Nitrogen (about 78%)."],
+                ["Give two examples of human-made environment.", "Roads and buildings (also bridges, parks)."],
+                ["What percentage of the Earth's water is in the oceans?", "About 97%."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The solid crust of the Earth is called the:", ["Hydrosphere", "Lithosphere", "Atmosphere", "Biosphere"], "B", "'Litho' means stone.", "The lithosphere is the rocky outer layer."],
+                  ["Which is a human-made component of the environment?", ["River", "Mountain", "Bridge", "Forest"], "C", "People built it.", "A bridge is built by humans."],
+                  ["Which gas forms about 21% of the atmosphere?", ["Oxygen", "Nitrogen", "Carbon dioxide", "Argon"], "A", "We breathe it in.", "Oxygen is about 21% of air."],
+                  ["The zone where land, water and air support life is the:", ["Lithosphere", "Atmosphere", "Hydrosphere", "Biosphere"], "D", "'Bio' means life.", "The biosphere is the zone of life."]
+                ],
+                "MEDIUM": [
+                  ["Which is an abiotic component of a pond ecosystem?", ["Fish", "Water", "Algae", "Frog"], "B", "Abiotic means non-living.", "Water is non-living."],
+                  ["Most of the Earth's water is:", ["Fresh water in rivers", "Ice in mountains", "Salty water in oceans", "Underground water"], "C", "Think of how much of the Earth is ocean.", "About 97% of water is in salty oceans."],
+                  ["An ecosystem is best described as:", ["Living organisms interacting with each other and their surroundings", "Only the animals of a forest", "A collection of rocks", "Only human settlements"], "A", "It includes both living and non-living parts.", "Ecosystems involve interactions among organisms and with their environment."],
+                  ["How did early humans mainly relate to the environment?", ["They built large factories", "They polluted rivers with plastic", "They built dams everywhere", "They adapted to nature with little modification"], "D", "Think of hunter-gatherers.", "Early humans adapted to their surroundings rather than changing them greatly."]
+                ],
+                "HARD": [
+                  ["Why is only a small part of the hydrosphere directly useful for drinking?", ["Water evaporates daily", "Most water is salty or frozen", "Water is in the atmosphere only", "Fresh water is poisonous"], "B", "Where is most water stored?", "Most water is salty sea water or locked in ice."],
+                  ["A new highway is planned through a forest. Which tool assesses its effects on land, water, air and wildlife?", ["A census", "A budget", "An Environmental Impact Assessment", "An election"], "C", "It studies environmental effects before building.", "EIAs evaluate how projects will affect the environment."],
+                  ["Which statement about the atmosphere is correct?", ["It protects living things from harmful solar radiation", "It is mostly oxygen", "It is part of the lithosphere", "It has no role in weather"], "A", "Think about the ozone layer.", "The atmosphere, including ozone, shields life from harmful rays."],
+                  ["Removing all fungi and bacteria from a forest would most likely:", ["Increase soil fertility", "Have no effect", "Make trees grow faster", "Stop the recycling of nutrients from dead matter"], "D", "What do decomposers do?", "Decomposers return nutrients to the soil; without them nutrients stay locked in dead matter."]
+                ]
+              }
+            },
+            {
+              "slug": "g7-sst-air-water",
+              "title": "Air and Water",
+              "objectives": [
+                "Describe the composition and layers of the atmosphere",
+                "Distinguish weather from climate",
+                "Explain the water cycle",
+                "Describe ocean movements and the causes of water scarcity"
+              ],
+              "intro": "Air and water are the two most important resources for life. We can survive without food for weeks, but without water for only a few days and without air for only a few minutes. The atmosphere controls weather and climate, and water moves endlessly between the oceans, the air and the land. In this lesson we study how air and water behave and why we must protect them.",
+              "sections": [
+                [
+                  "The atmosphere and weather",
+                  "The atmosphere is divided into layers. The troposphere, up to about 13 km, is where we live and where almost all weather occurs: clouds, rain, storms. Above it the stratosphere, up to about 50 km, contains the ozone layer and is almost free of clouds, which is why aircraft fly in its lower part. Higher layers are the mesosphere, thermosphere and exosphere. Weather is the day-to-day condition of the atmosphere, such as temperature, rainfall, wind and humidity, which can change hour by hour. Climate is the average weather of a place over many years. Temperature decreases with height in the troposphere, which is why hill stations are cooler."
+                ],
+                [
+                  "The water cycle",
+                  "Water continuously moves between the Earth's surface and the atmosphere in the water cycle. The Sun heats water in oceans, lakes and rivers, and it evaporates to form water vapour. Plants also release vapour through their leaves. As vapour rises, it cools and condenses into tiny droplets that form clouds. When droplets join and become heavy, they fall as precipitation: rain, snow or hail. Rainwater flows over land as run-off into rivers and back to the sea, or soaks into the ground to become groundwater. In this way, the same water is used again and again."
+                ],
+                [
+                  "Ocean movements and water scarcity",
+                  "Ocean water is always moving. Waves are caused mainly by wind. Tides are the regular rise and fall of the sea level, twice a day, caused mainly by the gravitational pull of the Moon and the Sun. Ocean currents are streams of water flowing in definite directions; warm currents, such as the Gulf Stream, carry warm water from the tropics and make nearby coasts milder. Although Earth is a 'water planet', many regions face water scarcity because of uneven rainfall, overuse of groundwater, growing cities and pollution of rivers. Rainwater harvesting, repairing leaks and preventing pollution help conserve water."
+                ]
+              ],
+              "definitions": [
+                ["Troposphere", "The lowest layer of the atmosphere, where weather occurs."],
+                ["Weather", "The condition of the atmosphere at a place for a short time."],
+                ["Climate", "The average weather of a place over many years."],
+                ["Water cycle", "The continuous movement of water between the Earth's surface and the atmosphere."],
+                ["Tide", "The regular rise and fall of sea level caused by the pull of the Moon and Sun."]
+              ],
+              "examples": [
+                "Mumbai's climate is hot and humid, but its weather today may be cloudy and rainy.",
+                "Chennai collects rooftop rainwater by law to recharge groundwater."
+              ],
+              "worked": [
+                {
+                  "problem": "Explain the journey of a drop of water from the Bay of Bengal to a farmer's well in Odisha.",
+                  "steps": [
+                    "Sun heats the sea → the drop evaporates as vapour.",
+                    "Monsoon winds carry the moist air inland; it rises and cools → condensation forms clouds.",
+                    "Droplets grow heavy → precipitation as rain over Odisha.",
+                    "Rain soaks into the soil → infiltration recharges groundwater, which fills the well."
+                  ],
+                  "answer": "Evaporation → transport by wind → condensation → precipitation → infiltration into groundwater."
+                }
+              ],
+              "diagram": {
+                "type": "cycle",
+                "title": "The water cycle",
+                "items": ["Evaporation from seas and lakes", "Condensation into clouds", "Precipitation as rain or snow", "Run-off and infiltration back to seas and groundwater"]
+              },
+              "real_world": "Weather forecasts help farmers decide when to sow and fishermen when it is safe to go to sea. Ports schedule ship movements according to tides, and cities like Bengaluru and Chennai have faced severe water shortages, making rainwater harvesting and lake protection urgent.",
+              "takeaways": [
+                "Weather occurs in the troposphere; the stratosphere contains the ozone layer.",
+                "Weather is short-term; climate is the long-term average.",
+                "The water cycle: evaporation, condensation, precipitation, run-off and infiltration.",
+                "Waves, tides and currents move ocean water; water scarcity needs conservation."
+              ],
+              "practice": [
+                ["In which layer of the atmosphere do aeroplanes fly?", "The lower stratosphere."],
+                ["What causes tides?", "Mainly the gravitational pull of the Moon (and Sun)."],
+                ["Give two ways to conserve water at home.", "Fix leaks; reuse water; rainwater harvesting."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["In which layer of the atmosphere does weather occur?", ["Stratosphere", "Troposphere", "Mesosphere", "Exosphere"], "B", "It is the lowest layer.", "Almost all weather occurs in the troposphere."],
+                  ["The change of water vapour into droplets is:", ["Evaporation", "Precipitation", "Condensation", "Infiltration"], "C", "It forms clouds.", "Cooling vapour condenses into droplets."],
+                  ["Tides are mainly caused by the pull of the:", ["Moon", "Wind", "Earthquakes", "Clouds"], "A", "It is Earth's natural satellite.", "The Moon's gravity causes tides."],
+                  ["The average weather of a place over many years is its:", ["Season", "Forecast", "Temperature", "Climate"], "D", "Long-term pattern.", "Climate is the long-term average of weather."]
+                ],
+                "MEDIUM": [
+                  ["The ozone layer is found in the:", ["Troposphere", "Stratosphere", "Thermosphere", "Lithosphere"], "B", "Above the weather layer.", "Ozone is concentrated in the stratosphere."],
+                  ["Why are hill stations cooler than plains?", ["They are closer to the Sun", "They have more oxygen", "Temperature decreases with height in the troposphere", "They have no sunlight"], "C", "Think about altitude.", "Air temperature falls as height increases."],
+                  ["Waves on the sea are mainly caused by:", ["Wind", "The Moon", "Ships", "Fish"], "A", "Blowing air over water.", "Wind blowing over the water surface creates waves."],
+                  ["Which is a major cause of water scarcity in Indian cities?", ["Too many oceans", "Excess rainfall everywhere", "Water being destroyed in the water cycle", "Overuse of groundwater and pollution of rivers"], "D", "The amount of water on Earth stays the same.", "Overuse and pollution reduce usable fresh water."]
+                ],
+                "HARD": [
+                  ["Why do aircraft prefer to fly in the lower stratosphere?", ["It is warmer", "It is almost free of clouds and turbulence", "It has more oxygen", "It is closer to the ground"], "B", "Where is weather absent?", "The stratosphere has very little weather, giving smoother flights."],
+                  ["Which statement describes weather, not climate?", ["Kerala receives heavy rain every monsoon", "Rajasthan is usually hot and dry", "It is foggy in Delhi this morning", "Shimla has cold winters"], "C", "Weather is short-term.", "Fog this morning is a day-to-day condition."],
+                  ["How does a warm ocean current affect the coast it flows past?", ["It makes the coast's climate milder", "It freezes the coast", "It stops all rainfall", "It has no effect"], "A", "It carries warm water from the tropics.", "Warm currents warm the air over nearby coasts."],
+                  ["Rooftop rainwater harvesting mainly helps by:", ["Increasing evaporation", "Stopping the water cycle", "Producing salt water", "Recharging groundwater and storing rainwater for use"], "D", "Where does the collected water go?", "It stores rain or sends it into the ground to recharge aquifers."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g7-sst-u-civics",
+      "title": "Civics: Democracy",
+      "topics": [
+        {
+          "slug": "g7-sst-t-democracy-equality",
+          "title": "Democracy and Equality",
+          "description": "Equality as the foundation of democracy and how a state government works.",
+          "lessons": [
+            {
+              "slug": "g7-sst-equality",
+              "title": "Equality in Indian Democracy",
+              "objectives": [
+                "Explain the principle of universal adult franchise",
+                "Describe how the Constitution guarantees equality",
+                "Identify forms of inequality and discrimination in society",
+                "Explain government measures that promote equality"
+              ],
+              "intro": "In India, the vote of a famous film star counts exactly the same as the vote of a farmer, a factory worker or a teacher. This idea, that every adult citizen has one vote of equal value, is called universal adult franchise, and it lies at the heart of democracy. Yet equality in voting does not automatically mean equality in daily life. People can still be treated unfairly because of their caste, religion, gender, disability or wealth.",
+              "sections": [
+                [
+                  "Equal right to vote",
+                  "Universal adult franchise means that every citizen aged 18 or above can vote, regardless of religion, caste, gender, education or income. India adopted this from its very first general election in 1951–52, when many people in the world still could not vote. Equal voting rights mean that the people choose their government and can change it peacefully. Elections are conducted by the independent Election Commission so that they are free and fair."
+                ],
+                [
+                  "Equality in the Constitution",
+                  "The Constitution of India declares that every person is equal before the law. The state cannot discriminate against any citizen on grounds of religion, race, caste, sex or place of birth. Every person has access to public places such as shops, hotels, wells, roads and bathing ghats. Untouchability has been abolished and its practice is a punishable offence. These principles were shaped by leaders such as Dr B. R. Ambedkar, chairman of the Drafting Committee, who had himself faced caste discrimination as a child. Laws alone, however, cannot change attitudes overnight."
+                ],
+                [
+                  "Making equality real",
+                  "The government uses laws and programmes to reduce inequality. The Mid-day Meal Scheme (now PM-POSHAN) provides cooked lunches in government schools, which increased enrolment of poor children, reduced hunger and helped children of different castes sit and eat together. Seats are reserved in legislatures, government jobs and educational institutions for Scheduled Castes, Scheduled Tribes and Other Backward Classes. The Rights of Persons with Disabilities Act requires public spaces and services to be accessible. Citizens also have a role: refusing to discriminate and speaking up against unfair treatment are part of building a fair society."
+                ]
+              ],
+              "definitions": [
+                ["Universal adult franchise", "The right of every adult citizen to vote, regardless of background."],
+                ["Equality before the law", "Every person is subject to the same laws and has the same legal rights."],
+                ["Discrimination", "Unfair treatment of people because of who they are."],
+                ["Dignity", "Respect and self-worth that every person deserves."]
+              ],
+              "examples": [
+                "An 18-year-old college student and a 90-year-old farmer each cast one vote of equal value.",
+                "Ramps in railway stations allow wheelchair users equal access."
+              ],
+              "worked": [
+                {
+                  "problem": "A hotel refuses to serve a family because of their caste. Which principles are violated, and what can the family do?",
+                  "steps": [
+                    "The Constitution guarantees equal access to public places such as hotels.",
+                    "Discrimination on the ground of caste is prohibited, and untouchability practices are punishable.",
+                    "The family can file a complaint with the police and approach courts or human rights commissions."
+                  ],
+                  "answer": "Equality and non-discrimination are violated; the family can seek legal action through police, courts and commissions."
+                }
+              ],
+              "diagram": {
+                "type": "labelled",
+                "title": "How equality is promoted",
+                "items": [
+                  ["Constitution", "Equality before law, no discrimination, untouchability abolished"],
+                  ["Laws", "Punish discrimination; protect disabled persons' rights"],
+                  ["Schemes", "Mid-day meals, scholarships, reservations"],
+                  ["Citizens", "Respect for all; speaking up against injustice"]
+                ]
+              },
+              "real_world": "Before each election, voter awareness drives encourage first-time voters, women and people in remote areas to register. Court cases and public campaigns have made temples, wells and workplaces more open to all, and schools now must admit children with disabilities.",
+              "takeaways": [
+                "Every adult citizen has one vote of equal value.",
+                "The Constitution guarantees equality before law and bans discrimination.",
+                "Inequality persists in society, so laws and schemes actively promote equality.",
+                "Citizens must also reject discrimination in daily life."
+              ],
+              "practice": [
+                ["What is the minimum voting age in India?", "18 years."],
+                ["Name one scheme that promotes equality in schools.", "The Mid-day Meal Scheme (PM-POSHAN)."],
+                ["Who chaired the Drafting Committee of the Constitution?", "Dr B. R. Ambedkar."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Universal adult franchise means:", ["Only educated people vote", "Every adult citizen can vote", "Only men vote", "Only taxpayers vote"], "B", "'Universal' means for everyone.", "All citizens aged 18+ can vote."],
+                  ["The minimum voting age in India is:", ["16", "21", "18", "25"], "C", "It was lowered from 21 in 1989.", "Citizens aged 18 or above can vote."],
+                  ["Who chaired the Drafting Committee of the Constitution?", ["Dr B. R. Ambedkar", "Jawaharlal Nehru", "Mahatma Gandhi", "Sardar Patel"], "A", "He is called the architect of the Constitution.", "Dr Ambedkar chaired the Drafting Committee."],
+                  ["Unfair treatment because of caste or religion is called:", ["Democracy", "Equality", "Dignity", "Discrimination"], "D", "It is the opposite of equality.", "Treating people unfairly for who they are is discrimination."]
+                ],
+                "MEDIUM": [
+                  ["Which scheme gives cooked meals in government schools?", ["MGNREGA", "Mid-day Meal Scheme", "Jan Dhan Yojana", "Swachh Bharat"], "B", "Now called PM-POSHAN.", "The Mid-day Meal Scheme provides lunch to schoolchildren."],
+                  ["Which practice has been abolished and made punishable by the Constitution?", ["Voting", "Celebrating festivals", "Untouchability", "Paying taxes"], "C", "A caste-based practice.", "Untouchability is abolished and its practice is an offence."],
+                  ["Why do equal voting rights not guarantee equality in daily life?", ["Discrimination in society can still continue", "People cannot vote", "Votes have different values", "Elections are not held"], "A", "Voting happens every few years.", "Social discrimination may persist despite equal votes."],
+                  ["Which body conducts elections in India?", ["The Supreme Court", "The Prime Minister's Office", "The Parliament", "The Election Commission"], "D", "It is an independent body.", "The Election Commission conducts free and fair elections."]
+                ],
+                "HARD": [
+                  ["How did the Mid-day Meal Scheme promote equality besides reducing hunger?", ["It stopped exams", "Children of different castes ate together, reducing caste prejudice", "It only served rich children", "It ended school fees for private schools"], "B", "Think about sitting together.", "Shared meals helped break caste barriers and raised enrolment."],
+                  ["Which is an example of a law promoting equality for people with disabilities?", ["Motor Vehicles Act", "Indian Penal Code on theft", "Rights of Persons with Disabilities Act", "Income Tax Act"], "C", "It requires accessibility.", "This Act requires accessible public spaces and equal opportunities."],
+                  ["India adopted universal adult franchise from:", ["Its first general election in 1951–52", "1980", "The 21st century", "Only after 2000"], "A", "Right from the start.", "All adults could vote from the first general election."],
+                  ["Why is dignity linked to equality?", ["Dignity is about wealth", "Only leaders have dignity", "Equality concerns only voting", "Treating people unequally hurts their self-respect and worth"], "D", "How does discrimination make people feel?", "Discrimination denies people the respect every human deserves."]
+                ]
+              }
+            },
+            {
+              "slug": "g7-sst-state-government",
+              "title": "How the State Government Works",
+              "objectives": [
+                "Explain how MLAs are elected",
+                "Distinguish between the ruling party and the opposition",
+                "Describe the roles of the Chief Minister, ministers and Governor",
+                "Explain how the state legislature debates and makes laws"
+              ],
+              "intro": "India is a union of states, and each state has its own government that looks after matters such as health, police, agriculture, roads and school education. Who decides how a state hospital is run or how much a state spends on roads? The answer is the elected state government. In this lesson we follow how representatives are elected, how the government is formed and how it is held accountable.",
+              "sections": [
+                [
+                  "Elections and the Legislative Assembly",
+                  "Each state is divided into constituencies, and the voters of each constituency elect one Member of the Legislative Assembly (MLA). Candidates may belong to political parties or stand as independents. The MLAs together form the Legislative Assembly, or Vidhan Sabha. Elections are normally held every five years. A political party, or a group of parties, that wins more than half the seats has a majority and forms the government; it is called the ruling party. The other members form the opposition."
+                ],
+                [
+                  "The executive",
+                  "The leader of the ruling party in the Assembly is appointed Chief Minister by the Governor. The Chief Minister selects other MLAs as ministers, who head departments such as health, education and public works. The Governor is appointed by the President of India and is the formal head of the state; most decisions are taken on the advice of the Chief Minister and the council of ministers. Ministers do not carry out every task themselves; government departments with officials and staff implement decisions."
+                ],
+                [
+                  "Debate and accountability",
+                  "In the Legislative Assembly, MLAs ask questions, debate problems and pass laws for the state. For example, if there is an outbreak of a disease, opposition MLAs may question the health minister about the shortage of doctors and medicines, and the minister must answer. Ministers also explain their actions to the public through press conferences, and newspapers and television report on them. Citizens can protest peacefully or write to their MLA. If the people are unhappy, they can vote the government out at the next election. This way the government stays answerable to the people."
+                ]
+              ],
+              "definitions": [
+                ["Constituency", "An area whose voters elect one representative."],
+                ["MLA", "Member of the Legislative Assembly, elected from a constituency."],
+                ["Majority", "More than half the total number of seats."],
+                ["Opposition", "Elected members who are not part of the ruling party or coalition."],
+                ["Governor", "The formal head of a state, appointed by the President."]
+              ],
+              "examples": [
+                "A state with 234 Assembly seats needs 118 for a majority.",
+                "An MLA raises the problem of flooded roads in her constituency during the Assembly session."
+              ],
+              "worked": [
+                {
+                  "problem": "In an Assembly of 200 seats, Party A wins 90, Party B 75, Party C 25 and independents 10. Can Party A form the government alone? What can it do?",
+                  "steps": [
+                    "Majority = more than half of 200 = at least 101 seats.",
+                    "Party A has 90, short of 101 by 11.",
+                    "Party A can form a coalition, for example with Party C (90 + 25 = 115)."
+                  ],
+                  "answer": "No; it needs at least 101 seats, so it must form a coalition (e.g., with Party C)."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Forming a state government",
+                "items": ["Voters elect MLAs from constituencies", "Party/coalition with majority becomes ruling party", "Governor appoints its leader as Chief Minister", "CM chooses ministers", "Departments carry out decisions"]
+              },
+              "real_world": "State governments run most government hospitals, police forces and state boards of education. When citizens face a problem such as water shortage, writing to the local MLA, raising it through the media or voting carefully in elections are effective ways to make the state government act.",
+              "takeaways": [
+                "Voters in each constituency elect an MLA for five years.",
+                "A party with a majority forms the government; the rest form the opposition.",
+                "The Governor appoints the Chief Minister, who chooses ministers.",
+                "The Assembly debates and makes laws, keeping the government accountable."
+              ],
+              "practice": [
+                ["Who appoints the Chief Minister?", "The Governor."],
+                ["What is a coalition government?", "A government formed by two or more parties together."],
+                ["Name two ways citizens can hold a state government accountable.", "Voting, petitions/letters to MLAs, peaceful protest, media."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["An MLA is elected to the:", ["Lok Sabha", "Legislative Assembly", "Rajya Sabha", "Gram Sabha"], "B", "The state law-making body.", "MLAs sit in the Legislative Assembly (Vidhan Sabha)."],
+                  ["The head of a state government is the:", ["Prime Minister", "President", "Chief Minister", "Mayor"], "C", "This person leads the ruling party in the state.", "The Chief Minister heads the state government."],
+                  ["The Governor is appointed by the:", ["President of India", "Chief Minister", "Voters", "Supreme Court"], "A", "The head of the country.", "The President appoints Governors."],
+                  ["State elections are normally held every:", ["Year", "Two years", "Ten years", "Five years"], "D", "Same as national elections.", "Assembly elections are normally held every five years."]
+                ],
+                "MEDIUM": [
+                  ["The members who are not in the ruling party form the:", ["Cabinet", "Opposition", "Judiciary", "Panchayat"], "B", "They question the government.", "Non-ruling members form the opposition."],
+                  ["What does 'majority' mean in an Assembly of 150 seats?", ["50 seats", "75 seats", "76 or more seats", "100 seats"], "C", "More than half.", "More than half of 150 is at least 76."],
+                  ["Who carries out the day-to-day work of government departments?", ["Officials and staff of the departments", "The Governor alone", "The opposition", "Voters"], "A", "Ministers decide; others implement.", "Departments with officials implement decisions."],
+                  ["Why do MLAs ask questions in the Assembly?", ["To delay elections", "To appoint the Governor", "To become judges", "To make ministers explain and answer for government actions"], "D", "It is part of accountability.", "Questions force ministers to account for their work."]
+                ],
+                "HARD": [
+                  ["In a 120-seat Assembly, Party X has 55 seats and Party Y 20. Together they can:", ["Not form a government", "Form a coalition government with 75 seats", "Form a government with 55 seats only", "Become the opposition automatically"], "B", "Majority needs at least 61.", "55 + 20 = 75, which is more than half of 120."],
+                  ["Which subject is mainly handled by state governments?", ["Defence of India", "Foreign policy", "Police and public order", "Printing currency"], "C", "Think of law and order in your city.", "Police and public order are state subjects."],
+                  ["If voters are unhappy with a state government, the most democratic way to change it is:", ["Voting it out in the next election", "Asking the army to remove it", "Refusing all laws", "Appointing a new Governor"], "A", "Peaceful change in a democracy.", "Elections allow peaceful change of government."],
+                  ["Why is the Governor called the 'formal' head of a state?", ["The Governor makes all laws alone", "The Governor is elected by MLAs", "The Governor leads the opposition", "Most decisions are taken on the advice of the Chief Minister and ministers"], "D", "Who actually runs the government?", "Real executive power lies with the elected Chief Minister and council of ministers."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

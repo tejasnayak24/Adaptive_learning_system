@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useParams, useLocation } from 'react-router-dom'
+import { actionInfo } from '../utils/recommendationActions'
+import LessonMaterial from '../components/LessonMaterial'
 import { useAuth } from '../context/AuthContext'
 import { lessonService } from '../services/lessonService'
 import { progressService } from '../services/progressService'
@@ -7,7 +9,6 @@ import { progressService } from '../services/progressService'
 export default function LessonDetail() {
   const { id } = useParams()
   const { user } = useAuth()
-  const navigate = useNavigate()
   const location = useLocation()
   const [lesson, setLesson] = useState(null)
   const [lessonProgress, setLessonProgress] = useState([])
@@ -29,7 +30,7 @@ export default function LessonDetail() {
     }
 
     try {
-      const studentId = user?.id ?? user?.sub
+      const studentId = user?.id
 
       if (studentId) {
         const progressRes = await progressService.getStudentProgress(studentId)
@@ -49,7 +50,20 @@ export default function LessonDetail() {
   }
 
   loadLessonData()
-}, [id, user?.id, user?.sub])
+}, [id, user?.id])
+
+  const focusSection = {
+    SHOW_WORKED_EXAMPLE: 'worked-examples',
+    SHOW_REAL_WORLD_APPLICATION: 'real-world'
+  }[location.state?.recommendedAction]
+
+  useEffect(() => {
+    if (!lesson || !focusSection) return
+    const timer = setTimeout(() => {
+      document.getElementById(focusSection)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [lesson, focusSection])
 
   if (loading) {
     return (
@@ -88,7 +102,24 @@ export default function LessonDetail() {
     return quizzes.find(q => q.difficulty.toLowerCase() === diff.toLowerCase())
   }
 
-  const subject = location.state?.subject || lesson.subject || ''
+  const subject = lesson.subject || location.state?.subject || ''
+  const navigation = lesson.navigation
+
+  // Guidance when the student arrives here because of a recommendation.
+  const recommendedAction = location.state?.recommendedAction
+  const recommendationGuide = {
+    REPEAT_LESSON: 'Read the lesson again slowly. Note the key terms and try to explain each paragraph in your own words before retaking a quiz.',
+    SHOW_REAL_WORLD_APPLICATION: 'Read the highlighted “In the real world” section and think of one more example from your own life before retaking a quiz.',
+    SHOW_WORKED_EXAMPLE: 'Work through the highlighted worked examples step by step, then try the practice exercises before retaking a quiz.',
+    NEXT_LESSON: 'You are ready for this lesson. Start with the Easy quiz after reading.',
+    SKIP_TO_ADVANCED_TOPIC: 'You skipped ahead because of strong results. Start with the Medium or Hard quiz after reading.',
+    INCREASE_DIFFICULTY: 'Choose the next harder quiz below.',
+    DECREASE_DIFFICULTY: 'Choose an easier quiz below to rebuild confidence.',
+    PRACTICE_QUIZ: 'Retake a quiz below for practice.',
+    PROVIDE_HINT: 'Retake a quiz below and use the hint button on questions you are unsure about.',
+    QUICK_CHALLENGE: 'Pick a quiz below and try to finish it quickly.',
+    FOCUS_RECOVERY: 'Take a short break before continuing.'
+  }[recommendedAction]
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
@@ -107,32 +138,54 @@ export default function LessonDetail() {
 
       {/* Header Info */}
       <div className="space-y-3 border-b border-slate-900 pb-6">
-        <div className="flex items-center gap-2">
-          {subject && (
-            <>
-              <span className="px-2.5 py-0.5 text-[10px] font-semibold bg-slate-900 text-slate-400 border border-slate-800 rounded">
-                {subject}
-              </span>
-              <span className="text-slate-600">&bull;</span>
-            </>
+        <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400">
+          {lesson.grade && (
+            <span className="px-2.5 py-0.5 text-[10px] font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 rounded">
+              Grade {lesson.grade}
+            </span>
           )}
-          <span className="text-xs font-medium text-slate-400">
-            Topic: {lesson.topic}
-          </span>
+          {subject && (
+            <span className="px-2.5 py-0.5 text-[10px] font-semibold bg-slate-900 text-slate-400 border border-slate-800 rounded">
+              {subject}
+            </span>
+          )}
+          {lesson.unit && <span>{lesson.unit.title}</span>}
+          {lesson.unit && <span className="text-slate-600">&rsaquo;</span>}
+          <span className="font-medium">{lesson.curriculum_topic?.title || lesson.topic}</span>
+          {navigation && (
+            <span className="text-slate-500">
+              · Lesson {navigation.index + 1} of {navigation.total}
+            </span>
+          )}
         </div>
         <h1 className="font-display text-3xl md:text-4xl font-extrabold text-white tracking-tight">
           {lesson.title}
         </h1>
       </div>
 
-      {/* Reading pane */}
-      <article className="prose prose-invert max-w-none text-slate-300 leading-relaxed text-sm md:text-base space-y-6">
-        {lesson.content.split('\n\n').map((paragraph, index) => (
-          <p key={index} className="indent-0">
-            {paragraph}
+      {recommendationGuide && (
+        <div className="rounded-2xl border border-teal-500/30 bg-teal-500/5 px-5 py-4 space-y-1">
+          <p className="text-xs font-bold uppercase tracking-wider text-teal-300">
+            {actionInfo(recommendedAction).icon} Coach recommendation: {actionInfo(recommendedAction).label}
           </p>
-        ))}
-      </article>
+          <p className="text-sm text-slate-300">{recommendationGuide}</p>
+        </div>
+      )}
+
+      {/* Reading pane */}
+      {lesson.material ? (
+        <article>
+          <LessonMaterial material={lesson.material} highlight={focusSection} />
+        </article>
+      ) : (
+        <article className="prose prose-invert max-w-none text-slate-300 leading-relaxed text-sm md:text-base space-y-6">
+          {lesson.content.split('\n\n').map((paragraph, index) => (
+            <p key={index} className="indent-0">
+              {paragraph}
+            </p>
+          ))}
+        </article>
+      )}
 
       {/* Assessments Section */}
       <div className="glass-panel rounded-3xl p-6 md:p-8 border border-slate-900 shadow-xl space-y-6 mt-12 relative overflow-hidden">
@@ -184,13 +237,23 @@ export default function LessonDetail() {
                 </div>
 
                 {quiz ? (
-                  <Link
-                    to={`/quiz/${quiz.id}`}
-                    state={{ subject }}
-                    className="mt-4 w-full inline-flex items-center justify-center py-2 rounded-xl text-xs font-semibold border bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-350 hover:text-white transition-all"
-                  >
-                    Take quiz
-                  </Link>
+                  <div className="mt-4 flex gap-2">
+                    <Link
+                      to={`/quiz/${quiz.id}`}
+                      state={{ subject, attempt: Date.now() }}
+                      className="flex-1 inline-flex items-center justify-center py-2 rounded-xl text-xs font-semibold border bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-350 hover:text-white transition-all"
+                    >
+                      Take quiz
+                    </Link>
+                    <Link
+                      to={`/quiz/${quiz.id}`}
+                      state={{ subject, attempt: Date.now(), mode: 'challenge' }}
+                      title="Timed challenge: 30 seconds per question"
+                      className="inline-flex items-center justify-center px-3 py-2 rounded-xl text-xs font-semibold border border-slate-800 text-slate-400 hover:text-white transition-all"
+                    >
+                      ⏱️
+                    </Link>
+                  </div>
                 ) : (
                   <button 
                     disabled 
@@ -204,6 +267,32 @@ export default function LessonDetail() {
           })}
         </div>
       </div>
+      {navigation && (
+        <nav className="flex items-center justify-between gap-3 border-t border-slate-900 pt-6">
+          {navigation.previous ? (
+            <Link
+              to={`/lesson/${navigation.previous.id}`}
+              className="rounded-xl border border-slate-800 bg-slate-950 px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white"
+            >
+              &larr; {navigation.previous.title}
+            </Link>
+          ) : (
+            <span />
+          )}
+          {navigation.next ? (
+            <Link
+              to={`/lesson/${navigation.next.id}`}
+              className="rounded-xl bg-indigo-500 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-600"
+            >
+              {navigation.next.title} &rarr;
+            </Link>
+          ) : (
+            <Link to="/subjects" className="rounded-xl bg-emerald-500 px-4 py-2 text-xs font-semibold text-white">
+              Subject complete — back to curriculum &rarr;
+            </Link>
+          )}
+        </nav>
+      )}
     </div>
   )
 }

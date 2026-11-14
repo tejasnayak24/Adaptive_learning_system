@@ -14,6 +14,8 @@ export default function Login() {
 
   // Redirect to dashboard, or where they came from
   const from = location.state?.from?.pathname || '/'
+  // e.g. "Registration successful! Please sign in." from the register page
+  const info = typeof location.state?.info === 'string' ? location.state.info : ''
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -54,6 +56,12 @@ export default function Login() {
         </div>
 
         <div className="glass-panel rounded-3xl p-8 shadow-2xl relative border border-slate-800">
+          {info && !error && (
+            <div role="status" className="mb-6 rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-4 text-sm text-emerald-300">
+              {info}
+            </div>
+          )}
+
           {error && (
             <div className="mb-6 rounded-xl bg-rose-500/10 border border-rose-500/20 p-4 text-sm text-rose-400 flex items-start gap-2">
               <svg className="h-5 w-5 shrink-0" viewBox="0 0 20 20" fill="currentColor">

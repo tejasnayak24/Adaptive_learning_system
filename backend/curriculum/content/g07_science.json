@@ -1,0 +1,573 @@
+{
+  "grade": 7,
+  "subject": "Science",
+  "units": [
+    {
+      "slug": "g7-sci-u-biology",
+      "title": "Biology: Nutrition",
+      "topics": [
+        {
+          "slug": "g7-sci-t-nutrition",
+          "title": "Nutrition in Plants and Animals",
+          "description": "How plants make food by photosynthesis and how humans digest food.",
+          "lessons": [
+            {
+              "slug": "g7-sci-photosynthesis",
+              "title": "Photosynthesis: How Plants Make Food",
+              "objectives": [
+                "Explain autotrophic and heterotrophic nutrition",
+                "Describe the raw materials, conditions and products of photosynthesis",
+                "Explain the roles of chlorophyll, stomata and roots",
+                "Describe a simple test for starch in leaves"
+              ],
+              "intro": "Every bite of food you eat can be traced back to plants. Rice, vegetables and fruit come from plants directly, and milk, eggs and meat come from animals that ate plants. Green plants are special because they make their own food using sunlight. This process is called photosynthesis, from Greek words meaning 'putting together with light'. Organisms that make their own food are autotrophs; those that depend on others for food, like us, are heterotrophs.",
+              "sections": [
+                [
+                  "Raw materials and products",
+                  "Plants need carbon dioxide, water and sunlight for photosynthesis. Carbon dioxide enters the leaf from the air through tiny pores called stomata, usually on the underside of leaves. Water is absorbed from the soil by the roots and carried up the stem to the leaves through tube-like vessels. The green pigment chlorophyll, found in chloroplasts in leaf cells, traps the energy of sunlight. Using this energy, the leaf combines carbon dioxide and water to make glucose, a sugar, and releases oxygen. In words: carbon dioxide + water → (sunlight, chlorophyll) → glucose + oxygen."
+                ],
+                [
+                  "What happens to the food",
+                  "Glucose is used by the plant for energy through respiration and to build its body. Extra glucose is changed into starch and stored in leaves, stems, roots, fruits and seeds. Potatoes, wheat grains and rice are full of stored starch. The oxygen released during photosynthesis goes into the air through the stomata, which is why plants are essential for keeping the air breathable. Leaves are the main food factories, but any green part of a plant, such as a young stem, can photosynthesise."
+                ],
+                [
+                  "Testing a leaf for starch",
+                  "We can show that a leaf has made food by testing for starch, which turns blue-black with iodine solution. First boil the leaf in water for a minute to kill it and soften it. Then place it in a test tube of alcohol in a hot water bath to remove the green chlorophyll, so the colour change can be seen; never heat alcohol over a flame because it catches fire. Rinse the leaf and add a few drops of iodine. A blue-black colour shows starch. If a plant is kept in darkness for two days before the test, the leaf shows no starch, which proves that light is needed. Variegated leaves show starch only in the green parts, proving that chlorophyll is needed."
+                ]
+              ],
+              "definitions": [
+                ["Photosynthesis", "The process by which green plants make glucose from carbon dioxide and water using sunlight, releasing oxygen."],
+                ["Chlorophyll", "The green pigment in plants that absorbs light energy."],
+                ["Stomata", "Tiny pores, mainly on leaves, through which gases enter and leave."],
+                ["Autotroph", "An organism that makes its own food."],
+                ["Heterotroph", "An organism that obtains food from other organisms."]
+              ],
+              "examples": [
+                "Cactus stems are green and carry out photosynthesis because the leaves are reduced to spines.",
+                "Algae in ponds photosynthesise and release bubbles of oxygen in sunlight."
+              ],
+              "worked": [
+                {
+                  "problem": "A plant is kept in a dark cupboard for 48 hours and one leaf is then tested with iodine. It stays brown. A leaf from the same plant left in sunlight for 6 more hours turns blue-black. What do the results show?",
+                  "steps": [
+                    "Darkness used up the stored starch, so the first leaf shows no starch.",
+                    "After light was available, the second leaf made starch again.",
+                    "The only difference between the two was light."
+                  ],
+                  "answer": "Light is necessary for photosynthesis (and starch formation)."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Photosynthesis in a leaf",
+                "items": ["Water from roots + CO₂ through stomata", "Chlorophyll traps sunlight", "Glucose is made", "Oxygen released through stomata", "Extra glucose stored as starch"]
+              },
+              "real_world": "Farmers grow crops in sunny fields and greenhouses may add extra carbon dioxide to increase yields. Forests and ocean algae produce much of the oxygen we breathe, which is one reason why cutting forests harms the whole planet.",
+              "takeaways": [
+                "Plants are autotrophs; animals are heterotrophs.",
+                "Photosynthesis needs carbon dioxide, water, sunlight and chlorophyll.",
+                "It produces glucose (stored as starch) and releases oxygen.",
+                "Iodine turns starch blue-black."
+              ],
+              "practice": [
+                ["Write the word equation for photosynthesis.", "Carbon dioxide + water → glucose + oxygen (in sunlight, with chlorophyll)."],
+                ["Why is chlorophyll removed before the iodine test?", "So that the colour change is visible."],
+                ["Through which part does carbon dioxide enter a leaf?", "Stomata."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which gas do plants take in for photosynthesis?", ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"], "B", "It is the gas we breathe out.", "Plants use carbon dioxide from the air."],
+                  ["The green pigment in leaves is:", ["Haemoglobin", "Melanin", "Chlorophyll", "Starch"], "C", "It traps sunlight.", "Chlorophyll absorbs light energy for photosynthesis."],
+                  ["Organisms that make their own food are called:", ["Autotrophs", "Heterotrophs", "Parasites", "Decomposers"], "A", "'Auto' means self.", "Autotrophs such as green plants make their own food."],
+                  ["Which gas is released during photosynthesis?", ["Carbon dioxide", "Methane", "Nitrogen", "Oxygen"], "D", "It is the gas we need to breathe.", "Photosynthesis releases oxygen."]
+                ],
+                "MEDIUM": [
+                  ["Iodine turns a leaf blue-black. This shows the presence of:", ["Protein", "Starch", "Fat", "Water"], "B", "Iodine is a test for a carbohydrate.", "Iodine gives a blue-black colour with starch."],
+                  ["Why is a leaf placed in alcohol during the starch test?", ["To add starch", "To kill germs", "To remove chlorophyll", "To make it green"], "C", "We need to see a colour change.", "Alcohol removes the green chlorophyll so the iodine colour is visible."],
+                  ["How does water reach the leaves?", ["Through vessels from the roots up the stem", "Through stomata from the air", "From the flowers", "It is made in the leaf"], "A", "Water is absorbed from the soil.", "Roots absorb water, which travels up through vessels in the stem."],
+                  ["Why can a cactus make food even though it has no broad leaves?", ["It eats insects", "It absorbs food from soil", "It does not need food", "Its green stem has chlorophyll"], "D", "Look at the colour of the stem.", "The green stem contains chlorophyll and photosynthesises."]
+                ],
+                "HARD": [
+                  ["A variegated leaf (green and white) is tested with iodine. Which parts turn blue-black?", ["Only the white parts", "Only the green parts", "The whole leaf", "No part"], "B", "Where is chlorophyll present?", "Only green parts have chlorophyll, so only they make starch."],
+                  ["Why must alcohol be heated in a water bath rather than over a flame?", ["It boils too slowly", "Water reacts with alcohol", "Alcohol catches fire easily", "Iodine needs water"], "C", "Think about safety.", "Alcohol is flammable, so it is heated indirectly in hot water."],
+                  ["A plant is kept in a sealed jar with a chemical that absorbs all carbon dioxide. After two days its leaves show no starch. Why?", ["Without carbon dioxide, photosynthesis cannot occur", "The jar blocked water", "Chlorophyll was destroyed", "It was too hot"], "A", "Which raw material was removed?", "Carbon dioxide is a raw material; without it no glucose or starch is made."],
+                  ["Which statement is correct?", ["Animals photosynthesise at night", "Photosynthesis uses oxygen and makes carbon dioxide", "Starch is the first product of photosynthesis", "All food chains depend on photosynthesis"], "D", "Trace your food back to its source.", "Plants make food by photosynthesis, and all other organisms depend on it."]
+                ]
+              }
+            },
+            {
+              "slug": "g7-sci-human-digestion",
+              "title": "Digestion in Humans",
+              "objectives": [
+                "Name the parts of the human digestive system in order",
+                "Describe what happens to food in the mouth, stomach and small intestine",
+                "Explain the roles of digestive juices and enzymes",
+                "Explain absorption, assimilation and egestion"
+              ],
+              "intro": "A sandwich contains starch, protein and fat, but your body cannot use these large molecules directly. They must first be broken down into small, soluble substances that can pass into the blood. This breaking down is called digestion. It happens in a long tube called the alimentary canal, which runs from the mouth to the anus and is about 8 to 9 metres long in an adult, with help from glands such as the liver and pancreas.",
+              "sections": [
+                [
+                  "Mouth, food pipe and stomach",
+                  "Digestion begins in the mouth. Teeth cut, tear and grind food into small pieces; this is mechanical digestion. Saliva from salivary glands moistens food and contains an enzyme that begins to break starch into sugar; this is why a piece of chapati tastes slightly sweet if you chew it for a long time. The tongue mixes food with saliva and pushes it into the food pipe, or oesophagus. Muscles in its wall contract in waves to push food down to the stomach. The stomach churns food and adds gastric juice, which contains hydrochloric acid that kills many germs and an enzyme that begins to digest proteins. Mucus protects the stomach lining from the acid."
+                ],
+                [
+                  "Small intestine",
+                  "The small intestine is the longest part of the canal, about 7.5 metres. Here digestion is completed. Bile from the liver, stored in the gall bladder, breaks fats into tiny droplets. Pancreatic juice and intestinal juice contain enzymes that break carbohydrates into simple sugars such as glucose, proteins into amino acids, and fats into fatty acids and glycerol. The inner wall of the small intestine has thousands of finger-like projections called villi. These give an enormous surface area through which digested food is absorbed into the blood vessels."
+                ],
+                [
+                  "Large intestine and after",
+                  "Undigested food passes into the large intestine, which is wider but shorter, about 1.5 metres. It absorbs water and some salts. The remaining waste, called faeces, is stored in the rectum and removed through the anus; this is egestion. Absorbed food is carried by the blood to every cell, where it is used to release energy, to grow and to repair tissues; this is assimilation. Eating fibre (roughage) from vegetables, fruits and whole grains helps the intestines move food along and prevents constipation, and drinking clean water helps the large intestine work well."
+                ]
+              ],
+              "definitions": [
+                ["Digestion", "Breaking down complex food into simple, soluble substances."],
+                ["Enzyme", "A substance that speeds up a chemical reaction, such as breaking down food."],
+                ["Villi", "Finger-like projections in the small intestine that increase the area for absorption."],
+                ["Absorption", "Passing of digested food into the blood."],
+                ["Egestion", "Removal of undigested food from the body as faeces."]
+              ],
+              "examples": [
+                "Chewing a piece of rice for a long time makes it taste sweet because saliva breaks starch into sugar.",
+                "Diarrhoea can cause dangerous water loss; oral rehydration solution (ORS) replaces water and salts."
+              ],
+              "worked": [
+                {
+                  "problem": "Trace a piece of paneer (rich in protein and fat) through the digestive system.",
+                  "steps": [
+                    "Mouth: teeth chew it; saliva moistens it.",
+                    "Stomach: hydrochloric acid and an enzyme begin protein digestion.",
+                    "Small intestine: bile emulsifies the fat; pancreatic and intestinal enzymes finish digesting protein into amino acids and fat into fatty acids and glycerol.",
+                    "Villi absorb these into the blood; cells assimilate them for growth and repair."
+                  ],
+                  "answer": "Mouth → oesophagus → stomach (protein begins) → small intestine (protein and fat completed, absorbed) → body cells."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Path of food",
+                "items": ["Mouth", "Oesophagus", "Stomach", "Small intestine", "Large intestine", "Rectum", "Anus"]
+              },
+              "real_world": "Doctors use this knowledge to treat stomach ulcers, acidity and diarrhoea. ORS, a simple mix of water, sugar and salt, has saved millions of children's lives by replacing what is lost from the intestine. Eating slowly and including fibre supports good digestion.",
+              "takeaways": [
+                "Digestion breaks large food molecules into small soluble ones.",
+                "Starch digestion starts in the mouth, protein digestion in the stomach.",
+                "Digestion is completed and food is absorbed in the small intestine through villi.",
+                "The large intestine absorbs water; waste is egested through the anus."
+              ],
+              "practice": [
+                ["What is the function of bile?", "It breaks fats into small droplets (emulsifies them)."],
+                ["Why does the stomach not digest itself?", "Mucus protects its lining from acid and enzymes."],
+                ["Where is water mainly absorbed?", "In the large intestine."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Digestion of starch begins in the:", ["Stomach", "Mouth", "Large intestine", "Liver"], "B", "Saliva contains an enzyme.", "Saliva begins breaking starch into sugar in the mouth."],
+                  ["The food pipe is also called the:", ["Trachea", "Rectum", "Oesophagus", "Villus"], "C", "It connects the mouth to the stomach.", "The oesophagus carries food to the stomach."],
+                  ["Which organ produces bile?", ["Liver", "Stomach", "Pancreas", "Kidney"], "A", "It is the largest gland.", "Bile is made in the liver and stored in the gall bladder."],
+                  ["Removal of undigested waste from the body is called:", ["Absorption", "Ingestion", "Assimilation", "Egestion"], "D", "It happens through the anus.", "Egestion removes faeces from the body."]
+                ],
+                "MEDIUM": [
+                  ["What is the role of hydrochloric acid in the stomach?", ["To digest fat", "To kill germs and help protein digestion", "To absorb water", "To make bile"], "B", "The stomach is very acidic.", "The acid kills many bacteria and provides conditions for protein digestion."],
+                  ["Villi in the small intestine help to:", ["Make saliva", "Store faeces", "Increase surface area for absorption", "Churn food"], "C", "Think of finger-like folds.", "Villi greatly increase the area through which food is absorbed."],
+                  ["The end products of protein digestion are:", ["Amino acids", "Glucose", "Fatty acids", "Starch"], "A", "Proteins are built from these.", "Proteins are broken down into amino acids."],
+                  ["Why is roughage important in our diet?", ["It gives a lot of energy", "It is digested quickly", "It builds muscles", "It helps food move through the intestines and prevents constipation"], "D", "Fibre is not digested.", "Roughage adds bulk and helps the intestines push food along."]
+                ],
+                "HARD": [
+                  ["A person's gall bladder is removed. Which food is hardest for them to digest well?", ["Starchy food", "Fatty food", "Fruit juice", "Water"], "B", "Which food does bile act on?", "Bile is released less efficiently, so fat digestion is affected."],
+                  ["Which part of the canal is the longest?", ["Oesophagus", "Large intestine", "Small intestine", "Stomach"], "C", "Despite its name…", "The small intestine is about 7.5 m long, the longest part."],
+                  ["Why does a chapati taste sweet after chewing it for a few minutes?", ["Saliva breaks starch into sugar", "Teeth add sugar", "The stomach sends sugar back", "Chapati contains sugar crystals"], "A", "Saliva contains an enzyme.", "Salivary enzyme converts starch to a sugar."],
+                  ["Using absorbed glucose in muscle cells to release energy is an example of:", ["Ingestion", "Digestion", "Egestion", "Assimilation"], "D", "It happens after absorption, inside cells.", "Using absorbed food in body cells is assimilation."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g7-sci-u-chemistry",
+      "title": "Chemistry: Substances and Changes",
+      "topics": [
+        {
+          "slug": "g7-sci-t-acids-changes",
+          "title": "Acids, Bases and Changes",
+          "description": "Identifying acids and bases with indicators and telling physical changes from chemical changes.",
+          "lessons": [
+            {
+              "slug": "g7-sci-acids-bases",
+              "title": "Acids, Bases and Indicators",
+              "objectives": [
+                "Describe the properties of acids and bases",
+                "Use natural indicators such as litmus, turmeric and china rose",
+                "Explain neutralisation",
+                "Give everyday examples of neutralisation"
+              ],
+              "intro": "Lemon juice and vinegar taste sour; soap feels slippery; sugar water is neither. Substances that taste sour, like lemon juice, contain acids. Substances that taste bitter and feel soapy, like baking soda solution, are bases. Tasting or touching unknown chemicals is dangerous, so scientists use indicators, special substances that change colour in acids or bases, to identify them safely.",
+              "sections": [
+                [
+                  "Acids and bases",
+                  "Acids occur naturally in many foods: citric acid in lemons and oranges, acetic acid in vinegar, lactic acid in curd, and tartaric acid in tamarind and grapes. Our stomach contains hydrochloric acid. Bases include calcium hydroxide (lime water), sodium hydroxide (used to make soap), magnesium hydroxide (milk of magnesia) and ammonium hydroxide (used in window cleaners). Bases that dissolve in water are called alkalis. Strong acids and bases are corrosive and can burn skin, so they must be handled with great care. Substances that are neither acidic nor basic, like pure water and sugar solution, are neutral."
+                ],
+                [
+                  "Indicators",
+                  "Litmus is a natural dye from lichens. Acids turn blue litmus red, and bases turn red litmus blue. Neutral solutions do not change either colour. Turmeric is yellow, and it turns red in a basic solution such as soap water; that is why a turmeric stain on your shirt turns red when washed with soap. China rose (hibiscus) petals give a solution that turns dark pink (magenta) in acids and green in bases. Using an indicator, you can test kitchen substances safely: lemon juice turns blue litmus red, and baking soda solution turns red litmus blue."
+                ],
+                [
+                  "Neutralisation",
+                  "When an acid and a base react, they cancel each other's properties. This reaction is called neutralisation and forms a salt and water, often with heat being given out: acid + base → salt + water. Examples are everywhere. Indigestion is caused by too much acid in the stomach, so we take an antacid such as milk of magnesia, a base. An ant's sting injects formic acid; rubbing baking soda solution on it brings relief. If soil is too acidic, farmers add quicklime or slaked lime; if it is too basic, they add organic matter that releases acids. Factory wastes are neutralised before being released into rivers."
+                ]
+              ],
+              "definitions": [
+                ["Acid", "A substance that tastes sour and turns blue litmus red."],
+                ["Base", "A substance that tastes bitter, feels soapy and turns red litmus blue."],
+                ["Indicator", "A substance that shows by a colour change whether something is acidic or basic."],
+                ["Neutralisation", "The reaction between an acid and a base forming a salt and water."],
+                ["Neutral", "Neither acidic nor basic."]
+              ],
+              "examples": [
+                "Curd tastes sour because of lactic acid.",
+                "Toothpaste is slightly basic to neutralise acids made by bacteria in the mouth."
+              ],
+              "worked": [
+                {
+                  "problem": "Three unlabelled bottles contain lemon juice, soap solution and sugar solution. Using only red and blue litmus, identify them.",
+                  "steps": [
+                    "Dip blue litmus into each: the one that turns it red is acidic → lemon juice.",
+                    "Dip red litmus into the other two: the one that turns it blue is basic → soap solution.",
+                    "The one that changes neither paper is neutral → sugar solution."
+                  ],
+                  "answer": "Blue→red: lemon juice; red→blue: soap solution; no change: sugar solution."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Indicator colours",
+                "columns": ["Indicator", "In acid", "In base", "In neutral"],
+                "rows": [
+                  ["Blue litmus", "Red", "Blue", "Blue"],
+                  ["Red litmus", "Red", "Blue", "Red"],
+                  ["Turmeric", "Yellow", "Red", "Yellow"],
+                  ["China rose", "Dark pink", "Green", "No change"]
+                ]
+              },
+              "real_world": "Farmers test soil to decide whether to add lime, swimming pools are tested so the water is neither too acidic nor too basic, and doctors recommend antacids for acidity. Toothpaste, shampoo and many cleaning products are designed to be slightly acidic or basic for their job.",
+              "takeaways": [
+                "Acids are sour and turn blue litmus red; bases are bitter, soapy and turn red litmus blue.",
+                "Turmeric turns red in bases; china rose turns pink in acids and green in bases.",
+                "Acid + base → salt + water (neutralisation), often releasing heat.",
+                "Never taste or touch unknown chemicals; use indicators."
+              ],
+              "practice": [
+                ["Name the acid in vinegar.", "Acetic acid."],
+                ["What colour does turmeric turn in soap solution?", "Red."],
+                ["Why is an antacid taken for indigestion?", "It is a base that neutralises excess stomach acid."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Which substance is acidic?", ["Soap solution", "Lemon juice", "Lime water", "Baking soda solution"], "B", "Which one tastes sour?", "Lemon juice contains citric acid."],
+                  ["Acids turn blue litmus:", ["Green", "Yellow", "Red", "Purple"], "C", "Remember: Acid – Red.", "Acids change blue litmus to red."],
+                  ["Which is a base?", ["Milk of magnesia", "Vinegar", "Curd", "Orange juice"], "A", "It is used to treat acidity.", "Milk of magnesia contains magnesium hydroxide, a base."],
+                  ["The reaction between an acid and a base is called:", ["Evaporation", "Condensation", "Rusting", "Neutralisation"], "D", "The two cancel each other.", "An acid and a base neutralise each other."]
+                ],
+                "MEDIUM": [
+                  ["What colour does turmeric indicator show in a base?", ["Yellow", "Red", "Blue", "Green"], "B", "Think of a turmeric stain washed with soap.", "Turmeric turns red in basic solutions."],
+                  ["The products of neutralisation are:", ["Acid and water", "Base and oxygen", "Salt and water", "Sugar and carbon dioxide"], "C", "Acid + base → ?", "Neutralisation produces a salt and water."],
+                  ["An ant's sting contains formic acid. What should be applied?", ["Baking soda solution", "Vinegar", "Lemon juice", "Hydrochloric acid"], "A", "You need a mild base.", "Baking soda is a mild base that neutralises the acid."],
+                  ["Sugar solution does not change red or blue litmus. It is:", ["Acidic", "Basic", "Corrosive", "Neutral"], "D", "No colour change in either paper.", "A neutral substance does not change litmus colour."]
+                ],
+                "HARD": [
+                  ["A solution turns china rose indicator green. What happens to red litmus in it?", ["Stays red", "Turns blue", "Turns yellow", "Turns pink"], "B", "Green with china rose means…", "The solution is basic, so red litmus turns blue."],
+                  ["Why do farmers add slaked lime to some fields?", ["To make soil more acidic", "To kill earthworms", "To neutralise acidic soil", "To add water"], "C", "Lime is a base.", "Slaked lime neutralises excess acid in the soil."],
+                  ["Why are factory wastes neutralised before they are released into rivers?", ["Acidic or basic wastes harm aquatic life", "To make the water sweet", "To increase fish catch for the factory", "Because rivers are always acidic"], "A", "Think about fish and plants in the river.", "Strong acids or bases would kill organisms living in the water."],
+                  ["During neutralisation in a test tube, the tube becomes warm. This shows:", ["The reaction absorbs heat", "Nothing happened", "Water evaporated", "Heat is given out in the reaction"], "D", "Did the temperature rise or fall?", "Neutralisation releases heat, so the tube warms up."]
+                ]
+              }
+            },
+            {
+              "slug": "g7-sci-physical-chemical-changes",
+              "title": "Physical and Chemical Changes",
+              "objectives": [
+                "Distinguish physical changes from chemical changes",
+                "Identify signs that a chemical change has occurred",
+                "Explain rusting and how to prevent it",
+                "Describe crystallisation as a physical change"
+              ],
+              "intro": "Ice melts, paper burns, milk sets into curd and a balloon is blown up. All of these are changes, but they are not all the same kind. In some changes, the substance changes only in shape, size or state and can often be changed back. In others, a completely new substance with new properties is formed. Scientists call these physical changes and chemical changes.",
+              "sections": [
+                [
+                  "Physical changes",
+                  "In a physical change, the properties such as shape, size, colour or state of a substance change, but no new substance is formed. Melting ice, boiling water, dissolving sugar, cutting paper, stretching a rubber band and folding clothes are all physical changes. Many physical changes are reversible: water vapour condenses back to water, and dissolved salt can be recovered by evaporation. Crystallisation, in which pure crystals form from a hot saturated solution as it cools, is a physical change used to obtain pure substances such as sugar and copper sulphate crystals."
+                ],
+                [
+                  "Chemical changes",
+                  "In a chemical change, one or more new substances are formed. Burning wood, cooking food, ripening fruit, curdling milk, digesting food and rusting iron are chemical changes. They are usually not easily reversible. Signs of a chemical change include a change in colour, the production of a gas (bubbles or smell), heat or light being given out or absorbed, the formation of a precipitate (a solid in a liquid), or a change in smell or taste. When magnesium ribbon burns, it gives a dazzling white light and forms white magnesium oxide powder, a new substance. When vinegar is added to baking soda, bubbles of carbon dioxide gas form."
+                ],
+                [
+                  "Rusting",
+                  "When iron is left in moist air, a reddish-brown flaky substance called rust forms on its surface. Rusting is a chemical change: iron reacts with oxygen and water to form iron oxide. Both oxygen and water are needed, which is why iron rusts faster near the sea, where the air is humid and salty. Rust weakens bridges, ships, vehicles and pipes, costing a great deal to repair. Rusting can be prevented by stopping air and moisture reaching the iron: painting, oiling or greasing, or coating it with zinc (galvanisation). Stainless steel, an alloy of iron with chromium and nickel, does not rust easily."
+                ]
+              ],
+              "definitions": [
+                ["Physical change", "A change in shape, size, colour or state in which no new substance is formed."],
+                ["Chemical change", "A change in which one or more new substances are formed."],
+                ["Rusting", "The reaction of iron with oxygen and water forming iron oxide."],
+                ["Galvanisation", "Coating iron or steel with zinc to prevent rusting."],
+                ["Crystallisation", "Obtaining pure crystals from a solution as it cools."]
+              ],
+              "examples": [
+                "Making a sugar solution is physical; caramelising sugar by heating it until brown is chemical.",
+                "A cut apple turning brown is a chemical change caused by its reaction with air."
+              ],
+              "worked": [
+                {
+                  "problem": "Classify as physical or chemical, with a reason: (a) cooking an egg, (b) breaking a glass, (c) baking soda fizzing in lemon juice.",
+                  "steps": [
+                    "(a) The egg changes colour and texture permanently, forming new substances → chemical.",
+                    "(b) Glass changes only in shape and size; it is still glass → physical.",
+                    "(c) Bubbles of a new gas, carbon dioxide, form → chemical."
+                  ],
+                  "answer": "(a) chemical, (b) physical, (c) chemical."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Physical vs chemical change",
+                "columns": ["Feature", "Physical", "Chemical"],
+                "rows": [
+                  ["New substance?", "No", "Yes"],
+                  ["Usually reversible?", "Often", "Rarely"],
+                  ["Examples", "Melting, dissolving, cutting", "Burning, rusting, cooking"],
+                  ["Signs", "Change of shape/state", "Gas, colour, heat/light, smell"]
+                ]
+              },
+              "real_world": "Engineers galvanise iron poles and paint bridges to save crores of rupees spent on repairing rust damage. Cooks rely on chemical changes when baking bread or making curd, while the sugar industry uses crystallisation, a physical change, to produce pure sugar crystals.",
+              "takeaways": [
+                "Physical changes alter shape, size or state but make no new substance.",
+                "Chemical changes form new substances and show signs like gas, colour change, heat or light.",
+                "Rusting needs both oxygen and water and can be prevented by painting, oiling or galvanising.",
+                "Crystallisation is a physical change used to obtain pure substances."
+              ],
+              "practice": [
+                ["Is dissolving salt in water a physical or chemical change?", "Physical."],
+                ["Name two things iron needs in order to rust.", "Oxygen (air) and water (moisture)."],
+                ["Give one sign of a chemical change.", "Gas produced, colour change, heat or light given out, new smell."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Melting of ice is a:", ["Chemical change", "Physical change", "Neither", "Both"], "B", "Is a new substance formed?", "Ice and water are the same substance in different states."],
+                  ["Which is a chemical change?", ["Folding paper", "Boiling water", "Burning paper", "Cutting wood"], "C", "Which one forms ash and smoke?", "Burning forms new substances such as ash, smoke and carbon dioxide."],
+                  ["Rust forms on:", ["Iron", "Plastic", "Wood", "Glass"], "A", "It is reddish-brown and flaky.", "Rusting is a reaction of iron with oxygen and water."],
+                  ["Which is a sign of a chemical change?", ["Change of shape", "Change of size", "Change of state only", "Bubbles of a new gas"], "D", "New substances may be gases.", "Production of a new gas indicates a chemical change."]
+                ],
+                "MEDIUM": [
+                  ["Which two are needed for iron to rust?", ["Oxygen and nitrogen", "Oxygen and water", "Water and sunlight", "Carbon dioxide and heat"], "B", "Iron does not rust in dry air.", "Rusting needs both oxygen and moisture."],
+                  ["Galvanisation means coating iron with:", ["Paint", "Oil", "Zinc", "Copper"], "C", "It is a metal coating.", "Galvanised iron is coated with zinc."],
+                  ["Obtaining pure copper sulphate crystals from its solution is:", ["Crystallisation, a physical change", "Rusting", "Burning", "Neutralisation"], "A", "No new substance forms.", "Crystallisation recovers the same substance in pure form."],
+                  ["Which change is NOT easily reversible?", ["Freezing water", "Melting wax", "Dissolving sugar", "Curdling milk"], "D", "Can curd become milk again?", "Curdling is a chemical change and cannot be reversed easily."]
+                ],
+                "HARD": [
+                  ["Burning a candle involves:", ["Only a physical change", "Both physical (melting wax) and chemical (burning wax vapour) changes", "Only a chemical change", "No change"], "B", "What happens to the wax near the flame?", "Wax melts (physical) and its vapour burns forming new gases (chemical)."],
+                  ["Why do ships and bridges near the sea rust faster?", ["There is less oxygen there", "Sea water is always hot", "Moist, salty air speeds up rusting", "Sunlight is stronger"], "C", "What does sea air contain more of?", "Humidity and salt in sea air speed up rusting."],
+                  ["Magnesium ribbon burns with a bright light forming white powder. Which statement is TRUE?", ["A new substance, magnesium oxide, is formed", "It is a physical change", "The powder is still magnesium", "No energy is released"], "A", "Look at the white powder.", "Burning forms magnesium oxide and releases light and heat."],
+                  ["Which pair contains one physical and one chemical change?", ["Rusting; burning", "Melting; boiling", "Digesting; cooking", "Dissolving sugar; ripening a mango"], "D", "Check each pair separately.", "Dissolving sugar is physical; ripening forms new substances, so it is chemical."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g7-sci-u-physics",
+      "title": "Physics: Heat",
+      "topics": [
+        {
+          "slug": "g7-sci-t-heat",
+          "title": "Heat and Temperature",
+          "description": "Measuring temperature and how heat travels by conduction, convection and radiation.",
+          "lessons": [
+            {
+              "slug": "g7-sci-temperature",
+              "title": "Temperature and Thermometers",
+              "objectives": [
+                "Distinguish heat from temperature",
+                "Use a clinical thermometer and a laboratory thermometer correctly",
+                "Convert temperatures between Celsius and Fahrenheit",
+                "Explain why touch is not a reliable way to judge temperature"
+              ],
+              "intro": "Put one hand in cold water and the other in hot water for a minute, then put both in lukewarm water. The lukewarm water feels warm to one hand and cold to the other. Our sense of touch can mislead us, so we use thermometers. Temperature is a measure of how hot or cold something is, while heat is a form of energy that flows from a hotter object to a colder one.",
+              "sections": [
+                [
+                  "Heat and temperature",
+                  "Heat always flows from a body at a higher temperature to one at a lower temperature until both reach the same temperature. A cup of tea cools because heat flows from the tea to the cooler air. Temperature is measured in degrees Celsius (°C); on this scale water freezes at 0 °C and boils at 100 °C at normal pressure. Another scale is Fahrenheit (°F), on which water freezes at 32 °F and boils at 212 °F. To convert, use F = (9/5)C + 32. A bucket of warm water contains more heat energy than a cup of boiling water, even though its temperature is lower."
+                ],
+                [
+                  "The clinical thermometer",
+                  "A clinical thermometer measures body temperature. It is a narrow glass tube with a bulb containing mercury or alcohol, and its scale usually runs from 35 °C to 42 °C, because body temperature does not go beyond this range. Normal body temperature is about 37 °C (98.6 °F). It has a kink near the bulb that stops the liquid from falling back on its own, so the reading can be taken after the thermometer is removed. Before use, wash it with antiseptic and give it a few jerks to bring the level below 35 °C. Place it under the tongue for about a minute. Digital thermometers, which use no mercury, are now widely used and are safer."
+                ],
+                [
+                  "The laboratory thermometer",
+                  "A laboratory thermometer has a range of about −10 °C to 110 °C and no kink, so the reading must be taken while it is still in the substance. Hold it upright, keep the bulb fully in the liquid without touching the bottom or sides of the container, and read the level with your eye at the same height. A clinical thermometer must never be used to measure very hot liquids such as boiling water, because it would break. Mercury is poisonous, so broken mercury thermometers must be handled carefully."
+                ]
+              ],
+              "definitions": [
+                ["Temperature", "A measure of the degree of hotness or coldness of an object."],
+                ["Heat", "A form of energy that flows from a hotter object to a colder one."],
+                ["Thermometer", "An instrument used to measure temperature."],
+                ["Clinical thermometer", "A thermometer designed to measure human body temperature, range 35–42 °C."]
+              ],
+              "examples": [
+                "A temperature of 38.5 °C indicates fever.",
+                "Room temperature on a pleasant day is about 25 °C, which is 77 °F."
+              ],
+              "worked": [
+                {
+                  "problem": "Convert 40 °C to Fahrenheit and 212 °F to Celsius.",
+                  "steps": [
+                    "F = (9/5) × 40 + 32 = 72 + 32 = 104 °F.",
+                    "Rearrange: C = (5/9)(F − 32).",
+                    "C = (5/9)(212 − 32) = (5/9) × 180 = 100 °C."
+                  ],
+                  "answer": "40 °C = 104 °F; 212 °F = 100 °C."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Clinical vs laboratory thermometer",
+                "columns": ["Feature", "Clinical", "Laboratory"],
+                "rows": [
+                  ["Range", "35–42 °C", "−10–110 °C"],
+                  ["Kink", "Yes", "No"],
+                  ["Read when", "After removing", "While still in the substance"],
+                  ["Used for", "Body temperature", "Liquids and experiments"]
+                ]
+              },
+              "real_world": "Doctors and nurses check temperature to detect fever, cold-storage warehouses monitor temperature so vaccines stay effective, and weather forecasters report daily maximum and minimum temperatures. During the COVID-19 pandemic, infrared thermometers were used to screen people quickly without touching them.",
+              "takeaways": [
+                "Heat is energy; temperature measures hotness.",
+                "Heat flows from hotter to colder objects.",
+                "Clinical thermometers (35–42 °C) have a kink; laboratory thermometers (−10–110 °C) do not.",
+                "F = (9/5)C + 32; normal body temperature is about 37 °C."
+              ],
+              "practice": [
+                ["Convert 25 °C to °F.", "77 °F"],
+                ["Why is a clinical thermometer jerked before use?", "To bring the mercury level below 35 °C."],
+                ["Why should a clinical thermometer not be used for boiling water?", "Its range is only up to 42 °C, so it would break."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Normal human body temperature is about:", ["32 °C", "37 °C", "42 °C", "100 °C"], "B", "It is 98.6 °F.", "Normal body temperature is about 37 °C."],
+                  ["Water boils at:", ["0 °C", "37 °C", "100 °C", "212 °C"], "C", "At normal pressure, on the Celsius scale.", "Water boils at 100 °C."],
+                  ["Heat flows from:", ["A hotter object to a colder one", "A colder object to a hotter one", "Light objects to heavy ones", "It never flows"], "A", "Think of tea cooling down.", "Heat always flows from higher to lower temperature."],
+                  ["The range of a clinical thermometer is:", ["0–100 °C", "−10–110 °C", "100–200 °C", "35–42 °C"], "D", "Body temperature stays within a narrow range.", "Clinical thermometers measure from 35 to 42 °C."]
+                ],
+                "MEDIUM": [
+                  ["Why does a clinical thermometer have a kink?", ["To make it look nice", "To stop the mercury falling back so it can be read later", "To increase its range", "To make it stronger"], "B", "You read it after taking it out of the mouth.", "The kink holds the mercury level until it is shaken down."],
+                  ["What is 30 °C in Fahrenheit?", ["54 °F", "62 °F", "86 °F", "96 °F"], "C", "Use F = (9/5)C + 32.", "(9/5) × 30 + 32 = 54 + 32 = 86 °F."],
+                  ["When reading a laboratory thermometer, its bulb should:", ["Be fully in the liquid without touching the container", "Touch the bottom of the beaker", "Be outside the liquid", "Be held in the hand"], "A", "The bulb must measure the liquid, not the glass.", "The bulb should be surrounded by liquid and not touch the container."],
+                  ["Why is touch unreliable for judging temperature?", ["Hands cannot feel heat", "Water has no temperature", "Thermometers are cheaper", "The same water can feel warm to one hand and cold to the other"], "D", "Remember the three-bowl experiment.", "Our sense depends on what the hand touched before, so it can mislead."]
+                ],
+                "HARD": [
+                  ["At what temperature are the Celsius and Fahrenheit readings equal?", ["0°", "−40°", "40°", "100°"], "B", "Set F = C in F = (9/5)C + 32.", "C = (9/5)C + 32 gives −(4/5)C = 32, so C = −40."],
+                  ["A doctor's thermometer shows 101.3 °F. In Celsius this is about:", ["36.5 °C", "40.2 °C", "38.5 °C", "42.0 °C"], "C", "C = (5/9)(F − 32).", "(5/9) × 69.3 ≈ 38.5 °C, which is a fever."],
+                  ["A bucket of water at 40 °C and a cup of water at 90 °C are compared. Which statement is correct?", ["The cup is at a higher temperature, but the bucket may contain more heat energy", "The bucket is hotter", "They have the same heat", "The cup always contains more heat energy"], "A", "Heat energy depends on the amount of water too.", "Temperature is higher in the cup, but the larger mass can hold more total heat."],
+                  ["Why are digital thermometers preferred over mercury thermometers today?", ["They are always cheaper", "They measure only boiling water", "They use more mercury", "They contain no poisonous mercury and are safer if broken"], "D", "Mercury is toxic.", "Digital thermometers avoid the danger of mercury spills."]
+                ]
+              }
+            },
+            {
+              "slug": "g7-sci-heat-transfer",
+              "title": "Transfer of Heat",
+              "objectives": [
+                "Explain conduction, convection and radiation",
+                "Classify materials as conductors and insulators of heat",
+                "Explain land and sea breezes",
+                "Explain the choice of clothing colours and materials in different seasons"
+              ],
+              "intro": "Hold one end of a steel spoon in hot tea and soon the other end feels warm. Stand near a fire and you feel its warmth on your face without touching it. Heat travels in three ways: conduction, convection and radiation. Understanding them explains why cooking pans have plastic handles, why sea breezes blow during the day, and why we wear light-coloured clothes in summer.",
+              "sections": [
+                [
+                  "Conduction",
+                  "In conduction, heat passes from the hotter part of a solid to the colder part through the material itself, from particle to particle, without the material moving. Metals such as copper, aluminium and iron are good conductors of heat, which is why cooking pots are made of them. Materials that do not allow heat to pass easily, such as wood, plastic, cloth, air and cork, are poor conductors or insulators. Pan handles are made of plastic or wood so that we can hold them, and a woollen blanket keeps us warm because air trapped between its fibres is a poor conductor."
+                ],
+                [
+                  "Convection",
+                  "Liquids and gases are mainly heated by convection. When water at the bottom of a pan is heated, it expands, becomes lighter and rises; cooler, denser water from above sinks to take its place. This sets up convection currents that spread heat through the whole liquid. Air behaves the same way. Near the sea, the land heats up faster than water during the day, so warm air above the land rises and cooler air from the sea moves in: a sea breeze. At night the land cools faster, and air flows from land to sea: a land breeze. Ventilators are placed high on walls so that warm air can escape."
+                ],
+                [
+                  "Radiation",
+                  "Heat from the Sun reaches the Earth through empty space, where there are no particles for conduction or convection. This transfer of heat is radiation, and it does not need any medium. All hot objects radiate heat. Dark surfaces absorb more radiated heat than light surfaces, while light-coloured and shiny surfaces reflect more. That is why we prefer white or light-coloured cotton clothes in summer and dark woollen clothes in winter. A vacuum flask keeps drinks hot or cold by reducing all three types of transfer: the vacuum between double walls stops conduction and convection, and shiny silvered walls reduce radiation."
+                ]
+              ],
+              "definitions": [
+                ["Conduction", "Transfer of heat through a solid from particle to particle without the material moving."],
+                ["Convection", "Transfer of heat in liquids and gases by the movement of the heated material."],
+                ["Radiation", "Transfer of heat without any medium, as from the Sun."],
+                ["Conductor", "A material that allows heat to pass through it easily."],
+                ["Insulator", "A material that does not allow heat to pass through easily."]
+              ],
+              "examples": [
+                "A metal chair feels colder than a wooden chair in winter because metal conducts heat away from your body faster.",
+                "Hot air balloons rise because heated air inside is less dense than the cooler air outside."
+              ],
+              "worked": [
+                {
+                  "problem": "Explain why a sea breeze blows from sea to land on a sunny afternoon.",
+                  "steps": [
+                    "The Sun heats land and water, but land heats up faster.",
+                    "Air above the hot land warms, expands, becomes less dense and rises.",
+                    "Cooler, denser air over the sea moves towards the land to replace it.",
+                    "This movement of air from sea to land is the sea breeze, a convection current."
+                  ],
+                  "answer": "Land heats faster, warm air over it rises, and cooler sea air flows in: convection."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Three ways heat travels",
+                "columns": ["Mode", "Needs a medium?", "Main in", "Example"],
+                "rows": [
+                  ["Conduction", "Yes", "Solids", "Spoon in hot tea"],
+                  ["Convection", "Yes", "Liquids and gases", "Boiling water, sea breeze"],
+                  ["Radiation", "No", "Any, even vacuum", "Sunlight warming the Earth"]
+                ]
+              },
+              "real_world": "Houses in hot regions are often painted white to reflect sunlight, and double-glazed windows trap a layer of air to reduce heat loss. Fishermen in coastal areas use land and sea breezes when sailing out early and returning in the afternoon. Engineers design car radiators and refrigerator coils using conduction and convection.",
+              "takeaways": [
+                "Conduction transfers heat through solids; metals are good conductors.",
+                "Convection transfers heat by moving liquids and gases.",
+                "Radiation needs no medium; dark surfaces absorb more heat.",
+                "Land and sea breezes are convection currents caused by unequal heating."
+              ],
+              "practice": [
+                ["Why are cooking pans made of metal but their handles of plastic?", "Metal conducts heat to cook food; plastic insulates our hands."],
+                ["Why do we wear light-coloured clothes in summer?", "They reflect more heat."],
+                ["How does heat from the Sun reach the Earth?", "By radiation."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Heat travels through a metal spoon by:", ["Convection", "Conduction", "Radiation", "Evaporation"], "B", "The spoon is a solid.", "Heat passes along a solid by conduction."],
+                  ["Heat from the Sun reaches us by:", ["Conduction", "Convection", "Radiation", "Reflection"], "C", "Space has no air.", "Radiation needs no medium."],
+                  ["Which material is a good conductor of heat?", ["Copper", "Wood", "Plastic", "Cotton"], "A", "Cooking pots are made of it.", "Copper is a metal and conducts heat well."],
+                  ["Which colour of clothing is best for a hot summer day?", ["Black", "Dark blue", "Dark brown", "White"], "D", "Which colour reflects most heat?", "Light colours such as white reflect more radiated heat."]
+                ],
+                "MEDIUM": [
+                  ["In which medium does convection NOT occur?", ["Water", "Solids", "Air", "Oil"], "B", "Convection needs particles that can move around.", "Particles in solids cannot flow, so there is no convection."],
+                  ["During the day, the breeze near the sea blows:", ["From land to sea", "Upwards only", "From sea to land", "It does not blow"], "C", "Land heats faster than water.", "Warm air over land rises and cooler sea air moves in."],
+                  ["Woollen clothes keep us warm because:", ["Air trapped in the fibres is a poor conductor", "Wool produces heat", "Wool is a metal", "Wool absorbs cold"], "A", "Think about what fills the gaps in wool.", "Trapped air insulates and reduces heat loss from the body."],
+                  ["Why are ventilators placed near the ceiling?", ["To let in sunlight", "To keep insects out", "To reduce noise", "So warm, rising air can escape"], "D", "Warm air rises.", "Warm air rises by convection and leaves through high ventilators."]
+                ],
+                "HARD": [
+                  ["A vacuum flask reduces heat transfer by conduction and convection mainly through its:", ["Plastic cap", "Vacuum between double walls", "Outer colour", "Narrow mouth only"], "B", "Which transfers need particles?", "A vacuum has no particles, so conduction and convection cannot occur."],
+                  ["On a winter morning a steel bench feels colder than a wooden bench at the same temperature. Why?", ["Steel is at a lower temperature", "Wood produces heat", "Steel conducts heat away from your body faster", "Wood absorbs cold"], "C", "Both benches are at the same temperature.", "Steel is a better conductor, so it draws heat from your hand quickly."],
+                  ["At night near the coast, the breeze blows from land to sea because:", ["Land cools faster, so air above the sea is warmer and rises", "The sea freezes", "Sunlight stops reaching the sea", "Fishermen create it"], "A", "Which surface stays warmer at night?", "Water keeps heat longer, so warmer sea air rises and air from land flows out."],
+                  ["Why are the inner walls of a vacuum flask silvered?", ["To make it lighter", "To conduct heat faster", "To stop convection", "To reflect radiated heat and reduce heat loss"], "D", "Shiny surfaces reflect radiation.", "Silvered surfaces reflect heat radiation back, keeping contents hot or cold."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

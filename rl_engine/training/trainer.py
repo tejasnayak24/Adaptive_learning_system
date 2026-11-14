@@ -10,10 +10,11 @@ lives in ``agent.py``'s ``recommend`` method). It has no dependency on
 FastAPI, any database, any API framework, or any frontend or UI code.
 """
 
+import random
+
 from ..core.config import RLConfig
 from .agent import QLearningAgent
 from .environment import LearningEnvironment
-from .simulation import create_initial_state
 
 
 class Trainer:
@@ -48,7 +49,7 @@ class Trainer:
             has completed. Intended for monitoring only.
     """
 
-    def __init__(self, config: RLConfig) -> None:
+    def __init__(self, config: RLConfig, seed: int | None = None) -> None:
         """Initialize the trainer, and the agent and environment it drives.
 
         Args:
@@ -77,8 +78,13 @@ class Trainer:
             )
 
         self.config = config
-        self._agent = QLearningAgent(config)
-        self._environment = LearningEnvironment(create_initial_state())
+        self.seed = seed
+        # One seeded generator drives the simulator and another the agent's
+        # exploration, so a training run is reproducible from ``seed``.
+        self._agent = QLearningAgent(config, rng=random.Random(seed))
+        self._environment = LearningEnvironment(
+            random.Random(None if seed is None else seed + 1)
+        )
 
         self.episode_rewards: list[float] = []
         self.epsilon_history: list[float] = []
@@ -108,8 +114,8 @@ class Trainer:
     def _run_episode(self) -> float:
         """Run a single training episode to completion or the step limit.
 
-        Resets the environment to a fresh starting state (built by
-        ``training.simulation.create_initial_state``), then repeatedly
+        Resets the environment with a freshly sampled simulated student
+        (``training.simulation.SimulatedStudent``), then repeatedly
         lets the agent choose an action, applies it to the environment,
         and updates the agent's Q-table from the observed transition,
         until the environment reports the episode is done or
@@ -119,7 +125,7 @@ class Trainer:
             The sum of the rewards received over every step of the
             episode.
         """
-        state = self._environment.reset(create_initial_state())
+        state = self._environment.reset()
         total_reward = 0.0
         done = False
         steps_taken = 0

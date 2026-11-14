@@ -15,3 +15,22 @@ env/
 # OS files
 .DS_Store
 Thumbs.db
+# Local database backups
+backups/
+
+# Runtime logs
+logs/
+*.log
+
+# RL training candidate (only promoted after validation)
+rl_engine/q_table.candidate.json
+
+# Secrets (also ignored per folder; this is a safety net)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Test / tool caches
+.pytest_cache/

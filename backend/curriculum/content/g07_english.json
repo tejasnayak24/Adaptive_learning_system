@@ -1,0 +1,581 @@
+{
+  "grade": 7,
+  "subject": "English",
+  "units": [
+    {
+      "slug": "g7-eng-u-grammar",
+      "title": "Grammar",
+      "topics": [
+        {
+          "slug": "g7-eng-t-tenses",
+          "title": "Verbs and Tenses",
+          "description": "Using simple, continuous and perfect tenses to show when actions happen.",
+          "lessons": [
+            {
+              "slug": "g7-eng-simple-tenses",
+              "title": "Simple Present and Simple Past",
+              "objectives": [
+                "Use the simple present for habits, facts and timetables",
+                "Use the simple past for completed actions",
+                "Form regular and irregular past tense verbs",
+                "Make negatives and questions with do, does and did"
+              ],
+              "intro": "A verb tells us what someone does, and its tense tells us when. 'She walks to school' describes a habit; 'She walked to school yesterday' describes a finished action in the past. The simple present and simple past are the tenses we use most often in speaking and writing. Getting them right makes your English clear and correct.",
+              "sections": [
+                [
+                  "The simple present",
+                  "We use the simple present for habits and routines ('I brush my teeth twice a day'), general truths and facts ('Water boils at 100 °C'; 'The Earth goes round the Sun'), and fixed timetables ('The train leaves at 6:15'). With he, she, it or a singular noun, add -s or -es to the verb: she reads, he watches, the dog barks. Verbs ending in consonant + y change y to ies: he studies. Signal words include always, usually, often, every day and never. The verb 'have' becomes 'has' and 'be' becomes am, is or are."
+                ],
+                [
+                  "The simple past",
+                  "We use the simple past for actions completed at a definite time in the past: 'We visited Jaipur last summer.' Regular verbs add -ed (play, played; stop, stopped; carry, carried). Many common verbs are irregular and must be learnt: go, went; see, saw; eat, ate; write, wrote; buy, bought; take, took; think, thought. The past of be is was (I, he, she, it) or were (you, we, they). Signal words include yesterday, last week, ago and in 2019."
+                ],
+                [
+                  "Negatives and questions",
+                  "In the simple present, use do not (don't) or does not (doesn't) with the base form of the verb: 'He does not like spicy food' (not 'does not likes'). Questions begin with do or does: 'Do you play chess?' 'Does she live here?' In the simple past, use did not (didn't) and did for all subjects, again with the base form: 'They did not come.' 'Did you finish your homework?' A very common mistake is to use the past form after did: 'Did you went?' is wrong; say 'Did you go?'"
+                ]
+              ],
+              "definitions": [
+                ["Tense", "The form of a verb that shows the time of an action."],
+                ["Simple present", "The tense used for habits, facts and timetables."],
+                ["Simple past", "The tense used for actions completed at a definite past time."],
+                ["Irregular verb", "A verb that does not form its past tense by adding -ed."],
+                ["Base form", "The plain form of a verb, such as go, eat, write."]
+              ],
+              "examples": [
+                "My grandmother tells us a story every night. (habit)",
+                "Neil Armstrong walked on the Moon in 1969. (completed past action)"
+              ],
+              "worked": [
+                {
+                  "problem": "Correct the errors: 'Yesterday my brother go to the market and buyed apples. He don't like oranges. Did he paid?'",
+                  "steps": [
+                    "'Yesterday' shows past time: go → went; 'buyed' → bought (irregular).",
+                    "'He' needs does in the negative: don't → doesn't (present habit).",
+                    "After did use the base form: paid → pay."
+                  ],
+                  "answer": "Yesterday my brother went to the market and bought apples. He doesn't like oranges. Did he pay?"
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Common irregular verbs",
+                "columns": ["Base", "Past", "Base", "Past"],
+                "rows": [
+                  ["go", "went", "see", "saw"],
+                  ["eat", "ate", "write", "wrote"],
+                  ["buy", "bought", "think", "thought"],
+                  ["take", "took", "bring", "brought"]
+                ]
+              },
+              "real_world": "News reports describe events in the simple past ('The rocket launched at 10 a.m.'), while timetables, product instructions and science facts use the simple present. Diary entries and travel blogs are mostly written in the simple past.",
+              "takeaways": [
+                "Simple present: habits, facts and timetables; add -s/-es for he, she, it.",
+                "Simple past: completed actions at a definite past time.",
+                "Learn common irregular past forms.",
+                "After do, does and did always use the base form of the verb."
+              ],
+              "practice": [
+                ["Fill in: The Sun ___ (rise) in the east.", "rises"],
+                ["Write the past of 'catch', 'teach' and 'swim'.", "caught, taught, swam"],
+                ["Make a question: She watched the match.", "Did she watch the match?"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Choose the correct form: 'She ___ to school every day.'", ["go", "goes", "going", "gone"], "B", "Subject 'she' in the simple present.", "With she, add -es: goes."],
+                  ["What is the past tense of 'write'?", ["writed", "writes", "wrote", "written"], "C", "It is irregular.", "The simple past of write is wrote."],
+                  ["Which sentence states a general truth?", ["Water freezes at 0 °C.", "I went to Goa.", "She is singing now.", "They had left."], "A", "Facts use the simple present.", "A scientific fact is expressed in the simple present."],
+                  ["Choose the correct sentence.", ["Did you saw the film?", "Did you sees the film?", "Did you seeing the film?", "Did you see the film?"], "D", "After 'did', use the base form.", "Did + base form: Did you see the film?"]
+                ],
+                "MEDIUM": [
+                  ["Choose the correct negative: 'He likes tea.'", ["He don't like tea.", "He doesn't like tea.", "He doesn't likes tea.", "He not likes tea."], "B", "Does not + base verb.", "With he, use doesn't + like."],
+                  ["Fill in: 'Last year we ___ (visit) the Taj Mahal.'", ["visit", "visits", "visited", "will visit"], "C", "'Last year' signals the past.", "Regular past tense: visited."],
+                  ["What is the past tense of 'carry'?", ["carried", "carryed", "carry", "carries"], "A", "Consonant + y.", "Change y to i and add -ed: carried."],
+                  ["Fill in: 'The bus ___ at 7:30 tomorrow morning.' (timetable)", ["leaved", "left", "has left", "leaves"], "D", "Fixed timetables use the simple present.", "Timetables use the simple present even for the future: leaves."]
+                ],
+                "HARD": [
+                  ["Find the error: 'My father reads the newspaper every morning and drinked tea.'", ["reads", "drinked", "every", "morning"], "B", "It is a habit and the verb is irregular anyway.", "The habit needs 'drinks'; 'drinked' is not a word."],
+                  ["Choose the correct sentence.", ["She didn't went to the party.", "She don't went to the party.", "She didn't go to the party.", "She not go to the party."], "C", "Didn't + base form.", "The negative past is didn't + go."],
+                  ["Which sentence uses the simple past correctly?", ["We bought a new bicycle two days ago.", "We buy a new bicycle two days ago.", "We buyed a new bicycle two days ago.", "We have buy a new bicycle two days ago."], "A", "'Two days ago' is a definite past time.", "Bought is the correct irregular past form."],
+                  ["Choose the correct question for: 'They study in the library.'", ["Does they study in the library?", "Did they studies in the library?", "Do they studies in the library?", "Do they study in the library?"], "D", "Plural subject in the present.", "Do + they + base form: Do they study?"]
+                ]
+              }
+            },
+            {
+              "slug": "g7-eng-continuous-perfect",
+              "title": "Continuous and Perfect Tenses",
+              "objectives": [
+                "Form and use the present and past continuous tenses",
+                "Form and use the present perfect tense",
+                "Distinguish the present perfect from the simple past",
+                "Use since and for correctly"
+              ],
+              "intro": "Compare 'I read a book', 'I am reading a book' and 'I have read this book'. The first is a simple fact or completed action; the second describes an action in progress now; the third connects a past action to the present. Continuous tenses show actions in progress, and perfect tenses show completed actions with a link to a later time. Using them correctly adds precision to your writing.",
+              "sections": [
+                [
+                  "Continuous tenses",
+                  "The present continuous is formed with am, is or are + the -ing form of the verb: 'She is cooking dinner.' It describes actions happening now, temporary situations ('He is staying with us this week') and planned future arrangements ('We are meeting at five'). The past continuous is formed with was or were + -ing: 'I was reading when the lights went out.' It describes an action in progress at a past moment, often interrupted by a shorter action in the simple past. Some verbs of feeling and knowing, such as know, like, want and believe, are not usually used in continuous forms: say 'I know the answer', not 'I am knowing'."
+                ],
+                [
+                  "The present perfect",
+                  "The present perfect is formed with has or have + the past participle: 'I have finished my homework.' Past participles of regular verbs end in -ed, but irregular verbs have their own forms: go, went, gone; see, saw, seen; write, wrote, written; eat, ate, eaten. The present perfect is used for past actions whose results matter now ('She has lost her key, so she cannot open the door'), for experiences ('Have you ever been to Kerala?'), and for actions that began in the past and continue now ('We have lived here since 2015')."
+                ],
+                [
+                  "Present perfect or simple past? Since or for?",
+                  "Use the simple past when the time of the action is stated or finished: 'I saw that film last week.' Use the present perfect when no finished time is mentioned: 'I have seen that film.' Never use the present perfect with yesterday, last year or ago: 'I have seen it yesterday' is wrong. With the present perfect, since shows the starting point (since Monday, since 2010, since I was five), while for shows the length of time (for three days, for ten years). So: 'She has taught here for twelve years' and 'She has taught here since 2013'."
+                ]
+              ],
+              "definitions": [
+                ["Present continuous", "am/is/are + verb-ing; an action happening now."],
+                ["Past continuous", "was/were + verb-ing; an action in progress in the past."],
+                ["Present perfect", "has/have + past participle; a past action linked to the present."],
+                ["Past participle", "The verb form used in perfect tenses, e.g. written, gone, played."]
+              ],
+              "examples": [
+                "Look! The children are flying kites. (now)",
+                "I have just finished my project. (recent action, result now)"
+              ],
+              "worked": [
+                {
+                  "problem": "Choose and explain: 'While I (walked / was walking) home, it (started / was starting) to rain.'",
+                  "steps": [
+                    "Walking home was a longer action in progress → past continuous: was walking.",
+                    "The rain began at one moment and interrupted it → simple past: started."
+                  ],
+                  "answer": "While I was walking home, it started to rain."
+                },
+                {
+                  "problem": "Fill in since or for: 'He has been ill ___ Monday' and 'We have waited ___ two hours.'",
+                  "steps": [
+                    "Monday is a starting point → since.",
+                    "Two hours is a length of time → for."
+                  ],
+                  "answer": "since Monday; for two hours."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Tense forms with 'write'",
+                "columns": ["Tense", "Form", "Example"],
+                "rows": [
+                  ["Present continuous", "am/is/are + -ing", "She is writing."],
+                  ["Past continuous", "was/were + -ing", "She was writing."],
+                  ["Present perfect", "has/have + past participle", "She has written."],
+                  ["Simple past", "past form", "She wrote."]
+                ]
+              },
+              "real_world": "Live cricket commentary uses the present continuous ('He is running in to bowl'), while news headlines and reports on recent events often use the present perfect ('Scientists have discovered a new species'). Job applications use the present perfect for experience: 'I have worked as a volunteer for two years.'",
+              "takeaways": [
+                "Continuous tenses: be + verb-ing for actions in progress.",
+                "Past continuous is often interrupted by a simple past action.",
+                "Present perfect: has/have + past participle, linking the past to now.",
+                "Since = starting point; for = length of time; no present perfect with 'yesterday' or 'ago'."
+              ],
+              "practice": [
+                ["Fill in: They ___ (play) cricket at this moment.", "are playing"],
+                ["Write the past participle of 'take', 'go' and 'eat'.", "taken, gone, eaten"],
+                ["Correct: 'I have visited Agra last year.'", "I visited Agra last year."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Choose the present continuous: 'Look! The baby ___.'", ["sleep", "is sleeping", "slept", "has slept"], "B", "'Look!' shows it is happening now.", "is + sleeping shows an action in progress now."],
+                  ["The past participle of 'write' is:", ["wrote", "writed", "written", "writing"], "C", "Used after has/have.", "write – wrote – written."],
+                  ["Fill in: 'We have lived here ___ ten years.'", ["for", "since", "from", "ago"], "A", "Ten years is a length of time.", "For shows duration."],
+                  ["Choose the past continuous: 'At 8 p.m. yesterday, I ___ dinner.'", ["eat", "have eaten", "am eating", "was eating"], "D", "In progress at a past moment.", "was + eating shows an action in progress at that time."]
+                ],
+                "MEDIUM": [
+                  ["Fill in: 'She has worked here ___ 2018.'", ["for", "since", "ago", "during"], "B", "2018 is a starting point.", "Since marks the starting point."],
+                  ["Which sentence is correct?", ["I am knowing the answer.", "I knowing the answer.", "I know the answer.", "I am know the answer."], "C", "'Know' is not normally continuous.", "Verbs of knowing use simple forms: I know."],
+                  ["Choose the correct sentence.", ["I saw that film last week.", "I have seen that film last week.", "I have saw that film last week.", "I seen that film last week."], "A", "'Last week' is a finished time.", "A finished time takes the simple past."],
+                  ["Fill in: 'When the phone rang, I ___ a bath.'", ["take", "have taken", "took", "was taking"], "D", "The bath was in progress when interrupted.", "Past continuous for the longer interrupted action."]
+                ],
+                "HARD": [
+                  ["Which sentence uses the present perfect for an experience?", ["I visited Kerala in 2020.", "Have you ever climbed a mountain?", "I am climbing a mountain.", "I was climbing when it snowed."], "B", "'Ever' asks about life experience.", "'Have you ever…' asks about experiences up to now."],
+                  ["Find the error: 'She has gone to the market an hour ago.'", ["She", "gone", "has gone (with 'ago')", "market"], "C", "Present perfect cannot be used with 'ago'.", "With 'an hour ago' use the simple past: She went…"],
+                  ["Choose the correct pair: 'While they ___ football, the ball ___ the window.'", ["were playing / broke", "played / was breaking", "are playing / broke", "were playing / was breaking"], "A", "Longer action + sudden interruption.", "Past continuous for the game; simple past for the sudden break."],
+                  ["Which sentence shows a past action with a result now?", ["I was losing my wallet.", "I lose my wallet every day.", "I am losing my wallet.", "I have lost my wallet, so I can't pay."], "D", "The result is felt now.", "The present perfect links the loss to the present problem."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g7-eng-u-vocabulary",
+      "title": "Vocabulary",
+      "topics": [
+        {
+          "slug": "g7-eng-t-words-in-context",
+          "title": "Words in Context",
+          "description": "Building words with prefixes and suffixes and working out meanings from context.",
+          "lessons": [
+            {
+              "slug": "g7-eng-prefixes-suffixes",
+              "title": "Prefixes and Suffixes",
+              "objectives": [
+                "Identify root words, prefixes and suffixes",
+                "Use common prefixes to change meaning",
+                "Use suffixes to change word class",
+                "Apply spelling rules when adding suffixes"
+              ],
+              "intro": "Many long English words are built from smaller parts. 'Unbreakable' is made from the root 'break', the prefix 'un-' meaning not, and the suffix '-able' meaning able to be. If you know the meaning of common word parts, you can often work out the meaning of a word you have never seen before. Word building is one of the fastest ways to grow your vocabulary.",
+              "sections": [
+                [
+                  "Roots and prefixes",
+                  "The root (or base) word carries the main meaning. A prefix is added to the front of a root and changes its meaning. Common prefixes include un-, in-, im-, dis- and non- (not): unfair, invisible, impatient, dislike, non-stop; re- (again): rewrite, rebuild; pre- (before): preview, prepaid; mis- (wrongly): misspell, misunderstand; over- (too much): overcook; sub- (under): submarine, subway; inter- (between): international; and multi- (many): multicoloured. Prefixes never change the spelling of the root: dis + satisfied = dissatisfied, mis + spell = misspell, with double letters."
+                ],
+                [
+                  "Suffixes and word class",
+                  "A suffix is added to the end of a word and often changes its word class. Suffixes that make nouns include -ness (kindness), -ment (enjoyment), -tion/-sion (creation, decision), -ity (activity) and -er/-or (teacher, actor). Suffixes that make adjectives include -ful (hopeful), -less (careless), -able/-ible (washable, visible), -ous (dangerous) and -ive (creative). The suffix -ly usually turns an adjective into an adverb (quick, quickly), and -ify, -ise and -en make verbs (simplify, modernise, widen). One root can produce a whole family: care, careful, carefully, careless, carelessness, caring."
+                ],
+                [
+                  "Spelling rules",
+                  "When a suffix beginning with a vowel is added to a word ending in silent e, drop the e: make, making; hope, hoping; but keep it before a consonant suffix: hopeful, careless. For words ending in consonant + y, change y to i before most suffixes: happy, happiness; beauty, beautiful; but keep y before -ing: carrying. For short words with one vowel followed by one consonant, double the consonant before a vowel suffix: run, running; stop, stopped; big, bigger. Checking a dictionary is wise for tricky words."
+                ]
+              ],
+              "definitions": [
+                ["Root word", "The basic word to which prefixes and suffixes are added."],
+                ["Prefix", "Letters added to the beginning of a word to change its meaning."],
+                ["Suffix", "Letters added to the end of a word, often changing its word class."],
+                ["Word family", "Words built from the same root, such as act, action, active, actor."]
+              ],
+              "examples": [
+                "Re + view = review (look at again); pre + view = preview (look at before).",
+                "Danger (noun) → dangerous (adjective) → dangerously (adverb)."
+              ],
+              "worked": [
+                {
+                  "problem": "Break down and explain 'disagreement' and 'unbelievable'.",
+                  "steps": [
+                    "disagreement = dis- (not) + agree (root) + -ment (noun suffix): the state of not agreeing.",
+                    "unbelievable = un- (not) + believe (root) + -able (can be): believe loses its e before -able.",
+                    "Meaning: not able to be believed."
+                  ],
+                  "answer": "Disagreement: the state of not agreeing. Unbelievable: impossible to believe."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "A word family from 'use'",
+                "columns": ["Word", "Class", "Part added"],
+                "rows": [
+                  ["use", "verb / noun", "root"],
+                  ["useful", "adjective", "-ful"],
+                  ["useless", "adjective", "-less"],
+                  ["usefulness", "noun", "-ful + -ness"],
+                  ["misuse", "verb / noun", "mis-"],
+                  ["reuse", "verb", "re-"]
+                ]
+              },
+              "real_world": "Scientific and medical words are built from prefixes and roots: 'hyper-tension' (high blood pressure) and 'sub-marine' (under the sea). Knowing word parts helps you understand new terms in science textbooks, news reports and instructions.",
+              "takeaways": [
+                "Prefixes change meaning; suffixes often change word class.",
+                "Learn common prefixes: un-, dis-, re-, pre-, mis-, sub-, inter-.",
+                "Learn common suffixes: -ness, -ment, -tion, -ful, -less, -able, -ly.",
+                "Follow spelling rules: drop silent e, change y to i, double the final consonant."
+              ],
+              "practice": [
+                ["Add a prefix to make the opposite of 'honest'.", "dishonest"],
+                ["Make a noun from 'kind' and an adjective from 'danger'.", "kindness; dangerous"],
+                ["Add -ing to 'make', 'swim' and 'carry'.", "making, swimming, carrying"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["What does the prefix 're-' mean in 'rewrite'?", ["not", "again", "before", "under"], "B", "Write it ___.", "Re- means again: rewrite means write again."],
+                  ["Which suffix turns 'care' into an adjective meaning 'without care'?", ["-ful", "-ness", "-less", "-ment"], "C", "It means without.", "Careless means without care."],
+                  ["Which word has a prefix meaning 'before'?", ["preview", "review", "misuse", "unhappy"], "A", "Pre- means before.", "Preview means to see before."],
+                  ["The noun formed from 'enjoy' is:", ["enjoyable", "enjoyed", "enjoyful", "enjoyment"], "D", "Add a noun suffix.", "Enjoy + -ment = enjoyment (noun)."]
+                ],
+                "MEDIUM": [
+                  ["Which spelling is correct?", ["hopeing", "hoping", "hopping (for 'hope')", "hopeeing"], "B", "Drop silent e before -ing.", "hope → hoping."],
+                  ["Which is correct?", ["mispell", "misspel", "misspell", "mispel"], "C", "Prefixes do not change the root.", "mis + spell = misspell."],
+                  ["What does 'submerge' most likely mean?", ["Go under water", "Come out of water", "Mix together", "Fly above"], "A", "Sub- means under.", "Submerge means to go or put under water."],
+                  ["Which suffix makes 'simple' into a verb?", ["-ness", "-ly", "-ous", "-ify"], "D", "Verb suffixes include -ify.", "Simple → simplify (verb)."]
+                ],
+                "HARD": [
+                  ["Which word is spelled correctly?", ["happyness", "happiness", "happines", "hapiness"], "B", "Consonant + y → i.", "happy → happiness."],
+                  ["In 'The instructions were incomprehensible', the word means:", ["very clear", "easy to remember", "impossible to understand", "badly printed"], "C", "in- (not) + comprehend (understand) + -ible (able).", "It means not able to be understood."],
+                  ["Which pair belongs to the same word family?", ["create, creative", "create, crate", "act, actually", "hope, hop"], "A", "Same root and related meaning.", "Creative is formed from create."],
+                  ["Which word is formed correctly?", ["stoped", "runing", "biger", "stopping"], "D", "Short word, one vowel + one consonant.", "Double the final consonant: stop → stopping."]
+                ]
+              }
+            },
+            {
+              "slug": "g7-eng-context-clues",
+              "title": "Using Context Clues",
+              "objectives": [
+                "Explain what context clues are",
+                "Use definition, synonym, antonym and example clues",
+                "Infer the meaning of unfamiliar words from the sentence",
+                "Check guesses with a dictionary"
+              ],
+              "intro": "When reading, you will often meet words you do not know. Stopping to look up every word breaks the flow of reading. Good readers first use the words and sentences around an unfamiliar word, called its context, to make an intelligent guess about its meaning. Writers often leave clues on purpose, especially in textbooks. Learning to spot these clues will make you a faster and more confident reader.",
+              "sections": [
+                [
+                  "Definition and synonym clues",
+                  "Sometimes the writer explains the word directly. In 'An archipelago, a group of islands, lies off the coast', the meaning is given between commas. Signal words for definitions include 'is', 'means', 'refers to', 'that is' and 'or'. A synonym clue gives a word with a similar meaning nearby: 'The hikers were exhausted; they were so tired they could barely walk.' Here 'so tired' explains 'exhausted'. Dashes and brackets also often contain definitions."
+                ],
+                [
+                  "Antonym and example clues",
+                  "An antonym clue shows a contrast. Signal words include but, however, unlike, instead and although. In 'Unlike her timid brother, Meera was audacious and loved adventure', we can guess that audacious means bold, the opposite of timid. An example clue lists examples of the word: 'Citrus fruits, such as lemons, oranges and limes, are rich in vitamin C.' From the examples we can tell that citrus fruits are sour, juicy fruits of the lemon family. Signal words include such as, for example, including and like."
+                ],
+                [
+                  "General context and checking",
+                  "Sometimes there is no single clue, and we must use the general sense of the sentence or paragraph. In 'After the long drought, the farmers were relieved when the rain finally came', we can infer that a drought is a long period without rain. It also helps to look at word parts: prefixes, roots and suffixes. Make your best guess, read on, and see if it still makes sense. Finally, check important words in a dictionary, because context gives an approximate meaning, and some words have several meanings that depend on the situation."
+                ]
+              ],
+              "definitions": [
+                ["Context", "The words and sentences surrounding a word that help explain its meaning."],
+                ["Context clue", "A hint in the surrounding text about the meaning of a word."],
+                ["Inference", "A conclusion reached using evidence and reasoning."],
+                ["Signal words", "Words such as 'but', 'such as' or 'means' that show the type of clue."]
+              ],
+              "examples": [
+                "Definition: A herbivore, an animal that eats only plants, has flat teeth for grinding.",
+                "Antonym: The first test was arduous, but the second was easy."
+              ],
+              "worked": [
+                {
+                  "problem": "Work out the meaning: 'The old bridge was precarious; it swayed in the wind and looked as if it might collapse at any moment.'",
+                  "steps": [
+                    "Look for clues after the semicolon: 'swayed', 'might collapse at any moment'.",
+                    "These describe something unsafe and unstable.",
+                    "Test the guess 'unsafe, likely to fall' in the sentence: it makes sense."
+                  ],
+                  "answer": "Precarious means unstable or dangerously likely to fall."
+                }
+              ],
+              "diagram": {
+                "type": "table",
+                "title": "Types of context clues",
+                "columns": ["Clue type", "Signal words", "Example"],
+                "rows": [
+                  ["Definition", "is, means, or, that is", "A nocturnal animal, one active at night…"],
+                  ["Synonym", "also, like, in other words", "She was elated — overjoyed…"],
+                  ["Antonym", "but, unlike, however", "Unlike lazy Raj, Anu was diligent."],
+                  ["Example", "such as, including", "Reptiles, such as snakes and lizards…"]
+                ]
+              },
+              "real_world": "Readers of newspapers, novels and textbooks use context clues constantly. In competitive exams, reading comprehension sections test exactly this skill, and adults use it to understand legal, technical or medical documents filled with unfamiliar terms.",
+              "takeaways": [
+                "Context clues help you guess meanings without stopping to look them up.",
+                "Look for definition, synonym, antonym and example clues and their signal words.",
+                "Use the general sense of the passage and word parts.",
+                "Confirm important guesses in a dictionary."
+              ],
+              "practice": [
+                ["Guess 'frugal': 'Being frugal, my grandfather never wasted food or money.'", "Careful with money; thrifty."],
+                ["Which signal word shows an antonym clue: 'such as' or 'unlike'?", "Unlike."],
+                ["What type of clue is in: 'Amphibians, such as frogs and toads, live on land and in water'?", "Example clue."]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["Context clues are found in:", ["The dictionary only", "The words around an unfamiliar word", "The title page", "The index"], "B", "Context means surroundings.", "Clues come from nearby words and sentences."],
+                  ["Which signal phrase usually introduces examples?", ["however", "means", "such as", "unlike"], "C", "It introduces a list.", "'Such as' introduces examples."],
+                  ["'A biography, the story of a person's life, …' This is a:", ["Definition clue", "Antonym clue", "Example clue", "No clue"], "A", "The meaning is given directly.", "The phrase between commas defines the word."],
+                  ["Which word signals contrast (an antonym clue)?", ["also", "including", "is", "but"], "D", "It shows an opposite idea.", "'But' introduces contrast."]
+                ],
+                "MEDIUM": [
+                  ["'Unlike his garrulous sister, Amit hardly spoke.' Garrulous means:", ["shy", "very talkative", "angry", "clever"], "B", "Amit hardly spoke; his sister was unlike him.", "The contrast shows garrulous means talkative."],
+                  ["'Many legumes, such as peas, beans and lentils, are rich in protein.' Legumes are:", ["leafy vegetables", "fruits", "plants whose seeds grow in pods", "root vegetables"], "C", "Look at the examples.", "Peas, beans and lentils are pod-bearing plants."],
+                  ["'The room was immaculate; there was not a speck of dust anywhere.' Immaculate means:", ["perfectly clean", "dusty", "very large", "dark"], "A", "What does 'not a speck of dust' suggest?", "The clue shows it was spotless."],
+                  ["After guessing a word's meaning from context, you should:", ["Never check it", "Skip the rest of the passage", "Change the word", "Check whether it makes sense and confirm in a dictionary if important"], "D", "Context gives an approximate meaning.", "Test the guess and confirm important words."]
+                ],
+                "HARD": [
+                  ["'The medicine alleviated her pain; within an hour she felt much better.' Alleviated means:", ["increased", "reduced", "caused", "ignored"], "B", "She felt better afterwards.", "The pain lessened, so alleviated means reduced."],
+                  ["Which sentence gives a synonym clue for 'lethargic'?", ["Lethargic animals, such as sloths…", "Unlike the energetic puppy, the old dog was lethargic.", "He felt lethargic — sluggish and slow — after the heavy meal.", "Lethargic is a long word."], "C", "Look for a word with a similar meaning.", "'Sluggish and slow' restates lethargic."],
+                  ["'The scientist was sceptical of the claim and asked for more evidence.' Sceptical means:", ["doubtful", "certain", "excited", "careless"], "A", "Why would she ask for more evidence?", "Asking for evidence shows doubt."],
+                  ["Why is context sometimes NOT enough to know a word's exact meaning?", ["Context is always misleading", "Dictionaries are banned", "Writers never give clues", "Context may give only a general idea, and words can have several meanings"], "D", "Think about words like 'bank' or 'bark'.", "Context may be vague and words can be ambiguous."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "g7-eng-u-writing",
+      "title": "Writing Skills",
+      "topics": [
+        {
+          "slug": "g7-eng-t-letters-notices",
+          "title": "Letters and Notices",
+          "description": "Writing informal letters and school notices in the correct format.",
+          "lessons": [
+            {
+              "slug": "g7-eng-informal-letter",
+              "title": "Writing an Informal Letter",
+              "objectives": [
+                "Identify the parts of an informal letter",
+                "Use an appropriate friendly tone",
+                "Organise content into clear paragraphs",
+                "Write an informal letter on a given topic"
+              ],
+              "intro": "In an age of text messages, a handwritten letter is still a special way to share news, thank someone or offer comfort. An informal letter is written to people we know well, such as family members and friends. It is warm and personal, but it still follows a clear structure so that the reader can enjoy it easily. Many examinations ask students to write informal letters.",
+              "sections": [
+                [
+                  "Format",
+                  "An informal letter has these parts. (1) The sender's address, written at the top left (or right), followed by (2) the date, for example 12 March 2026. (3) The salutation or greeting: 'Dear Grandma,' or 'Dear Rohan,'. (4) The body, usually in three parts: an opening paragraph that greets and states the reason for writing, one or two middle paragraphs with the main news or ideas, and a closing paragraph with good wishes. (5) The complimentary close, such as 'With love,' or 'Your loving granddaughter,'. (6) The sender's name. No subject line is needed."
+                ],
+                [
+                  "Tone and language",
+                  "Informal letters use a friendly, conversational tone, as if you are talking to the reader. You may use contractions (I'm, can't), questions ('How is your new school?') and personal details. However, the letter should still be clear, grammatically correct and well organised. Avoid text-message shortcuts such as 'u' or 'gr8'. Show interest in the reader by asking about them and responding to news they may have shared. Keep each paragraph focused on one main idea."
+                ],
+                [
+                  "Planning and writing",
+                  "Before writing, decide the purpose: inviting, thanking, congratulating, describing an event, giving advice or apologising. Note three or four points to include. For example, a letter describing a school trip could cover where you went, what you saw, the most enjoyable moment and what you learned. Use vivid details: instead of 'It was nice', write 'The view of the sunrise over the hills turned the sky orange and pink.' End warmly, perhaps inviting a reply: 'Write back soon and tell me about your holidays.'"
+                ]
+              ],
+              "definitions": [
+                ["Informal letter", "A personal letter to family or friends written in a friendly tone."],
+                ["Salutation", "The greeting at the start of a letter, such as 'Dear Asha,'."],
+                ["Complimentary close", "The phrase before the signature, such as 'With love,'."],
+                ["Contraction", "A shortened form such as I'm for I am."]
+              ],
+              "examples": [
+                "Salutation: Dear Nani,",
+                "Complimentary close: Your loving grandson,"
+              ],
+              "worked": [
+                {
+                  "problem": "Plan a letter to your cousin describing your first visit to a science museum.",
+                  "steps": [
+                    "Address and date at the top; salutation 'Dear Kavya,'.",
+                    "Paragraph 1: greet her, ask about her exams, say you want to share an exciting trip.",
+                    "Paragraph 2: describe the museum — the planetarium show, the robot gallery, the giant DNA model.",
+                    "Paragraph 3: the best moment and what you learned; suggest visiting together.",
+                    "Close: 'Love, Arjun'."
+                  ],
+                  "answer": "A three-paragraph letter with address, date, greeting, vivid details, a warm ending, close and name."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Informal letter layout",
+                "items": ["Sender's address", "Date", "Salutation (Dear …,)", "Opening paragraph", "Main paragraph(s)", "Closing paragraph", "Complimentary close and name"]
+              },
+              "real_world": "Personal letters and emails to relatives abroad, thank-you notes after receiving gifts and letters of encouragement to friends all follow this pattern. Well-written personal letters are often kept for years as treasured memories.",
+              "takeaways": [
+                "Informal letters go to people we know well.",
+                "Include address, date, salutation, body, complimentary close and name.",
+                "Use a friendly tone, but avoid text-message language.",
+                "Plan the purpose and points, and use vivid details."
+              ],
+              "practice": [
+                ["Write a suitable salutation for a letter to your best friend Meera.", "Dear Meera,"],
+                ["Does an informal letter need a subject line?", "No."],
+                ["Give one way to end an informal letter warmly.", "With love, / Write back soon!"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["An informal letter is usually written to:", ["A bank manager", "A friend or relative", "A newspaper editor", "A government officer"], "B", "Informal means personal.", "Informal letters are for people we know well."],
+                  ["Which is a suitable salutation for an informal letter?", ["Respected Sir,", "To Whom It May Concern,", "Dear Rahul,", "Sir/Madam,"], "C", "It should be friendly.", "'Dear Rahul,' is friendly and personal."],
+                  ["Which part comes at the very end of the letter?", ["The sender's name", "The date", "The address", "The salutation"], "A", "You sign off with it.", "The letter ends with the complimentary close and your name."],
+                  ["An informal letter does NOT need a:", ["Date", "Salutation", "Body", "Subject line"], "D", "Subject lines are for formal letters.", "Informal letters do not have a subject line."]
+                ],
+                "MEDIUM": [
+                  ["Which sentence best suits an informal letter?", ["I am writing to lodge a complaint.", "I'm so excited to tell you about my trip!", "Kindly take necessary action.", "Yours faithfully."], "B", "Friendly and conversational.", "This sentence has a warm, personal tone."],
+                  ["Which should be avoided in an informal letter?", ["Asking about the reader", "Using paragraphs", "Writing 'u r gr8'", "Describing events"], "C", "Think about clarity and correctness.", "Text-message shortcuts are not suitable even in informal letters."],
+                  ["The opening paragraph of an informal letter should:", ["Greet the reader and say why you are writing", "List all your complaints", "Give your full address again", "End the letter"], "A", "Start warmly with the purpose.", "The opening greets and introduces the purpose."],
+                  ["Which complimentary close suits a letter to your grandmother?", ["Yours faithfully,", "Yours truly, Manager", "Sincerely, Applicant", "Your loving grandson,"], "D", "It should be affectionate.", "'Your loving grandson,' is warm and personal."]
+                ],
+                "HARD": [
+                  ["Which detail would make a description of a festival more vivid?", ["It was good.", "The whole street glowed with hundreds of clay lamps.", "We had fun.", "It happened yesterday."], "B", "Vivid means appealing to the senses.", "Specific sensory detail paints a picture."],
+                  ["Your friend has just moved to a new city. Which middle-paragraph idea is MOST relevant?", ["Your opinion of a cricket match last year", "A list of your school timetable", "Asking how she is settling in and sharing ways to make new friends", "Complaining about homework"], "C", "Respond to the reader's situation.", "Responding to her news shows interest and keeps the letter focused."],
+                  ["Why should each paragraph focus on one main idea?", ["It makes the letter easy to follow", "Letters must be short", "Teachers require five paragraphs", "Ideas cannot be mixed in English"], "A", "Think of the reader.", "One idea per paragraph keeps the letter clear and organised."],
+                  ["Which ending invites a reply?", ["That is all.", "End of letter.", "Yours faithfully, Arjun.", "Do write back soon and tell me all about your new school!"], "D", "It asks the reader to respond.", "It warmly encourages the reader to reply."]
+                ]
+              }
+            },
+            {
+              "slug": "g7-eng-notice-writing",
+              "title": "Notice Writing",
+              "objectives": [
+                "Explain the purpose of a notice",
+                "Use the correct format of a notice",
+                "Include all essential details: what, when, where, who and how",
+                "Write concise notices within a word limit"
+              ],
+              "intro": "A notice is a short, formal piece of writing that informs a group of people about an event, announcement, instruction or lost and found item. It is displayed on a notice board or shared in a newsletter or group message. Because people read notices quickly while passing by, a notice must be brief, clear and complete. School examinations usually set a limit of about 50 words for the body.",
+              "sections": [
+                [
+                  "Format",
+                  "A notice follows a standard layout, usually inside a box. At the top is the name of the institution, such as 'Green Valley School, Pune'. Below it is the word NOTICE, in capital letters. Then come the date (on the left) and a short, catchy heading that tells what the notice is about, for example 'Inter-House Quiz Competition'. The body gives the details. At the end are the signature, the name of the writer in capitals and their designation, such as 'Secretary, Science Club'. Notices are written in the third person or in a formal, impersonal style."
+                ],
+                [
+                  "Content: the five Ws",
+                  "A good notice answers the questions what (the event or announcement), when (date and time), where (venue), who (who may take part or whom it concerns) and how (how to register, whom to contact, what to bring). Include deadlines and contact details clearly. Avoid unnecessary descriptions, greetings or personal opinions. Use short sentences or bullet points for clarity. The tone is formal and polite: 'All students of Classes VI to VIII are invited to…' or 'Interested students may give their names to the undersigned by 15 July.'"
+                ],
+                [
+                  "Common mistakes",
+                  "Common mistakes include forgetting the date or heading, writing in a chatty letter style ('Hi friends!'), leaving out the venue or deadline, and exceeding the word limit with unnecessary details. Another error is writing the notice for the wrong audience. A lost-and-found notice should describe the item precisely ('a blue steel water bottle with the initials A.K.') and say where it was lost or found and whom to contact. Always read your notice from the point of view of someone who knows nothing about the event: can they act on it?"
+                ]
+              ],
+              "definitions": [
+                ["Notice", "A short formal announcement displayed to inform a group of people."],
+                ["Heading", "A short title stating the subject of a notice."],
+                ["Designation", "The official position of the person issuing the notice."],
+                ["Word limit", "The maximum number of words allowed, usually about 50 for the body."]
+              ],
+              "examples": [
+                "Heading: 'Lost: Geometry Box'",
+                "Signature block: (Signature) / ANANYA SHARMA / Head Girl"
+              ],
+              "worked": [
+                {
+                  "problem": "Write a notice as Secretary of the Eco Club inviting students to a tree-plantation drive.",
+                  "steps": [
+                    "Institution: Sunrise Public School, Lucknow; then NOTICE; date: 20 July 2026; heading: Tree-Plantation Drive.",
+                    "What/who: The Eco Club is organising a tree-plantation drive; students of Classes VI–IX may participate.",
+                    "When/where: Saturday 25 July 2026, 8:00–10:00 a.m., school back garden.",
+                    "How: Give your names to the undersigned by 23 July; wear old clothes and bring a water bottle.",
+                    "Sign off: (Signature) RAHUL VERMA, Secretary, Eco Club."
+                  ],
+                  "answer": "A boxed notice with institution, NOTICE, date, heading, five-W body under 50 words and signature with designation."
+                }
+              ],
+              "diagram": {
+                "type": "flow",
+                "title": "Notice format",
+                "items": ["Name of institution", "NOTICE", "Date", "Heading", "Body: what, when, where, who, how", "Signature, NAME, designation"]
+              },
+              "real_world": "Notices are used by schools, housing societies, offices and government departments every day: water supply interruptions, meeting announcements and exam schedules. Being able to write a clear notice is a practical skill for any club secretary, class representative or office worker.",
+              "takeaways": [
+                "A notice is brief, formal and placed in a box.",
+                "Include institution, NOTICE, date, heading, body and signature with designation.",
+                "Answer what, when, where, who and how.",
+                "Stay within the word limit and avoid a chatty tone."
+              ],
+              "practice": [
+                ["List the five Ws a notice should answer.", "What, when, where, who and how."],
+                ["What is the usual word limit for the body of a notice?", "About 50 words."],
+                ["Write a heading for a notice about a lost watch.", "Lost: Wristwatch"]
+              ],
+              "quiz": {
+                "EASY": [
+                  ["The word NOTICE is written:", ["At the end", "In capital letters near the top", "In the middle of the body", "Only on the back"], "B", "It is a clear label at the top.", "NOTICE appears in capitals below the institution's name."],
+                  ["Which is NOT needed in a notice?", ["Date", "Heading", "A long personal greeting", "Signature"], "C", "Notices are brief and formal.", "Notices do not include chatty greetings."],
+                  ["The usual word limit for the body of a school notice is about:", ["50 words", "500 words", "5 words", "250 words"], "A", "Notices are short.", "Notices are concise, about 50 words."],
+                  ["A notice is usually displayed on a:", ["Envelope", "Diary", "Postcard", "Notice board"], "D", "Many people need to see it.", "Notices are put up on notice boards."]
+                ],
+                "MEDIUM": [
+                  ["Which heading is most suitable?", ["Hello Everyone!", "Annual Sports Day", "Please Read This Carefully Now", "A Message"], "B", "It should state the subject briefly.", "A clear heading names the event."],
+                  ["Which detail is MISSING from: 'A debate will be held in the auditorium. Interested students may contact the undersigned.'?", ["The venue", "The contact person", "The date and time", "The event"], "C", "Check the five Ws.", "It does not say when the debate will take place."],
+                  ["Which sentence suits a notice?", ["All students of Class VII are requested to assemble in the hall at 9 a.m.", "Hey guys, come to the hall!", "I really think you'll love it.", "Love, Priya"], "A", "Formal and impersonal.", "It is formal, clear and gives time and place."],
+                  ["What should appear below the signature?", ["The date", "The heading", "The venue", "The name in capitals and designation"], "D", "Who issued the notice?", "The writer's name and position identify the issuer."]
+                ],
+                "HARD": [
+                  ["Which is the best description in a 'Found' notice?", ["A thing was found.", "A black leather wallet with a bus pass, found near the canteen on 3 August", "Something valuable", "A wallet with ₹500 in it belonging to someone"], "B", "It must be specific but not reveal everything to claimants.", "It describes the item and place precisely so the owner can identify it."],
+                  ["Why is a notice written in the third person or impersonal style?", ["To make it longer", "Because it is a letter", "Because it is a formal announcement to a group", "To hide who wrote it"], "C", "Who is the audience?", "Formal, impersonal language suits official announcements to many readers."],
+                  ["A notice about a blood donation camp gives date, time, venue and purpose. What else is MOST needed?", ["Who can donate and how to register", "The history of blood banks", "A poem about health", "The writer's favourite food"], "A", "Readers must know whether and how to take part.", "Eligibility and registration details let readers act on it."],
+                  ["Which is a common mistake in notice writing?", ["Putting it in a box", "Using a short heading", "Writing the date", "Using chatty language like 'Hi friends!'"], "D", "Notices are formal.", "Chatty letter-style openings are inappropriate in notices."]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
