@@ -1,36 +1,66 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
+# Aegis: files that must never be committed.
+# This is the only .gitignore in the repository; it covers every folder.
 
-# Virtual environments
-venv/
-.venv/
-env/
-
-# IDE
-.vscode/
-.idea/
-
-# OS files
-.DS_Store
-Thumbs.db
-# Local database backups
-backups/
-
-# Runtime logs
-logs/
-*.log
-
-# RL training candidate (only promoted after validation)
-rl_engine/q_table.candidate.json
-
-# Secrets (also ignored per folder; this is a safety net)
+# --- Secrets and local configuration ---------------------------------------
+# backend/.env holds the database password and SECRET_KEY. Copy
+# backend/.env.example instead; it is the only .env file that is tracked.
 .env
 .env.*
 !.env.example
 *.pem
 *.key
 
-# Test / tool caches
+# --- Python -----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Virtual environments (backend and camera agent)
+venv/
+.venv/
+env/
+
+# Test and tool caches
 .pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# --- Frontend (Node) ---------------------------------------------------------
+node_modules/
+dist/
+.eslintcache
+npm-debug.log*
+
+# --- Data that stays on your own computer -------------------------------------
+# Database backups and dumps
+backups/
+*.dump
+*.backup
+# SQLite files (the test suites create theirs in temporary folders)
+*.db
+*.sqlite
+*.sqlite3
+# Runtime logs (the camera agent writes to facial_analysis/logs/)
+logs/
+*.log
+
+# Q-table candidate written by `python -m rl_engine.train`; it replaces
+# rl_engine/q_table.json only after passing validation.
+rl_engine/q_table.candidate.json
+
+# --- Editors, operating systems and temporary files -------------------------
+.vscode/
+.idea/
+*.swp
+*~
+*.tmp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Personal Claude Code settings
+.claude/settings.local.json
+CLAUDE.local.md
