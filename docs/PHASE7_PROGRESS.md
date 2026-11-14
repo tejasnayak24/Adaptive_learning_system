@@ -38,6 +38,7 @@ Branch: `final/project-completion` (never `main`). Phase 6 commit: `5060646`.
   - ESLint config; `eslint .` is clean.
 - `start-all.ps1` / `stop-all.ps1`: written and tested for real.
 - Docs:
+  - README (setup from scratch, start scripts, tests, docs index);
   - [ARCHITECTURE.md](ARCHITECTURE.md);
   - [DEMO.md](DEMO.md);
   - [TROUBLESHOOTING.md](TROUBLESHOOTING.md);
@@ -45,13 +46,15 @@ Branch: `final/project-completion` (never `main`). Phase 6 commit: `5060646`.
   - `backend/.env.example`;
   - TEAM_GUIDE API updates.
 
+## Commits
+
+- `0aafa45`: Phase 7A (fixes, security, scripts, docs).
+- Phase 7B: README update (this commit).
+
 ## Remaining
 
-1. README update (start scripts, setup from scratch, test commands, docs
-   index).
-2. Final run of all suites. Then commit and push.
-3. Final pull request `final/project-completion` → `main`. It is opened,
-   **not merged**.
+- Final pull request `final/project-completion` → `main`. It is opened for
+  review and **not merged**.
 
 ## Needs the team lead (physical testing)
 
