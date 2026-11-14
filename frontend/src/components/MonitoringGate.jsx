@@ -93,6 +93,9 @@ export function ConsentPanel() {
         <ul className="list-disc pl-5 space-y-1 text-slate-400">
           <li>Video is analysed <strong className="text-slate-200">only on this computer</strong> by the Aegis camera agent. No images or video are recorded, stored or sent.</li>
           <li>Only numbers and yes/no signals are sent to Aegis: attention level, face present, yawning, looking away and <em>possible</em> drowsiness (eyes closed for a while).</li>
+          <li>The camera agent may also notice when <strong className="text-slate-200">more than one face</strong> is visible. Only how many faces and when are recorded &mdash; never who.</li>
+          <li>During <strong className="text-slate-200">protected quizzes</strong>, Aegis records when the quiz page is hidden (another tab, a minimised window) and for how long. It never records which tab, website or app you used. Leaving twice, or for more than 10 seconds, ends the quiz without grading.</li>
+          <li>Only event times and numbers are stored. <strong className="text-slate-200">Raw webcam images and video are never stored or transmitted.</strong> You can see everything recorded about you on the Session Activity page.</li>
           <li>These signals are estimates for learning support. They are not a medical or sleep assessment.</li>
           <li>You can withdraw consent at any time; lessons then cannot start.</li>
         </ul>
@@ -104,18 +107,18 @@ export function ConsentPanel() {
       <div className="space-y-3 text-sm">
         <label className="flex gap-3 items-start text-slate-200">
           <input type="checkbox" className="mt-1" checked={understood} onChange={(e) => setUnderstood(e.target.checked)} />
-          <span>I have read and understand how Aegis uses my webcam, and I agree.</span>
+          <span>I have read and understand how Aegis uses my webcam and monitors protected quizzes, and I agree.</span>
         </label>
 
         {minor && (
           <>
             <label className="flex gap-3 items-start text-slate-200">
               <input type="checkbox" className="mt-1" checked={guardian} onChange={(e) => setGuardian(e.target.checked)} />
-              <span>My parent or guardian has authorised camera-based monitoring for my lessons.</span>
+              <span>My parent or guardian has authorised camera-based monitoring for my lessons, including multiple-face detection and tab-visibility checks during quizzes.</span>
             </label>
             <label className="flex gap-3 items-start text-slate-200">
               <input type="checkbox" className="mt-1" checked={school} onChange={(e) => setSchool(e.target.checked)} />
-              <span>My school or teacher has approved using Aegis with camera monitoring.</span>
+              <span>My school or teacher has approved using Aegis with camera monitoring and protected quizzes.</span>
             </label>
             <p className="text-xs text-amber-300/80">
               Because you are under 18, both confirmations are required. Schools should collect written
@@ -228,8 +231,22 @@ export default function MonitoringGate({ lessonId = null, children }) {
     return <ConsentPanel />
   }
 
+  // Sustained multiple-face signal from the camera agent: an informational
+  // banner while it lasts (no popup, no lock, nothing recorded as misconduct).
+  const multipleFaces = verified && monitoring.backend?.multiple_faces === true
+
   return (
     <div className="relative">
+      {multipleFaces && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="mb-4 rounded-2xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-xs font-semibold text-amber-200"
+        >
+          👥 More than one face is visible to your camera. If you are studying alone, make sure only you are in view.
+          This is noted in your session activity; it does not stop your lesson or quiz.
+        </div>
+      )}
       <div
         aria-hidden={!verified}
         inert={!verified}

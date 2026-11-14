@@ -93,7 +93,7 @@ def test_submit_returns_next_step_within_grade_and_subject(client, db_session, t
     quiz_id = _quiz(lesson, "EASY").id
     monitoring = start_monitoring(client, headers)
     heartbeat(client, monitoring, attention_score=0.85)
-    questions = client.get(f"/quiz/{quiz_id}", headers=headers).json()["data"]["questions"]
+    questions = client.post("/quiz/start", json={"quiz_id": quiz_id}, headers=headers).json()["data"]["questions"]
     answers = {str(q["id"]): "A" for q in questions}
     data = client.post(
         "/quiz/submit",

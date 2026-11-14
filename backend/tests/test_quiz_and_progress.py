@@ -5,7 +5,7 @@ ALL_CORRECT = ["B", "A"]
 
 
 def _answers(client, headers, quiz_id, letters):
-    questions = client.get(f"/quiz/{quiz_id}", headers=headers).json()["data"]["questions"]
+    questions = client.post("/quiz/start", json={"quiz_id": quiz_id}, headers=headers).json()["data"]["questions"]
     return {str(q["id"]): letter for q, letter in zip(questions, letters)}
 
 

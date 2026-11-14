@@ -49,6 +49,23 @@ Totals: journey 38/38, extra checks 9/9, production smoke 7/7.
 - **Results-page wording.** "1 hints" was ungrammatical, and the panel
   claimed "PostgreSQL saved".
 
+## Session integrity (2026-11-14, branch `feature/session-integrity`)
+
+Headless Chrome on an isolated copy (`aegis_si_copy`), real backend and
+real camera-agent code with a synthetic camera:
+
+| Script | Result |
+|---|---|
+| Tab switching: warning, second switch, more than 10 s, blur ignored, cancelled reload is not an incident, confirmed reload as first incident (warning, same attempt and answers) and after the warning (ends at once), network loss is never a violation, leave confirmation (link and Back), cooldown, normal grading still works | 27/27 |
+| Multiple faces: brief face ignored, warning after about 3 s, single banner, clears, quiz never ended | 11/11 |
+| Session Activity page and consent v2 (new wording, re-consent, privacy) | 13/13 |
+| Phase 7 journey and extra checks, rerun | 38/38, 9/9 |
+
+The page-visibility change itself was **simulated**. Headless Chrome, and
+windowed Chrome launched by the test tools, never hid a background tab on
+this machine. Real Chrome and real webcam checks:
+[SESSION_INTEGRITY_CHECKLIST.md](SESSION_INTEGRITY_CHECKLIST.md).
+
 ## What still needs a person
 
 These need a real webcam, a human eye or human judgement. Run them on the

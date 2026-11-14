@@ -17,3 +17,5 @@ from app.models.session import LearningSession  # noqa: F401
 from app.models.recommendation import RecommendationHistory  # noqa: F401
 from app.models.reward import RewardHistory  # noqa: F401
 from app.models.monitoring import MonitoringConsent, MonitoringSession  # noqa: F401
+from app.models.quiz_attempt import QuizAttempt, QuizAttemptEvent  # noqa: F401
+from app.models.session_event import SessionEvent  # noqa: F401

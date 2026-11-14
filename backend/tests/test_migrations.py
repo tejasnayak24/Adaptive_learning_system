@@ -49,3 +49,24 @@ def test_fresh_database_upgrade_check_and_seed(tmp_path):
         difficulties = {r[0] for r in conn.execute(text("select distinct difficulty from quizzes"))}
     assert difficulties == {"EASY", "MEDIUM", "HARD"}
     engine.dispose()
+
+
+def test_quiz_attempt_migration_upgrades_and_downgrades(tmp_path):
+    db_url = f"sqlite:///{(tmp_path / 'attempts.db').as_posix()}"
+    assert _run(["-m", "alembic", "upgrade", "head"], db_url).returncode == 0
+
+    engine = create_engine(db_url)
+    tables = set(inspect(engine).get_table_names())
+    assert {"quiz_attempts", "quiz_attempt_events"} <= tables
+    indexes = {i["name"]: i for i in inspect(engine).get_indexes("quiz_attempts")}
+    assert indexes["uq_quiz_attempts_open"]["unique"]
+    engine.dispose()
+
+    down = _run(["-m", "alembic", "downgrade", "0006_curriculum"], db_url)
+    assert down.returncode == 0, down.stderr
+    engine = create_engine(db_url)
+    assert "quiz_attempts" not in set(inspect(engine).get_table_names())
+    assert "progress" in set(inspect(engine).get_table_names())
+    engine.dispose()
+
+    assert _run(["-m", "alembic", "upgrade", "head"], db_url).returncode == 0

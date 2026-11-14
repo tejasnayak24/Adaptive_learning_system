@@ -42,6 +42,27 @@ FACE_STABILITY_MIN_RATIO = 0.8
 LOW_LIGHT_BRIGHTNESS = 45
 
 # -------------------------------
+# Multiple-face detection (separate from the attention pipeline)
+# -------------------------------
+# MediaPipe Face Detection on a downscaled copy of a frame, about twice a
+# second, in its own thread. Only the face count and a yes/no signal are
+# sent; frames are never stored or transmitted.
+MULTI_FACE_DETECTION_ENABLED = True
+MULTI_FACE_INTERVAL_SECONDS = 0.5
+MULTI_FACE_WORK_WIDTH = 320            # pixels; frames are downscaled to this width
+MULTI_FACE_MIN_CONFIDENCE = 0.6        # detection score needed to count a face
+# A face counts only if at least this fraction of the largest face's width,
+# so small faces far behind the student (posters, a TV) are ignored.
+MULTI_FACE_MIN_RELATIVE_SIZE = 0.4
+# Sustained detection: 2+ faces in 5 of the last 6 samples (~3 s) starts a
+# "multiple faces" episode; 4 samples in a row below 2 (~2 s) clears it.
+MULTI_FACE_WINDOW_SAMPLES = 6
+MULTI_FACE_REQUIRED_SAMPLES = 5
+MULTI_FACE_CLEAR_SAMPLES = 4
+# A face-count result older than this is not sent as current.
+MULTI_FACE_RESULT_MAX_AGE_SECONDS = 2.0
+
+# -------------------------------
 # Backend / Local Agent
 # -------------------------------
 

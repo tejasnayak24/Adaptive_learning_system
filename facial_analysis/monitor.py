@@ -19,7 +19,12 @@ import time
 
 from backend_client import BackendClient, BackendUnavailable, SessionRevoked
 from camera import CAMERA_DISCONNECTED, CAMERA_HELP, CAMERA_OK, Camera, CameraError
-from config import CAMERA_READ_FAILURE_LIMIT, CAMERA_REOPEN_INTERVAL_SECONDS, HEARTBEAT_INTERVAL
+from config import (
+    CAMERA_READ_FAILURE_LIMIT,
+    CAMERA_REOPEN_INTERVAL_SECONDS,
+    HEARTBEAT_INTERVAL,
+    MULTI_FACE_DETECTION_ENABLED,
+)
 from frame_processor import telemetry_from_result
 
 AGENT_VERSION = "1.0"
@@ -44,10 +49,14 @@ class MonitoringController:
         voice=None,
         display=True,
         clock=time.time,
+        face_worker_factory=None,
     ):
         self.client = client or BackendClient()
         self.camera_factory = camera_factory
         self.processor_factory = processor_factory or _default_processor_factory
+        # Multiple-face counting runs in its own thread, separate from the
+        # attention pipeline. None from the factory = feature off.
+        self.face_worker_factory = face_worker_factory or _default_face_worker_factory
         self.voice = voice
         self.display = display
         self.clock = clock
@@ -204,6 +213,7 @@ class MonitoringController:
                 "face_detected", "face_stable", "lighting_ok", "brightness",
                 "attention_score", "yawning", "looking_away", "eyes_closed",
                 "possible_drowsiness", "eyes_closed_seconds", "head_direction", "gaze",
+                "face_count", "multiple_faces",
             )
             for name in fields:
                 payload[name] = measurement[name] if measurement else None
@@ -254,6 +264,7 @@ class MonitoringController:
         camera = None
         processor = None
         hud = None
+        face_worker = None
         active_generation = None
         read_failures = 0
         next_open_attempt = 0.0
@@ -273,6 +284,7 @@ class MonitoringController:
                     if camera is not None:
                         camera.release()
                         camera = None
+                    face_worker = _stop_worker(face_worker)
                     processor = None
                     hud = None
                     self._close_window()
@@ -292,6 +304,8 @@ class MonitoringController:
                         camera = self.camera_factory()
                         processor = self.processor_factory()
                         hud = self._make_hud()
+                        if face_worker is None:
+                            face_worker = self.face_worker_factory()
                         read_failures = 0
                         self._set_camera(CAMERA_OK, None, None)
                     except CameraError as exc:
@@ -315,8 +329,11 @@ class MonitoringController:
 
                 read_failures = 0
                 now = self.clock()
+                if face_worker is not None:
+                    face_worker.offer(frame)  # copies the frame only when a sample is due
                 result = processor.process(frame, now=now)
                 measurement = telemetry_from_result(result)
+                measurement.update(_face_fields(face_worker))
 
                 with self._lock:
                     if generation != self._generation:
@@ -330,6 +347,7 @@ class MonitoringController:
         finally:
             if camera is not None:
                 camera.release()
+            _stop_worker(face_worker)
             self._close_window()
 
     def _set_camera(self, state, error, message):
@@ -411,3 +429,25 @@ def _default_processor_factory():
     from frame_processor import FrameProcessor
 
     return FrameProcessor()
+
+
+def _default_face_worker_factory():
+    if not MULTI_FACE_DETECTION_ENABLED:
+        return None
+    from face_counter import FaceCountWorker
+
+    return FaceCountWorker()
+
+
+def _stop_worker(worker):
+    if worker is not None:
+        worker.stop()
+    return None
+
+
+def _face_fields(worker):
+    """Multiple-face fields for a measurement: None = not measured."""
+    latest = worker.latest() if worker is not None and worker.error is None else None
+    if latest is None:
+        return {"face_count": None, "multiple_faces": None}
+    return {"face_count": latest["face_count"], "multiple_faces": latest["multiple_faces"]}

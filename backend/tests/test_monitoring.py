@@ -254,7 +254,7 @@ def test_agent_shutdown_returns_session_to_awaiting(client, auth):
 
 
 def _answers(client, headers, quiz_id):
-    questions = client.get(f"/quiz/{quiz_id}", headers=headers).json()["data"]["questions"]
+    questions = client.post("/quiz/start", json={"quiz_id": quiz_id}, headers=headers).json()["data"]["questions"]
     return {str(q["id"]): "A" for q in questions}
 
 
