@@ -56,7 +56,7 @@ real camera-agent code with a synthetic camera:
 
 | Script | Result |
 |---|---|
-| Tab switching: warning, second switch, more than 10 s, blur ignored, reload keeps the strike, network loss is never a violation, leave confirmation (link and Back), cooldown, normal grading still works | 24/24 |
+| Tab switching: warning, second switch, more than 10 s, blur ignored, cancelled reload is not an incident, confirmed reload as first incident (warning, same attempt and answers) and after the warning (ends at once), network loss is never a violation, leave confirmation (link and Back), cooldown, normal grading still works | 27/27 |
 | Multiple faces: brief face ignored, warning after about 3 s, single banner, clears, quiz never ended | 11/11 |
 | Session Activity page and consent v2 (new wording, re-consent, privacy) | 13/13 |
 | Phase 7 journey and extra checks, rerun | 38/38, 9/9 |

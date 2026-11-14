@@ -27,23 +27,25 @@ from app.models.student import Student
 END_LABELS = {
     "submitted": "Submitted and graded",
     "grace_expired": "Ended: the quiz page was hidden for more than 10 seconds",
-    "second_tab_switch": "Ended: the quiz page was hidden a second time after the warning",
+    "second_tab_switch": "Ended: the quiz page was hidden or reloaded a second time after the warning",
     "left_quiz": "Closed: the student left the quiz for another page",
     "no_contact": "Closed: no activity for 30 minutes",
     "unverified_no_measurement": "Closed: the return to the quiz could not be verified (not a violation)",
-    "reload_not_verified": "Closed: a reload could not be verified in time (not a violation)",
 }
 
 RETURN_LABELS = {
     "strike": "Came back within 10 seconds: warning given",
     "strike_network_delayed": "Came back within 10 seconds: warning given (the report was delayed by the network)",
-    "reload_recovered": "Page reloaded and came back in time: no warning",
+    "reload_strike": "Page reloaded and came back within 10 seconds: warning given",
+    "reload_strike_network_delayed": "Page reloaded and came back within 10 seconds: warning given "
+    "(the report was delayed by the network)",
     "abandoned_unverified": "Return could not be verified: attempt closed (not a violation)",
 }
 
 NOTES = [
     "Times away are measured by the student's own browser; the server checks them against its own clock.",
-    "A tab-switch incident means the quiz page was hidden (another tab, a minimised window, a locked screen). "
+    "A tab-switch incident means the quiz page was hidden (another tab, a minimised window, a locked screen) "
+    "or reloaded / closed after confirming the browser's prompt. "
     "Aegis does not know which tab, website or app was used.",
     "Window focus changes (for example clicking the camera agent's window) are counted for diagnostics only "
     "and never count as a tab switch.",
@@ -123,7 +125,8 @@ def _incidents(attempt: QuizAttempt, events: list[QuizAttemptEvent], now: dateti
             continue
 
         if ev.kind in ("visible", "resume") and outcome in (
-            "strike", "strike_network_delayed", "terminated", "reload_recovered", "abandoned_unverified"
+            "strike", "strike_network_delayed", "terminated", "abandoned_unverified",
+            "reload_strike", "reload_strike_network_delayed",
         ):
             incident = current
             if incident is None:
@@ -140,7 +143,7 @@ def _incidents(attempt: QuizAttempt, events: list[QuizAttemptEvent], now: dateti
             if ev.hidden_ms is not None:
                 incident["away_seconds"] = round(ev.hidden_ms / 1000, 1)
                 incident["away_measured"] = True
-            if outcome == "reload_recovered":
+            if outcome.startswith("reload_"):
                 incident["kind"] = "page_reloaded"
             incident["result"] = (
                 END_LABELS.get(attempt.end_reason, "Ended") if outcome == "terminated" else RETURN_LABELS[outcome]
@@ -230,7 +233,7 @@ def build_report(db: Session, student: Student, limit: int = 20, now: datetime |
 
     for attempt in attempts:
         incidents, unverified, focus_changes, delayed = _incidents(attempt, events_by_attempt[attempt.id], now)
-        switches = [i for i in incidents if i["kind"] != "page_reloaded"]
+        switches = incidents  # confirmed reloads are incidents too
         quiz = quizzes.get(attempt.quiz_id)
         lesson = lessons.get(quiz.lesson_id) if quiz else None
         window_end = attempt.ended_at or now
@@ -266,7 +269,7 @@ def build_report(db: Session, student: Student, limit: int = 20, now: datetime |
             }
         )
         totals["tab_switch_incidents"] += len(switches)
-        totals["reloads"] += len(incidents) - len(switches)
+        totals["reloads"] += sum(1 for i in incidents if i["kind"] == "page_reloaded")
         totals["attempts_terminated"] += attempt.status == TERMINATED
         totals["attempts_abandoned"] += attempt.status == ABANDONED
         totals["attempts_graded"] += attempt.status == SUBMITTED

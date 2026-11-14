@@ -12,6 +12,12 @@ The rule (protected attempts only):
 2. Back within 10 s: strike 1 and a warning; the quiz continues.
 3. Reliable evidence of more than 10 s away: terminated (``grace_expired``).
 4. Hidden again after strike 1: terminated at once (``second_tab_switch``).
+5. A confirmed reload (the student accepted the browser's "leave / reload"
+   prompt, so the page was unloaded: ``pagehide``) is an incident like any
+   other: the first one gives strike 1 when the reloaded page is back
+   within 10 s; after strike 1 it terminates at once. A cancelled reload
+   sends nothing and is not an incident. The attempt, its answers and its
+   strike history survive the reload.
 
 Evidence and the 2-second delivery allowance:
 
@@ -81,7 +87,6 @@ REASON_SECOND_SWITCH = "second_tab_switch"
 REASON_LEFT_QUIZ = "left_quiz"
 REASON_NO_CONTACT = "no_contact"
 REASON_NO_MEASUREMENT = "unverified_no_measurement"
-REASON_RELOAD_NOT_VERIFIED = "reload_not_verified"
 
 HIDE_KINDS = ("hidden", "pagehide")
 RETURN_KINDS = ("visible", "resume")
@@ -193,10 +198,8 @@ def _open_attempt(db: Session, student_id: int, quiz_id: int) -> QuizAttempt | N
     )
 
 
-def cooldown_until(db: Session, student_id: int, quiz_id: int, now: datetime | None = None) -> datetime | None:
-    """When the student may start this quiz again, if a cooldown applies."""
-    now = now or _utcnow()
-    last = (
+def _last_ended(db: Session, student_id: int, quiz_id: int) -> QuizAttempt | None:
+    return (
         db.query(QuizAttempt)
         .filter(
             QuizAttempt.student_id == student_id,
@@ -207,6 +210,12 @@ def cooldown_until(db: Session, student_id: int, quiz_id: int, now: datetime | N
         .order_by(QuizAttempt.ended_at.desc())
         .first()
     )
+
+
+def cooldown_until(db: Session, student_id: int, quiz_id: int, now: datetime | None = None) -> datetime | None:
+    """When the student may start this quiz again, if a cooldown applies."""
+    now = now or _utcnow()
+    last = _last_ended(db, student_id, quiz_id)
     if last is None:
         return None
     until = last.ended_at + timedelta(seconds=COOLDOWN_SECONDS)
@@ -247,6 +256,8 @@ def start_or_resume(
                 "You can start a new attempt when the 5-minute cooldown ends.",
                 "cooldown_until": until.isoformat() + "Z",
                 "retry_after_seconds": retry_after,
+                # Why the previous attempt ended (e.g. after a reload page).
+                "previous_attempt": view(_last_ended(db, student.id, quiz.id), now),
             },
             retry_after=retry_after,
         )
@@ -360,13 +371,11 @@ def _second_switch(attempt: QuizAttempt, now: datetime) -> str:
 
 
 def _start_absence(attempt: QuizAttempt, page_id: str, kind: str, now: datetime) -> str:
-    """The quiz page became hidden (or is being closed / reloaded).
+    """The quiz page became hidden, or was unloaded (confirmed reload / close).
 
-    After strike 1 a hidden page terminates at once. A page that is being
-    unloaded (``pagehide``) may be a reload, which keeps the strike count:
-    that is decided when the student comes back (see ``_return``).
+    After strike 1 either one terminates at once.
     """
-    if attempt.strikes >= 1 and kind != "pagehide":
+    if attempt.strikes >= 1:
         return _second_switch(attempt, now)
     attempt.status = AWAY
     attempt.away_started_at = now
@@ -399,7 +408,7 @@ def _apply(attempt: QuizAttempt, page_id: str, ev: ReportedEvent, now: datetime)
         return _start_absence(attempt, page_id, ev.kind, now)
 
     if ev.kind == "hidden_tick":
-        # The page is still alive and still hidden (so it was not a reload).
+        # The page is still alive and still hidden.
         if attempt.status == IN_PROGRESS:
             # The "hidden" report was lost; this tick opens the absence.
             outcome = _start_absence(attempt, page_id, "hidden", now)
@@ -415,7 +424,18 @@ def _apply(attempt: QuizAttempt, page_id: str, ev: ReportedEvent, now: datetime)
 
 
 def _return(attempt: QuizAttempt, page_id: str, ev: ReportedEvent, now: datetime) -> str:
-    """visible / resume: the student is back on the quiz page."""
+    """visible / resume: the student is back on the quiz page.
+
+    A page loaded by a reload (``reload``) is judged exactly like any other
+    return; its outcome is only labelled as a reload for the report.
+    """
+    outcome = _judge_return(attempt, ev, now)
+    if ev.kind == "resume" and ev.reload and outcome in ("strike", "strike_network_delayed"):
+        return f"reload_{outcome}"
+    return outcome
+
+
+def _judge_return(attempt: QuizAttempt, ev: ReportedEvent, now: datetime) -> str:
     hidden = ev.hidden_ms
 
     if attempt.status == IN_PROGRESS:
@@ -433,27 +453,8 @@ def _return(attempt: QuizAttempt, page_id: str, ev: ReportedEvent, now: datetime
     in_time_by_server = away <= GRACE_SECONDS + DELIVERY_ALLOWANCE_SECONDS
     network_delayed = (ev.delivery_failures or 0) > 0 or (ev.queued_ms or 0.0) > PROMPT_DELIVERY_MS
 
-    is_reload = (
-        ev.kind == "resume"
-        and ev.reload
-        and attempt.away_kind == "unload"
-        and page_id != attempt.away_page_id
-    )
-    if is_reload:
-        # A reload keeps the attempt and its strike count, provided the
-        # reloaded page is back within the grace period. If that cannot be
-        # established the attempt is abandoned -- never called a violation.
-        back_in_time = (hidden is None or hidden <= GRACE_MS) and (in_time_by_server or network_delayed)
-        if back_in_time:
-            attempt.status = IN_PROGRESS
-            _clear_absence(attempt)
-            return "reload_recovered"
-        _end(attempt, ABANDONED, REASON_RELOAD_NOT_VERIFIED, now)
-        return "abandoned_unverified"
-
     if attempt.strikes >= 1:
-        # Strike 1 already given and the page was not reloaded: this absence
-        # was a second switch (the page announced an unload that did not happen).
+        # Defensive: an absence after strike 1 is a second incident.
         return _second_switch(attempt, now)
 
     if hidden is None:

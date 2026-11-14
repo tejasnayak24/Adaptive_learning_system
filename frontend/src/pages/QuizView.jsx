@@ -165,7 +165,9 @@ export default function QuizView() {
             const meta = await quizService.getQuiz(id).catch(() => null)
             setCooldown({
               retryAfter: startError.detail?.retry_after_seconds ?? 300,
-              lessonId: meta?.data?.quiz?.lesson_id ?? null
+              lessonId: meta?.data?.quiz?.lesson_id ?? null,
+              // e.g. after a confirmed reload that ended the quiz
+              endReason: startError.detail?.previous_attempt?.end_reason ?? null
             })
             return
           }
@@ -362,7 +364,7 @@ export default function QuizView() {
   }
 
   if (cooldown) {
-    return <CooldownPanel retryAfterSeconds={cooldown.retryAfter} lessonId={cooldown.lessonId} onRetake={retakeQuiz} />
+    return <CooldownPanel retryAfterSeconds={cooldown.retryAfter} lessonId={cooldown.lessonId} endReason={cooldown.endReason} onRetake={retakeQuiz} />
   }
 
   if (attemptEnded && !isFinished) {

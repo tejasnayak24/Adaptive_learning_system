@@ -234,8 +234,11 @@ Content is imported from `backend/curriculum/content/*.json` with
 `in_progress` with `strikes: 1` (warning), or `terminated`
 (`end_reason` `grace_expired` | `second_tab_switch`). `unverified` = no
 report arrived after the grace period (locked, not a violation).
-`abandoned` (`left_quiz`, `no_contact`, `unverified_no_measurement`,
-`reload_not_verified`). Terminated and abandoned attempts never create a
+`abandoned` (`left_quiz`, `no_contact`, `unverified_no_measurement`).
+A confirmed reload (`pagehide`, then `resume` with `reload: true` from the
+reloaded page) is a tab-switch incident like any other; a cancelled reload
+sends nothing. The 429 cooldown response includes `previous_attempt`.
+Terminated and abandoned attempts never create a
 `progress` row, so they count nowhere (completion, averages, analytics,
 recommendations, rewards).
 

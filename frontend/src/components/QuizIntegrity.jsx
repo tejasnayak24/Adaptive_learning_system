@@ -8,13 +8,11 @@ import { Link } from 'react-router-dom'
 
 export const END_REASONS = {
   grace_expired: 'The quiz page was hidden for more than 10 seconds.',
-  second_tab_switch: 'The quiz page was hidden a second time after the warning.',
+  second_tab_switch: 'The quiz page was hidden or reloaded a second time after the warning.',
   left_quiz: 'You left the quiz for another page.',
   no_contact: 'The quiz received no activity for 30 minutes.',
   unverified_no_measurement:
     'We could not confirm when you came back to the quiz (for example, the tab was closed or the connection was lost). This is not recorded as a tab switch.',
-  reload_not_verified:
-    'The quiz page took too long to come back after a reload, so the attempt could not be verified. This is not recorded as a tab switch.',
 }
 
 export function useCountdown(seconds) {
@@ -39,14 +37,14 @@ export function IntegrityRulesBanner({ strikes }) {
   if (strikes >= 1) {
     return (
       <div role="status" className="rounded-2xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-xs font-semibold text-amber-200">
-        ⚠️ Warning given: you left this quiz once. If the quiz page is hidden again, the quiz will end and will not be graded.
+        ⚠️ Warning given: you left this quiz once. If the quiz page is hidden or reloaded again, the quiz will end and will not be graded.
       </div>
     )
   }
   return (
     <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 px-4 py-3 text-xs text-slate-300 leading-relaxed">
-      <span className="font-bold text-slate-200">Protected quiz.</span> Stay on this page until you submit. If the quiz page is hidden (another tab, minimising the browser),
-      you have 10 seconds to come back and you will get one warning. A second time ends the quiz without grading.
+      <span className="font-bold text-slate-200">Protected quiz.</span> Stay on this page until you submit. If the quiz page is hidden (another tab, minimising the browser) or
+      reloaded, you have 10 seconds to come back and you will get one warning. A second time ends the quiz without grading.
       Hints are still available.
     </div>
   )
@@ -59,10 +57,10 @@ export function StrikeWarningModal({ open, onClose }) {
       <div className="max-w-md w-full rounded-3xl border border-amber-500/40 bg-slate-900 p-6 space-y-4 shadow-2xl">
         <h2 id="strike-warning-title" className="text-lg font-bold text-amber-300">You left the quiz</h2>
         <p className="text-sm text-slate-300 leading-relaxed">
-          The quiz page was hidden. You came back in time, so your quiz continues and your answers are saved.
+          The quiz page was hidden or reloaded. You came back in time, so your quiz continues and your answers are saved.
         </p>
         <p className="text-sm font-semibold text-amber-200 leading-relaxed">
-          If you switch tabs or hide this page again, the quiz will end immediately and will not be graded.
+          If you switch tabs, reload or hide this page again, the quiz will end immediately and will not be graded.
         </p>
         <button
           autoFocus
@@ -158,7 +156,7 @@ export function AttemptEndedPanel({ attempt, lessonId, onRetake }) {
   )
 }
 
-export function CooldownPanel({ retryAfterSeconds, lessonId, onRetake }) {
+export function CooldownPanel({ retryAfterSeconds, lessonId, onRetake, endReason }) {
   const secondsLeft = useCountdown(retryAfterSeconds)
   return (
     <div className="max-w-xl mx-auto py-10 space-y-6 text-center" role="status">
@@ -167,6 +165,7 @@ export function CooldownPanel({ retryAfterSeconds, lessonId, onRetake }) {
       <p className="text-sm text-slate-300 leading-relaxed">
         Your previous attempt at this quiz ended without grading. A new attempt can start when the 5-minute wait is over.
       </p>
+      {END_REASONS[endReason] && <p className="text-xs text-slate-400 leading-relaxed">{END_REASONS[endReason]}</p>}
       <div className="flex flex-wrap justify-center gap-3">
         <RetakeButton secondsLeft={secondsLeft} onRetake={onRetake} />
         {lessonId && (

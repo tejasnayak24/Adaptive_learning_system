@@ -243,3 +243,27 @@ test('after pagehide the old page never reports a return (the next page does)', 
   assert.deepEqual(kinds(h.sent), ['pagehide'])
   assert.equal(storage.size, 1) // the gap record survives for the reloaded page
 })
+
+test('a cancelled reload (prompt dismissed, page stays) sends nothing', async () => {
+  const h = harness()
+  h.tracker.beforeUnload() // the browser asks; the student cancels
+  await h.advance(5000)
+  assert.deepEqual(kinds(h.sent), [])
+  assert.equal(h.tracker.hidden, false)
+})
+
+test('a confirmed reload is reported as an incident by both pages', async () => {
+  const storage = new Map()
+  const first = harness({ storage })
+  first.tracker.beforeUnload()
+  first.tracker.pageHide() // prompt accepted: the page is unloaded
+  await first.settle()
+  assert.deepEqual(kinds(first.sent), ['pagehide']) // the server opens the incident now
+  const second = harness({ storage, pageId: 'page-reloaded-cccc', wall: first.time.wall + 1200 })
+  second.tracker.start({ serverStatus: 'away', navigationType: 'reload' })
+  await second.settle()
+  const [resume] = second.sent[0].events
+  assert.equal(resume.kind, 'resume')
+  assert.equal(resume.reload, true)
+  assert.equal(resume.hidden_ms, 1200)
+})

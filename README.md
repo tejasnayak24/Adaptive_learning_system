@@ -142,10 +142,10 @@ authorisation. Lessons and quizzes unlock only while monitoring is verified.
 
 | Suite | Command | Database |
 |---|---|---|
-| Backend (192) | `cd backend; pip install -r requirements-dev.txt; python -m pytest` | throwaway SQLite |
+| Backend (194) | `cd backend; pip install -r requirements-dev.txt; python -m pytest` | throwaway SQLite |
 | Recommendation engine (68) | `python -m pytest rl_engine` | — |
 | Camera agent (51) | `$env:AEGIS_BACKEND_PYTHON = (Get-Command python).Source; python -m pytest facial_analysis` | throwaway SQLite (the integration test starts its own backend) |
-| Frontend unit tests (44) | `cd frontend; npm test` | — |
+| Frontend unit tests (46) | `cd frontend; npm test` | — |
 | Frontend lint / build | `npm run lint`, `npm run build` | — |
 | Curriculum content | `python backend\scripts\import_curriculum.py --check` | — |
 | Migrations vs models | `cd backend; python -m alembic check` | the configured database (read only) |

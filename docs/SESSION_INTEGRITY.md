@@ -29,7 +29,8 @@ challenge. There is no ungraded practice mode yet. The attempt flag
 | Hidden again after the warning | **Terminated immediately** (`second_tab_switch`) |
 | Terminated | Answers kept and frozen. **Not graded**: no `progress` row, so it never counts towards completion, averages, analytics, recommendations or Q-learning rewards. A new attempt is possible after a **5-minute cooldown** |
 | Window blur/focus (e.g. the camera agent's window, an OS dialog) | Recorded for diagnostics only. **Never a strike** |
-| Reload | Keeps the attempt, its answers **and its strike count**. A confirmed reload that returns within 10 s is not a strike |
+| Confirmed reload (the student accepts the browser's "Reload site?" prompt) | **Counts as a tab-switch incident.** First incident: strike 1 and the warning, once the reloaded page is back within 10 s. After strike 1: **terminated immediately** (`second_tab_switch`). The attempt, its answers and its strike history are kept across the reload |
+| Cancelled reload (the student dismisses the prompt and stays) | Not an incident: nothing is reported |
 | Leaving for another Aegis page (link or Back button) | Asks first. Confirming makes the attempt **abandoned** (answers kept, not graded, not a violation, 5-minute cooldown) |
 | Network interruption | **Never a violation.** If nothing can be verified, the attempt is locked as `unverified` until a report resolves it |
 
@@ -57,9 +58,10 @@ nothing at all after 10 + 2 s          status "unverified" (locked, not a violat
   - With no report at all, the attempt is `unverified`. A later report resolves it. If it can never be measured (e.g. the tab was closed and reopened), the attempt is **abandoned**, not terminated.
   - No contact for 30 minutes also abandons it.
 - **Reload.**
-  - `beforeunload` marks the hide as an unload.
-  - The reloaded page reports the gap (from `sessionStorage`) with `reload: true`.
-  - If the original page comes back instead (a cancelled reload), that is a normal hide, which after a warning is a second switch.
+  - `beforeunload` shows the browser's prompt. If the student cancels, the page never unloads and nothing is sent.
+  - A confirmed reload unloads the page: `pagehide` is sent with `keepalive`. After strike 1 the server terminates at once. Otherwise the incident is open and the 10-second rule applies.
+  - The reloaded page reports the measured gap (from `sessionStorage`) with `reload: true`. It is judged exactly like any other return (within 10 s: strike 1; network-delayed: strike 1; longer: terminated). It is labelled "page reloaded" in the report.
+  - The reloaded page resumes the same attempt with its saved answers. If the attempt has already ended, it shows the reason and the cooldown.
 - **Duplicates.** Every event has `(page_id, seq)`. Replays are ignored.
 - **Concurrency.** A partial unique index allows one open attempt per student and quiz. Two simultaneous starts resume the same attempt.
 - **Lock.** After a return, the questions stay hidden behind "Checking your quiz…" (or "Reconnecting…") until the server answers.
@@ -120,7 +122,7 @@ the signed-in student's own records only:
   - time away, as measured by the browser, or "not measured";
   - outcome;
   - whether the return was unverified;
-  - reloads are listed separately and are not counted.
+  - confirmed reloads are counted as incidents and labelled "page reloaded".
 - **Attempt outcome:** graded, ended (terminated) or closed (abandoned), with the reason.
 - **Unverified periods** and **reports delayed by the network**.
 - **Multiple-face episodes:** times, duration, peak count.
@@ -149,12 +151,12 @@ exist yet.
 
 | Suite | What it covers |
 |---|---|
-| `backend/tests/test_quiz_attempts.py` (29) | Every timing rule with a controlled clock (9.9 s / 10.1 s, 2 s allowance, hidden ticks, second switch, lost reports, unverified, network delay, reload, cancelled reload, duplicates, cooldown, abandonment, privacy, ungraded results, concurrent starts) |
+| `backend/tests/test_quiz_attempts.py` (31) | Every timing rule with a controlled clock (9.9 s / 10.1 s, 2 s allowance, hidden ticks, second switch, lost reports, unverified, network delay, confirmed reload as first and second incident, cancelled reload, slow and network-delayed reload, duplicates, cooldown, abandonment, privacy, ungraded results, concurrent starts) |
 | `backend/tests/test_multiple_faces.py` (9) | Episodes open/close, peak count, stale/unmeasured data, heartbeat gaps, session end, no effect on grading |
 | `backend/tests/test_integrity_report.py` (6) | Report contents, privacy, no score wording, consent v2 re-consent |
 | `facial_analysis/tests/test_face_counter.py` (14) | Counting rules, sustained signal, worker thread, real MediaPipe model loads |
-| `frontend/tests/quizIntegrity.test.mjs` (12) | Tracker: keepalive hide, ticks, measured absence, offline retry, reload gap, blur ignored, ordering |
-| Browser (headless Chrome, isolated database copy) | Tab switching 24/24, multiple faces 11/11, report and consent 13/13, Phase 7 journey 38/38 |
+| `frontend/tests/quizIntegrity.test.mjs` (14) | Tracker: keepalive hide, ticks, measured absence, offline retry, confirmed reload reported by both pages, cancelled reload sends nothing, blur ignored, ordering |
+| Browser (headless Chrome, isolated database copy) | Tab switching 27/27, multiple faces 11/11, report and consent 13/13, Phase 7 journey 38/38 |
 
 **Limits of the automated tests:**
 - Headless Chrome never hides a background tab. A windowed Chrome launched from the test tools also kept every tab "visible" on this machine. In the browser tests the page-visibility change was therefore **simulated**, and everything else was real.

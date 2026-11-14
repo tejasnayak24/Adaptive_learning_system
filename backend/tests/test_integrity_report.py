@@ -89,7 +89,7 @@ def test_report_shows_unverified_periods_and_network_delays(client, auth, lesson
     assert attempt["status"] == "in_progress"
 
 
-def test_reload_is_listed_but_not_counted_as_a_tab_switch(client, auth, lesson_with_quiz, clock):
+def test_confirmed_reload_is_counted_as_a_tab_switch_incident(client, auth, lesson_with_quiz, clock):
     headers, _ = auth
     attempt_id = _start(client, headers, lesson_with_quiz["quiz_id"])
     _ev(client, headers, attempt_id, PAGE, {"seq": 1, "kind": "pagehide"})
@@ -97,9 +97,11 @@ def test_reload_is_listed_but_not_counted_as_a_tab_switch(client, auth, lesson_w
     _ev(client, headers, attempt_id, PAGE2, {"seq": 1, "kind": "resume", "reload": True, "hidden_ms": 900})
     report = _report(client, headers)
     [attempt] = report["attempts"]
-    assert attempt["tab_switch_incidents"] == 0
-    assert attempt["incidents"][0]["kind"] == "page_reloaded"
-    assert report["totals"]["reloads"] == 1
+    assert attempt["tab_switch_incidents"] == 1
+    [incident] = attempt["incidents"]
+    assert incident["kind"] == "page_reloaded" and incident["away_seconds"] == 0.9
+    assert "Page reloaded" in incident["result"] and "warning given" in incident["result"]
+    assert report["totals"]["reloads"] == 1 and report["totals"]["tab_switch_incidents"] == 1
 
 
 def test_report_includes_multiple_face_episodes_with_times(client, auth, lesson_with_quiz, monkeypatch):

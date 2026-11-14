@@ -63,10 +63,11 @@ Say during Part B:
 ## Part C — protected quiz and session activity (about 4 minutes)
 
 1. Open a quiz. Point to the "Protected quiz" banner.
-2. Press Ctrl+T, wait about 5 s, go back. Show the "You left the quiz" dialog
-   and the warning banner. Answers are still there.
-3. Press F5 and accept the prompt. Show that the same attempt, answers and
-   warning come back. A reload is not a second switch.
+2. Answer a question, press F5 and accept the prompt. Show that the same
+   attempt and answer come back with the "You left the quiz" warning: a
+   confirmed reload counts as the first incident.
+3. Press F5 again but **cancel** the prompt: nothing changes. A cancelled
+   reload is not an incident.
 4. Ask a teammate to sit beside you for about 5 s. Show the "More than one
    face" banner: it only informs, and the quiz keeps going. It clears when they leave.
 5. Switch tabs once more. The quiz ends without grading; show the retake

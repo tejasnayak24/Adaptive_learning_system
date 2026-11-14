@@ -32,8 +32,10 @@ Use a different quiz for each group. A terminated or closed quiz needs a
 |---|---|---|---|
 | A1 | Open a quiz and wait for the camera to verify | "Protected quiz" rules banner above the questions | |
 | A2 | Answer a question, press Ctrl+T, wait about 5 s, go back to the quiz tab | "You left the quiz" dialog; quiz continues; the amber warning banner stays | |
-| A3 | Press F5 and accept the browser's "Leave site?" prompt | Same attempt, same answer selected, warning still shown, quiz **not** ended | |
-| A4 | Switch to another tab again for 1 s | "This quiz has ended": hidden a second time; answers kept; not graded; retake countdown | |
+| A3 | Press F5 and **cancel** the browser's "Reload site?" prompt | Nothing changes: still one warning, quiz continues | |
+| A4 | Switch to another tab again for 1 s | "This quiz has ended": hidden or reloaded a second time; answers kept; not graded; retake countdown | |
+| A4b | New quiz: answer a question, press F5 and **accept** the prompt | Same attempt, same answer selected, and the "You left the quiz" warning (the reload is the first incident) | |
+| A4c | Same quiz: press F5 and accept again | The quiz ends at once ("hidden or reloaded a second time"); the cooldown screen states the reason | |
 | A5 | New quiz: switch tabs and stay away about 15 s | Ended: hidden for more than 10 seconds | |
 | A6 | New quiz: minimise Chrome for about 3 s, restore | Warning (first incident) | |
 | A7 | Same quiz: click the "Aegis Camera Agent" preview window, then click back in Chrome | **No** warning or termination (focus change only) | |

@@ -256,59 +256,90 @@ def test_attempt_without_any_contact_is_abandoned(client, quiz, clock):
 
 
 # ---------------------------------------------------------------- reload
+# A confirmed reload (the browser's prompt accepted -> pagehide) is a
+# tab-switch incident. A cancelled reload sends nothing.
 
 
-def test_reload_keeps_attempt_and_strike_count(client, quiz, clock):
+def test_confirmed_reload_is_the_first_incident_and_keeps_the_attempt(client, quiz, db_session, clock):
     data, attempt_id = _new_attempt(client, quiz)
     h = quiz["headers"]
     first = str(data["questions"][0]["id"])
     client.put(f"/quiz/attempts/{attempt_id}/answers", json={"answers": {first: "B"}}, headers=h)
 
-    # First a real switch (strike 1), then a reload.
-    _events(client, h, attempt_id, PAGE_A, {"seq": 1, "kind": "hidden"})
-    clock.advance(2)
-    _events(client, h, attempt_id, PAGE_A, {"seq": 2, "kind": "visible", "hidden_ms": 2000})
-    clock.advance(30)
-    _events(client, h, attempt_id, PAGE_A, {"seq": 3, "kind": "pagehide"})
+    assert _events(client, h, attempt_id, PAGE_A, {"seq": 1, "kind": "pagehide"})["status"] == "away"
     clock.advance(1.5)
     resumed = _attempt(client, h, quiz["quiz_id"])
     assert resumed["attempt"]["id"] == attempt_id
     assert resumed["attempt"]["answers"] == {first: "B"}
     state = _events(client, h, attempt_id, PAGE_B, {"seq": 1, "kind": "resume", "reload": True, "hidden_ms": 1400})
     assert state["status"] == "in_progress"
-    assert state["strikes"] == 1  # preserved: neither reset nor increased
+    assert state["strikes"] == 1 and state["warning"] is True
+    outcomes = [e.outcome for e in db_session.query(QuizAttemptEvent).filter_by(attempt_id=attempt_id).order_by(QuizAttemptEvent.id)]
+    assert outcomes == ["grace_started", "reload_strike"]
 
 
-def test_cancelled_reload_after_strike_counts_as_second_switch(client, quiz, clock):
-    """A page that announced an unload but comes back itself was hidden, not reloaded."""
-    _, attempt_id = _new_attempt(client, quiz)
+def test_confirmed_reload_after_strike_terminates_immediately(client, quiz, clock):
+    data, attempt_id = _new_attempt(client, quiz)
     h = quiz["headers"]
+    first = str(data["questions"][0]["id"])
+    client.put(f"/quiz/attempts/{attempt_id}/answers", json={"answers": {first: "C"}}, headers=h)
     _events(client, h, attempt_id, PAGE_A, {"seq": 1, "kind": "hidden"})
     clock.advance(2)
     _events(client, h, attempt_id, PAGE_A, {"seq": 2, "kind": "visible", "hidden_ms": 2000})
-    _events(client, h, attempt_id, PAGE_A, {"seq": 3, "kind": "pagehide"})
-    clock.advance(4)
-    state = _events(client, h, attempt_id, PAGE_A, {"seq": 4, "kind": "visible", "hidden_ms": 4000})
-    assert state["status"] == "terminated" and state["end_reason"] == "second_tab_switch"
+    clock.advance(30)
+
+    state = _events(client, h, attempt_id, PAGE_A, {"seq": 3, "kind": "pagehide"})
+    assert state["status"] == "terminated"
+    assert state["end_reason"] == "second_tab_switch"
+    assert state["strikes"] == 2
+    assert state["answers"] == {first: "C"}  # preserved
+    # The reloaded page finds the ended attempt; a new one waits for the cooldown.
+    blocked = _start(client, h, quiz["quiz_id"])
+    assert blocked.status_code == 429
+    assert blocked.json()["detail"]["previous_attempt"]["end_reason"] == "second_tab_switch"
 
 
-def test_hidden_tick_after_announced_unload_counts_as_second_switch(client, quiz, clock):
+def test_cancelled_reload_is_not_an_incident(client, quiz, clock):
+    """Cancelling the browser's prompt sends no event: nothing changes."""
     _, attempt_id = _new_attempt(client, quiz)
     h = quiz["headers"]
     _events(client, h, attempt_id, PAGE_A, {"seq": 1, "kind": "visible", "hidden_ms": 1000})  # strike 1
-    _events(client, h, attempt_id, PAGE_A, {"seq": 2, "kind": "pagehide"})
-    clock.advance(2)
-    state = _events(client, h, attempt_id, PAGE_A, {"seq": 3, "kind": "hidden_tick", "hidden_ms": 2000})
+    clock.advance(20)
+    state = _state(client, h, attempt_id)
+    assert state["status"] == "in_progress" and state["strikes"] == 1
+
+
+def test_reload_strike_history_survives_several_reload_pages(client, quiz, clock):
+    _, attempt_id = _new_attempt(client, quiz)
+    h = quiz["headers"]
+    _events(client, h, attempt_id, PAGE_A, {"seq": 1, "kind": "pagehide"})
+    clock.advance(1)
+    _events(client, h, attempt_id, PAGE_B, {"seq": 1, "kind": "resume", "reload": True, "hidden_ms": 900})
+    clock.advance(40)
+    # The reloaded page (B) is reloaded again: second incident.
+    state = _events(client, h, attempt_id, PAGE_B, {"seq": 2, "kind": "pagehide"})
     assert state["status"] == "terminated" and state["end_reason"] == "second_tab_switch"
 
 
-def test_reload_that_cannot_be_verified_is_abandoned(client, quiz, clock):
+def test_slow_reload_follows_the_ten_second_rule(client, quiz, clock):
     _, attempt_id = _new_attempt(client, quiz)
     h = quiz["headers"]
     _events(client, h, attempt_id, PAGE_A, {"seq": 1, "kind": "pagehide"})
     clock.advance(16)
     state = _events(client, h, attempt_id, PAGE_B, {"seq": 1, "kind": "resume", "reload": True, "hidden_ms": 15500})
-    assert state["status"] == "abandoned" and state["end_reason"] == "reload_not_verified"
+    assert state["status"] == "terminated" and state["end_reason"] == "grace_expired"
+
+
+def test_reload_delayed_by_the_network_is_a_warning_not_a_termination(client, quiz, clock):
+    _, attempt_id = _new_attempt(client, quiz)
+    h = quiz["headers"]
+    _events(client, h, attempt_id, PAGE_A, {"seq": 1, "kind": "pagehide"})
+    clock.advance(30)
+    state = _events(
+        client, h, attempt_id, PAGE_B,
+        {"seq": 1, "kind": "resume", "reload": True, "hidden_ms": 2500, "delivery_failures": 4},
+    )
+    assert state["status"] == "in_progress" and state["strikes"] == 1
 
 
 # ---------------------------------------------------------------- diagnostics and duplicates

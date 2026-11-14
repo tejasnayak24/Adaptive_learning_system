@@ -175,7 +175,7 @@ export default function SessionActivity() {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <Tile label="Tab-switch incidents" value={totals.tab_switch_incidents ?? 0} hint={`${totals.reloads ?? 0} page reload${totals.reloads === 1 ? '' : 's'} (not counted)`} />
+        <Tile label="Tab-switch incidents" value={totals.tab_switch_incidents ?? 0} hint={`including ${totals.reloads ?? 0} confirmed page reload${totals.reloads === 1 ? '' : 's'}`} />
         <Tile
           label="Quizzes ended or closed"
           value={(totals.attempts_terminated ?? 0) + (totals.attempts_abandoned ?? 0)}
