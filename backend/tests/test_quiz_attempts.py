@@ -482,3 +482,21 @@ def test_event_payload_is_validated(client, quiz, clock):
     assert client.post(url, json={"page_id": "x", "events": [{"seq": 1, "kind": "hidden"}]}, headers=h).status_code == 422
     assert client.post(url, json={"page_id": PAGE_A, "events": [{"seq": 1, "kind": "screenshot"}]}, headers=h).status_code == 422
     assert client.post(url, json={"page_id": PAGE_A, "events": []}, headers=h).status_code == 422
+
+
+def test_concurrent_starts_resume_the_same_attempt(client, quiz, monkeypatch, clock):
+    """Two simultaneous starts (StrictMode, two tabs): one attempt, no 500."""
+    _, attempt_id = _new_attempt(client, quiz)
+    real = qa._open_attempt
+    calls = {"n": 0}
+
+    def racing(db, student_id, quiz_id):
+        # The first lookup misses the attempt the "other request" just created.
+        calls["n"] += 1
+        return None if calls["n"] == 1 else real(db, student_id, quiz_id)
+
+    monkeypatch.setattr(qa, "_open_attempt", racing)
+    again = _start(client, quiz["headers"], quiz["quiz_id"])
+    assert again.status_code == 200, again.text
+    assert again.json()["data"]["attempt"]["id"] == attempt_id
+    assert again.json()["data"]["resumed"] is True

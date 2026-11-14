@@ -1,10 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useMonitoring } from '../context/MonitoringContext'
 import { quizService } from '../services/quizService'
 import { lessonService } from '../services/lessonService'
 import { telemetryService } from '../services/telemetryService'
+import { useLeaveGuard, useQuizIntegrity } from '../hooks/useQuizIntegrity'
+import {
+  AttemptEndedPanel,
+  CheckingOverlay,
+  CooldownPanel,
+  IntegrityRulesBanner,
+  LeaveQuizModal,
+  SaveStatus,
+  StrikeWarningModal
+} from '../components/QuizIntegrity'
+
+const OPEN_STATUSES = ['in_progress', 'away', 'unverified']
 import {
   CONFIDENCE_NOTE,
   POLICY_LABELS,
@@ -38,6 +50,13 @@ export default function QuizView() {
   const [rlRecommendation, setRlRecommendation] = useState(null)
   const [breakSecondsLeft, setBreakSecondsLeft] = useState(null)
 
+  // Server-side attempt (tab-switch rule). The server decides its state.
+  const [attempt, setAttempt] = useState(null)
+  const [cooldown, setCooldown] = useState(null)
+  const [warningOpen, setWarningOpen] = useState(false)
+  const [saveState, setSaveState] = useState(null)
+  const strikesSeen = useRef(0)
+
   const studentId = user?.id
   // How this attempt is taken: standard, practice, hints or challenge
   // (set by a recommended next step). Recorded with the attempt.
@@ -52,6 +71,65 @@ export default function QuizView() {
   // answers, position, elapsed time and hints are stored -- never tokens.
   const draftKey = studentId ? `aegis.quizDraft.${studentId}.${id}` : null
   const [draftLoaded, setDraftLoaded] = useState(false)
+
+  const attemptOpen = Boolean(attempt && OPEN_STATUSES.includes(attempt.status) && !isFinished)
+  const protectedOpen = attemptOpen && Boolean(attempt?.protected)
+  const attemptEnded = Boolean(attempt && ['terminated', 'abandoned'].includes(attempt.status))
+
+  const clearDraft = useCallback(() => {
+    try {
+      if (draftKey) sessionStorage.removeItem(draftKey)
+    } catch {
+      // ignore
+    }
+  }, [draftKey])
+
+  // Every server decision about the attempt arrives here.
+  const applyAttemptView = useCallback(
+    (view) => {
+      if (!view) return
+      setAttempt((previous) => ({ ...(previous || {}), ...view }))
+      if (OPEN_STATUSES.includes(view.status) && view.strikes > strikesSeen.current) {
+        setWarningOpen(true)
+      }
+      strikesSeen.current = view.strikes ?? strikesSeen.current
+      if (['terminated', 'abandoned'].includes(view.status)) {
+        setWarningOpen(false)
+        clearDraft()
+      }
+    },
+    [clearDraft]
+  )
+
+  const integrity = useQuizIntegrity({
+    attemptId: attempt?.id,
+    active: protectedOpen,
+    initialStatus: attempt?.status,
+    onView: applyAttemptView,
+    // The quiz page went away without a confirmed departure (e.g. sign-out).
+    onUnmountOpen: () => {
+      if (attempt?.id) quizService.abandonAttempt(attempt.id, { keepalive: true }).catch(() => {})
+    }
+  })
+
+  const leaveGuard = useLeaveGuard({
+    active: attemptOpen,
+    navigate,
+    onLeave: async () => {
+      if (!attempt?.id) return
+      const view = await quizService.abandonAttempt(attempt.id).catch(() => null)
+      integrity.endReporting()
+      if (view) applyAttemptView(view)
+    }
+  })
+
+  const locked = Boolean(attemptOpen && (integrity.checking || attempt?.status !== 'in_progress'))
+
+  const retakeQuiz = () => {
+    navigate(location.pathname, {
+      state: { ...(location.state || {}), attempt: Date.now() }
+    })
+  }
 
   const resetQuizTelemetry = async () => {
     try {
@@ -74,12 +152,44 @@ export default function QuizView() {
       try {
         setError('')
 
+        // Start a server-side attempt, or resume the open one (reload).
+        let quizRes
+        try {
+          quizRes = await quizService.startAttempt({
+            quizId: id,
+            mode: attemptMode,
+            monitoringSessionId: monitoring.sessionId
+          })
+        } catch (startError) {
+          if (startError.status === 429) {
+            const meta = await quizService.getQuiz(id).catch(() => null)
+            setCooldown({
+              retryAfter: startError.detail?.retry_after_seconds ?? 300,
+              lessonId: meta?.data?.quiz?.lesson_id ?? null
+            })
+            return
+          }
+          throw startError
+        }
+
+        if (!quizRes.success) {
+          throw new Error('Could not load quiz details')
+        }
+
+        const view = quizRes.data.attempt
+        strikesSeen.current = view.strikes
+        setAttempt(view)
+
+        // In-progress answers: the server copy, unless this device holds
+        // newer unsaved ones for the same attempt (e.g. saved while offline).
         let restored = null
         try {
           restored = draftKey ? JSON.parse(sessionStorage.getItem(draftKey) || 'null') : null
         } catch {
           restored = null
         }
+        if (restored && restored.attemptId !== view.id) restored = null
+        const serverDraft = view.draft_state || null
 
         if (restored) {
           setSelectedAnswers(restored.answers || {})
@@ -87,17 +197,18 @@ export default function QuizView() {
           setSecondsElapsed(restored.seconds || 0)
           setHintsRevealed(restored.hintsRevealed || {})
           setHintsCount(restored.hints || 0)
-        } else {
+        } else if (quizRes.data.resumed) {
+          setSelectedAnswers(view.answers || {})
+          setCurrentQuestionIdx(serverDraft?.index || 0)
+          setSecondsElapsed(serverDraft?.seconds || 0)
+          setHintsRevealed(serverDraft?.hintsRevealed || {})
+          setHintsCount(serverDraft?.hints || 0)
+        }
+        if (!quizRes.data.resumed) {
           // New attempt: start a fresh camera-measurement window.
           await resetQuizTelemetry()
         }
         setDraftLoaded(true)
-
-        const quizRes = await quizService.getQuiz(id)
-
-        if (!quizRes.success) {
-          throw new Error('Could not load quiz details')
-        }
 
         const quizData = quizRes.data.quiz
         const questionsList = quizRes.data.questions || []
@@ -172,6 +283,7 @@ export default function QuizView() {
       sessionStorage.setItem(
         draftKey,
         JSON.stringify({
+          attemptId: attempt?.id,
           answers: selectedAnswers,
           index: currentQuestionIdx,
           seconds: secondsElapsed,
@@ -182,7 +294,51 @@ export default function QuizView() {
     } catch {
       // Storage unavailable: answers still live in memory.
     }
-  }, [draftKey, draftLoaded, isFinished, selectedAnswers, currentQuestionIdx, secondsElapsed, hintsRevealed, hintsCount])
+  }, [draftKey, draftLoaded, isFinished, attempt?.id, selectedAnswers, currentQuestionIdx, secondsElapsed, hintsRevealed, hintsCount])
+
+  // Save answers on the server as the student works (debounced), so they
+  // survive a reload and are kept if the attempt ends without grading.
+  const latestDraft = useRef(null)
+  useEffect(() => {
+    latestDraft.current = {
+      answers: selectedAnswers,
+      draft: { index: currentQuestionIdx, seconds: secondsElapsed, hintsRevealed, hints: hintsCount }
+    }
+  })
+  useEffect(() => {
+    if (!attempt?.id || !attemptOpen || !draftLoaded) return undefined
+    const timer = setTimeout(async () => {
+      setSaveState('saving')
+      try {
+        await quizService.saveAnswers(attempt.id, latestDraft.current.answers, latestDraft.current.draft)
+        setSaveState('saved')
+      } catch (saveError) {
+        if (saveError.status === 409 && saveError.detail?.attempt) {
+          applyAttemptView(saveError.detail.attempt)
+          setSaveState(null)
+        } else {
+          setSaveState(saveError.status ? null : 'offline')
+        }
+      }
+    }, 800)
+    return () => clearTimeout(timer)
+    // Saved when answers, position or hints change (not on every timer tick).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [attempt?.id, attemptOpen, draftLoaded, selectedAnswers, currentQuestionIdx, hintsRevealed, hintsCount])
+
+  // Leaving the page: save the latest answers at once (keepalive survives
+  // a closed or reloaded tab).
+  useEffect(() => {
+    if (!attempt?.id || !attemptOpen) return undefined
+    const saveNow = () => {
+      if (document.visibilityState !== 'hidden' || !latestDraft.current) return
+      quizService
+        .saveAnswers(attempt.id, latestDraft.current.answers, latestDraft.current.draft, { keepalive: true })
+        .catch(() => {})
+    }
+    document.addEventListener('visibilitychange', saveNow)
+    return () => document.removeEventListener('visibilitychange', saveNow)
+  }, [attempt?.id, attemptOpen])
 
   // Focus-recovery break countdown (recommended by the RL engine).
   useEffect(() => {
@@ -203,6 +359,14 @@ export default function QuizView() {
         </div>
       </div>
     )
+  }
+
+  if (cooldown) {
+    return <CooldownPanel retryAfterSeconds={cooldown.retryAfter} lessonId={cooldown.lessonId} onRetake={retakeQuiz} />
+  }
+
+  if (attemptEnded && !isFinished) {
+    return <AttemptEndedPanel attempt={attempt} lessonId={lesson?.id ?? quiz?.lesson_id} onRetake={retakeQuiz} />
   }
 
   if (error || !quiz || !lesson) {
@@ -344,6 +508,11 @@ export default function QuizView() {
       return
     }
 
+    if (!attempt?.id || locked) {
+      alert('Your quiz is being checked. Please wait a moment and try again.')
+      return
+    }
+
     setSubmitLoading(true)
 
     try {
@@ -354,6 +523,7 @@ export default function QuizView() {
        */
       const submitRes = await quizService.submitQuiz({
         quizId: quiz.id,
+        attemptId: attempt.id,
         monitoringSessionId: monitoring.sessionId,
         answers: selectedAnswers,
         responseTime: secondsElapsed,
@@ -370,11 +540,9 @@ export default function QuizView() {
       const { grading, progress, recommendation, recommendation_status: recommendationStatus } =
         submitRes.data
 
-      try {
-        if (draftKey) sessionStorage.removeItem(draftKey)
-      } catch {
-        // ignore
-      }
+      clearDraft()
+      integrity.endReporting()
+      if (submitRes.data.attempt) applyAttemptView(submitRes.data.attempt)
 
       let rlRes
       if (recommendation) {
@@ -418,6 +586,13 @@ export default function QuizView() {
         'Quiz submission error:',
         err
       )
+
+      if (err.status === 409 && err.detail?.attempt) {
+        // The server's view of the attempt (e.g. return not yet confirmed,
+        // or the attempt ended) replaces a generic error.
+        applyAttemptView(err.detail.attempt)
+        integrity.flush()
+      }
 
       alert(
         err.message ||
@@ -921,6 +1096,11 @@ export default function QuizView() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
+      <StrikeWarningModal open={warningOpen && attemptOpen} onClose={() => setWarningOpen(false)} />
+      <LeaveQuizModal pending={leaveGuard.pending} onConfirm={leaveGuard.confirm} onCancel={leaveGuard.cancel} />
+
+      {attempt?.protected && <IntegrityRulesBanner strikes={attempt.strikes} />}
+
       {modeBanner && (
         <div className="rounded-2xl border border-indigo-500/30 bg-indigo-500/5 px-4 py-3 text-xs font-semibold text-indigo-300">
           {modeBanner}
@@ -934,6 +1114,9 @@ export default function QuizView() {
         >
           ← Abort to Lesson
         </Link>
+        <span className="float-right">
+          <SaveStatus state={saveState} />
+        </span>
       </div>
 
       <div className="glass-panel rounded-3xl p-6 border border-slate-900 shadow-md space-y-4">
@@ -990,7 +1173,8 @@ export default function QuizView() {
         </div>
       </div>
 
-      <div className="glass-panel rounded-3xl p-8 border border-slate-900 shadow-lg space-y-8 min-h-[300px] flex flex-col justify-between">
+      <div className="relative glass-panel rounded-3xl p-8 border border-slate-900 shadow-lg space-y-8 min-h-[300px] flex flex-col justify-between">
+        {locked && <CheckingOverlay connection={integrity.connection} status={attempt?.status} />}
         <div className="space-y-6">
           <h2 className="text-lg md:text-xl font-bold text-white leading-relaxed">
             {currentQuestion.question}
@@ -1012,6 +1196,7 @@ export default function QuizView() {
                 return (
                   <button
                     key={letter}
+                    disabled={locked}
                     onClick={() =>
                       handleSelectOption(
                         letter
@@ -1058,6 +1243,7 @@ export default function QuizView() {
                 onClick={
                   handleRevealHint
                 }
+                disabled={locked}
                 className="text-xs font-semibold text-slate-500 hover:text-slate-300 transition-colors flex items-center gap-1"
               >
                 💡 Need a hint?
@@ -1091,6 +1277,7 @@ export default function QuizView() {
                 }
                 disabled={
                   submitLoading ||
+                  locked ||
                   !monitoringVerified ||
                   Object.keys(
                     selectedAnswers

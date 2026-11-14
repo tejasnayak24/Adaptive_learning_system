@@ -41,6 +41,7 @@ from datetime import datetime, timedelta
 from typing import Any, Iterable
 
 from sqlalchemy import func
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.models.question import Question
@@ -263,8 +264,18 @@ def start_or_resume(
         started_at=now,
         last_seen_at=now,
     )
-    db.add(attempt)
-    db.flush()
+    try:
+        with db.begin_nested():
+            db.add(attempt)
+            db.flush()
+    except IntegrityError:
+        # Another request (a second tab, a double click) opened the attempt
+        # at the same moment; the unique index kept it to one. Resume it.
+        existing = _open_attempt(db, student.id, quiz.id)
+        if existing is None:
+            raise
+        _touch(existing, now)
+        return existing, False
     return attempt, True
 
 

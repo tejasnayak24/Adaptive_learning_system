@@ -58,6 +58,8 @@ api.interceptors.response.use(
     // Keep the HTTP status so pages can tell a refusal (403/404) from a
     // network problem.
     failure.status = error.response?.status ?? null
+    // Structured details (e.g. a quiz attempt's state or a cooldown).
+    failure.detail = error.response?.data?.detail ?? null
     return Promise.reject(failure)
   }
 )
