@@ -1,206 +1,198 @@
 # Aegis — Adaptive Learning System
 
-Aegis is an adaptive learning platform for school students in Grades 6–10.
-Students study Mathematics, Science, Social Science and English lessons,
-then take Easy, Medium or Hard quizzes. During lessons and quizzes, a local
-camera agent measures attention and notices yawning, looking away and
-possible drowsiness; it can speak a short alert. After each quiz, the server
-grades the answers and an offline-trained **Q-learning** policy recommends
-one of 11 next steps. Dashboards show each student's own progress.
+## Project Overview
 
-Quizzes are **protected**:
-- **Tab switching:** leaving the quiz page gives one warning if the student is back within 10 seconds. A second time, or a longer absence, ends the quiz without grading.
-- **Multiple faces:** the camera agent shows a warning while more than one face is visible.
-- **Session Activity:** this page shows the student exactly what was recorded, with no score.
+Aegis is a learning platform built as a final-year B.Tech project. Instead
+of giving every student the same fixed path, it grades each quiz on the
+server, combines the result with attention estimates from a camera agent on
+the student's computer, and recommends a personalised next step. The agent
+sends only numbers and yes/no signals, never images.
 
-See [docs/SESSION_INTEGRITY.md](docs/SESSION_INTEGRITY.md).
+## Key Features
 
-| Service | Folder | Address |
-|---|---|---|
-| Backend API (FastAPI + PostgreSQL) | `backend/` | http://127.0.0.1:8000 (docs at `/docs`) |
-| Frontend (React + Vite) | `frontend/` | http://localhost:5173 |
-| Camera agent (OpenCV + MediaPipe) | `facial_analysis/` | http://127.0.0.1:8765 (local only) |
-| Recommendation engine (Q-learning) | `rl_engine/` | loaded by the backend |
+- **Curriculum:** 122 lessons for Grades 6–10 in Mathematics, Science,
+  Social Science and English, with Easy, Medium and Hard quizzes.
+- **Server-side grading** with hints and an answer review after submission.
+- **Q-learning recommendations:** one of 11 next steps, chosen by an
+  offline-trained, read-only Q-table when the quiz has valid camera data.
+- **Webcam monitoring** (with consent): attention, yawning, looking away,
+  possible drowsiness and spoken alerts.
+- **Protected quizzes:** server-enforced tab-switch rule, reload handling,
+  autosave and a multiple-face notice.
+- **Insights:** dashboard, progress analytics, AI Coach and Session Activity.
 
-Architecture diagram: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+## Tech Stack
 
-## Quick start (already set up)
+| Layer | Technologies |
+|---|---|
+| Frontend | React 19, Vite 8, Tailwind CSS 4, React Router 7, Axios, Recharts |
+| Backend | Python 3.10, FastAPI, Uvicorn, SQLAlchemy 2, Pydantic 2, Alembic, JWT, bcrypt |
+| Database | PostgreSQL (tested with 18) |
+| Camera agent | OpenCV, MediaPipe, pyttsx3 |
+| Recommendations | Tabular Q-learning in plain Python |
 
-```powershell
-cd C:\Users\tejas\Adaptive_learning_system
-powershell -ExecutionPolicy Bypass -File .\start-all.ps1
+## System Architecture
+
+```mermaid
+flowchart TB
+    student(["Student"]) --> fe["React frontend<br/>localhost:5173"]
+    fe -- "REST /api/* + JWT" --> be["FastAPI backend<br/>127.0.0.1:8000"]
+    fe -- "pairing token" --> agent["Camera agent<br/>127.0.0.1:8765"]
+    agent -- "heartbeats:<br/>numbers only" --> be
+    be --> db[("PostgreSQL")]
+    be -- "after each graded quiz" --> rl[["Q-learning engine<br/>q_table.json, read-only"]]
 ```
 
-The script checks everything first. It looks for Python, Node, `.env`, the
-virtual environment, `node_modules` and free ports, and confirms that
-PostgreSQL is reachable and migrated. It then opens three windows
-(backend, camera agent, frontend) and the browser.
-- `-CheckOnly` runs only the checks.
-- `-NoAgent` skips the camera agent.
-- `-NoBrowser` doesn't open the browser.
+1. The frontend calls the REST API through Vite's `/api` proxy with a JWT.
+2. For each lesson, the camera agent pairs with a one-time token from the
+   browser and sends heartbeats about once per second; lessons and quizzes
+   unlock only while the camera is verified.
+3. During quizzes, answers are autosaved and the backend enforces the
+   tab-switch rule from page-visibility events.
+4. On submission, the backend grades the answers, adds the camera averages,
+   picks the next step from the Q-table and stores everything in PostgreSQL.
 
-Stop everything with `.\stop-all.ps1`.
+Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md),
+[docs/RL_ENGINE.md](docs/RL_ENGINE.md),
+[docs/SESSION_INTEGRITY.md](docs/SESSION_INTEGRITY.md).
 
-## First-time setup on Windows
+## Project Structure
 
-### 1. Install
-
-| Tool | Version used | Notes |
-|---|---|---|
-| Python | 3.10 | Tick "Add python.exe to PATH" |
-| Node.js | 20 LTS or newer (tested with 24) | Includes npm |
-| PostgreSQL | 14 or newer (tested with 18) | Remember the `postgres` password |
-| A webcam | — | Lessons and quizzes require camera monitoring |
-
-### 2. Database
-
-Create an empty database. Use pgAdmin, or run the following (the tools live
-in `C:\Program Files\PostgreSQL\<version>\bin`):
-
-```powershell
-& "C:\Program Files\PostgreSQL\18\bin\createdb.exe" -U postgres adaptive_learning_db
+```text
+Adaptive_learning_system/
+├── backend/
+│   ├── app/               FastAPI app: routers/, services/, models/, schemas/, auth/
+│   ├── migrations/        Alembic schema migrations
+│   ├── curriculum/        lesson content (content/*.json), validator, importer
+│   ├── scripts/           curriculum import, role assignment, RL outcome report
+│   ├── tests/
+│   ├── requirements.txt
+│   └── .env.example       configuration template
+├── facial_analysis/       camera agent (main.py), detectors, voice alerts, tests
+├── rl_engine/             Q-learning engine imported by the backend; q_table.json
+├── frontend/
+│   ├── src/               pages/, components/, services/ (API clients), context/, hooks/
+│   └── tests/
+├── docs/                  architecture, algorithms, analytics, demo, troubleshooting
+├── TEAM_GUIDE.md          team workflow and the full API contract
+├── start-all.ps1          checks prerequisites and starts everything (Windows)
+└── stop-all.ps1
 ```
 
-Configure the backend:
+## Getting Started
+
+**Prerequisites:** Windows 10 or 11 (the scripts are Windows PowerShell;
+other systems are untested), Git, Python 3.10 (camera agent: 3.10–3.12),
+Node.js 20.19+, 22.13+ or 24+, PostgreSQL (tested with 18) and a webcam.
+
+Everything runs locally, so no API keys or cloud services are needed: the
+only credentials are your own PostgreSQL password and a `SECRET_KEY` you
+generate.
+
+**1. Clone the repository**
 
 ```powershell
-cd C:\Users\tejas\Adaptive_learning_system\backend
-copy .env.example .env
-python -c "import secrets; print(secrets.token_urlsafe(48))"   # paste as SECRET_KEY
-notepad .env                                                   # set DATABASE_URL and SECRET_KEY
-pip install -r requirements.txt
-python -m alembic upgrade head
+git clone https://github.com/tejasnayak24/Adaptive_learning_system.git
+cd Adaptive_learning_system
 ```
 
-`.env` is git-ignored; never commit it. The backend refuses to start with the
-placeholder secret. All variables are explained in
-[`backend/.env.example`](backend/.env.example).
-
-Load the curriculum: 20 grade-subject combinations, 122 lessons, Easy,
-Medium and Hard quizzes. It is safe to re-run. Rows are matched by slug and
-never duplicated or deleted, and the original Science lessons keep their
-ids and progress.
+**2. Create an empty database** in pgAdmin, or:
 
 ```powershell
-cd C:\Users\tejas\Adaptive_learning_system
-python backend\scripts\import_curriculum.py --check   # validate only
-python backend\scripts\import_curriculum.py           # import
+& "C:\Program Files\PostgreSQL\18\bin\createdb.exe" -U postgres aegis_db
 ```
 
-> **Existing database from before Alembic?** Back up first
-> (`pg_dump -Fc -f backup.dump <database>`), then
-> `python -m alembic stamp 0001_baseline` and `python -m alembic upgrade head`.
-> Always back up before running migrations on a database with real data.
-
-### 3. Camera agent
+**3. Set up the backend**
 
 ```powershell
-cd C:\Users\tejas\Adaptive_learning_system\facial_analysis
+cd backend
 python -m venv venv
-.\venv\Scripts\pip install -r requirements.txt
+.\venv\Scripts\python.exe -m pip install -r requirements.txt python-multipart==0.0.32
+Copy-Item .env.example .env
+.\venv\Scripts\python.exe -c "import secrets; print(secrets.token_urlsafe(48))"
+notepad .env
 ```
 
-### 4. Frontend
+`python-multipart` (needed by the login form) is missing from
+`backend/requirements.txt`, so it is installed explicitly. Ignore the
+outdated root `requirements.txt`.
+
+In `backend/.env`, set `DATABASE_URL` (e.g.
+`postgresql://postgres:<your-password>@localhost:5432/aegis_db`) and
+`SECRET_KEY` (the printed value). The other variables already have working
+values; see [backend/.env.example](backend/.env.example). Never commit
+`.env`.
+
+Create the schema and load the curriculum (both safe to re-run):
 
 ```powershell
-cd C:\Users\tejas\Adaptive_learning_system\frontend
-npm install
+.\venv\Scripts\python.exe -m alembic upgrade head
+cd ..
+backend\venv\Scripts\python.exe backend\scripts\import_curriculum.py
 ```
 
-Then run `start-all.ps1` (Quick start above).
-
-### Optional: teacher/admin role
-
-Teachers and admins can edit lessons and correct quiz attempts. Roles can't
-be changed through the API:
+**4. Set up the camera agent**, then allow desktop apps to use the camera
+(Windows Settings → Privacy & security → Camera):
 
 ```powershell
-python backend\scripts\set_role.py teacher@example.com teacher
+cd facial_analysis
+python -m venv venv
+.\venv\Scripts\python.exe -m pip install -r requirements.txt
+cd ..
 ```
 
-## Starting services by hand
-
-Use one PowerShell window per service, all from the project root.
+**5. Set up the frontend**
 
 ```powershell
-# Backend (start from the project root: it imports rl_engine)
-$env:PYTHONPATH = "$PWD\backend"
-python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+cd frontend
+npm ci
+cd ..
+```
 
-# Camera agent (webcam stays off until a lesson starts)
+**6. Run Aegis.** `start-all.ps1` checks the prerequisites and starts the
+three services; it uses the `python` on `PATH`, so activate the backend
+environment first:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\backend\venv\Scripts\Activate.ps1
+.\start-all.ps1
+```
+
+Open http://localhost:5173 (API docs: http://127.0.0.1:8000/docs); stop with
+`.\stop-all.ps1`. Or run each component in its own terminal from the
+project root:
+
+```powershell
+$env:PYTHONPATH = "$PWD\backend"; backend\venv\Scripts\python.exe -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
 cd facial_analysis; .\venv\Scripts\python.exe main.py
-
-# Frontend (forwards /api/* to the backend)
 cd frontend; npm run dev
 ```
 
-Open http://localhost:5173. The first lesson asks for camera-monitoring
-consent. Students under 18 also confirm parent/guardian and school
-authorisation. Lessons and quizzes unlock only while monitoring is verified.
+Then register, open a lesson, accept camera consent and take a quiz.
+Troubleshooting: [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md).
 
-## Tests
+## Team / Contribution Notes
 
-| Suite | Command | Database |
-|---|---|---|
-| Backend (194) | `cd backend; pip install -r requirements-dev.txt; python -m pytest` | throwaway SQLite |
-| Recommendation engine (68) | `python -m pytest rl_engine` | — |
-| Camera agent (51) | `$env:AEGIS_BACKEND_PYTHON = (Get-Command python).Source; python -m pytest facial_analysis` | throwaway SQLite (the integration test starts its own backend) |
-| Frontend unit tests (46) | `cd frontend; npm test` | — |
-| Frontend lint / build | `npm run lint`, `npm run build` | — |
-| Curriculum content | `python backend\scripts\import_curriculum.py --check` | — |
-| Migrations vs models | `cd backend; python -m alembic check` | the configured database (read only) |
-
-Results for the final release are in
-[docs/PHASE7_PROGRESS.md](docs/PHASE7_PROGRESS.md) and
-[docs/BROWSER_ACCEPTANCE.md](docs/BROWSER_ACCEPTANCE.md).
-
-## Recommendation engine
-
-The backend loads the trained Q-table `rl_engine/q_table.json`. It was
-trained **offline** on simulated students and is not updated while the app
-runs. To retrain it (about a minute):
+- Start with [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md);
+  [TEAM_GUIDE.md](TEAM_GUIDE.md) and the backend's `/docs` page describe
+  every endpoint.
+- Keep logic in `backend/app/services/`, use the `{success, message, data}`
+  envelope and change the schema only through Alembic migrations.
+- Grading and camera values stay server-side; missing camera data is stored
+  as `NULL`, never guessed.
+- Build frontend pages from `frontend/src/components/ui/`
+  ([frontend/DESIGN_SYSTEM.md](frontend/DESIGN_SYSTEM.md)).
+- Work on a branch, run the tests (none touch PostgreSQL) and open a pull
+  request into `main`:
 
 ```powershell
-python -m rl_engine.train
+cd backend; .\venv\Scripts\python.exe -m pip install -r requirements-dev.txt; .\venv\Scripts\python.exe -m pytest; cd ..
+cd rl_engine; ..\backend\venv\Scripts\python.exe -m pytest; cd ..
+cd facial_analysis; .\venv\Scripts\python.exe -m pip install -r requirements-dev.txt; .\venv\Scripts\python.exe -m pytest; cd ..
+cd frontend; npm test; npm run lint; cd ..
 ```
 
-The new table only replaces the old one if it beats the previous rule policy
-and a random policy. The old table is archived in `rl_engine/archive/`.
-Restart the backend afterwards. To summarise the outcomes of real
-recommendations, run `python backend\scripts\rl_outcome_report.py`. The
-design is described in [docs/RL_ENGINE.md](docs/RL_ENGINE.md).
-
-## Documentation
-
-| Document | Contents |
-|---|---|
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Diagram, request flow, trust boundaries, code map |
-| [TEAM_GUIDE.md](TEAM_GUIDE.md#-api-contracts) | API reference (every endpoint), team workflow |
-| [docs/DEMO.md](docs/DEMO.md) | Demonstration checklist and script, including drowsiness and voice alerts |
-| [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Fixes for common problems; **known limitations** |
-| [docs/BROWSER_ACCEPTANCE.md](docs/BROWSER_ACCEPTANCE.md) | What was tested in the browser, and the manual checklist |
-| [docs/WEBCAM_ACCEPTANCE_CHECKLIST.md](docs/WEBCAM_ACCEPTANCE_CHECKLIST.md) | Real-webcam test plan |
-| [docs/ANALYTICS.md](docs/ANALYTICS.md) | How every dashboard metric is calculated |
-| [docs/SESSION_INTEGRITY.md](docs/SESSION_INTEGRITY.md) | Tab-switch rule, multiple-face detection, activity report, privacy, limits |
-| [docs/SESSION_INTEGRITY_CHECKLIST.md](docs/SESSION_INTEGRITY_CHECKLIST.md) | Real-Chrome and real-webcam acceptance checks |
-| [docs/RL_ENGINE.md](docs/RL_ENGINE.md) | Q-learning state, actions, rewards, training and evaluation |
-| [facial_analysis/README.md](facial_analysis/README.md) | Camera agent details |
-
-## Privacy and security in brief
-
-- **Camera data:**
-  - The camera agent never stores or sends images or video, only numbers
-    and yes/no signals.
-  - A quiz with no valid camera reading is stored as "unknown", never as
-    low attention.
-  - Multiple-face detection records only how many faces and when, never
-    who; tab checks record when the quiz page was hidden, never which tab,
-    site or app.
-- **Accounts and access:**
-  - Passwords are bcrypt-hashed.
-  - Each student can only read their own records.
-  - Quiz answers are never sent before submission, and quizzes are graded
-    on the server.
-- **Known limitation:** the login token is kept in the browser's
-  `localStorage`. See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md#known-limitations)
-  for this and the other known limitations.
+**Team:** Tejas Nayak (team lead, reinforcement learning, integration),
+Rishika Rajesh (backend), Rohan M Shet (facial analysis), Roshwin Dsouza
+(frontend).
